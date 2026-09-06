@@ -1,8 +1,11 @@
-//! Freestanding Compiler Builtin Intrinsics
-#![allow(dead_code)]
+//! Freestanding Compiler Builtin Intrinsics (Hardened)
+#![allow(dead_code, suspicious_runtime_symbol_definitions)]
 
 #[no_mangle]
 pub unsafe extern "C" fn memset(dest: *mut u8, c: i32, n: usize) -> *mut u8 {
+    if dest.is_null() || n == 0 {
+        return dest;
+    }
     let mut i = 0;
     while i < n {
         *dest.add(i) = c as u8;
@@ -13,6 +16,9 @@ pub unsafe extern "C" fn memset(dest: *mut u8, c: i32, n: usize) -> *mut u8 {
 
 #[no_mangle]
 pub unsafe extern "C" fn memcpy(dest: *mut u8, src: *const u8, n: usize) -> *mut u8 {
+    if dest.is_null() || src.is_null() || n == 0 || dest == (src as *mut u8) {
+        return dest;
+    }
     let mut i = 0;
     while i < n {
         *dest.add(i) = *src.add(i);
@@ -23,6 +29,9 @@ pub unsafe extern "C" fn memcpy(dest: *mut u8, src: *const u8, n: usize) -> *mut
 
 #[no_mangle]
 pub unsafe extern "C" fn memmove(dest: *mut u8, src: *const u8, n: usize) -> *mut u8 {
+    if dest.is_null() || src.is_null() || n == 0 || dest == (src as *mut u8) {
+        return dest;
+    }
     if (dest as usize) < (src as usize) {
         memcpy(dest, src, n)
     } else {
@@ -37,6 +46,15 @@ pub unsafe extern "C" fn memmove(dest: *mut u8, src: *const u8, n: usize) -> *mu
 
 #[no_mangle]
 pub unsafe extern "C" fn memcmp(s1: *const u8, s2: *const u8, n: usize) -> i32 {
+    if s1.is_null() && s2.is_null() {
+        return 0;
+    }
+    if s1.is_null() {
+        return -1;
+    }
+    if s2.is_null() {
+        return 1;
+    }
     let mut i = 0;
     while i < n {
         let diff = (*s1.add(i) as i32) - (*s2.add(i) as i32);

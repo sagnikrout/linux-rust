@@ -20,7 +20,15 @@ impl SerialPort {
     }
 
     pub unsafe fn write_byte(b: u8) {
-        while !Self::is_transmit_empty() {}
+        // SEC-05: Bounded timeout loop prevents infinite Denial-of-Service freeze
+        let mut timeout: u32 = 100_000;
+        while !Self::is_transmit_empty() {
+            timeout -= 1;
+            if timeout == 0 {
+                return; // Drop byte on hardware stall rather than hanging the CPU
+            }
+            core::hint::spin_loop();
+        }
         outb(PORT, b);
     }
 

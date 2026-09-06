@@ -12,8 +12,15 @@ p3_table:
     .skip 4096
 p2_table:
     .skip 4096
+
+/* SEC-03: Stack Guard Page Buffer (4096 bytes) */
+.global stack_guard_page
+stack_guard_page:
+    .skip 4096
+.global stack_bottom
 stack_bottom:
     .skip 16384
+.global stack_top
 stack_top:
 
 .section .rodata, "a"

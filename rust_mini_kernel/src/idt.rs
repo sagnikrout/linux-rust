@@ -59,7 +59,7 @@ pub unsafe fn init_idt() {
 
     let ptr = IdtPointer {
         limit: (core::mem::size_of::<[IdtEntry; 256]>() - 1) as u16,
-        base: IDT.as_ptr() as u64,
+        base: core::ptr::addr_of!(IDT) as u64,
     };
 
     asm!("lidt [{}]", in(reg) &ptr, options(readonly, nostack, preserves_flags));
