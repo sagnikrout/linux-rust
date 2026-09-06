@@ -1,0 +1,143 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpio/gpio-104-idio-16.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// GPIO driver for the ACCES 104-IDIO-16 family
+// Copyright (C) 2015 William Breathitt Gray
+//
+// This driver supports the following ACCES devices: 104-IDIO-16,
+// 104-IDIO-16E, 104-IDO-16, 104-IDIO-8, 104-IDIO-8E, and 104-IDO-8.
+//
+
+pub const IDIO_16_EXTENT: c_int = 8;
+
+    static unsigned int base[MAX_NUM_IDIO_16];
+    static unsigned int num_idio_16;
+    module_param_hw_array(base, uint, ioport, &num_idio_16, 0);
+    MODULE_PARM_DESC(base, "ACCES 104-IDIO-16 base addresses");
+    static unsigned int irq[MAX_NUM_IDIO_16];
+    static unsigned int num_irq;
+    module_param_hw_array(irq, uint, irq, &num_irq, 0);
+    MODULE_PARM_DESC(irq, "ACCES 104-IDIO-16 interrupt line numbers");
+    static const struct regmap_range idio_16_wr_ranges[] = {
+    regmap_reg_range(0x0, 0x2), regmap_reg_range(0x4, 0x4),
+    };
+    static const struct regmap_range idio_16_rd_ranges[] = {
+    regmap_reg_range(0x1, 0x2), regmap_reg_range(0x5, 0x5),
+    };
+    static const struct regmap_range idio_16_precious_ranges[] = {
+    regmap_reg_range(0x2, 0x2),
+    };
+    static const struct regmap_access_table idio_16_wr_table = {
+    .yes_ranges = idio_16_wr_ranges,
+    .n_yes_ranges = ARRAY_SIZE(idio_16_wr_ranges),
+    };
+    static const struct regmap_access_table idio_16_rd_table = {
+    .yes_ranges = idio_16_rd_ranges,
+    .n_yes_ranges = ARRAY_SIZE(idio_16_rd_ranges),
+    };
+    static const struct regmap_access_table idio_16_precious_table = {
+    .yes_ranges = idio_16_precious_ranges,
+    .n_yes_ranges = ARRAY_SIZE(idio_16_precious_ranges),
+    };
+    static const struct regmap_config idio_16_regmap_config = {
+    .reg_bits = 8,
+    .reg_stride = 1,
+    .val_bits = 8,
+    .io_port = true,
+    .max_register = 0x5,
+    .wr_table = &idio_16_wr_table,
+    .rd_table = &idio_16_rd_table,
+    .volatile_table = &idio_16_rd_table,
+    .precious_table = &idio_16_precious_table,
+    .cache_type = REGCACHE_FLAT,
+    .use_raw_spinlock = true,
+    };
+// Only input lines (GPIO 16-31) support interrupts
+
+    [16 + _id] = {							\
+    .mask = BIT(_id),					\
+    .type = { .types_supported = IRQ_TYPE_EDGE_BOTH },	\
+    }
+    static const struct regmap_irq idio_16_regmap_irqs[] = {
+    IDIO_16_REGMAP_IRQ(0), IDIO_16_REGMAP_IRQ(1), IDIO_16_REGMAP_IRQ(2), /* 0-2 */
+    IDIO_16_REGMAP_IRQ(3), IDIO_16_REGMAP_IRQ(4), IDIO_16_REGMAP_IRQ(5), /* 3-5 */
+    IDIO_16_REGMAP_IRQ(6), IDIO_16_REGMAP_IRQ(7), IDIO_16_REGMAP_IRQ(8), /* 6-8 */
+    IDIO_16_REGMAP_IRQ(9), IDIO_16_REGMAP_IRQ(10), IDIO_16_REGMAP_IRQ(11), /* 9-11 */
+    IDIO_16_REGMAP_IRQ(12), IDIO_16_REGMAP_IRQ(13), IDIO_16_REGMAP_IRQ(14), /* 12-14 */
+    IDIO_16_REGMAP_IRQ(15), /* 15 */
+    };
+#[no_mangle]
+unsafe extern "C" fn idio_16_probe(dev: *mut device, id: c_uint) -> c_int {
+    static int idio_16_probe(struct device *dev, unsigned int id)
+    {
+    let mut name: *const char const = dev_name(dev);
+    let mut config: idio_16_regmap_config = {};
+    void __iomem *regs;
+    struct regmap *map;
+    if (!devm_request_region(dev, base[id], IDIO_16_EXTENT, name)) {
+    dev_err(dev, "Unable to lock port addresses (0x%X-0x%X)\n",
+    base[id], base[id] + IDIO_16_EXTENT);
+    return -EBUSY;
+    }
+    regs = devm_ioport_map(dev, base[id], IDIO_16_EXTENT);
+    if (!regs)
+    return -ENOMEM;
+    map = devm_regmap_init_mmio(dev, regs, &idio_16_regmap_config);
+    if (IS_ERR(map))
+    return dev_err_probe(dev, PTR_ERR(map), "Unable to initialize register map\n");
+    config.parent = dev;
+    config.map = map;
+    config.regmap_irqs = idio_16_regmap_irqs;
+    config.num_regmap_irqs = ARRAY_SIZE(idio_16_regmap_irqs);
+    config.irq = irq[id];
+    config.no_status = true;
+    return devm_idio_16_regmap_register(dev, &config);
+    }
+    static struct isa_driver idio_16_driver = {
+    .probe = idio_16_probe,
+    .driver = {
+    .name = "104-idio-16"
+    },
+    };
+    module_isa_driver_with_irq(idio_16_driver, num_idio_16, num_irq);
+    MODULE_AUTHOR("William Breathitt Gray <vilhelm.gray@gmail.com>");
+    MODULE_DESCRIPTION("ACCES 104-IDIO-16 GPIO driver");
+    MODULE_LICENSE("GPL v2");
+    MODULE_IMPORT_NS("GPIO_IDIO_16");

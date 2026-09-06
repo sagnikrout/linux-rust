@@ -1,0 +1,160 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/mfd/madera-spi.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// SPI bus interface to Cirrus Logic Madera codecs
+//
+// Copyright (C) 2015-2018 Cirrus Logic
+//
+
+#[no_mangle]
+unsafe extern "C" fn madera_spi_probe(spi: *mut spi_device) -> c_int {
+    static int madera_spi_probe(struct spi_device *spi)
+    {
+    struct madera *madera;
+    const struct regmap_config *regmap_16bit_config = core::ptr::null_mut();
+    const struct regmap_config *regmap_32bit_config = core::ptr::null_mut();
+    unsigned long type;
+    const char *name;
+    int ret;
+    type = (unsigned long)spi_get_device_match_data(spi);
+    switch (type) {
+    case CS47L15:
+    if (IS_ENABLED(CONFIG_MFD_CS47L15)) {
+    regmap_16bit_config = &cs47l15_16bit_spi_regmap;
+    regmap_32bit_config = &cs47l15_32bit_spi_regmap;
+    }
+    break;
+    case CS47L35:
+    if (IS_ENABLED(CONFIG_MFD_CS47L35)) {
+    regmap_16bit_config = &cs47l35_16bit_spi_regmap;
+    regmap_32bit_config = &cs47l35_32bit_spi_regmap;
+    }
+    break;
+    case CS47L85:
+    case WM1840:
+    if (IS_ENABLED(CONFIG_MFD_CS47L85)) {
+    regmap_16bit_config = &cs47l85_16bit_spi_regmap;
+    regmap_32bit_config = &cs47l85_32bit_spi_regmap;
+    }
+    break;
+    case CS47L90:
+    case CS47L91:
+    if (IS_ENABLED(CONFIG_MFD_CS47L90)) {
+    regmap_16bit_config = &cs47l90_16bit_spi_regmap;
+    regmap_32bit_config = &cs47l90_32bit_spi_regmap;
+    }
+    break;
+    case CS42L92:
+    case CS47L92:
+    case CS47L93:
+    if (IS_ENABLED(CONFIG_MFD_CS47L92)) {
+    regmap_16bit_config = &cs47l92_16bit_spi_regmap;
+    regmap_32bit_config = &cs47l92_32bit_spi_regmap;
+    }
+    break;
+    default:
+    dev_err(&spi.dev,
+    "Unknown Madera SPI device type %ld\n", type);
+    return -EINVAL;
+    }
+    name = madera_name_from_type(type);
+    if (!regmap_16bit_config) {
+// it's polite to say which codec isn't built into the kernel
+    dev_err(&spi.dev,
+    "Kernel does not include support for %s\n", name);
+    return -EINVAL;
+    }
+    madera = devm_kzalloc(&spi.dev, sizeof(*madera), GFP_KERNEL);
+    if (!madera)
+    return -ENOMEM;
+    madera.regmap = devm_regmap_init_spi(spi, regmap_16bit_config);
+    if (IS_ERR(madera.regmap)) {
+    ret = PTR_ERR(madera.regmap);
+    dev_err(&spi.dev,
+    "Failed to allocate 16-bit register map: %d\n",	ret);
+    return ret;
+    }
+    madera.regmap_32bit = devm_regmap_init_spi(spi, regmap_32bit_config);
+    if (IS_ERR(madera.regmap_32bit)) {
+    ret = PTR_ERR(madera.regmap_32bit);
+    dev_err(&spi.dev,
+    "Failed to allocate 32-bit register map: %d\n",	ret);
+    return ret;
+    }
+    madera.type = type;
+    madera.type_name = name;
+    madera.dev = &spi.dev;
+    madera.irq = spi.irq;
+    return madera_dev_init(madera);
+    }
+#[no_mangle]
+unsafe extern "C" fn madera_spi_remove(spi: *mut spi_device) {
+    static void madera_spi_remove(struct spi_device *spi)
+    {
+    struct madera *madera = spi_get_drvdata(spi);
+    madera_dev_exit(madera);
+    }
+    static const struct spi_device_id madera_spi_ids[] = {
+    { .name = "cs47l15", .driver_data = CS47L15 },
+    { .name = "cs47l35", .driver_data = CS47L35 },
+    { .name = "cs47l85", .driver_data = CS47L85 },
+    { .name = "cs47l90", .driver_data = CS47L90 },
+    { .name = "cs47l91", .driver_data = CS47L91 },
+    { .name = "cs42l92", .driver_data = CS42L92 },
+    { .name = "cs47l92", .driver_data = CS47L92 },
+    { .name = "cs47l93", .driver_data = CS47L93 },
+    { .name = "wm1840", .driver_data = WM1840 },
+    { }
+    };
+    MODULE_DEVICE_TABLE(spi, madera_spi_ids);
+    static struct spi_driver madera_spi_driver = {
+    .driver = {
+    .name	= "madera",
+    .pm	= &madera_pm_ops,
+    .of_match_table	= of_match_ptr(madera_of_match),
+    },
+    .probe		= madera_spi_probe,
+    .remove		= madera_spi_remove,
+    .id_table	= madera_spi_ids,
+    };
+    module_spi_driver(madera_spi_driver);
+    MODULE_DESCRIPTION("Madera SPI bus interface");
+    MODULE_AUTHOR("Richard Fitzgerald <rf@opensource.cirrus.com>");
+    MODULE_LICENSE("GPL v2");

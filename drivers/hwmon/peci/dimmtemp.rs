@@ -1,0 +1,604 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/hwmon/peci/dimmtemp.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+// Copyright (c) 2018-2021 Intel Corporation
+
+// Max number of channel ranks and DIMM index per channel
+pub const CHAN_RANK_MAX_ON_HSX: c_int = 8;
+pub const DIMM_IDX_MAX_ON_HSX: c_int = 3;
+pub const CHAN_RANK_MAX_ON_BDX: c_int = 4;
+pub const DIMM_IDX_MAX_ON_BDX: c_int = 3;
+pub const CHAN_RANK_MAX_ON_BDXD: c_int = 2;
+pub const DIMM_IDX_MAX_ON_BDXD: c_int = 2;
+pub const CHAN_RANK_MAX_ON_SKX: c_int = 6;
+pub const DIMM_IDX_MAX_ON_SKX: c_int = 2;
+pub const CHAN_RANK_MAX_ON_ICX: c_int = 8;
+pub const DIMM_IDX_MAX_ON_ICX: c_int = 2;
+pub const CHAN_RANK_MAX_ON_ICXD: c_int = 4;
+pub const DIMM_IDX_MAX_ON_ICXD: c_int = 2;
+pub const CHAN_RANK_MAX_ON_SPR: c_int = 8;
+pub const DIMM_IDX_MAX_ON_SPR: c_int = 2;
+pub const CHAN_RANK_MAX_ON_EMR: c_int = 8;
+pub const DIMM_IDX_MAX_ON_EMR: c_int = 2;
+
+pub const NO_DIMM_RETRY_COUNT_MAX: c_int = 120;
+    struct peci_dimmtemp;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct dimm_info {
+    pub chan_rank_max: c_int,
+    pub dimm_idx_max: c_int,
+    pub min_peci_revision: u8,
+    int (*read_thresholds)(struct peci_dimmtemp *priv, int dimm_order,
+    pub data): *mut int chan_rank, u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct peci_dimm_thresholds {
+    pub temp_max: c_long,
+    pub temp_crit: c_long,
+    pub state: peci_sensor_state,
+}
+
+    enum peci_dimm_threshold_type {
+    temp_max_type,
+    temp_crit_type,
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct peci_dimmtemp {
+    pub peci_dev: *mut peci_device,
+    pub dev: *mut device,
+    pub name: *const c_char,
+    pub gen_info: *const dimm_info,
+    pub detect_work: delayed_work,
+    struct {
+    pub temp: peci_sensor_data,
+    pub thresholds: peci_dimm_thresholds,
+    pub dimm: [}; DIMM_NUMS_MAX],
+    pub dimmtemp_label: *mut c_char,
+    pub DIMM_NUMS_MAX): DECLARE_BITMAP(dimm_mask,,
+    pub no_dimm_retry_count: u8,
+}
+
+#[no_mangle]
+unsafe extern "C" fn __dimm_temp(reg: u32, dimm_order: c_int) -> u8 {
+    static u8 __dimm_temp(u32 reg, int dimm_order)
+    {
+    return (reg >> (dimm_order * 8)) & 0xff;
+    }
+#[no_mangle]
+unsafe extern "C" fn get_dimm_temp(priv: *mut peci_dimmtemp, dimm_no: c_int, val: *mut c_long) -> c_int {
+    static int get_dimm_temp(struct peci_dimmtemp *priv, int dimm_no, long *val)
+    {
+    let mut dimm_order: c_int = dimm_no % priv.gen_info.dimm_idx_max;
+    let mut chan_rank: c_int = dimm_no / priv.gen_info.dimm_idx_max;
+    u32 data;
+    int ret;
+    if (!peci_sensor_need_update(&priv.dimm[dimm_no].temp.state))
+    goto skip_update;
+    ret = peci_pcs_read(priv.peci_dev, PECI_PCS_DDR_DIMM_TEMP, chan_rank, &data);
+    if (ret)
+    return ret;
+    priv.dimm[dimm_no].temp.value = __dimm_temp(data, dimm_order) * MILLIDEGREE_PER_DEGREE;
+    peci_sensor_mark_updated(&priv.dimm[dimm_no].temp.state);
+    skip_update:
+// val = priv->dimm[dimm_no].temp.value;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn update_thresholds(priv: *mut peci_dimmtemp, dimm_no: c_int) -> c_int {
+    static int update_thresholds(struct peci_dimmtemp *priv, int dimm_no)
+    {
+    let mut dimm_order: c_int = dimm_no % priv.gen_info.dimm_idx_max;
+    let mut chan_rank: c_int = dimm_no / priv.gen_info.dimm_idx_max;
+    u32 data;
+    int ret;
+    if (!peci_sensor_need_update(&priv.dimm[dimm_no].thresholds.state))
+    return 0;
+    ret = priv.gen_info.read_thresholds(priv, dimm_order, chan_rank, &data);
+    if (ret)
+    return ret;
+    priv.dimm[dimm_no].thresholds.temp_max = GET_TEMP_MAX(data) * MILLIDEGREE_PER_DEGREE;
+    priv.dimm[dimm_no].thresholds.temp_crit = GET_TEMP_CRIT(data) * MILLIDEGREE_PER_DEGREE;
+    peci_sensor_mark_updated(&priv.dimm[dimm_no].thresholds.state);
+    return 0;
+    }
+    static int get_dimm_thresholds(struct peci_dimmtemp *priv, enum peci_dimm_threshold_type type,
+    int dimm_no, long *val)
+    {
+    int ret;
+    ret = update_thresholds(priv, dimm_no);
+    if (ret)
+    return ret;
+    switch (type) {
+    case temp_max_type:
+// val = priv->dimm[dimm_no].thresholds.temp_max;
+    break;
+    case temp_crit_type:
+// val = priv->dimm[dimm_no].thresholds.temp_crit;
+    break;
+    default:
+    ret = -EOPNOTSUPP;
+    break;
+    }
+    return ret;
+    }
+    static int dimmtemp_read_string(struct device *dev,
+    enum hwmon_sensor_types type,
+    u32 attr, int channel, const char **str)
+    {
+    struct peci_dimmtemp *priv = dev_get_drvdata(dev);
+    if (attr != hwmon_temp_label)
+    return -EOPNOTSUPP;
+// str = (const char *)priv->dimmtemp_label[channel];
+    return 0;
+    }
+    static int dimmtemp_read(struct device *dev, enum hwmon_sensor_types type,
+    u32 attr, int channel, long *val)
+    {
+    struct peci_dimmtemp *priv = dev_get_drvdata(dev);
+    switch (attr) {
+    case hwmon_temp_input:
+    return get_dimm_temp(priv, channel, val);
+    case hwmon_temp_max:
+    return get_dimm_thresholds(priv, temp_max_type, channel, val);
+    case hwmon_temp_crit:
+    return get_dimm_thresholds(priv, temp_crit_type, channel, val);
+    default:
+    break;
+    }
+    return -EOPNOTSUPP;
+    }
+    static umode_t dimmtemp_is_visible(const void *data, enum hwmon_sensor_types type,
+    u32 attr, int channel)
+    {
+    const struct peci_dimmtemp *priv = data;
+    if (test_bit(channel, priv.dimm_mask))
+    return 0444;
+    return 0;
+    }
+    static const struct hwmon_ops peci_dimmtemp_ops = {
+    .is_visible = dimmtemp_is_visible,
+    .read_string = dimmtemp_read_string,
+    .read = dimmtemp_read,
+    };
+#[no_mangle]
+unsafe extern "C" fn check_populated_dimms(priv: *mut peci_dimmtemp) -> c_int {
+    static int check_populated_dimms(struct peci_dimmtemp *priv)
+    {
+    let mut chan_rank_max: c_int = priv.gen_info.chan_rank_max;
+    let mut dimm_idx_max: c_int = priv.gen_info.dimm_idx_max;
+    DECLARE_BITMAP(dimm_mask, DIMM_NUMS_MAX);
+    DECLARE_BITMAP(chan_rank_empty, CHAN_RANK_MAX);
+    int chan_rank, dimm_idx, ret, i;
+    u32 pcs;
+    if (chan_rank_max * dimm_idx_max > DIMM_NUMS_MAX) {
+    WARN_ONCE(1, "Unsupported number of DIMMs - chan_rank_max: %d, dimm_idx_max: %d",
+    chan_rank_max, dimm_idx_max);
+    return -EINVAL;
+    }
+    bitmap_zero(dimm_mask, DIMM_NUMS_MAX);
+    bitmap_zero(chan_rank_empty, CHAN_RANK_MAX);
+    for (chan_rank = 0; chan_rank < chan_rank_max; chan_rank++) {
+    ret = peci_pcs_read(priv.peci_dev, PECI_PCS_DDR_DIMM_TEMP, chan_rank, &pcs);
+    if (ret) {
+//
+// Overall, we expect either success or -EINVAL in
+// order to determine whether DIMM is populated or not.
+// For anything else we fall back to deferring the
+// detection to be performed at a later point in time.
+//
+    if (ret == -EINVAL) {
+    bitmap_set(chan_rank_empty, chan_rank, 1);
+    continue;
+    }
+    return -EAGAIN;
+    }
+    for (dimm_idx = 0; dimm_idx < dimm_idx_max; dimm_idx++)
+    if (__dimm_temp(pcs, dimm_idx))
+    bitmap_set(dimm_mask, chan_rank * dimm_idx_max + dimm_idx, 1);
+    }
+//
+// If we got all -EINVALs, it means that the CPU doesn't have any
+// DIMMs. Unfortunately, it may also happen at the very start of
+// host platform boot. Retrying a couple of times lets us make sure
+// that the state is persistent.
+//
+    if (bitmap_full(chan_rank_empty, chan_rank_max)) {
+    if (priv.no_dimm_retry_count < NO_DIMM_RETRY_COUNT_MAX) {
+    priv.no_dimm_retry_count++;
+    return -EAGAIN;
+    }
+    return -ENODEV;
+    }
+//
+// It's possible that memory training is not done yet. In this case we
+// defer the detection to be performed at a later point in time.
+//
+    if (bitmap_empty(dimm_mask, DIMM_NUMS_MAX)) {
+    priv.no_dimm_retry_count = 0;
+    return -EAGAIN;
+    }
+    for_each_set_bit(i, dimm_mask, DIMM_NUMS_MAX) {
+    dev_dbg(priv.dev, "Found DIMM%#x\n", i);
+    }
+    bitmap_copy(priv.dimm_mask, dimm_mask, DIMM_NUMS_MAX);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn create_dimm_temp_label(priv: *mut peci_dimmtemp, chan: c_int) -> c_int {
+    static int create_dimm_temp_label(struct peci_dimmtemp *priv, int chan)
+    {
+    let mut rank: c_int = chan / priv.gen_info.dimm_idx_max;
+    let mut idx: c_int = chan % priv.gen_info.dimm_idx_max;
+    priv.dimmtemp_label[chan] = devm_kasprintf(priv.dev, GFP_KERNEL,
+    "DIMM %c%d", 'A' + rank,
+    idx + 1);
+    if (!priv.dimmtemp_label[chan])
+    return -ENOMEM;
+    return 0;
+    }
+    static const struct hwmon_channel_info * const peci_dimmtemp_temp_info[] = {
+    HWMON_CHANNEL_INFO(temp,
+    [0 ... DIMM_NUMS_MAX - 1] = HWMON_T_LABEL |
+    HWMON_T_INPUT | HWMON_T_MAX | HWMON_T_CRIT),
+    core::ptr::null_mut()
+    };
+    static const struct hwmon_chip_info peci_dimmtemp_chip_info = {
+    .ops = &peci_dimmtemp_ops,
+    .info = peci_dimmtemp_temp_info,
+    };
+#[no_mangle]
+unsafe extern "C" fn create_dimm_temp_info(priv: *mut peci_dimmtemp) -> c_int {
+    static int create_dimm_temp_info(struct peci_dimmtemp *priv)
+    {
+    int ret, i, channels;
+    struct device *dev;
+//
+// We expect to either find populated DIMMs and carry on with creating
+// sensors, or find out that there are no DIMMs populated.
+// All other states mean that the platform never reached the state that
+// allows to check DIMM state - causing us to retry later on.
+//
+    ret = check_populated_dimms(priv);
+    if (ret == -ENODEV) {
+    dev_dbg(priv.dev, "No DIMMs found\n");
+    return 0;
+    } else if (ret) {
+    schedule_delayed_work(&priv.detect_work, DIMM_MASK_CHECK_DELAY_JIFFIES);
+    dev_dbg(priv.dev, "Deferred populating DIMM temp info\n");
+    return ret;
+    }
+    channels = priv.gen_info.chan_rank_max * priv.gen_info.dimm_idx_max;
+    priv.dimmtemp_label = devm_kzalloc(priv.dev, channels * sizeof(char *), GFP_KERNEL);
+    if (!priv.dimmtemp_label)
+    return -ENOMEM;
+    for_each_set_bit(i, priv.dimm_mask, DIMM_NUMS_MAX) {
+    ret = create_dimm_temp_label(priv, i);
+    if (ret)
+    return ret;
+    }
+    dev = devm_hwmon_device_register_with_info(priv.dev, priv.name, priv,
+    &peci_dimmtemp_chip_info, core::ptr::null_mut());
+    if (IS_ERR(dev)) {
+    dev_err(priv.dev, "Failed to register hwmon device\n");
+    return PTR_ERR(dev);
+    }
+    dev_dbg(priv.dev, "%s: sensor '%s'\n", dev_name(dev), priv.name);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn create_dimm_temp_info_delayed(work: *mut work_struct) {
+    static void create_dimm_temp_info_delayed(struct work_struct *work)
+    {
+    struct peci_dimmtemp *priv = container_of(to_delayed_work(work),
+    struct peci_dimmtemp,
+    detect_work);
+    int ret;
+    ret = create_dimm_temp_info(priv);
+    if (ret && ret != -EAGAIN)
+    dev_err(priv.dev, "Failed to populate DIMM temp info\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn peci_dimmtemp_probe(adev: *mut auxiliary_device, id: *const auxiliary_device_id) -> c_int {
+    static int peci_dimmtemp_probe(struct auxiliary_device *adev, const struct auxiliary_device_id *id)
+    {
+    struct device *dev = &adev.dev;
+    struct peci_device *peci_dev = to_peci_device(dev.parent);
+    struct peci_dimmtemp *priv;
+    int ret;
+    priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
+    if (!priv)
+    return -ENOMEM;
+    priv.name = devm_kasprintf(dev, GFP_KERNEL, "peci_dimmtemp.cpu%d",
+    peci_dev.info.socket_id);
+    if (!priv.name)
+    return -ENOMEM;
+    priv.dev = dev;
+    priv.peci_dev = peci_dev;
+    priv.gen_info = (const struct dimm_info *)id.driver_data;
+//
+// This is just a sanity check. Since we're using commands that are
+// guaranteed to be supported on a given platform, we should never see
+// revision lower than expected.
+//
+    if (peci_dev.info.peci_revision < priv.gen_info.min_peci_revision)
+    dev_warn(priv.dev,
+    "Unexpected PECI revision %#x, some features may be unavailable\n",
+    peci_dev.info.peci_revision);
+    ret = devm_delayed_work_autocancel(priv.dev, &priv.detect_work,
+    create_dimm_temp_info_delayed);
+    if (ret)
+    return ret;
+    ret = create_dimm_temp_info(priv);
+    if (ret && ret != -EAGAIN) {
+    dev_err(dev, "Failed to populate DIMM temp info\n");
+    return ret;
+    }
+    return 0;
+    }
+    static int
+    read_thresholds_hsx(struct peci_dimmtemp *priv, int dimm_order, int chan_rank, u32 *data)
+    {
+    u8 dev, func;
+    u16 reg;
+    int ret;
+//
+// Device 20, Function 0: IMC 0 channel 0 -> rank 0
+// Device 20, Function 1: IMC 0 channel 1 -> rank 1
+// Device 21, Function 0: IMC 0 channel 2 -> rank 2
+// Device 21, Function 1: IMC 0 channel 3 -> rank 3
+// Device 23, Function 0: IMC 1 channel 0 -> rank 4
+// Device 23, Function 1: IMC 1 channel 1 -> rank 5
+// Device 24, Function 0: IMC 1 channel 2 -> rank 6
+// Device 24, Function 1: IMC 1 channel 3 -> rank 7
+//
+    dev = 20 + chan_rank / 2 + chan_rank / 4;
+    func = chan_rank % 2;
+    reg = 0x120 + dimm_order * 4;
+    ret = peci_pci_local_read(priv.peci_dev, 1, dev, func, reg, data);
+    if (ret)
+    return ret;
+    return 0;
+    }
+    static int
+    read_thresholds_bdxd(struct peci_dimmtemp *priv, int dimm_order, int chan_rank, u32 *data)
+    {
+    u8 dev, func;
+    u16 reg;
+    int ret;
+//
+// Device 10, Function 2: IMC 0 channel 0 -> rank 0
+// Device 10, Function 6: IMC 0 channel 1 -> rank 1
+// Device 12, Function 2: IMC 1 channel 0 -> rank 2
+// Device 12, Function 6: IMC 1 channel 1 -> rank 3
+//
+    dev = 10 + chan_rank / 2 * 2;
+    func = (chan_rank % 2) ? 6 : 2;
+    reg = 0x120 + dimm_order * 4;
+    ret = peci_pci_local_read(priv.peci_dev, 2, dev, func, reg, data);
+    if (ret)
+    return ret;
+    return 0;
+    }
+    static int
+    read_thresholds_skx(struct peci_dimmtemp *priv, int dimm_order, int chan_rank, u32 *data)
+    {
+    u8 dev, func;
+    u16 reg;
+    int ret;
+//
+// Device 10, Function 2: IMC 0 channel 0 -> rank 0
+// Device 10, Function 6: IMC 0 channel 1 -> rank 1
+// Device 11, Function 2: IMC 0 channel 2 -> rank 2
+// Device 12, Function 2: IMC 1 channel 0 -> rank 3
+// Device 12, Function 6: IMC 1 channel 1 -> rank 4
+// Device 13, Function 2: IMC 1 channel 2 -> rank 5
+//
+    dev = 10 + chan_rank / 3 * 2 + (chan_rank % 3 == 2 ? 1 : 0);
+    func = chan_rank % 3 == 1 ? 6 : 2;
+    reg = 0x120 + dimm_order * 4;
+    ret = peci_pci_local_read(priv.peci_dev, 2, dev, func, reg, data);
+    if (ret)
+    return ret;
+    return 0;
+    }
+    static int
+    read_thresholds_icx(struct peci_dimmtemp *priv, int dimm_order, int chan_rank, u32 *data)
+    {
+    u32 reg_val;
+    u64 offset;
+    int ret;
+    u8 dev;
+    ret = peci_ep_pci_local_read(priv.peci_dev, 0, 13, 0, 2, 0xd4, &reg_val);
+    if (ret || !(reg_val & BIT(31)))
+    return -ENODATA;
+    ret = peci_ep_pci_local_read(priv.peci_dev, 0, 13, 0, 2, 0xd0, &reg_val);
+    if (ret)
+    return -ENODATA;
+//
+// Device 26, Offset 224e0: IMC 0 channel 0 -> rank 0
+// Device 26, Offset 264e0: IMC 0 channel 1 -> rank 1
+// Device 27, Offset 224e0: IMC 1 channel 0 -> rank 2
+// Device 27, Offset 264e0: IMC 1 channel 1 -> rank 3
+// Device 28, Offset 224e0: IMC 2 channel 0 -> rank 4
+// Device 28, Offset 264e0: IMC 2 channel 1 -> rank 5
+// Device 29, Offset 224e0: IMC 3 channel 0 -> rank 6
+// Device 29, Offset 264e0: IMC 3 channel 1 -> rank 7
+//
+    dev = 26 + chan_rank / 2;
+    offset = 0x224e0 + dimm_order * 4 + (chan_rank % 2) * 0x4000;
+    ret = peci_mmio_read(priv.peci_dev, 0, GET_CPU_SEG(reg_val), GET_CPU_BUS(reg_val),
+    dev, 0, offset, data);
+    if (ret)
+    return ret;
+    return 0;
+    }
+    static int
+    read_thresholds_spr(struct peci_dimmtemp *priv, int dimm_order, int chan_rank, u32 *data)
+    {
+    u32 reg_val;
+    u64 offset;
+    int ret;
+    u8 dev;
+    ret = peci_ep_pci_local_read(priv.peci_dev, 0, 30, 0, 2, 0xd4, &reg_val);
+    if (ret || !(reg_val & BIT(31)))
+    return -ENODATA;
+    ret = peci_ep_pci_local_read(priv.peci_dev, 0, 30, 0, 2, 0xd0, &reg_val);
+    if (ret)
+    return -ENODATA;
+//
+// Device 26, Offset 219a8: IMC 0 channel 0 -> rank 0
+// Device 26, Offset 299a8: IMC 0 channel 1 -> rank 1
+// Device 27, Offset 219a8: IMC 1 channel 0 -> rank 2
+// Device 27, Offset 299a8: IMC 1 channel 1 -> rank 3
+// Device 28, Offset 219a8: IMC 2 channel 0 -> rank 4
+// Device 28, Offset 299a8: IMC 2 channel 1 -> rank 5
+// Device 29, Offset 219a8: IMC 3 channel 0 -> rank 6
+// Device 29, Offset 299a8: IMC 3 channel 1 -> rank 7
+//
+    dev = 26 + chan_rank / 2;
+    offset = 0x219a8 + dimm_order * 4 + (chan_rank % 2) * 0x8000;
+    ret = peci_mmio_read(priv.peci_dev, 0, GET_CPU_SEG(reg_val), GET_CPU_BUS(reg_val),
+    dev, 0, offset, data);
+    if (ret)
+    return ret;
+    return 0;
+    }
+    static int read_thresholds_emr(struct peci_dimmtemp *priv, int dimm_order,
+    int chan_rank, u32 *data)
+    {
+    return read_thresholds_spr(priv, dimm_order, chan_rank, data);
+    }
+    static const struct dimm_info dimm_hsx = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_HSX,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_HSX,
+    .min_peci_revision = 0x33,
+    .read_thresholds = &read_thresholds_hsx,
+    };
+    static const struct dimm_info dimm_bdx = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_BDX,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_BDX,
+    .min_peci_revision = 0x33,
+    .read_thresholds = &read_thresholds_hsx,
+    };
+    static const struct dimm_info dimm_bdxd = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_BDXD,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_BDXD,
+    .min_peci_revision = 0x33,
+    .read_thresholds = &read_thresholds_bdxd,
+    };
+    static const struct dimm_info dimm_skx = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_SKX,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_SKX,
+    .min_peci_revision = 0x33,
+    .read_thresholds = &read_thresholds_skx,
+    };
+    static const struct dimm_info dimm_icx = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_ICX,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_ICX,
+    .min_peci_revision = 0x40,
+    .read_thresholds = &read_thresholds_icx,
+    };
+    static const struct dimm_info dimm_icxd = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_ICXD,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_ICXD,
+    .min_peci_revision = 0x40,
+    .read_thresholds = &read_thresholds_icx,
+    };
+    static const struct dimm_info dimm_spr = {
+    .chan_rank_max	= CHAN_RANK_MAX_ON_SPR,
+    .dimm_idx_max	= DIMM_IDX_MAX_ON_SPR,
+    .min_peci_revision = 0x40,
+    .read_thresholds = &read_thresholds_spr,
+    };
+    static const struct dimm_info dimm_emr = {
+    .chan_rank_max  = CHAN_RANK_MAX_ON_EMR,
+    .dimm_idx_max  = DIMM_IDX_MAX_ON_EMR,
+    .min_peci_revision = 0x40,
+    .read_thresholds = &read_thresholds_emr,
+    };
+    static const struct auxiliary_device_id peci_dimmtemp_ids[] = {
+    {
+    .name = "peci_cpu.dimmtemp.hsx",
+    .driver_data = (kernel_ulong_t)&dimm_hsx,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.bdx",
+    .driver_data = (kernel_ulong_t)&dimm_bdx,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.bdxd",
+    .driver_data = (kernel_ulong_t)&dimm_bdxd,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.skx",
+    .driver_data = (kernel_ulong_t)&dimm_skx,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.icx",
+    .driver_data = (kernel_ulong_t)&dimm_icx,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.icxd",
+    .driver_data = (kernel_ulong_t)&dimm_icxd,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.spr",
+    .driver_data = (kernel_ulong_t)&dimm_spr,
+    },
+    {
+    .name = "peci_cpu.dimmtemp.emr",
+    .driver_data = (kernel_ulong_t)&dimm_emr,
+    },
+    { }
+    };
+    MODULE_DEVICE_TABLE(auxiliary, peci_dimmtemp_ids);
+    static struct auxiliary_driver peci_dimmtemp_driver = {
+    .probe		= peci_dimmtemp_probe,
+    .id_table	= peci_dimmtemp_ids,
+    };
+    module_auxiliary_driver(peci_dimmtemp_driver);
+    MODULE_AUTHOR("Jae Hyun Yoo <jae.hyun.yoo@linux.intel.com>");
+    MODULE_AUTHOR("Iwona Winiarska <iwona.winiarska@intel.com>");
+    MODULE_DESCRIPTION("PECI dimmtemp driver");
+    MODULE_LICENSE("GPL");
+    MODULE_IMPORT_NS("PECI_CPU");

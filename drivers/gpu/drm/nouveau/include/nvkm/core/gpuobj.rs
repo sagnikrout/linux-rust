@@ -1,0 +1,65 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/gpu/drm/nouveau/include/nvkm/core/gpuobj.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: MIT
+
+pub const NVOBJ_FLAG_ZERO_ALLOC: c_uint = 0x00000001;
+pub const NVOBJ_FLAG_HEAP: c_uint = 0x00000004;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nvkm_gpuobj {
+    pub func: *const nvkm_gpuobj_func,
+    pub ptrs: *const nvkm_gpuobj_func,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nvkm_gpuobj_func {
+    pub ): *mut *mut *mut void (acquire)(struct nvkm_gpuobj,
+    pub ): *mut *mut void (release)(struct nvkm_gpuobj,
+    pub offset): *mut *mut *mut u32 (rd32)(struct nvkm_gpuobj , u32,
+    pub data): *mut *mut *mut void (wr32)(struct nvkm_gpuobj , u32 offset, u32,
+    pub argc): *mut *mut *mut nvkm_vma , void argv, u32,
+}
+
+extern "C" {
+    pub fn nvkm_gpuobj_del(: *mut nvkm_gpuobj);
+}
+extern "C" {
+    pub fn nvkm_gpuobj_wrap(: *mut nvkm_memory, : *mut nvkm_gpuobj) -> c_int;
+}

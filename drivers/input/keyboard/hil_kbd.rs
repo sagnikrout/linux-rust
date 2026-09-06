@@ -1,0 +1,536 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/input/keyboard/hil_kbd.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+//
+// Generic linux-input device driver for keyboard devices
+//
+// Copyright (c) 2001 Brian S. Julin
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 1. Redistributions of source code must retain the above copyright
+// notice, this list of conditions, and the following disclaimer,
+// without modification.
+// 2. The name of the author may not be used to endorse or promote products
+// derived from this software without specific prior written permission.
+//
+// Alternatively, this software may be distributed under the terms of the
+// GNU General Public License ("GPL").
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+// OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+//
+// References:
+// HP-HIL Technical Reference Manual.  Hewlett Packard Product No. 45918A
+//
+
+    MODULE_AUTHOR("Brian S. Julin <bri@calyx.com>");
+    MODULE_DESCRIPTION("HIL keyboard/mouse driver");
+    MODULE_LICENSE("Dual BSD/GPL");
+    MODULE_ALIAS("serio:ty03pr25id00ex*"); /* HIL keyboard */
+    MODULE_ALIAS("serio:ty03pr25id0Fex*"); /* HIL mouse */
+pub const HIL_PACKET_MAX_LENGTH: c_int = 16;
+pub const HIL_KBD_SET1_UPBIT: c_uint = 0x01;
+pub const HIL_KBD_SET1_SHIFT: c_int = 1;
+    static unsigned int hil_kbd_set1[HIL_KEYCODES_SET1_TBLSIZE] __read_mostly =
+    { HIL_KEYCODES_SET1 };
+pub const HIL_KBD_SET2_UPBIT: c_uint = 0x01;
+pub const HIL_KBD_SET2_SHIFT: c_int = 1;
+// Set2 is user defined
+pub const HIL_KBD_SET3_UPBIT: c_uint = 0x80;
+pub const HIL_KBD_SET3_SHIFT: c_int = 0;
+    static unsigned int hil_kbd_set3[HIL_KEYCODES_SET3_TBLSIZE] __read_mostly =
+    { HIL_KEYCODES_SET3 };
+    static const char hil_language[][16] = { HIL_LOCALE_MAP };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hil_dev {
+    pub dev: *mut input_dev,
+    pub serio: *mut serio,
+// Input buffer and index for packets from HIL bus.
+    pub data: [hil_packet; HIL_PACKET_MAX_LENGTH],
+    pub /: *mut *mut int idx4; / four counts per packet,
+// Raw device info records from HIL bus, see hil.h for fields.
+    pub /: *mut *mut char idd[HIL_PACKET_MAX_LENGTH]; / DID byte and IDD record,
+    pub /: *mut *mut char rsc[HIL_PACKET_MAX_LENGTH]; / RSC record,
+    pub /: *mut *mut char exd[HIL_PACKET_MAX_LENGTH]; / EXD record,
+    pub /: *mut *mut char rnm[HIL_PACKET_MAX_LENGTH + 1]; / RNM record + NULL term.,
+    pub cmd_done: completion,
+    pub is_pointer: bool,
+// Extra device details needed for pointing devices.
+    pub naxes: unsigned int nbtn,,
+    pub btnmap: [c_uint; 7],
+}
+
+#[no_mangle]
+unsafe extern "C" fn hil_dev_is_command_response(p: hil_packet) -> bool {
+    static bool hil_dev_is_command_response(hil_packet p)
+    {
+    if ((p & ~HIL_CMDCT_POL) == (HIL_ERR_INT | HIL_PKT_CMD | HIL_CMD_POL))
+    return false;
+    if ((p & ~HIL_CMDCT_RPL) == (HIL_ERR_INT | HIL_PKT_CMD | HIL_CMD_RPL))
+    return false;
+    return true;
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_handle_command_response(dev: *mut hil_dev) {
+    static void hil_dev_handle_command_response(struct hil_dev *dev)
+    {
+    hil_packet p;
+    char *buf;
+    int i, idx;
+    idx = dev.idx4 / 4;
+    p = dev.data[idx - 1];
+    switch (p & HIL_PKT_DATA_MASK) {
+    case HIL_CMD_IDD:
+    buf = dev.idd;
+    break;
+    case HIL_CMD_RSC:
+    buf = dev.rsc;
+    break;
+    case HIL_CMD_EXD:
+    buf = dev.exd;
+    break;
+    case HIL_CMD_RNM:
+    dev.rnm[HIL_PACKET_MAX_LENGTH] = 0;
+    buf = dev.rnm;
+    break;
+    default:
+// These occur when device isn't present
+    if (p != (HIL_ERR_INT | HIL_PKT_CMD)) {
+// Anything else we'd like to know about.
+    printk(KERN_WARNING PREFIX "Device sent unknown record %x\n", p);
+    }
+    goto out;
+    }
+    for (i = 0; i < idx; i++)
+    buf[i] = dev.data[i] & HIL_PKT_DATA_MASK;
+    for (; i < HIL_PACKET_MAX_LENGTH; i++)
+    buf[i] = 0;
+    out:
+    complete(&dev.cmd_done);
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_handle_kbd_events(kbd: *mut hil_dev) {
+    static void hil_dev_handle_kbd_events(struct hil_dev *kbd)
+    {
+    struct input_dev *dev = kbd.dev;
+    let mut idx: c_int = kbd.idx4 / 4;
+    int i;
+    switch (kbd.data[0] & HIL_POL_CHARTYPE_MASK) {
+    case HIL_POL_CHARTYPE_NONE:
+    return;
+    case HIL_POL_CHARTYPE_ASCII:
+    for (i = 1; i < idx - 1; i++)
+    input_report_key(dev, kbd.data[i] & 0x7f, 1);
+    break;
+    case HIL_POL_CHARTYPE_RSVD1:
+    case HIL_POL_CHARTYPE_RSVD2:
+    case HIL_POL_CHARTYPE_BINARY:
+    for (i = 1; i < idx - 1; i++)
+    input_report_key(dev, kbd.data[i], 1);
+    break;
+    case HIL_POL_CHARTYPE_SET1:
+    for (i = 1; i < idx - 1; i++) {
+    let mut key: c_uint = kbd.data[i];
+    let mut up: c_int = key & HIL_KBD_SET1_UPBIT;
+    key &= (~HIL_KBD_SET1_UPBIT & 0xff);
+    key = hil_kbd_set1[key >> HIL_KBD_SET1_SHIFT];
+    input_report_key(dev, key, !up);
+    }
+    break;
+    case HIL_POL_CHARTYPE_SET2:
+    for (i = 1; i < idx - 1; i++) {
+    let mut key: c_uint = kbd.data[i];
+    let mut up: c_int = key & HIL_KBD_SET2_UPBIT;
+    key &= (~HIL_KBD_SET1_UPBIT & 0xff);
+    key = key >> HIL_KBD_SET2_SHIFT;
+    input_report_key(dev, key, !up);
+    }
+    break;
+    case HIL_POL_CHARTYPE_SET3:
+    for (i = 1; i < idx - 1; i++) {
+    let mut key: c_uint = kbd.data[i];
+    let mut up: c_int = key & HIL_KBD_SET3_UPBIT;
+    key &= (~HIL_KBD_SET1_UPBIT & 0xff);
+    key = hil_kbd_set3[key >> HIL_KBD_SET3_SHIFT];
+    input_report_key(dev, key, !up);
+    }
+    break;
+    }
+    input_sync(dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_handle_ptr_events(ptr: *mut hil_dev) {
+    static void hil_dev_handle_ptr_events(struct hil_dev *ptr)
+    {
+    struct input_dev *dev = ptr.dev;
+    let mut idx: c_int = ptr.idx4 / 4;
+    let mut p: hil_packet = ptr.data[idx - 1];
+    int i, cnt, laxis;
+    bool absdev, ax16;
+    if ((p & HIL_CMDCT_POL) != idx - 1) {
+    printk(KERN_WARNING PREFIX
+    "Malformed poll packet %x (idx = %i)\n", p, idx);
+    return;
+    }
+    i = (p & HIL_POL_AXIS_ALT) ? 3 : 0;
+    laxis = (p & HIL_POL_NUM_AXES_MASK) + i;
+    ax16 = ptr.idd[1] & HIL_IDD_HEADER_16BIT; /* 8 or 16bit resolution */
+    absdev = ptr.idd[1] & HIL_IDD_HEADER_ABS;
+    for (cnt = 1; i < laxis; i++) {
+    unsigned int lo, hi, val;
+    lo = ptr.data[cnt++] & HIL_PKT_DATA_MASK;
+    hi = ax16 ? (ptr.data[cnt++] & HIL_PKT_DATA_MASK) : 0;
+    if (absdev) {
+    val = lo + (hi << 8);
+
+    if (val < input_abs_get_min(dev, ABS_X + i))
+    input_abs_set_min(dev, ABS_X + i, val);
+    if (val > input_abs_get_max(dev, ABS_X + i))
+    input_abs_set_max(dev, ABS_X + i, val);
+
+    if (i % 3)
+    val = input_abs_get_max(dev, ABS_X + i) - val;
+    input_report_abs(dev, ABS_X + i, val);
+    } else {
+    val = (int) (((int8_t) lo) | ((int8_t) hi << 8));
+    if (i % 3)
+    val *= -1;
+    input_report_rel(dev, REL_X + i, val);
+    }
+    }
+    while (cnt < idx - 1) {
+    let mut btn: c_uint = ptr.data[cnt++];
+    let mut up: c_int = btn & 1;
+    btn &= 0xfe;
+    if (btn == 0x8e)
+    continue; /* TODO: proximity == touch? */
+    if (btn > 0x8c || btn < 0x80)
+    continue;
+    btn = (btn - 0x80) >> 1;
+    btn = ptr.btnmap[btn];
+    input_report_key(dev, btn, !up);
+    }
+    input_sync(dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_process_err(dev: *mut hil_dev) {
+    static void hil_dev_process_err(struct hil_dev *dev)
+    {
+    printk(KERN_WARNING PREFIX "errored HIL packet\n");
+    dev.idx4 = 0;
+    complete(&dev.cmd_done); /* just in case somebody is waiting */
+    }
+    static irqreturn_t hil_dev_interrupt(struct serio *serio,
+    unsigned char data, unsigned int flags)
+    {
+    struct hil_dev *dev;
+    hil_packet packet;
+    int idx;
+    dev = serio_get_drvdata(serio);
+    BUG_ON(dev == core::ptr::null_mut());
+    if (dev.idx4 >= HIL_PACKET_MAX_LENGTH * sizeof(hil_packet)) {
+    hil_dev_process_err(dev);
+    goto out;
+    }
+    idx = dev.idx4 / 4;
+    if (!(dev.idx4 % 4))
+    dev.data[idx] = 0;
+    packet = dev.data[idx];
+    packet |= ((hil_packet)data) << ((3 - (dev.idx4 % 4)) * 8);
+    dev.data[idx] = packet;
+// Records of N 4-byte hil_packets must terminate with a command.
+    if ((++dev.idx4 % 4) == 0) {
+    if ((packet & 0xffff0000) != HIL_ERR_INT) {
+    hil_dev_process_err(dev);
+    } else if (packet & HIL_PKT_CMD) {
+    if (hil_dev_is_command_response(packet))
+    hil_dev_handle_command_response(dev);
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: dev->is_pointer) -> else {
+    else if (dev.is_pointer)
+    hil_dev_handle_ptr_events(dev);
+    else
+    hil_dev_handle_kbd_events(dev);
+    dev.idx4 = 0;
+    }
+    }
+    out:
+    return IRQ_HANDLED;
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_disconnect(serio: *mut serio) {
+    static void hil_dev_disconnect(struct serio *serio)
+    {
+    struct hil_dev *dev = serio_get_drvdata(serio);
+    BUG_ON(dev == core::ptr::null_mut());
+    serio_close(serio);
+    input_unregister_device(dev.dev);
+    serio_set_drvdata(serio, core::ptr::null_mut());
+    kfree(dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_keyboard_setup(kbd: *mut hil_dev) {
+    static void hil_dev_keyboard_setup(struct hil_dev *kbd)
+    {
+    struct input_dev *input_dev = kbd.dev;
+    let mut did: u8 = kbd.idd[0];
+    int i;
+    input_dev.evbit[0]	= BIT_MASK(EV_KEY) | BIT_MASK(EV_REP);
+    input_dev.ledbit[0]	= BIT_MASK(LED_NUML) | BIT_MASK(LED_CAPSL) |
+    BIT_MASK(LED_SCROLLL);
+    for (i = 0; i < 128; i++) {
+    __set_bit(hil_kbd_set1[i], input_dev.keybit);
+    __set_bit(hil_kbd_set3[i], input_dev.keybit);
+    }
+    __clear_bit(KEY_RESERVED, input_dev.keybit);
+    input_dev.keycodemax	= HIL_KEYCODES_SET1_TBLSIZE;
+    input_dev.keycodesize	= sizeof(hil_kbd_set1[0]);
+    input_dev.keycode	= hil_kbd_set1;
+    input_dev.name	= strlen(kbd.rnm) ? kbd.rnm : "HIL keyboard";
+    input_dev.phys	= "hpkbd/input0";
+    printk(KERN_INFO PREFIX "HIL keyboard found (did = 0x%02x, lang = %s)\n",
+    did, hil_language[did & HIL_IDD_DID_TYPE_KB_LANG_MASK]);
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_pointer_setup(ptr: *mut hil_dev) {
+    static void hil_dev_pointer_setup(struct hil_dev *ptr)
+    {
+    struct input_dev *input_dev = ptr.dev;
+    let mut did: u8 = ptr.idd[0];
+    uint8_t *idd = ptr.idd + 1;
+    let mut naxsets: c_uint = HIL_IDD_NUM_AXSETS(*idd);
+    unsigned int i, btntype;
+    const char *txt;
+    ptr.naxes = HIL_IDD_NUM_AXES_PER_SET(*idd);
+    switch (did & HIL_IDD_DID_TYPE_MASK) {
+    case HIL_IDD_DID_TYPE_REL:
+    input_dev.evbit[0] = BIT_MASK(EV_REL);
+    for (i = 0; i < ptr.naxes; i++)
+    __set_bit(REL_X + i, input_dev.relbit);
+    for (i = 3; naxsets > 1 && i < ptr.naxes + 3; i++)
+    __set_bit(REL_X + i, input_dev.relbit);
+    txt = "relative";
+    break;
+    case HIL_IDD_DID_TYPE_ABS:
+    input_dev.evbit[0] = BIT_MASK(EV_ABS);
+    for (i = 0; i < ptr.naxes; i++)
+    input_set_abs_params(input_dev, ABS_X + i,
+    0, HIL_IDD_AXIS_MAX(idd, i), 0, 0);
+    for (i = 3; naxsets > 1 && i < ptr.naxes + 3; i++)
+    input_set_abs_params(input_dev, ABS_X + i,
+    0, HIL_IDD_AXIS_MAX(idd, i - 3), 0, 0);
+
+    for (i = 0; i < ABS_MAX; i++) {
+    let mut diff: c_int = input_abs_get_max(input_dev, ABS_X + i) / 10;
+    input_abs_set_min(input_dev, ABS_X + i,
+    input_abs_get_min(input_dev, ABS_X + i) + diff);
+    input_abs_set_max(input_dev, ABS_X + i,
+    input_abs_get_max(input_dev, ABS_X + i) - diff);
+    }
+
+    txt = "absolute";
+    break;
+    default:
+    BUG();
+    }
+    ptr.nbtn = HIL_IDD_NUM_BUTTONS(idd);
+    if (ptr.nbtn)
+    input_dev.evbit[0] |= BIT_MASK(EV_KEY);
+    btntype = BTN_MISC;
+    if ((did & HIL_IDD_DID_ABS_TABLET_MASK) == HIL_IDD_DID_ABS_TABLET)
+
+    btntype = BTN_TOUCH;
+
+    btntype = BTN_DIGI;
+
+    if ((did & HIL_IDD_DID_ABS_TSCREEN_MASK) == HIL_IDD_DID_ABS_TSCREEN)
+    btntype = BTN_TOUCH;
+    if ((did & HIL_IDD_DID_REL_MOUSE_MASK) == HIL_IDD_DID_REL_MOUSE)
+    btntype = BTN_MOUSE;
+    for (i = 0; i < ptr.nbtn; i++) {
+    __set_bit(btntype | i, input_dev.keybit);
+    ptr.btnmap[i] = btntype | i;
+    }
+    if (btntype == BTN_MOUSE) {
+// Swap buttons 2 and 3
+    ptr.btnmap[1] = BTN_MIDDLE;
+    ptr.btnmap[2] = BTN_RIGHT;
+    }
+    input_dev.name = strlen(ptr.rnm) ? ptr.rnm : "HIL pointer device";
+    printk(KERN_INFO PREFIX
+    "HIL pointer device found (did: 0x%02x, axis: %s)\n",
+    did, txt);
+    printk(KERN_INFO PREFIX
+    "HIL pointer has %i buttons and %i sets of %i axes\n",
+    ptr.nbtn, naxsets, ptr.naxes);
+    }
+#[no_mangle]
+unsafe extern "C" fn hil_dev_connect(serio: *mut serio, drv: *mut serio_driver) -> c_int {
+    static int hil_dev_connect(struct serio *serio, struct serio_driver *drv)
+    {
+    struct hil_dev *dev;
+    struct input_dev *input_dev;
+    uint8_t did, *idd;
+    int error;
+    dev = kzalloc_obj(*dev);
+    input_dev = input_allocate_device();
+    if (!dev || !input_dev) {
+    error = -ENOMEM;
+    goto bail0;
+    }
+    dev.serio = serio;
+    dev.dev = input_dev;
+    error = serio_open(serio, drv);
+    if (error)
+    goto bail0;
+    serio_set_drvdata(serio, dev);
+// Get device info.  MLC driver supplies devid/status/etc.
+    init_completion(&dev.cmd_done);
+    serio_write(serio, 0);
+    serio_write(serio, 0);
+    serio_write(serio, HIL_PKT_CMD >> 8);
+    serio_write(serio, HIL_CMD_IDD);
+    error = wait_for_completion_killable(&dev.cmd_done);
+    if (error)
+    goto bail1;
+    reinit_completion(&dev.cmd_done);
+    serio_write(serio, 0);
+    serio_write(serio, 0);
+    serio_write(serio, HIL_PKT_CMD >> 8);
+    serio_write(serio, HIL_CMD_RSC);
+    error = wait_for_completion_killable(&dev.cmd_done);
+    if (error)
+    goto bail1;
+    reinit_completion(&dev.cmd_done);
+    serio_write(serio, 0);
+    serio_write(serio, 0);
+    serio_write(serio, HIL_PKT_CMD >> 8);
+    serio_write(serio, HIL_CMD_RNM);
+    error = wait_for_completion_killable(&dev.cmd_done);
+    if (error)
+    goto bail1;
+    reinit_completion(&dev.cmd_done);
+    serio_write(serio, 0);
+    serio_write(serio, 0);
+    serio_write(serio, HIL_PKT_CMD >> 8);
+    serio_write(serio, HIL_CMD_EXD);
+    error = wait_for_completion_killable(&dev.cmd_done);
+    if (error)
+    goto bail1;
+    did = dev.idd[0];
+    idd = dev.idd + 1;
+    switch (did & HIL_IDD_DID_TYPE_MASK) {
+    case HIL_IDD_DID_TYPE_KB_INTEGRAL:
+    case HIL_IDD_DID_TYPE_KB_ITF:
+    case HIL_IDD_DID_TYPE_KB_RSVD:
+    case HIL_IDD_DID_TYPE_CHAR:
+    if (HIL_IDD_NUM_BUTTONS(idd) ||
+    HIL_IDD_NUM_AXES_PER_SET(*idd)) {
+    printk(KERN_INFO PREFIX
+    "combo devices are not supported.\n");
+    error = -EINVAL;
+    goto bail1;
+    }
+    dev.is_pointer = false;
+    hil_dev_keyboard_setup(dev);
+    break;
+    case HIL_IDD_DID_TYPE_REL:
+    case HIL_IDD_DID_TYPE_ABS:
+    dev.is_pointer = true;
+    hil_dev_pointer_setup(dev);
+    break;
+    default:
+    goto bail1;
+    }
+    input_dev.id.bustype	= BUS_HIL;
+    input_dev.id.vendor	= PCI_VENDOR_ID_HP;
+    input_dev.id.product	= 0x0001; /* TODO: get from kbd.rsc */
+    input_dev.id.version	= 0x0100; /* TODO: get from kbd.rsc */
+    input_dev.dev.parent	= &serio.dev;
+    if (!dev.is_pointer) {
+    serio_write(serio, 0);
+    serio_write(serio, 0);
+    serio_write(serio, HIL_PKT_CMD >> 8);
+// Enable Keyswitch Autorepeat 1
+    serio_write(serio, HIL_CMD_EK1);
+// No need to wait for completion
+    }
+    error = input_register_device(input_dev);
+    if (error)
+    goto bail1;
+    return 0;
+    bail1:
+    serio_close(serio);
+    serio_set_drvdata(serio, core::ptr::null_mut());
+    bail0:
+    input_free_device(input_dev);
+    kfree(dev);
+    return error;
+    }
+    static const struct serio_device_id hil_dev_ids[] = {
+    {
+    .type = SERIO_HIL_MLC,
+    .proto = SERIO_HIL,
+    .id = SERIO_ANY,
+    .extra = SERIO_ANY,
+    },
+    { 0 }
+    };
+    MODULE_DEVICE_TABLE(serio, hil_dev_ids);
+    static struct serio_driver hil_serio_drv = {
+    .driver		= {
+    .name	= "hil_dev",
+    },
+    .description	= "HP HIL keyboard/mouse/tablet driver",
+    .id_table	= hil_dev_ids,
+    .connect	= hil_dev_connect,
+    .disconnect	= hil_dev_disconnect,
+    .interrupt	= hil_dev_interrupt
+    };
+    module_serio_driver(hil_serio_drv);

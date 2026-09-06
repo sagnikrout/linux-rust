@@ -1,0 +1,127 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/clk/imx/clk-fixup-mux.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Copyright (C) 2013 Freescale Semiconductor, Inc.
+//
+
+//
+// struct clk_fixup_mux - imx integer fixup multiplexer clock
+// @mux: the parent class
+// @ops: pointer to clk_ops of parent class
+// @fixup: a hook to fixup the write value
+//
+// The imx fixup multiplexer clock is a subclass of basic clk_mux
+// with an additional fixup hook.
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct clk_fixup_mux {
+    pub mux: clk_mux,
+    pub ops: *const clk_ops,
+    pub val): *mut *mut void (fixup)(u32,
+}
+
+    static inline struct clk_fixup_mux *to_clk_fixup_mux(struct clk_hw *hw)
+    {
+    struct clk_mux *mux = to_clk_mux(hw);
+    return container_of(mux, struct clk_fixup_mux, mux);
+    }
+#[no_mangle]
+unsafe extern "C" fn clk_fixup_mux_get_parent(hw: *mut clk_hw) -> u8 {
+    static u8 clk_fixup_mux_get_parent(struct clk_hw *hw)
+    {
+    struct clk_fixup_mux *fixup_mux = to_clk_fixup_mux(hw);
+    return fixup_mux.ops.get_parent(&fixup_mux.mux.hw);
+    }
+#[no_mangle]
+unsafe extern "C" fn clk_fixup_mux_set_parent(hw: *mut clk_hw, index: u8) -> c_int {
+    static int clk_fixup_mux_set_parent(struct clk_hw *hw, u8 index)
+    {
+    struct clk_fixup_mux *fixup_mux = to_clk_fixup_mux(hw);
+    struct clk_mux *mux = to_clk_mux(hw);
+    unsigned long flags;
+    u32 val;
+    spin_lock_irqsave(mux.lock, flags);
+    val = readl(mux.reg);
+    val &= ~(mux.mask << mux.shift);
+    val |= index << mux.shift;
+    fixup_mux.fixup(&val);
+    writel(val, mux.reg);
+    spin_unlock_irqrestore(mux.lock, flags);
+    return 0;
+    }
+    static const struct clk_ops clk_fixup_mux_ops = {
+    .determine_rate = clk_hw_determine_rate_no_reparent,
+    .get_parent = clk_fixup_mux_get_parent,
+    .set_parent = clk_fixup_mux_set_parent,
+    };
+    struct clk_hw *imx_clk_hw_fixup_mux(const char *name, void __iomem *reg,
+    u8 shift, u8 width, const char * const *parents,
+    int num_parents, void (*fixup)(u32 *val))
+    {
+    struct clk_fixup_mux *fixup_mux;
+    struct clk_hw *hw;
+    struct clk_init_data init;
+    int ret;
+    if (!fixup)
+    return ERR_PTR(-EINVAL);
+    fixup_mux = kzalloc_obj(*fixup_mux);
+    if (!fixup_mux)
+    return ERR_PTR(-ENOMEM);
+    init.name = name;
+    init.ops = &clk_fixup_mux_ops;
+    init.parent_names = parents;
+    init.num_parents = num_parents;
+    init.flags = 0;
+    fixup_mux.mux.reg = reg;
+    fixup_mux.mux.shift = shift;
+    fixup_mux.mux.mask = BIT(width) - 1;
+    fixup_mux.mux.lock = &imx_ccm_lock;
+    fixup_mux.mux.hw.init = &init;
+    fixup_mux.ops = &clk_mux_ops;
+    fixup_mux.fixup = fixup;
+    hw = &fixup_mux.mux.hw;
+    ret = clk_hw_register(core::ptr::null_mut(), hw);
+    if (ret) {
+    kfree(fixup_mux);
+    return ERR_PTR(ret);
+    }
+    return hw;
+    }

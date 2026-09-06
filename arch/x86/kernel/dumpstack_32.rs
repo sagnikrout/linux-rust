@@ -1,0 +1,153 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/kernel/dumpstack_32.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright (C) 1991, 1992  Linus Torvalds
+// Copyright (C) 2000, 2001, 2002 Andi Kleen, SuSE Labs
+//
+
+    const char *stack_type_name(enum stack_type type)
+    {
+    if (type == STACK_TYPE_IRQ)
+    return "IRQ";
+    if (type == STACK_TYPE_SOFTIRQ)
+    return "SOFTIRQ";
+    if (type == STACK_TYPE_ENTRY)
+    return "ENTRY_TRAMPOLINE";
+    if (type == STACK_TYPE_EXCEPTION)
+    return "#DF";
+    return core::ptr::null_mut();
+    }
+#[no_mangle]
+unsafe extern "C" fn in_hardirq_stack(stack: *mut c_ulong, info: *mut stack_info) -> bool {
+    static bool in_hardirq_stack(unsigned long *stack, struct stack_info *info)
+    {
+    unsigned long *begin = (unsigned long *)this_cpu_read(hardirq_stack_ptr);
+    unsigned long *end   = begin + (THREAD_SIZE / sizeof(long));
+//
+// This is a software stack, so 'end' can be a valid stack pointer.
+// It just means the stack is empty.
+//
+    if (stack < begin || stack > end)
+    return false;
+    info.type	= STACK_TYPE_IRQ;
+    info.begin	= begin;
+    info.end	= end;
+//
+// See irq_32.c -- the next stack pointer is stored at the beginning of
+// the stack.
+//
+    info.next_sp	= (unsigned long *)*begin;
+    return true;
+    }
+#[no_mangle]
+unsafe extern "C" fn in_softirq_stack(stack: *mut c_ulong, info: *mut stack_info) -> bool {
+    static bool in_softirq_stack(unsigned long *stack, struct stack_info *info)
+    {
+    unsigned long *begin = (unsigned long *)this_cpu_read(softirq_stack_ptr);
+    unsigned long *end   = begin + (THREAD_SIZE / sizeof(long));
+//
+// This is a software stack, so 'end' can be a valid stack pointer.
+// It just means the stack is empty.
+//
+    if (stack < begin || stack > end)
+    return false;
+    info.type	= STACK_TYPE_SOFTIRQ;
+    info.begin	= begin;
+    info.end	= end;
+//
+// The next stack pointer is stored at the beginning of the stack.
+// See irq_32.c.
+//
+    info.next_sp	= (unsigned long *)*begin;
+    return true;
+    }
+#[no_mangle]
+unsafe extern "C" fn in_doublefault_stack(stack: *mut c_ulong, info: *mut stack_info) -> bool {
+    static bool in_doublefault_stack(unsigned long *stack, struct stack_info *info)
+    {
+    struct cpu_entry_area *cea = get_cpu_entry_area(raw_smp_processor_id());
+    struct doublefault_stack *ss = &cea.doublefault_stack;
+    void *begin = ss.stack;
+    void *end = begin + sizeof(ss.stack);
+    if ((void *)stack < begin || (void *)stack >= end)
+    return false;
+    info.type	= STACK_TYPE_EXCEPTION;
+    info.begin	= begin;
+    info.end	= end;
+    info.next_sp	= (unsigned long *)this_cpu_read(cpu_tss_rw.x86_tss.sp);
+    return true;
+    }
+    int get_stack_info(unsigned long *stack, struct task_struct *task,
+    struct stack_info *info, unsigned long *visit_mask)
+    {
+    if (!stack)
+    goto unknown;
+    task = task ? : current;
+    if (in_task_stack(stack, task, info))
+    goto recursion_check;
+    if (task != current)
+    goto unknown;
+    if (in_entry_stack(stack, info))
+    goto recursion_check;
+    if (in_hardirq_stack(stack, info))
+    goto recursion_check;
+    if (in_softirq_stack(stack, info))
+    goto recursion_check;
+    if (in_doublefault_stack(stack, info))
+    goto recursion_check;
+    goto unknown;
+    recursion_check:
+//
+// Make sure we don't iterate through any given stack more than once.
+// If it comes up a second time then there's something wrong going on:
+// just break out and report an unknown stack type.
+//
+    if (visit_mask) {
+    if (*visit_mask & (1UL << info.type)) {
+    printk_deferred_once(KERN_WARNING "WARNING: stack recursion on stack type %d\n", info.type);
+    goto unknown;
+    }
+// visit_mask |= 1UL << info->type;
+    }
+    return 0;
+    unknown:
+    info.type = STACK_TYPE_UNKNOWN;
+    return -EINVAL;
+    }

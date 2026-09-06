@@ -1,0 +1,83 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: arch/riscv/include/asm/tlbflush.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Copyright (C) 2009 Chen Liqin <liqin.chen@sunplusct.com>
+// Copyright (C) 2012 Regents of the University of California
+//
+
+extern "C" {
+    pub fn volatile("memory": SFENCE_INVAL_IR() :::) -> asm;
+}
+extern "C" {
+    pub fn volatile("memory": SFENCE_W_INVAL() :::) -> asm;
+}
+extern "C" {
+    pub fn volatile(_arg: SINVAL_VMA(%0, (vma): %1) : : "r", "memory": "r" (asid) :) -> asm;
+}
+extern "C" {
+    pub fn volatile(_arg: SINVAL_VMA(%0, "memory": zero) : : "r" (vma) :) -> asm;
+}
+extern "C" {
+    pub fn __volatile__("memory": "sfence.vma" : : :) -> __asm__;
+}
+// Flush one page from local TLB
+extern "C" {
+    pub fn flush_tlb_all();
+}
+extern "C" {
+    pub fn flush_tlb_mm(mm: *mut mm_struct);
+}
+extern "C" {
+    pub fn flush_tlb_page(vma: *mut vm_area_struct, addr: c_ulong);
+}
+extern "C" {
+    pub fn flush_tlb_kernel_range(start: c_ulong, end: c_ulong);
+}
+extern "C" {
+    pub fn local_flush_tlb_kernel_range(start: c_ulong, end: c_ulong);
+}
+
+extern "C" {
+    pub fn arch_tlbbatch_should_defer(mm: *mut mm_struct) -> bool;
+}
+extern "C" {
+    pub fn arch_tlbbatch_flush(batch: *mut arch_tlbflush_unmap_batch);
+}
+

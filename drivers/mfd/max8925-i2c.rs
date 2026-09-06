@@ -1,0 +1,258 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/mfd/max8925-i2c.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// I2C driver for Maxim MAX8925
+//
+// Copyright (C) 2009 Marvell International Ltd.
+// Haojian Zhuang <haojian.zhuang@marvell.com>
+//
+
+pub const RTC_I2C_ADDR: c_uint = 0x68;
+pub const ADC_I2C_ADDR: c_uint = 0x47;
+    static inline int max8925_read_device(struct i2c_client *i2c,
+    int reg, int bytes, void *dest)
+    {
+    int ret;
+    if (bytes > 1)
+    ret = i2c_smbus_read_i2c_block_data(i2c, reg, bytes, dest);
+    else {
+    ret = i2c_smbus_read_byte_data(i2c, reg);
+    if (ret < 0)
+    return ret;
+// (unsigned char *)dest = (unsigned char)ret;
+    }
+    return ret;
+    }
+    static inline int max8925_write_device(struct i2c_client *i2c,
+    int reg, int bytes, void *src)
+    {
+    unsigned char buf[9];
+    int ret;
+    buf[0] = (unsigned char)reg;
+    memcpy(&buf[1], src, bytes);
+    ret = i2c_master_send(i2c, buf, bytes + 1);
+    if (ret < 0)
+    return ret;
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn max8925_reg_read(i2c: *mut i2c_client, reg: c_int) -> c_int {
+    int max8925_reg_read(struct i2c_client *i2c, int reg)
+    {
+    struct max8925_chip *chip = i2c_get_clientdata(i2c);
+    let mut data: c_uchar = 0;
+    int ret;
+    mutex_lock(&chip.io_lock);
+    ret = max8925_read_device(i2c, reg, 1, &data);
+    mutex_unlock(&chip.io_lock);
+    if (ret < 0)
+    return ret;
+    else
+    return (int)data;
+    }
+    EXPORT_SYMBOL(max8925_reg_read);
+    int max8925_reg_write(struct i2c_client *i2c, int reg,
+    unsigned char data)
+    {
+    struct max8925_chip *chip = i2c_get_clientdata(i2c);
+    int ret;
+    mutex_lock(&chip.io_lock);
+    ret = max8925_write_device(i2c, reg, 1, &data);
+    mutex_unlock(&chip.io_lock);
+    return ret;
+    }
+    EXPORT_SYMBOL(max8925_reg_write);
+    int max8925_bulk_read(struct i2c_client *i2c, int reg,
+    int count, unsigned char *buf)
+    {
+    struct max8925_chip *chip = i2c_get_clientdata(i2c);
+    int ret;
+    mutex_lock(&chip.io_lock);
+    ret = max8925_read_device(i2c, reg, count, buf);
+    mutex_unlock(&chip.io_lock);
+    return ret;
+    }
+    EXPORT_SYMBOL(max8925_bulk_read);
+    int max8925_bulk_write(struct i2c_client *i2c, int reg,
+    int count, unsigned char *buf)
+    {
+    struct max8925_chip *chip = i2c_get_clientdata(i2c);
+    int ret;
+    mutex_lock(&chip.io_lock);
+    ret = max8925_write_device(i2c, reg, count, buf);
+    mutex_unlock(&chip.io_lock);
+    return ret;
+    }
+    EXPORT_SYMBOL(max8925_bulk_write);
+    int max8925_set_bits(struct i2c_client *i2c, int reg,
+    unsigned char mask, unsigned char data)
+    {
+    struct max8925_chip *chip = i2c_get_clientdata(i2c);
+    unsigned char value;
+    int ret;
+    mutex_lock(&chip.io_lock);
+    ret = max8925_read_device(i2c, reg, 1, &value);
+    if (ret < 0)
+    goto out;
+    value &= ~mask;
+    value |= data;
+    ret = max8925_write_device(i2c, reg, 1, &value);
+    out:
+    mutex_unlock(&chip.io_lock);
+    return ret;
+    }
+    EXPORT_SYMBOL(max8925_set_bits);
+    static const struct i2c_device_id max8925_id_table[] = {
+    { "max8925" },
+    { }
+    };
+    static int max8925_dt_init(struct device_node *np, struct device *dev,
+    struct max8925_platform_data *pdata)
+    {
+    int ret;
+    ret = of_property_read_u32(np, "maxim,tsc-irq", &pdata.tsc_irq);
+    if (ret) {
+    dev_err(dev, "Not found maxim,tsc-irq property\n");
+    return -EINVAL;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn max8925_probe(client: *mut i2c_client) -> c_int {
+    static int max8925_probe(struct i2c_client *client)
+    {
+    struct max8925_platform_data *pdata = dev_get_platdata(&client.dev);
+    struct max8925_chip *chip;
+    struct device_node *node = client.dev.of_node;
+    if (node && !pdata) {
+// parse DT to get platform data
+    pdata = devm_kzalloc(&client.dev,
+    sizeof(struct max8925_platform_data),
+    GFP_KERNEL);
+    if (!pdata)
+    return -ENOMEM;
+    if (max8925_dt_init(node, &client.dev, pdata))
+    return -EINVAL;
+    } else if (!pdata) {
+    pr_info("%s: platform data is missing\n", __func__);
+    return -EINVAL;
+    }
+    chip = devm_kzalloc(&client.dev,
+    sizeof(struct max8925_chip), GFP_KERNEL);
+    if (chip == core::ptr::null_mut())
+    return -ENOMEM;
+    chip.i2c = client;
+    chip.dev = &client.dev;
+    i2c_set_clientdata(client, chip);
+    mutex_init(&chip.io_lock);
+    chip.rtc = i2c_new_dummy_device(chip.i2c.adapter, RTC_I2C_ADDR);
+    if (IS_ERR(chip.rtc)) {
+    dev_err(chip.dev, "Failed to allocate I2C device for RTC\n");
+    return PTR_ERR(chip.rtc);
+    }
+    i2c_set_clientdata(chip.rtc, chip);
+    chip.adc = i2c_new_dummy_device(chip.i2c.adapter, ADC_I2C_ADDR);
+    if (IS_ERR(chip.adc)) {
+    dev_err(chip.dev, "Failed to allocate I2C device for ADC\n");
+    i2c_unregister_device(chip.rtc);
+    return PTR_ERR(chip.adc);
+    }
+    i2c_set_clientdata(chip.adc, chip);
+    device_init_wakeup(&client.dev, 1);
+    max8925_device_init(chip, pdata);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn max8925_remove(client: *mut i2c_client) {
+    static void max8925_remove(struct i2c_client *client)
+    {
+    struct max8925_chip *chip = i2c_get_clientdata(client);
+    max8925_device_exit(chip);
+    device_init_wakeup(&client.dev, false);
+    i2c_unregister_device(chip.adc);
+    i2c_unregister_device(chip.rtc);
+    }
+#[no_mangle]
+unsafe extern "C" fn max8925_suspend(dev: *mut device) -> c_int {
+    static int max8925_suspend(struct device *dev)
+    {
+    struct i2c_client *client = to_i2c_client(dev);
+    struct max8925_chip *chip = i2c_get_clientdata(client);
+    if (device_may_wakeup(dev) && chip.wakeup_flag)
+    enable_irq_wake(chip.core_irq);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn max8925_resume(dev: *mut device) -> c_int {
+    static int max8925_resume(struct device *dev)
+    {
+    struct i2c_client *client = to_i2c_client(dev);
+    struct max8925_chip *chip = i2c_get_clientdata(client);
+    if (device_may_wakeup(dev) && chip.wakeup_flag)
+    disable_irq_wake(chip.core_irq);
+    return 0;
+    }
+    static DEFINE_SIMPLE_DEV_PM_OPS(max8925_pm_ops,
+    max8925_suspend, max8925_resume);
+    static const struct of_device_id max8925_dt_ids[] = {
+    { .compatible = "maxim,max8925", },
+    {},
+    };
+    static struct i2c_driver max8925_driver = {
+    .driver	= {
+    .name	= "max8925",
+    .pm     = pm_sleep_ptr(&max8925_pm_ops),
+    .of_match_table = max8925_dt_ids,
+    },
+    .probe		= max8925_probe,
+    .remove		= max8925_remove,
+    .id_table	= max8925_id_table,
+    };
+#[no_mangle]
+unsafe extern "C" fn max8925_i2c_init() -> int __init {
+    static int __init max8925_i2c_init(void)
+    {
+    int ret;
+    ret = i2c_add_driver(&max8925_driver);
+    if (ret != 0)
+    pr_err("Failed to register MAX8925 I2C driver: %d\n", ret);
+    return ret;
+    }
+    subsys_initcall(max8925_i2c_init);

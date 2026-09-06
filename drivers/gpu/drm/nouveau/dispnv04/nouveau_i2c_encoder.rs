@@ -1,0 +1,147 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpu/drm/nouveau/dispnv04/nouveau_i2c_encoder.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+//
+// Copyright (C) 2009 Francisco Jerez.
+// All Rights Reserved.
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice (including the
+// next paragraph) shall be included in all copies or substantial
+// portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE COPYRIGHT OWNER(S) AND/OR ITS SUPPLIERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+
+//
+// nouveau_i2c_encoder_init - Initialize an I2C slave encoder
+// @dev:	DRM device.
+// @encoder:    Encoder to be attached to the I2C device. You aren't
+// required to have called drm_encoder_init() before.
+// @adap:	I2C adapter that will be used to communicate with
+// the device.
+// @info:	Information that will be used to create the I2C device.
+// Required fields are @addr and @type.
+//
+// Create an I2C device on the specified bus (the module containing its
+// driver is transparently loaded) and attach it to the specified
+// &nouveau_i2c_encoder. The @encoder_i2c_funcs field will be initialized with
+// the hooks provided by the slave driver.
+//
+// If @info.platform_data is non-NULL it will be used as the initial
+// slave config.
+//
+// Returns 0 on success or a negative errno on failure, in particular,
+// -ENODEV is returned when no matching driver is found.
+//
+    int nouveau_i2c_encoder_init(struct drm_device *dev,
+    struct nouveau_i2c_encoder *encoder,
+    struct i2c_adapter *adap,
+    const struct i2c_board_info *info)
+    {
+    struct module *module = core::ptr::null_mut();
+    struct i2c_client *client;
+    struct nouveau_i2c_encoder_driver *encoder_drv;
+    let mut err: c_int = 0;
+    request_module("%s%s", I2C_MODULE_PREFIX, info.type);
+    client = i2c_new_client_device(adap, info);
+    if (!i2c_client_has_driver(client)) {
+    err = -ENODEV;
+    goto fail_unregister;
+    }
+    module = client.dev.driver.owner;
+    if (!try_module_get(module)) {
+    err = -ENODEV;
+    goto fail_unregister;
+    }
+    encoder.i2c_client = client;
+    encoder_drv = to_nouveau_i2c_encoder_driver(to_i2c_driver(client.dev.driver));
+    err = encoder_drv.encoder_init(client, dev, encoder);
+    if (err)
+    goto fail_module_put;
+    if (info.platform_data)
+    encoder.encoder_i2c_funcs.set_config(&encoder.base,
+    info.platform_data);
+    return 0;
+    fail_module_put:
+    module_put(module);
+    fail_unregister:
+    i2c_unregister_device(client);
+    return err;
+    }
+//
+// Wrapper fxns which can be plugged in to drm_encoder_helper_funcs:
+//
+    bool nouveau_i2c_encoder_mode_fixup(struct drm_encoder *encoder,
+    const struct drm_display_mode *mode,
+    struct drm_display_mode *adjusted_mode)
+    {
+    if (!get_encoder_i2c_funcs(encoder).mode_fixup)
+    return true;
+    return get_encoder_i2c_funcs(encoder).mode_fixup(encoder, mode, adjusted_mode);
+    }
+    enum drm_connector_status nouveau_i2c_encoder_detect(struct drm_encoder *encoder,
+    struct drm_connector *connector)
+    {
+    return get_encoder_i2c_funcs(encoder).detect(encoder, connector);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn nouveau_i2c_encoder_save(encoder: *mut drm_encoder) {
+    void nouveau_i2c_encoder_save(struct drm_encoder *encoder)
+    {
+    get_encoder_i2c_funcs(encoder).save(encoder);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn nouveau_i2c_encoder_restore(encoder: *mut drm_encoder) {
+    void nouveau_i2c_encoder_restore(struct drm_encoder *encoder)
+    {
+    get_encoder_i2c_funcs(encoder).restore(encoder);
+    }

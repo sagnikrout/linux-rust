@@ -1,0 +1,183 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpu/drm/drm_flip_work.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+//
+// Copyright (C) 2013 Red Hat
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice (including the next
+// paragraph) shall be included in all copies or substantial portions of the
+// Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct drm_flip_task {
+    pub node: list_head,
+    pub data: *mut c_void,
+}
+
+    static struct drm_flip_task *drm_flip_work_allocate_task(void *data, gfp_t flags)
+    {
+    struct drm_flip_task *task;
+    task = kzalloc_obj(*task, flags);
+    if (task)
+    task.data = data;
+    return task;
+    }
+#[no_mangle]
+unsafe extern "C" fn drm_flip_work_queue_task(work: *mut drm_flip_work, task: *mut drm_flip_task) {
+    static void drm_flip_work_queue_task(struct drm_flip_work *work, struct drm_flip_task *task)
+    {
+    unsigned long flags;
+    spin_lock_irqsave(&work.lock, flags);
+    list_add_tail(&task.node, &work.queued);
+    spin_unlock_irqrestore(&work.lock, flags);
+    }
+//
+// drm_flip_work_queue - queue work
+// @work: the flip-work
+// @val: the value to queue
+//
+// Queues work, that will later be run (passed back to drm_flip_func_t
+// func) on a work queue after drm_flip_work_commit() is called.
+//
+#[no_mangle]
+pub unsafe extern "C" fn drm_flip_work_queue(work: *mut drm_flip_work, val: *mut c_void) {
+    void drm_flip_work_queue(struct drm_flip_work *work, void *val)
+    {
+    struct drm_flip_task *task;
+    task = drm_flip_work_allocate_task(val,
+    drm_can_sleep() ? GFP_KERNEL : GFP_ATOMIC);
+    if (task) {
+    drm_flip_work_queue_task(work, task);
+    } else {
+    DRM_ERROR("%s could not allocate task!\n", work.name);
+    work.func(work, val);
+    }
+    }
+    EXPORT_SYMBOL(drm_flip_work_queue);
+//
+// drm_flip_work_commit - commit queued work
+// @work: the flip-work
+// @wq: the work-queue to run the queued work on
+//
+// Trigger work previously queued by drm_flip_work_queue() to run
+// on a workqueue.  The typical usage would be to queue work (via
+// drm_flip_work_queue()) at any point (from vblank irq and/or
+// prior), and then from vblank irq commit the queued work.
+//
+    void drm_flip_work_commit(struct drm_flip_work *work,
+    struct workqueue_struct *wq)
+    {
+    unsigned long flags;
+    spin_lock_irqsave(&work.lock, flags);
+    list_splice_tail(&work.queued, &work.commited);
+    INIT_LIST_HEAD(&work.queued);
+    spin_unlock_irqrestore(&work.lock, flags);
+    queue_work(wq, &work.worker);
+    }
+    EXPORT_SYMBOL(drm_flip_work_commit);
+#[no_mangle]
+unsafe extern "C" fn flip_worker(w: *mut work_struct) {
+    static void flip_worker(struct work_struct *w)
+    {
+    struct drm_flip_work *work = container_of(w, struct drm_flip_work, worker);
+    struct list_head tasks;
+    unsigned long flags;
+    while (1) {
+    struct drm_flip_task *task, *tmp;
+    INIT_LIST_HEAD(&tasks);
+    spin_lock_irqsave(&work.lock, flags);
+    list_splice_tail(&work.commited, &tasks);
+    INIT_LIST_HEAD(&work.commited);
+    spin_unlock_irqrestore(&work.lock, flags);
+    if (list_empty(&tasks))
+    break;
+    list_for_each_entry_safe(task, tmp, &tasks, node) {
+    work.func(work, task.data);
+    kfree(task);
+    }
+    }
+    }
+//
+// drm_flip_work_init - initialize flip-work
+// @work: the flip-work to initialize
+// @name: debug name
+// @func: the callback work function
+//
+// Initializes/allocates resources for the flip-work
+//
+    void drm_flip_work_init(struct drm_flip_work *work,
+    const char *name, drm_flip_func_t func)
+    {
+    work.name = name;
+    INIT_LIST_HEAD(&work.queued);
+    INIT_LIST_HEAD(&work.commited);
+    spin_lock_init(&work.lock);
+    work.func = func;
+    INIT_WORK(&work.worker, flip_worker);
+    }
+    EXPORT_SYMBOL(drm_flip_work_init);
+//
+// drm_flip_work_cleanup - cleans up flip-work
+// @work: the flip-work to cleanup
+//
+// Destroy resources allocated for the flip-work
+//
+#[no_mangle]
+pub unsafe extern "C" fn drm_flip_work_cleanup(work: *mut drm_flip_work) {
+    void drm_flip_work_cleanup(struct drm_flip_work *work)
+    {
+    WARN_ON(!list_empty(&work.queued) || !list_empty(&work.commited));
+    }
+    EXPORT_SYMBOL(drm_flip_work_cleanup);

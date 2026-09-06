@@ -1,0 +1,298 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/pinctrl/freescale/pinctrl-imx8ulp.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2021 NXP
+//
+
+    enum imx8ulp_pads {
+    IMX8ULP_PAD_PTD0 = 0,
+    IMX8ULP_PAD_PTD1,
+    IMX8ULP_PAD_PTD2,
+    IMX8ULP_PAD_PTD3,
+    IMX8ULP_PAD_PTD4,
+    IMX8ULP_PAD_PTD5,
+    IMX8ULP_PAD_PTD6,
+    IMX8ULP_PAD_PTD7,
+    IMX8ULP_PAD_PTD8,
+    IMX8ULP_PAD_PTD9,
+    IMX8ULP_PAD_PTD10,
+    IMX8ULP_PAD_PTD11,
+    IMX8ULP_PAD_PTD12,
+    IMX8ULP_PAD_PTD13,
+    IMX8ULP_PAD_PTD14,
+    IMX8ULP_PAD_PTD15,
+    IMX8ULP_PAD_PTD16,
+    IMX8ULP_PAD_PTD17,
+    IMX8ULP_PAD_PTD18,
+    IMX8ULP_PAD_PTD19,
+    IMX8ULP_PAD_PTD20,
+    IMX8ULP_PAD_PTD21,
+    IMX8ULP_PAD_PTD22,
+    IMX8ULP_PAD_PTD23,
+    IMX8ULP_PAD_RESERVE0,
+    IMX8ULP_PAD_RESERVE1,
+    IMX8ULP_PAD_RESERVE2,
+    IMX8ULP_PAD_RESERVE3,
+    IMX8ULP_PAD_RESERVE4,
+    IMX8ULP_PAD_RESERVE5,
+    IMX8ULP_PAD_RESERVE6,
+    IMX8ULP_PAD_RESERVE7,
+    IMX8ULP_PAD_PTE0,
+    IMX8ULP_PAD_PTE1,
+    IMX8ULP_PAD_PTE2,
+    IMX8ULP_PAD_PTE3,
+    IMX8ULP_PAD_PTE4,
+    IMX8ULP_PAD_PTE5,
+    IMX8ULP_PAD_PTE6,
+    IMX8ULP_PAD_PTE7,
+    IMX8ULP_PAD_PTE8,
+    IMX8ULP_PAD_PTE9,
+    IMX8ULP_PAD_PTE10,
+    IMX8ULP_PAD_PTE11,
+    IMX8ULP_PAD_PTE12,
+    IMX8ULP_PAD_PTE13,
+    IMX8ULP_PAD_PTE14,
+    IMX8ULP_PAD_PTE15,
+    IMX8ULP_PAD_PTE16,
+    IMX8ULP_PAD_PTE17,
+    IMX8ULP_PAD_PTE18,
+    IMX8ULP_PAD_PTE19,
+    IMX8ULP_PAD_PTE20,
+    IMX8ULP_PAD_PTE21,
+    IMX8ULP_PAD_PTE22,
+    IMX8ULP_PAD_PTE23,
+    IMX8ULP_PAD_RESERVE8,
+    IMX8ULP_PAD_RESERVE9,
+    IMX8ULP_PAD_RESERVE10,
+    IMX8ULP_PAD_RESERVE11,
+    IMX8ULP_PAD_RESERVE12,
+    IMX8ULP_PAD_RESERVE13,
+    IMX8ULP_PAD_RESERVE14,
+    IMX8ULP_PAD_RESERVE15,
+    IMX8ULP_PAD_PTF0,
+    IMX8ULP_PAD_PTF1,
+    IMX8ULP_PAD_PTF2,
+    IMX8ULP_PAD_PTF3,
+    IMX8ULP_PAD_PTF4,
+    IMX8ULP_PAD_PTF5,
+    IMX8ULP_PAD_PTF6,
+    IMX8ULP_PAD_PTF7,
+    IMX8ULP_PAD_PTF8,
+    IMX8ULP_PAD_PTF9,
+    IMX8ULP_PAD_PTF10,
+    IMX8ULP_PAD_PTF11,
+    IMX8ULP_PAD_PTF12,
+    IMX8ULP_PAD_PTF13,
+    IMX8ULP_PAD_PTF14,
+    IMX8ULP_PAD_PTF15,
+    IMX8ULP_PAD_PTF16,
+    IMX8ULP_PAD_PTF17,
+    IMX8ULP_PAD_PTF18,
+    IMX8ULP_PAD_PTF19,
+    IMX8ULP_PAD_PTF20,
+    IMX8ULP_PAD_PTF21,
+    IMX8ULP_PAD_PTF22,
+    IMX8ULP_PAD_PTF23,
+    IMX8ULP_PAD_PTF24,
+    IMX8ULP_PAD_PTF25,
+    IMX8ULP_PAD_PTF26,
+    IMX8ULP_PAD_PTF27,
+    IMX8ULP_PAD_PTF28,
+    IMX8ULP_PAD_PTF29,
+    IMX8ULP_PAD_PTF30,
+    IMX8ULP_PAD_PTF31,
+    };
+// Pad names for the pinmux subsystem
+    static const struct pinctrl_pin_desc imx8ulp_pinctrl_pads[] = {
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD0),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD1),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD2),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD3),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD4),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD5),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD6),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD7),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD8),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD9),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD10),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD11),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD12),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD13),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD14),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD15),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD16),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD17),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD18),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD19),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD20),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD21),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD22),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTD23),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE0),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE1),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE2),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE3),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE4),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE5),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE6),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE7),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE0),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE1),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE2),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE3),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE4),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE5),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE6),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE7),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE8),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE9),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE10),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE11),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE12),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE13),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE14),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE15),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE16),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE17),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE18),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE19),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE20),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE21),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE22),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTE23),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE8),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE9),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE10),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE11),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE12),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE13),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE14),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_RESERVE15),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF0),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF1),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF2),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF3),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF4),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF5),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF6),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF7),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF8),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF9),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF10),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF11),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF12),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF13),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF14),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF15),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF16),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF17),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF18),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF19),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF20),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF21),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF22),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF23),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF24),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF25),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF26),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF27),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF28),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF29),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF30),
+    IMX_PINCTRL_PIN(IMX8ULP_PAD_PTF31),
+    };
+
+pub const BM_MUX_MODE: c_uint = 0xf00;
+pub const BP_MUX_MODE: c_int = 8;
+    static int imx8ulp_pmx_gpio_set_direction(struct pinctrl_dev *pctldev,
+    struct pinctrl_gpio_range *range,
+    unsigned offset, bool input)
+    {
+    struct imx_pinctrl *ipctl = pinctrl_dev_get_drvdata(pctldev);
+    const struct imx_pin_reg *pin_reg;
+    u32 reg;
+    pin_reg = &ipctl.pin_regs[offset];
+    if (pin_reg.mux_reg == -1)
+    return -EINVAL;
+    reg = readl(ipctl.base + pin_reg.mux_reg);
+    if (input)
+    reg = (reg & ~BM_OBE_ENABLED) | BM_IBE_ENABLED;
+    else
+    reg = (reg & ~BM_IBE_ENABLED) | BM_OBE_ENABLED;
+    writel(reg, ipctl.base + pin_reg.mux_reg);
+    return 0;
+    }
+    static const struct imx_pinctrl_soc_info imx8ulp_pinctrl_info = {
+    .pins = imx8ulp_pinctrl_pads,
+    .npins = ARRAY_SIZE(imx8ulp_pinctrl_pads),
+    .flags = ZERO_OFFSET_VALID | SHARE_MUX_CONF_REG,
+    .gpio_set_direction = imx8ulp_pmx_gpio_set_direction,
+    .mux_mask = BM_MUX_MODE,
+    .mux_shift = BP_MUX_MODE,
+    };
+    static const struct of_device_id imx8ulp_pinctrl_of_match[] = {
+    { .compatible = "fsl,imx8ulp-iomuxc1", },
+    { /* sentinel */ }
+    };
+    MODULE_DEVICE_TABLE(of, imx8ulp_pinctrl_of_match);
+#[no_mangle]
+unsafe extern "C" fn imx8ulp_pinctrl_probe(pdev: *mut platform_device) -> c_int {
+    static int imx8ulp_pinctrl_probe(struct platform_device *pdev)
+    {
+    return imx_pinctrl_probe(pdev, &imx8ulp_pinctrl_info);
+    }
+    static struct platform_driver imx8ulp_pinctrl_driver = {
+    .driver = {
+    .name = "imx8ulp-pinctrl",
+    .of_match_table = imx8ulp_pinctrl_of_match,
+    .suppress_bind_attrs = true,
+    },
+    .probe = imx8ulp_pinctrl_probe,
+    };
+#[no_mangle]
+unsafe extern "C" fn imx8ulp_pinctrl_init() -> int __init {
+    static int __init imx8ulp_pinctrl_init(void)
+    {
+    return platform_driver_register(&imx8ulp_pinctrl_driver);
+    }
+    arch_initcall(imx8ulp_pinctrl_init);
+    MODULE_AUTHOR("Jacky Bai <ping.bai@nxp.com>");
+    MODULE_DESCRIPTION("NXP i.MX8ULP pinctrl driver");
+    MODULE_LICENSE("GPL v2");

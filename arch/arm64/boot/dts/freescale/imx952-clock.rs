@@ -1,0 +1,244 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: arch/arm64/boot/dts/freescale/imx952-clock.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only OR MIT
+//
+// Copyright 2025 NXP
+//
+// Clock Source
+pub const IMX952_CLK_EXT: c_int = 0;
+pub const IMX952_CLK_OSC32K: c_int = 1;
+pub const IMX952_CLK_OSC24M: c_int = 2;
+pub const IMX952_CLK_FRO: c_int = 3;
+pub const IMX952_CLK_SYSPLL1_VCO: c_int = 4;
+pub const IMX952_CLK_SYSPLL1_PFD0_UNGATED: c_int = 5;
+pub const IMX952_CLK_SYSPLL1_PFD0: c_int = 6;
+pub const IMX952_CLK_SYSPLL1_PFD0_DIV2: c_int = 7;
+pub const IMX952_CLK_SYSPLL1_PFD1_UNGATED: c_int = 8;
+pub const IMX952_CLK_SYSPLL1_PFD1: c_int = 9;
+pub const IMX952_CLK_SYSPLL1_PFD1_DIV2: c_int = 10;
+pub const IMX952_CLK_SYSPLL1_PFD2_UNGATED: c_int = 11;
+pub const IMX952_CLK_SYSPLL1_PFD2: c_int = 12;
+pub const IMX952_CLK_SYSPLL1_PFD2_DIV2: c_int = 13;
+pub const IMX952_CLK_AUDIOPLL1_VCO: c_int = 14;
+pub const IMX952_CLK_AUDIOPLL1: c_int = 15;
+pub const IMX952_CLK_AUDIOPLL2_VCO: c_int = 16;
+pub const IMX952_CLK_AUDIOPLL2: c_int = 17;
+pub const IMX952_CLK_VIDEOPLL1_VCO: c_int = 18;
+pub const IMX952_CLK_VIDEOPLL1: c_int = 19;
+pub const IMX952_CLK_SRC_RESERVED20: c_int = 20;
+pub const IMX952_CLK_SYSPLL1_PFD3_UNGATED: c_int = 21;
+pub const IMX952_CLK_SYSPLL1_PFD3: c_int = 22;
+pub const IMX952_CLK_SYSPLL1_PFD3_DIV2: c_int = 23;
+pub const IMX952_CLK_ARMPLL_VCO: c_int = 24;
+pub const IMX952_CLK_ARMPLL_PFD0_UNGATED: c_int = 25;
+pub const IMX952_CLK_ARMPLL_PFD0: c_int = 26;
+pub const IMX952_CLK_ARMPLL_PFD1_UNGATED: c_int = 27;
+pub const IMX952_CLK_ARMPLL_PFD1: c_int = 28;
+pub const IMX952_CLK_ARMPLL_PFD2_UNGATED: c_int = 29;
+pub const IMX952_CLK_ARMPLL_PFD2: c_int = 30;
+pub const IMX952_CLK_ARMPLL_PFD3_UNGATED: c_int = 31;
+pub const IMX952_CLK_ARMPLL_PFD3: c_int = 32;
+pub const IMX952_CLK_DRAMPLL_VCO: c_int = 33;
+pub const IMX952_CLK_DRAMPLL: c_int = 34;
+pub const IMX952_CLK_HSIOPLL_VCO: c_int = 35;
+pub const IMX952_CLK_HSIOPLL: c_int = 36;
+pub const IMX952_CLK_LDBPLL_VCO: c_int = 37;
+pub const IMX952_CLK_LDBPLL: c_int = 38;
+pub const IMX952_CLK_EXT1: c_int = 39;
+pub const IMX952_CLK_EXT2: c_int = 40;
+// Clock ROOT
+pub const IMX952_CLK_ADC: c_int = 41;
+pub const IMX952_CLK_RESERVED1: c_int = 42;
+pub const IMX952_CLK_BUSAON: c_int = 43;
+pub const IMX952_CLK_CAN1: c_int = 44;
+pub const IMX952_CLK_RESERVED4: c_int = 45;
+pub const IMX952_CLK_I3C1SLOW: c_int = 46;
+pub const IMX952_CLK_LPI2C1: c_int = 47;
+pub const IMX952_CLK_LPI2C2: c_int = 48;
+pub const IMX952_CLK_LPSPI1: c_int = 49;
+pub const IMX952_CLK_LPSPI2: c_int = 50;
+pub const IMX952_CLK_LPTMR1: c_int = 51;
+pub const IMX952_CLK_LPUART1: c_int = 52;
+pub const IMX952_CLK_LPUART2: c_int = 53;
+pub const IMX952_CLK_M33: c_int = 54;
+pub const IMX952_CLK_M33SYSTICK: c_int = 55;
+pub const IMX952_CLK_RESERVED15: c_int = 56;
+pub const IMX952_CLK_PDM: c_int = 57;
+pub const IMX952_CLK_SAI1: c_int = 58;
+pub const IMX952_CLK_RESERVED18: c_int = 59;
+pub const IMX952_CLK_TPM2: c_int = 60;
+pub const IMX952_CLK_RESERVED20: c_int = 61;
+pub const IMX952_CLK_CAMAPB: c_int = 62;
+pub const IMX952_CLK_CAMAXI: c_int = 63;
+pub const IMX952_CLK_CAMCM0: c_int = 64;
+pub const IMX952_CLK_CAMISI: c_int = 65;
+pub const IMX952_CLK_CAMPHYCFG: c_int = 66;
+pub const IMX952_CLK_MIPIPHYPLLBYPASS: c_int = 67;
+pub const IMX952_CLK_RESERVED27: c_int = 68;
+pub const IMX952_CLK_MIPITESTBYTE: c_int = 69;
+pub const IMX952_CLK_A55: c_int = 70;
+pub const IMX952_CLK_A55MTRBUS: c_int = 71;
+pub const IMX952_CLK_A55PERIPH: c_int = 72;
+pub const IMX952_CLK_DRAMALT: c_int = 73;
+pub const IMX952_CLK_DRAMAPB: c_int = 74;
+pub const IMX952_CLK_DISPAPB: c_int = 75;
+pub const IMX952_CLK_DISPAXI: c_int = 76;
+pub const IMX952_CLK_DISPLPSPI: c_int = 77;
+pub const IMX952_CLK_DISPOCRAM: c_int = 78;
+pub const IMX952_CLK_DISPPHYCFG: c_int = 79;
+pub const IMX952_CLK_DISP1PIX: c_int = 80;
+pub const IMX952_CLK_DISPCDPHYAPB: c_int = 81;
+pub const IMX952_CLK_RESERVED41: c_int = 82;
+pub const IMX952_CLK_GPUAPB: c_int = 83;
+pub const IMX952_CLK_GPU: c_int = 84;
+pub const IMX952_CLK_HSIOACSCAN480M: c_int = 85;
+pub const IMX952_CLK_HSIOACSCAN80M: c_int = 86;
+pub const IMX952_CLK_HSIO: c_int = 87;
+pub const IMX952_CLK_HSIOPCIEAUX: c_int = 88;
+pub const IMX952_CLK_HSIOPCIETEST160M: c_int = 89;
+pub const IMX952_CLK_HSIOPCIETEST400M: c_int = 90;
+pub const IMX952_CLK_HSIOPCIETEST500M: c_int = 91;
+pub const IMX952_CLK_HSIOUSBTEST50M: c_int = 92;
+pub const IMX952_CLK_HSIOUSBTEST60M: c_int = 93;
+pub const IMX952_CLK_BUSM7: c_int = 94;
+pub const IMX952_CLK_M7: c_int = 95;
+pub const IMX952_CLK_M7SYSTICK: c_int = 96;
+pub const IMX952_CLK_BUSNETCMIX: c_int = 97;
+pub const IMX952_CLK_ENET: c_int = 98;
+pub const IMX952_CLK_ENETPHYTEST200M: c_int = 99;
+pub const IMX952_CLK_ENETPHYTEST500M: c_int = 100;
+pub const IMX952_CLK_ENETPHYTEST667M: c_int = 101;
+pub const IMX952_CLK_ENETREF: c_int = 102;
+pub const IMX952_CLK_ENETTIMER1: c_int = 103;
+pub const IMX952_CLK_RESERVED63: c_int = 104;
+pub const IMX952_CLK_SAI2: c_int = 105;
+pub const IMX952_CLK_NOCAPB: c_int = 106;
+pub const IMX952_CLK_NOC: c_int = 107;
+pub const IMX952_CLK_NPUAPB: c_int = 108;
+pub const IMX952_CLK_NPU: c_int = 109;
+pub const IMX952_CLK_CCMCKO1: c_int = 110;
+pub const IMX952_CLK_CCMCKO2: c_int = 111;
+pub const IMX952_CLK_CCMCKO3: c_int = 112;
+pub const IMX952_CLK_CCMCKO4: c_int = 113;
+pub const IMX952_CLK_VPUAPB: c_int = 114;
+pub const IMX952_CLK_VPU: c_int = 115;
+pub const IMX952_CLK_RESERVED75: c_int = 116;
+pub const IMX952_CLK_RESERVED76: c_int = 117;
+pub const IMX952_CLK_AUDIOXCVR: c_int = 118;
+pub const IMX952_CLK_BUSWAKEUP: c_int = 119;
+pub const IMX952_CLK_CAN2: c_int = 120;
+pub const IMX952_CLK_CAN3: c_int = 121;
+pub const IMX952_CLK_CAN4: c_int = 122;
+pub const IMX952_CLK_CAN5: c_int = 123;
+pub const IMX952_CLK_FLEXIO1: c_int = 124;
+pub const IMX952_CLK_FLEXIO2: c_int = 125;
+pub const IMX952_CLK_XSPI1: c_int = 126;
+pub const IMX952_CLK_RESERVED86: c_int = 127;
+pub const IMX952_CLK_I3C2SLOW: c_int = 128;
+pub const IMX952_CLK_LPI2C3: c_int = 129;
+pub const IMX952_CLK_LPI2C4: c_int = 130;
+pub const IMX952_CLK_LPI2C5: c_int = 131;
+pub const IMX952_CLK_LPI2C6: c_int = 132;
+pub const IMX952_CLK_LPI2C7: c_int = 133;
+pub const IMX952_CLK_LPI2C8: c_int = 134;
+pub const IMX952_CLK_LPSPI3: c_int = 135;
+pub const IMX952_CLK_LPSPI4: c_int = 136;
+pub const IMX952_CLK_LPSPI5: c_int = 137;
+pub const IMX952_CLK_LPSPI6: c_int = 138;
+pub const IMX952_CLK_LPSPI7: c_int = 139;
+pub const IMX952_CLK_LPSPI8: c_int = 140;
+pub const IMX952_CLK_LPTMR2: c_int = 141;
+pub const IMX952_CLK_LPUART3: c_int = 142;
+pub const IMX952_CLK_LPUART4: c_int = 143;
+pub const IMX952_CLK_LPUART5: c_int = 144;
+pub const IMX952_CLK_LPUART6: c_int = 145;
+pub const IMX952_CLK_LPUART7: c_int = 146;
+pub const IMX952_CLK_LPUART8: c_int = 147;
+pub const IMX952_CLK_SAI3: c_int = 148;
+pub const IMX952_CLK_SAI4: c_int = 149;
+pub const IMX952_CLK_SAI5: c_int = 150;
+pub const IMX952_CLK_SPDIF: c_int = 151;
+pub const IMX952_CLK_SWOTRACE: c_int = 152;
+pub const IMX952_CLK_TPM4: c_int = 153;
+pub const IMX952_CLK_TPM5: c_int = 154;
+pub const IMX952_CLK_TPM6: c_int = 155;
+pub const IMX952_CLK_MIPIPHYDFT400: c_int = 156;
+pub const IMX952_CLK_MIPIPHYDFT540: c_int = 157;
+pub const IMX952_CLK_USDHC1: c_int = 158;
+pub const IMX952_CLK_USDHC2: c_int = 159;
+pub const IMX952_CLK_USDHC3: c_int = 160;
+pub const IMX952_CLK_V2XPK: c_int = 161;
+pub const IMX952_CLK_WAKEUPAXI: c_int = 162;
+pub const IMX952_CLK_XSPISLVROOT: c_int = 163;
+pub const IMX952_CLK_AUDMIX1: c_int = 164;
+pub const IMX952_CLK_ASRC1: c_int = 165;
+pub const IMX952_CLK_ASRC2: c_int = 166;
+pub const IMX952_CLK_GPT1: c_int = 167;
+pub const IMX952_CLK_GPT2: c_int = 168;
+pub const IMX952_CLK_GPT3: c_int = 169;
+pub const IMX952_CLK_GPT4: c_int = 170;
+// Clock GPR SEL
+pub const IMX952_CLK_GPR_SEL_EXT: c_int = 171;
+pub const IMX952_CLK_GPR_SEL_A55C0: c_int = 172;
+pub const IMX952_CLK_GPR_SEL_A55C1: c_int = 173;
+pub const IMX952_CLK_GPR_SEL_A55C2: c_int = 174;
+pub const IMX952_CLK_GPR_SEL_A55C3: c_int = 175;
+pub const IMX952_CLK_GPR_SEL_A55P: c_int = 176;
+pub const IMX952_CLK_GPR_SEL_DRAM: c_int = 177;
+pub const IMX952_CLK_GPR_SEL_TEMPSENSE: c_int = 178;
+// Clock CGC
+pub const IMX952_CLK_CGC_NPU: c_int = 179;
+pub const IMX952_CLK_CGC_GPU: c_int = 180;
+pub const IMX952_CLK_CGC_CAMISI: c_int = 181;
+pub const IMX952_CLK_CGC_CAMISP: c_int = 182;
+pub const IMX952_CLK_CGC_CAMCSI0: c_int = 183;
+pub const IMX952_CLK_CGC_CAMCSI1: c_int = 184;
+pub const IMX952_CLK_CGC_CAMOCRAM: c_int = 185;
+pub const IMX952_CLK_CGC_HSIOUSB: c_int = 186;
+pub const IMX952_CLK_CGC_HSIOPCIE: c_int = 187;
+pub const IMX952_CLK_CGC_DISPOCRAM: c_int = 188;
+pub const IMX952_CLK_CGC_DISPSEERIS: c_int = 189;
+pub const IMX952_CLK_CGC_DISPDSI: c_int = 190;
+pub const IMX952_CLK_CGC_NOCGIC: c_int = 191;
+pub const IMX952_CLK_CGC_NOCOCRAM: c_int = 192;
+pub const IMX952_CLK_CGC_NETC: c_int = 193;
+pub const IMX952_CLK_CGC_VPUENC: c_int = 194;
+pub const IMX952_CLK_CGC_VPUJPEGENC: c_int = 195;
+pub const IMX952_CLK_CGC_VPUJPEGDEC: c_int = 196;
+pub const IMX952_CLK_CGC_VPUDEC: c_int = 197;

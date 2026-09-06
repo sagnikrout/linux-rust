@@ -1,0 +1,372 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/mfd/samsung/irq.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// Copyright (c) 2012 Samsung Electronics Co., Ltd
+// http://www.samsung.com
+//
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpa01_irq {
+    S2MPA01_IRQ_PWRONF,
+    S2MPA01_IRQ_PWRONR,
+    S2MPA01_IRQ_JIGONBF,
+    S2MPA01_IRQ_JIGONBR,
+    S2MPA01_IRQ_ACOKBF,
+    S2MPA01_IRQ_ACOKBR,
+    S2MPA01_IRQ_PWRON1S,
+    S2MPA01_IRQ_MRB,
+
+    S2MPA01_IRQ_RTC60S,
+    S2MPA01_IRQ_RTCA1,
+    S2MPA01_IRQ_RTCA0,
+    S2MPA01_IRQ_SMPL,
+    S2MPA01_IRQ_RTC1S,
+    S2MPA01_IRQ_WTSR,
+
+    S2MPA01_IRQ_INT120C,
+    S2MPA01_IRQ_INT140C,
+    S2MPA01_IRQ_LDO3_TSD,
+    S2MPA01_IRQ_B16_TSD,
+    S2MPA01_IRQ_B24_TSD,
+    S2MPA01_IRQ_B35_TSD,
+
+    S2MPA01_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpg10_common_irq {
+// Top-level (common) block
+    S2MPG10_COMMON_IRQ_PMIC,
+    S2MPG10_COMMON_IRQ_UNUSED,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpg10_irq {
+// PMIC
+    S2MPG10_IRQ_PWRONF,
+    S2MPG10_IRQ_PWRONR,
+    S2MPG10_IRQ_JIGONBF,
+    S2MPG10_IRQ_JIGONBR,
+    S2MPG10_IRQ_ACOKBF,
+    S2MPG10_IRQ_ACOKBR,
+    S2MPG10_IRQ_PWRON1S,
+    S2MPG10_IRQ_MRB,
+
+    S2MPG10_IRQ_RTC60S,
+    S2MPG10_IRQ_RTCA1,
+    S2MPG10_IRQ_RTCA0,
+    S2MPG10_IRQ_RTC1S,
+    S2MPG10_IRQ_WTSR_COLDRST,
+    S2MPG10_IRQ_WTSR,
+    S2MPG10_IRQ_WRST,
+    S2MPG10_IRQ_SMPL,
+
+    S2MPG10_IRQ_120C,
+    S2MPG10_IRQ_140C,
+    S2MPG10_IRQ_TSD,
+    S2MPG10_IRQ_PIF_TIMEOUT1,
+    S2MPG10_IRQ_PIF_TIMEOUT2,
+    S2MPG10_IRQ_SPD_PARITY_ERR,
+    S2MPG10_IRQ_SPD_ABNORMAL_STOP,
+    S2MPG10_IRQ_PMETER_OVERF,
+
+    S2MPG10_IRQ_OCP_B1M,
+    S2MPG10_IRQ_OCP_B2M,
+    S2MPG10_IRQ_OCP_B3M,
+    S2MPG10_IRQ_OCP_B4M,
+    S2MPG10_IRQ_OCP_B5M,
+    S2MPG10_IRQ_OCP_B6M,
+    S2MPG10_IRQ_OCP_B7M,
+    S2MPG10_IRQ_OCP_B8M,
+
+    S2MPG10_IRQ_OCP_B9M,
+    S2MPG10_IRQ_OCP_B10M,
+    S2MPG10_IRQ_WLWP_ACC,
+    S2MPG10_IRQ_SMPL_TIMEOUT,
+    S2MPG10_IRQ_WTSR_TIMEOUT,
+    S2MPG10_IRQ_SPD_SRP_PKT_RST,
+
+    S2MPG10_IRQ_PWR_WARN_CH0,
+    S2MPG10_IRQ_PWR_WARN_CH1,
+    S2MPG10_IRQ_PWR_WARN_CH2,
+    S2MPG10_IRQ_PWR_WARN_CH3,
+    S2MPG10_IRQ_PWR_WARN_CH4,
+    S2MPG10_IRQ_PWR_WARN_CH5,
+    S2MPG10_IRQ_PWR_WARN_CH6,
+    S2MPG10_IRQ_PWR_WARN_CH7,
+
+    S2MPG10_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpg11_common_irq {
+// Top-level (common) block
+    S2MPG11_COMMON_IRQ_PMIC,
+    S2MPG11_COMMON_IRQ_UNUSED,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpg11_irq {
+// PMIC
+    S2MPG11_IRQ_PWRONF,
+    S2MPG11_IRQ_PWRONR,
+    S2MPG11_IRQ_PIF_TIMEOUT_MIF,
+    S2MPG11_IRQ_PIF_TIMEOUTS,
+    S2MPG11_IRQ_WTSR,
+    S2MPG11_IRQ_SPD_ABNORMAL_STOP,
+    S2MPG11_IRQ_SPD_PARITY_ERR,
+
+    S2MPG11_IRQ_140C,
+    S2MPG11_IRQ_120C,
+    S2MPG11_IRQ_TSD,
+    S2MPG11_IRQ_WRST,
+    S2MPG11_IRQ_NTC_CYCLE_DONE,
+    S2MPG11_IRQ_PMETER_OVERF,
+
+    S2MPG11_IRQ_OCP_B1S,
+    S2MPG11_IRQ_OCP_B2S,
+    S2MPG11_IRQ_OCP_B3S,
+    S2MPG11_IRQ_OCP_B4S,
+    S2MPG11_IRQ_OCP_B5S,
+    S2MPG11_IRQ_OCP_B6S,
+    S2MPG11_IRQ_OCP_B7S,
+    S2MPG11_IRQ_OCP_B8S,
+
+    S2MPG11_IRQ_OCP_B9S,
+    S2MPG11_IRQ_OCP_B10S,
+    S2MPG11_IRQ_OCP_BDS,
+    S2MPG11_IRQ_OCP_BAS,
+    S2MPG11_IRQ_OCP_BBS,
+    S2MPG11_IRQ_WLWP_ACC,
+    S2MPG11_IRQ_SPD_SRP_PKT_RST,
+
+    S2MPG11_IRQ_PWR_WARN_CH0,
+    S2MPG11_IRQ_PWR_WARN_CH1,
+    S2MPG11_IRQ_PWR_WARN_CH2,
+    S2MPG11_IRQ_PWR_WARN_CH3,
+    S2MPG11_IRQ_PWR_WARN_CH4,
+    S2MPG11_IRQ_PWR_WARN_CH5,
+    S2MPG11_IRQ_PWR_WARN_CH6,
+    S2MPG11_IRQ_PWR_WARN_CH7,
+
+    S2MPG11_IRQ_NTC_WARN_CH0,
+    S2MPG11_IRQ_NTC_WARN_CH1,
+    S2MPG11_IRQ_NTC_WARN_CH2,
+    S2MPG11_IRQ_NTC_WARN_CH3,
+    S2MPG11_IRQ_NTC_WARN_CH4,
+    S2MPG11_IRQ_NTC_WARN_CH5,
+    S2MPG11_IRQ_NTC_WARN_CH6,
+    S2MPG11_IRQ_NTC_WARN_CH7,
+
+    S2MPG11_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mps11_irq {
+    S2MPS11_IRQ_PWRONF,
+    S2MPS11_IRQ_PWRONR,
+    S2MPS11_IRQ_JIGONBF,
+    S2MPS11_IRQ_JIGONBR,
+    S2MPS11_IRQ_ACOKBF,
+    S2MPS11_IRQ_ACOKBR,
+    S2MPS11_IRQ_PWRON1S,
+    S2MPS11_IRQ_MRB,
+
+    S2MPS11_IRQ_RTC60S,
+    S2MPS11_IRQ_RTCA1,
+    S2MPS11_IRQ_RTCA0,
+    S2MPS11_IRQ_SMPL,
+    S2MPS11_IRQ_RTC1S,
+    S2MPS11_IRQ_WTSR,
+
+    S2MPS11_IRQ_INT120C,
+    S2MPS11_IRQ_INT140C,
+
+    S2MPS11_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mps14_irq {
+    S2MPS14_IRQ_PWRONF,
+    S2MPS14_IRQ_PWRONR,
+    S2MPS14_IRQ_JIGONBF,
+    S2MPS14_IRQ_JIGONBR,
+    S2MPS14_IRQ_ACOKBF,
+    S2MPS14_IRQ_ACOKBR,
+    S2MPS14_IRQ_PWRON1S,
+    S2MPS14_IRQ_MRB,
+
+    S2MPS14_IRQ_RTC60S,
+    S2MPS14_IRQ_RTCA1,
+    S2MPS14_IRQ_RTCA0,
+    S2MPS14_IRQ_SMPL,
+    S2MPS14_IRQ_RTC1S,
+    S2MPS14_IRQ_WTSR,
+
+    S2MPS14_IRQ_INT120C,
+    S2MPS14_IRQ_INT140C,
+    S2MPS14_IRQ_TSD,
+
+    S2MPS14_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpu02_irq {
+    S2MPU02_IRQ_PWRONF,
+    S2MPU02_IRQ_PWRONR,
+    S2MPU02_IRQ_JIGONBF,
+    S2MPU02_IRQ_JIGONBR,
+    S2MPU02_IRQ_ACOKBF,
+    S2MPU02_IRQ_ACOKBR,
+    S2MPU02_IRQ_PWRON1S,
+    S2MPU02_IRQ_MRB,
+
+    S2MPU02_IRQ_RTC60S,
+    S2MPU02_IRQ_RTCA1,
+    S2MPU02_IRQ_RTCA0,
+    S2MPU02_IRQ_SMPL,
+    S2MPU02_IRQ_RTC1S,
+    S2MPU02_IRQ_WTSR,
+
+    S2MPU02_IRQ_INT120C,
+    S2MPU02_IRQ_INT140C,
+    S2MPU02_IRQ_TSD,
+
+    S2MPU02_IRQ_NR,
+}
+
+// Masks for interrupts are the same as in s2mps11
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mpu05_irq {
+    S2MPU05_IRQ_PWRONF,
+    S2MPU05_IRQ_PWRONR,
+    S2MPU05_IRQ_JIGONBF,
+    S2MPU05_IRQ_JIGONBR,
+    S2MPU05_IRQ_ACOKF,
+    S2MPU05_IRQ_ACOKR,
+    S2MPU05_IRQ_PWRON1S,
+    S2MPU05_IRQ_MRB,
+
+    S2MPU05_IRQ_RTC60S,
+    S2MPU05_IRQ_RTCA1,
+    S2MPU05_IRQ_RTCA0,
+    S2MPU05_IRQ_SMPL,
+    S2MPU05_IRQ_RTC1S,
+    S2MPU05_IRQ_WTSR,
+
+    S2MPU05_IRQ_INT120C,
+    S2MPU05_IRQ_INT140C,
+    S2MPU05_IRQ_TSD,
+
+    S2MPU05_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mu005_irq {
+    S2MU005_IRQ_CHGR_DETBAT,
+    S2MU005_IRQ_CHGR_BAT,
+    S2MU005_IRQ_CHGR_IVR,
+    S2MU005_IRQ_CHGR_EVENT,
+    S2MU005_IRQ_CHGR_CHG,
+    S2MU005_IRQ_CHGR_VMID,
+    S2MU005_IRQ_CHGR_WCIN,
+    S2MU005_IRQ_CHGR_VBUS,
+
+    S2MU005_IRQ_FLED_LBPROT,
+    S2MU005_IRQ_FLED_OPENCH2,
+    S2MU005_IRQ_FLED_OPENCH1,
+    S2MU005_IRQ_FLED_SHORTCH2,
+    S2MU005_IRQ_FLED_SHORTCH1,
+
+    S2MU005_IRQ_MUIC_ATTACH,
+    S2MU005_IRQ_MUIC_DETACH,
+    S2MU005_IRQ_MUIC_KP,
+    S2MU005_IRQ_MUIC_LKP,
+    S2MU005_IRQ_MUIC_LKR,
+    S2MU005_IRQ_MUIC_RIDCHG,
+
+    S2MU005_IRQ_MUIC_VBUSON,
+    S2MU005_IRQ_MUIC_RSVD,
+    S2MU005_IRQ_MUIC_ADC,
+    S2MU005_IRQ_MUIC_STUCK,
+    S2MU005_IRQ_MUIC_STUCKRCV,
+    S2MU005_IRQ_MUIC_MHDL,
+    S2MU005_IRQ_MUIC_AVCHG,
+    S2MU005_IRQ_MUIC_VBUSOFF,
+
+    S2MU005_IRQ_NR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s5m8767_irq {
+    S5M8767_IRQ_PWRR,
+    S5M8767_IRQ_PWRF,
+    S5M8767_IRQ_PWR1S,
+    S5M8767_IRQ_JIGR,
+    S5M8767_IRQ_JIGF,
+    S5M8767_IRQ_LOWBAT2,
+    S5M8767_IRQ_LOWBAT1,
+
+    S5M8767_IRQ_MRB,
+    S5M8767_IRQ_DVSOK2,
+    S5M8767_IRQ_DVSOK3,
+    S5M8767_IRQ_DVSOK4,
+
+    S5M8767_IRQ_RTC60S,
+    S5M8767_IRQ_RTCA1,
+    S5M8767_IRQ_RTCA2,
+    S5M8767_IRQ_SMPL,
+    S5M8767_IRQ_RTC1S,
+    S5M8767_IRQ_WTSR,
+
+    S5M8767_IRQ_NR,
+}
+

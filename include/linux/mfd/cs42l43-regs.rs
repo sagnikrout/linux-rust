@@ -1,0 +1,1162 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/mfd/cs42l43-regs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// cs42l43 register definitions
+//
+// Copyright (c) 2022-2023 Cirrus Logic, Inc. and
+// Cirrus Logic International Semiconductor Ltd.
+//
+// Registers
+pub const CS42L43_GEN_INT_STAT_1: c_uint = 0x000000C0;
+pub const CS42L43_GEN_INT_MASK_1: c_uint = 0x000000C1;
+pub const CS42L43_DEVID: c_uint = 0x00003000;
+pub const CS42L43_REVID: c_uint = 0x00003004;
+pub const CS42L43_RELID: c_uint = 0x0000300C;
+pub const CS42L43_SFT_RESET: c_uint = 0x00003020;
+pub const CS42L43_DRV_CTRL1: c_uint = 0x00006004;
+pub const CS42L43_DRV_CTRL3: c_uint = 0x0000600C;
+pub const CS42L43_DRV_CTRL4: c_uint = 0x00006010;
+pub const CS42L43_DRV_CTRL_5: c_uint = 0x00006014;
+pub const CS42L43_GPIO_CTRL1: c_uint = 0x00006034;
+pub const CS42L43_GPIO_CTRL2: c_uint = 0x00006038;
+pub const CS42L43_GPIO_STS: c_uint = 0x0000603C;
+pub const CS42L43_GPIO_FN_SEL: c_uint = 0x00006040;
+pub const CS42L43_MCLK_SRC_SEL: c_uint = 0x00007004;
+pub const CS42L43_CCM_BLK_CLK_CONTROL: c_uint = 0x00007010;
+pub const CS42L43_SAMPLE_RATE1: c_uint = 0x00007014;
+pub const CS42L43_SAMPLE_RATE2: c_uint = 0x00007018;
+pub const CS42L43_SAMPLE_RATE3: c_uint = 0x0000701C;
+pub const CS42L43_SAMPLE_RATE4: c_uint = 0x00007020;
+pub const CS42L43_PLL_CONTROL: c_uint = 0x00007034;
+pub const CS42L43_FS_SELECT1: c_uint = 0x00007038;
+pub const CS42L43_FS_SELECT2: c_uint = 0x0000703C;
+pub const CS42L43_FS_SELECT3: c_uint = 0x00007040;
+pub const CS42L43_FS_SELECT4: c_uint = 0x00007044;
+pub const CS42L43_PDM_CONTROL: c_uint = 0x0000704C;
+pub const CS42L43_ASP_CLK_CONFIG1: c_uint = 0x00007058;
+pub const CS42L43_ASP_CLK_CONFIG2: c_uint = 0x0000705C;
+pub const CS42L43_OSC_DIV_SEL: c_uint = 0x00007068;
+pub const CS42L43_ADC_B_CTRL1: c_uint = 0x00008000;
+pub const CS42L43_ADC_B_CTRL2: c_uint = 0x00008004;
+pub const CS42L43_DECIM_HPF_WNF_CTRL1: c_uint = 0x0000803C;
+pub const CS42L43_DECIM_HPF_WNF_CTRL2: c_uint = 0x00008040;
+pub const CS42L43_DECIM_HPF_WNF_CTRL3: c_uint = 0x00008044;
+pub const CS42L43_DECIM_HPF_WNF_CTRL4: c_uint = 0x00008048;
+pub const CS42L43_DMIC_PDM_CTRL: c_uint = 0x0000804C;
+pub const CS42L43_DECIM_VOL_CTRL_CH1_CH2: c_uint = 0x00008050;
+pub const CS42L43_DECIM_VOL_CTRL_CH3_CH4: c_uint = 0x00008054;
+pub const CS42L43_DECIM_VOL_CTRL_UPDATE: c_uint = 0x00008058;
+pub const CS42L43_INTP_VOLUME_CTRL1: c_uint = 0x00009008;
+pub const CS42L43_INTP_VOLUME_CTRL2: c_uint = 0x0000900C;
+pub const CS42L43_AMP1_2_VOL_RAMP: c_uint = 0x00009010;
+pub const CS42L43_ASP_CTRL: c_uint = 0x0000A000;
+pub const CS42L43_ASP_FSYNC_CTRL1: c_uint = 0x0000A004;
+pub const CS42L43_ASP_FSYNC_CTRL2: c_uint = 0x0000A008;
+pub const CS42L43_ASP_FSYNC_CTRL3: c_uint = 0x0000A00C;
+pub const CS42L43_ASP_FSYNC_CTRL4: c_uint = 0x0000A010;
+pub const CS42L43_ASP_DATA_CTRL: c_uint = 0x0000A018;
+pub const CS42L43_ASP_RX_EN: c_uint = 0x0000A020;
+pub const CS42L43_ASP_TX_EN: c_uint = 0x0000A024;
+pub const CS42L43_ASP_RX_CH1_CTRL: c_uint = 0x0000A028;
+pub const CS42L43_ASP_RX_CH2_CTRL: c_uint = 0x0000A02C;
+pub const CS42L43_ASP_RX_CH3_CTRL: c_uint = 0x0000A030;
+pub const CS42L43_ASP_RX_CH4_CTRL: c_uint = 0x0000A034;
+pub const CS42L43_ASP_RX_CH5_CTRL: c_uint = 0x0000A038;
+pub const CS42L43_ASP_RX_CH6_CTRL: c_uint = 0x0000A03C;
+pub const CS42L43_ASP_TX_CH1_CTRL: c_uint = 0x0000A068;
+pub const CS42L43_ASP_TX_CH2_CTRL: c_uint = 0x0000A06C;
+pub const CS42L43_ASP_TX_CH3_CTRL: c_uint = 0x0000A070;
+pub const CS42L43_ASP_TX_CH4_CTRL: c_uint = 0x0000A074;
+pub const CS42L43_ASP_TX_CH5_CTRL: c_uint = 0x0000A078;
+pub const CS42L43_ASP_TX_CH6_CTRL: c_uint = 0x0000A07C;
+pub const CS42L43_OTP_REVISION_ID: c_uint = 0x0000B02C;
+pub const CS42L43_ASPTX1_INPUT: c_uint = 0x0000C200;
+pub const CS42L43_ASPTX2_INPUT: c_uint = 0x0000C210;
+pub const CS42L43_ASPTX3_INPUT: c_uint = 0x0000C220;
+pub const CS42L43_ASPTX4_INPUT: c_uint = 0x0000C230;
+pub const CS42L43_ASPTX5_INPUT: c_uint = 0x0000C240;
+pub const CS42L43_ASPTX6_INPUT: c_uint = 0x0000C250;
+pub const CS42L43_SWIRE_DP1_CH1_INPUT: c_uint = 0x0000C280;
+pub const CS42L43_SWIRE_DP1_CH2_INPUT: c_uint = 0x0000C290;
+pub const CS42L43_SWIRE_DP1_CH3_INPUT: c_uint = 0x0000C2A0;
+pub const CS42L43_SWIRE_DP1_CH4_INPUT: c_uint = 0x0000C2B0;
+pub const CS42L43_SWIRE_DP2_CH1_INPUT: c_uint = 0x0000C2C0;
+pub const CS42L43_SWIRE_DP2_CH2_INPUT: c_uint = 0x0000C2D0;
+pub const CS42L43_SWIRE_DP3_CH1_INPUT: c_uint = 0x0000C2E0;
+pub const CS42L43_SWIRE_DP3_CH2_INPUT: c_uint = 0x0000C2F0;
+pub const CS42L43_SWIRE_DP4_CH1_INPUT: c_uint = 0x0000C300;
+pub const CS42L43_SWIRE_DP4_CH2_INPUT: c_uint = 0x0000C310;
+pub const CS42L43_ASRC_INT1_INPUT1: c_uint = 0x0000C400;
+pub const CS42L43_ASRC_INT2_INPUT1: c_uint = 0x0000C410;
+pub const CS42L43_ASRC_INT3_INPUT1: c_uint = 0x0000C420;
+pub const CS42L43_ASRC_INT4_INPUT1: c_uint = 0x0000C430;
+pub const CS42L43_ASRC_DEC1_INPUT1: c_uint = 0x0000C440;
+pub const CS42L43_ASRC_DEC2_INPUT1: c_uint = 0x0000C450;
+pub const CS42L43_ASRC_DEC3_INPUT1: c_uint = 0x0000C460;
+pub const CS42L43_ASRC_DEC4_INPUT1: c_uint = 0x0000C470;
+pub const CS42L43_ISRC1INT1_INPUT1: c_uint = 0x0000C500;
+pub const CS42L43_ISRC1INT2_INPUT1: c_uint = 0x0000C510;
+pub const CS42L43_ISRC1DEC1_INPUT1: c_uint = 0x0000C520;
+pub const CS42L43_ISRC1DEC2_INPUT1: c_uint = 0x0000C530;
+pub const CS42L43_ISRC2INT1_INPUT1: c_uint = 0x0000C540;
+pub const CS42L43_ISRC2INT2_INPUT1: c_uint = 0x0000C550;
+pub const CS42L43_ISRC2DEC1_INPUT1: c_uint = 0x0000C560;
+pub const CS42L43_ISRC2DEC2_INPUT1: c_uint = 0x0000C570;
+pub const CS42L43_EQ1MIX_INPUT1: c_uint = 0x0000C580;
+pub const CS42L43_EQ1MIX_INPUT2: c_uint = 0x0000C584;
+pub const CS42L43_EQ1MIX_INPUT3: c_uint = 0x0000C588;
+pub const CS42L43_EQ1MIX_INPUT4: c_uint = 0x0000C58C;
+pub const CS42L43_EQ2MIX_INPUT1: c_uint = 0x0000C590;
+pub const CS42L43_EQ2MIX_INPUT2: c_uint = 0x0000C594;
+pub const CS42L43_EQ2MIX_INPUT3: c_uint = 0x0000C598;
+pub const CS42L43_EQ2MIX_INPUT4: c_uint = 0x0000C59C;
+pub const CS42L43_SPDIF1_INPUT1: c_uint = 0x0000C600;
+pub const CS42L43_SPDIF2_INPUT1: c_uint = 0x0000C610;
+pub const CS42L43_AMP1MIX_INPUT1: c_uint = 0x0000C620;
+pub const CS42L43_AMP1MIX_INPUT2: c_uint = 0x0000C624;
+pub const CS42L43_AMP1MIX_INPUT3: c_uint = 0x0000C628;
+pub const CS42L43_AMP1MIX_INPUT4: c_uint = 0x0000C62C;
+pub const CS42L43_AMP2MIX_INPUT1: c_uint = 0x0000C630;
+pub const CS42L43_AMP2MIX_INPUT2: c_uint = 0x0000C634;
+pub const CS42L43_AMP2MIX_INPUT3: c_uint = 0x0000C638;
+pub const CS42L43_AMP2MIX_INPUT4: c_uint = 0x0000C63C;
+pub const CS42L43_AMP3MIX_INPUT1: c_uint = 0x0000C640;
+pub const CS42L43_AMP3MIX_INPUT2: c_uint = 0x0000C644;
+pub const CS42L43_AMP3MIX_INPUT3: c_uint = 0x0000C648;
+pub const CS42L43_AMP3MIX_INPUT4: c_uint = 0x0000C64C;
+pub const CS42L43_AMP4MIX_INPUT1: c_uint = 0x0000C650;
+pub const CS42L43_AMP4MIX_INPUT2: c_uint = 0x0000C654;
+pub const CS42L43_AMP4MIX_INPUT3: c_uint = 0x0000C658;
+pub const CS42L43_AMP4MIX_INPUT4: c_uint = 0x0000C65C;
+pub const CS42L43_ASRC_INT_ENABLES: c_uint = 0x0000E000;
+pub const CS42L43_ASRC_DEC_ENABLES: c_uint = 0x0000E004;
+pub const CS42L43_PDNCNTL: c_uint = 0x00010000;
+pub const CS42L43_RINGSENSE_DEB_CTRL: c_uint = 0x0001001C;
+pub const CS42L43_TIPSENSE_DEB_CTRL: c_uint = 0x00010020;
+pub const CS42L43_TIP_RING_SENSE_INTERRUPT_STATUS: c_uint = 0x00010028;
+pub const CS42L43_HS2: c_uint = 0x00010040;
+pub const CS42L43_HS_STAT: c_uint = 0x00010048;
+pub const CS42L43_MCU_SW_INTERRUPT: c_uint = 0x00010094;
+pub const CS42L43_STEREO_MIC_CTRL: c_uint = 0x000100A4;
+pub const CS42L43_STEREO_MIC_CLAMP_CTRL: c_uint = 0x000100C4;
+pub const CS42L43_BLOCK_EN2: c_uint = 0x00010104;
+pub const CS42L43_BLOCK_EN3: c_uint = 0x00010108;
+pub const CS42L43_BLOCK_EN4: c_uint = 0x0001010C;
+pub const CS42L43_BLOCK_EN5: c_uint = 0x00010110;
+pub const CS42L43_BLOCK_EN6: c_uint = 0x00010114;
+pub const CS42L43_BLOCK_EN7: c_uint = 0x00010118;
+pub const CS42L43_BLOCK_EN8: c_uint = 0x0001011C;
+pub const CS42L43_BLOCK_EN9: c_uint = 0x00010120;
+pub const CS42L43_BLOCK_EN10: c_uint = 0x00010124;
+pub const CS42L43_BLOCK_EN11: c_uint = 0x00010128;
+pub const CS42L43_TONE_CH1_CTRL: c_uint = 0x00010134;
+pub const CS42L43_TONE_CH2_CTRL: c_uint = 0x00010138;
+pub const CS42L43_MIC_DETECT_CONTROL_1: c_uint = 0x00011074;
+pub const CS42L43_DETECT_STATUS_1: c_uint = 0x0001107C;
+pub const CS42L43_HS_BIAS_SENSE_AND_CLAMP_AUTOCONTROL: c_uint = 0x00011090;
+pub const CS42L43_MIC_DETECT_CONTROL_ANDROID: c_uint = 0x000110B0;
+pub const CS42L43_ISRC1_CTRL: c_uint = 0x00012004;
+pub const CS42L43_ISRC2_CTRL: c_uint = 0x00013004;
+pub const CS42L43_CTRL_REG: c_uint = 0x00014000;
+pub const CS42L43_FDIV_FRAC: c_uint = 0x00014004;
+pub const CS42L43_CAL_RATIO: c_uint = 0x00014008;
+pub const CS42L43_SPI_CLK_CONFIG1: c_uint = 0x00016004;
+pub const CS42L43_SPI_CONFIG1: c_uint = 0x00016010;
+pub const CS42L43_SPI_CONFIG2: c_uint = 0x00016014;
+pub const CS42L43_SPI_CONFIG3: c_uint = 0x00016018;
+pub const CS42L43_SPI_CONFIG4: c_uint = 0x00016024;
+pub const CS42L43_SPI_STATUS1: c_uint = 0x00016100;
+pub const CS42L43_SPI_STATUS2: c_uint = 0x00016104;
+pub const CS42L43_TRAN_CONFIG1: c_uint = 0x00016200;
+pub const CS42L43_TRAN_CONFIG2: c_uint = 0x00016204;
+pub const CS42L43_TRAN_CONFIG3: c_uint = 0x00016208;
+pub const CS42L43_TRAN_CONFIG4: c_uint = 0x0001620C;
+pub const CS42L43_TRAN_CONFIG5: c_uint = 0x00016220;
+pub const CS42L43_TRAN_CONFIG6: c_uint = 0x00016224;
+pub const CS42L43_TRAN_CONFIG7: c_uint = 0x00016228;
+pub const CS42L43_TRAN_CONFIG8: c_uint = 0x0001622C;
+pub const CS42L43_TRAN_STATUS1: c_uint = 0x00016300;
+pub const CS42L43_TRAN_STATUS2: c_uint = 0x00016304;
+pub const CS42L43_TRAN_STATUS3: c_uint = 0x00016308;
+pub const CS42L43_TX_DATA: c_uint = 0x00016400;
+pub const CS42L43_RX_DATA: c_uint = 0x00016600;
+pub const CS42L43_DACCNFG1: c_uint = 0x00017000;
+pub const CS42L43_DACCNFG2: c_uint = 0x00017004;
+pub const CS42L43_HPPATHVOL: c_uint = 0x0001700C;
+pub const CS42L43_PGAVOL: c_uint = 0x00017014;
+pub const CS42L43_LOADDETRESULTS: c_uint = 0x00017018;
+pub const CS42L43_LOADDETENA: c_uint = 0x00017024;
+pub const CS42L43_CTRL: c_uint = 0x00017028;
+pub const CS42L43_COEFF_DATA_IN0: c_uint = 0x00018000;
+pub const CS42L43_COEFF_RD_WR0: c_uint = 0x00018008;
+pub const CS42L43_INIT_DONE0: c_uint = 0x00018010;
+pub const CS42L43_START_EQZ0: c_uint = 0x00018014;
+pub const CS42L43_MUTE_EQ_IN0: c_uint = 0x0001801C;
+pub const CS42L43_DECIM_INT: c_uint = 0x0001B000;
+pub const CS42L43_EQ_INT: c_uint = 0x0001B004;
+pub const CS42L43_ASP_INT: c_uint = 0x0001B008;
+pub const CS42L43_PLL_INT: c_uint = 0x0001B00C;
+pub const CS42L43_SOFT_INT: c_uint = 0x0001B010;
+pub const CS42L43_SWIRE_INT: c_uint = 0x0001B014;
+pub const CS42L43_MSM_INT: c_uint = 0x0001B018;
+pub const CS42L43_ACC_DET_INT: c_uint = 0x0001B01C;
+pub const CS42L43_I2C_TGT_INT: c_uint = 0x0001B020;
+pub const CS42L43_SPI_MSTR_INT: c_uint = 0x0001B024;
+pub const CS42L43_SW_TO_SPI_BRIDGE_INT: c_uint = 0x0001B028;
+pub const CS42L43_OTP_INT: c_uint = 0x0001B02C;
+pub const CS42L43_CLASS_D_AMP_INT: c_uint = 0x0001B030;
+pub const CS42L43_GPIO_INT: c_uint = 0x0001B034;
+pub const CS42L43_ASRC_INT: c_uint = 0x0001B038;
+pub const CS42L43_HPOUT_INT: c_uint = 0x0001B03C;
+pub const CS42L43_DECIM_MASK: c_uint = 0x0001B0A0;
+pub const CS42L43_EQ_MIX_MASK: c_uint = 0x0001B0A4;
+pub const CS42L43_ASP_MASK: c_uint = 0x0001B0A8;
+pub const CS42L43_PLL_MASK: c_uint = 0x0001B0AC;
+pub const CS42L43_SOFT_MASK: c_uint = 0x0001B0B0;
+pub const CS42L43_SWIRE_MASK: c_uint = 0x0001B0B4;
+pub const CS42L43_MSM_MASK: c_uint = 0x0001B0B8;
+pub const CS42L43_ACC_DET_MASK: c_uint = 0x0001B0BC;
+pub const CS42L43_I2C_TGT_MASK: c_uint = 0x0001B0C0;
+pub const CS42L43_SPI_MSTR_MASK: c_uint = 0x0001B0C4;
+pub const CS42L43_SW_TO_SPI_BRIDGE_MASK: c_uint = 0x0001B0C8;
+pub const CS42L43_OTP_MASK: c_uint = 0x0001B0CC;
+pub const CS42L43_CLASS_D_AMP_MASK: c_uint = 0x0001B0D0;
+pub const CS42L43_GPIO_INT_MASK: c_uint = 0x0001B0D4;
+pub const CS42L43_ASRC_MASK: c_uint = 0x0001B0D8;
+pub const CS42L43_HPOUT_MASK: c_uint = 0x0001B0DC;
+pub const CS42L43_DECIM_INT_SHADOW: c_uint = 0x0001B300;
+pub const CS42L43_EQ_MIX_INT_SHADOW: c_uint = 0x0001B304;
+pub const CS42L43_ASP_INT_SHADOW: c_uint = 0x0001B308;
+pub const CS42L43_PLL_INT_SHADOW: c_uint = 0x0001B30C;
+pub const CS42L43_SOFT_INT_SHADOW: c_uint = 0x0001B310;
+pub const CS42L43_SWIRE_INT_SHADOW: c_uint = 0x0001B314;
+pub const CS42L43_MSM_INT_SHADOW: c_uint = 0x0001B318;
+pub const CS42L43_ACC_DET_INT_SHADOW: c_uint = 0x0001B31C;
+pub const CS42L43_I2C_TGT_INT_SHADOW: c_uint = 0x0001B320;
+pub const CS42L43_SPI_MSTR_INT_SHADOW: c_uint = 0x0001B324;
+pub const CS42L43_SW_TO_SPI_BRIDGE_SHADOW: c_uint = 0x0001B328;
+pub const CS42L43_OTP_INT_SHADOW: c_uint = 0x0001B32C;
+pub const CS42L43_CLASS_D_AMP_INT_SHADOW: c_uint = 0x0001B330;
+pub const CS42L43_GPIO_SHADOW: c_uint = 0x0001B334;
+pub const CS42L43_ASRC_SHADOW: c_uint = 0x0001B338;
+pub const CS42L43_HP_OUT_SHADOW: c_uint = 0x0001B33C;
+pub const CS42L43_BOOT_CONTROL: c_uint = 0x00101000;
+pub const CS42L43_BLOCK_EN: c_uint = 0x00101008;
+pub const CS42L43_SHUTTER_CONTROL: c_uint = 0x0010100C;
+pub const CS42L43_MCU_SW_REV: c_uint = 0x00114000;
+pub const CS42L43_PATCH_START_ADDR: c_uint = 0x00114004;
+pub const CS42L43_NEED_CONFIGS: c_uint = 0x0011400C;
+pub const CS42L43_BOOT_STATUS: c_uint = 0x0011401C;
+pub const CS42L43_FW_SH_BOOT_CFG_NEED_CONFIGS: c_uint = 0x0011F8F8;
+pub const CS42L43_FW_MISSION_CTRL_NEED_CONFIGS: c_uint = 0x0011FE00;
+pub const CS42L43_FW_MISSION_CTRL_HAVE_CONFIGS: c_uint = 0x0011FE04;
+pub const CS42L43_FW_MISSION_CTRL_MM_CTRL_SELECTION: c_uint = 0x0011FE0C;
+pub const CS42L43_FW_MISSION_CTRL_MM_MCU_CFG_REG: c_uint = 0x0011FE10;
+pub const CS42L43_MCU_RAM_MAX: c_uint = 0x0011FFFF;
+// CS42L43_DEVID
+pub const CS42L43_DEVID_VAL: c_uint = 0x00042A43;
+// CS42L43_GEN_INT_STAT_1
+pub const CS42L43_INT_STAT_GEN1_MASK: c_uint = 0x00000001;
+pub const CS42L43_INT_STAT_GEN1_SHIFT: c_int = 0;
+// CS42L43_SFT_RESET
+pub const CS42L43_SFT_RESET_MASK: c_uint = 0xFF000000;
+pub const CS42L43_SFT_RESET_SHIFT: c_int = 24;
+pub const CS42L43_SFT_RESET_VAL: c_uint = 0x5A000000;
+// CS42L43_DRV_CTRL1
+pub const CS42L43_ASP_DOUT_DRV_MASK: c_uint = 0x00038000;
+pub const CS42L43_ASP_DOUT_DRV_SHIFT: c_int = 15;
+pub const CS42L43_ASP_FSYNC_DRV_MASK: c_uint = 0x00000E00;
+pub const CS42L43_ASP_FSYNC_DRV_SHIFT: c_int = 9;
+pub const CS42L43_ASP_BCLK_DRV_MASK: c_uint = 0x000001C0;
+pub const CS42L43_ASP_BCLK_DRV_SHIFT: c_int = 6;
+// CS42L43_DRV_CTRL3
+pub const CS42L43_I2C_ADDR_DRV_MASK: c_uint = 0x30000000;
+pub const CS42L43_I2C_ADDR_DRV_SHIFT: c_int = 28;
+pub const CS42L43_I2C_SDA_DRV_MASK: c_uint = 0x0C000000;
+pub const CS42L43_I2C_SDA_DRV_SHIFT: c_int = 26;
+pub const CS42L43_PDMOUT2_CLK_DRV_MASK: c_uint = 0x00E00000;
+pub const CS42L43_PDMOUT2_CLK_DRV_SHIFT: c_int = 21;
+pub const CS42L43_PDMOUT2_DATA_DRV_MASK: c_uint = 0x001C0000;
+pub const CS42L43_PDMOUT2_DATA_DRV_SHIFT: c_int = 18;
+pub const CS42L43_PDMOUT1_CLK_DRV_MASK: c_uint = 0x00038000;
+pub const CS42L43_PDMOUT1_CLK_DRV_SHIFT: c_int = 15;
+pub const CS42L43_PDMOUT1_DATA_DRV_MASK: c_uint = 0x00007000;
+pub const CS42L43_PDMOUT1_DATA_DRV_SHIFT: c_int = 12;
+pub const CS42L43_SPI_MISO_DRV_MASK: c_uint = 0x00000038;
+pub const CS42L43_SPI_MISO_DRV_SHIFT: c_int = 3;
+// CS42L43_DRV_CTRL4
+pub const CS42L43_GPIO3_DRV_MASK: c_uint = 0x00000E00;
+pub const CS42L43_GPIO3_DRV_SHIFT: c_int = 9;
+pub const CS42L43_GPIO2_DRV_MASK: c_uint = 0x000001C0;
+pub const CS42L43_GPIO2_DRV_SHIFT: c_int = 6;
+pub const CS42L43_GPIO1_DRV_MASK: c_uint = 0x00000038;
+pub const CS42L43_GPIO1_DRV_SHIFT: c_int = 3;
+// CS42L43_DRV_CTRL_5
+pub const CS42L43_I2C_SCL_DRV_MASK: c_uint = 0x18000000;
+pub const CS42L43_I2C_SCL_DRV_SHIFT: c_int = 27;
+pub const CS42L43_SPI_SCK_DRV_MASK: c_uint = 0x07000000;
+pub const CS42L43_SPI_SCK_DRV_SHIFT: c_int = 24;
+pub const CS42L43_SPI_MOSI_DRV_MASK: c_uint = 0x00E00000;
+pub const CS42L43_SPI_MOSI_DRV_SHIFT: c_int = 21;
+pub const CS42L43_SPI_SSB_DRV_MASK: c_uint = 0x001C0000;
+pub const CS42L43_SPI_SSB_DRV_SHIFT: c_int = 18;
+pub const CS42L43_ASP_DIN_DRV_MASK: c_uint = 0x000001C0;
+pub const CS42L43_ASP_DIN_DRV_SHIFT: c_int = 6;
+// CS42L43_GPIO_CTRL1
+pub const CS42L43_GPIO3_POL_MASK: c_uint = 0x00040000;
+pub const CS42L43_GPIO3_POL_SHIFT: c_int = 18;
+pub const CS42L43_GPIO2_POL_MASK: c_uint = 0x00020000;
+pub const CS42L43_GPIO2_POL_SHIFT: c_int = 17;
+pub const CS42L43_GPIO1_POL_MASK: c_uint = 0x00010000;
+pub const CS42L43_GPIO1_POL_SHIFT: c_int = 16;
+pub const CS42L43_GPIO3_LVL_MASK: c_uint = 0x00000400;
+pub const CS42L43_GPIO3_LVL_SHIFT: c_int = 10;
+pub const CS42L43_GPIO2_LVL_MASK: c_uint = 0x00000200;
+pub const CS42L43_GPIO2_LVL_SHIFT: c_int = 9;
+pub const CS42L43_GPIO1_LVL_MASK: c_uint = 0x00000100;
+pub const CS42L43_GPIO1_LVL_SHIFT: c_int = 8;
+pub const CS42L43_GPIO3_DIR_MASK: c_uint = 0x00000004;
+pub const CS42L43_GPIO3_DIR_SHIFT: c_int = 2;
+pub const CS42L43_GPIO2_DIR_MASK: c_uint = 0x00000002;
+pub const CS42L43_GPIO2_DIR_SHIFT: c_int = 1;
+pub const CS42L43_GPIO1_DIR_MASK: c_uint = 0x00000001;
+pub const CS42L43_GPIO1_DIR_SHIFT: c_int = 0;
+// CS42L43_GPIO_CTRL2
+pub const CS42L43_GPIO3_DEGLITCH_BYP_MASK: c_uint = 0x00000004;
+pub const CS42L43_GPIO3_DEGLITCH_BYP_SHIFT: c_int = 2;
+pub const CS42L43_GPIO2_DEGLITCH_BYP_MASK: c_uint = 0x00000002;
+pub const CS42L43_GPIO2_DEGLITCH_BYP_SHIFT: c_int = 1;
+pub const CS42L43_GPIO1_DEGLITCH_BYP_MASK: c_uint = 0x00000001;
+pub const CS42L43_GPIO1_DEGLITCH_BYP_SHIFT: c_int = 0;
+// CS42L43_GPIO_STS
+pub const CS42L43_GPIO3_STS_MASK: c_uint = 0x00000004;
+pub const CS42L43_GPIO3_STS_SHIFT: c_int = 2;
+pub const CS42L43_GPIO2_STS_MASK: c_uint = 0x00000002;
+pub const CS42L43_GPIO2_STS_SHIFT: c_int = 1;
+pub const CS42L43_GPIO1_STS_MASK: c_uint = 0x00000001;
+pub const CS42L43_GPIO1_STS_SHIFT: c_int = 0;
+// CS42L43_GPIO_FN_SEL
+pub const CS42L43_GPIO3_FN_SEL_MASK: c_uint = 0x00000004;
+pub const CS42L43_GPIO3_FN_SEL_SHIFT: c_int = 2;
+pub const CS42L43_GPIO1_FN_SEL_MASK: c_uint = 0x00000001;
+pub const CS42L43_GPIO1_FN_SEL_SHIFT: c_int = 0;
+// CS42L43_MCLK_SRC_SEL
+pub const CS42L43_OSC_PLL_MCLK_SEL_MASK: c_uint = 0x00000001;
+pub const CS42L43_OSC_PLL_MCLK_SEL_SHIFT: c_int = 0;
+// CS42L43_SAMPLE_RATE1..CS42L43_SAMPLE_RATE4
+pub const CS42L43_SAMPLE_RATE_MASK: c_uint = 0x0000001F;
+pub const CS42L43_SAMPLE_RATE_SHIFT: c_int = 0;
+// CS42L43_PLL_CONTROL
+pub const CS42L43_PLL_REFCLK_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_PLL_REFCLK_EN_SHIFT: c_int = 3;
+pub const CS42L43_PLL_REFCLK_DIV_MASK: c_uint = 0x00000006;
+pub const CS42L43_PLL_REFCLK_DIV_SHIFT: c_int = 1;
+pub const CS42L43_PLL_REFCLK_SRC_MASK: c_uint = 0x00000001;
+pub const CS42L43_PLL_REFCLK_SRC_SHIFT: c_int = 0;
+// CS42L43_FS_SELECT1
+pub const CS42L43_ASP_RATE_MASK: c_uint = 0x00000003;
+pub const CS42L43_ASP_RATE_SHIFT: c_int = 0;
+// CS42L43_FS_SELECT2
+pub const CS42L43_ASRC_DEC_OUT_RATE_MASK: c_uint = 0x000000C0;
+pub const CS42L43_ASRC_DEC_OUT_RATE_SHIFT: c_int = 6;
+pub const CS42L43_ASRC_INT_OUT_RATE_MASK: c_uint = 0x00000030;
+pub const CS42L43_ASRC_INT_OUT_RATE_SHIFT: c_int = 4;
+pub const CS42L43_ASRC_DEC_IN_RATE_MASK: c_uint = 0x0000000C;
+pub const CS42L43_ASRC_DEC_IN_RATE_SHIFT: c_int = 2;
+pub const CS42L43_ASRC_INT_IN_RATE_MASK: c_uint = 0x00000003;
+pub const CS42L43_ASRC_INT_IN_RATE_SHIFT: c_int = 0;
+// CS42L43_FS_SELECT3
+pub const CS42L43_HPOUT_RATE_MASK: c_uint = 0x0000C000;
+pub const CS42L43_HPOUT_RATE_SHIFT: c_int = 14;
+pub const CS42L43_EQZ_RATE_MASK: c_uint = 0x00003000;
+pub const CS42L43_EQZ_RATE_SHIFT: c_int = 12;
+pub const CS42L43_DIAGGEN_RATE_MASK: c_uint = 0x00000C00;
+pub const CS42L43_DIAGGEN_RATE_SHIFT: c_int = 10;
+pub const CS42L43_DECIM_CH4_RATE_MASK: c_uint = 0x00000300;
+pub const CS42L43_DECIM_CH4_RATE_SHIFT: c_int = 8;
+pub const CS42L43_DECIM_CH3_RATE_MASK: c_uint = 0x000000C0;
+pub const CS42L43_DECIM_CH3_RATE_SHIFT: c_int = 6;
+pub const CS42L43_DECIM_CH2_RATE_MASK: c_uint = 0x00000030;
+pub const CS42L43_DECIM_CH2_RATE_SHIFT: c_int = 4;
+pub const CS42L43_DECIM_CH1_RATE_MASK: c_uint = 0x0000000C;
+pub const CS42L43_DECIM_CH1_RATE_SHIFT: c_int = 2;
+pub const CS42L43_AMP1_2_RATE_MASK: c_uint = 0x00000003;
+pub const CS42L43_AMP1_2_RATE_SHIFT: c_int = 0;
+// CS42L43_FS_SELECT4
+pub const CS42L43_SW_DP7_RATE_MASK: c_uint = 0x00C00000;
+pub const CS42L43_SW_DP7_RATE_SHIFT: c_int = 22;
+pub const CS42L43_SW_DP6_RATE_MASK: c_uint = 0x00300000;
+pub const CS42L43_SW_DP6_RATE_SHIFT: c_int = 20;
+pub const CS42L43_SPDIF_RATE_MASK: c_uint = 0x000C0000;
+pub const CS42L43_SPDIF_RATE_SHIFT: c_int = 18;
+pub const CS42L43_SW_DP5_RATE_MASK: c_uint = 0x00030000;
+pub const CS42L43_SW_DP5_RATE_SHIFT: c_int = 16;
+pub const CS42L43_SW_DP4_RATE_MASK: c_uint = 0x0000C000;
+pub const CS42L43_SW_DP4_RATE_SHIFT: c_int = 14;
+pub const CS42L43_SW_DP3_RATE_MASK: c_uint = 0x00003000;
+pub const CS42L43_SW_DP3_RATE_SHIFT: c_int = 12;
+pub const CS42L43_SW_DP2_RATE_MASK: c_uint = 0x00000C00;
+pub const CS42L43_SW_DP2_RATE_SHIFT: c_int = 10;
+pub const CS42L43_SW_DP1_RATE_MASK: c_uint = 0x00000300;
+pub const CS42L43_SW_DP1_RATE_SHIFT: c_int = 8;
+pub const CS42L43_ISRC2_LOW_RATE_MASK: c_uint = 0x000000C0;
+pub const CS42L43_ISRC2_LOW_RATE_SHIFT: c_int = 6;
+pub const CS42L43_ISRC2_HIGH_RATE_MASK: c_uint = 0x00000030;
+pub const CS42L43_ISRC2_HIGH_RATE_SHIFT: c_int = 4;
+pub const CS42L43_ISRC1_LOW_RATE_MASK: c_uint = 0x0000000C;
+pub const CS42L43_ISRC1_LOW_RATE_SHIFT: c_int = 2;
+pub const CS42L43_ISRC1_HIGH_RATE_MASK: c_uint = 0x00000003;
+pub const CS42L43_ISRC1_HIGH_RATE_SHIFT: c_int = 0;
+// CS42L43_PDM_CONTROL
+pub const CS42L43_PDM2_CLK_DIV_MASK: c_uint = 0x0000000C;
+pub const CS42L43_PDM2_CLK_DIV_SHIFT: c_int = 2;
+pub const CS42L43_PDM1_CLK_DIV_MASK: c_uint = 0x00000003;
+pub const CS42L43_PDM1_CLK_DIV_SHIFT: c_int = 0;
+// CS42L43_ASP_CLK_CONFIG1
+pub const CS42L43_ASP_BCLK_N_MASK: c_uint = 0x03FF0000;
+pub const CS42L43_ASP_BCLK_N_SHIFT: c_int = 16;
+pub const CS42L43_ASP_BCLK_M_MASK: c_uint = 0x000003FF;
+pub const CS42L43_ASP_BCLK_M_SHIFT: c_int = 0;
+// CS42L43_ASP_CLK_CONFIG2
+pub const CS42L43_ASP_MASTER_MODE_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASP_MASTER_MODE_SHIFT: c_int = 1;
+pub const CS42L43_ASP_BCLK_INV_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASP_BCLK_INV_SHIFT: c_int = 0;
+// CS42L43_OSC_DIV_SEL
+pub const CS42L43_OSC_DIV2_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_OSC_DIV2_EN_SHIFT: c_int = 0;
+// CS42L43_ADC_B_CTRL1..CS42L43_ADC_B_CTRL1
+pub const CS42L43_PGA_WIDESWING_MODE_EN_MASK: c_uint = 0x00000080;
+pub const CS42L43_PGA_WIDESWING_MODE_EN_SHIFT: c_int = 7;
+pub const CS42L43_ADC_AIN_SEL_MASK: c_uint = 0x00000010;
+pub const CS42L43_ADC_AIN_SEL_SHIFT: c_int = 4;
+pub const CS42L43_ADC_PGA_GAIN_MASK: c_uint = 0x0000000F;
+pub const CS42L43_ADC_PGA_GAIN_SHIFT: c_int = 0;
+// CS42L43_DECIM_HPF_WNF_CTRL1..CS42L43_DECIM_HPF_WNF_CTRL4
+pub const CS42L43_DECIM_WNF_CF_MASK: c_uint = 0x00000070;
+pub const CS42L43_DECIM_WNF_CF_SHIFT: c_int = 4;
+pub const CS42L43_DECIM_WNF_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_DECIM_WNF_EN_SHIFT: c_int = 3;
+pub const CS42L43_DECIM_HPF_CF_MASK: c_uint = 0x00000006;
+pub const CS42L43_DECIM_HPF_CF_SHIFT: c_int = 1;
+pub const CS42L43_DECIM_HPF_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_DECIM_HPF_EN_SHIFT: c_int = 0;
+// CS42L43_DMIC_PDM_CTRL
+pub const CS42L43_PDM2R_INV_MASK: c_uint = 0x00000020;
+pub const CS42L43_PDM2R_INV_SHIFT: c_int = 5;
+pub const CS42L43_PDM2L_INV_MASK: c_uint = 0x00000010;
+pub const CS42L43_PDM2L_INV_SHIFT: c_int = 4;
+pub const CS42L43_PDM1R_INV_MASK: c_uint = 0x00000008;
+pub const CS42L43_PDM1R_INV_SHIFT: c_int = 3;
+pub const CS42L43_PDM1L_INV_MASK: c_uint = 0x00000004;
+pub const CS42L43_PDM1L_INV_SHIFT: c_int = 2;
+// CS42L43_DECIM_VOL_CTRL_CH1_CH2
+pub const CS42L43_DECIM2_MUTE_MASK: c_uint = 0x80000000;
+pub const CS42L43_DECIM2_MUTE_SHIFT: c_int = 31;
+pub const CS42L43_DECIM2_VOL_MASK: c_uint = 0x3FC00000;
+pub const CS42L43_DECIM2_VOL_SHIFT: c_int = 22;
+pub const CS42L43_DECIM2_VD_RAMP_MASK: c_uint = 0x00380000;
+pub const CS42L43_DECIM2_VD_RAMP_SHIFT: c_int = 19;
+pub const CS42L43_DECIM2_VI_RAMP_MASK: c_uint = 0x00070000;
+pub const CS42L43_DECIM2_VI_RAMP_SHIFT: c_int = 16;
+pub const CS42L43_DECIM1_MUTE_MASK: c_uint = 0x00008000;
+pub const CS42L43_DECIM1_MUTE_SHIFT: c_int = 15;
+pub const CS42L43_DECIM1_VOL_MASK: c_uint = 0x00003FC0;
+pub const CS42L43_DECIM1_VOL_SHIFT: c_int = 6;
+pub const CS42L43_DECIM1_VD_RAMP_MASK: c_uint = 0x00000038;
+pub const CS42L43_DECIM1_VD_RAMP_SHIFT: c_int = 3;
+pub const CS42L43_DECIM1_VI_RAMP_MASK: c_uint = 0x00000007;
+pub const CS42L43_DECIM1_VI_RAMP_SHIFT: c_int = 0;
+// CS42L43_DECIM_VOL_CTRL_CH3_CH4
+pub const CS42L43_DECIM4_MUTE_MASK: c_uint = 0x80000000;
+pub const CS42L43_DECIM4_MUTE_SHIFT: c_int = 31;
+pub const CS42L43_DECIM4_VOL_MASK: c_uint = 0x3FC00000;
+pub const CS42L43_DECIM4_VOL_SHIFT: c_int = 22;
+pub const CS42L43_DECIM4_VD_RAMP_MASK: c_uint = 0x00380000;
+pub const CS42L43_DECIM4_VD_RAMP_SHIFT: c_int = 19;
+pub const CS42L43_DECIM4_VI_RAMP_MASK: c_uint = 0x00070000;
+pub const CS42L43_DECIM4_VI_RAMP_SHIFT: c_int = 16;
+pub const CS42L43_DECIM3_MUTE_MASK: c_uint = 0x00008000;
+pub const CS42L43_DECIM3_MUTE_SHIFT: c_int = 15;
+pub const CS42L43_DECIM3_VOL_MASK: c_uint = 0x00003FC0;
+pub const CS42L43_DECIM3_VOL_SHIFT: c_int = 6;
+pub const CS42L43_DECIM3_VD_RAMP_MASK: c_uint = 0x00000038;
+pub const CS42L43_DECIM3_VD_RAMP_SHIFT: c_int = 3;
+pub const CS42L43_DECIM3_VI_RAMP_MASK: c_uint = 0x00000007;
+pub const CS42L43_DECIM3_VI_RAMP_SHIFT: c_int = 0;
+// CS42L43_DECIM_VOL_CTRL_UPDATE
+pub const CS42L43_DECIM4_VOL_UPDATE_MASK: c_uint = 0x00000008;
+pub const CS42L43_DECIM4_VOL_UPDATE_SHIFT: c_int = 3;
+pub const CS42L43_DECIM3_VOL_UPDATE_MASK: c_uint = 0x00000004;
+pub const CS42L43_DECIM3_VOL_UPDATE_SHIFT: c_int = 2;
+pub const CS42L43_DECIM2_VOL_UPDATE_MASK: c_uint = 0x00000002;
+pub const CS42L43_DECIM2_VOL_UPDATE_SHIFT: c_int = 1;
+pub const CS42L43_DECIM1_VOL_UPDATE_MASK: c_uint = 0x00000001;
+pub const CS42L43_DECIM1_VOL_UPDATE_SHIFT: c_int = 0;
+// CS42L43_INTP_VOLUME_CTRL1..CS42L43_INTP_VOLUME_CTRL2
+pub const CS42L43_AMP1_2_VU_MASK: c_uint = 0x00000200;
+pub const CS42L43_AMP1_2_VU_SHIFT: c_int = 9;
+pub const CS42L43_AMP_MUTE_MASK: c_uint = 0x00000100;
+pub const CS42L43_AMP_MUTE_SHIFT: c_int = 8;
+pub const CS42L43_AMP_VOL_MASK: c_uint = 0x000000FF;
+pub const CS42L43_AMP_VOL_SHIFT: c_int = 0;
+// CS42L43_AMP1_2_VOL_RAMP
+pub const CS42L43_AMP1_2_VD_RAMP_MASK: c_uint = 0x00000070;
+pub const CS42L43_AMP1_2_VD_RAMP_SHIFT: c_int = 4;
+pub const CS42L43_AMP1_2_VI_RAMP_MASK: c_uint = 0x00000007;
+pub const CS42L43_AMP1_2_VI_RAMP_SHIFT: c_int = 0;
+// CS42L43_ASP_CTRL
+pub const CS42L43_ASP_FSYNC_MODE_MASK: c_uint = 0x00000004;
+pub const CS42L43_ASP_FSYNC_MODE_SHIFT: c_int = 2;
+pub const CS42L43_ASP_BCLK_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASP_BCLK_EN_SHIFT: c_int = 1;
+pub const CS42L43_ASP_FSYNC_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASP_FSYNC_EN_SHIFT: c_int = 0;
+// CS42L43_ASP_FSYNC_CTRL1
+pub const CS42L43_ASP_FSYNC_M_MASK: c_uint = 0x0007FFFF;
+pub const CS42L43_ASP_FSYNC_M_SHIFT: c_int = 0;
+// CS42L43_ASP_FSYNC_CTRL3
+pub const CS42L43_ASP_FSYNC_IN_INV_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASP_FSYNC_IN_INV_SHIFT: c_int = 1;
+pub const CS42L43_ASP_FSYNC_OUT_INV_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASP_FSYNC_OUT_INV_SHIFT: c_int = 0;
+// CS42L43_ASP_FSYNC_CTRL4
+pub const CS42L43_ASP_NUM_BCLKS_PER_FSYNC_MASK: c_uint = 0x00001FFE;
+pub const CS42L43_ASP_NUM_BCLKS_PER_FSYNC_SHIFT: c_int = 1;
+// CS42L43_ASP_DATA_CTRL
+pub const CS42L43_ASP_FSYNC_FRAME_START_PHASE_MASK: c_uint = 0x00000008;
+pub const CS42L43_ASP_FSYNC_FRAME_START_PHASE_SHIFT: c_int = 3;
+pub const CS42L43_ASP_FSYNC_FRAME_START_DLY_MASK: c_uint = 0x00000007;
+pub const CS42L43_ASP_FSYNC_FRAME_START_DLY_SHIFT: c_int = 0;
+// CS42L43_ASP_RX_EN
+pub const CS42L43_ASP_RX_CH6_EN_MASK: c_uint = 0x00000020;
+pub const CS42L43_ASP_RX_CH6_EN_SHIFT: c_int = 5;
+pub const CS42L43_ASP_RX_CH5_EN_MASK: c_uint = 0x00000010;
+pub const CS42L43_ASP_RX_CH5_EN_SHIFT: c_int = 4;
+pub const CS42L43_ASP_RX_CH4_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_ASP_RX_CH4_EN_SHIFT: c_int = 3;
+pub const CS42L43_ASP_RX_CH3_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43_ASP_RX_CH3_EN_SHIFT: c_int = 2;
+pub const CS42L43_ASP_RX_CH2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASP_RX_CH2_EN_SHIFT: c_int = 1;
+pub const CS42L43_ASP_RX_CH1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASP_RX_CH1_EN_SHIFT: c_int = 0;
+// CS42L43_ASP_TX_EN
+pub const CS42L43_ASP_TX_CH6_EN_MASK: c_uint = 0x00000020;
+pub const CS42L43_ASP_TX_CH6_EN_SHIFT: c_int = 5;
+pub const CS42L43_ASP_TX_CH5_EN_MASK: c_uint = 0x00000010;
+pub const CS42L43_ASP_TX_CH5_EN_SHIFT: c_int = 4;
+pub const CS42L43_ASP_TX_CH4_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_ASP_TX_CH4_EN_SHIFT: c_int = 3;
+pub const CS42L43_ASP_TX_CH3_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43_ASP_TX_CH3_EN_SHIFT: c_int = 2;
+pub const CS42L43_ASP_TX_CH2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASP_TX_CH2_EN_SHIFT: c_int = 1;
+pub const CS42L43_ASP_TX_CH1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASP_TX_CH1_EN_SHIFT: c_int = 0;
+// CS42L43_ASP_RX_CH1_CTRL..CS42L43_ASP_TX_CH6_CTRL
+pub const CS42L43_ASP_CH_WIDTH_MASK: c_uint = 0x001F0000;
+pub const CS42L43_ASP_CH_WIDTH_SHIFT: c_int = 16;
+pub const CS42L43_ASP_CH_SLOT_MASK: c_uint = 0x00001FFE;
+pub const CS42L43_ASP_CH_SLOT_SHIFT: c_int = 1;
+pub const CS42L43_ASP_CH_SLOT_PHASE_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASP_CH_SLOT_PHASE_SHIFT: c_int = 0;
+// CS42L43_ASPTX1_INPUT..CS42L43_AMP4MIX_INPUT4
+pub const CS42L43_MIXER_VOL_MASK: c_uint = 0x00FE0000;
+pub const CS42L43_MIXER_VOL_SHIFT: c_int = 17;
+pub const CS42L43_MIXER_SRC_MASK: c_uint = 0x000001FF;
+pub const CS42L43_MIXER_SRC_SHIFT: c_int = 0;
+// CS42L43_ASRC_INT_ENABLES
+pub const CS42L43_ASRC_INT4_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_ASRC_INT4_EN_SHIFT: c_int = 3;
+pub const CS42L43_ASRC_INT3_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43_ASRC_INT3_EN_SHIFT: c_int = 2;
+pub const CS42L43_ASRC_INT2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASRC_INT2_EN_SHIFT: c_int = 1;
+pub const CS42L43_ASRC_INT1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASRC_INT1_EN_SHIFT: c_int = 0;
+// CS42L43_ASRC_DEC_ENABLES
+pub const CS42L43_ASRC_DEC4_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_ASRC_DEC4_EN_SHIFT: c_int = 3;
+pub const CS42L43_ASRC_DEC3_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43_ASRC_DEC3_EN_SHIFT: c_int = 2;
+pub const CS42L43_ASRC_DEC2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASRC_DEC2_EN_SHIFT: c_int = 1;
+pub const CS42L43_ASRC_DEC1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASRC_DEC1_EN_SHIFT: c_int = 0;
+// CS42L43_PDNCNTL
+pub const CS42L43_RING_SENSE_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_RING_SENSE_EN_SHIFT: c_int = 1;
+// CS42L43_RINGSENSE_DEB_CTRL
+pub const CS42L43_RINGSENSE_INV_MASK: c_uint = 0x00000080;
+pub const CS42L43_RINGSENSE_INV_SHIFT: c_int = 7;
+pub const CS42L43_RINGSENSE_PULLUP_PDNB_MASK: c_uint = 0x00000040;
+pub const CS42L43_RINGSENSE_PULLUP_PDNB_SHIFT: c_int = 6;
+pub const CS42L43_RINGSENSE_FALLING_DB_TIME_MASK: c_uint = 0x00000038;
+pub const CS42L43_RINGSENSE_FALLING_DB_TIME_SHIFT: c_int = 3;
+pub const CS42L43_RINGSENSE_RISING_DB_TIME_MASK: c_uint = 0x00000007;
+pub const CS42L43_RINGSENSE_RISING_DB_TIME_SHIFT: c_int = 0;
+// CS42L43_TIPSENSE_DEB_CTRL
+pub const CS42L43_TIPSENSE_INV_MASK: c_uint = 0x00000080;
+pub const CS42L43_TIPSENSE_INV_SHIFT: c_int = 7;
+pub const CS42L43_TIPSENSE_FALLING_DB_TIME_MASK: c_uint = 0x00000038;
+pub const CS42L43_TIPSENSE_FALLING_DB_TIME_SHIFT: c_int = 3;
+pub const CS42L43_TIPSENSE_RISING_DB_TIME_MASK: c_uint = 0x00000007;
+pub const CS42L43_TIPSENSE_RISING_DB_TIME_SHIFT: c_int = 0;
+// CS42L43_TIP_RING_SENSE_INTERRUPT_STATUS
+pub const CS42L43_TIPSENSE_UNPLUG_DB_STS_MASK: c_uint = 0x00000008;
+pub const CS42L43_TIPSENSE_UNPLUG_DB_STS_SHIFT: c_int = 3;
+pub const CS42L43_TIPSENSE_PLUG_DB_STS_MASK: c_uint = 0x00000004;
+pub const CS42L43_TIPSENSE_PLUG_DB_STS_SHIFT: c_int = 2;
+pub const CS42L43_RINGSENSE_UNPLUG_DB_STS_MASK: c_uint = 0x00000002;
+pub const CS42L43_RINGSENSE_UNPLUG_DB_STS_SHIFT: c_int = 1;
+pub const CS42L43_RINGSENSE_PLUG_DB_STS_MASK: c_uint = 0x00000001;
+pub const CS42L43_RINGSENSE_PLUG_DB_STS_SHIFT: c_int = 0;
+// CS42L43_HS2
+pub const CS42L43_HS_CLAMP_DISABLE_MASK: c_uint = 0x10000000;
+pub const CS42L43_HS_CLAMP_DISABLE_SHIFT: c_int = 28;
+pub const CS42L43_HSBIAS_RAMP_MASK: c_uint = 0x0C000000;
+pub const CS42L43_HSBIAS_RAMP_SHIFT: c_int = 26;
+pub const CS42L43_HSDET_MODE_MASK: c_uint = 0x00018000;
+pub const CS42L43_HSDET_MODE_SHIFT: c_int = 15;
+pub const CS42L43_HSDET_MANUAL_MODE_MASK: c_uint = 0x00006000;
+pub const CS42L43_HSDET_MANUAL_MODE_SHIFT: c_int = 13;
+pub const CS42L43_AUTO_HSDET_TIME_MASK: c_uint = 0x00000700;
+pub const CS42L43_AUTO_HSDET_TIME_SHIFT: c_int = 8;
+pub const CS42L43_AMP3_4_GNDREF_HS3_SEL_MASK: c_uint = 0x00000080;
+pub const CS42L43_AMP3_4_GNDREF_HS3_SEL_SHIFT: c_int = 7;
+pub const CS42L43_AMP3_4_GNDREF_HS4_SEL_MASK: c_uint = 0x00000040;
+pub const CS42L43_AMP3_4_GNDREF_HS4_SEL_SHIFT: c_int = 6;
+pub const CS42L43_HSBIAS_GNDREF_HS3_SEL_MASK: c_uint = 0x00000020;
+pub const CS42L43_HSBIAS_GNDREF_HS3_SEL_SHIFT: c_int = 5;
+pub const CS42L43_HSBIAS_GNDREF_HS4_SEL_MASK: c_uint = 0x00000010;
+pub const CS42L43_HSBIAS_GNDREF_HS4_SEL_SHIFT: c_int = 4;
+pub const CS42L43_HSBIAS_OUT_HS3_SEL_MASK: c_uint = 0x00000008;
+pub const CS42L43_HSBIAS_OUT_HS3_SEL_SHIFT: c_int = 3;
+pub const CS42L43_HSBIAS_OUT_HS4_SEL_MASK: c_uint = 0x00000004;
+pub const CS42L43_HSBIAS_OUT_HS4_SEL_SHIFT: c_int = 2;
+pub const CS42L43_HSGND_HS3_SEL_MASK: c_uint = 0x00000002;
+pub const CS42L43_HSGND_HS3_SEL_SHIFT: c_int = 1;
+pub const CS42L43_HSGND_HS4_SEL_MASK: c_uint = 0x00000001;
+pub const CS42L43_HSGND_HS4_SEL_SHIFT: c_int = 0;
+// CS42L43_HS_STAT
+pub const CS42L43_HSDET_TYPE_STS_MASK: c_uint = 0x00000007;
+pub const CS42L43_HSDET_TYPE_STS_SHIFT: c_int = 0;
+// CS42L43_MCU_SW_INTERRUPT
+pub const CS42L43_CONTROL_IND_MASK: c_uint = 0x00000004;
+pub const CS42L43_CONTROL_IND_SHIFT: c_int = 2;
+pub const CS42L43_CONFIGS_IND_MASK: c_uint = 0x00000002;
+pub const CS42L43_CONFIGS_IND_SHIFT: c_int = 1;
+pub const CS42L43_PATCH_IND_MASK: c_uint = 0x00000001;
+pub const CS42L43_PATCH_IND_SHIFT: c_int = 0;
+// CS42L43_STEREO_MIC_CTRL
+pub const CS42L43_HS2_BIAS_SENSE_EN_MASK: c_uint = 0x00000020;
+pub const CS42L43_HS2_BIAS_SENSE_EN_SHIFT: c_int = 5;
+pub const CS42L43_HS1_BIAS_SENSE_EN_MASK: c_uint = 0x00000010;
+pub const CS42L43_HS1_BIAS_SENSE_EN_SHIFT: c_int = 4;
+pub const CS42L43_HS2_BIAS_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_HS2_BIAS_EN_SHIFT: c_int = 3;
+pub const CS42L43_HS1_BIAS_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43_HS1_BIAS_EN_SHIFT: c_int = 2;
+pub const CS42L43_JACK_STEREO_CONFIG_MASK: c_uint = 0x00000003;
+pub const CS42L43_JACK_STEREO_CONFIG_SHIFT: c_int = 0;
+// CS42L43_STEREO_MIC_CLAMP_CTRL
+pub const CS42L43_SMIC_HPAMP_CLAMP_DIS_FRC_VAL_MASK: c_uint = 0x00000002;
+pub const CS42L43_SMIC_HPAMP_CLAMP_DIS_FRC_VAL_SHIFT: c_int = 1;
+pub const CS42L43_SMIC_HPAMP_CLAMP_DIS_FRC_MASK: c_uint = 0x00000001;
+pub const CS42L43_SMIC_HPAMP_CLAMP_DIS_FRC_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN2
+pub const CS42L43_SPI_MSTR_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_MSTR_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN3
+pub const CS42L43_PDM2_DIN_R_EN_MASK: c_uint = 0x00000020;
+pub const CS42L43_PDM2_DIN_R_EN_SHIFT: c_int = 5;
+pub const CS42L43_PDM2_DIN_L_EN_MASK: c_uint = 0x00000010;
+pub const CS42L43_PDM2_DIN_L_EN_SHIFT: c_int = 4;
+pub const CS42L43_PDM1_DIN_R_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_PDM1_DIN_R_EN_SHIFT: c_int = 3;
+pub const CS42L43_PDM1_DIN_L_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43_PDM1_DIN_L_EN_SHIFT: c_int = 2;
+pub const CS42L43_ADC2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ADC2_EN_SHIFT: c_int = 1;
+pub const CS42L43_ADC1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ADC1_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN4
+pub const CS42L43_ASRC_DEC_BANK_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ASRC_DEC_BANK_EN_SHIFT: c_int = 1;
+pub const CS42L43_ASRC_INT_BANK_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ASRC_INT_BANK_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN5
+pub const CS42L43_ISRC2_BANK_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ISRC2_BANK_EN_SHIFT: c_int = 1;
+pub const CS42L43_ISRC1_BANK_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ISRC1_BANK_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN6
+pub const CS42L43_MIXER_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_MIXER_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN7
+pub const CS42L43_EQ_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_EQ_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN8
+pub const CS42L43_HP_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_HP_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN9
+pub const CS42L43_TONE_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_TONE_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN10
+pub const CS42L43_AMP2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_AMP2_EN_SHIFT: c_int = 1;
+pub const CS42L43_AMP1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_AMP1_EN_SHIFT: c_int = 0;
+// CS42L43_BLOCK_EN11
+pub const CS42L43_SPDIF_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPDIF_EN_SHIFT: c_int = 0;
+// CS42L43_TONE_CH1_CTRL..CS42L43_TONE_CH2_CTRL
+pub const CS42L43_TONE_FREQ_MASK: c_uint = 0x00000070;
+pub const CS42L43_TONE_FREQ_SHIFT: c_int = 4;
+pub const CS42L43_TONE_SEL_MASK: c_uint = 0x0000000F;
+pub const CS42L43_TONE_SEL_SHIFT: c_int = 0;
+// CS42L43_MIC_DETECT_CONTROL_1
+pub const CS42L43_BUTTON_DETECT_MODE_MASK: c_uint = 0x00000018;
+pub const CS42L43_BUTTON_DETECT_MODE_SHIFT: c_int = 3;
+pub const CS42L43_HSBIAS_MODE_MASK: c_uint = 0x00000006;
+pub const CS42L43_HSBIAS_MODE_SHIFT: c_int = 1;
+pub const CS42L43_MIC_LVL_DET_DISABLE_MASK: c_uint = 0x00000001;
+pub const CS42L43_MIC_LVL_DET_DISABLE_SHIFT: c_int = 0;
+// CS42L43_DETECT_STATUS_1
+pub const CS42L43_HSDET_DC_STS_MASK: c_uint = 0x01FF0000;
+pub const CS42L43_HSDET_DC_STS_SHIFT: c_int = 16;
+pub const CS42L43_JACKDET_STS_MASK: c_uint = 0x00000080;
+pub const CS42L43_JACKDET_STS_SHIFT: c_int = 7;
+pub const CS42L43_HSBIAS_CLAMP_STS_MASK: c_uint = 0x00000040;
+pub const CS42L43_HSBIAS_CLAMP_STS_SHIFT: c_int = 6;
+// CS42L43_HS_BIAS_SENSE_AND_CLAMP_AUTOCONTROL
+pub const CS42L43_JACKDET_MODE_MASK: c_uint = 0xC0000000;
+pub const CS42L43_JACKDET_MODE_SHIFT: c_int = 30;
+pub const CS42L43_JACKDET_INV_MASK: c_uint = 0x20000000;
+pub const CS42L43_JACKDET_INV_SHIFT: c_int = 29;
+pub const CS42L43_JACKDET_DB_TIME_MASK: c_uint = 0x03000000;
+pub const CS42L43_JACKDET_DB_TIME_SHIFT: c_int = 24;
+pub const CS42L43_S0_AUTO_ADCMUTE_DISABLE_MASK: c_uint = 0x00800000;
+pub const CS42L43_S0_AUTO_ADCMUTE_DISABLE_SHIFT: c_int = 23;
+pub const CS42L43_HSBIAS_SENSE_EN_MASK: c_uint = 0x00000080;
+pub const CS42L43_HSBIAS_SENSE_EN_SHIFT: c_int = 7;
+pub const CS42L43_AUTO_HSBIAS_CLAMP_EN_MASK: c_uint = 0x00000040;
+pub const CS42L43_AUTO_HSBIAS_CLAMP_EN_SHIFT: c_int = 6;
+pub const CS42L43_JACKDET_SENSE_EN_MASK: c_uint = 0x00000020;
+pub const CS42L43_JACKDET_SENSE_EN_SHIFT: c_int = 5;
+pub const CS42L43_HSBIAS_SENSE_TRIP_MASK: c_uint = 0x00000007;
+pub const CS42L43_HSBIAS_SENSE_TRIP_SHIFT: c_int = 0;
+// CS42L43_MIC_DETECT_CONTROL_ANDROID
+pub const CS42L43_HSDET_LVL_COMBWIDTH_MASK: c_uint = 0xC0000000;
+pub const CS42L43_HSDET_LVL_COMBWIDTH_SHIFT: c_int = 30;
+pub const CS42L43_HSDET_LVL2_THRESH_MASK: c_uint = 0x01FF0000;
+pub const CS42L43_HSDET_LVL2_THRESH_SHIFT: c_int = 16;
+pub const CS42L43_HSDET_LVL1_THRESH_MASK: c_uint = 0x000001FF;
+pub const CS42L43_HSDET_LVL1_THRESH_SHIFT: c_int = 0;
+// CS42L43_ISRC1_CTRL..CS42L43_ISRC2_CTRL
+pub const CS42L43_ISRC_INT2_EN_MASK: c_uint = 0x00000200;
+pub const CS42L43_ISRC_INT2_EN_SHIFT: c_int = 9;
+pub const CS42L43_ISRC_INT1_EN_MASK: c_uint = 0x00000100;
+pub const CS42L43_ISRC_INT1_EN_SHIFT: c_int = 8;
+pub const CS42L43_ISRC_DEC2_EN_MASK: c_uint = 0x00000002;
+pub const CS42L43_ISRC_DEC2_EN_SHIFT: c_int = 1;
+pub const CS42L43_ISRC_DEC1_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_ISRC_DEC1_EN_SHIFT: c_int = 0;
+// CS42L43_CTRL_REG
+pub const CS42L43_PLL_MODE_BYPASS_500_MASK: c_uint = 0x00000004;
+pub const CS42L43_PLL_MODE_BYPASS_500_SHIFT: c_int = 2;
+pub const CS42L43_PLL_MODE_BYPASS_1029_MASK: c_uint = 0x00000002;
+pub const CS42L43_PLL_MODE_BYPASS_1029_SHIFT: c_int = 1;
+pub const CS42L43_PLL_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_PLL_EN_SHIFT: c_int = 0;
+// CS42L43_FDIV_FRAC
+pub const CS42L43_PLL_DIV_INT_MASK: c_uint = 0xFF000000;
+pub const CS42L43_PLL_DIV_INT_SHIFT: c_int = 24;
+pub const CS42L43_PLL_DIV_FRAC_BYTE2_MASK: c_uint = 0x00FF0000;
+pub const CS42L43_PLL_DIV_FRAC_BYTE2_SHIFT: c_int = 16;
+pub const CS42L43_PLL_DIV_FRAC_BYTE1_MASK: c_uint = 0x0000FF00;
+pub const CS42L43_PLL_DIV_FRAC_BYTE1_SHIFT: c_int = 8;
+pub const CS42L43_PLL_DIV_FRAC_BYTE0_MASK: c_uint = 0x000000FF;
+pub const CS42L43_PLL_DIV_FRAC_BYTE0_SHIFT: c_int = 0;
+// CS42L43_CAL_RATIO
+pub const CS42L43_PLL_CAL_RATIO_MASK: c_uint = 0x000000FF;
+pub const CS42L43_PLL_CAL_RATIO_SHIFT: c_int = 0;
+// CS42L43_SPI_CLK_CONFIG1
+pub const CS42L43_SCLK_DIV_MASK: c_uint = 0x0000000F;
+pub const CS42L43_SCLK_DIV_SHIFT: c_int = 0;
+// CS42L43_SPI_CONFIG1
+pub const CS42L43_SPI_SS_IDLE_DUR_MASK: c_uint = 0x0F000000;
+pub const CS42L43_SPI_SS_IDLE_DUR_SHIFT: c_int = 24;
+pub const CS42L43_SPI_SS_DELAY_DUR_MASK: c_uint = 0x000F0000;
+pub const CS42L43_SPI_SS_DELAY_DUR_SHIFT: c_int = 16;
+pub const CS42L43_SPI_THREE_WIRE_MASK: c_uint = 0x00000100;
+pub const CS42L43_SPI_THREE_WIRE_SHIFT: c_int = 8;
+pub const CS42L43_SPI_DPHA_MASK: c_uint = 0x00000040;
+pub const CS42L43_SPI_DPHA_SHIFT: c_int = 6;
+pub const CS42L43_SPI_CPHA_MASK: c_uint = 0x00000020;
+pub const CS42L43_SPI_CPHA_SHIFT: c_int = 5;
+pub const CS42L43_SPI_CPOL_MASK: c_uint = 0x00000010;
+pub const CS42L43_SPI_CPOL_SHIFT: c_int = 4;
+pub const CS42L43_SPI_SS_SEL_MASK: c_uint = 0x00000007;
+pub const CS42L43_SPI_SS_SEL_SHIFT: c_int = 0;
+// CS42L43_SPI_CONFIG2
+pub const CS42L43_SPI_SS_FRC_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_SS_FRC_SHIFT: c_int = 0;
+// CS42L43_SPI_CONFIG3
+pub const CS42L43_SPI_WDT_ENA_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_WDT_ENA_SHIFT: c_int = 0;
+// CS42L43_SPI_CONFIG4
+pub const CS42L43_SPI_STALL_ENA_MASK: c_uint = 0x00010000;
+pub const CS42L43_SPI_STALL_ENA_SHIFT: c_int = 16;
+// CS42L43_SPI_STATUS1
+pub const CS42L43_SPI_ABORT_STS_MASK: c_uint = 0x00000002;
+pub const CS42L43_SPI_ABORT_STS_SHIFT: c_int = 1;
+pub const CS42L43_SPI_DONE_STS_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_DONE_STS_SHIFT: c_int = 0;
+// CS42L43_SPI_STATUS2
+pub const CS42L43_SPI_RX_DONE_STS_MASK: c_uint = 0x00000010;
+pub const CS42L43_SPI_RX_DONE_STS_SHIFT: c_int = 4;
+pub const CS42L43_SPI_TX_DONE_STS_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_TX_DONE_STS_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG1
+pub const CS42L43_SPI_START_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_START_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG2
+pub const CS42L43_SPI_ABORT_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_ABORT_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG3
+pub const CS42L43_SPI_WORD_SIZE_MASK: c_uint = 0x00070000;
+pub const CS42L43_SPI_WORD_SIZE_SHIFT: c_int = 16;
+pub const CS42L43_SPI_CMD_MASK: c_uint = 0x00000003;
+pub const CS42L43_SPI_CMD_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG4
+pub const CS42L43_SPI_TX_LENGTH_MASK: c_uint = 0x0000FFFF;
+pub const CS42L43_SPI_TX_LENGTH_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG5
+pub const CS42L43_SPI_RX_LENGTH_MASK: c_uint = 0x0000FFFF;
+pub const CS42L43_SPI_RX_LENGTH_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG6
+pub const CS42L43_SPI_TX_BLOCK_LENGTH_MASK: c_uint = 0x0000000F;
+pub const CS42L43_SPI_TX_BLOCK_LENGTH_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG7
+pub const CS42L43_SPI_RX_BLOCK_LENGTH_MASK: c_uint = 0x0000000F;
+pub const CS42L43_SPI_RX_BLOCK_LENGTH_SHIFT: c_int = 0;
+// CS42L43_TRAN_CONFIG8
+pub const CS42L43_SPI_RX_DONE_MASK: c_uint = 0x00000010;
+pub const CS42L43_SPI_RX_DONE_SHIFT: c_int = 4;
+pub const CS42L43_SPI_TX_DONE_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_TX_DONE_SHIFT: c_int = 0;
+// CS42L43_TRAN_STATUS1
+pub const CS42L43_SPI_BUSY_STS_MASK: c_uint = 0x00000100;
+pub const CS42L43_SPI_BUSY_STS_SHIFT: c_int = 8;
+pub const CS42L43_SPI_RX_REQUEST_MASK: c_uint = 0x00000010;
+pub const CS42L43_SPI_RX_REQUEST_SHIFT: c_int = 4;
+pub const CS42L43_SPI_TX_REQUEST_MASK: c_uint = 0x00000001;
+pub const CS42L43_SPI_TX_REQUEST_SHIFT: c_int = 0;
+// CS42L43_TRAN_STATUS2
+pub const CS42L43_SPI_TX_BYTE_COUNT_MASK: c_uint = 0x0000FFFF;
+pub const CS42L43_SPI_TX_BYTE_COUNT_SHIFT: c_int = 0;
+// CS42L43_TRAN_STATUS3
+pub const CS42L43_SPI_RX_BYTE_COUNT_MASK: c_uint = 0x0000FFFF;
+pub const CS42L43_SPI_RX_BYTE_COUNT_SHIFT: c_int = 0;
+// CS42L43_TX_DATA
+pub const CS42L43_SPI_TX_DATA_MASK: c_uint = 0xFFFFFFFF;
+pub const CS42L43_SPI_TX_DATA_SHIFT: c_int = 0;
+// CS42L43_RX_DATA
+pub const CS42L43_SPI_RX_DATA_MASK: c_uint = 0xFFFFFFFF;
+pub const CS42L43_SPI_RX_DATA_SHIFT: c_int = 0;
+// CS42L43_DACCNFG1
+pub const CS42L43_HP_MSTR_VOL_CTRL_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43_HP_MSTR_VOL_CTRL_EN_SHIFT: c_int = 3;
+pub const CS42L43_AMP4_INV_MASK: c_uint = 0x00000002;
+pub const CS42L43_AMP4_INV_SHIFT: c_int = 1;
+pub const CS42L43_AMP3_INV_MASK: c_uint = 0x00000001;
+pub const CS42L43_AMP3_INV_SHIFT: c_int = 0;
+// CS42L43_DACCNFG2
+pub const CS42L43_HP_AUTO_CLAMP_DISABLE_MASK: c_uint = 0x00000002;
+pub const CS42L43_HP_AUTO_CLAMP_DISABLE_SHIFT: c_int = 1;
+pub const CS42L43_HP_HPF_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_HP_HPF_EN_SHIFT: c_int = 0;
+// CS42L43_HPPATHVOL
+pub const CS42L43_AMP4_PATH_VOL_MASK: c_uint = 0x01FF0000;
+pub const CS42L43_AMP4_PATH_VOL_SHIFT: c_int = 16;
+pub const CS42L43_AMP3_PATH_VOL_MASK: c_uint = 0x000001FF;
+pub const CS42L43_AMP3_PATH_VOL_SHIFT: c_int = 0;
+// CS42L43_PGAVOL
+pub const CS42L43_HP_PATH_VOL_RAMP_MASK: c_uint = 0x0003C000;
+pub const CS42L43_HP_PATH_VOL_RAMP_SHIFT: c_int = 14;
+pub const CS42L43_HP_PATH_VOL_ZC_MASK: c_uint = 0x00002000;
+pub const CS42L43_HP_PATH_VOL_ZC_SHIFT: c_int = 13;
+pub const CS42L43_HP_PATH_VOL_SFT_MASK: c_uint = 0x00001000;
+pub const CS42L43_HP_PATH_VOL_SFT_SHIFT: c_int = 12;
+pub const CS42L43_HP_DIG_VOL_RAMP_MASK: c_uint = 0x00000F00;
+pub const CS42L43_HP_DIG_VOL_RAMP_SHIFT: c_int = 8;
+pub const CS42L43_HP_ANA_VOL_RAMP_MASK: c_uint = 0x0000000F;
+pub const CS42L43_HP_ANA_VOL_RAMP_SHIFT: c_int = 0;
+// CS42L43_LOADDETRESULTS
+pub const CS42L43_AMP3_RES_DET_MASK: c_uint = 0x00000003;
+pub const CS42L43_AMP3_RES_DET_SHIFT: c_int = 0;
+// CS42L43_LOADDETENA
+pub const CS42L43_HPLOAD_DET_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_HPLOAD_DET_EN_SHIFT: c_int = 0;
+// CS42L43_CTRL
+pub const CS42L43_ADPTPWR_MODE_MASK: c_uint = 0x00000007;
+pub const CS42L43_ADPTPWR_MODE_SHIFT: c_int = 0;
+// CS42L43_COEFF_RD_WR0
+pub const CS42L43_WRITE_MODE_MASK: c_uint = 0x00000002;
+pub const CS42L43_WRITE_MODE_SHIFT: c_int = 1;
+// CS42L43_INIT_DONE0
+pub const CS42L43_INITIALIZE_DONE_MASK: c_uint = 0x00000001;
+pub const CS42L43_INITIALIZE_DONE_SHIFT: c_int = 0;
+// CS42L43_START_EQZ0
+pub const CS42L43_START_FILTER_MASK: c_uint = 0x00000001;
+pub const CS42L43_START_FILTER_SHIFT: c_int = 0;
+// CS42L43_MUTE_EQ_IN0
+pub const CS42L43_MUTE_EQ_CH2_MASK: c_uint = 0x00000002;
+pub const CS42L43_MUTE_EQ_CH2_SHIFT: c_int = 1;
+pub const CS42L43_MUTE_EQ_CH1_MASK: c_uint = 0x00000001;
+pub const CS42L43_MUTE_EQ_CH1_SHIFT: c_int = 0;
+// CS42L43_PLL_INT
+pub const CS42L43_PLL_LOST_LOCK_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_PLL_LOST_LOCK_INT_SHIFT: c_int = 1;
+pub const CS42L43_PLL_READY_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_PLL_READY_INT_SHIFT: c_int = 0;
+// CS42L43_SOFT_INT
+pub const CS42L43_CONTROL_APPLIED_INT_MASK: c_uint = 0x00000010;
+pub const CS42L43_CONTROL_APPLIED_INT_SHIFT: c_int = 4;
+pub const CS42L43_CONTROL_WARN_INT_MASK: c_uint = 0x00000008;
+pub const CS42L43_CONTROL_WARN_INT_SHIFT: c_int = 3;
+pub const CS42L43_PATCH_WARN_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_PATCH_WARN_INT_SHIFT: c_int = 1;
+pub const CS42L43_PATCH_APPLIED_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_PATCH_APPLIED_INT_SHIFT: c_int = 0;
+// CS42L43_MSM_INT
+pub const CS42L43_HP_STARTUP_DONE_INT_MASK: c_uint = 0x00000800;
+pub const CS42L43_HP_STARTUP_DONE_INT_SHIFT: c_int = 11;
+pub const CS42L43_HP_SHUTDOWN_DONE_INT_MASK: c_uint = 0x00000400;
+pub const CS42L43_HP_SHUTDOWN_DONE_INT_SHIFT: c_int = 10;
+pub const CS42L43_HSDET_DONE_INT_MASK: c_uint = 0x00000200;
+pub const CS42L43_HSDET_DONE_INT_SHIFT: c_int = 9;
+pub const CS42L43_TIPSENSE_UNPLUG_DB_INT_MASK: c_uint = 0x00000080;
+pub const CS42L43_TIPSENSE_UNPLUG_DB_INT_SHIFT: c_int = 7;
+pub const CS42L43_TIPSENSE_PLUG_DB_INT_MASK: c_uint = 0x00000040;
+pub const CS42L43_TIPSENSE_PLUG_DB_INT_SHIFT: c_int = 6;
+pub const CS42L43_RINGSENSE_UNPLUG_DB_INT_MASK: c_uint = 0x00000020;
+pub const CS42L43_RINGSENSE_UNPLUG_DB_INT_SHIFT: c_int = 5;
+pub const CS42L43_RINGSENSE_PLUG_DB_INT_MASK: c_uint = 0x00000010;
+pub const CS42L43_RINGSENSE_PLUG_DB_INT_SHIFT: c_int = 4;
+pub const CS42L43_TIPSENSE_UNPLUG_PDET_INT_MASK: c_uint = 0x00000008;
+pub const CS42L43_TIPSENSE_UNPLUG_PDET_INT_SHIFT: c_int = 3;
+pub const CS42L43_TIPSENSE_PLUG_PDET_INT_MASK: c_uint = 0x00000004;
+pub const CS42L43_TIPSENSE_PLUG_PDET_INT_SHIFT: c_int = 2;
+pub const CS42L43_RINGSENSE_UNPLUG_PDET_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_RINGSENSE_UNPLUG_PDET_INT_SHIFT: c_int = 1;
+pub const CS42L43_RINGSENSE_PLUG_PDET_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_RINGSENSE_PLUG_PDET_INT_SHIFT: c_int = 0;
+// CS42L43_ACC_DET_INT
+pub const CS42L43_HS2_BIAS_SENSE_INT_MASK: c_uint = 0x00000800;
+pub const CS42L43_HS2_BIAS_SENSE_INT_SHIFT: c_int = 11;
+pub const CS42L43_HS1_BIAS_SENSE_INT_MASK: c_uint = 0x00000400;
+pub const CS42L43_HS1_BIAS_SENSE_INT_SHIFT: c_int = 10;
+pub const CS42L43_DC_DETECT1_FALSE_INT_MASK: c_uint = 0x00000080;
+pub const CS42L43_DC_DETECT1_FALSE_INT_SHIFT: c_int = 7;
+pub const CS42L43_DC_DETECT1_TRUE_INT_MASK: c_uint = 0x00000040;
+pub const CS42L43_DC_DETECT1_TRUE_INT_SHIFT: c_int = 6;
+pub const CS42L43_HSBIAS_CLAMPED_INT_MASK: c_uint = 0x00000008;
+pub const CS42L43_HSBIAS_CLAMPED_INT_SHIFT: c_int = 3;
+pub const CS42L43_HS3_4_BIAS_SENSE_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_HS3_4_BIAS_SENSE_INT_SHIFT: c_int = 0;
+// CS42L43_SPI_MSTR_INT
+pub const CS42L43_IRQ_SPI_STALLING_INT_MASK: c_uint = 0x00000004;
+pub const CS42L43_IRQ_SPI_STALLING_INT_SHIFT: c_int = 2;
+pub const CS42L43_IRQ_SPI_STS_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_IRQ_SPI_STS_INT_SHIFT: c_int = 1;
+pub const CS42L43_IRQ_SPI_BLOCK_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_IRQ_SPI_BLOCK_INT_SHIFT: c_int = 0;
+// CS42L43_SW_TO_SPI_BRIDGE_INT
+pub const CS42L43_SW2SPI_BUF_OVF_UDF_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_SW2SPI_BUF_OVF_UDF_INT_SHIFT: c_int = 0;
+// CS42L43_CLASS_D_AMP_INT
+pub const CS42L43_AMP2_CLK_STOP_FAULT_INT_MASK: c_uint = 0x00002000;
+pub const CS42L43_AMP2_CLK_STOP_FAULT_INT_SHIFT: c_int = 13;
+pub const CS42L43_AMP1_CLK_STOP_FAULT_INT_MASK: c_uint = 0x00001000;
+pub const CS42L43_AMP1_CLK_STOP_FAULT_INT_SHIFT: c_int = 12;
+pub const CS42L43_AMP2_VDDSPK_FAULT_INT_MASK: c_uint = 0x00000800;
+pub const CS42L43_AMP2_VDDSPK_FAULT_INT_SHIFT: c_int = 11;
+pub const CS42L43_AMP1_VDDSPK_FAULT_INT_MASK: c_uint = 0x00000400;
+pub const CS42L43_AMP1_VDDSPK_FAULT_INT_SHIFT: c_int = 10;
+pub const CS42L43_AMP2_SHUTDOWN_DONE_INT_MASK: c_uint = 0x00000200;
+pub const CS42L43_AMP2_SHUTDOWN_DONE_INT_SHIFT: c_int = 9;
+pub const CS42L43_AMP1_SHUTDOWN_DONE_INT_MASK: c_uint = 0x00000100;
+pub const CS42L43_AMP1_SHUTDOWN_DONE_INT_SHIFT: c_int = 8;
+pub const CS42L43_AMP2_STARTUP_DONE_INT_MASK: c_uint = 0x00000080;
+pub const CS42L43_AMP2_STARTUP_DONE_INT_SHIFT: c_int = 7;
+pub const CS42L43_AMP1_STARTUP_DONE_INT_MASK: c_uint = 0x00000040;
+pub const CS42L43_AMP1_STARTUP_DONE_INT_SHIFT: c_int = 6;
+pub const CS42L43_AMP2_THERM_SHDN_INT_MASK: c_uint = 0x00000020;
+pub const CS42L43_AMP2_THERM_SHDN_INT_SHIFT: c_int = 5;
+pub const CS42L43_AMP1_THERM_SHDN_INT_MASK: c_uint = 0x00000010;
+pub const CS42L43_AMP1_THERM_SHDN_INT_SHIFT: c_int = 4;
+pub const CS42L43_AMP2_THERM_WARN_INT_MASK: c_uint = 0x00000008;
+pub const CS42L43_AMP2_THERM_WARN_INT_SHIFT: c_int = 3;
+pub const CS42L43_AMP1_THERM_WARN_INT_MASK: c_uint = 0x00000004;
+pub const CS42L43_AMP1_THERM_WARN_INT_SHIFT: c_int = 2;
+pub const CS42L43_AMP2_SCDET_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_AMP2_SCDET_INT_SHIFT: c_int = 1;
+pub const CS42L43_AMP1_SCDET_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_AMP1_SCDET_INT_SHIFT: c_int = 0;
+// CS42L43_GPIO_INT
+pub const CS42L43_GPIO3_FALL_INT_MASK: c_uint = 0x00000020;
+pub const CS42L43_GPIO3_FALL_INT_SHIFT: c_int = 5;
+pub const CS42L43_GPIO3_RISE_INT_MASK: c_uint = 0x00000010;
+pub const CS42L43_GPIO3_RISE_INT_SHIFT: c_int = 4;
+pub const CS42L43_GPIO2_FALL_INT_MASK: c_uint = 0x00000008;
+pub const CS42L43_GPIO2_FALL_INT_SHIFT: c_int = 3;
+pub const CS42L43_GPIO2_RISE_INT_MASK: c_uint = 0x00000004;
+pub const CS42L43_GPIO2_RISE_INT_SHIFT: c_int = 2;
+pub const CS42L43_GPIO1_FALL_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_GPIO1_FALL_INT_SHIFT: c_int = 1;
+pub const CS42L43_GPIO1_RISE_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_GPIO1_RISE_INT_SHIFT: c_int = 0;
+// CS42L43_HPOUT_INT
+pub const CS42L43_HP_ILIMIT_INT_MASK: c_uint = 0x00000002;
+pub const CS42L43_HP_ILIMIT_INT_SHIFT: c_int = 1;
+pub const CS42L43_HP_LOADDET_DONE_INT_MASK: c_uint = 0x00000001;
+pub const CS42L43_HP_LOADDET_DONE_INT_SHIFT: c_int = 0;
+// CS42L43_BOOT_CONTROL
+pub const CS42L43_LOCK_HW_STS_MASK: c_uint = 0x00000002;
+pub const CS42L43_LOCK_HW_STS_SHIFT: c_int = 1;
+// CS42L43_BLOCK_EN
+pub const CS42L43_MCU_EN_MASK: c_uint = 0x00000001;
+pub const CS42L43_MCU_EN_SHIFT: c_int = 0;
+// CS42L43_SHUTTER_CONTROL
+pub const CS42L43_STATUS_SPK_SHUTTER_MUTE_MASK: c_uint = 0x00008000;
+pub const CS42L43_STATUS_SPK_SHUTTER_MUTE_SHIFT: c_int = 15;
+pub const CS42L43_SPK_SHUTTER_CFG_MASK: c_uint = 0x00000F00;
+pub const CS42L43_SPK_SHUTTER_CFG_SHIFT: c_int = 8;
+pub const CS42L43_STATUS_MIC_SHUTTER_MUTE_MASK: c_uint = 0x00000080;
+pub const CS42L43_STATUS_MIC_SHUTTER_MUTE_SHIFT: c_int = 7;
+pub const CS42L43_MIC_SHUTTER_CFG_MASK: c_uint = 0x0000000F;
+pub const CS42L43_MIC_SHUTTER_CFG_SHIFT: c_int = 0;
+// CS42L43_MCU_SW_REV
+pub const CS42L43_BIOS_SUBMINOR_REV_MASK: c_uint = 0xFF000000;
+pub const CS42L43_BIOS_SUBMINOR_REV_SHIFT: c_int = 24;
+pub const CS42L43_BIOS_MINOR_REV_MASK: c_uint = 0x00F00000;
+pub const CS42L43_BIOS_MINOR_REV_SHIFT: c_int = 20;
+pub const CS42L43_BIOS_MAJOR_REV_MASK: c_uint = 0x000F0000;
+pub const CS42L43_BIOS_MAJOR_REV_SHIFT: c_int = 16;
+pub const CS42L43_FW_SUBMINOR_REV_MASK: c_uint = 0x0000FF00;
+pub const CS42L43_FW_SUBMINOR_REV_SHIFT: c_int = 8;
+pub const CS42L43_FW_MINOR_REV_MASK: c_uint = 0x000000F0;
+pub const CS42L43_FW_MINOR_REV_SHIFT: c_int = 4;
+pub const CS42L43_FW_MAJOR_REV_MASK: c_uint = 0x0000000F;
+pub const CS42L43_FW_MAJOR_REV_SHIFT: c_int = 0;
+// CS42L43_NEED_CONFIGS
+pub const CS42L43_FW_PATCH_NEED_CFG_MASK: c_uint = 0x80000000;
+pub const CS42L43_FW_PATCH_NEED_CFG_SHIFT: c_int = 31;
+// CS42L43_FW_MISSION_CTRL_MM_CTRL_SELECTION
+pub const CS42L43_FW_MM_CTRL_MCU_SEL_MASK: c_uint = 0x00000001;
+pub const CS42L43_FW_MM_CTRL_MCU_SEL_SHIFT: c_int = 0;
+// CS42L43_FW_MISSION_CTRL_MM_MCU_CFG_REG
+pub const CS42L43_FW_MISSION_CTRL_MM_MCU_CFG_DISABLE_VAL: c_uint = 0xF05AA50F;
+// CS42L43B VARIANT REGISTERS
+pub const CS42L43B_DEVID_VAL: c_uint = 0x0042A43B;
+pub const CS42L43B_DECIM_VOL_CTRL_CH1_CH2: c_uint = 0x00008280;
+pub const CS42L43B_DECIM_VOL_CTRL_CH3_CH4: c_uint = 0x00008284;
+pub const CS42L43B_DECIM_VOL_CTRL_CH5_CH6: c_uint = 0x00008290;
+pub const CS42L43B_DECIM_VOL_CTRL_UPDATE: c_uint = 0x0000829C;
+pub const CS42L43B_DECIM_HPF_WNF_CTRL5: c_uint = 0x000082A0;
+pub const CS42L43B_DECIM_HPF_WNF_CTRL6: c_uint = 0x000082A4;
+pub const CS42L43B_SWIRE_DP3_CH3_INPUT: c_uint = 0x0000C320;
+pub const CS42L43B_SWIRE_DP3_CH4_INPUT: c_uint = 0x0000C330;
+pub const CS42L43B_SWIRE_DP4_CH3_INPUT: c_uint = 0x0000C340;
+pub const CS42L43B_SWIRE_DP4_CH4_INPUT: c_uint = 0x0000C350;
+pub const CS42L43B_ISRC1DEC3_INPUT1: c_uint = 0x0000C780;
+pub const CS42L43B_ISRC1DEC4_INPUT1: c_uint = 0x0000C790;
+pub const CS42L43B_ISRC2DEC3_INPUT1: c_uint = 0x0000C7A0;
+pub const CS42L43B_ISRC2DEC4_INPUT1: c_uint = 0x0000C7B0;
+pub const CS42L43B_FW_MISSION_CTRL_NEED_CONFIGS: c_uint = 0x00117E00;
+pub const CS42L43B_FW_MISSION_CTRL_HAVE_CONFIGS: c_uint = 0x00117E04;
+pub const CS42L43B_FW_MISSION_CTRL_PATCH_START_ADDR_REG: c_uint = 0x00117E08;
+pub const CS42L43B_FW_MISSION_CTRL_MM_CTRL_SELECTION: c_uint = 0x00117E0C;
+pub const CS42L43B_FW_MISSION_CTRL_MM_MCU_CFG_REG: c_uint = 0x00117E10;
+pub const CS42L43B_MCU_SW_REV: c_uint = 0x00117314;
+pub const CS42L43B_PATCH_START_ADDR: c_uint = 0x00117318;
+pub const CS42L43B_CONFIG_SELECTION: c_uint = 0x0011731C;
+pub const CS42L43B_NEED_CONFIGS: c_uint = 0x00117320;
+pub const CS42L43B_BOOT_STATUS: c_uint = 0x00117330;
+pub const CS42L43B_FW_MISSION_CTRL_NEED_CONFIGS: c_uint = 0x00117E00;
+pub const CS42L43B_FW_MISSION_CTRL_HAVE_CONFIGS: c_uint = 0x00117E04;
+pub const CS42L43B_FW_MISSION_CTRL_PATCH_START_ADDR_REG: c_uint = 0x00117E08;
+pub const CS42L43B_FW_MISSION_CTRL_MM_CTRL_SELECTION: c_uint = 0x00117E0C;
+pub const CS42L43B_FW_MISSION_CTRL_MM_MCU_CFG_REG: c_uint = 0x00117E10;
+pub const CS42L43B_MCU_RAM_MAX: c_uint = 0x00117FFF;
+// CS42L43B_DECIM_DECIM_VOL_CTRL_CH5_CH6
+pub const CS42L43B_DECIM6_MUTE_MASK: c_uint = 0x80000000;
+pub const CS42L43B_DECIM6_MUTE_SHIFT: c_int = 31;
+pub const CS42L43B_DECIM6_VOL_MASK: c_uint = 0x3FC00000;
+pub const CS42L43B_DECIM6_VOL_SHIFT: c_int = 22;
+pub const CS42L43B_DECIM6_PATH1_VOL_FALL_RATE_MASK: c_uint = 0x00380000;
+pub const CS42L43B_DECIM6_PATH1_VOL_FALL_RATE_SHIFT: c_int = 19;
+pub const CS42L43B_DECIM6_PATH1_VOL_RISE_RATE_MASK: c_uint = 0x00070000;
+pub const CS42L43B_DECIM6_PATH1_VOL_RISE_RATE_SHIFT: c_int = 16;
+pub const CS42L43B_DECIM5_MUTE_MASK: c_uint = 0x00008000;
+pub const CS42L43B_DECIM5_MUTE_SHIFT: c_int = 15;
+pub const CS42L43B_DECIM5_VOL_MASK: c_uint = 0x00003FC0;
+pub const CS42L43B_DECIM5_VOL_SHIFT: c_int = 6;
+pub const CS42L43B_DECIM5_PATH1_VOL_FALL_RATE_MASK: c_uint = 0x00000038;
+pub const CS42L43B_DECIM5_PATH1_VOL_FALL_RATE_SHIFT: c_int = 3;
+pub const CS42L43B_DECIM5_PATH1_VOL_RISE_RATE_MASK: c_uint = 0x00000007;
+pub const CS42L43B_DECIM5_PATH1_VOL_RISE_RATE_SHIFT: c_int = 0;
+// CS42L43B_DECIM_VOL_CTRL_UPDATE
+pub const CS42L43B_DECIM6_PATH1_VOL_TRIG_MASK: c_uint = 0x00000800;
+pub const CS42L43B_DECIM6_PATH1_VOL_TRIG_SHIFT: c_int = 11;
+pub const CS42L43B_DECIM5_PATH1_VOL_TRIG_MASK: c_uint = 0x00000100;
+pub const CS42L43B_DECIM5_PATH1_VOL_TRIG_SHIFT: c_int = 8;
+pub const CS42L43B_DECIM4_VOL_UPDATE_MASK: c_uint = 0x00000020;
+pub const CS42L43B_DECIM4_VOL_UPDATE_SHIFT: c_int = 5;
+// CS42L43_ISRC1_CTRL..CS42L43_ISRC2_CTRL
+pub const CS42L43B_ISRC_DEC4_EN_MASK: c_uint = 0x00000008;
+pub const CS42L43B_ISRC_DEC4_EN_SHIFT: c_int = 3;
+pub const CS42L43B_ISRC_DEC4_EN_WIDTH: c_int = 1;
+pub const CS42L43B_ISRC_DEC3_EN_MASK: c_uint = 0x00000004;
+pub const CS42L43B_ISRC_DEC3_EN_SHIFT: c_int = 2;
+pub const CS42L43B_ISRC_DEC3_EN_WIDTH: c_int = 1;

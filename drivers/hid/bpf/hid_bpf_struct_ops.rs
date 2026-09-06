@@ -1,0 +1,326 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/hid/bpf/hid_bpf_struct_ops.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// HID-BPF support for Linux
+//
+// Copyright (c) 2024 Benjamin Tissoires
+//
+
+    static struct btf *hid_bpf_ops_btf;
+#[no_mangle]
+unsafe extern "C" fn hid_bpf_ops_init(btf: *mut btf) -> c_int {
+    static int hid_bpf_ops_init(struct btf *btf)
+    {
+    hid_bpf_ops_btf = btf;
+    return 0;
+    }
+    static bool hid_bpf_ops_is_valid_access(int off, int size,
+    enum bpf_access_type type,
+    const struct bpf_prog *prog,
+    struct bpf_insn_access_aux *info)
+    {
+    return bpf_tracing_btf_ctx_access(off, size, type, prog, info);
+    }
+    static int hid_bpf_ops_check_member(const struct btf_type *t,
+    const struct btf_member *member,
+    const struct bpf_prog *prog)
+    {
+    let mut moff: u32 = __btf_member_bit_offset(t, member) / 8;
+    switch (moff) {
+    case offsetof(struct hid_bpf_ops, hid_rdesc_fixup):
+    case offsetof(struct hid_bpf_ops, hid_hw_request):
+    case offsetof(struct hid_bpf_ops, hid_hw_output_report):
+    break;
+    default:
+    if (prog.sleepable)
+    return -EINVAL;
+    }
+    return 0;
+    }
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hid_bpf_offset_write_range {
+    pub struct_name: *const c_char,
+    pub struct_length: u32,
+    pub start: u32,
+    pub end: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hid_bpf_ctx__safe_trusted {
+    pub hid: *mut hid_device,
+}
+
+    static int hid_bpf_ops_btf_struct_access(struct bpf_verifier_log *log,
+    const struct bpf_reg_state *reg,
+    int off, int size)
+    {
+
+    {									\
+    .struct_name = #_name,						\
+    .struct_length = sizeof(struct _name),				\
+    .start = offsetof(struct _name, _field),			\
+    .end = offsetofend(struct _name, _field) - !!(_is_string),	\
+    }
+    const struct hid_bpf_offset_write_range write_ranges[] = {
+    WRITE_RANGE(hid_bpf_ctx, retval, false),
+    WRITE_RANGE(hid_device, name, true),
+    WRITE_RANGE(hid_device, uniq, true),
+    WRITE_RANGE(hid_device, phys, true),
+    };
+
+    const struct btf_type *state = core::ptr::null_mut();
+    const struct btf_type *t;
+    const char *cur = core::ptr::null_mut();
+    int i;
+    BTF_TYPE_EMIT(struct hid_bpf_ctx__safe_trusted);
+    t = btf_type_by_id(reg.btf, reg.btf_id);
+    for (i = 0; i < ARRAY_SIZE(write_ranges); i++) {
+    const struct hid_bpf_offset_write_range *write_range = &write_ranges[i];
+    s32 type_id;
+// we already found a writeable struct, but there is a
+// new one, let's break the loop.
+//
+    if (t == state && write_range.struct_name != cur)
+    break;
+// new struct to look for
+    if (write_range.struct_name != cur) {
+    type_id = btf_find_by_name_kind(reg.btf, write_range.struct_name,
+    BTF_KIND_STRUCT);
+    if (type_id < 0)
+    return -EINVAL;
+    state = btf_type_by_id(reg.btf, type_id);
+    }
+// this is not the struct we are looking for
+    if (t != state) {
+    cur = write_range.struct_name;
+    continue;
+    }
+// first time we see this struct, check for out of bounds
+    if (cur != write_range.struct_name &&
+    off + size > write_range.struct_length) {
+    bpf_log(log, "write access for struct %s at off %d with size %d\n",
+    write_range.struct_name, off, size);
+    return -EACCES;
+    }
+// now check if we are in our boundaries
+    if (off >= write_range.start && off + size <= write_range.end)
+    return NOT_INIT;
+    cur = write_range.struct_name;
+    }
+    if (t != state)
+    bpf_log(log, "write access to this struct is not supported\n");
+    else
+    bpf_log(log,
+    "write access at off %d with size %d on read-only part of %s\n",
+    off, size, cur);
+    return -EACCES;
+    }
+    static const struct bpf_verifier_ops hid_bpf_verifier_ops = {
+    .get_func_proto = bpf_base_func_proto,
+    .is_valid_access = hid_bpf_ops_is_valid_access,
+    .btf_struct_access = hid_bpf_ops_btf_struct_access,
+    };
+    static int hid_bpf_ops_init_member(const struct btf_type *t,
+    const struct btf_member *member,
+    void *kdata, const void *udata)
+    {
+    const struct hid_bpf_ops *uhid_bpf_ops;
+    struct hid_bpf_ops *khid_bpf_ops;
+    u32 moff;
+    uhid_bpf_ops = (const struct hid_bpf_ops *)udata;
+    khid_bpf_ops = (struct hid_bpf_ops *)kdata;
+    moff = __btf_member_bit_offset(t, member) / 8;
+    switch (moff) {
+    case offsetof(struct hid_bpf_ops, hid_id):
+// For hid_id and flags fields, this function has to copy it
+// and return 1 to indicate that the data has been handled by
+// the struct_ops type, or the verifier will reject the map if
+// the value of those fields is not zero.
+//
+    khid_bpf_ops.hid_id = uhid_bpf_ops.hid_id;
+    return 1;
+    case offsetof(struct hid_bpf_ops, flags):
+    if (uhid_bpf_ops.flags & ~BPF_F_BEFORE)
+    return -EINVAL;
+    khid_bpf_ops.flags = uhid_bpf_ops.flags;
+    return 1;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn hid_bpf_reg(kdata: *mut c_void, link: *mut bpf_link) -> c_int {
+    static int hid_bpf_reg(void *kdata, struct bpf_link *link)
+    {
+    struct hid_bpf_ops *ops = kdata;
+    struct hid_device *hdev;
+    int count, err = 0;
+// prevent multiple attach of the same struct_ops
+    if (ops.hdev)
+    return -EINVAL;
+    hdev = hid_get_device(ops.hid_id);
+    if (IS_ERR(hdev))
+    return PTR_ERR(hdev);
+    ops.hdev = hdev;
+    mutex_lock(&hdev.bpf.prog_list_lock);
+    count = list_count_nodes(&hdev.bpf.prog_list);
+    if (count >= HID_BPF_MAX_PROGS_PER_DEV) {
+    err = -E2BIG;
+    goto out_unlock;
+    }
+    if (ops.hid_rdesc_fixup) {
+    if (hdev.bpf.rdesc_ops) {
+    err = -EINVAL;
+    goto out_unlock;
+    }
+    hdev.bpf.rdesc_ops = ops;
+    }
+    if (ops.hid_device_event) {
+    err = hid_bpf_allocate_event_data(hdev);
+    if (err)
+    goto out_unlock;
+    }
+    if (ops.flags & BPF_F_BEFORE)
+    list_add_rcu(&ops.list, &hdev.bpf.prog_list);
+    else
+    list_add_tail_rcu(&ops.list, &hdev.bpf.prog_list);
+    synchronize_srcu(&hdev.bpf.srcu);
+    out_unlock:
+    mutex_unlock(&hdev.bpf.prog_list_lock);
+    if (err) {
+    if (hdev.bpf.rdesc_ops == ops)
+    hdev.bpf.rdesc_ops = core::ptr::null_mut();
+    hid_put_device(hdev);
+    } else if (ops.hid_rdesc_fixup) {
+    hid_bpf_reconnect(hdev);
+    }
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn hid_bpf_unreg(kdata: *mut c_void, link: *mut bpf_link) {
+    static void hid_bpf_unreg(void *kdata, struct bpf_link *link)
+    {
+    struct hid_bpf_ops *ops = kdata;
+    struct hid_device *hdev;
+    let mut reconnect: bool = false;
+    hdev = ops.hdev;
+// check if __hid_bpf_ops_destroy_device() has been called
+    if (!hdev)
+    return;
+    mutex_lock(&hdev.bpf.prog_list_lock);
+    if (!ops.hdev) {
+    mutex_unlock(&hdev.bpf.prog_list_lock);
+    return;
+    }
+    list_del_rcu(&ops.list);
+    synchronize_srcu(&hdev.bpf.srcu);
+    ops.hdev = core::ptr::null_mut();
+    reconnect = hdev.bpf.rdesc_ops == ops;
+    if (reconnect)
+    hdev.bpf.rdesc_ops = core::ptr::null_mut();
+    mutex_unlock(&hdev.bpf.prog_list_lock);
+    if (reconnect)
+    hid_bpf_reconnect(hdev);
+    hid_put_device(hdev);
+    }
+#[no_mangle]
+unsafe extern "C" fn __hid_bpf_device_event(ctx: *mut hid_bpf_ctx, type: enum hid_report_type, source: u64) -> c_int {
+    static int __hid_bpf_device_event(struct hid_bpf_ctx *ctx, enum hid_report_type type, u64 source)
+    {
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn __hid_bpf_rdesc_fixup(ctx: *mut hid_bpf_ctx) -> c_int {
+    static int __hid_bpf_rdesc_fixup(struct hid_bpf_ctx *ctx)
+    {
+    return 0;
+    }
+    static int __hid_bpf_hw_request(struct hid_bpf_ctx *ctx, unsigned char reportnum,
+    enum hid_report_type rtype, enum hid_class_request reqtype,
+    u64 source)
+    {
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn __hid_bpf_hw_output_report(ctx: *mut hid_bpf_ctx, source: u64) -> c_int {
+    static int __hid_bpf_hw_output_report(struct hid_bpf_ctx *ctx, u64 source)
+    {
+    return 0;
+    }
+    static struct hid_bpf_ops __bpf_hid_bpf_ops = {
+    .hid_device_event = __hid_bpf_device_event,
+    .hid_rdesc_fixup = __hid_bpf_rdesc_fixup,
+    .hid_hw_request = __hid_bpf_hw_request,
+    .hid_hw_output_report = __hid_bpf_hw_output_report,
+    };
+    static struct bpf_struct_ops bpf_hid_bpf_ops = {
+    .verifier_ops = &hid_bpf_verifier_ops,
+    .init = hid_bpf_ops_init,
+    .check_member = hid_bpf_ops_check_member,
+    .init_member = hid_bpf_ops_init_member,
+    .reg = hid_bpf_reg,
+    .unreg = hid_bpf_unreg,
+    .name = "hid_bpf_ops",
+    .cfi_stubs = &__bpf_hid_bpf_ops,
+    .owner = THIS_MODULE,
+    };
+#[no_mangle]
+pub unsafe extern "C" fn __hid_bpf_ops_destroy_device(hdev: *mut hid_device) {
+    void __hid_bpf_ops_destroy_device(struct hid_device *hdev)
+    {
+    struct hid_bpf_ops *e;
+    let mut count: c_int = 0;
+    mutex_lock(&hdev.bpf.prog_list_lock);
+    list_for_each_entry(e, &hdev.bpf.prog_list, list) {
+    e.hdev = core::ptr::null_mut();
+    count++;
+    }
+    mutex_unlock(&hdev.bpf.prog_list_lock);
+    while (count--)
+    hid_put_device(hdev);
+    }
+#[no_mangle]
+unsafe extern "C" fn hid_bpf_struct_ops_init() -> int __init {
+    static int __init hid_bpf_struct_ops_init(void)
+    {
+    return register_bpf_struct_ops(&bpf_hid_bpf_ops, hid_bpf_ops);
+    }
+    late_initcall(hid_bpf_struct_ops_init);

@@ -1,0 +1,116 @@
+//! Automatically rewritten from C to Rust
+//! Source: net/ceph/msgpool.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+    static void *msgpool_alloc(gfp_t gfp_mask, void *arg)
+    {
+    struct ceph_msgpool *pool = arg;
+    struct ceph_msg *msg;
+    msg = ceph_msg_new2(pool.type, pool.front_len, pool.max_data_items,
+    gfp_mask, true);
+    if (!msg) {
+    dout("msgpool_alloc %s failed\n", pool.name);
+    } else {
+    dout("msgpool_alloc %s %p\n", pool.name, msg);
+    msg.pool = pool;
+    }
+    return msg;
+    }
+#[no_mangle]
+unsafe extern "C" fn msgpool_free(element: *mut c_void, arg: *mut c_void) {
+    static void msgpool_free(void *element, void *arg)
+    {
+    struct ceph_msgpool *pool = arg;
+    struct ceph_msg *msg = element;
+    dout("msgpool_release %s %p\n", pool.name, msg);
+    msg.pool = core::ptr::null_mut();
+    ceph_msg_put(msg);
+    }
+    int ceph_msgpool_init(struct ceph_msgpool *pool, int type,
+    int front_len, int max_data_items, int size,
+    const char *name)
+    {
+    dout("msgpool %s init\n", name);
+    pool.type = type;
+    pool.front_len = front_len;
+    pool.max_data_items = max_data_items;
+    pool.pool = mempool_create(size, msgpool_alloc, msgpool_free, pool);
+    if (!pool.pool)
+    return -ENOMEM;
+    pool.name = name;
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ceph_msgpool_destroy(pool: *mut ceph_msgpool) {
+    void ceph_msgpool_destroy(struct ceph_msgpool *pool)
+    {
+    dout("msgpool %s destroy\n", pool.name);
+    mempool_destroy(pool.pool);
+    }
+    struct ceph_msg *ceph_msgpool_get(struct ceph_msgpool *pool, int front_len,
+    int max_data_items)
+    {
+    struct ceph_msg *msg;
+    if (front_len > pool.front_len ||
+    max_data_items > pool.max_data_items) {
+    pr_warn_ratelimited("%s need %d/%d, pool %s has %d/%d\n",
+    __func__, front_len, max_data_items, pool.name,
+    pool.front_len, pool.max_data_items);
+    WARN_ON_ONCE(1);
+// try to alloc a fresh message
+    return ceph_msg_new2(pool.type, front_len, max_data_items,
+    GFP_NOFS, false);
+    }
+    msg = mempool_alloc(pool.pool, GFP_NOFS);
+    dout("msgpool_get %s %p\n", pool.name, msg);
+    return msg;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ceph_msgpool_put(pool: *mut ceph_msgpool, msg: *mut ceph_msg) {
+    void ceph_msgpool_put(struct ceph_msgpool *pool, struct ceph_msg *msg)
+    {
+    dout("msgpool_put %s %p\n", pool.name, msg);
+// reset msg front_len; user may have changed it
+    msg.front.iov_len = pool.front_len;
+    msg.hdr.front_len = cpu_to_le32(pool.front_len);
+    msg.data_length = 0;
+    msg.num_data_items = 0;
+    kref_init(&msg.kref);  /* retake single ref */
+    mempool_free(msg, pool.pool);
+    }

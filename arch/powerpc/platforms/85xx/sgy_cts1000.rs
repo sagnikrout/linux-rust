@@ -1,0 +1,162 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/powerpc/platforms/85xx/sgy_cts1000.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Servergy CTS-1000 Setup
+//
+// Maintained by Ben Collins <ben.c@servergy.com>
+//
+// Copyright 2012 by Servergy, Inc.
+//
+
+    static struct gpio_desc *halt_gpio;
+    static int halt_irq;
+    static const struct of_device_id child_match[] = {
+    {
+    .compatible = "sgy,gpio-halt",
+    },
+    {},
+    };
+#[no_mangle]
+unsafe extern "C" fn gpio_halt_wfn(work: *mut work_struct) {
+    static void gpio_halt_wfn(struct work_struct *work)
+    {
+// Likely wont return
+    orderly_poweroff(true);
+    }
+    static DECLARE_WORK(gpio_halt_wq, gpio_halt_wfn);
+#[no_mangle]
+unsafe extern "C" fn gpio_halt_cb() -> void __noreturn {
+    static void __noreturn gpio_halt_cb(void)
+    {
+    pr_info("triggering GPIO.\n");
+// Probably wont return
+    gpiod_set_value(halt_gpio, 1);
+    panic("Halt failed\n");
+    }
+// This IRQ means someone pressed the power button and it is waiting for us
+// to handle the shutdown/poweroff.
+#[no_mangle]
+unsafe extern "C" fn gpio_halt_irq(irq: c_int, __data: *mut c_void) -> irqreturn_t {
+    static irqreturn_t gpio_halt_irq(int irq, void *__data)
+    {
+    struct platform_device *pdev = __data;
+    dev_info(&pdev.dev, "scheduling shutdown due to power button IRQ\n");
+    schedule_work(&gpio_halt_wq);
+    return IRQ_HANDLED;
+    };
+    static int __gpio_halt_probe(struct platform_device *pdev,
+    struct device_node *halt_node)
+    {
+    int err;
+    halt_gpio = fwnode_gpiod_get_index(of_fwnode_handle(halt_node),
+    core::ptr::null_mut(), 0, GPIOD_OUT_LOW, "gpio-halt");
+    err = PTR_ERR_OR_ZERO(halt_gpio);
+    if (err) {
+    dev_err(&pdev.dev, "failed to request halt GPIO: %d\n", err);
+    return err;
+    }
+// Now get the IRQ which tells us when the power button is hit
+    halt_irq = irq_of_parse_and_map(halt_node, 0);
+    err = request_irq(halt_irq, gpio_halt_irq,
+    IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
+    "gpio-halt", pdev);
+    if (err) {
+    dev_err(&pdev.dev, "failed to request IRQ %d: %d\n",
+    halt_irq, err);
+    gpiod_put(halt_gpio);
+    halt_gpio = core::ptr::null_mut();
+    return err;
+    }
+// Register our halt function
+    ppc_md.halt = gpio_halt_cb;
+    pm_power_off = gpio_halt_cb;
+    dev_info(&pdev.dev, "registered halt GPIO, irq: %d\n", halt_irq);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn gpio_halt_probe(pdev: *mut platform_device) -> c_int {
+    static int gpio_halt_probe(struct platform_device *pdev)
+    {
+    struct device_node *halt_node;
+    int ret;
+    if (!pdev.dev.of_node)
+    return -ENODEV;
+// If there's no matching child, this isn't really an error
+    halt_node = of_find_matching_node(pdev.dev.of_node, child_match);
+    if (!halt_node)
+    return -ENODEV;
+    ret = __gpio_halt_probe(pdev, halt_node);
+    of_node_put(halt_node);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn gpio_halt_remove(pdev: *mut platform_device) {
+    static void gpio_halt_remove(struct platform_device *pdev)
+    {
+    free_irq(halt_irq, pdev);
+    cancel_work_sync(&gpio_halt_wq);
+    ppc_md.halt = core::ptr::null_mut();
+    pm_power_off = core::ptr::null_mut();
+    gpiod_put(halt_gpio);
+    halt_gpio = core::ptr::null_mut();
+    }
+    static const struct of_device_id gpio_halt_match[] = {
+// We match on the gpio bus itself and scan the children since they
+// wont be matched against us. We know the bus wont match until it
+// has been registered too.
+    {
+    .compatible = "fsl,qoriq-gpio",
+    },
+    {},
+    };
+    MODULE_DEVICE_TABLE(of, gpio_halt_match);
+    static struct platform_driver gpio_halt_driver = {
+    .driver = {
+    .name		= "gpio-halt",
+    .of_match_table = gpio_halt_match,
+    },
+    .probe		= gpio_halt_probe,
+    .remove		= gpio_halt_remove,
+    };
+    module_platform_driver(gpio_halt_driver);
+    MODULE_DESCRIPTION("Driver to support GPIO triggered system halt for Servergy CTS-1000 Systems.");
+    MODULE_VERSION("1.0");
+    MODULE_AUTHOR("Ben Collins <ben.c@servergy.com>");
+    MODULE_LICENSE("GPL");

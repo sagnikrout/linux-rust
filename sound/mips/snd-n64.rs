@@ -1,0 +1,344 @@
+//! Automatically rewritten from C to Rust
+//! Source: sound/mips/snd-n64.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Sound driver for Nintendo 64.
+//
+// Copyright 2021 Lauri Kasanen
+//
+
+    MODULE_AUTHOR("Lauri Kasanen <cand@gmx.com>");
+    MODULE_DESCRIPTION("N64 Audio");
+    MODULE_LICENSE("GPL");
+pub const AI_NTSC_DACRATE: c_int = 48681812;
+
+pub const AI_ADDR_REG: c_int = 0;
+pub const AI_LEN_REG: c_int = 1;
+pub const AI_CONTROL_REG: c_int = 2;
+pub const AI_STATUS_REG: c_int = 3;
+pub const AI_RATE_REG: c_int = 4;
+pub const AI_BITCLOCK_REG: c_int = 5;
+pub const MI_INTR_REG: c_int = 2;
+pub const MI_MASK_REG: c_int = 3;
+pub const MI_INTR_AI: c_uint = 0x04;
+pub const MI_MASK_CLR_AI: c_uint = 0x0010;
+pub const MI_MASK_SET_AI: c_uint = 0x0020;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct n64audio {
+    pub ai_reg_base: *mut u32 __iomem,
+    pub mi_reg_base: *mut u32 __iomem,
+    pub ring_base: *mut c_void,
+    pub ring_base_dma: dma_addr_t,
+    pub card: *mut snd_card,
+    struct {
+    pub substream: *mut snd_pcm_substream,
+    pub nextpos: int pos,,
+    pub writesize: u32,
+    pub bufsize: u32,
+    pub lock: spinlock_t,
+    pub chan: },
+}
+
+#[no_mangle]
+unsafe extern "C" fn n64audio_write_reg(priv: *mut n64audio, reg: u8, value: u32) {
+    static void n64audio_write_reg(struct n64audio *priv, const u8 reg, const u32 value)
+    {
+    writel(value, priv.ai_reg_base + reg);
+    }
+#[no_mangle]
+unsafe extern "C" fn n64mi_write_reg(priv: *mut n64audio, reg: u8, value: u32) {
+    static void n64mi_write_reg(struct n64audio *priv, const u8 reg, const u32 value)
+    {
+    writel(value, priv.mi_reg_base + reg);
+    }
+#[no_mangle]
+unsafe extern "C" fn n64mi_read_reg(priv: *mut n64audio, reg: u8) -> u32 {
+    static u32 n64mi_read_reg(struct n64audio *priv, const u8 reg)
+    {
+    return readl(priv.mi_reg_base + reg);
+    }
+#[no_mangle]
+unsafe extern "C" fn n64audio_push(priv: *mut n64audio) {
+    static void n64audio_push(struct n64audio *priv)
+    {
+    struct snd_pcm_runtime *runtime = priv.chan.substream.runtime;
+    u32 count;
+    guard(spinlock_irqsave)(&priv.chan.lock);
+    count = priv.chan.writesize;
+    memcpy(priv.ring_base + priv.chan.nextpos,
+    runtime.dma_area + priv.chan.nextpos, count);
+//
+// The hw registers are double-buffered, and the IRQ fires essentially
+// one period behind. The core only allows one period's distance, so we
+// keep a private DMA buffer to afford two.
+//
+    n64audio_write_reg(priv, AI_ADDR_REG, priv.ring_base_dma + priv.chan.nextpos);
+    barrier();
+    n64audio_write_reg(priv, AI_LEN_REG, count);
+    priv.chan.nextpos += count;
+    priv.chan.nextpos %= priv.chan.bufsize;
+    runtime.delay = runtime.period_size;
+    }
+#[no_mangle]
+unsafe extern "C" fn n64audio_isr(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
+    static irqreturn_t n64audio_isr(int irq, void *dev_id)
+    {
+    struct n64audio *priv = dev_id;
+    let mut intrs: u32 = n64mi_read_reg(priv, MI_INTR_REG);
+// Check it's ours
+    if (!(intrs & MI_INTR_AI))
+    return IRQ_NONE;
+    n64audio_write_reg(priv, AI_STATUS_REG, 1);
+    if (priv.chan.substream && snd_pcm_running(priv.chan.substream)) {
+    scoped_guard(spinlock_irqsave, &priv.chan.lock) {
+    priv.chan.pos = priv.chan.nextpos;
+    }
+    snd_pcm_period_elapsed(priv.chan.substream);
+    if (priv.chan.substream && snd_pcm_running(priv.chan.substream))
+    n64audio_push(priv);
+    }
+    return IRQ_HANDLED;
+    }
+    static const struct snd_pcm_hardware n64audio_pcm_hw = {
+    .info = (SNDRV_PCM_INFO_MMAP |
+    SNDRV_PCM_INFO_MMAP_VALID |
+    SNDRV_PCM_INFO_INTERLEAVED |
+    SNDRV_PCM_INFO_BLOCK_TRANSFER),
+    .formats =          SNDRV_PCM_FMTBIT_S16_BE,
+    .rates =            SNDRV_PCM_RATE_8000_48000,
+    .rate_min =         8000,
+    .rate_max =         48000,
+    .channels_min =     2,
+    .channels_max =     2,
+    .buffer_bytes_max = 32768,
+    .period_bytes_min = 1024,
+    .period_bytes_max = 32768,
+    .periods_min =      3,
+// 3 periods lets the double-buffering hw read one buffer behind safely
+    .periods_max =      128,
+    };
+    static int hw_rule_period_size(struct snd_pcm_hw_params *params,
+    struct snd_pcm_hw_rule *rule)
+    {
+    struct snd_interval *c = hw_param_interval(params,
+    SNDRV_PCM_HW_PARAM_PERIOD_SIZE);
+    let mut changed: c_int = 0;
+//
+// The DMA unit has errata on (start + len) & 0x3fff == 0x2000.
+// This constraint makes sure that the period size is not a power of two,
+// which combined with dma_alloc_coherent aligning the buffer to the largest
+// PoT <= size guarantees it won't be hit.
+//
+    if (is_power_of_2(c.min)) {
+    c.min += 2;
+    changed = 1;
+    }
+    if (is_power_of_2(c.max)) {
+    c.max -= 2;
+    changed = 1;
+    }
+    if (snd_interval_checkempty(c)) {
+    c.empty = 1;
+    return -EINVAL;
+    }
+    return changed;
+    }
+#[no_mangle]
+unsafe extern "C" fn n64audio_pcm_open(substream: *mut snd_pcm_substream) -> c_int {
+    static int n64audio_pcm_open(struct snd_pcm_substream *substream)
+    {
+    struct snd_pcm_runtime *runtime = substream.runtime;
+    int err;
+    runtime.hw = n64audio_pcm_hw;
+    err = snd_pcm_hw_constraint_integer(runtime, SNDRV_PCM_HW_PARAM_PERIODS);
+    if (err < 0)
+    return err;
+    err = snd_pcm_hw_constraint_step(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE, 2);
+    if (err < 0)
+    return err;
+    err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,
+    hw_rule_period_size, core::ptr::null_mut(), SNDRV_PCM_HW_PARAM_PERIOD_SIZE, -1);
+    if (err < 0)
+    return err;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn n64audio_pcm_prepare(substream: *mut snd_pcm_substream) -> c_int {
+    static int n64audio_pcm_prepare(struct snd_pcm_substream *substream)
+    {
+    struct snd_pcm_runtime *runtime = substream.runtime;
+    struct n64audio *priv = substream.pcm.private_data;
+    u32 rate;
+    rate = ((2 * AI_NTSC_DACRATE / runtime.rate) + 1) / 2 - 1;
+    n64audio_write_reg(priv, AI_RATE_REG, rate);
+    rate /= 66;
+    if (rate > 16)
+    rate = 16;
+    n64audio_write_reg(priv, AI_BITCLOCK_REG, rate - 1);
+    guard(spinlock_irq)(&priv.chan.lock);
+// Setup the pseudo-dma transfer pointers.
+    priv.chan.pos = 0;
+    priv.chan.nextpos = 0;
+    priv.chan.substream = substream;
+    priv.chan.writesize = snd_pcm_lib_period_bytes(substream);
+    priv.chan.bufsize = snd_pcm_lib_buffer_bytes(substream);
+    return 0;
+    }
+    static int n64audio_pcm_trigger(struct snd_pcm_substream *substream,
+    int cmd)
+    {
+    struct n64audio *priv = substream.pcm.private_data;
+    switch (cmd) {
+    case SNDRV_PCM_TRIGGER_START:
+    n64audio_push(substream.pcm.private_data);
+    n64audio_write_reg(priv, AI_CONTROL_REG, 1);
+    n64mi_write_reg(priv, MI_MASK_REG, MI_MASK_SET_AI);
+    break;
+    case SNDRV_PCM_TRIGGER_STOP:
+    n64audio_write_reg(priv, AI_CONTROL_REG, 0);
+    n64mi_write_reg(priv, MI_MASK_REG, MI_MASK_CLR_AI);
+    break;
+    default:
+    return -EINVAL;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn n64audio_pcm_pointer(substream: *mut snd_pcm_substream) -> snd_pcm_uframes_t {
+    static snd_pcm_uframes_t n64audio_pcm_pointer(struct snd_pcm_substream *substream)
+    {
+    struct n64audio *priv = substream.pcm.private_data;
+    return bytes_to_frames(substream.runtime,
+    priv.chan.pos);
+    }
+#[no_mangle]
+unsafe extern "C" fn n64audio_pcm_close(substream: *mut snd_pcm_substream) -> c_int {
+    static int n64audio_pcm_close(struct snd_pcm_substream *substream)
+    {
+    struct n64audio *priv = substream.pcm.private_data;
+    priv.chan.substream = core::ptr::null_mut();
+    return 0;
+    }
+    static const struct snd_pcm_ops n64audio_pcm_ops = {
+    .open =		n64audio_pcm_open,
+    .prepare =	n64audio_pcm_prepare,
+    .trigger =	n64audio_pcm_trigger,
+    .pointer =	n64audio_pcm_pointer,
+    .close =	n64audio_pcm_close,
+    };
+//
+// The target device is embedded and RAM-constrained. We save RAM
+// by initializing in __init code that gets dropped late in boot.
+// For the same reason there is no module or unloading support.
+//
+#[no_mangle]
+unsafe extern "C" fn n64audio_probe(pdev: *mut platform_device) -> int __init {
+    static int __init n64audio_probe(struct platform_device *pdev)
+    {
+    struct snd_card *card;
+    struct snd_pcm *pcm;
+    struct n64audio *priv;
+    int err, irq;
+    err = snd_card_new(&pdev.dev, SNDRV_DEFAULT_IDX1,
+    SNDRV_DEFAULT_STR1,
+    THIS_MODULE, sizeof(*priv), &card);
+    if (err < 0)
+    return err;
+    priv = card.private_data;
+    spin_lock_init(&priv.chan.lock);
+    priv.card = card;
+    priv.ring_base = dma_alloc_coherent(card.dev, 32 * 1024, &priv.ring_base_dma,
+    GFP_DMA|GFP_KERNEL);
+    if (!priv.ring_base) {
+    err = -ENOMEM;
+    goto fail_card;
+    }
+    priv.mi_reg_base = devm_platform_ioremap_resource(pdev, 0);
+    if (IS_ERR(priv.mi_reg_base)) {
+    err = PTR_ERR(priv.mi_reg_base);
+    goto fail_dma_alloc;
+    }
+    priv.ai_reg_base = devm_platform_ioremap_resource(pdev, 1);
+    if (IS_ERR(priv.ai_reg_base)) {
+    err = PTR_ERR(priv.ai_reg_base);
+    goto fail_dma_alloc;
+    }
+    err = snd_pcm_new(card, "N64 Audio", 0, 1, 0, &pcm);
+    if (err < 0)
+    goto fail_dma_alloc;
+    pcm.private_data = priv;
+    strscpy(pcm.name, "N64 Audio");
+    snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_PLAYBACK, &n64audio_pcm_ops);
+    snd_pcm_set_managed_buffer_all(pcm, SNDRV_DMA_TYPE_VMALLOC, card.dev, 0, 0);
+    strscpy(card.driver, "N64 Audio");
+    strscpy(card.shortname, "N64 Audio");
+    strscpy(card.longname, "N64 Audio");
+    irq = platform_get_irq(pdev, 0);
+    if (irq < 0) {
+    err = -EINVAL;
+    goto fail_dma_alloc;
+    }
+    if (devm_request_irq(&pdev.dev, irq, n64audio_isr,
+    IRQF_SHARED, "N64 Audio", priv)) {
+    err = -EBUSY;
+    goto fail_dma_alloc;
+    }
+    err = snd_card_register(card);
+    if (err < 0)
+    goto fail_dma_alloc;
+    return 0;
+    fail_dma_alloc:
+    dma_free_coherent(card.dev, 32 * 1024, priv.ring_base, priv.ring_base_dma);
+    fail_card:
+    snd_card_free(card);
+    return err;
+    }
+    static struct platform_driver n64audio_driver = {
+    .driver = {
+    .name = "n64audio",
+    },
+    };
+#[no_mangle]
+unsafe extern "C" fn n64audio_init() -> int __init {
+    static int __init n64audio_init(void)
+    {
+    return platform_driver_probe(&n64audio_driver, n64audio_probe);
+    }
+    module_init(n64audio_init);

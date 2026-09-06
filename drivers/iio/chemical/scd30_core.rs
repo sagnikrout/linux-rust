@@ -1,0 +1,678 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/iio/chemical/scd30_core.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Sensirion SCD30 carbon dioxide sensor core driver
+//
+// Copyright (c) 2020 Tomasz Duszynski <tduszyns@gmail.com>
+//
+
+pub const SCD30_PRESSURE_COMP_MIN_MBAR: c_int = 700;
+pub const SCD30_PRESSURE_COMP_MAX_MBAR: c_int = 1400;
+pub const SCD30_PRESSURE_COMP_DEFAULT: c_int = 1013;
+pub const SCD30_MEAS_INTERVAL_MIN_S: c_int = 2;
+pub const SCD30_MEAS_INTERVAL_MAX_S: c_int = 1800;
+
+pub const SCD30_FRC_MIN_PPM: c_int = 400;
+pub const SCD30_FRC_MAX_PPM: c_int = 2000;
+pub const SCD30_TEMP_OFFSET_MAX: c_int = 655360;
+pub const SCD30_EXTRA_TIMEOUT_PER_S: c_int = 250;
+// Floating point arithmetic macros
+
+    enum {
+    SCD30_CONC,
+    SCD30_TEMP,
+    SCD30_HR,
+    };
+#[no_mangle]
+unsafe extern "C" fn scd30_command_write(state: *mut scd30_state, cmd: enum scd30_cmd, arg: u16) -> c_int {
+    static int scd30_command_write(struct scd30_state *state, enum scd30_cmd cmd, u16 arg)
+    {
+    return state.command(state, cmd, arg, core::ptr::null_mut(), 0);
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_command_read(state: *mut scd30_state, cmd: enum scd30_cmd, val: *mut u16) -> c_int {
+    static int scd30_command_read(struct scd30_state *state, enum scd30_cmd cmd, u16 *val)
+    {
+    __be16 tmp;
+    int ret;
+    ret = state.command(state, cmd, 0, &tmp, sizeof(tmp));
+// val = be16_to_cpup(&tmp);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_reset(state: *mut scd30_state) -> c_int {
+    static int scd30_reset(struct scd30_state *state)
+    {
+    int ret;
+    u16 val;
+    ret = scd30_command_write(state, CMD_RESET, 0);
+    if (ret)
+    return ret;
+// sensor boots up within 2 secs
+    msleep(2000);
+//
+// Power-on-reset causes sensor to produce some glitch on i2c bus and
+// some controllers end up in error state. Try to recover by placing
+// any data on the bus.
+//
+    scd30_command_read(state, CMD_MEAS_READY, &val);
+    return 0;
+    }
+// simplified float to fixed point conversion with a scaling factor of 0.01
+#[no_mangle]
+unsafe extern "C" fn scd30_float_to_fp(float32: c_int) -> c_int {
+    static int scd30_float_to_fp(int float32)
+    {
+    int fraction, shift, sign;
+    let mut mantissa: c_int = FIELD_GET(SCD30_FLOAT_MANTISSA_MSK, float32);
+    let mut exp: c_int = FIELD_GET(SCD30_FLOAT_EXP_MSK, float32);
+    if (float32 & SCD30_FLOAT_SIGN_MSK)
+    sign = -1;
+    else
+    sign = 1;
+// special case 0
+    if (!exp && !mantissa)
+    return 0;
+    exp -= 127;
+    if (exp < 0) {
+    exp = -exp;
+// return values ranging from 1 to 99
+    return sign * ((((BIT(23) + mantissa) * 100) >> 23) >> exp);
+    }
+// return values starting at 100
+    shift = 23 - exp;
+    float32 = BIT(exp) + (mantissa >> shift);
+    fraction = mantissa & GENMASK(shift - 1, 0);
+    return sign * (float32 * 100 + ((fraction * 100) >> shift));
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_read_meas(state: *mut scd30_state) -> c_int {
+    static int scd30_read_meas(struct scd30_state *state)
+    {
+    int i, ret;
+    ret = state.command(state, CMD_READ_MEAS, 0, state.meas, sizeof(state.meas));
+    if (ret)
+    return ret;
+    be32_to_cpu_array(state.meas, (__be32 *)state.meas, ARRAY_SIZE(state.meas));
+    for (i = 0; i < ARRAY_SIZE(state.meas); i++)
+    state.meas[i] = scd30_float_to_fp(state.meas[i]);
+//
+// co2 is left unprocessed while temperature and humidity are scaled
+// to milli deg C and milli percent respectively.
+//
+    state.meas[SCD30_TEMP] *= 10;
+    state.meas[SCD30_HR] *= 10;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_wait_meas_irq(state: *mut scd30_state) -> c_int {
+    static int scd30_wait_meas_irq(struct scd30_state *state)
+    {
+    int ret, timeout;
+    reinit_completion(&state.meas_ready);
+    enable_irq(state.irq);
+    timeout = msecs_to_jiffies(state.meas_interval * (1000 + SCD30_EXTRA_TIMEOUT_PER_S));
+    ret = wait_for_completion_interruptible_timeout(&state.meas_ready, timeout);
+    if (ret > 0)
+    ret = 0;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !ret) -> else {
+    else if (!ret)
+    ret = -ETIMEDOUT;
+    disable_irq(state.irq);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_wait_meas_poll(state: *mut scd30_state) -> c_int {
+    static int scd30_wait_meas_poll(struct scd30_state *state)
+    {
+    let mut timeout: c_int = state.meas_interval * SCD30_EXTRA_TIMEOUT_PER_S, tries = 5;
+    do {
+    int ret;
+    u16 val;
+    ret = scd30_command_read(state, CMD_MEAS_READY, &val);
+    if (ret)
+    return -EIO;
+// new measurement available
+    if (val)
+    break;
+    msleep_interruptible(timeout);
+    } while (--tries);
+    return tries ? 0 : -ETIMEDOUT;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_read_poll(state: *mut scd30_state) -> c_int {
+    static int scd30_read_poll(struct scd30_state *state)
+    {
+    int ret;
+    ret = scd30_wait_meas_poll(state);
+    if (ret)
+    return ret;
+    return scd30_read_meas(state);
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_read(state: *mut scd30_state) -> c_int {
+    static int scd30_read(struct scd30_state *state)
+    {
+    if (state.irq > 0)
+    return scd30_wait_meas_irq(state);
+    return scd30_read_poll(state);
+    }
+    static int scd30_read_raw(struct iio_dev *indio_dev, struct iio_chan_spec const *chan,
+    int *val, int *val2, long mask)
+    {
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    u16 tmp;
+    guard(mutex)(&state.lock);
+    switch (mask) {
+    case IIO_CHAN_INFO_RAW:
+    case IIO_CHAN_INFO_PROCESSED:
+    if (chan.output) {
+// val = state->pressure_comp;
+    return IIO_VAL_INT;
+    }
+    if (!iio_device_claim_direct(indio_dev))
+    return -EBUSY;
+    ret = scd30_read(state);
+    if (ret) {
+    iio_device_release_direct(indio_dev);
+    return ret;
+    }
+// val = state->meas[chan->address];
+    iio_device_release_direct(indio_dev);
+    return IIO_VAL_INT;
+    case IIO_CHAN_INFO_SCALE:
+// val = 0;
+// val2 = 1;
+    return IIO_VAL_INT_PLUS_MICRO;
+    case IIO_CHAN_INFO_SAMP_FREQ:
+    ret = scd30_command_read(state, CMD_MEAS_INTERVAL, &tmp);
+    if (ret)
+    return ret;
+// val = 0;
+// val2 = 1000000000 / tmp;
+    return IIO_VAL_INT_PLUS_NANO;
+    case IIO_CHAN_INFO_CALIBBIAS:
+    ret = scd30_command_read(state, CMD_TEMP_OFFSET, &tmp);
+    if (ret)
+    return ret;
+// val = tmp;
+    return IIO_VAL_INT;
+    default:
+    return -EINVAL;
+    }
+    }
+    static int scd30_write_raw(struct iio_dev *indio_dev, struct iio_chan_spec const *chan,
+    int val, int val2, long mask)
+    {
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    guard(mutex)(&state.lock);
+    switch (mask) {
+    case IIO_CHAN_INFO_SAMP_FREQ:
+    if (val || !val2)
+    return -EINVAL;
+    val = 1000000000 / val2;
+    if (val < SCD30_MEAS_INTERVAL_MIN_S || val > SCD30_MEAS_INTERVAL_MAX_S)
+    return -EINVAL;
+    ret = scd30_command_write(state, CMD_MEAS_INTERVAL, val);
+    if (ret)
+    return ret;
+    state.meas_interval = val;
+    return 0;
+    case IIO_CHAN_INFO_RAW:
+    switch (chan.type) {
+    case IIO_PRESSURE:
+    if (val < SCD30_PRESSURE_COMP_MIN_MBAR ||
+    val > SCD30_PRESSURE_COMP_MAX_MBAR)
+    return -EINVAL;
+    ret = scd30_command_write(state, CMD_START_MEAS, val);
+    if (ret)
+    return ret;
+    state.pressure_comp = val;
+    return 0;
+    default:
+    return -EINVAL;
+    }
+    case IIO_CHAN_INFO_CALIBBIAS:
+    if (val < 0 || val > SCD30_TEMP_OFFSET_MAX)
+    return -EINVAL;
+//
+// Manufacturer does not explicitly specify min/max sensible
+// values hence check is omitted for simplicity.
+//
+    return scd30_command_write(state, CMD_TEMP_OFFSET / 10, val);
+    default:
+    return -EINVAL;
+    }
+    }
+    static int scd30_write_raw_get_fmt(struct iio_dev *indio_dev, struct iio_chan_spec const *chan,
+    long mask)
+    {
+    switch (mask) {
+    case IIO_CHAN_INFO_SAMP_FREQ:
+    return IIO_VAL_INT_PLUS_NANO;
+    case IIO_CHAN_INFO_RAW:
+    case IIO_CHAN_INFO_CALIBBIAS:
+    return IIO_VAL_INT;
+    }
+    return -EINVAL;
+    }
+    static const int scd30_pressure_raw_available[] = {
+    SCD30_PRESSURE_COMP_MIN_MBAR, 1, SCD30_PRESSURE_COMP_MAX_MBAR,
+    };
+    static const int scd30_temp_calibbias_available[] = {
+    0, 10, SCD30_TEMP_OFFSET_MAX,
+    };
+    static int scd30_read_avail(struct iio_dev *indio_dev, struct iio_chan_spec const *chan,
+    const int **vals, int *type, int *length, long mask)
+    {
+    switch (mask) {
+    case IIO_CHAN_INFO_RAW:
+// vals = scd30_pressure_raw_available;
+// type = IIO_VAL_INT;
+    return IIO_AVAIL_RANGE;
+    case IIO_CHAN_INFO_CALIBBIAS:
+// vals = scd30_temp_calibbias_available;
+// type = IIO_VAL_INT;
+    return IIO_AVAIL_RANGE;
+    }
+    return -EINVAL;
+    }
+    static ssize_t sampling_frequency_available_show(struct device *dev, struct device_attribute *attr,
+    char *buf)
+    {
+    let mut i: c_int = SCD30_MEAS_INTERVAL_MIN_S;
+    let mut len: isize = 0;
+    do {
+    len += sysfs_emit_at(buf, len, "0.%09u ", 1000000000 / i);
+//
+// Not all values fit PAGE_SIZE buffer hence print every 6th
+// (each frequency differs by 6s in time domain from the
+// adjacent). Unlisted but valid ones are still accepted.
+//
+    i += 6;
+    } while (i <= SCD30_MEAS_INTERVAL_MAX_S);
+    buf[len - 1] = '\n';
+    return len;
+    }
+    static ssize_t calibration_auto_enable_show(struct device *dev, struct device_attribute *attr,
+    char *buf)
+    {
+    struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    u16 val;
+    guard(mutex)(&state.lock);
+    ret = scd30_command_read(state, CMD_ASC, &val);
+    if (ret)
+    return ret;
+    return sysfs_emit(buf, "%d\n", val);
+    }
+    static ssize_t calibration_auto_enable_store(struct device *dev, struct device_attribute *attr,
+    const char *buf, size_t len)
+    {
+    struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+    struct scd30_state *state = iio_priv(indio_dev);
+    bool val;
+    int ret;
+    ret = kstrtobool(buf, &val);
+    if (ret)
+    return ret;
+    guard(mutex)(&state.lock);
+    ret = scd30_command_write(state, CMD_ASC, val);
+    if (ret)
+    return ret;
+    return len;
+    }
+    static ssize_t calibration_forced_value_show(struct device *dev, struct device_attribute *attr,
+    char *buf)
+    {
+    struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    u16 val;
+    guard(mutex)(&state.lock);
+    ret = scd30_command_read(state, CMD_FRC, &val);
+    if (ret)
+    return ret;
+    return sysfs_emit(buf, "%d\n", val);
+    }
+    static ssize_t calibration_forced_value_store(struct device *dev, struct device_attribute *attr,
+    const char *buf, size_t len)
+    {
+    struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    u16 val;
+    ret = kstrtou16(buf, 0, &val);
+    if (ret)
+    return ret;
+    if (val < SCD30_FRC_MIN_PPM || val > SCD30_FRC_MAX_PPM)
+    return -EINVAL;
+    guard(mutex)(&state.lock);
+    ret = scd30_command_write(state, CMD_FRC, val);
+    if (ret)
+    return ret;
+    return len;
+    }
+    static IIO_DEVICE_ATTR_RO(sampling_frequency_available, 0);
+    static IIO_DEVICE_ATTR_RW(calibration_auto_enable, 0);
+    static IIO_DEVICE_ATTR_RW(calibration_forced_value, 0);
+    static struct attribute *scd30_attrs[] = {
+    &iio_dev_attr_sampling_frequency_available.dev_attr.attr,
+    &iio_dev_attr_calibration_auto_enable.dev_attr.attr,
+    &iio_dev_attr_calibration_forced_value.dev_attr.attr,
+    core::ptr::null_mut()
+    };
+    static const struct attribute_group scd30_attr_group = {
+    .attrs = scd30_attrs,
+    };
+    static const struct iio_info scd30_info = {
+    .attrs = &scd30_attr_group,
+    .read_raw = scd30_read_raw,
+    .write_raw = scd30_write_raw,
+    .write_raw_get_fmt = scd30_write_raw_get_fmt,
+    .read_avail = scd30_read_avail,
+    };
+
+    .sign = _sign, \
+    .realbits = _realbits, \
+    .storagebits = 32, \
+    .endianness = IIO_CPU, \
+    }
+    static const struct iio_chan_spec scd30_channels[] = {
+    {
+//
+// this channel is special in a sense we are pretending that
+// sensor is able to change measurement chamber pressure but in
+// fact we're just setting pressure compensation value
+//
+    .type = IIO_PRESSURE,
+    .info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
+    .info_mask_separate_available = BIT(IIO_CHAN_INFO_RAW),
+    .output = 1,
+    .scan_index = -1,
+    },
+    {
+    .type = IIO_CONCENTRATION,
+    .channel2 = IIO_MOD_CO2,
+    .address = SCD30_CONC,
+    .scan_index = SCD30_CONC,
+    .info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
+    BIT(IIO_CHAN_INFO_SCALE),
+    .info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+    .modified = 1,
+    SCD30_CHAN_SCAN_TYPE('u', 20),
+    },
+    {
+    .type = IIO_TEMP,
+    .address = SCD30_TEMP,
+    .scan_index = SCD30_TEMP,
+    .info_mask_separate = BIT(IIO_CHAN_INFO_PROCESSED) |
+    BIT(IIO_CHAN_INFO_CALIBBIAS),
+    .info_mask_separate_available = BIT(IIO_CHAN_INFO_CALIBBIAS),
+    .info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+    SCD30_CHAN_SCAN_TYPE('s', 18),
+    },
+    {
+    .type = IIO_HUMIDITYRELATIVE,
+    .address = SCD30_HR,
+    .scan_index = SCD30_HR,
+    .info_mask_separate = BIT(IIO_CHAN_INFO_PROCESSED),
+    .info_mask_shared_by_all = BIT(IIO_CHAN_INFO_SAMP_FREQ),
+    SCD30_CHAN_SCAN_TYPE('u', 17),
+    },
+    IIO_CHAN_SOFT_TIMESTAMP(3),
+    };
+#[no_mangle]
+unsafe extern "C" fn scd30_suspend(dev: *mut device) -> c_int {
+    static int scd30_suspend(struct device *dev)
+    {
+    struct iio_dev *indio_dev = dev_get_drvdata(dev);
+    struct scd30_state *state  = iio_priv(indio_dev);
+    int ret;
+    ret = scd30_command_write(state, CMD_STOP_MEAS, 0);
+    if (ret)
+    return ret;
+    return regulator_disable(state.vdd);
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_resume(dev: *mut device) -> c_int {
+    static int scd30_resume(struct device *dev)
+    {
+    struct iio_dev *indio_dev = dev_get_drvdata(dev);
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    ret = regulator_enable(state.vdd);
+    if (ret)
+    return ret;
+    return scd30_command_write(state, CMD_START_MEAS, state.pressure_comp);
+    }
+    EXPORT_NS_SIMPLE_DEV_PM_OPS(scd30_pm_ops, scd30_suspend, scd30_resume, IIO_SCD30);
+#[no_mangle]
+unsafe extern "C" fn scd30_stop_meas(data: *mut c_void) {
+    static void scd30_stop_meas(void *data)
+    {
+    struct scd30_state *state = data;
+    scd30_command_write(state, CMD_STOP_MEAS, 0);
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_disable_regulator(data: *mut c_void) {
+    static void scd30_disable_regulator(void *data)
+    {
+    struct scd30_state *state = data;
+    regulator_disable(state.vdd);
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_irq_handler(irq: c_int, priv: *mut c_void) -> irqreturn_t {
+    static irqreturn_t scd30_irq_handler(int irq, void *priv)
+    {
+    struct iio_dev *indio_dev = priv;
+    if (iio_buffer_enabled(indio_dev)) {
+    iio_trigger_poll(indio_dev.trig);
+    return IRQ_HANDLED;
+    }
+    return IRQ_WAKE_THREAD;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_irq_thread_handler(irq: c_int, priv: *mut c_void) -> irqreturn_t {
+    static irqreturn_t scd30_irq_thread_handler(int irq, void *priv)
+    {
+    struct iio_dev *indio_dev = priv;
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    ret = scd30_read_meas(state);
+    if (ret)
+    goto out;
+    complete_all(&state.meas_ready);
+    out:
+    return IRQ_HANDLED;
+    }
+    static int scd30_trigger_handler_helper(struct iio_dev *indio_dev, int *scan_data,
+    size_t scan_data_size)
+    {
+    struct scd30_state *state = iio_priv(indio_dev);
+    int ret;
+    guard(mutex)(&state.lock);
+    if (!iio_trigger_using_own(indio_dev))
+    ret = scd30_read_poll(state);
+    else
+    ret = scd30_read_meas(state);
+    memcpy(scan_data, state.meas, scan_data_size);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_trigger_handler(irq: c_int, p: *mut c_void) -> irqreturn_t {
+    static irqreturn_t scd30_trigger_handler(int irq, void *p)
+    {
+    struct iio_poll_func *pf = p;
+    struct iio_dev *indio_dev = pf.indio_dev;
+    struct {
+    int data[SCD30_MEAS_COUNT];
+    aligned_s64 ts;
+    } scan = { };
+    int ret;
+    ret = scd30_trigger_handler_helper(indio_dev, scan.data, sizeof(scan.data));
+    if (ret)
+    goto out;
+    iio_push_to_buffers_with_ts(indio_dev, &scan, sizeof(scan),
+    iio_get_time_ns(indio_dev));
+    out:
+    iio_trigger_notify_done(indio_dev.trig);
+    return IRQ_HANDLED;
+    }
+#[no_mangle]
+unsafe extern "C" fn scd30_set_trigger_state(trig: *mut iio_trigger, state: bool) -> c_int {
+    static int scd30_set_trigger_state(struct iio_trigger *trig, bool state)
+    {
+    struct iio_dev *indio_dev = iio_trigger_get_drvdata(trig);
+    struct scd30_state *st = iio_priv(indio_dev);
+    if (state)
+    enable_irq(st.irq);
+    else
+    disable_irq(st.irq);
+    return 0;
+    }
+    static const struct iio_trigger_ops scd30_trigger_ops = {
+    .set_trigger_state = scd30_set_trigger_state,
+    .validate_device = iio_trigger_validate_own_device,
+    };
+#[no_mangle]
+unsafe extern "C" fn scd30_setup_trigger(indio_dev: *mut iio_dev) -> c_int {
+    static int scd30_setup_trigger(struct iio_dev *indio_dev)
+    {
+    struct scd30_state *state = iio_priv(indio_dev);
+    struct device *dev = indio_dev.dev.parent;
+    struct iio_trigger *trig;
+    int ret;
+    trig = devm_iio_trigger_alloc(dev, "%s-dev%d", indio_dev.name,
+    iio_device_id(indio_dev));
+    if (!trig)
+    return -ENOMEM;
+    trig.ops = &scd30_trigger_ops;
+    iio_trigger_set_drvdata(trig, indio_dev);
+    ret = devm_iio_trigger_register(dev, trig);
+    if (ret)
+    return ret;
+    indio_dev.trig = iio_trigger_get(trig);
+//
+// Interrupt is enabled just before taking a fresh measurement
+// and disabled afterwards. This means we need to ensure it is not
+// enabled here to keep calls to enable/disable balanced.
+//
+    ret = devm_request_threaded_irq(dev, state.irq, scd30_irq_handler,
+    scd30_irq_thread_handler,
+    IRQF_TRIGGER_HIGH | IRQF_ONESHOT |
+    IRQF_NO_AUTOEN,
+    indio_dev.name, indio_dev);
+    if (ret)
+    return ret;
+    return 0;
+    }
+    int scd30_probe(struct device *dev, int irq, const char *name, void *priv,
+    scd30_command_t command)
+    {
+    static const unsigned long scd30_scan_masks[] = { 0x07, 0x00 };
+    struct scd30_state *state;
+    struct iio_dev *indio_dev;
+    int ret;
+    u16 val;
+    indio_dev = devm_iio_device_alloc(dev, sizeof(*state));
+    if (!indio_dev)
+    return -ENOMEM;
+    state = iio_priv(indio_dev);
+    state.dev = dev;
+    state.priv = priv;
+    state.irq = irq;
+    state.pressure_comp = SCD30_PRESSURE_COMP_DEFAULT;
+    state.meas_interval = SCD30_MEAS_INTERVAL_DEFAULT;
+    state.command = command;
+    ret = devm_mutex_init(dev, &state.lock);
+    if (ret)
+    return ret;
+    init_completion(&state.meas_ready);
+    dev_set_drvdata(dev, indio_dev);
+    indio_dev.info = &scd30_info;
+    indio_dev.name = name;
+    indio_dev.channels = scd30_channels;
+    indio_dev.num_channels = ARRAY_SIZE(scd30_channels);
+    indio_dev.modes = INDIO_DIRECT_MODE;
+    indio_dev.available_scan_masks = scd30_scan_masks;
+    state.vdd = devm_regulator_get(dev, "vdd");
+    if (IS_ERR(state.vdd))
+    return dev_err_probe(dev, PTR_ERR(state.vdd), "failed to get regulator\n");
+    ret = regulator_enable(state.vdd);
+    if (ret)
+    return ret;
+    ret = devm_add_action_or_reset(dev, scd30_disable_regulator, state);
+    if (ret)
+    return ret;
+    ret = scd30_reset(state);
+    if (ret)
+    return dev_err_probe(dev, ret, "failed to reset device\n");
+    if (state.irq > 0) {
+    ret = scd30_setup_trigger(indio_dev);
+    if (ret)
+    return dev_err_probe(dev, ret, "failed to setup trigger\n");
+    }
+    ret = devm_iio_triggered_buffer_setup(dev, indio_dev, core::ptr::null_mut(), scd30_trigger_handler, core::ptr::null_mut());
+    if (ret)
+    return ret;
+    ret = scd30_command_read(state, CMD_FW_VERSION, &val);
+    if (ret)
+    return dev_err_probe(dev, ret, "failed to read firmware version\n");
+    dev_info(dev, "firmware version: %d.%d\n", val >> 8, (char)val);
+    ret = scd30_command_write(state, CMD_MEAS_INTERVAL, state.meas_interval);
+    if (ret)
+    return dev_err_probe(dev, ret, "failed to set measurement interval\n");
+    ret = scd30_command_write(state, CMD_START_MEAS, state.pressure_comp);
+    if (ret)
+    return dev_err_probe(dev, ret, "failed to start measurement\n");
+    ret = devm_add_action_or_reset(dev, scd30_stop_meas, state);
+    if (ret)
+    return ret;
+    return devm_iio_device_register(dev, indio_dev);
+    }
+    EXPORT_SYMBOL_NS(scd30_probe, "IIO_SCD30");
+    MODULE_AUTHOR("Tomasz Duszynski <tduszyns@gmail.com>");
+    MODULE_DESCRIPTION("Sensirion SCD30 carbon dioxide sensor core driver");
+    MODULE_LICENSE("GPL v2");

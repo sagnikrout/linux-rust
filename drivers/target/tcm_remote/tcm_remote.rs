@@ -1,0 +1,58 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/target/tcm_remote/tcm_remote.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+pub const TL_WWN_ADDR_LEN: c_int = 256;
+pub const TL_TPGS_PER_HBA: c_int = 32;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct tcm_remote_tpg {
+    pub remote_tpgt: c_ushort,
+    pub remote_se_tpg: se_portal_group,
+    pub remote_hba: *mut tcm_remote_hba,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct tcm_remote_hba {
+    pub remote_proto_id: u8,
+    pub remote_wwn_address: [c_uchar; TL_WWN_ADDR_LEN],
+    pub remote_hba_tpgs: [tcm_remote_tpg; TL_TPGS_PER_HBA],
+    pub remote_hba_wwn: se_wwn,
+}

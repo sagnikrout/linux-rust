@@ -1,0 +1,1076 @@
+//! Automatically rewritten from C to Rust
+//! Source: mm/page_owner.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+//
+// TODO: teach PAGE_OWNER_STACK_DEPTH (__dump_page_owner and save_stack)
+// to use off stack temporal storage
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct page_owner {
+    pub order: c_ushort,
+    pub last_migrate_reason: c_short,
+    pub gfp_mask: gfp_t,
+    pub handle: depot_stack_handle_t,
+    pub free_handle: depot_stack_handle_t,
+    pub ts_nsec: u64,
+    pub free_ts_nsec: u64,
+    pub comm: [c_char; TASK_COMM_LEN],
+    pub pid: pid_t,
+    pub tgid: pid_t,
+    pub free_pid: pid_t,
+    pub free_tgid: pid_t,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct stack {
+    pub stack_record: *mut stack_record,
+    pub next: *mut stack,
+}
+
+    static struct stack dummy_stack;
+    static struct stack failure_stack;
+    static struct stack *stack_list;
+    static DEFINE_SPINLOCK(stack_list_lock);
+pub const STACK_PRINT_FLAG_STACK: c_uint = 0x1;
+pub const STACK_PRINT_FLAG_PAGES: c_uint = 0x2;
+pub const STACK_PRINT_FLAG_HANDLE: c_uint = 0x4;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct stack_print_ctx {
+    pub stack: *mut stack,
+    pub flags: u8,
+}
+
+    enum page_owner_print_mode {
+    PAGE_OWNER_PRINT_STACK,
+    PAGE_OWNER_PRINT_HANDLE,
+    PAGE_OWNER_PRINT_STACK_HANDLE,
+    };
+    static const char * const page_owner_print_mode_strings[] = {
+    [PAGE_OWNER_PRINT_STACK]	= "stack",
+    [PAGE_OWNER_PRINT_HANDLE]	= "handle",
+    [PAGE_OWNER_PRINT_STACK_HANDLE]	= "stack_handle",
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct page_owner_filter_state {
+    pub print_mode: enum page_owner_print_mode,
+    pub nid_filter: nodemask_t,
+    pub nid_filter_enabled: bool,
+}
+
+    static bool page_owner_enabled __initdata;
+    DEFINE_STATIC_KEY_FALSE(page_owner_inited);
+    static depot_stack_handle_t dummy_handle;
+    static depot_stack_handle_t failure_handle;
+    static depot_stack_handle_t early_handle;
+    static void init_early_allocated_pages(void);
+#[no_mangle]
+pub unsafe extern "C" fn set_current_in_page_owner() {
+    static inline void set_current_in_page_owner(void)
+    {
+//
+// Avoid recursion.
+//
+// We might need to allocate more memory from page_owner code, so make
+// sure to signal it in order to avoid recursion.
+//
+    current.in_page_owner = 1;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn unset_current_in_page_owner() {
+    static inline void unset_current_in_page_owner(void)
+    {
+    current.in_page_owner = 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn early_page_owner_param(buf: *mut c_char) -> int __init {
+    static int __init early_page_owner_param(char *buf)
+    {
+    let mut ret: c_int = kstrtobool(buf, &page_owner_enabled);
+    if (page_owner_enabled)
+    stack_depot_request_early_init();
+    return ret;
+    }
+    early_param("page_owner", early_page_owner_param);
+#[no_mangle]
+unsafe extern "C" fn need_page_owner() -> __init bool {
+    static __init bool need_page_owner(void)
+    {
+    return page_owner_enabled;
+    }
+#[no_mangle]
+unsafe extern "C" fn create_dummy_stack() -> __always_inline depot_stack_handle_t {
+    static __always_inline depot_stack_handle_t create_dummy_stack(void)
+    {
+    unsigned long entries[4];
+    unsigned int nr_entries;
+    nr_entries = stack_trace_save(entries, ARRAY_SIZE(entries), 0);
+    return stack_depot_save(entries, nr_entries, GFP_KERNEL);
+    }
+#[no_mangle]
+unsafe extern "C" fn register_dummy_stack() -> noinline void {
+    static noinline void register_dummy_stack(void)
+    {
+    dummy_handle = create_dummy_stack();
+    }
+#[no_mangle]
+unsafe extern "C" fn register_failure_stack() -> noinline void {
+    static noinline void register_failure_stack(void)
+    {
+    failure_handle = create_dummy_stack();
+    }
+#[no_mangle]
+unsafe extern "C" fn register_early_stack() -> noinline void {
+    static noinline void register_early_stack(void)
+    {
+    early_handle = create_dummy_stack();
+    }
+#[no_mangle]
+unsafe extern "C" fn init_page_owner() -> __init void {
+    static __init void init_page_owner(void)
+    {
+    if (!page_owner_enabled)
+    return;
+    register_dummy_stack();
+    register_failure_stack();
+    register_early_stack();
+    init_early_allocated_pages();
+// Initialize dummy and failure stacks and link them to stack_list
+    dummy_stack.stack_record = __stack_depot_get_stack_record(dummy_handle);
+    failure_stack.stack_record = __stack_depot_get_stack_record(failure_handle);
+    if (dummy_stack.stack_record)
+    refcount_set(&dummy_stack.stack_record.count, 1);
+    if (failure_stack.stack_record)
+    refcount_set(&failure_stack.stack_record.count, 1);
+    dummy_stack.next = &failure_stack;
+    stack_list = &dummy_stack;
+    static_branch_enable(&page_owner_inited);
+    }
+    struct page_ext_operations page_owner_ops = {
+    .size = sizeof(struct page_owner),
+    .need = need_page_owner,
+    .init = init_page_owner,
+    .need_shared_flags = true,
+    };
+    static inline struct page_owner *get_page_owner(struct page_ext *page_ext)
+    {
+    return page_ext_data(page_ext, &page_owner_ops);
+    }
+#[no_mangle]
+unsafe extern "C" fn save_stack(flags: gfp_t) -> noinline depot_stack_handle_t {
+    static noinline depot_stack_handle_t save_stack(gfp_t flags)
+    {
+    unsigned long entries[PAGE_OWNER_STACK_DEPTH];
+    depot_stack_handle_t handle;
+    unsigned int nr_entries;
+    if (current.in_page_owner)
+    return dummy_handle;
+    set_current_in_page_owner();
+    nr_entries = stack_trace_save(entries, ARRAY_SIZE(entries), 2);
+    handle = stack_depot_save(entries, nr_entries, flags);
+    if (!handle)
+    handle = failure_handle;
+    unset_current_in_page_owner();
+    return handle;
+    }
+    static void add_stack_record_to_list(struct stack_record *stack_record,
+    gfp_t gfp_mask)
+    {
+    unsigned long flags;
+    struct stack *stack;
+    if (!gfpflags_allow_spinning(gfp_mask))
+    return;
+    set_current_in_page_owner();
+    stack = kmalloc_obj(*stack, gfp_nested_mask(gfp_mask));
+    if (!stack) {
+    unset_current_in_page_owner();
+    return;
+    }
+    unset_current_in_page_owner();
+    stack.stack_record = stack_record;
+    stack.next = core::ptr::null_mut();
+    spin_lock_irqsave(&stack_list_lock, flags);
+    stack.next = stack_list;
+//
+// This pairs with smp_load_acquire() from function
+// stack_start(). This guarantees that stack_start()
+// will see an updated stack_list before starting to
+// traverse the list.
+//
+    smp_store_release(&stack_list, stack);
+    spin_unlock_irqrestore(&stack_list_lock, flags);
+    }
+    static void inc_stack_record_count(depot_stack_handle_t handle, gfp_t gfp_mask,
+    int nr_base_pages)
+    {
+    struct stack_record *stack_record = __stack_depot_get_stack_record(handle);
+    if (!stack_record)
+    return;
+//
+// New stack_record's that do not use STACK_DEPOT_FLAG_GET start
+// with REFCOUNT_SATURATED to catch spurious increments of their
+// refcount.
+// Since we do not use STACK_DEPOT_FLAG_GET API, let us
+// set a refcount of 1 ourselves.
+//
+    if (refcount_read(&stack_record.count) == REFCOUNT_SATURATED) {
+    let mut old: c_int = REFCOUNT_SATURATED;
+    if (atomic_try_cmpxchg_relaxed(&stack_record.count.refs, &old, 1))
+// Add the new stack_record to our list
+    add_stack_record_to_list(stack_record, gfp_mask);
+    }
+    refcount_add(nr_base_pages, &stack_record.count);
+    }
+    static void dec_stack_record_count(depot_stack_handle_t handle,
+    int nr_base_pages)
+    {
+    struct stack_record *stack_record = __stack_depot_get_stack_record(handle);
+    if (!stack_record)
+    return;
+    if (refcount_sub_and_test(nr_base_pages, &stack_record.count))
+    pr_warn("%s: refcount went to 0 for %u handle\n", __func__,
+    handle);
+    }
+    static inline void __update_page_owner_handle(struct page *page,
+    depot_stack_handle_t handle,
+    unsigned short order,
+    gfp_t gfp_mask,
+    short last_migrate_reason, u64 ts_nsec,
+    pid_t pid, pid_t tgid, char *comm)
+    {
+    struct page_ext_iter iter;
+    struct page_ext *page_ext;
+    struct page_owner *page_owner;
+    rcu_read_lock();
+    for_each_page_ext(page, 1 << order, page_ext, iter) {
+    page_owner = get_page_owner(page_ext);
+    page_owner.handle = handle;
+    page_owner.order = order;
+    page_owner.gfp_mask = gfp_mask;
+    page_owner.last_migrate_reason = last_migrate_reason;
+    page_owner.pid = pid;
+    page_owner.tgid = tgid;
+    page_owner.ts_nsec = ts_nsec;
+    strscpy(page_owner.comm, comm,
+    sizeof(page_owner.comm));
+    __set_bit(PAGE_EXT_OWNER, &page_ext.flags);
+    __set_bit(PAGE_EXT_OWNER_ALLOCATED, &page_ext.flags);
+    }
+    rcu_read_unlock();
+    }
+    static inline void __update_page_owner_free_handle(struct page *page,
+    depot_stack_handle_t handle,
+    unsigned short order,
+    pid_t pid, pid_t tgid,
+    u64 free_ts_nsec)
+    {
+    struct page_ext_iter iter;
+    struct page_ext *page_ext;
+    struct page_owner *page_owner;
+    rcu_read_lock();
+    for_each_page_ext(page, 1 << order, page_ext, iter) {
+    page_owner = get_page_owner(page_ext);
+// Only __reset_page_owner() wants to clear the bit
+    if (handle) {
+    __clear_bit(PAGE_EXT_OWNER_ALLOCATED, &page_ext.flags);
+    page_owner.free_handle = handle;
+    }
+    page_owner.free_ts_nsec = free_ts_nsec;
+    page_owner.free_pid = current.pid;
+    page_owner.free_tgid = current.tgid;
+    }
+    rcu_read_unlock();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __reset_page_owner(page: *mut page, order: c_ushort) {
+    void __reset_page_owner(struct page *page, unsigned short order)
+    {
+    struct page_ext *page_ext;
+    depot_stack_handle_t handle;
+    depot_stack_handle_t alloc_handle;
+    struct page_owner *page_owner;
+    let mut free_ts_nsec: u64 = local_clock();
+    page_ext = page_ext_get(page);
+    if (unlikely(!page_ext))
+    return;
+    page_owner = get_page_owner(page_ext);
+    alloc_handle = page_owner.handle;
+    page_ext_put(page_ext);
+//
+// Do not specify GFP_NOWAIT to make gfpflags_allow_spinning() == false
+// to prevent issues in stack_depot_save().
+// This is similar to alloc_pages_nolock() gfp flags, but only used
+// to signal stack_depot to avoid spin_locks.
+//
+    handle = save_stack(__GFP_NOWARN);
+    __update_page_owner_free_handle(page, handle, order, current.pid,
+    current.tgid, free_ts_nsec);
+    if (alloc_handle != early_handle)
+//
+// early_handle is being set as a handle for all those
+// early allocated pages. See init_pages_in_zone().
+// Since their refcount is not being incremented because
+// the machinery is not ready yet, we cannot decrement
+// their refcount either.
+//
+    dec_stack_record_count(alloc_handle, 1 << order);
+    }
+    noinline void __set_page_owner(struct page *page, unsigned short order,
+    gfp_t gfp_mask)
+    {
+    let mut ts_nsec: u64 = local_clock();
+    depot_stack_handle_t handle;
+    handle = save_stack(gfp_mask);
+    __update_page_owner_handle(page, handle, order, gfp_mask, MR_NEVER,
+    ts_nsec, current.pid, current.tgid,
+    current.comm);
+    inc_stack_record_count(handle, gfp_mask, 1 << order);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __folio_set_owner_migrate_reason(folio: *mut folio, reason: enum migrate_reason) {
+    void __folio_set_owner_migrate_reason(struct folio *folio, enum migrate_reason reason)
+    {
+    struct page_ext *page_ext = page_ext_get(&folio.page);
+    struct page_owner *page_owner;
+    if (unlikely(!page_ext))
+    return;
+    page_owner = get_page_owner(page_ext);
+    page_owner.last_migrate_reason = reason;
+    page_ext_put(page_ext);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __split_page_owner(page: *mut page, old_order: c_int, new_order: c_int) {
+    void __split_page_owner(struct page *page, int old_order, int new_order)
+    {
+    struct page_ext_iter iter;
+    struct page_ext *page_ext;
+    struct page_owner *page_owner;
+    rcu_read_lock();
+    for_each_page_ext(page, 1 << old_order, page_ext, iter) {
+    page_owner = get_page_owner(page_ext);
+    page_owner.order = new_order;
+    }
+    rcu_read_unlock();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __folio_copy_owner(newfolio: *mut folio, old: *mut folio) {
+    void __folio_copy_owner(struct folio *newfolio, struct folio *old)
+    {
+    struct page_ext *page_ext;
+    struct page_ext_iter iter;
+    struct page_owner *old_page_owner;
+    struct page_owner *new_page_owner;
+    depot_stack_handle_t migrate_handle;
+    page_ext = page_ext_get(&old.page);
+    if (unlikely(!page_ext))
+    return;
+    old_page_owner = get_page_owner(page_ext);
+    page_ext_put(page_ext);
+    page_ext = page_ext_get(&newfolio.page);
+    if (unlikely(!page_ext))
+    return;
+    new_page_owner = get_page_owner(page_ext);
+    page_ext_put(page_ext);
+    migrate_handle = new_page_owner.handle;
+    __update_page_owner_handle(&newfolio.page, old_page_owner.handle,
+    old_page_owner.order, old_page_owner.gfp_mask,
+    old_page_owner.last_migrate_reason,
+    old_page_owner.ts_nsec, old_page_owner.pid,
+    old_page_owner.tgid, old_page_owner.comm);
+//
+// Do not proactively clear PAGE_EXT_OWNER{_ALLOCATED} bits as the folio
+// will be freed after migration. Keep them until then as they may be
+// useful.
+//
+    __update_page_owner_free_handle(&newfolio.page, 0, old_page_owner.order,
+    old_page_owner.free_pid,
+    old_page_owner.free_tgid,
+    old_page_owner.free_ts_nsec);
+//
+// We linked the original stack to the new folio, we need to do the same
+// for the new one and the old folio otherwise there will be an imbalance
+// when subtracting those pages from the stack.
+//
+    rcu_read_lock();
+    for_each_page_ext(&old.page, 1 << new_page_owner.order, page_ext, iter) {
+    old_page_owner = get_page_owner(page_ext);
+    old_page_owner.handle = migrate_handle;
+    }
+    rcu_read_unlock();
+    }
+//
+// Check if a page is a buddy page and advance @pfn past the entire buddy block.
+// This safely reads the buddy order without the zone lock, which may cause us
+// to skip less than the full buddy block, but that is acceptable for page owner
+// iteration purposes.
+//
+// The lockless read of buddy_order_unsafe() can also return a garbage order if
+// the page is concurrently allocated and PageBuddy is cleared between the check
+// and the read. Clamp the advance at the next MAX_ORDER_NR_PAGES boundary so
+// that a bogus order cannot carry @pfn into an unvalidated memory section,
+// which would break callers that rely on boundary-aligned pfn_valid() checks.
+//
+// Return: true if the page was skipped (caller should continue its loop),
+// false if the page is not a buddy page and should be processed normally.
+//
+#[no_mangle]
+pub unsafe extern "C" fn skip_buddy_pages(pfn: *mut c_ulong, page: *mut page) -> bool {
+    static inline bool skip_buddy_pages(unsigned long *pfn, struct page *page)
+    {
+    unsigned long order;
+    if (!PageBuddy(page))
+    return false;
+    order = buddy_order_unsafe(page);
+    if (order <= MAX_PAGE_ORDER) {
+    let mut new_pfn: c_ulong = *pfn + (1UL << order);
+    let mut boundary: c_ulong = ALIGN(*pfn + 1, MAX_ORDER_NR_PAGES);
+// pfn = min(new_pfn, boundary) - 1;
+    }
+    return true;
+    }
+    void pagetypeinfo_showmixedcount_print(struct seq_file *m,
+    pg_data_t *pgdat, struct zone *zone)
+    {
+    struct page *page;
+    struct page_ext *page_ext;
+    struct page_owner *page_owner;
+    unsigned long pfn, block_end_pfn;
+    let mut end_pfn: c_ulong = zone_end_pfn(zone);
+    unsigned long count[MIGRATE_TYPES] = { 0, };
+    int pageblock_mt, page_mt;
+    int i;
+// Scan block by block. First and last block may be incomplete
+    pfn = zone.zone_start_pfn;
+//
+// Walk the zone in pageblock_nr_pages steps. If a page block spans
+// a zone boundary, it will be double counted between zones. This does
+// not matter as the mixed block count will still be correct
+//
+    for (; pfn < end_pfn; ) {
+    page = pfn_to_online_page(pfn);
+    if (!page) {
+    pfn = ALIGN(pfn + 1, MAX_ORDER_NR_PAGES);
+    continue;
+    }
+    block_end_pfn = pageblock_end_pfn(pfn);
+    block_end_pfn = min(block_end_pfn, end_pfn);
+    pageblock_mt = get_pageblock_migratetype(page);
+    for (; pfn < block_end_pfn; pfn++) {
+// The pageblock is online, no need to recheck.
+    page = pfn_to_page(pfn);
+    if (page_zone(page) != zone)
+    continue;
+    if (skip_buddy_pages(&pfn, page))
+    continue;
+    if (PageReserved(page))
+    continue;
+    page_ext = page_ext_get(page);
+    if (unlikely(!page_ext))
+    continue;
+    if (!test_bit(PAGE_EXT_OWNER_ALLOCATED, &page_ext.flags))
+    goto ext_put_continue;
+    page_owner = get_page_owner(page_ext);
+    page_mt = gfp_migratetype(page_owner.gfp_mask);
+    if (pageblock_mt != page_mt) {
+    if (is_migrate_cma(pageblock_mt))
+    count[MIGRATE_MOVABLE]++;
+    else
+    count[pageblock_mt]++;
+    pfn = block_end_pfn;
+    page_ext_put(page_ext);
+    break;
+    }
+    pfn += (1UL << page_owner.order) - 1;
+    ext_put_continue:
+    page_ext_put(page_ext);
+    }
+    }
+// Print counts
+    seq_printf(m, "Node %d, zone %8s ", pgdat.node_id, zone.name);
+    for (i = 0; i < MIGRATE_TYPES; i++)
+    seq_printf(m, "%12lu ", count[i]);
+    seq_putc(m, '\n');
+    }
+
+//
+// Looking for memcg information and print it out
+//
+    static inline int print_page_owner_memcg(char *kbuf, size_t count, int ret,
+    struct page *page)
+    {
+    unsigned long memcg_data;
+    struct obj_cgroup *objcg;
+    struct mem_cgroup *memcg;
+    bool online;
+    char name[80];
+    rcu_read_lock();
+    memcg_data = READ_ONCE(page.memcg_data);
+    if (!memcg_data || PageTail(page))
+    goto out_unlock;
+    if (memcg_data & MEMCG_DATA_OBJEXTS) {
+    ret += scnprintf(kbuf + ret, count - ret,
+    "Slab cache page\n");
+    goto out_unlock;
+    }
+    objcg = (void *)(memcg_data & ~OBJEXTS_FLAGS_MASK);
+    memcg = objcg ? obj_cgroup_memcg(objcg) : core::ptr::null_mut();
+    if (!memcg)
+    goto out_unlock;
+    online = css_is_online(&memcg.css);
+    cgroup_name(memcg.css.cgroup, name, sizeof(name));
+    ret += scnprintf(kbuf + ret, count - ret,
+    "Charged %sto %smemcg %s\n",
+    (memcg_data & MEMCG_DATA_KMEM) ? "(via objcg) " : "",
+    online ? "" : "offline ",
+    name);
+    out_unlock:
+    rcu_read_unlock();
+    return ret;
+    }
+
+    static inline int print_page_owner_memcg(char *kbuf, size_t count, int ret,
+    struct page *page)
+    {
+    return ret;
+    }
+
+    static ssize_t
+    print_page_owner(char __user *buf, size_t count, unsigned long pfn,
+    struct page *page, struct page_owner *page_owner,
+    depot_stack_handle_t handle,
+    struct page_owner_filter_state *state)
+    {
+    int ret, pageblock_mt, page_mt;
+    char *kbuf;
+    enum page_owner_print_mode print_mode;
+    count = min_t(size_t, count, PAGE_SIZE);
+    kbuf = kmalloc(count, GFP_KERNEL);
+    if (!kbuf)
+    return -ENOMEM;
+    print_mode = state.print_mode;
+    ret = scnprintf(kbuf, count,
+    "Page allocated via order %u, mask %#x(%pGg), pid %d, tgid %d (%s), ts %llu ns\n",
+    page_owner.order, page_owner.gfp_mask,
+    &page_owner.gfp_mask, page_owner.pid,
+    page_owner.tgid, page_owner.comm,
+    page_owner.ts_nsec);
+// Print information relevant to grouping pages by mobility
+    pageblock_mt = get_pageblock_migratetype(page);
+    page_mt  = gfp_migratetype(page_owner.gfp_mask);
+    ret += scnprintf(kbuf + ret, count - ret,
+    "PFN 0x%lx type %s Block %lu type %s Flags %pGp\n",
+    pfn,
+    migratetype_names[page_mt],
+    pfn >> pageblock_order,
+    migratetype_names[pageblock_mt],
+    &page.flags.f);
+    if (print_mode != PAGE_OWNER_PRINT_HANDLE) {
+    ret += stack_depot_snprint(handle, kbuf + ret, count - ret, 0);
+    if (ret >= count)
+    goto err;
+    }
+    if (print_mode != PAGE_OWNER_PRINT_STACK) {
+    ret += scnprintf(kbuf + ret, count - ret, "handle: %u\n",
+    handle);
+    if (ret >= count)
+    goto err;
+    }
+    if (page_owner.last_migrate_reason != MR_NEVER) {
+    ret += scnprintf(kbuf + ret, count - ret,
+    "Page has been migrated, last migrate reason: %s\n",
+    migrate_reason_names[page_owner.last_migrate_reason]);
+    }
+    ret = print_page_owner_memcg(kbuf, count, ret, page);
+    ret += snprintf(kbuf + ret, count - ret, "\n");
+    if (ret >= count)
+    goto err;
+    if (copy_to_user(buf, kbuf, ret))
+    ret = -EFAULT;
+    kfree(kbuf);
+    return ret;
+    err:
+    kfree(kbuf);
+    return -ENOMEM;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __dump_page_owner(page: *const page) {
+    void __dump_page_owner(const struct page *page)
+    {
+    struct page_ext *page_ext = page_ext_get((void *)page);
+    struct page_owner *page_owner;
+    depot_stack_handle_t handle;
+    gfp_t gfp_mask;
+    int mt;
+    if (unlikely(!page_ext)) {
+    pr_alert("There is not page extension available.\n");
+    return;
+    }
+    page_owner = get_page_owner(page_ext);
+    gfp_mask = page_owner.gfp_mask;
+    mt = gfp_migratetype(gfp_mask);
+    if (!test_bit(PAGE_EXT_OWNER, &page_ext.flags)) {
+    pr_alert("page_owner info is not present (never set?)\n");
+    page_ext_put(page_ext);
+    return;
+    }
+    if (test_bit(PAGE_EXT_OWNER_ALLOCATED, &page_ext.flags))
+    pr_alert("page_owner tracks the page as allocated\n");
+    else
+    pr_alert("page_owner tracks the page as freed\n");
+    pr_alert("page last allocated via order %u, migratetype %s, gfp_mask %#x(%pGg), pid %d, tgid %d (%s), ts %llu\n",
+    page_owner.order, migratetype_names[mt], gfp_mask, &gfp_mask,
+    page_owner.pid, page_owner.tgid, page_owner.comm,
+    page_owner.ts_nsec);
+    handle = READ_ONCE(page_owner.handle);
+    if (!handle)
+    pr_alert("page_owner allocation stack trace missing\n");
+    else
+    stack_depot_print(handle);
+    handle = READ_ONCE(page_owner.free_handle);
+    if (!handle) {
+    pr_alert("page_owner free stack trace missing\n");
+    } else {
+    pr_alert("page last free pid %d tgid %d ts %llu stack trace:\n",
+    page_owner.free_pid, page_owner.free_tgid,
+    page_owner.free_ts_nsec);
+    stack_depot_print(handle);
+    }
+    if (page_owner.last_migrate_reason != MR_NEVER)
+    pr_alert("page has been migrated, last migrate reason: %s\n",
+    migrate_reason_names[page_owner.last_migrate_reason]);
+    page_ext_put(page_ext);
+    }
+    static ssize_t
+    read_page_owner(struct file *file, char __user *buf, size_t count, loff_t *ppos)
+    {
+    unsigned long pfn;
+    struct page *page;
+    struct page_ext *page_ext;
+    struct page_owner *page_owner;
+    depot_stack_handle_t handle;
+    struct page_owner_filter_state *state = file.private_data;
+    if (!static_branch_unlikely(&page_owner_inited))
+    return -EINVAL;
+    page = core::ptr::null_mut();
+    if (*ppos == 0)
+    pfn = min_low_pfn;
+    else
+    pfn = *ppos;
+// Find a valid PFN or the start of a MAX_ORDER_NR_PAGES area
+    while (!pfn_valid(pfn) && (pfn & (MAX_ORDER_NR_PAGES - 1)) != 0)
+    pfn++;
+// Find an allocated page
+    for (; pfn < max_pfn; pfn++) {
+//
+// This temporary page_owner is required so
+// that we can avoid the context switches while holding
+// the rcu lock and copying the page owner information to
+// user through copy_to_user() or GFP_KERNEL allocations.
+//
+    struct page_owner page_owner_tmp;
+//
+// If the new page is in a new MAX_ORDER_NR_PAGES area,
+// validate the area as existing, skip it if not
+//
+    if ((pfn & (MAX_ORDER_NR_PAGES - 1)) == 0 && !pfn_valid(pfn)) {
+    pfn += MAX_ORDER_NR_PAGES - 1;
+    continue;
+    }
+    page = pfn_to_page(pfn);
+    if (skip_buddy_pages(&pfn, page))
+    continue;
+    page_ext = page_ext_get(page);
+    if (unlikely(!page_ext))
+    continue;
+//
+// Some pages could be missed by concurrent allocation or free,
+// because we don't hold the zone lock.
+//
+    if (!test_bit(PAGE_EXT_OWNER, &page_ext.flags))
+    goto ext_put_continue;
+//
+// Although we do have the info about past allocation of free
+// pages, it's not relevant for current memory usage.
+//
+    if (!test_bit(PAGE_EXT_OWNER_ALLOCATED, &page_ext.flags))
+    goto ext_put_continue;
+    page_owner = get_page_owner(page_ext);
+//
+// Don't print "tail" pages of high-order allocations as that
+// would inflate the stats.
+//
+    if (!IS_ALIGNED(pfn, 1 << page_owner.order))
+    goto ext_put_continue;
+//
+// Access to page_ext->handle isn't synchronous so we should
+// be careful to access it.
+//
+    handle = READ_ONCE(page_owner.handle);
+    if (!handle)
+    goto ext_put_continue;
+    if (state.nid_filter_enabled) {
+    int nid;
+    let mut page_flags: memdesc_flags_t = READ_ONCE(page.flags);
+//
+// Bypass PF_POISONED_CHECK() in page_to_nid() to avoid
+// VM_BUG_ON when accessing poisoned pages.
+//
+    if (page_flags.f == PAGE_POISON_PATTERN)
+    goto ext_put_continue;
+    nid = memdesc_nid(&page_flags);
+    if (!node_isset(nid, state.nid_filter))
+    goto ext_put_continue;
+    }
+// Record the next PFN to read in the file offset
+// ppos = pfn + 1;
+    page_owner_tmp = *page_owner;
+    page_ext_put(page_ext);
+    return print_page_owner(buf, count, pfn, page,
+    &page_owner_tmp, handle, state);
+    ext_put_continue:
+    page_ext_put(page_ext);
+    cond_resched();
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn lseek_page_owner(file: *mut file, offset: loff_t, orig: c_int) -> loff_t {
+    static loff_t lseek_page_owner(struct file *file, loff_t offset, int orig)
+    {
+    switch (orig) {
+    case SEEK_SET:
+    file.f_pos = offset;
+    break;
+    case SEEK_CUR:
+    file.f_pos += offset;
+    break;
+    default:
+    return -EINVAL;
+    }
+    return file.f_pos;
+    }
+#[no_mangle]
+unsafe extern "C" fn init_pages_in_zone(zone: *mut zone) {
+    static void init_pages_in_zone(struct zone *zone)
+    {
+    let mut pfn: c_ulong = zone.zone_start_pfn;
+    let mut end_pfn: c_ulong = zone_end_pfn(zone);
+    let mut count: c_ulong = 0;
+//
+// Walk the zone in pageblock_nr_pages steps. If a page block spans
+// a zone boundary, it will be double counted between zones. This does
+// not matter as the mixed block count will still be correct
+//
+    for (; pfn < end_pfn; ) {
+    unsigned long block_end_pfn;
+    if (!pfn_valid(pfn)) {
+    pfn = ALIGN(pfn + 1, MAX_ORDER_NR_PAGES);
+    continue;
+    }
+    block_end_pfn = pageblock_end_pfn(pfn);
+    block_end_pfn = min(block_end_pfn, end_pfn);
+    for (; pfn < block_end_pfn; pfn++) {
+    struct page *page = pfn_to_page(pfn);
+    struct page_ext *page_ext;
+    if (page_zone(page) != zone)
+    continue;
+    if (skip_buddy_pages(&pfn, page))
+    continue;
+    if (PageReserved(page))
+    continue;
+    page_ext = page_ext_get(page);
+    if (unlikely(!page_ext))
+    continue;
+// Maybe overlapping zone
+    if (test_bit(PAGE_EXT_OWNER, &page_ext.flags))
+    goto ext_put_continue;
+// Found early allocated page
+    __update_page_owner_handle(page, early_handle, 0, 0,
+    MR_NEVER, local_clock(), current.pid,
+    current.tgid, current.comm);
+    count++;
+    ext_put_continue:
+    page_ext_put(page_ext);
+    }
+    cond_resched();
+    }
+    pr_info("Node %d, zone %8s: page owner found early allocated %lu pages\n",
+    zone.zone_pgdat.node_id, zone.name, count);
+    }
+#[no_mangle]
+unsafe extern "C" fn init_early_allocated_pages() {
+    static void init_early_allocated_pages(void)
+    {
+    struct zone *zone;
+    for_each_populated_zone(zone)
+    init_pages_in_zone(zone);
+    }
+#[no_mangle]
+unsafe extern "C" fn page_owner_open(inode: *mut inode, file: *mut file) -> c_int {
+    static int page_owner_open(struct inode *inode, struct file *file)
+    {
+    struct page_owner_filter_state *state;
+    state = kzalloc_obj(*state);
+    if (!state)
+    return -ENOMEM;
+    state.print_mode = PAGE_OWNER_PRINT_STACK;
+    nodes_clear(state.nid_filter);
+    state.nid_filter_enabled = false;
+    file.private_data = state;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn page_owner_release(inode: *mut inode, file: *mut file) -> c_int {
+    static int page_owner_release(struct inode *inode, struct file *file)
+    {
+    kfree(file.private_data);
+    return 0;
+    }
+    static ssize_t page_owner_write(struct file *file,
+    const char __user *buf,
+    size_t count, loff_t *ppos)
+    {
+    char *kbuf;
+    char *orig;
+    char *token;
+    int ret;
+    struct page_owner_filter_state *state = file.private_data;
+    enum page_owner_print_mode new_print_mode;
+    nodemask_t new_nid_filter;
+    bool new_nid_filter_enabled;
+//
+// Maximum input length for filter commands:
+// - 32: print_mode command max length is 17 ("mode=stack_handle")
+// with sufficient buffer
+// - 6 * MAX_NUMNODES: worst case for nid list
+// Worst case per node: ",NNNNN" (comma + 5-digit node number) = 6 bytes
+//
+    if (count > 32 + 6 * MAX_NUMNODES)
+    return -EINVAL;
+    kbuf = memdup_user_nul(buf, count);
+    if (IS_ERR(kbuf))
+    return PTR_ERR(kbuf);
+    orig = kbuf;
+    new_print_mode = state.print_mode;
+    new_nid_filter = state.nid_filter;
+    new_nid_filter_enabled = state.nid_filter_enabled;
+    while ((token = strsep(&kbuf, " \t\n")) != core::ptr::null_mut()) {
+    if (*token == '\0')
+    continue;
+    if (!strncmp(token, "mode=", 5)) {
+    ret = sysfs_match_string(page_owner_print_mode_strings,
+    token + 5);
+    if (ret < 0)
+    goto out_free;
+    new_print_mode = ret;
+    } else if (!strncmp(token, "nid=", 4)) {
+    ret = nodelist_parse(token + 4, new_nid_filter);
+    if (ret < 0)
+    goto out_free;
+    if (nodes_empty(new_nid_filter)) {
+    ret = -EINVAL;
+    goto out_free;
+    }
+//
+// We want to filter memory allocations by numa nodes, so make sure
+// that the specified nodes have memory.
+//
+    if (!nodes_subset(new_nid_filter, node_states[N_MEMORY])) {
+    ret = -EINVAL;
+    goto out_free;
+    }
+    new_nid_filter_enabled = true;
+    } else {
+    ret = -EINVAL;
+    goto out_free;
+    }
+    }
+// Commit all filter changes
+    state.print_mode = new_print_mode;
+    state.nid_filter = new_nid_filter;
+    state.nid_filter_enabled = new_nid_filter_enabled;
+    ret = count;
+    out_free:
+    kfree(orig);
+    return ret;
+    }
+    static const struct file_operations page_owner_fops = {
+    .owner		= THIS_MODULE,
+    .open		= page_owner_open,
+    .release	= page_owner_release,
+    .write		= page_owner_write,
+    .read		= read_page_owner,
+    .llseek		= lseek_page_owner,
+    };
+    static void *stack_start(struct seq_file *m, loff_t *ppos)
+    {
+    struct stack *stack;
+    struct stack_print_ctx *ctx = m.private;
+    if (*ppos == -1UL)
+    return core::ptr::null_mut();
+    if (!*ppos) {
+//
+// This pairs with smp_store_release() from function
+// add_stack_record_to_list(), so we get a consistent
+// value of stack_list.
+//
+    stack = smp_load_acquire(&stack_list);
+    ctx.stack = stack;
+    } else {
+    stack = ctx.stack;
+    }
+    return stack;
+    }
+    static void *stack_next(struct seq_file *m, void *v, loff_t *ppos)
+    {
+    struct stack *stack = v;
+    struct stack_print_ctx *ctx = m.private;
+    stack = stack.next;
+// ppos = stack ? *ppos + 1 : -1UL;
+    ctx.stack = stack;
+    return stack;
+    }
+    static unsigned long pages_threshold;
+#[no_mangle]
+unsafe extern "C" fn stack_print(m: *mut seq_file, v: *mut c_void) -> c_int {
+    static int stack_print(struct seq_file *m, void *v)
+    {
+    int i, nr_base_pages;
+    struct stack *stack = v;
+    unsigned long *entries;
+    unsigned long nr_entries;
+    struct stack_record *stack_record = stack.stack_record;
+    struct stack_print_ctx *ctx = m.private;
+    if (!stack.stack_record)
+    return 0;
+    nr_base_pages = refcount_read(&stack_record.count) - 1;
+    if (ctx.flags & STACK_PRINT_FLAG_PAGES &&
+    (nr_base_pages < 1 || nr_base_pages < pages_threshold))
+    return 0;
+    if (ctx.flags & STACK_PRINT_FLAG_STACK) {
+    nr_entries = stack_record.size;
+    entries = stack_record.entries;
+    for (i = 0; i < nr_entries; i++)
+    seq_printf(m, " %pS\n", (void *)entries[i]);
+    }
+    if (ctx.flags & STACK_PRINT_FLAG_HANDLE)
+    seq_printf(m, "handle: %d\n", stack_record.handle.handle);
+    if (ctx.flags & STACK_PRINT_FLAG_PAGES)
+    seq_printf(m, "nr_base_pages: %d\n", nr_base_pages);
+    seq_putc(m, '\n');
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn stack_stop(m: *mut seq_file, v: *mut c_void) {
+    static void stack_stop(struct seq_file *m, void *v)
+    {
+    }
+    static const struct seq_operations stack_op = {
+    .start	= stack_start,
+    .next	= stack_next,
+    .stop	= stack_stop,
+    .show	= stack_print
+    };
+#[no_mangle]
+unsafe extern "C" fn stack_open(inode: *mut inode, file: *mut file) -> c_int {
+    static int stack_open(struct inode *inode, struct file *file)
+    {
+    int ret = seq_open_private(file, &stack_op,
+    sizeof(struct stack_print_ctx));
+    if (!ret) {
+    struct seq_file *m = file.private_data;
+    struct stack_print_ctx *ctx = m.private;
+    ctx.flags = (uintptr_t) inode.i_private;
+    }
+    return ret;
+    }
+    static const struct file_operations stack_fops = {
+    .open		= stack_open,
+    .read		= seq_read,
+    .llseek		= seq_lseek,
+    .release	= seq_release_private,
+    };
+#[no_mangle]
+unsafe extern "C" fn threshold_get(data: *mut c_void, val: *mut u64) -> c_int {
+    static int threshold_get(void *data, u64 *val)
+    {
+// val = READ_ONCE(pages_threshold);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn threshold_set(data: *mut c_void, val: u64) -> c_int {
+    static int threshold_set(void *data, u64 val)
+    {
+    WRITE_ONCE(pages_threshold, val);
+    return 0;
+    }
+    DEFINE_SIMPLE_ATTRIBUTE(threshold_fops, &threshold_get, &threshold_set, "%llu\n");
+#[no_mangle]
+unsafe extern "C" fn pageowner_init() -> int __init {
+    static int __init pageowner_init(void)
+    {
+    struct dentry *dir;
+    if (!static_branch_unlikely(&page_owner_inited)) {
+    pr_info("page_owner is disabled\n");
+    return 0;
+    }
+    debugfs_create_file("page_owner", 0600, core::ptr::null_mut(), core::ptr::null_mut(), &page_owner_fops);
+    dir = debugfs_create_dir("page_owner_stacks", core::ptr::null_mut());
+    debugfs_create_file("show_stacks", 0400, dir,
+    (void *)(STACK_PRINT_FLAG_STACK |
+    STACK_PRINT_FLAG_PAGES),
+    &stack_fops);
+    debugfs_create_file("show_handles", 0400, dir,
+    (void *)(STACK_PRINT_FLAG_HANDLE |
+    STACK_PRINT_FLAG_PAGES),
+    &stack_fops);
+    debugfs_create_file("show_stacks_handles", 0400, dir,
+    (void *)(STACK_PRINT_FLAG_STACK |
+    STACK_PRINT_FLAG_HANDLE),
+    &stack_fops);
+    debugfs_create_file("count_threshold", 0600, dir, core::ptr::null_mut(),
+    &threshold_fops);
+    return 0;
+    }
+    late_initcall(pageowner_init)

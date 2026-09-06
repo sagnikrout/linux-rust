@@ -1,0 +1,208 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/scsi/pcmcia/aha152x_stub.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// ======================================================================
+    A driver for Adaptec AHA152X-compatible PCMCIA SCSI cards.
+    This driver supports the Adaptec AHA-1460, the New Media Bus
+    Toaster, and the New Media Toast & Jam.
+    aha152x_cs.c 1.54 2000/06/12 21:27:25
+    The contents of this file are subject to the Mozilla Public
+    License Version 1.1 (the "License"); you may not use this file
+    except in compliance with the License. You may obtain a copy of
+    the License at http://www.mozilla.org/MPL/
+    Software distributed under the License is distributed on an "AS
+    IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the License for the specific language governing
+    rights and limitations under the License.
+    The initial developer of the original code is David A. Hinds
+    <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
+    are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
+    Alternatively, the contents of this file may be used under the
+    terms of the GNU General Public License version 2 (the "GPL"), in which
+    case the provisions of the GPL are applicable instead of the
+    above.  If you wish to allow the use of your version of this file
+    only under the terms of the GPL and not to allow others to use
+    your version of this file under the MPL, indicate your decision
+    by deleting the provisions above and replace them with the notice
+    and other provisions required by the GPL.  If you do not delete
+    the provisions above, a recipient may use your version of this
+    file under either the MPL or the GPL.
+    ======================================================================*/
+
+// ====================================================================
+// Parameters that can be set with 'insmod'
+// SCSI bus setup options
+    let mut host_id: static int = 7;
+    let mut reconnect: static int = 1;
+    let mut parity: static int = 1;
+    let mut synchronous: static int = 1;
+    let mut reset_delay: static int = 100;
+    let mut ext_trans: static int = 0;
+    module_param(host_id, int, 0);
+    module_param(reconnect, int, 0);
+    module_param(parity, int, 0);
+    module_param(synchronous, int, 0);
+    module_param(reset_delay, int, 0);
+    module_param(ext_trans, int, 0);
+    MODULE_DESCRIPTION("Adaptec AHA152X-compatible PCMCIA SCSI card driver");
+    MODULE_LICENSE("Dual MPL/GPL");
+// ====================================================================
+    typedef struct scsi_info_t {
+    struct pcmcia_device	*p_dev;
+    struct Scsi_Host	*host;
+    } scsi_info_t;
+    static void aha152x_release_cs(struct pcmcia_device *link);
+    static void aha152x_detach(struct pcmcia_device *p_dev);
+    static int aha152x_config_cs(struct pcmcia_device *link);
+#[no_mangle]
+unsafe extern "C" fn aha152x_probe(link: *mut pcmcia_device) -> c_int {
+    static int aha152x_probe(struct pcmcia_device *link)
+    {
+    scsi_info_t *info;
+    dev_dbg(&link.dev, "aha152x_attach()\n");
+// Create new SCSI device
+    info = kzalloc_obj(*info);
+    if (!info) return -ENOMEM;
+    info.p_dev = link;
+    link.priv = info;
+    link.config_flags |= CONF_ENABLE_IRQ | CONF_AUTO_SET_IO;
+    link.config_regs = PRESENT_OPTION;
+    return aha152x_config_cs(link);
+    } /* aha152x_attach */
+// ====================================================================
+#[no_mangle]
+unsafe extern "C" fn aha152x_detach(link: *mut pcmcia_device) {
+    static void aha152x_detach(struct pcmcia_device *link)
+    {
+    dev_dbg(&link.dev, "aha152x_detach\n");
+    aha152x_release_cs(link);
+// Unlink device structure, free bits
+    kfree(link.priv);
+    } /* aha152x_detach */
+// ====================================================================
+#[no_mangle]
+unsafe extern "C" fn aha152x_config_check(p_dev: *mut pcmcia_device, priv_data: *mut c_void) -> c_int {
+    static int aha152x_config_check(struct pcmcia_device *p_dev, void *priv_data)
+    {
+    p_dev.io_lines = 10;
+// For New Media T&J, look for a SCSI window
+    if ((p_dev.resource[0].end < 0x20) &&
+    (p_dev.resource[1].end >= 0x20))
+    p_dev.resource[0].start = p_dev.resource[1].start;
+    if (p_dev.resource[0].start >= 0xffff)
+    return -EINVAL;
+    p_dev.resource[1].start = p_dev.resource[1].end = 0;
+    p_dev.resource[0].end = 0x20;
+    p_dev.resource[0].flags &= ~IO_DATA_PATH_WIDTH;
+    p_dev.resource[0].flags |= IO_DATA_PATH_WIDTH_AUTO;
+    return pcmcia_request_io(p_dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn aha152x_config_cs(link: *mut pcmcia_device) -> c_int {
+    static int aha152x_config_cs(struct pcmcia_device *link)
+    {
+    scsi_info_t *info = link.priv;
+    struct aha152x_setup s;
+    int ret;
+    struct Scsi_Host *host;
+    dev_dbg(&link.dev, "aha152x_config\n");
+    ret = pcmcia_loop_config(link, aha152x_config_check, core::ptr::null_mut());
+    if (ret)
+    goto failed;
+    if (!link.irq)
+    goto failed;
+    ret = pcmcia_enable_device(link);
+    if (ret)
+    goto failed;
+// Set configuration options for the aha152x driver
+    memset(&s, 0, sizeof(s));
+    s.conf        = "PCMCIA setup";
+    s.io_port     = link.resource[0].start;
+    s.irq         = link.irq;
+    s.scsiid      = host_id;
+    s.reconnect   = reconnect;
+    s.parity      = parity;
+    s.synchronous = synchronous;
+    s.delay       = reset_delay;
+    if (ext_trans)
+    s.ext_trans = ext_trans;
+    host = aha152x_probe_one(&s);
+    if (host == core::ptr::null_mut()) {
+    printk(KERN_INFO "aha152x_cs: no SCSI devices found\n");
+    goto failed;
+    }
+    info.host = host;
+    return 0;
+    failed:
+    aha152x_release_cs(link);
+    return -ENODEV;
+    }
+#[no_mangle]
+unsafe extern "C" fn aha152x_release_cs(link: *mut pcmcia_device) {
+    static void aha152x_release_cs(struct pcmcia_device *link)
+    {
+    scsi_info_t *info = link.priv;
+    aha152x_release(info.host);
+    pcmcia_disable_device(link);
+    }
+#[no_mangle]
+unsafe extern "C" fn aha152x_resume(link: *mut pcmcia_device) -> c_int {
+    static int aha152x_resume(struct pcmcia_device *link)
+    {
+    scsi_info_t *info = link.priv;
+    aha152x_host_reset_host(info.host);
+    return 0;
+    }
+    static const struct pcmcia_device_id aha152x_ids[] = {
+    PCMCIA_DEVICE_PROD_ID123("New Media", "SCSI", "Bus Toaster", 0xcdf7e4cc, 0x35f26476, 0xa8851d6e),
+    PCMCIA_DEVICE_PROD_ID123("NOTEWORTHY", "SCSI", "Bus Toaster", 0xad89c6e8, 0x35f26476, 0xa8851d6e),
+    PCMCIA_DEVICE_PROD_ID12("Adaptec, Inc.", "APA-1460 SCSI Host Adapter", 0x24ba9738, 0x3a3c3d20),
+    PCMCIA_DEVICE_PROD_ID12("New Media Corporation", "Multimedia Sound/SCSI", 0x085a850b, 0x80a6535c),
+    PCMCIA_DEVICE_PROD_ID12("NOTEWORTHY", "NWCOMB02 SCSI/AUDIO COMBO CARD", 0xad89c6e8, 0x5f9a615b),
+    PCMCIA_DEVICE_NULL,
+    };
+    MODULE_DEVICE_TABLE(pcmcia, aha152x_ids);
+    static struct pcmcia_driver aha152x_cs_driver = {
+    .owner		= THIS_MODULE,
+    .name		= "aha152x_cs",
+    .probe		= aha152x_probe,
+    .remove		= aha152x_detach,
+    .id_table       = aha152x_ids,
+    .resume		= aha152x_resume,
+    };
+    module_pcmcia_driver(aha152x_cs_driver);

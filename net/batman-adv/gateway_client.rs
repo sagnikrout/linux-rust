@@ -1,0 +1,70 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: net/batman-adv/gateway_client.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// Copyright (C) B.A.T.M.A.N. contributors:
+//
+// Marek Lindner
+//
+
+extern "C" {
+    pub fn batadv_gw_check_client_stop(bat_priv: *mut batadv_priv);
+}
+extern "C" {
+    pub fn batadv_gw_reselect(bat_priv: *mut batadv_priv);
+}
+extern "C" {
+    pub fn batadv_gw_election(bat_priv: *mut batadv_priv);
+}
+extern "C" {
+    pub fn batadv_gw_node_free(bat_priv: *mut batadv_priv);
+}
+extern "C" {
+    pub fn batadv_gw_node_release(ref: *mut kref);
+}
+extern "C" {
+    pub fn batadv_gw_dump(msg: *mut sk_buff, cb: *mut netlink_callback) -> c_int;
+}
+extern "C" {
+    pub fn batadv_gw_out_of_range(bat_priv: *mut batadv_priv, skb: *mut sk_buff) -> bool;
+}
+//
+// batadv_gw_node_put() - decrement the gw_node refcounter and possibly release
+// it
+// @gw_node: gateway node to free
+//

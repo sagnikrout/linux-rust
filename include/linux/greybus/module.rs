@@ -1,0 +1,67 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/greybus/module.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Greybus Module code
+//
+// Copyright 2016 Google Inc.
+// Copyright 2016 Linaro Ltd.
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct gb_module {
+    pub dev: device,
+    pub hd: *mut gb_host_device,
+    pub hd_node: list_head,
+    pub module_id: u8,
+    pub num_interfaces: usize,
+    pub disconnected: bool,
+    pub interfaces: [*mut gb_interface; ],
+}
+
+extern "C" {
+    pub fn gb_module_add(module: *mut gb_module) -> c_int;
+}
+extern "C" {
+    pub fn gb_module_del(module: *mut gb_module);
+}
+extern "C" {
+    pub fn gb_module_put(module: *mut gb_module);
+}

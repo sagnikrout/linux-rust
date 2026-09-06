@@ -1,0 +1,60 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/mfd/rdc321x.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+// Offsets to be accessed in the southbridge PCI
+// device configuration register
+pub const RDC321X_WDT_CTRL: c_uint = 0x44;
+pub const RDC321X_GPIO_CTRL_REG1: c_uint = 0x48;
+pub const RDC321X_GPIO_DATA_REG1: c_uint = 0x4c;
+pub const RDC321X_GPIO_CTRL_REG2: c_uint = 0x84;
+pub const RDC321X_GPIO_DATA_REG2: c_uint = 0x88;
+pub const RDC321X_NUM_GPIO: c_int = 59;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rdc321x_gpio_pdata {
+    pub sb_pdev: *mut pci_dev,
+    pub max_gpios: unsigned,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rdc321x_wdt_pdata {
+    pub sb_pdev: *mut pci_dev,
+}

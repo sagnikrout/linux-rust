@@ -1,0 +1,189 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: block/blk-throttle.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+//
+// To implement hierarchical throttling, throtl_grps form a tree and bios
+// are dispatched upwards level by level until they reach the top and get
+// issued.  When dispatching bios from the children and local group at each
+// level, if the bios are dispatched into a single bio_list, there's a risk
+// of a local or child group which can queue many bios at once filling up
+// the list starving others.
+//
+// To avoid such starvation, dispatched bios are queued separately
+// according to where they came from.  When they are again dispatched to
+// the parent, they're popped in round-robin order so that no single source
+// hogs the dispatch window.
+//
+// throtl_qnode is used to keep the queued bios separated by their sources.
+// Bios are queued to throtl_qnode which in turn is queued to
+// throtl_service_queue and then dispatched in round-robin order.
+//
+// It's also used to track the reference counts on blkg's.  A qnode always
+// belongs to a throtl_grp and gets queued on itself or the parent, so
+// incrementing the reference of the associated throtl_grp when a qnode is
+// queued and decrementing when dequeued is enough to keep the whole blkg
+// tree pinned while bios are in flight.
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct throtl_qnode {
+    pub /: *mut *mut list_head node; / service_queue->queued[],
+    pub /: *mut *mut bio_list bios_bps; / queued bios for bps limit,
+    pub /: *mut *mut bio_list bios_iops; / queued bios for iops limit,
+    pub /: *mut *mut *mut throtl_grp tg; / tg this qnode belongs to,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct throtl_service_queue {
+    pub /: *mut *mut *mut throtl_service_queue parent_sq; / the parent service_queue,
+//
+// Bios queued directly to this service_queue or dispatched from
+// children throtl_grp's.
+//
+    pub /: *mut *mut list_head queued[2]; / throtl_qnode [READ/WRITE],
+    pub /: *mut *mut unsigned int nr_queued_bps[2]; / number of queued bps bios,
+    pub /: *mut *mut unsigned int nr_queued_iops[2]; / number of queued iops bios,
+//
+// RB tree of active children throtl_grp's, which are sorted by
+// their ->disptime.
+//
+    pub /: *mut *mut rb_root_cached pending_tree; / RB tree of active tgs,
+    pub /: *mut *mut unsigned int nr_pending; / # queued in the tree,
+    pub /: *mut *mut unsigned long first_pending_disptime; / disptime of the first tg,
+    pub /: *mut *mut timer_list pending_timer; / fires on first_pending_disptime,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum tg_state_flags {
+    THROTL_TG_PENDING		= 1 << 0,	/* on parent's pending tree */
+    THROTL_TG_WAS_EMPTY		= 1 << 1,	/* bio_lists[] became non-empty */
+//
+// The sq's iops queue is empty, and a bio is about to be enqueued
+// to the first qnode's bios_iops list.
+//
+    THROTL_TG_IOPS_WAS_EMPTY	= 1 << 2,
+    THROTL_TG_CANCELING		= 1 << 3,	/* starts to cancel bio */
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct throtl_grp {
+// must be the first member
+    pub pd: blkg_policy_data,
+// active throtl group service_queue member
+    pub rb_node: rb_node,
+// throtl_data this group belongs to
+    pub td: *mut throtl_data,
+// this group's service queue
+    pub service_queue: throtl_service_queue,
+//
+// qnode_on_self is used when bios are directly queued to this
+// throtl_grp so that local bios compete fairly with bios
+// dispatched from children.  qnode_on_parent is used when bios are
+// dispatched from this throtl_grp into its parent and will compete
+// with the sibling qnode_on_parents and the parent's
+// qnode_on_self.
+//
+    pub qnode_on_self: [throtl_qnode; 2],
+    pub qnode_on_parent: [throtl_qnode; 2],
+//
+// Dispatch time in jiffies. This is the estimated time when group
+// will unthrottle and is ready to dispatch more bio. It is used as
+// key to sort active groups in service tree.
+//
+    pub disptime: c_ulong,
+    pub flags: c_uint,
+// are there any throtl rules between this group and td?
+    pub has_rules_bps: [bool; 2],
+    pub has_rules_iops: [bool; 2],
+// bytes per second rate limits
+    pub bps: [u64; 2],
+// IOPS limits
+    pub iops: [c_uint; 2],
+//
+// Number of bytes/bio's dispatched in current slice.
+// When new configuration is submitted while some bios are still throttled,
+// first calculate the carryover: the amount of bytes/IOs already waited
+// under the previous configuration. Then, [bytes/io]_disp are represented
+// as the negative of the carryover, and they will be used to calculate the
+// wait time under the new configuration.
+//
+    pub bytes_disp: [i64; 2],
+    pub io_disp: [c_int; 2],
+// When did we start a new slice
+    pub slice_start: [c_ulong; 2],
+    pub slice_end: [c_ulong; 2],
+    pub stat_bytes: blkg_rwstat,
+    pub stat_ios: blkg_rwstat,
+}
+
+extern "C" {
+    pub fn pd_to_tg(_arg: blkg_to_pd(blkg, _arg: &blkcg_policy_throtl)) -> return;
+}
+//
+// Internal throttling interface
+//
+
+extern "C" {
+    pub fn blk_throtl_exit(disk: *mut gendisk);
+}
+extern "C" {
+    pub fn __blk_throtl_bio(bio: *mut bio) -> bool;
+}
+extern "C" {
+    pub fn blk_throtl_cancel_bios(disk: *mut gendisk);
+}
+//
+// q->td guarantees that the blk-throttle module is already loaded,
+// and the plid of blk-throttle is assigned.
+// blkcg_policy_enabled() guarantees that the policy is activated
+// in the request_queue.
+//
+// iops limit is always counted
+//
+// block throttling takes effect if the policy is activated
+// in the bio's request_queue.
+//
+extern "C" {
+    pub fn __blk_throtl_bio(_arg: bio) -> return;
+}
+

@@ -1,0 +1,234 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: tools/testing/selftests/rseq/rseq.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: LGPL-2.1 OR MIT
+//
+// rseq.h
+//
+// (C) Copyright 2016-2018 - Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+//
+
+//
+// Empty code injection macros, override when testing.
+// It is important to consider that the ASM injection macros need to be
+// fully reentrant (e.g. do not modify the stack).
+//
+
+// Macro flag: #define RSEQ_INJECT_ASM(n)
+
+// Macro flag: #define RSEQ_INJECT_C(n)
+
+// Macro flag: #define RSEQ_INJECT_INPUT
+
+// Macro flag: #define RSEQ_INJECT_CLOBBER
+
+// Macro flag: #define RSEQ_INJECT_FAILED
+
+// Offset from the thread pointer to the rseq area.
+//
+// The rseq ABI is composed of extensible feature fields. The extensions
+// are done by appending additional fields at the end of the structure.
+// The rseq_size defines the size of the active feature set which can be
+// used by the application for the current rseq registration. Features
+// starting at offset >= rseq_size are inactive and should not be used.
+//
+// The rseq_size is the intersection between the available allocation
+// size for the rseq area and the feature size supported by the kernel.
+// unsuccessful.
+//
+// Flags used during rseq registration.
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum rseq_mo {
+    RSEQ_MO_RELAXED = 0,
+    RSEQ_MO_CONSUME = 1,	/* Unused */
+    RSEQ_MO_ACQUIRE = 2,	/* Unused */
+    RSEQ_MO_RELEASE = 3,
+    RSEQ_MO_ACQ_REL = 4,	/* Unused */
+    RSEQ_MO_SEQ_CST = 5,	/* Unused */
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum rseq_percpu_mode {
+    RSEQ_PERCPU_CPU_ID = 0,
+    RSEQ_PERCPU_MM_CID = 1,
+}
+
+//
+// Register rseq for the current thread. This needs to be called once
+// by any thread which uses restartable sequences, before they start
+// using restartable sequences, to ensure restartable sequences
+// succeed. A restartable sequence executed from a non-registered
+// thread will always fail.
+//
+extern "C" {
+    pub fn __rseq_register_current_thread(nolibc: bool, legacy: bool) -> c_int;
+}
+extern "C" {
+    pub fn __rseq_register_current_thread(_arg: false, _arg: false) -> return;
+}
+//
+// Unregister rseq for current thread.
+//
+extern "C" {
+    pub fn rseq_unregister_current_thread() -> c_int;
+}
+//
+// Restartable sequence fallback for reading the current CPU number.
+//
+extern "C" {
+    pub fn rseq_fallback_current_cpu() -> i32;
+}
+//
+// Restartable sequence fallback for reading the current node number.
+//
+extern "C" {
+    pub fn rseq_fallback_current_node() -> i32;
+}
+//
+// Returns true if rseq is supported.
+//
+extern "C" {
+    pub fn rseq_available() -> bool;
+}
+//
+// Values returned can be either the current CPU number, -1 (rseq is
+// uninitialized), or -2 (rseq initialization has failed).
+//
+extern "C" {
+    pub fn RSEQ_ACCESS_ONCE(_arg: rseq_get_abi()->cpu_id) -> return;
+}
+//
+// Returns a possible CPU number, which is typically the current CPU.
+// The returned CPU number can be used to prepare for an rseq critical
+// section, which will confirm whether the cpu number is indeed the
+// current one, and whether rseq is initialized.
+//
+// The CPU number returned by rseq_cpu_start should always be validated
+// by passing it to a rseq asm sequence, or by comparing it to the
+// return value of rseq_current_cpu_raw() if the rseq asm sequence
+// does not need to be invoked.
+//
+extern "C" {
+    pub fn RSEQ_ACCESS_ONCE(_arg: rseq_get_abi()->cpu_id_start) -> return;
+}
+//
+// Current NUMA node number.
+//
+extern "C" {
+    pub fn RSEQ_ACCESS_ONCE(_arg: rseq_get_abi()->node_id) -> return;
+}
+extern "C" {
+    pub fn RSEQ_ACCESS_ONCE(_arg: rseq_get_abi()->mm_cid) -> return;
+}
+//
+// rseq_prepare_unload() should be invoked by each thread executing a rseq
+// critical section at least once between their last critical section and
+// library unload of the library defining the rseq critical section (struct
+// rseq_cs) or the code referred to by the struct rseq_cs start_ip and
+// post_commit_offset fields. This also applies to use of rseq in code
+// generated by JIT: rseq_prepare_unload() should be invoked at least once by
+// each thread executing a rseq critical section before reclaim of the memory
+// holding the struct rseq_cs or reclaim of the code pointed to by struct
+// rseq_cs start_ip and post_commit_offset fields.
+//
+extern "C" {
+    pub fn rseq_cmpeqv_storev_relaxed_cpu_id(_arg: v, _arg: expect, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_storev_relaxed_mm_cid(_arg: v, _arg: expect, _arg: newv, _arg: cpu) -> return;
+}
+//
+// Compare @v against @expectnot. When it does _not_ match, load @v
+// into @load, and store the content of *@v + voffp into @v.
+//
+extern "C" {
+    pub fn rseq_cmpnev_storeoffp_load_relaxed_cpu_id(_arg: v, _arg: expectnot, _arg: voffp, _arg: load, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpnev_storeoffp_load_relaxed_mm_cid(_arg: v, _arg: expectnot, _arg: voffp, _arg: load, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_addv_relaxed_cpu_id(_arg: v, _arg: count, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_addv_relaxed_mm_cid(_arg: v, _arg: count, _arg: cpu) -> return;
+}
+
+//
+// pval = *(ptr+off)
+// *pval += inc;
+//
+extern "C" {
+    pub fn rseq_offset_deref_addv_relaxed_cpu_id(_arg: ptr, _arg: off, _arg: inc, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_offset_deref_addv_relaxed_mm_cid(_arg: ptr, _arg: off, _arg: inc, _arg: cpu) -> return;
+}
+
+extern "C" {
+    pub fn rseq_cmpeqv_trystorev_storev_relaxed_cpu_id(_arg: v, _arg: expect, _arg: v2, _arg: newv2, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trystorev_storev_relaxed_mm_cid(_arg: v, _arg: expect, _arg: v2, _arg: newv2, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trystorev_storev_release_cpu_id(_arg: v, _arg: expect, _arg: v2, _arg: newv2, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trystorev_storev_release_mm_cid(_arg: v, _arg: expect, _arg: v2, _arg: newv2, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_cmpeqv_storev_relaxed_cpu_id(_arg: v, _arg: expect, _arg: v2, _arg: expect2, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_cmpeqv_storev_relaxed_mm_cid(_arg: v, _arg: expect, _arg: v2, _arg: expect2, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trymemcpy_storev_relaxed_cpu_id(_arg: v, _arg: expect, _arg: dst, _arg: src, _arg: len, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trymemcpy_storev_relaxed_mm_cid(_arg: v, _arg: expect, _arg: dst, _arg: src, _arg: len, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trymemcpy_storev_release_cpu_id(_arg: v, _arg: expect, _arg: dst, _arg: src, _arg: len, _arg: newv, _arg: cpu) -> return;
+}
+extern "C" {
+    pub fn rseq_cmpeqv_trymemcpy_storev_release_mm_cid(_arg: v, _arg: expect, _arg: dst, _arg: src, _arg: len, _arg: newv, _arg: cpu) -> return;
+}

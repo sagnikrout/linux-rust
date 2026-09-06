@@ -1,0 +1,164 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/firmware/efi/riscv-runtime.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Extensible Firmware Interface
+//
+// Copyright (C) 2020 Western Digital Corporation or its affiliates.
+//
+// Based on Extensible Firmware Interface Specification version 2.4
+// Adapted from drivers/firmware/efi/arm-runtime.c
+//
+
+#[no_mangle]
+unsafe extern "C" fn efi_virtmap_init() -> bool __init {
+    static bool __init efi_virtmap_init(void)
+    {
+    efi_memory_desc_t *md;
+    efi_mm.pgd = pgd_alloc(&efi_mm);
+    mm_init_cpumask(&efi_mm);
+    init_new_context(core::ptr::null_mut(), &efi_mm);
+    for_each_efi_memory_desc(md) {
+    if (!(md.attribute & EFI_MEMORY_RUNTIME))
+    continue;
+    if (md.virt_addr == U64_MAX)
+    return false;
+    efi_create_mapping(&efi_mm, md);
+    }
+    if (efi_memattr_apply_permissions(&efi_mm, efi_set_mapping_permissions))
+    return false;
+    return true;
+    }
+//
+// Enable the UEFI Runtime Services if all prerequisites are in place, i.e.,
+// non-early mapping of the UEFI system table and virtual mappings for all
+// EFI_MEMORY_RUNTIME regions.
+//
+#[no_mangle]
+unsafe extern "C" fn riscv_enable_runtime_services() -> int __init {
+    static int __init riscv_enable_runtime_services(void)
+    {
+    u64 mapsize;
+    if (!efi_enabled(EFI_BOOT)) {
+    pr_info("EFI services will not be available.\n");
+    return 0;
+    }
+    efi_memmap_unmap();
+    mapsize = efi.memmap.desc_size * efi.memmap.nr_map;
+    if (efi_memmap_init_late(efi.memmap.phys_map, mapsize)) {
+    pr_err("Failed to remap EFI memory map\n");
+    return 0;
+    }
+    if (efi_soft_reserve_enabled()) {
+    efi_memory_desc_t *md;
+    for_each_efi_memory_desc(md) {
+    let mut md_size: u64 = md.num_pages << EFI_PAGE_SHIFT;
+    struct resource *res;
+    if (!(md.attribute & EFI_MEMORY_SP))
+    continue;
+    res = kzalloc_obj(*res);
+    if (WARN_ON(!res))
+    break;
+    res.start	= md.phys_addr;
+    res.end	= md.phys_addr + md_size - 1;
+    res.name	= "Soft Reserved";
+    res.flags	= IORESOURCE_MEM;
+    res.desc	= IORES_DESC_SOFT_RESERVED;
+    insert_resource(&iomem_resource, res);
+    }
+    }
+    if (efi_runtime_disabled()) {
+    pr_info("EFI runtime services will be disabled.\n");
+    return 0;
+    }
+    if (efi_enabled(EFI_RUNTIME_SERVICES)) {
+    pr_info("EFI runtime services access via paravirt.\n");
+    return 0;
+    }
+    pr_info("Remapping and enabling EFI services.\n");
+    if (!efi_virtmap_init()) {
+    pr_err("UEFI virtual mapping missing or invalid -- runtime services will not be available\n");
+    return -ENOMEM;
+    }
+// Set up runtime services function pointers
+    efi_native_runtime_setup();
+    set_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+    return 0;
+    }
+    early_initcall(riscv_enable_runtime_services);
+#[no_mangle]
+unsafe extern "C" fn efi_virtmap_load() {
+    static void efi_virtmap_load(void)
+    {
+    preempt_disable();
+    switch_mm(current.active_mm, &efi_mm, core::ptr::null_mut());
+    }
+#[no_mangle]
+unsafe extern "C" fn efi_virtmap_unload() {
+    static void efi_virtmap_unload(void)
+    {
+    switch_mm(&efi_mm, current.active_mm, core::ptr::null_mut());
+    preempt_enable();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_efi_call_virt_setup() {
+    void arch_efi_call_virt_setup(void)
+    {
+    sync_kernel_mappings(efi_mm.pgd);
+    efi_virtmap_load();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_efi_call_virt_teardown() {
+    void arch_efi_call_virt_teardown(void)
+    {
+    efi_virtmap_unload();
+    }
+#[no_mangle]
+unsafe extern "C" fn riscv_dmi_init() -> int __init {
+    static int __init riscv_dmi_init(void)
+    {
+//
+// On riscv, DMI depends on UEFI, and dmi_setup() needs to
+// be called early because dmi_id_init(), which is an arch_initcall
+// itself, depends on dmi_scan_machine() having been called already.
+//
+    dmi_setup();
+    return 0;
+    }
+    core_initcall(riscv_dmi_init);

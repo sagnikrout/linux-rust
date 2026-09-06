@@ -1,0 +1,1442 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/dma/sh/rz-dmac.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Renesas RZ/G2L DMA Controller Driver
+//
+// Based on imx-dma.c
+//
+// Copyright (C) 2021 Renesas Electronics Corp.
+// Copyright 2010 Sascha Hauer, Pengutronix <s.hauer@pengutronix.de>
+// Copyright 2012 Javier Martin, Vista Silicon <javier.martin@vista-silicon.com>
+//
+
+    enum  rz_dmac_prep_type {
+    RZ_DMAC_DESC_MEMCPY,
+    RZ_DMAC_DESC_SLAVE_SG,
+    RZ_DMAC_DESC_CYCLIC,
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rz_lmdesc {
+    pub header: u32,
+    pub sa: u32,
+    pub da: u32,
+    pub tb: u32,
+    pub chcfg: u32,
+    pub chitvl: u32,
+    pub chext: u32,
+    pub nxla: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rz_dmac_desc {
+    pub vd: virt_dma_desc,
+    pub src: dma_addr_t,
+    pub dest: dma_addr_t,
+    pub len: usize,
+    pub node: list_head,
+    pub direction: enum dma_transfer_direction,
+    pub type: enum rz_dmac_prep_type,
+// For slave sg
+    pub sg: *mut scatterlist,
+    pub sgcount: c_uint,
+    pub start_lmdesc: *mut rz_lmdesc,
+}
+
+//
+// enum rz_dmac_chan_status: RZ DMAC channel status
+// @RZ_DMAC_CHAN_STATUS_PAUSED: Channel is paused though DMA engine callbacks
+// @RZ_DMAC_CHAN_STATUS_CYCLIC: Channel is cyclic
+// @RZ_DMAC_CHAN_STATUS_PAUSED_INTERNAL: Channel is paused through driver internal logic
+//
+    enum rz_dmac_chan_status {
+    RZ_DMAC_CHAN_STATUS_PAUSED,
+    RZ_DMAC_CHAN_STATUS_CYCLIC,
+    RZ_DMAC_CHAN_STATUS_PAUSED_INTERNAL,
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rz_dmac_chan {
+    pub vc: virt_dma_chan,
+    pub ch_base: *mut void __iomem,
+    pub ch_cmn_base: *mut void __iomem,
+    pub index: c_uint,
+    pub desc: *mut rz_dmac_desc,
+    pub descs_allocated: c_int,
+    pub src_per_address: dma_addr_t,
+    pub dst_per_address: dma_addr_t,
+    pub status: c_ulong,
+    pub chcfg: u32,
+    pub chctrl: u32,
+    pub mid_rid: c_int,
+    pub dmac_ack: c_int,
+    struct {
+    pub nxla: u32,
+    pub pm_state: },
+    pub ld_free: list_head,
+    struct {
+    pub base: *mut rz_lmdesc,
+    pub head: *mut rz_lmdesc,
+    pub tail: *mut rz_lmdesc,
+    pub base_dma: dma_addr_t,
+    pub lmdesc: },
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rz_dmac_icu {
+    pub pdev: *mut platform_device,
+    pub dmac_index: u8,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rz_dmac_info {
+    void (*icu_register_dma_req)(struct platform_device *icu_dev,
+    pub req_no): u8 dmac_index, u8 dmac_channel, u16,
+    void (*icu_register_dma_ack)(struct platform_device *icu_dev,
+    pub ack_no): u8 dmac_index, u8 dmac_channel, u16,
+    pub default_dma_ack_no: u16,
+    pub default_dma_req_no: u16,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rz_dmac {
+    pub engine: dma_device,
+    pub icu: rz_dmac_icu,
+    pub info: *const rz_dmac_info,
+    pub dev: *mut device,
+    pub rstc: *mut reset_control,
+    pub base: *mut void __iomem,
+    pub ext_base: *mut void __iomem,
+    pub n_channels: c_uint,
+    pub channels: *mut rz_dmac_chan,
+    pub 1024): DECLARE_BITMAP(modules,,
+}
+
+//
+// -----------------------------------------------------------------------------
+// Registers
+//
+pub const CRTB: c_uint = 0x0020;
+pub const CHSTAT: c_uint = 0x0024;
+pub const CHCTRL: c_uint = 0x0028;
+pub const CHCFG: c_uint = 0x002c;
+pub const NXLA: c_uint = 0x0038;
+pub const CRLA: c_uint = 0x003c;
+pub const DCTRL: c_uint = 0x0000;
+pub const EACH_CHANNEL_OFFSET: c_uint = 0x0040;
+pub const CHANNEL_0_7_OFFSET: c_uint = 0x0000;
+pub const CHANNEL_0_7_COMMON_BASE: c_uint = 0x0300;
+pub const CHANNEL_8_15_OFFSET: c_uint = 0x0400;
+pub const CHANNEL_8_15_COMMON_BASE: c_uint = 0x0700;
+
+    CHCTRL_CLRTC |	CHCTRL_CLREND | \
+    CHCTRL_CLRRQ | CHCTRL_SWRST | \
+    CHCTRL_CLREN)
+
+pub const CHCFG_DS_INVALID: c_uint = 0xFF;
+
+// LINK MODE DESCRIPTOR
+
+pub const RZ_DMAC_MAX_CHAN_DESCRIPTORS: c_int = 16;
+pub const RZ_DMAC_MAX_CHANNELS: c_int = 16;
+pub const DMAC_NR_LMDESC: c_int = 64;
+// RZ/V2H ICU related
+pub const RZV2H_MAX_DMAC_INDEX: c_int = 4;
+//
+// -----------------------------------------------------------------------------
+// Device access
+//
+    static void rz_dmac_writel(struct rz_dmac *dmac, unsigned int val,
+    unsigned int offset)
+    {
+    writel(val, dmac.base + offset);
+    }
+    static void rz_dmac_ext_writel(struct rz_dmac *dmac, unsigned int val,
+    unsigned int offset)
+    {
+    writel(val, dmac.ext_base + offset);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_ext_readl(dmac: *mut rz_dmac, offset: c_uint) -> u32 {
+    static u32 rz_dmac_ext_readl(struct rz_dmac *dmac, unsigned int offset)
+    {
+    return readl(dmac.ext_base + offset);
+    }
+    static void rz_dmac_ch_writel(struct rz_dmac_chan *channel, unsigned int val,
+    unsigned int offset, int which)
+    {
+    if (which)
+    writel(val, channel.ch_base + offset);
+    else
+    writel(val, channel.ch_cmn_base + offset);
+    }
+    static u32 rz_dmac_ch_readl(struct rz_dmac_chan *channel,
+    unsigned int offset, int which)
+    {
+    if (which)
+    return readl(channel.ch_base + offset);
+    else
+    return readl(channel.ch_cmn_base + offset);
+    }
+//
+// -----------------------------------------------------------------------------
+// Initialization
+//
+    static void rz_lmdesc_setup(struct rz_dmac_chan *channel,
+    struct rz_lmdesc *lmdesc)
+    {
+    u32 nxla;
+    channel.lmdesc.base = lmdesc;
+    channel.lmdesc.head = lmdesc;
+    channel.lmdesc.tail = lmdesc;
+    nxla = channel.lmdesc.base_dma;
+    while (lmdesc < (channel.lmdesc.base + (DMAC_NR_LMDESC - 1))) {
+    lmdesc.header = 0;
+    nxla += sizeof(*lmdesc);
+    lmdesc.nxla = nxla;
+    lmdesc++;
+    }
+    lmdesc.header = 0;
+    lmdesc.nxla = channel.lmdesc.base_dma;
+    }
+//
+// -----------------------------------------------------------------------------
+// Descriptors preparation
+//
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_lmdesc_addr(channel: *mut rz_dmac_chan, lmdesc: *mut rz_lmdesc) -> u32 {
+    static u32 rz_dmac_lmdesc_addr(struct rz_dmac_chan *channel, struct rz_lmdesc *lmdesc)
+    {
+    return channel.lmdesc.base_dma +
+    (sizeof(struct rz_lmdesc) * (lmdesc - channel.lmdesc.base));
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_lmdesc_recycle(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_lmdesc_recycle(struct rz_dmac_chan *channel)
+    {
+    struct rz_lmdesc *lmdesc = channel.lmdesc.head;
+    while (!(lmdesc.header & HEADER_LV)) {
+    lmdesc.header = 0;
+    lmdesc++;
+    if (lmdesc >= (channel.lmdesc.base + DMAC_NR_LMDESC))
+    lmdesc = channel.lmdesc.base;
+    }
+    channel.lmdesc.head = lmdesc;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_chan_is_enabled(channel: *mut rz_dmac_chan) -> bool {
+    static bool rz_dmac_chan_is_enabled(struct rz_dmac_chan *channel)
+    {
+    let mut val: u32 = rz_dmac_ch_readl(channel, CHSTAT, 1);
+    return !!(val & CHSTAT_EN);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_chan_is_paused(channel: *mut rz_dmac_chan) -> bool {
+    static bool rz_dmac_chan_is_paused(struct rz_dmac_chan *channel)
+    {
+    let mut val: u32 = rz_dmac_ch_readl(channel, CHSTAT, 1);
+    return !!(val & CHSTAT_SUS);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_enable_hw(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_enable_hw(struct rz_dmac_chan *channel)
+    {
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    u32 nxla;
+    u32 chctrl;
+    dev_dbg(dmac.dev, "%s channel %d\n", __func__, channel.index);
+    rz_dmac_lmdesc_recycle(channel);
+    nxla = rz_dmac_lmdesc_addr(channel, channel.lmdesc.head);
+    chctrl = (channel.chctrl | CHCTRL_SETEN);
+    rz_dmac_ch_writel(channel, nxla, NXLA, 1);
+    rz_dmac_ch_writel(channel, channel.chcfg, CHCFG, 1);
+    rz_dmac_ch_writel(channel, CHCTRL_SWRST, CHCTRL, 1);
+    rz_dmac_ch_writel(channel, chctrl, CHCTRL, 1);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_disable_hw(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_disable_hw(struct rz_dmac_chan *channel)
+    {
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    dev_dbg(dmac.dev, "%s channel %d\n", __func__, channel.index);
+    rz_dmac_ch_writel(channel, CHCTRL_DEFAULT, CHCTRL, 1);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_set_dmars_register(dmac: *mut rz_dmac, nr: c_int, dmars: u32) {
+    static void rz_dmac_set_dmars_register(struct rz_dmac *dmac, int nr, u32 dmars)
+    {
+    let mut dmars_offset: u32 = (nr / 2) * 4;
+    let mut shift: u32 = (nr % 2) * 16;
+    u32 dmars32;
+    dmars32 = rz_dmac_ext_readl(dmac, dmars_offset);
+    dmars32 &= ~(0xffff << shift);
+    dmars32 |= dmars << shift;
+    rz_dmac_ext_writel(dmac, dmars32, dmars_offset);
+    }
+    static void rz_dmac_set_dma_req_no(struct rz_dmac *dmac, unsigned int index,
+    int req_no)
+    {
+    if (dmac.info.icu_register_dma_req)
+    dmac.info.icu_register_dma_req(dmac.icu.pdev, dmac.icu.dmac_index,
+    index, req_no);
+    else
+    rz_dmac_set_dmars_register(dmac, index, req_no);
+    }
+//
+// Map MID/RID request number (bits[0:9] of DMA specifier) to the ICU
+// DMA ACK signal number, per RZ/G3E hardware manual Table 4.6-28.
+//
+// Three peripheral groups cover all ACK-capable peripherals:
+//
+// PFC external DMA pins (DREQ0..DREQ4):
+// req_no 0x000-0x004 -> ACK No. 84-88  (ack = req_no + 84)
+//
+// SSIU BUSIFs (ssip00..ssip93):
+// req_no 0x161-0x198 -> ACK No. 28-83  (ack = req_no - 0x145)
+//
+// SPDIF (CH0..CH2) + SCU SRC (sr0..sr9) + DVC (cmd0..cmd1):
+// req_no 0x199-0x1b4 -> ACK No. 0-27   (ack = req_no - 0x199)
+//
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_get_ack_no(info: *const rz_dmac_info, req_no: u16) -> c_int {
+    static int rz_dmac_get_ack_no(const struct rz_dmac_info *info, u16 req_no)
+    {
+    if (!info.icu_register_dma_ack)
+    return -EINVAL;
+    switch (req_no) {
+    case 0x000 ... 0x004:
+// PFC external DMA pins: ACK No. 84-88
+    return req_no + 84;
+    case 0x161 ... 0x198:
+// SSIU BUSIFs: ACK No. 28-83
+    return req_no - 0x145;
+    case 0x199 ... 0x1b4:
+// SPDIF + SCU SRC + DVC: ACK No. 0-27
+    return req_no - 0x199;
+    default:
+    return -EINVAL;
+    }
+    }
+    static void rz_dmac_set_dma_ack_no(struct rz_dmac *dmac, unsigned int index,
+    int ack_no)
+    {
+    if (ack_no < 0 || !dmac.info.icu_register_dma_ack)
+    return;
+    dmac.info.icu_register_dma_ack(dmac.icu.pdev, dmac.icu.dmac_index,
+    index, ack_no);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_reset_dma_ack_no(dmac: *mut rz_dmac, ack_no: c_int) {
+    static void rz_dmac_reset_dma_ack_no(struct rz_dmac *dmac, int ack_no)
+    {
+    if (ack_no < 0 || !dmac.info.icu_register_dma_ack)
+    return;
+    dmac.info.icu_register_dma_ack(dmac.icu.pdev, dmac.icu.dmac_index,
+    dmac.info.default_dma_ack_no, ack_no);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_prepare_desc_for_memcpy(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_prepare_desc_for_memcpy(struct rz_dmac_chan *channel)
+    {
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    struct rz_lmdesc *lmdesc = channel.lmdesc.tail;
+    struct rz_dmac_desc *d = channel.desc;
+    let mut chcfg: u32 = CHCFG_MEM_COPY;
+    d.start_lmdesc = lmdesc;
+// prepare descriptor
+    lmdesc.sa = d.src;
+    lmdesc.da = d.dest;
+    lmdesc.tb = d.len;
+    lmdesc.chcfg = chcfg;
+    lmdesc.chitvl = 0;
+    lmdesc.chext = 0;
+    lmdesc.header = HEADER_LV | HEADER_LE;
+    rz_dmac_set_dma_req_no(dmac, channel.index, dmac.info.default_dma_req_no);
+    channel.chcfg = chcfg;
+    channel.chctrl = CHCTRL_STG;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_prepare_descs_for_slave_sg(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_prepare_descs_for_slave_sg(struct rz_dmac_chan *channel)
+    {
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    struct rz_dmac_desc *d = channel.desc;
+    struct scatterlist *sg, *sgl = d.sg;
+    struct rz_lmdesc *lmdesc;
+    unsigned int i, sg_len = d.sgcount;
+    channel.chcfg |= CHCFG_SEL(channel.index) | CHCFG_DEM | CHCFG_DMS;
+    if (d.direction == DMA_DEV_TO_MEM) {
+    channel.chcfg |= CHCFG_SAD;
+    channel.chcfg &= ~CHCFG_REQD;
+    } else {
+    channel.chcfg |= CHCFG_DAD | CHCFG_REQD;
+    }
+    lmdesc = channel.lmdesc.tail;
+    d.start_lmdesc = lmdesc;
+    for (i = 0, sg = sgl; i < sg_len; i++, sg = sg_next(sg)) {
+    if (d.direction == DMA_DEV_TO_MEM) {
+    lmdesc.sa = channel.src_per_address;
+    lmdesc.da = sg_dma_address(sg);
+    } else {
+    lmdesc.sa = sg_dma_address(sg);
+    lmdesc.da = channel.dst_per_address;
+    }
+    lmdesc.tb = sg_dma_len(sg);
+    lmdesc.chitvl = 0;
+    lmdesc.chext = 0;
+    if (i == (sg_len - 1)) {
+    lmdesc.chcfg = (channel.chcfg & ~CHCFG_DEM);
+    lmdesc.header = HEADER_LV | HEADER_LE;
+    } else {
+    lmdesc.chcfg = channel.chcfg;
+    lmdesc.header = HEADER_LV;
+    }
+    if (++lmdesc >= (channel.lmdesc.base + DMAC_NR_LMDESC))
+    lmdesc = channel.lmdesc.base;
+    }
+    channel.lmdesc.tail = lmdesc;
+    rz_dmac_set_dma_req_no(dmac, channel.index, channel.mid_rid);
+    rz_dmac_set_dma_ack_no(dmac, channel.index, channel.dmac_ack);
+    channel.chctrl = 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_prepare_descs_for_cyclic(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_prepare_descs_for_cyclic(struct rz_dmac_chan *channel)
+    {
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    struct rz_dmac_desc *d = channel.desc;
+    let mut period_len: usize = d.sgcount;
+    struct rz_lmdesc *lmdesc;
+    let mut buf_len: usize = d.len;
+    let mut periods: usize = buf_len / period_len;
+    lockdep_assert_held(&channel.vc.lock);
+    channel.chcfg |= CHCFG_SEL(channel.index) | CHCFG_DMS;
+    if (d.direction == DMA_DEV_TO_MEM) {
+    channel.chcfg |= CHCFG_SAD;
+    channel.chcfg &= ~CHCFG_REQD;
+    } else {
+    channel.chcfg |= CHCFG_DAD | CHCFG_REQD;
+    }
+    lmdesc = channel.lmdesc.tail;
+    d.start_lmdesc = lmdesc;
+    for (size_t i = 0; i < periods; i++) {
+    if (d.direction == DMA_DEV_TO_MEM) {
+    lmdesc.sa = d.src;
+    lmdesc.da = d.dest + (i * period_len);
+    } else {
+    lmdesc.sa = d.src + (i * period_len);
+    lmdesc.da = d.dest;
+    }
+    lmdesc.tb = period_len;
+    lmdesc.chitvl = 0;
+    lmdesc.chext = 0;
+    lmdesc.chcfg = channel.chcfg;
+    lmdesc.header = HEADER_LV | HEADER_WBD;
+    if (i == periods - 1)
+    lmdesc.nxla = rz_dmac_lmdesc_addr(channel, d.start_lmdesc);
+    if (++lmdesc >= (channel.lmdesc.base + DMAC_NR_LMDESC))
+    lmdesc = channel.lmdesc.base;
+    }
+    channel.lmdesc.tail = lmdesc;
+    rz_dmac_set_dma_req_no(dmac, channel.index, channel.mid_rid);
+    rz_dmac_set_dma_ack_no(dmac, channel.index, channel.dmac_ack);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_xfer_desc(chan: *mut rz_dmac_chan) {
+    static void rz_dmac_xfer_desc(struct rz_dmac_chan *chan)
+    {
+    struct virt_dma_desc *vd;
+    vd = vchan_next_desc(&chan.vc);
+    if (!vd) {
+    chan.desc = core::ptr::null_mut();
+    return;
+    }
+    list_del(&vd.node);
+    chan.desc = to_rz_dmac_desc(vd);
+    switch (chan.desc.type) {
+    case RZ_DMAC_DESC_MEMCPY:
+    rz_dmac_prepare_desc_for_memcpy(chan);
+    break;
+    case RZ_DMAC_DESC_SLAVE_SG:
+    rz_dmac_prepare_descs_for_slave_sg(chan);
+    break;
+    case RZ_DMAC_DESC_CYCLIC:
+    rz_dmac_prepare_descs_for_cyclic(chan);
+    break;
+    }
+    rz_dmac_enable_hw(chan);
+    }
+//
+// -----------------------------------------------------------------------------
+// DMA engine operations
+//
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_alloc_chan_resources(chan: *mut dma_chan) -> c_int {
+    static int rz_dmac_alloc_chan_resources(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    while (channel.descs_allocated < RZ_DMAC_MAX_CHAN_DESCRIPTORS) {
+    struct rz_dmac_desc *desc;
+    desc = kzalloc_obj(*desc);
+    if (!desc)
+    break;
+// No need to lock. This is called only for the 1st client.
+    list_add_tail(&desc.node, &channel.ld_free);
+    channel.descs_allocated++;
+    }
+    if (!channel.descs_allocated)
+    return -ENOMEM;
+    return channel.descs_allocated;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_free_chan_resources(chan: *mut dma_chan) {
+    static void rz_dmac_free_chan_resources(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    struct rz_dmac_desc *desc, *_desc;
+    unsigned long flags;
+    int ret;
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret) {
+    dev_err(dmac.dev, "RPM resume failed for channel %s, ret=%d\n!",
+    dma_chan_name(chan), ret);
+    }
+    spin_lock_irqsave(&channel.vc.lock, flags);
+    rz_lmdesc_setup(channel, channel.lmdesc.base);
+// Skip touching HW if RPM resume failed. Let the cleanup do its jobs.
+    if (!ret)
+    rz_dmac_disable_hw(channel);
+    if (channel.mid_rid >= 0) {
+    clear_bit(channel.mid_rid, dmac.modules);
+    channel.mid_rid = -EINVAL;
+    }
+    channel.status = 0;
+    rz_dmac_reset_dma_ack_no(dmac, channel.dmac_ack);
+    channel.dmac_ack = -EINVAL;
+    spin_unlock_irqrestore(&channel.vc.lock, flags);
+    vchan_free_chan_resources(&channel.vc);
+    spin_lock_irqsave(&channel.vc.lock, flags);
+    list_for_each_entry_safe(desc, _desc, &channel.ld_free, node) {
+    list_del(&desc.node);
+    kfree(desc);
+    channel.descs_allocated--;
+    }
+    INIT_LIST_HEAD(&channel.ld_free);
+    spin_unlock_irqrestore(&channel.vc.lock, flags);
+    }
+    static struct dma_async_tx_descriptor *
+    rz_dmac_prep_dma_memcpy(struct dma_chan *chan, dma_addr_t dest, dma_addr_t src,
+    size_t len, unsigned long flags)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    struct rz_dmac_desc *desc;
+    dev_dbg(dmac.dev, "%s channel: %d src=0x%pad dst=0x%pad len=%zu\n",
+    __func__, channel.index, &src, &dest, len);
+    scoped_guard(spinlock_irqsave, &channel.vc.lock) {
+    desc = list_first_entry_or_null(&channel.ld_free, struct rz_dmac_desc, node);
+    if (!desc)
+    return core::ptr::null_mut();
+    list_del(&desc.node);
+    }
+    desc.type = RZ_DMAC_DESC_MEMCPY;
+    desc.src = src;
+    desc.dest = dest;
+    desc.len = len;
+    desc.direction = DMA_MEM_TO_MEM;
+    return vchan_tx_prep(&channel.vc, &desc.vd, flags);
+    }
+    static struct dma_async_tx_descriptor *
+    rz_dmac_prep_slave_sg(struct dma_chan *chan, struct scatterlist *sgl,
+    unsigned int sg_len,
+    enum dma_transfer_direction direction,
+    unsigned long flags, void *context)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac_desc *desc;
+    struct scatterlist *sg;
+    let mut dma_length: c_int = 0;
+    let mut i: c_int = 0;
+    scoped_guard(spinlock_irqsave, &channel.vc.lock) {
+    desc = list_first_entry_or_null(&channel.ld_free, struct rz_dmac_desc, node);
+    if (!desc)
+    return core::ptr::null_mut();
+    list_del(&desc.node);
+    }
+    for_each_sg(sgl, sg, sg_len, i)
+    dma_length += sg_dma_len(sg);
+    desc.type = RZ_DMAC_DESC_SLAVE_SG;
+    desc.sg = sgl;
+    desc.sgcount = sg_len;
+    desc.len = dma_length;
+    desc.direction = direction;
+    if (direction == DMA_DEV_TO_MEM)
+    desc.src = channel.src_per_address;
+    else
+    desc.dest = channel.dst_per_address;
+    return vchan_tx_prep(&channel.vc, &desc.vd, flags);
+    }
+    static struct dma_async_tx_descriptor *
+    rz_dmac_prep_dma_cyclic(struct dma_chan *chan, dma_addr_t buf_addr,
+    size_t buf_len, size_t period_len,
+    enum dma_transfer_direction direction,
+    unsigned long flags)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac_desc *desc;
+    size_t periods;
+    if (!is_slave_direction(direction))
+    return core::ptr::null_mut();
+    if (!period_len || !buf_len)
+    return core::ptr::null_mut();
+    periods = buf_len / period_len;
+    if (!periods || periods > DMAC_NR_LMDESC)
+    return core::ptr::null_mut();
+    scoped_guard(spinlock_irqsave, &channel.vc.lock) {
+    if (channel.status & BIT(RZ_DMAC_CHAN_STATUS_CYCLIC))
+    return core::ptr::null_mut();
+    desc = list_first_entry_or_null(&channel.ld_free, struct rz_dmac_desc, node);
+    if (!desc)
+    return core::ptr::null_mut();
+    list_del(&desc.node);
+    channel.status |= BIT(RZ_DMAC_CHAN_STATUS_CYCLIC);
+    }
+    desc.type = RZ_DMAC_DESC_CYCLIC;
+    desc.sgcount = period_len;
+    desc.len = buf_len;
+    desc.direction = direction;
+    if (direction == DMA_DEV_TO_MEM) {
+    desc.src = channel.src_per_address;
+    desc.dest = buf_addr;
+    } else {
+    desc.src = buf_addr;
+    desc.dest = channel.dst_per_address;
+    }
+    return vchan_tx_prep(&channel.vc, &desc.vd, flags);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_terminate_all(chan: *mut dma_chan) -> c_int {
+    static int rz_dmac_terminate_all(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    unsigned long flags;
+    LIST_HEAD(head);
+    int ret;
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret) {
+    dev_err(dmac.dev, "RPM resume failed for channel %s, ret=%d\n!",
+    dma_chan_name(chan), ret);
+    }
+    spin_lock_irqsave(&channel.vc.lock, flags);
+// Don't return if RPM failed. Let the cleanup do its jobs.
+    if (!ret)
+    rz_dmac_disable_hw(channel);
+    rz_lmdesc_setup(channel, channel.lmdesc.base);
+    if (channel.desc) {
+    vchan_terminate_vdesc(&channel.desc.vd);
+    channel.desc = core::ptr::null_mut();
+    }
+    vchan_get_all_descriptors(&channel.vc, &head);
+    channel.status = 0;
+    spin_unlock_irqrestore(&channel.vc.lock, flags);
+    vchan_dma_desc_free_list(&channel.vc, &head);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_issue_pending(chan: *mut dma_chan) {
+    static void rz_dmac_issue_pending(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    unsigned long flags;
+    int ret;
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret)
+    return;
+    spin_lock_irqsave(&channel.vc.lock, flags);
+//
+// Issue the descriptor. If another transfer is already in progress, the
+// issued descriptor will be handled after the current transfer finishes.
+//
+    if (vchan_issue_pending(&channel.vc) && !channel.desc)
+    rz_dmac_xfer_desc(channel);
+    spin_unlock_irqrestore(&channel.vc.lock, flags);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_ds_to_val_mapping(ds: enum dma_slave_buswidth) -> u8 {
+    static u8 rz_dmac_ds_to_val_mapping(enum dma_slave_buswidth ds)
+    {
+    u8 i;
+    static const enum dma_slave_buswidth ds_lut[] = {
+    DMA_SLAVE_BUSWIDTH_1_BYTE,
+    DMA_SLAVE_BUSWIDTH_2_BYTES,
+    DMA_SLAVE_BUSWIDTH_4_BYTES,
+    DMA_SLAVE_BUSWIDTH_8_BYTES,
+    DMA_SLAVE_BUSWIDTH_16_BYTES,
+    DMA_SLAVE_BUSWIDTH_32_BYTES,
+    DMA_SLAVE_BUSWIDTH_64_BYTES,
+    DMA_SLAVE_BUSWIDTH_128_BYTES,
+    };
+    for (i = 0; i < ARRAY_SIZE(ds_lut); i++) {
+    if (ds_lut[i] == ds)
+    return i;
+    }
+    return CHCFG_DS_INVALID;
+    }
+    static int rz_dmac_config(struct dma_chan *chan,
+    struct dma_slave_config *config)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    u32 val;
+    channel.dst_per_address = config.dst_addr;
+    channel.chcfg &= ~CHCFG_FILL_DDS_MASK;
+    if (channel.dst_per_address) {
+    val = rz_dmac_ds_to_val_mapping(config.dst_addr_width);
+    if (val == CHCFG_DS_INVALID)
+    return -EINVAL;
+    channel.chcfg |= FIELD_PREP(CHCFG_FILL_DDS_MASK, val);
+    }
+    channel.src_per_address = config.src_addr;
+    channel.chcfg &= ~CHCFG_FILL_SDS_MASK;
+    if (channel.src_per_address) {
+    val = rz_dmac_ds_to_val_mapping(config.src_addr_width);
+    if (val == CHCFG_DS_INVALID)
+    return -EINVAL;
+    channel.chcfg |= FIELD_PREP(CHCFG_FILL_SDS_MASK, val);
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_virt_desc_free(vd: *mut virt_dma_desc) {
+    static void rz_dmac_virt_desc_free(struct virt_dma_desc *vd)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(vd.tx.chan);
+    struct virt_dma_chan *vc = to_virt_chan(vd.tx.chan);
+    struct rz_dmac_desc *desc = to_rz_dmac_desc(vd);
+    guard(spinlock_irqsave)(&vc.lock);
+    list_add_tail(&desc.node, &channel.ld_free);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_device_synchronize(chan: *mut dma_chan) {
+    static void rz_dmac_device_synchronize(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    u32 chstat;
+    int ret;
+    vchan_synchronize(&channel.vc);
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret)
+    return;
+    ret = read_poll_timeout(rz_dmac_ch_readl, chstat, !(chstat & CHSTAT_EN),
+    100, 100000, false, channel, CHSTAT, 1);
+    if (ret < 0)
+    dev_warn(dmac.dev, "DMA Timeout");
+    rz_dmac_set_dma_req_no(dmac, channel.index, dmac.info.default_dma_req_no);
+    rz_dmac_reset_dma_ack_no(dmac, channel.dmac_ack);
+    }
+    static struct rz_lmdesc *
+    rz_dmac_get_next_lmdesc(struct rz_lmdesc *base, struct rz_lmdesc *lmdesc)
+    {
+    struct rz_lmdesc *next = ++lmdesc;
+    if (next >= base + DMAC_NR_LMDESC)
+    next = base;
+    return next;
+    }
+    static u32 rz_dmac_calculate_residue_bytes_in_vd(struct rz_dmac_chan *channel,
+    struct rz_dmac_desc *desc, u32 crla)
+    {
+    struct rz_lmdesc *lmdesc = desc.start_lmdesc;
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    let mut residue: u32 = 0, i = 0;
+    while (lmdesc.nxla != crla) {
+    lmdesc = rz_dmac_get_next_lmdesc(channel.lmdesc.base, lmdesc);
+    if (++i >= DMAC_NR_LMDESC)
+    return 0;
+    }
+// Calculate residue from next lmdesc to end of virtual desc
+    if (channel.status & BIT(RZ_DMAC_CHAN_STATUS_CYCLIC)) {
+    let mut start_lmdesc_addr: u32 = rz_dmac_lmdesc_addr(channel, desc.start_lmdesc);
+    while (lmdesc.nxla != start_lmdesc_addr) {
+    residue += lmdesc.tb;
+    lmdesc = rz_dmac_get_next_lmdesc(channel.lmdesc.base, lmdesc);
+    }
+    } else {
+    while (lmdesc.chcfg & CHCFG_DEM) {
+    residue += lmdesc.tb;
+    lmdesc = rz_dmac_get_next_lmdesc(channel.lmdesc.base, lmdesc);
+    }
+    }
+    dev_dbg(dmac.dev, "%s: VD residue is %u\n", __func__, residue);
+    return residue;
+    }
+    static int rz_dmac_chan_get_residue(struct device *dev, struct rz_dmac_chan *channel,
+    dma_cookie_t cookie, u32 *residue)
+    {
+    struct rz_dmac_desc *desc = core::ptr::null_mut();
+    struct virt_dma_desc *vd;
+    u32 crla, crtb, i;
+    int ret;
+    vd = vchan_find_desc(&channel.vc, cookie);
+    if (vd) {
+// Descriptor has been issued but not yet processed.
+    desc = to_rz_dmac_desc(vd);
+// residue = desc->len;
+    return 0;
+    } else if (channel.desc && channel.desc.vd.tx.cookie == cookie) {
+// Descriptor is currently processed.
+    desc = channel.desc;
+    }
+    if (!desc) {
+// Descriptor was not found. May be already completed by now.
+// residue = 0;
+    return 0;
+    }
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret)
+    return ret;
+//
+// We need to read two registers. Make sure the hardware does not move
+// to next lmdesc while reading the current lmdesc. Trying it 3 times
+// should be enough: initial read, retry, retry for the paranoid.
+//
+    for (i = 0; i < 3; i++) {
+    crla = rz_dmac_ch_readl(channel, CRLA, 1);
+    crtb = rz_dmac_ch_readl(channel, CRTB, 1);
+// Still the same?
+    if (crla == rz_dmac_ch_readl(channel, CRLA, 1))
+    break;
+    }
+    WARN_ONCE(i >= 3, "residue might not be continuous!");
+//
+// Calculate number of bytes transferred in processing virtual descriptor.
+// One virtual descriptor can have many lmdesc.
+//
+// residue = crtb + rz_dmac_calculate_residue_bytes_in_vd(channel, desc, crla);
+    return 0;
+    }
+    static enum dma_status rz_dmac_tx_status(struct dma_chan *chan,
+    dma_cookie_t cookie,
+    struct dma_tx_state *txstate)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    enum dma_status status;
+    u32 residue;
+    scoped_guard(spinlock_irqsave, &channel.vc.lock) {
+    int ret;
+    status = dma_cookie_status(chan, cookie, txstate);
+    if (status == DMA_COMPLETE || !txstate)
+    return status;
+    ret = rz_dmac_chan_get_residue(dmac.dev, channel, cookie, &residue);
+    if (ret)
+    return DMA_ERROR;
+    if (status == DMA_IN_PROGRESS && rz_dmac_chan_is_paused(channel))
+    status = DMA_PAUSED;
+    }
+    dma_set_residue(txstate, residue);
+    return status;
+    }
+    static int rz_dmac_device_pause_set(struct rz_dmac_chan *channel,
+    unsigned long set_bitmask)
+    {
+    let mut ret: c_int = 0;
+    u32 val;
+    lockdep_assert_held(&channel.vc.lock);
+    if (!rz_dmac_chan_is_enabled(channel))
+    return 0;
+    if (rz_dmac_chan_is_paused(channel))
+    goto set_bit;
+    rz_dmac_ch_writel(channel, CHCTRL_SETSUS, CHCTRL, 1);
+    ret = read_poll_timeout_atomic(rz_dmac_ch_readl, val,
+    (val & CHSTAT_SUS), 1, 1024, false,
+    channel, CHSTAT, 1);
+    set_bit:
+    channel.status |= set_bitmask;
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_device_pause(chan: *mut dma_chan) -> c_int {
+    static int rz_dmac_device_pause(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    int ret;
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret)
+    return ret;
+    guard(spinlock_irqsave)(&channel.vc.lock);
+    return rz_dmac_device_pause_set(channel, BIT(RZ_DMAC_CHAN_STATUS_PAUSED));
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_device_pause_internal(channel: *mut rz_dmac_chan) -> c_int {
+    static int rz_dmac_device_pause_internal(struct rz_dmac_chan *channel)
+    {
+    lockdep_assert_held(&channel.vc.lock);
+// Skip channels explicitly paused by consummers or disabled.
+    if (channel.status & BIT(RZ_DMAC_CHAN_STATUS_PAUSED) ||
+    !rz_dmac_chan_is_enabled(channel))
+    return 0;
+    return rz_dmac_device_pause_set(channel, BIT(RZ_DMAC_CHAN_STATUS_PAUSED_INTERNAL));
+    }
+    static int rz_dmac_device_resume_set(struct rz_dmac_chan *channel,
+    unsigned long clear_bitmask)
+    {
+    u32 val;
+    int ret;
+    lockdep_assert_held(&channel.vc.lock);
+//
+// We can be:
+//
+// 1/ after the channel was paused by a consummer and now it
+// needs to be resummed
+// 2/ after the channel was paused internally (as a result of
+// a system suspend with power loss or not)
+// 3/ after the channel was paused by a consummer, the system
+// went through a system suspend (with power loss or not)
+// and the consummer wants to resume the channel
+//
+// To cover all the above cases we set both CLRSUS and SETEN.
+//
+// In case 1/ setting SETEN while the channel is still enabled
+// is harmless for the controller.
+//
+// In case 2/ the channel is disabled when calling this function
+// and setting CLRSUS is harmless for the controller as the
+// channel is disabled anyway.
+//
+// In case 3/ the channel is disabled/enabled if the system
+// went though a suspend with power loss/or not and setting
+// CLRSUS/SETEN is harmless for the controller as the channel
+// is enabled/disabled anyway.
+//
+    rz_dmac_ch_writel(channel, CHCTRL_CLRSUS | CHCTRL_SETEN, CHCTRL, 1);
+    ret = read_poll_timeout_atomic(rz_dmac_ch_readl, val,
+    ((val & (CHSTAT_SUS | CHSTAT_EN)) == CHSTAT_EN),
+    1, 1024, false, channel, CHSTAT, 1);
+    channel.status &= ~clear_bitmask;
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_device_resume(chan: *mut dma_chan) -> c_int {
+    static int rz_dmac_device_resume(struct dma_chan *chan)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    int ret;
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret)
+    return ret;
+    guard(spinlock_irqsave)(&channel.vc.lock);
+    if (!(channel.status & BIT(RZ_DMAC_CHAN_STATUS_PAUSED)))
+    return 0;
+    return rz_dmac_device_resume_set(channel, BIT(RZ_DMAC_CHAN_STATUS_PAUSED));
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_device_resume_internal(channel: *mut rz_dmac_chan) -> c_int {
+    static int rz_dmac_device_resume_internal(struct rz_dmac_chan *channel)
+    {
+    lockdep_assert_held(&channel.vc.lock);
+    if (!(channel.status & BIT(RZ_DMAC_CHAN_STATUS_PAUSED_INTERNAL)))
+    return 0;
+    return rz_dmac_device_resume_set(channel, BIT(RZ_DMAC_CHAN_STATUS_PAUSED_INTERNAL));
+    }
+//
+// -----------------------------------------------------------------------------
+// IRQ handling
+//
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_irq_handle_channel(channel: *mut rz_dmac_chan) {
+    static void rz_dmac_irq_handle_channel(struct rz_dmac_chan *channel)
+    {
+    struct dma_chan *chan = &channel.vc.chan;
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    u32 chstat;
+    chstat = rz_dmac_ch_readl(channel, CHSTAT, 1);
+    if (chstat & CHSTAT_ER) {
+    dev_err(dmac.dev, "DMAC err CHSTAT_%d = %08X\n",
+    channel.index, chstat);
+    scoped_guard(spinlock_irqsave, &channel.vc.lock)
+    rz_dmac_disable_hw(channel);
+    return;
+    }
+//
+// No need to lock. This just clears the END interrupt. Writing
+// zeros to CHCTRL is just ignored by HW.
+//
+    rz_dmac_ch_writel(channel, CHCTRL_CLREND, CHCTRL, 1);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_irq_handler(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
+    static irqreturn_t rz_dmac_irq_handler(int irq, void *dev_id)
+    {
+    struct rz_dmac_chan *channel = dev_id;
+    if (channel) {
+    rz_dmac_irq_handle_channel(channel);
+    return IRQ_WAKE_THREAD;
+    }
+// handle DMAERR irq
+    return IRQ_HANDLED;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_irq_handler_thread(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
+    static irqreturn_t rz_dmac_irq_handler_thread(int irq, void *dev_id)
+    {
+    struct rz_dmac_chan *channel = dev_id;
+    struct rz_dmac_desc *desc;
+    guard(spinlock_irqsave)(&channel.vc.lock);
+    desc = channel.desc;
+    if (!desc)
+    return IRQ_HANDLED;
+    if (channel.status & BIT(RZ_DMAC_CHAN_STATUS_CYCLIC)) {
+    vchan_cyclic_callback(&desc.vd);
+    } else {
+    vchan_cookie_complete(&desc.vd);
+    channel.desc = core::ptr::null_mut();
+    rz_dmac_xfer_desc(channel);
+    }
+    return IRQ_HANDLED;
+    }
+//
+// -----------------------------------------------------------------------------
+// OF xlate and channel filter
+//
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_chan_filter(chan: *mut dma_chan, arg: *mut c_void) -> bool {
+    static bool rz_dmac_chan_filter(struct dma_chan *chan, void *arg)
+    {
+    struct rz_dmac_chan *channel = to_rz_dmac_chan(chan);
+    struct rz_dmac *dmac = to_rz_dmac(chan.device);
+    struct of_phandle_args *dma_spec = arg;
+    u32 ch_cfg;
+    channel.mid_rid = dma_spec.args[0] & MID_RID_MASK;
+    ch_cfg = (dma_spec.args[0] & CHCFG_MASK) >> 10;
+    channel.chcfg = CHCFG_FILL_TM(ch_cfg) | CHCFG_FILL_AM(ch_cfg) |
+    CHCFG_FILL_LVL(ch_cfg) | CHCFG_FILL_HIEN(ch_cfg);
+    channel.dmac_ack = rz_dmac_get_ack_no(dmac.info, channel.mid_rid);
+    return !test_and_set_bit(channel.mid_rid, dmac.modules);
+    }
+    static struct dma_chan *rz_dmac_of_xlate(struct of_phandle_args *dma_spec,
+    struct of_dma *ofdma)
+    {
+    dma_cap_mask_t mask;
+    if (dma_spec.args_count != 1)
+    return core::ptr::null_mut();
+// Only slave DMA channels can be allocated via DT
+    dma_cap_zero(mask);
+    dma_cap_set(DMA_SLAVE, mask);
+    return __dma_request_channel(&mask, rz_dmac_chan_filter, dma_spec,
+    ofdma.of_node);
+    }
+//
+// -----------------------------------------------------------------------------
+// Probe and remove
+//
+    static int rz_dmac_chan_probe(struct rz_dmac *dmac,
+    struct rz_dmac_chan *channel,
+    u8 index)
+    {
+    struct platform_device *pdev = to_platform_device(dmac.dev);
+    struct rz_lmdesc *lmdesc;
+    char pdev_irqname[6];
+    char *irqname;
+    int irq, ret;
+    channel.index = index;
+    channel.mid_rid = -EINVAL;
+    channel.dmac_ack = -EINVAL;
+// Set io base address for each channel
+    if (index < 8) {
+    channel.ch_base = dmac.base + CHANNEL_0_7_OFFSET +
+    EACH_CHANNEL_OFFSET * index;
+    channel.ch_cmn_base = dmac.base + CHANNEL_0_7_COMMON_BASE;
+    } else {
+    channel.ch_base = dmac.base + CHANNEL_8_15_OFFSET +
+    EACH_CHANNEL_OFFSET * (index - 8);
+    channel.ch_cmn_base = dmac.base + CHANNEL_8_15_COMMON_BASE;
+    }
+// Allocate descriptors
+    lmdesc = dmam_alloc_coherent(&pdev.dev,
+    sizeof(struct rz_lmdesc) * DMAC_NR_LMDESC,
+    &channel.lmdesc.base_dma, GFP_KERNEL);
+    if (!lmdesc) {
+    dev_err(&pdev.dev, "Can't allocate memory (lmdesc)\n");
+    return -ENOMEM;
+    }
+    rz_lmdesc_setup(channel, lmdesc);
+    channel.vc.desc_free = rz_dmac_virt_desc_free;
+    vchan_init(&channel.vc, &dmac.engine);
+    INIT_LIST_HEAD(&channel.ld_free);
+// Initialize register for each channel
+    rz_dmac_disable_hw(channel);
+// Request the channel interrupt.
+    scnprintf(pdev_irqname, sizeof(pdev_irqname), "ch%u", index);
+    irq = platform_get_irq_byname(pdev, pdev_irqname);
+    if (irq < 0)
+    return irq;
+    irqname = devm_kasprintf(dmac.dev, GFP_KERNEL, "%s:%u",
+    dev_name(dmac.dev), index);
+    if (!irqname)
+    return -ENOMEM;
+    ret = devm_request_threaded_irq(dmac.dev, irq, rz_dmac_irq_handler,
+    rz_dmac_irq_handler_thread, 0,
+    irqname, channel);
+    if (ret)
+    dev_err(dmac.dev, "failed to request IRQ %u (%d)\n", irq, ret);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_put_device(_dev: *mut c_void) {
+    static void rz_dmac_put_device(void *_dev)
+    {
+    struct device *dev = _dev;
+    put_device(dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_parse_of_icu(dev: *mut device, dmac: *mut rz_dmac) -> c_int {
+    static int rz_dmac_parse_of_icu(struct device *dev, struct rz_dmac *dmac)
+    {
+    struct device_node *np = dev.of_node;
+    struct of_phandle_args args;
+    uint32_t dmac_index;
+    int ret;
+    if (!dmac.info.icu_register_dma_req)
+    return 0;
+    ret = of_parse_phandle_with_fixed_args(np, "renesas,icu", 1, 0, &args);
+    if (ret)
+    return ret;
+    dmac.icu.pdev = of_find_device_by_node(args.np);
+    of_node_put(args.np);
+    if (!dmac.icu.pdev) {
+    dev_err(dev, "ICU device not found.\n");
+    return -ENODEV;
+    }
+    ret = devm_add_action_or_reset(dev, rz_dmac_put_device, &dmac.icu.pdev.dev);
+    if (ret)
+    return ret;
+    dmac_index = args.args[0];
+    if (dmac_index > RZV2H_MAX_DMAC_INDEX) {
+    dev_err(dev, "DMAC index %u invalid.\n", dmac_index);
+    return -EINVAL;
+    }
+    dmac.icu.dmac_index = dmac_index;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_parse_of(dev: *mut device, dmac: *mut rz_dmac) -> c_int {
+    static int rz_dmac_parse_of(struct device *dev, struct rz_dmac *dmac)
+    {
+    struct device_node *np = dev.of_node;
+    int ret;
+    ret = of_property_read_u32(np, "dma-channels", &dmac.n_channels);
+    if (ret < 0) {
+    dev_err(dev, "unable to read dma-channels property\n");
+    return ret;
+    }
+    if (!dmac.n_channels || dmac.n_channels > RZ_DMAC_MAX_CHANNELS) {
+    dev_err(dev, "invalid number of channels %u\n", dmac.n_channels);
+    return -EINVAL;
+    }
+    return rz_dmac_parse_of_icu(dev, dmac);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_probe(pdev: *mut platform_device) -> c_int {
+    static int rz_dmac_probe(struct platform_device *pdev)
+    {
+    const char *irqname = "error";
+    struct dma_device *engine;
+    struct rz_dmac *dmac;
+    int ret;
+    int irq;
+    u8 i;
+    dmac = devm_kzalloc(&pdev.dev, sizeof(*dmac), GFP_KERNEL);
+    if (!dmac)
+    return -ENOMEM;
+    dmac.info = device_get_match_data(&pdev.dev);
+    dmac.dev = &pdev.dev;
+    platform_set_drvdata(pdev, dmac);
+    ret = rz_dmac_parse_of(&pdev.dev, dmac);
+    if (ret < 0)
+    return ret;
+    dmac.channels = devm_kcalloc(&pdev.dev, dmac.n_channels,
+    sizeof(*dmac.channels), GFP_KERNEL);
+    if (!dmac.channels)
+    return -ENOMEM;
+// Request resources
+    dmac.base = devm_platform_ioremap_resource(pdev, 0);
+    if (IS_ERR(dmac.base))
+    return PTR_ERR(dmac.base);
+    if (!dmac.info.icu_register_dma_req) {
+    dmac.ext_base = devm_platform_ioremap_resource(pdev, 1);
+    if (IS_ERR(dmac.ext_base))
+    return PTR_ERR(dmac.ext_base);
+    }
+// Initialize the channels.
+    INIT_LIST_HEAD(&dmac.engine.channels);
+    dmac.rstc = devm_reset_control_array_get_optional_exclusive(&pdev.dev);
+    if (IS_ERR(dmac.rstc))
+    return dev_err_probe(&pdev.dev, PTR_ERR(dmac.rstc),
+    "failed to get resets\n");
+    pm_runtime_irq_safe(&pdev.dev);
+    pm_runtime_enable(&pdev.dev);
+    ret = pm_runtime_resume_and_get(&pdev.dev);
+    if (ret < 0) {
+    dev_err(&pdev.dev, "pm_runtime_resume_and_get failed\n");
+    goto err_pm_disable;
+    }
+    ret = reset_control_deassert(dmac.rstc);
+    if (ret)
+    goto err_pm_runtime_put;
+    for (i = 0; i < dmac.n_channels; i++) {
+    ret = rz_dmac_chan_probe(dmac, &dmac.channels[i], i);
+    if (ret < 0)
+    goto err;
+    }
+// Register interrupt handler for error
+    irq = platform_get_irq_byname_optional(pdev, irqname);
+    if (irq > 0) {
+    ret = devm_request_irq(&pdev.dev, irq, rz_dmac_irq_handler, 0,
+    irqname, core::ptr::null_mut());
+    if (ret) {
+    dev_err(&pdev.dev, "failed to request IRQ %u (%d)\n",
+    irq, ret);
+    goto err;
+    }
+    }
+// Register the DMAC as a DMA provider for DT.
+    ret = of_dma_controller_register(pdev.dev.of_node, rz_dmac_of_xlate,
+    core::ptr::null_mut());
+    if (ret < 0)
+    goto err;
+// Register the DMA engine device.
+    engine = &dmac.engine;
+    dma_cap_set(DMA_SLAVE, engine.cap_mask);
+    dma_cap_set(DMA_MEMCPY, engine.cap_mask);
+    dma_cap_set(DMA_CYCLIC, engine.cap_mask);
+    engine.directions = BIT(DMA_DEV_TO_MEM) | BIT(DMA_MEM_TO_DEV);
+    engine.residue_granularity = DMA_RESIDUE_GRANULARITY_BURST;
+    rz_dmac_writel(dmac, DCTRL_DEFAULT, CHANNEL_0_7_COMMON_BASE + DCTRL);
+    rz_dmac_writel(dmac, DCTRL_DEFAULT, CHANNEL_8_15_COMMON_BASE + DCTRL);
+    engine.dev = &pdev.dev;
+    engine.device_alloc_chan_resources = rz_dmac_alloc_chan_resources;
+    engine.device_free_chan_resources = rz_dmac_free_chan_resources;
+    engine.device_tx_status = rz_dmac_tx_status;
+    engine.device_prep_slave_sg = rz_dmac_prep_slave_sg;
+    engine.device_prep_dma_memcpy = rz_dmac_prep_dma_memcpy;
+    engine.device_prep_dma_cyclic = rz_dmac_prep_dma_cyclic;
+    engine.device_config = rz_dmac_config;
+    engine.device_terminate_all = rz_dmac_terminate_all;
+    engine.device_issue_pending = rz_dmac_issue_pending;
+    engine.device_synchronize = rz_dmac_device_synchronize;
+    engine.device_pause = rz_dmac_device_pause;
+    engine.device_resume = rz_dmac_device_resume;
+    engine.copy_align = DMAENGINE_ALIGN_1_BYTE;
+    dma_set_max_seg_size(engine.dev, U32_MAX);
+    ret = dma_async_device_register(engine);
+    if (ret < 0) {
+    dev_err(&pdev.dev, "unable to register\n");
+    goto dma_register_err;
+    }
+    return 0;
+    dma_register_err:
+    of_dma_controller_free(pdev.dev.of_node);
+    err:
+    reset_control_assert(dmac.rstc);
+    err_pm_runtime_put:
+    pm_runtime_put(&pdev.dev);
+    err_pm_disable:
+    pm_runtime_disable(&pdev.dev);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_remove(pdev: *mut platform_device) {
+    static void rz_dmac_remove(struct platform_device *pdev)
+    {
+    struct rz_dmac *dmac = platform_get_drvdata(pdev);
+    dma_async_device_unregister(&dmac.engine);
+    of_dma_controller_free(pdev.dev.of_node);
+    reset_control_assert(dmac.rstc);
+    pm_runtime_put(&pdev.dev);
+    pm_runtime_disable(&pdev.dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_suspend_recover(dmac: *mut rz_dmac) {
+    static void rz_dmac_suspend_recover(struct rz_dmac *dmac)
+    {
+    int ret;
+    PM_RUNTIME_ACQUIRE_IF_ENABLED(dmac.dev, pm);
+    ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+    if (ret)
+    return;
+    for (unsigned int i = 0; i < dmac.n_channels; i++) {
+    struct rz_dmac_chan *channel = &dmac.channels[i];
+    guard(spinlock_irqsave)(&channel.vc.lock);
+    if (!(channel.status & BIT(RZ_DMAC_CHAN_STATUS_CYCLIC)))
+    continue;
+    rz_dmac_device_resume_internal(channel);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_suspend(dev: *mut device) -> c_int {
+    static int rz_dmac_suspend(struct device *dev)
+    {
+    struct rz_dmac *dmac = dev_get_drvdata(dev);
+    let mut ret: c_int = 0;
+    for (unsigned int i = 0; i < dmac.n_channels; i++) {
+    struct rz_dmac_chan *channel = &dmac.channels[i];
+    guard(spinlock_irqsave)(&channel.vc.lock);
+    if (!(channel.status & BIT(RZ_DMAC_CHAN_STATUS_CYCLIC)))
+    continue;
+    ret = rz_dmac_device_pause_internal(channel);
+    if (ret) {
+    dev_err(dev, "Failed to suspend channel %s\n",
+    dma_chan_name(&channel.vc.chan));
+    break;
+    }
+    channel.pm_state.nxla = rz_dmac_ch_readl(channel, NXLA, 1);
+    }
+    if (ret)
+    goto suspend_recover;
+    ret = reset_control_assert(dmac.rstc);
+    if (ret)
+    goto suspend_recover;
+    ret = pm_runtime_put_sync(dev);
+    if (ret < 0)
+    goto reset_deassert;
+    return 0;
+    reset_deassert:
+    reset_control_deassert(dmac.rstc);
+    suspend_recover:
+    rz_dmac_suspend_recover(dmac);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn rz_dmac_resume(dev: *mut device) -> c_int {
+    static int rz_dmac_resume(struct device *dev)
+    {
+    struct rz_dmac *dmac = dev_get_drvdata(dev);
+    let mut errors: c_int = 0, ret;
+    ret = pm_runtime_resume_and_get(dev);
+    if (ret)
+    return ret;
+    ret = reset_control_deassert(dmac.rstc);
+    if (ret) {
+//
+// Do not put runtime PM here and keep the same state as in
+// probe. As subsequent suspend/resume cycles may follow, leave
+// the runtime PM as is, here, to avoid imbalances.
+//
+    return ret;
+    }
+    rz_dmac_writel(dmac, DCTRL_DEFAULT, CHANNEL_0_7_COMMON_BASE + DCTRL);
+    rz_dmac_writel(dmac, DCTRL_DEFAULT, CHANNEL_8_15_COMMON_BASE + DCTRL);
+    for (unsigned int i = 0; i < dmac.n_channels; i++) {
+    struct rz_dmac_chan *channel = &dmac.channels[i];
+    guard(spinlock_irqsave)(&channel.vc.lock);
+    rz_dmac_disable_hw(&dmac.channels[i]);
+    if (!(channel.status & BIT(RZ_DMAC_CHAN_STATUS_CYCLIC)))
+    continue;
+    rz_dmac_set_dma_req_no(dmac, channel.index, channel.mid_rid);
+    rz_dmac_set_dma_ack_no(dmac, channel.index, channel.dmac_ack);
+    rz_dmac_ch_writel(channel, channel.pm_state.nxla, NXLA, 1);
+    rz_dmac_ch_writel(channel, channel.chcfg, CHCFG, 1);
+    rz_dmac_ch_writel(channel, CHCTRL_SWRST, CHCTRL, 1);
+    rz_dmac_ch_writel(channel, channel.chctrl, CHCTRL, 1);
+    ret = rz_dmac_device_resume_internal(channel);
+    if (ret) {
+    errors = ret;
+    dev_err(dev, "Failed to resume channel %s, ret=%d\n",
+    dma_chan_name(&channel.vc.chan), ret);
+    }
+    }
+    return errors ? : 0;
+    }
+    static DEFINE_SIMPLE_DEV_PM_OPS(rz_dmac_pm_ops, rz_dmac_suspend, rz_dmac_resume);
+    static const struct rz_dmac_info rz_dmac_v2h_info = {
+    .icu_register_dma_req = rzv2h_icu_register_dma_req,
+    .icu_register_dma_ack = rzv2h_icu_register_dma_ack,
+    .default_dma_ack_no = RZV2H_ICU_DMAC_ACK_NO_DEFAULT,
+    .default_dma_req_no = RZV2H_ICU_DMAC_REQ_NO_DEFAULT,
+    };
+    static const struct rz_dmac_info rz_dmac_t2h_info = {
+    .icu_register_dma_req = rzt2h_icu_register_dma_req,
+    .default_dma_req_no = RZT2H_ICU_DMAC_REQ_NO_DEFAULT,
+    };
+    static const struct rz_dmac_info rz_dmac_generic_info = {
+    .default_dma_req_no = 0,
+    };
+    static const struct of_device_id of_rz_dmac_match[] = {
+    { .compatible = "renesas,r9a09g057-dmac", .data = &rz_dmac_v2h_info },
+    { .compatible = "renesas,r9a09g077-dmac", .data = &rz_dmac_t2h_info },
+    { .compatible = "renesas,rz-dmac", .data = &rz_dmac_generic_info },
+    { /* Sentinel */ }
+    };
+    MODULE_DEVICE_TABLE(of, of_rz_dmac_match);
+    static struct platform_driver rz_dmac_driver = {
+    .driver		= {
+    .name	= "rz-dmac",
+    .of_match_table = of_rz_dmac_match,
+    .pm	= pm_ptr(&rz_dmac_pm_ops),
+    },
+    .probe		= rz_dmac_probe,
+    .remove		= rz_dmac_remove,
+    };
+    module_platform_driver(rz_dmac_driver);
+    MODULE_DESCRIPTION("Renesas RZ/G2L DMA Controller Driver");
+    MODULE_AUTHOR("Biju Das <biju.das.jz@bp.renesas.com>");
+    MODULE_LICENSE("GPL v2");

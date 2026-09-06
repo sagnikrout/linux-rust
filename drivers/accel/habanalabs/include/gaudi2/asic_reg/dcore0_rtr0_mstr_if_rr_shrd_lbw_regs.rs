@@ -1,0 +1,132 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/accel/habanalabs/include/gaudi2/asic_reg/dcore0_rtr0_mstr_if_rr_shrd_lbw_regs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2016-2020 HabanaLabs, Ltd.
+// All Rights Reserved.
+//
+// This is an auto-generated file
+// DO NOT EDIT BELOW
+//
+// DCORE0_RTR0_MSTR_IF_RR_SHRD_LBW
+// (Prototype: RANGE_REG_LBW)
+//
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_0: c_uint = 0x4142400;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_1: c_uint = 0x4142404;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_2: c_uint = 0x4142408;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_3: c_uint = 0x414240C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_4: c_uint = 0x4142410;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_5: c_uint = 0x4142414;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_6: c_uint = 0x4142418;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_7: c_uint = 0x414241C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_8: c_uint = 0x4142420;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_9: c_uint = 0x4142424;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_10: c_uint = 0x4142428;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_11: c_uint = 0x414242C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_12: c_uint = 0x4142430;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_SHORT_13: c_uint = 0x4142434;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_0: c_uint = 0x4142438;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_1: c_uint = 0x414243C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_2: c_uint = 0x4142440;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_3: c_uint = 0x4142444;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_4: c_uint = 0x4142448;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_5: c_uint = 0x414244C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_6: c_uint = 0x4142450;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_7: c_uint = 0x4142454;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_8: c_uint = 0x4142458;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_9: c_uint = 0x414245C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_10: c_uint = 0x4142460;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_11: c_uint = 0x4142464;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_12: c_uint = 0x4142468;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_SHORT_13: c_uint = 0x414246C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_0: c_uint = 0x4142470;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_1: c_uint = 0x4142474;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_2: c_uint = 0x4142478;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_3: c_uint = 0x414247C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_4: c_uint = 0x4142480;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_5: c_uint = 0x4142484;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_6: c_uint = 0x4142488;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_7: c_uint = 0x414248C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_8: c_uint = 0x4142490;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_9: c_uint = 0x4142494;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_10: c_uint = 0x4142498;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_11: c_uint = 0x414249C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_12: c_uint = 0x41424A0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_SHORT_13: c_uint = 0x41424A4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_0: c_uint = 0x41424A8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_1: c_uint = 0x41424AC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_2: c_uint = 0x41424B0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_3: c_uint = 0x41424B4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_4: c_uint = 0x41424B8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_5: c_uint = 0x41424BC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_6: c_uint = 0x41424C0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_7: c_uint = 0x41424C4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_8: c_uint = 0x41424C8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_9: c_uint = 0x41424CC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_10: c_uint = 0x41424D0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_11: c_uint = 0x41424D4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_12: c_uint = 0x41424D8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_SHORT_13: c_uint = 0x41424DC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_0: c_uint = 0x41424E0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_1: c_uint = 0x41424E4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_2: c_uint = 0x41424E8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MIN_3: c_uint = 0x41424EC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_0: c_uint = 0x41424F0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_1: c_uint = 0x41424F4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_2: c_uint = 0x41424F8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_RANGE_MAX_3: c_uint = 0x41424FC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_0: c_uint = 0x4142500;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_1: c_uint = 0x4142504;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_2: c_uint = 0x4142508;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MIN_3: c_uint = 0x414250C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_0: c_uint = 0x4142510;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_1: c_uint = 0x4142514;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_2: c_uint = 0x4142518;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_RANGE_MAX_3: c_uint = 0x414251C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_HIT_AW: c_uint = 0x4142520;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_HIT_AW: c_uint = 0x4142524;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_SEC_HIT_AR: c_uint = 0x4142528;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_PRIV_HIT_AR: c_uint = 0x414252C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_AW_RAZWI: c_uint = 0x4142530;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_AR_RAZWI: c_uint = 0x4142534;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_AW_RAZWI_XY: c_uint = 0x4142538;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_AR_RAZWI_XY: c_uint = 0x414253C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_AW_RAZWI_HAPPENED: c_uint = 0x4142540;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_AR_RAZWI_HAPPENED: c_uint = 0x4142544;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_SHRD_LBW_RAZWI_ERR_RESP: c_uint = 0x4142548;

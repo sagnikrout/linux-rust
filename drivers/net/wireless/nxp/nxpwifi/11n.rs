@@ -1,0 +1,71 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/net/wireless/nxp/nxpwifi/11n.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// nxpwifi: 802.11n support
+//
+// Copyright 2011-2024 NXP
+//
+
+// tx_tbl);
+extern "C" {
+    pub fn nxpwifi_11n_delete_all_tx_ba_stream_tbl(priv: *mut nxpwifi_private);
+}
+// priv, int tid, u8 *ra);
+extern "C" {
+    pub fn nxpwifi_send_addba(priv: *mut nxpwifi_private, tid: c_int, peer_mac: *mut u8) -> c_int;
+}
+extern "C" {
+    pub fn nxpwifi_11n_delete_ba_stream(priv: *mut nxpwifi_private, del_ba: *mut u8);
+}
+extern "C" {
+    pub fn nxpwifi_del_tx_ba_stream_tbl_by_ra(priv: *mut nxpwifi_private, ra: *mut u8);
+}
+extern "C" {
+    pub fn nxpwifi_get_sec_chan_offset(chan: c_int) -> u8;
+}
+// Check if AMPDU is allowed for the given TID.
+extern "C" {
+    pub fn nxpwifi_is_station_ampdu_allowed(_arg: priv, _arg: ptr, _arg: tid) -> return;
+}
+// Check if AMSDU is allowed for the given TID.
+// Check if there is available space for a new BA stream.
+// Find the Tx BA stream to delete and return its TID and RA.
+// ptid = tx_tbl->tid;
+// Check whether the associated station is 11n enabled.

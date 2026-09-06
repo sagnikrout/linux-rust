@@ -1,0 +1,579 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/powerpc/platforms/pseries/cmm.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Collaborative memory management interface.
+//
+// Copyright (C) 2008 IBM Corporation
+// Author(s): Brian King (brking@linux.vnet.ibm.com),
+//
+
+pub const CMM_DEFAULT_DELAY: c_int = 1;
+pub const CMM_HOTPLUG_DELAY: c_int = 5;
+pub const CMM_DEBUG: c_int = 0;
+pub const CMM_DISABLE: c_int = 0;
+pub const CMM_OOM_KB: c_int = 1024;
+pub const CMM_MIN_MEM_MB: c_int = 256;
+
+pub const CMM_MEM_HOTPLUG_PRI: c_int = 1;
+    let mut delay: static unsigned int = CMM_DEFAULT_DELAY;
+    let mut hotplug_delay: static unsigned int = CMM_HOTPLUG_DELAY;
+    let mut oom_kb: static unsigned int = CMM_OOM_KB;
+    let mut cmm_debug: static unsigned int = CMM_DEBUG;
+    let mut cmm_disabled: static unsigned int = CMM_DISABLE;
+    let mut min_mem_mb: static unsigned long = CMM_MIN_MEM_MB;
+    static bool __read_mostly simulate;
+    static unsigned long simulate_loan_target_kb;
+    static struct device cmm_dev;
+    MODULE_AUTHOR("Brian King <brking@linux.vnet.ibm.com>");
+    MODULE_DESCRIPTION("IBM System p Collaborative Memory Manager");
+    MODULE_LICENSE("GPL");
+    MODULE_VERSION(CMM_DRIVER_VERSION);
+    module_param_named(delay, delay, uint, 0644);
+    MODULE_PARM_DESC(delay, "Delay (in seconds) between polls to query hypervisor paging requests. "
+    "[Default=" __stringify(CMM_DEFAULT_DELAY) "]");
+    module_param_named(hotplug_delay, hotplug_delay, uint, 0644);
+    MODULE_PARM_DESC(hotplug_delay, "Delay (in seconds) after memory hotplug remove "
+    "before loaning resumes. "
+    "[Default=" __stringify(CMM_HOTPLUG_DELAY) "]");
+    module_param_named(oom_kb, oom_kb, uint, 0644);
+    MODULE_PARM_DESC(oom_kb, "Amount of memory in kb to free on OOM. "
+    "[Default=" __stringify(CMM_OOM_KB) "]");
+    module_param_named(min_mem_mb, min_mem_mb, ulong, 0644);
+    MODULE_PARM_DESC(min_mem_mb, "Minimum amount of memory (in MB) to not balloon. "
+    "[Default=" __stringify(CMM_MIN_MEM_MB) "]");
+    module_param_named(debug, cmm_debug, uint, 0644);
+    MODULE_PARM_DESC(debug, "Enable module debugging logging. Set to 1 to enable. "
+    "[Default=" __stringify(CMM_DEBUG) "]");
+    module_param_named(simulate, simulate, bool, 0444);
+    MODULE_PARM_DESC(simulate, "Enable simulation mode (no communication with hw).");
+
+    static atomic_long_t loaned_pages;
+    static unsigned long loaned_pages_target;
+    static unsigned long oom_freed_pages;
+    static DEFINE_MUTEX(hotplug_mutex);
+    static int hotplug_occurred; /* protected by the hotplug mutex */
+    static struct task_struct *cmm_thread_ptr;
+    static struct balloon_dev_info b_dev_info;
+#[no_mangle]
+unsafe extern "C" fn plpar_page_set_loaned(page: *mut page) -> c_long {
+    static long plpar_page_set_loaned(struct page *page)
+    {
+    let mut vpa: c_ulong = page_to_phys(page);
+    let mut cmo_page_sz: c_ulong = cmo_get_page_size();
+    let mut rc: c_long = 0;
+    int i;
+    if (unlikely(simulate))
+    return 0;
+    for (i = 0; !rc && i < PAGE_SIZE; i += cmo_page_sz)
+    rc = plpar_hcall_norets(H_PAGE_INIT, H_PAGE_SET_LOANED, vpa + i, 0);
+    for (i -= cmo_page_sz; rc && i != 0; i -= cmo_page_sz)
+    plpar_hcall_norets(H_PAGE_INIT, H_PAGE_SET_ACTIVE,
+    vpa + i - cmo_page_sz, 0);
+    return rc;
+    }
+#[no_mangle]
+unsafe extern "C" fn plpar_page_set_active(page: *mut page) -> c_long {
+    static long plpar_page_set_active(struct page *page)
+    {
+    let mut vpa: c_ulong = page_to_phys(page);
+    let mut cmo_page_sz: c_ulong = cmo_get_page_size();
+    let mut rc: c_long = 0;
+    int i;
+    if (unlikely(simulate))
+    return 0;
+    for (i = 0; !rc && i < PAGE_SIZE; i += cmo_page_sz)
+    rc = plpar_hcall_norets(H_PAGE_INIT, H_PAGE_SET_ACTIVE, vpa + i, 0);
+    for (i -= cmo_page_sz; rc && i != 0; i -= cmo_page_sz)
+    plpar_hcall_norets(H_PAGE_INIT, H_PAGE_SET_LOANED,
+    vpa + i - cmo_page_sz, 0);
+    return rc;
+    }
+//
+// cmm_alloc_pages - Allocate pages and mark them as loaned
+// @nr:	number of pages to allocate
+//
+// Return value:
+// number of pages requested to be allocated which were not
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_alloc_pages(nr: c_long) -> c_long {
+    static long cmm_alloc_pages(long nr)
+    {
+    struct page *page;
+    long rc;
+    cmm_dbg("Begin request for %ld pages\n", nr);
+    while (nr) {
+// Exit if a hotplug operation is in progress or occurred
+    if (mutex_trylock(&hotplug_mutex)) {
+    if (hotplug_occurred) {
+    mutex_unlock(&hotplug_mutex);
+    break;
+    }
+    mutex_unlock(&hotplug_mutex);
+    } else {
+    break;
+    }
+    page = balloon_page_alloc();
+    if (!page)
+    break;
+    rc = plpar_page_set_loaned(page);
+    if (rc) {
+    pr_err("%s: Can not set page to loaned. rc=%ld\n", __func__, rc);
+    __free_page(page);
+    break;
+    }
+    balloon_page_enqueue(&b_dev_info, page);
+    atomic_long_inc(&loaned_pages);
+    nr--;
+    }
+    cmm_dbg("End request with %ld pages unfulfilled\n", nr);
+    return nr;
+    }
+//
+// cmm_free_pages - Free pages and mark them as active
+// @nr:	number of pages to free
+//
+// Return value:
+// number of pages requested to be freed which were not
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_free_pages(nr: c_long) -> c_long {
+    static long cmm_free_pages(long nr)
+    {
+    struct page *page;
+    cmm_dbg("Begin free of %ld pages.\n", nr);
+    while (nr) {
+    page = balloon_page_dequeue(&b_dev_info);
+    if (!page)
+    break;
+    plpar_page_set_active(page);
+    __free_page(page);
+    atomic_long_dec(&loaned_pages);
+    nr--;
+    }
+    cmm_dbg("End request with %ld pages unfulfilled\n", nr);
+    return nr;
+    }
+//
+// cmm_oom_notify - OOM notifier
+// @self:	notifier block struct
+// @dummy:	not used
+// @parm:	returned - number of pages freed
+//
+// Return value:
+// NOTIFY_OK
+//
+    static int cmm_oom_notify(struct notifier_block *self,
+    unsigned long dummy, void *parm)
+    {
+    unsigned long *freed = parm;
+    let mut nr: c_long = KB2PAGES(oom_kb);
+    cmm_dbg("OOM processing started\n");
+    nr = cmm_free_pages(nr);
+    loaned_pages_target = atomic_long_read(&loaned_pages);
+// freed += KB2PAGES(oom_kb) - nr;
+    oom_freed_pages += KB2PAGES(oom_kb) - nr;
+    cmm_dbg("OOM processing complete\n");
+    return NOTIFY_OK;
+    }
+//
+// cmm_get_mpp - Read memory performance parameters
+//
+// Makes hcall to query the current page loan request from the hypervisor.
+//
+// Return value:
+// nothing
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_get_mpp() {
+    static void cmm_get_mpp(void)
+    {
+    let mut __loaned_pages: c_long = atomic_long_read(&loaned_pages);
+    let mut total_pages: c_long = totalram_pages() + __loaned_pages;
+    int rc;
+    struct hvcall_mpp_data mpp_data;
+    signed long active_pages_target, page_loan_request, target;
+    let mut min_mem_pages: signed long = (min_mem_mb * 1024 * 1024) / PAGE_SIZE;
+    if (likely(!simulate)) {
+    rc = h_get_mpp(&mpp_data);
+    if (rc != H_SUCCESS)
+    return;
+    page_loan_request = div_s64((s64)mpp_data.loan_request,
+    PAGE_SIZE);
+    target = page_loan_request + __loaned_pages;
+    } else {
+    target = KB2PAGES(simulate_loan_target_kb);
+    page_loan_request = target - __loaned_pages;
+    }
+    if (target < 0 || total_pages < min_mem_pages)
+    target = 0;
+    if (target > oom_freed_pages)
+    target -= oom_freed_pages;
+    else
+    target = 0;
+    active_pages_target = total_pages - target;
+    if (min_mem_pages > active_pages_target)
+    target = total_pages - min_mem_pages;
+    if (target < 0)
+    target = 0;
+    loaned_pages_target = target;
+    cmm_dbg("delta = %ld, loaned = %lu, target = %lu, oom = %lu, totalram = %lu\n",
+    page_loan_request, __loaned_pages, loaned_pages_target,
+    oom_freed_pages, totalram_pages());
+    }
+    static struct notifier_block cmm_oom_nb = {
+    .notifier_call = cmm_oom_notify
+    };
+//
+// cmm_thread - CMM task thread
+// @dummy:	not used
+//
+// Return value:
+// 0
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_thread(dummy: *mut c_void) -> c_int {
+    static int cmm_thread(void *dummy)
+    {
+    unsigned long timeleft;
+    long __loaned_pages;
+    while (1) {
+    timeleft = msleep_interruptible(delay * 1000);
+    if (kthread_should_stop() || timeleft)
+    break;
+    if (mutex_trylock(&hotplug_mutex)) {
+    if (hotplug_occurred) {
+    hotplug_occurred = 0;
+    mutex_unlock(&hotplug_mutex);
+    cmm_dbg("Hotplug operation has occurred, "
+    "loaning activity suspended "
+    "for %d seconds.\n",
+    hotplug_delay);
+    timeleft = msleep_interruptible(hotplug_delay *
+    1000);
+    if (kthread_should_stop() || timeleft)
+    break;
+    continue;
+    }
+    mutex_unlock(&hotplug_mutex);
+    } else {
+    cmm_dbg("Hotplug operation in progress, activity "
+    "suspended\n");
+    continue;
+    }
+    cmm_get_mpp();
+    __loaned_pages = atomic_long_read(&loaned_pages);
+    if (loaned_pages_target > __loaned_pages) {
+    if (cmm_alloc_pages(loaned_pages_target - __loaned_pages))
+    loaned_pages_target = __loaned_pages;
+    } else if (loaned_pages_target < __loaned_pages)
+    cmm_free_pages(__loaned_pages - loaned_pages_target);
+    }
+    return 0;
+    }
+
+    static ssize_t show_##name(struct device *dev,	\
+    struct device_attribute *attr,	\
+    char *buf)			\
+    {							\
+    return sysfs_emit(buf, format, ##args);		\
+    }							\
+#[no_mangle]
+pub unsafe extern "C" fn DEVICE_ATTR(_arg: name, _arg: 0444, _arg: show_##name, _arg: NULL) -> static {
+    static DEVICE_ATTR(name, 0444, show_##name, core::ptr::null_mut())
+    CMM_SHOW(loaned_kb, "%lu\n", PAGES2KB(atomic_long_read(&loaned_pages)));
+    CMM_SHOW(loaned_target_kb, "%lu\n", PAGES2KB(loaned_pages_target));
+    static ssize_t show_oom_pages(struct device *dev,
+    struct device_attribute *attr, char *buf)
+    {
+    return sysfs_emit(buf, "%lu\n", PAGES2KB(oom_freed_pages));
+    }
+    static ssize_t store_oom_pages(struct device *dev,
+    struct device_attribute *attr,
+    const char *buf, size_t count)
+    {
+    let mut val: c_ulong = simple_strtoul (buf, core::ptr::null_mut(), 10);
+    if (!capable(CAP_SYS_ADMIN))
+    return -EPERM;
+    if (val != 0)
+    return -EBADMSG;
+    oom_freed_pages = 0;
+    return count;
+    }
+    static DEVICE_ATTR(oom_freed_kb, 0644,
+    show_oom_pages, store_oom_pages);
+    static struct device_attribute *cmm_attrs[] = {
+    &dev_attr_loaned_kb,
+    &dev_attr_loaned_target_kb,
+    &dev_attr_oom_freed_kb,
+    };
+    static DEVICE_ULONG_ATTR(simulate_loan_target_kb, 0644,
+    simulate_loan_target_kb);
+    static const struct bus_type cmm_subsys = {
+    .name = "cmm",
+    .dev_name = "cmm",
+    };
+#[no_mangle]
+unsafe extern "C" fn cmm_release_device(dev: *mut device) {
+    static void cmm_release_device(struct device *dev)
+    {
+    }
+//
+// cmm_sysfs_register - Register with sysfs
+//
+// Return value:
+// 0 on success / other on failure
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_sysfs_register(dev: *mut device) -> c_int {
+    static int cmm_sysfs_register(struct device *dev)
+    {
+    int i, rc;
+    if ((rc = subsys_system_register(&cmm_subsys, core::ptr::null_mut())))
+    return rc;
+    dev.id = 0;
+    dev.bus = &cmm_subsys;
+    dev.release = cmm_release_device;
+    if ((rc = device_register(dev)))
+    goto subsys_unregister;
+    for (i = 0; i < ARRAY_SIZE(cmm_attrs); i++) {
+    if ((rc = device_create_file(dev, cmm_attrs[i])))
+    goto fail;
+    }
+    if (!simulate)
+    return 0;
+    rc = device_create_file(dev, &dev_attr_simulate_loan_target_kb.attr);
+    if (rc)
+    goto fail;
+    return 0;
+    fail:
+    while (--i >= 0)
+    device_remove_file(dev, cmm_attrs[i]);
+    device_unregister(dev);
+    subsys_unregister:
+    bus_unregister(&cmm_subsys);
+    return rc;
+    }
+//
+// cmm_unregister_sysfs - Unregister from sysfs
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_unregister_sysfs(dev: *mut device) {
+    static void cmm_unregister_sysfs(struct device *dev)
+    {
+    int i;
+    for (i = 0; i < ARRAY_SIZE(cmm_attrs); i++)
+    device_remove_file(dev, cmm_attrs[i]);
+    device_unregister(dev);
+    bus_unregister(&cmm_subsys);
+    }
+//
+// cmm_reboot_notifier - Make sure pages are not still marked as "loaned"
+//
+    static int cmm_reboot_notifier(struct notifier_block *nb,
+    unsigned long action, void *unused)
+    {
+    if (action == SYS_RESTART) {
+    if (cmm_thread_ptr)
+    kthread_stop(cmm_thread_ptr);
+    cmm_thread_ptr = core::ptr::null_mut();
+    cmm_free_pages(atomic_long_read(&loaned_pages));
+    }
+    return NOTIFY_DONE;
+    }
+    static struct notifier_block cmm_reboot_nb = {
+    .notifier_call = cmm_reboot_notifier,
+    };
+//
+// cmm_memory_cb - Handle memory hotplug notifier calls
+// @self:	notifier block struct
+// @action:	action to take
+// @arg:	struct memory_notify data for handler
+//
+// Return value:
+// NOTIFY_OK or notifier error based on subfunction return value
+//
+    static int cmm_memory_cb(struct notifier_block *self,
+    unsigned long action, void *arg)
+    {
+    switch (action) {
+    case MEM_GOING_OFFLINE:
+    mutex_lock(&hotplug_mutex);
+    hotplug_occurred = 1;
+    break;
+    case MEM_OFFLINE:
+    case MEM_CANCEL_OFFLINE:
+    mutex_unlock(&hotplug_mutex);
+    cmm_dbg("Memory offline operation complete.\n");
+    break;
+    case MEM_GOING_ONLINE:
+    case MEM_ONLINE:
+    case MEM_CANCEL_ONLINE:
+    break;
+    }
+    return NOTIFY_OK;
+    }
+    static struct notifier_block cmm_mem_nb = {
+    .notifier_call = cmm_memory_cb,
+    .priority = CMM_MEM_HOTPLUG_PRI
+    };
+
+    static int cmm_migratepage(struct balloon_dev_info *b_dev_info,
+    struct page *newpage, struct page *page,
+    enum migrate_mode mode)
+    {
+//
+// loan/"inflate" the newpage first.
+//
+// We might race against the cmm_thread who might discover after our
+// loan request that another page is to be unloaned. However, once
+// the cmm_thread runs again later, this error will automatically
+// be corrected.
+//
+    if (plpar_page_set_loaned(newpage)) {
+// Unlikely, but possible. Tell the caller not to retry now.
+    pr_err_ratelimited("%s: Cannot set page to loaned.", __func__);
+    return -EBUSY;
+    }
+//
+// activate/"deflate" the old page. We ignore any errors just like the
+// other callers.
+//
+    plpar_page_set_active(page);
+    return 0;
+    }
+
+    int cmm_migratepage(struct balloon_dev_info *b_dev_info, struct page *newpage,
+    struct page *page, enum migrate_mode mode);
+
+//
+// cmm_init - Module initialization
+//
+// Return value:
+// 0 on success / other on failure
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_init() -> c_int {
+    static int cmm_init(void)
+    {
+    int rc;
+    if (!firmware_has_feature(FW_FEATURE_CMO) && !simulate)
+    return -EOPNOTSUPP;
+    balloon_devinfo_init(&b_dev_info);
+    b_dev_info.adjust_managed_page_count = true;
+    if (IS_ENABLED(CONFIG_BALLOON_MIGRATION))
+    b_dev_info.migratepage = cmm_migratepage;
+    rc = register_oom_notifier(&cmm_oom_nb);
+    if (rc < 0)
+    return rc;
+    if ((rc = register_reboot_notifier(&cmm_reboot_nb)))
+    goto out_oom_notifier;
+    if ((rc = cmm_sysfs_register(&cmm_dev)))
+    goto out_reboot_notifier;
+    rc = register_memory_notifier(&cmm_mem_nb);
+    if (rc)
+    goto out_unregister_notifier;
+    if (cmm_disabled)
+    return 0;
+    cmm_thread_ptr = kthread_run(cmm_thread, core::ptr::null_mut(), "cmmthread");
+    if (IS_ERR(cmm_thread_ptr)) {
+    rc = PTR_ERR(cmm_thread_ptr);
+    goto out_unregister_notifier;
+    }
+    return 0;
+    out_unregister_notifier:
+    unregister_memory_notifier(&cmm_mem_nb);
+    cmm_unregister_sysfs(&cmm_dev);
+    out_reboot_notifier:
+    unregister_reboot_notifier(&cmm_reboot_nb);
+    out_oom_notifier:
+    unregister_oom_notifier(&cmm_oom_nb);
+    return rc;
+    }
+//
+// cmm_exit - Module exit
+//
+// Return value:
+// nothing
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_exit() {
+    static void cmm_exit(void)
+    {
+    if (cmm_thread_ptr)
+    kthread_stop(cmm_thread_ptr);
+    unregister_oom_notifier(&cmm_oom_nb);
+    unregister_reboot_notifier(&cmm_reboot_nb);
+    unregister_memory_notifier(&cmm_mem_nb);
+    cmm_free_pages(atomic_long_read(&loaned_pages));
+    cmm_unregister_sysfs(&cmm_dev);
+    }
+//
+// cmm_set_disable - Disable/Enable CMM
+//
+// Return value:
+// 0 on success / other on failure
+//
+#[no_mangle]
+unsafe extern "C" fn cmm_set_disable(val: *const c_char, kp: *const kernel_param) -> c_int {
+    static int cmm_set_disable(const char *val, const struct kernel_param *kp)
+    {
+    let mut disable: c_int = simple_strtoul(val, core::ptr::null_mut(), 10);
+    if (disable != 0 && disable != 1)
+    return -EINVAL;
+    if (disable && !cmm_disabled) {
+    if (cmm_thread_ptr)
+    kthread_stop(cmm_thread_ptr);
+    cmm_thread_ptr = core::ptr::null_mut();
+    cmm_free_pages(atomic_long_read(&loaned_pages));
+    } else if (!disable && cmm_disabled) {
+    cmm_thread_ptr = kthread_run(cmm_thread, core::ptr::null_mut(), "cmmthread");
+    if (IS_ERR(cmm_thread_ptr))
+    return PTR_ERR(cmm_thread_ptr);
+    }
+    cmm_disabled = disable;
+    return 0;
+    }
+    module_param_call(disable, cmm_set_disable, param_get_uint,
+    &cmm_disabled, 0644);
+    MODULE_PARM_DESC(disable, "Disable CMM. Set to 1 to disable. "
+    "[Default=" __stringify(CMM_DISABLE) "]");
+    module_init(cmm_init);
+    module_exit(cmm_exit);

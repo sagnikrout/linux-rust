@@ -1,0 +1,161 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/asm-generic/sections.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// References to section boundaries
+
+//
+// Usage guidelines:
+// _text, _data: architecture specific, don't use them in arch-independent code
+// [_stext, _etext]: contains .text.* sections, may also contain .rodata.
+// and/or .init.* sections
+// [_sdata, _edata]: contains .data.* sections, may also contain .rodata.
+// and/or .init.* sections.
+// [__start_rodata, __end_rodata]: contains .rodata.* sections
+// [__start_ro_after_init, __end_ro_after_init]:
+// contains .data..ro_after_init section
+// [__init_begin, __init_end]: contains .init.* sections, but .init.text.
+// may be out of this range on some architectures.
+// [_sinittext, _einittext]: contains .init.text.* sections
+// [__bss_start, __bss_stop]: contains BSS sections
+//
+// Following global variables are optional and may be unavailable on some
+// architectures and/or kernel configurations.
+// _text, _data
+// __kprobes_text_start, __kprobes_text_end
+// __entry_text_start, __entry_text_end
+// __ctors_start, __ctors_end
+// __irqentry_text_start, __irqentry_text_end
+// __softirqentry_text_start, __softirqentry_text_end
+// __start_opd, __end_opd
+//
+// Start and end of .ctors section - used for constructor calls.
+// Start and end of .opd section - used for function descriptors.
+// Start and end of instrumentation protected text section
+// Function descriptor handling (if any).  Override in asm/sections.h
+
+// An address is simply the address of the function.
+
+extern "C" {
+    pub fn IS_ENABLED(_arg: CONFIG_HAVE_FUNCTION_DESCRIPTORS) -> return;
+}
+//
+// memory_contains - checks if an object is contained within a memory region
+// @begin: virtual address of the beginning of the memory region
+// @end: virtual address of the end of the memory region
+// @virt: virtual address of the memory object
+// @size: size of the memory object
+//
+// Returns: true if the object specified by @virt and @size is entirely
+// contained within the memory region defined by @begin and @end, false
+// otherwise.
+//
+// memory_intersects - checks if the region occupied by an object intersects
+// with another memory region
+// @begin: virtual address of the beginning of the memory region
+// @end: virtual address of the end of the memory region
+// @virt: virtual address of the memory object
+// @size: size of the memory object
+//
+// Returns: true if an object's memory region, specified by @virt and @size,
+// intersects with the region specified by @begin and @end, false otherwise.
+//
+// init_section_contains - checks if an object is contained within the init
+// section
+// @virt: virtual address of the memory object
+// @size: size of the memory object
+//
+// Returns: true if the object specified by @virt and @size is entirely
+// contained within the init section, false otherwise.
+//
+extern "C" {
+    pub fn memory_contains(_arg: __init_begin, _arg: __init_end, _arg: virt, _arg: size) -> return;
+}
+//
+// init_section_intersects - checks if the region occupied by an object
+// intersects with the init section
+// @virt: virtual address of the memory object
+// @size: size of the memory object
+//
+// Returns: true if an object's memory region, specified by @virt and @size,
+// intersects with the init section, false otherwise.
+//
+extern "C" {
+    pub fn memory_intersects(_arg: __init_begin, _arg: __init_end, _arg: virt, _arg: size) -> return;
+}
+//
+// is_kernel_core_data - checks if the pointer address is located in the
+// .data or .bss section
+//
+// @addr: address to check
+//
+// Returns: true if the address is located in .data or .bss, false otherwise.
+// Note: On some archs it may return true for core RODATA, and false
+// for others. But will always be true for core RW data.
+//
+// is_kernel_rodata - checks if the pointer address is located in the
+// .rodata section
+//
+// @addr: address to check
+//
+// Returns: true if the address is located in .rodata, false otherwise.
+//
+// is_kernel_inittext - checks if the pointer address is located in the
+// .init.text section
+//
+// @addr: address to check
+//
+// Returns: true if the address is located in .init.text, false otherwise.
+//
+// __is_kernel_text - checks if the pointer address is located in the
+// .text section
+//
+// @addr: address to check
+//
+// Returns: true if the address is located in .text, false otherwise.
+// Note: an internal helper, only check the range of _stext to _etext.
+//
+// __is_kernel - checks if the pointer address is located in the kernel range
+//
+// @addr: address to check
+//
+// Returns: true if the address is located in the kernel range, false otherwise.
+// Note: an internal helper, check the range of _stext to _end,
+// and range from __init_begin to __init_end, which can be outside
+// of the _stext to _end range.
+//

@@ -1,0 +1,66 @@
+//! Automatically rewritten from C to Rust
+//! Source: lib/test_module.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// This module emits "Hello, world" on printk when loaded.
+//
+// It is designed to be used for basic evaluation of the module loading
+// subsystem (for example when validating module signing/verification). It
+// lacks any extra dependencies, and will not normally be loaded by the
+// system unless explicitly requested by name.
+//
+
+#[no_mangle]
+unsafe extern "C" fn test_module_init() -> int __init {
+    static int __init test_module_init(void)
+    {
+    pr_warn("Hello, world\n");
+    return 0;
+    }
+    module_init(test_module_init);
+#[no_mangle]
+unsafe extern "C" fn test_module_exit() -> void __exit {
+    static void __exit test_module_exit(void)
+    {
+    pr_warn("Goodbye\n");
+    }
+    module_exit(test_module_exit);
+    MODULE_AUTHOR("Kees Cook <keescook@chromium.org>");
+    MODULE_DESCRIPTION("module loading subsystem test module");
+    MODULE_LICENSE("GPL");

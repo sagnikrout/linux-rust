@@ -1,0 +1,95 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: mm/mm_init.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// mm_init.h:
+//
+// mm/ internal mm_init and memblock declarations
+//
+
+// perform sanity checks on struct pages being allocated or freed
+extern "C" {
+    pub fn set_zone_contiguous(zone: *mut zone);
+}
+extern "C" {
+    pub fn memblock_free_pages(pfn: c_ulong, order: c_uint);
+}
+
+// Free whole pageblock and set its migration type to MIGRATE_CMA.
+extern "C" {
+    pub fn init_cma_reserved_pageblock(page: *mut page);
+}
+
+extern "C" {
+    pub fn init_cma_pageblock(page: *mut page);
+}
+
+// Memory initialisation debug and verification
+
+extern "C" {
+    pub fn static_branch_unlikely(_arg: &deferred_pages) -> return;
+}
+extern "C" {
+    pub fn deferred_grow_zone(zone: *mut zone, order: c_uint) -> bool __init;
+}
+
+extern "C" {
+    pub fn init_deferred_page(pfn: c_ulong, nid: c_int);
+}
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum mminit_level {
+    MMINIT_WARNING,
+    MMINIT_VERIFY,
+    MMINIT_TRACE
+}
+
+extern "C" {
+    pub fn mminit_verify_pageflags_layout();
+}
+extern "C" {
+    pub fn mminit_verify_zonelist();
+}
+
+extern "C" {
+    pub fn memblock_has_mirror() -> bool;
+}
+extern "C" {
+    pub fn memblock_free_all();
+}

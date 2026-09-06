@@ -1,0 +1,201 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/kernel/paravirt.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+// Paravirtualization interfaces
+    Copyright (C) 2006 Rusty Russell IBM Corporation
+    2007 - x86_64 support added by Glauber de Oliveira Costa, Red Hat Inc
+//
+
+// stub always returning 0.
+    DEFINE_ASM_FUNC(paravirt_ret0, "xor %eax,%eax", .entry.text);
+#[no_mangle]
+pub unsafe extern "C" fn default_banner() -> void __init {
+    void __init default_banner(void)
+    {
+    printk(KERN_INFO "Booting paravirtualized kernel on %s\n",
+    pv_info.name);
+    }
+
+    unsigned long pv_native_save_fl(void);
+    void pv_native_irq_disable(void);
+    void pv_native_irq_enable(void);
+    unsigned long pv_native_read_cr2(void);
+    DEFINE_ASM_FUNC(_paravirt_ident_64, "mov %rdi, %rax", .text);
+    DEFINE_ASM_FUNC(pv_native_save_fl, "pushf; pop %rax", .noinstr.text);
+    DEFINE_ASM_FUNC(pv_native_irq_disable, "cli", .noinstr.text);
+    DEFINE_ASM_FUNC(pv_native_irq_enable, "sti", .noinstr.text);
+    DEFINE_ASM_FUNC(pv_native_read_cr2, "mov %cr2, %rax", .noinstr.text);
+
+#[no_mangle]
+unsafe extern "C" fn pv_native_safe_halt() -> noinstr void {
+    static noinstr void pv_native_safe_halt(void)
+    {
+    native_safe_halt();
+    }
+
+#[no_mangle]
+unsafe extern "C" fn pv_native_write_cr2(val: c_ulong) -> noinstr void {
+    static noinstr void pv_native_write_cr2(unsigned long val)
+    {
+    native_write_cr2(val);
+    }
+#[no_mangle]
+unsafe extern "C" fn pv_native_read_cr3() -> noinstr unsigned long {
+    static noinstr unsigned long pv_native_read_cr3(void)
+    {
+    return __native_read_cr3();
+    }
+#[no_mangle]
+unsafe extern "C" fn pv_native_write_cr3(cr3: c_ulong) -> noinstr void {
+    static noinstr void pv_native_write_cr3(unsigned long cr3)
+    {
+    native_write_cr3(cr3);
+    }
+#[no_mangle]
+unsafe extern "C" fn pv_native_get_debugreg(regno: c_int) -> noinstr unsigned long {
+    static noinstr unsigned long pv_native_get_debugreg(int regno)
+    {
+    return native_get_debugreg(regno);
+    }
+#[no_mangle]
+unsafe extern "C" fn pv_native_set_debugreg(regno: c_int, val: c_ulong) -> noinstr void {
+    static noinstr void pv_native_set_debugreg(int regno, unsigned long val)
+    {
+    native_set_debugreg(regno, val);
+    }
+
+    struct pv_info pv_info = {
+    .name = "bare hardware",
+
+    .extra_user_64bit_cs = __USER_CS,
+
+    .io_delay = true,
+    };
+// 64-bit pagetable entries
+
+    struct paravirt_patch_template pv_ops = {
+// Cpu ops.
+
+    .cpu.cpuid		= native_cpuid,
+    .cpu.get_debugreg	= pv_native_get_debugreg,
+    .cpu.set_debugreg	= pv_native_set_debugreg,
+    .cpu.read_cr0		= native_read_cr0,
+    .cpu.write_cr0		= native_write_cr0,
+    .cpu.write_cr4		= native_write_cr4,
+    .cpu.read_msr		= native_read_msr,
+    .cpu.write_msr		= native_write_msr,
+    .cpu.read_msr_safe	= native_read_msr_safe,
+    .cpu.write_msr_safe	= native_write_msr_safe,
+    .cpu.read_pmc		= native_read_pmc,
+    .cpu.load_tr_desc	= native_load_tr_desc,
+    .cpu.set_ldt		= native_set_ldt,
+    .cpu.load_gdt		= native_load_gdt,
+    .cpu.load_idt		= native_load_idt,
+    .cpu.store_tr		= native_store_tr,
+    .cpu.load_tls		= native_load_tls,
+    .cpu.load_gs_index	= native_load_gs_index,
+    .cpu.write_ldt_entry	= native_write_ldt_entry,
+    .cpu.write_gdt_entry	= native_write_gdt_entry,
+    .cpu.write_idt_entry	= native_write_idt_entry,
+    .cpu.alloc_ldt		= paravirt_nop,
+    .cpu.free_ldt		= paravirt_nop,
+    .cpu.load_sp0		= native_load_sp0,
+
+    .cpu.invalidate_io_bitmap	= native_tss_invalidate_io_bitmap,
+    .cpu.update_io_bitmap		= native_tss_update_io_bitmap,
+
+    .cpu.start_context_switch	= paravirt_nop,
+    .cpu.end_context_switch		= paravirt_nop,
+// Irq ops.
+    .irq.save_fl		= __PV_IS_CALLEE_SAVE(pv_native_save_fl),
+    .irq.irq_disable	= __PV_IS_CALLEE_SAVE(pv_native_irq_disable),
+    .irq.irq_enable		= __PV_IS_CALLEE_SAVE(pv_native_irq_enable),
+
+// Irq HLT ops.
+    .irq.safe_halt		= pv_native_safe_halt,
+    .irq.halt		= native_halt,
+// Mmu ops.
+    .mmu.flush_tlb_user	= native_flush_tlb_local,
+    .mmu.flush_tlb_kernel	= native_flush_tlb_global,
+    .mmu.flush_tlb_one_user	= native_flush_tlb_one_user,
+    .mmu.flush_tlb_multi	= native_flush_tlb_multi,
+    .mmu.exit_mmap		= paravirt_nop,
+    .mmu.notify_page_enc_status_changed	= paravirt_nop,
+
+    .mmu.read_cr2		= __PV_IS_CALLEE_SAVE(pv_native_read_cr2),
+    .mmu.write_cr2		= pv_native_write_cr2,
+    .mmu.read_cr3		= pv_native_read_cr3,
+    .mmu.write_cr3		= pv_native_write_cr3,
+    .mmu.pgd_alloc		= __paravirt_pgd_alloc,
+    .mmu.pgd_free		= paravirt_nop,
+    .mmu.alloc_pte		= paravirt_nop,
+    .mmu.alloc_pmd		= paravirt_nop,
+    .mmu.alloc_pud		= paravirt_nop,
+    .mmu.alloc_p4d		= paravirt_nop,
+    .mmu.release_pte	= paravirt_nop,
+    .mmu.release_pmd	= paravirt_nop,
+    .mmu.release_pud	= paravirt_nop,
+    .mmu.release_p4d	= paravirt_nop,
+    .mmu.set_pte		= native_set_pte,
+    .mmu.set_pmd		= native_set_pmd,
+    .mmu.ptep_modify_prot_start	= __ptep_modify_prot_start,
+    .mmu.ptep_modify_prot_commit	= __ptep_modify_prot_commit,
+    .mmu.set_pud		= native_set_pud,
+    .mmu.pmd_val		= PTE_IDENT,
+    .mmu.make_pmd		= PTE_IDENT,
+    .mmu.pud_val		= PTE_IDENT,
+    .mmu.make_pud		= PTE_IDENT,
+    .mmu.set_p4d		= native_set_p4d,
+    .mmu.p4d_val		= PTE_IDENT,
+    .mmu.make_p4d		= PTE_IDENT,
+    .mmu.set_pgd		= native_set_pgd,
+    .mmu.pte_val		= PTE_IDENT,
+    .mmu.pgd_val		= PTE_IDENT,
+    .mmu.make_pte		= PTE_IDENT,
+    .mmu.make_pgd		= PTE_IDENT,
+    .mmu.enter_mmap		= paravirt_nop,
+    .mmu.lazy_mode_flush	= paravirt_nop,
+    .mmu.set_fixmap		= native_set_fixmap,
+
+    };
+
+    NOKPROBE_SYMBOL(native_load_idt);
+
+    EXPORT_SYMBOL(pv_ops);
+    EXPORT_SYMBOL_GPL(pv_info);

@@ -1,0 +1,184 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/dt-bindings/reset/tegra194-reset.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// Copyright (c) 2018, NVIDIA CORPORATION. All rights reserved.
+pub const TEGRA194_RESET_ACTMON: c_int = 1;
+pub const TEGRA194_RESET_ADSP_ALL: c_int = 2;
+pub const TEGRA194_RESET_AFI: c_int = 3;
+pub const TEGRA194_RESET_CAN1: c_int = 4;
+pub const TEGRA194_RESET_CAN2: c_int = 5;
+pub const TEGRA194_RESET_DLA0: c_int = 6;
+pub const TEGRA194_RESET_DLA1: c_int = 7;
+pub const TEGRA194_RESET_DPAUX: c_int = 8;
+pub const TEGRA194_RESET_DPAUX1: c_int = 9;
+pub const TEGRA194_RESET_DPAUX2: c_int = 10;
+pub const TEGRA194_RESET_DPAUX3: c_int = 11;
+pub const TEGRA194_RESET_EQOS: c_int = 17;
+pub const TEGRA194_RESET_GPCDMA: c_int = 18;
+pub const TEGRA194_RESET_GPU: c_int = 19;
+pub const TEGRA194_RESET_HDA: c_int = 20;
+pub const TEGRA194_RESET_HDA2CODEC_2X: c_int = 21;
+pub const TEGRA194_RESET_HDA2HDMICODEC: c_int = 22;
+pub const TEGRA194_RESET_HOST1X: c_int = 23;
+pub const TEGRA194_RESET_I2C1: c_int = 24;
+pub const TEGRA194_RESET_I2C10: c_int = 25;
+pub const TEGRA194_RESET_RSVD_26: c_int = 26;
+pub const TEGRA194_RESET_RSVD_27: c_int = 27;
+pub const TEGRA194_RESET_RSVD_28: c_int = 28;
+pub const TEGRA194_RESET_I2C2: c_int = 29;
+pub const TEGRA194_RESET_I2C3: c_int = 30;
+pub const TEGRA194_RESET_I2C4: c_int = 31;
+pub const TEGRA194_RESET_I2C6: c_int = 32;
+pub const TEGRA194_RESET_I2C7: c_int = 33;
+pub const TEGRA194_RESET_I2C8: c_int = 34;
+pub const TEGRA194_RESET_I2C9: c_int = 35;
+pub const TEGRA194_RESET_ISP: c_int = 36;
+pub const TEGRA194_RESET_MIPI_CAL: c_int = 37;
+pub const TEGRA194_RESET_MPHY_CLK_CTL: c_int = 38;
+pub const TEGRA194_RESET_MPHY_L0_RX: c_int = 39;
+pub const TEGRA194_RESET_MPHY_L0_TX: c_int = 40;
+pub const TEGRA194_RESET_MPHY_L1_RX: c_int = 41;
+pub const TEGRA194_RESET_MPHY_L1_TX: c_int = 42;
+pub const TEGRA194_RESET_NVCSI: c_int = 43;
+pub const TEGRA194_RESET_NVDEC: c_int = 44;
+pub const TEGRA194_RESET_NVDISPLAY0_HEAD0: c_int = 45;
+pub const TEGRA194_RESET_NVDISPLAY0_HEAD1: c_int = 46;
+pub const TEGRA194_RESET_NVDISPLAY0_HEAD2: c_int = 47;
+pub const TEGRA194_RESET_NVDISPLAY0_HEAD3: c_int = 48;
+pub const TEGRA194_RESET_NVDISPLAY0_MISC: c_int = 49;
+pub const TEGRA194_RESET_NVDISPLAY0_WGRP0: c_int = 50;
+pub const TEGRA194_RESET_NVDISPLAY0_WGRP1: c_int = 51;
+pub const TEGRA194_RESET_NVDISPLAY0_WGRP2: c_int = 52;
+pub const TEGRA194_RESET_NVDISPLAY0_WGRP3: c_int = 53;
+pub const TEGRA194_RESET_NVDISPLAY0_WGRP4: c_int = 54;
+pub const TEGRA194_RESET_NVDISPLAY0_WGRP5: c_int = 55;
+pub const TEGRA194_RESET_RSVD_56: c_int = 56;
+pub const TEGRA194_RESET_RSVD_57: c_int = 57;
+pub const TEGRA194_RESET_RSVD_58: c_int = 58;
+pub const TEGRA194_RESET_NVENC: c_int = 59;
+pub const TEGRA194_RESET_NVENC1: c_int = 60;
+pub const TEGRA194_RESET_NVJPG: c_int = 61;
+pub const TEGRA194_RESET_PCIE: c_int = 62;
+pub const TEGRA194_RESET_PCIEXCLK: c_int = 63;
+pub const TEGRA194_RESET_RSVD_64: c_int = 64;
+pub const TEGRA194_RESET_RSVD_65: c_int = 65;
+pub const TEGRA194_RESET_PVA0_ALL: c_int = 66;
+pub const TEGRA194_RESET_PVA1_ALL: c_int = 67;
+pub const TEGRA194_RESET_PWM1: c_int = 68;
+pub const TEGRA194_RESET_PWM2: c_int = 69;
+pub const TEGRA194_RESET_PWM3: c_int = 70;
+pub const TEGRA194_RESET_PWM4: c_int = 71;
+pub const TEGRA194_RESET_PWM5: c_int = 72;
+pub const TEGRA194_RESET_PWM6: c_int = 73;
+pub const TEGRA194_RESET_PWM7: c_int = 74;
+pub const TEGRA194_RESET_PWM8: c_int = 75;
+pub const TEGRA194_RESET_QSPI0: c_int = 76;
+pub const TEGRA194_RESET_QSPI1: c_int = 77;
+pub const TEGRA194_RESET_SATA: c_int = 78;
+pub const TEGRA194_RESET_SATACOLD: c_int = 79;
+pub const TEGRA194_RESET_SCE_ALL: c_int = 80;
+pub const TEGRA194_RESET_RCE_ALL: c_int = 81;
+pub const TEGRA194_RESET_SDMMC1: c_int = 82;
+pub const TEGRA194_RESET_RSVD_83: c_int = 83;
+pub const TEGRA194_RESET_SDMMC3: c_int = 84;
+pub const TEGRA194_RESET_SDMMC4: c_int = 85;
+pub const TEGRA194_RESET_SE: c_int = 86;
+pub const TEGRA194_RESET_SOR0: c_int = 87;
+pub const TEGRA194_RESET_SOR1: c_int = 88;
+pub const TEGRA194_RESET_SOR2: c_int = 89;
+pub const TEGRA194_RESET_SOR3: c_int = 90;
+pub const TEGRA194_RESET_SPI1: c_int = 91;
+pub const TEGRA194_RESET_SPI2: c_int = 92;
+pub const TEGRA194_RESET_SPI3: c_int = 93;
+pub const TEGRA194_RESET_SPI4: c_int = 94;
+pub const TEGRA194_RESET_TACH: c_int = 95;
+pub const TEGRA194_RESET_RSVD_96: c_int = 96;
+pub const TEGRA194_RESET_TSCTNVI: c_int = 97;
+pub const TEGRA194_RESET_TSEC: c_int = 98;
+pub const TEGRA194_RESET_TSECB: c_int = 99;
+pub const TEGRA194_RESET_UARTA: c_int = 100;
+pub const TEGRA194_RESET_UARTB: c_int = 101;
+pub const TEGRA194_RESET_UARTC: c_int = 102;
+pub const TEGRA194_RESET_UARTD: c_int = 103;
+pub const TEGRA194_RESET_UARTE: c_int = 104;
+pub const TEGRA194_RESET_UARTF: c_int = 105;
+pub const TEGRA194_RESET_UARTG: c_int = 106;
+pub const TEGRA194_RESET_UARTH: c_int = 107;
+pub const TEGRA194_RESET_UFSHC: c_int = 108;
+pub const TEGRA194_RESET_UFSHC_AXI_M: c_int = 109;
+pub const TEGRA194_RESET_UFSHC_LP_SEQ: c_int = 110;
+pub const TEGRA194_RESET_RSVD_111: c_int = 111;
+pub const TEGRA194_RESET_VI: c_int = 112;
+pub const TEGRA194_RESET_VIC: c_int = 113;
+pub const TEGRA194_RESET_XUSB_PADCTL: c_int = 114;
+pub const TEGRA194_RESET_NVDEC1: c_int = 115;
+pub const TEGRA194_RESET_PEX0_CORE_0: c_int = 116;
+pub const TEGRA194_RESET_PEX0_CORE_1: c_int = 117;
+pub const TEGRA194_RESET_PEX0_CORE_2: c_int = 118;
+pub const TEGRA194_RESET_PEX0_CORE_3: c_int = 119;
+pub const TEGRA194_RESET_PEX0_CORE_4: c_int = 120;
+pub const TEGRA194_RESET_PEX0_CORE_0_APB: c_int = 121;
+pub const TEGRA194_RESET_PEX0_CORE_1_APB: c_int = 122;
+pub const TEGRA194_RESET_PEX0_CORE_2_APB: c_int = 123;
+pub const TEGRA194_RESET_PEX0_CORE_3_APB: c_int = 124;
+pub const TEGRA194_RESET_PEX0_CORE_4_APB: c_int = 125;
+pub const TEGRA194_RESET_PEX0_COMMON_APB: c_int = 126;
+pub const TEGRA194_RESET_PEX1_CORE_5: c_int = 129;
+pub const TEGRA194_RESET_PEX1_CORE_5_APB: c_int = 130;
+pub const TEGRA194_RESET_CVNAS: c_int = 131;
+pub const TEGRA194_RESET_CVNAS_FCM: c_int = 132;
+pub const TEGRA194_RESET_DMIC5: c_int = 144;
+pub const TEGRA194_RESET_APE: c_int = 145;
+pub const TEGRA194_RESET_PEX_USB_UPHY: c_int = 146;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L0: c_int = 147;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L1: c_int = 148;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L2: c_int = 149;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L3: c_int = 150;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L4: c_int = 151;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L5: c_int = 152;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L6: c_int = 153;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L7: c_int = 154;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L8: c_int = 155;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L9: c_int = 156;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L10: c_int = 157;
+pub const TEGRA194_RESET_PEX_USB_UPHY_L11: c_int = 158;
+pub const TEGRA194_RESET_PEX_USB_UPHY_PLL0: c_int = 159;
+pub const TEGRA194_RESET_PEX_USB_UPHY_PLL1: c_int = 160;
+pub const TEGRA194_RESET_PEX_USB_UPHY_PLL2: c_int = 161;
+pub const TEGRA194_RESET_PEX_USB_UPHY_PLL3: c_int = 162;

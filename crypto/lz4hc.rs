@@ -1,0 +1,120 @@
+//! Automatically rewritten from C to Rust
+//! Source: crypto/lz4hc.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Cryptographic API.
+//
+// Copyright (c) 2013 Chanho Min <chanho.min@lge.com>
+//
+
+    static void *lz4hc_alloc_ctx(void)
+    {
+    void *ctx;
+    ctx = vmalloc(LZ4HC_MEM_COMPRESS);
+    if (!ctx)
+    return ERR_PTR(-ENOMEM);
+    return ctx;
+    }
+#[no_mangle]
+unsafe extern "C" fn lz4hc_free_ctx(ctx: *mut c_void) {
+    static void lz4hc_free_ctx(void *ctx)
+    {
+    vfree(ctx);
+    }
+    static int __lz4hc_compress_crypto(const u8 *src, unsigned int slen,
+    u8 *dst, unsigned int *dlen, void *ctx)
+    {
+    int out_len = LZ4_compress_HC(src, dst, slen,
+// dlen, LZ4HC_DEFAULT_CLEVEL, ctx);
+    if (!out_len)
+    return -EINVAL;
+// dlen = out_len;
+    return 0;
+    }
+    static int lz4hc_scompress(struct crypto_scomp *tfm, const u8 *src,
+    unsigned int slen, u8 *dst, unsigned int *dlen,
+    void *ctx)
+    {
+    return __lz4hc_compress_crypto(src, slen, dst, dlen, ctx);
+    }
+    static int __lz4hc_decompress_crypto(const u8 *src, unsigned int slen,
+    u8 *dst, unsigned int *dlen, void *ctx)
+    {
+    let mut out_len: c_int = LZ4_decompress_safe(src, dst, slen, *dlen);
+    if (out_len < 0)
+    return -EINVAL;
+// dlen = out_len;
+    return 0;
+    }
+    static int lz4hc_sdecompress(struct crypto_scomp *tfm, const u8 *src,
+    unsigned int slen, u8 *dst, unsigned int *dlen,
+    void *ctx)
+    {
+    return __lz4hc_decompress_crypto(src, slen, dst, dlen, core::ptr::null_mut());
+    }
+    static struct scomp_alg scomp = {
+    .streams		= {
+    .alloc_ctx	= lz4hc_alloc_ctx,
+    .free_ctx	= lz4hc_free_ctx,
+    },
+    .compress		= lz4hc_scompress,
+    .decompress		= lz4hc_sdecompress,
+    .base			= {
+    .cra_name	= "lz4hc",
+    .cra_driver_name = "lz4hc-scomp",
+    .cra_module	 = THIS_MODULE,
+    }
+    };
+#[no_mangle]
+unsafe extern "C" fn lz4hc_mod_init() -> int __init {
+    static int __init lz4hc_mod_init(void)
+    {
+    return crypto_register_scomp(&scomp);
+    }
+#[no_mangle]
+unsafe extern "C" fn lz4hc_mod_fini() -> void __exit {
+    static void __exit lz4hc_mod_fini(void)
+    {
+    crypto_unregister_scomp(&scomp);
+    }
+    module_init(lz4hc_mod_init);
+    module_exit(lz4hc_mod_fini);
+    MODULE_LICENSE("GPL");
+    MODULE_DESCRIPTION("LZ4HC Compression Algorithm");
+    MODULE_ALIAS_CRYPTO("lz4hc");

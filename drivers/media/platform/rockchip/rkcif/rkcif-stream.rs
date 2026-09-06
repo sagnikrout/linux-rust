@@ -1,0 +1,59 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/media/platform/rockchip/rkcif/rkcif-stream.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Rockchip Camera Interface (CIF) Driver
+//
+// Abstraction for the DMA part and the ping-pong scheme (a double-buffering
+// mechanism) of the different CIF variants.
+// Each stream is represented as V4L2 device whose corresponding media entity
+// has one sink pad.
+// The sink pad is connected to an instance of the INTERFACE/CROP abstraction
+// in rkcif-interface.c.
+//
+// Copyright (C) 2025 Michael Riesch <michael.riesch@wolfvision.net>
+// Copyright (C) 2025 Collabora, Ltd.
+//
+
+extern "C" {
+    pub fn rkcif_stream_pingpong(stream: *mut rkcif_stream);
+}
+extern "C" {
+    pub fn rkcif_stream_unregister(stream: *mut rkcif_stream);
+}

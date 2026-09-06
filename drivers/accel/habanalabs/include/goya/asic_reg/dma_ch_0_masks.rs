@@ -1,0 +1,351 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/accel/habanalabs/include/goya/asic_reg/dma_ch_0_masks.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2016-2018 HabanaLabs, Ltd.
+// All Rights Reserved.
+//
+// This is an auto-generated file
+// DO NOT EDIT BELOW
+//
+// DMA_CH_0 (Prototype: DMA_CH)
+//
+// DMA_CH_0_CFG0
+pub const DMA_CH_0_CFG0_RD_MAX_OUTSTAND_SHIFT: c_int = 0;
+pub const DMA_CH_0_CFG0_RD_MAX_OUTSTAND_MASK: c_uint = 0x3FF;
+pub const DMA_CH_0_CFG0_WR_MAX_OUTSTAND_SHIFT: c_int = 16;
+pub const DMA_CH_0_CFG0_WR_MAX_OUTSTAND_MASK: c_uint = 0xFFF0000;
+// DMA_CH_0_CFG1
+pub const DMA_CH_0_CFG1_RD_BUF_MAX_SIZE_SHIFT: c_int = 0;
+pub const DMA_CH_0_CFG1_RD_BUF_MAX_SIZE_MASK: c_uint = 0x3FF;
+// DMA_CH_0_ERRMSG_ADDR_LO
+pub const DMA_CH_0_ERRMSG_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_ERRMSG_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_ERRMSG_ADDR_HI
+pub const DMA_CH_0_ERRMSG_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_ERRMSG_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_ERRMSG_WDATA
+pub const DMA_CH_0_ERRMSG_WDATA_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_ERRMSG_WDATA_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_RD_COMP_ADDR_LO
+pub const DMA_CH_0_RD_COMP_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_COMP_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_RD_COMP_ADDR_HI
+pub const DMA_CH_0_RD_COMP_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_COMP_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_RD_COMP_WDATA
+pub const DMA_CH_0_RD_COMP_WDATA_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_COMP_WDATA_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_WR_COMP_ADDR_LO
+pub const DMA_CH_0_WR_COMP_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_COMP_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_WR_COMP_ADDR_HI
+pub const DMA_CH_0_WR_COMP_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_COMP_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_WR_COMP_WDATA
+pub const DMA_CH_0_WR_COMP_WDATA_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_COMP_WDATA_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_LDMA_SRC_ADDR_LO
+pub const DMA_CH_0_LDMA_SRC_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_LDMA_SRC_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_LDMA_SRC_ADDR_HI
+pub const DMA_CH_0_LDMA_SRC_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_LDMA_SRC_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_LDMA_DST_ADDR_LO
+pub const DMA_CH_0_LDMA_DST_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_LDMA_DST_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_LDMA_DST_ADDR_HI
+pub const DMA_CH_0_LDMA_DST_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_LDMA_DST_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_LDMA_TSIZE
+pub const DMA_CH_0_LDMA_TSIZE_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_LDMA_TSIZE_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_COMIT_TRANSFER
+pub const DMA_CH_0_COMIT_TRANSFER_PCI_UPS_WKORDR_SHIFT: c_int = 0;
+pub const DMA_CH_0_COMIT_TRANSFER_PCI_UPS_WKORDR_MASK: c_uint = 0x1;
+pub const DMA_CH_0_COMIT_TRANSFER_RD_COMP_EN_SHIFT: c_int = 1;
+pub const DMA_CH_0_COMIT_TRANSFER_RD_COMP_EN_MASK: c_uint = 0x2;
+pub const DMA_CH_0_COMIT_TRANSFER_WR_COMP_EN_SHIFT: c_int = 2;
+pub const DMA_CH_0_COMIT_TRANSFER_WR_COMP_EN_MASK: c_uint = 0x4;
+pub const DMA_CH_0_COMIT_TRANSFER_NOSNOOP_SHIFT: c_int = 3;
+pub const DMA_CH_0_COMIT_TRANSFER_NOSNOOP_MASK: c_uint = 0x8;
+pub const DMA_CH_0_COMIT_TRANSFER_SRC_ADDR_INC_DIS_SHIFT: c_int = 4;
+pub const DMA_CH_0_COMIT_TRANSFER_SRC_ADDR_INC_DIS_MASK: c_uint = 0x10;
+pub const DMA_CH_0_COMIT_TRANSFER_DST_ADDR_INC_DIS_SHIFT: c_int = 5;
+pub const DMA_CH_0_COMIT_TRANSFER_DST_ADDR_INC_DIS_MASK: c_uint = 0x20;
+pub const DMA_CH_0_COMIT_TRANSFER_MEM_SET_SHIFT: c_int = 6;
+pub const DMA_CH_0_COMIT_TRANSFER_MEM_SET_MASK: c_uint = 0x40;
+pub const DMA_CH_0_COMIT_TRANSFER_MOD_TENSOR_SHIFT: c_int = 15;
+pub const DMA_CH_0_COMIT_TRANSFER_MOD_TENSOR_MASK: c_uint = 0x8000;
+pub const DMA_CH_0_COMIT_TRANSFER_CTL_SHIFT: c_int = 16;
+pub const DMA_CH_0_COMIT_TRANSFER_CTL_MASK: c_uint = 0xFFFF0000;
+// DMA_CH_0_STS0
+pub const DMA_CH_0_STS0_DMA_BUSY_SHIFT: c_int = 0;
+pub const DMA_CH_0_STS0_DMA_BUSY_MASK: c_uint = 0x1;
+pub const DMA_CH_0_STS0_RD_STS_CTX_FULL_SHIFT: c_int = 1;
+pub const DMA_CH_0_STS0_RD_STS_CTX_FULL_MASK: c_uint = 0x2;
+pub const DMA_CH_0_STS0_WR_STS_CTX_FULL_SHIFT: c_int = 2;
+pub const DMA_CH_0_STS0_WR_STS_CTX_FULL_MASK: c_uint = 0x4;
+// DMA_CH_0_STS1
+pub const DMA_CH_0_STS1_RD_STS_CTX_CNT_SHIFT: c_int = 0;
+pub const DMA_CH_0_STS1_RD_STS_CTX_CNT_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_STS2
+pub const DMA_CH_0_STS2_WR_STS_CTX_CNT_SHIFT: c_int = 0;
+pub const DMA_CH_0_STS2_WR_STS_CTX_CNT_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_STS3
+pub const DMA_CH_0_STS3_RD_STS_TRN_CNT_SHIFT: c_int = 0;
+pub const DMA_CH_0_STS3_RD_STS_TRN_CNT_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_STS4
+pub const DMA_CH_0_STS4_WR_STS_TRN_CNT_SHIFT: c_int = 0;
+pub const DMA_CH_0_STS4_WR_STS_TRN_CNT_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_SRC_ADDR_LO_STS
+pub const DMA_CH_0_SRC_ADDR_LO_STS_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_SRC_ADDR_LO_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_SRC_ADDR_HI_STS
+pub const DMA_CH_0_SRC_ADDR_HI_STS_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_SRC_ADDR_HI_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_SRC_TSIZE_STS
+pub const DMA_CH_0_SRC_TSIZE_STS_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_SRC_TSIZE_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_DST_ADDR_LO_STS
+pub const DMA_CH_0_DST_ADDR_LO_STS_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_DST_ADDR_LO_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_DST_ADDR_HI_STS
+pub const DMA_CH_0_DST_ADDR_HI_STS_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_DST_ADDR_HI_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_DST_TSIZE_STS
+pub const DMA_CH_0_DST_TSIZE_STS_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_DST_TSIZE_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_RD_RATE_LIM_EN
+pub const DMA_CH_0_RD_RATE_LIM_EN_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_RATE_LIM_EN_VAL_MASK: c_uint = 0x1;
+// DMA_CH_0_RD_RATE_LIM_RST_TOKEN
+pub const DMA_CH_0_RD_RATE_LIM_RST_TOKEN_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_RATE_LIM_RST_TOKEN_VAL_MASK: c_uint = 0xFFFF;
+// DMA_CH_0_RD_RATE_LIM_SAT
+pub const DMA_CH_0_RD_RATE_LIM_SAT_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_RATE_LIM_SAT_VAL_MASK: c_uint = 0xFFFF;
+// DMA_CH_0_RD_RATE_LIM_TOUT
+pub const DMA_CH_0_RD_RATE_LIM_TOUT_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_RD_RATE_LIM_TOUT_VAL_MASK: c_uint = 0x7FFFFFFF;
+// DMA_CH_0_WR_RATE_LIM_EN
+pub const DMA_CH_0_WR_RATE_LIM_EN_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_RATE_LIM_EN_VAL_MASK: c_uint = 0x1;
+// DMA_CH_0_WR_RATE_LIM_RST_TOKEN
+pub const DMA_CH_0_WR_RATE_LIM_RST_TOKEN_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_RATE_LIM_RST_TOKEN_VAL_MASK: c_uint = 0xFFFF;
+// DMA_CH_0_WR_RATE_LIM_SAT
+pub const DMA_CH_0_WR_RATE_LIM_SAT_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_RATE_LIM_SAT_VAL_MASK: c_uint = 0xFFFF;
+// DMA_CH_0_WR_RATE_LIM_TOUT
+pub const DMA_CH_0_WR_RATE_LIM_TOUT_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_WR_RATE_LIM_TOUT_VAL_MASK: c_uint = 0x7FFFFFFF;
+// DMA_CH_0_CFG2
+pub const DMA_CH_0_CFG2_FORCE_WORD_SHIFT: c_int = 0;
+pub const DMA_CH_0_CFG2_FORCE_WORD_MASK: c_uint = 0x1;
+// DMA_CH_0_TDMA_CTL
+pub const DMA_CH_0_TDMA_CTL_DTYPE_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_CTL_DTYPE_MASK: c_uint = 0x7;
+// DMA_CH_0_TDMA_SRC_BASE_ADDR_LO
+pub const DMA_CH_0_TDMA_SRC_BASE_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_BASE_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_BASE_ADDR_HI
+pub const DMA_CH_0_TDMA_SRC_BASE_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_BASE_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_BASE_0
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_SIZE_0
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_0
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_START_OFFSET_0
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_STRIDE_0
+pub const DMA_CH_0_TDMA_SRC_STRIDE_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_STRIDE_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_BASE_1
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_SIZE_1
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_1
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_START_OFFSET_1
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_STRIDE_1
+pub const DMA_CH_0_TDMA_SRC_STRIDE_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_STRIDE_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_BASE_2
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_SIZE_2
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_2
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_START_OFFSET_2
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_STRIDE_2
+pub const DMA_CH_0_TDMA_SRC_STRIDE_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_STRIDE_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_BASE_3
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_SIZE_3
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_3
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_START_OFFSET_3
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_STRIDE_3
+pub const DMA_CH_0_TDMA_SRC_STRIDE_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_STRIDE_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_BASE_4
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_BASE_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_ROI_SIZE_4
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_ROI_SIZE_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_4
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_VALID_ELEMENTS_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_START_OFFSET_4
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_START_OFFSET_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_SRC_STRIDE_4
+pub const DMA_CH_0_TDMA_SRC_STRIDE_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_SRC_STRIDE_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_BASE_ADDR_LO
+pub const DMA_CH_0_TDMA_DST_BASE_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_BASE_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_BASE_ADDR_HI
+pub const DMA_CH_0_TDMA_DST_BASE_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_BASE_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_BASE_0
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_SIZE_0
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_VALID_ELEMENTS_0
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_START_OFFSET_0
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_STRIDE_0
+pub const DMA_CH_0_TDMA_DST_STRIDE_0_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_STRIDE_0_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_BASE_1
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_SIZE_1
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_VALID_ELEMENTS_1
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_START_OFFSET_1
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_STRIDE_1
+pub const DMA_CH_0_TDMA_DST_STRIDE_1_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_STRIDE_1_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_BASE_2
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_SIZE_2
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_VALID_ELEMENTS_2
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_START_OFFSET_2
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_STRIDE_2
+pub const DMA_CH_0_TDMA_DST_STRIDE_2_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_STRIDE_2_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_BASE_3
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_SIZE_3
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_VALID_ELEMENTS_3
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_START_OFFSET_3
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_STRIDE_3
+pub const DMA_CH_0_TDMA_DST_STRIDE_3_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_STRIDE_3_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_BASE_4
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_BASE_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_ROI_SIZE_4
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_ROI_SIZE_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_VALID_ELEMENTS_4
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_VALID_ELEMENTS_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_START_OFFSET_4
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_START_OFFSET_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_TDMA_DST_STRIDE_4
+pub const DMA_CH_0_TDMA_DST_STRIDE_4_VAL_SHIFT: c_int = 0;
+pub const DMA_CH_0_TDMA_DST_STRIDE_4_VAL_MASK: c_uint = 0xFFFFFFFF;
+// DMA_CH_0_MEM_INIT_BUSY
+pub const DMA_CH_0_MEM_INIT_BUSY_SBC_DATA_SHIFT: c_int = 0;
+pub const DMA_CH_0_MEM_INIT_BUSY_SBC_DATA_MASK: c_uint = 0xFF;
+pub const DMA_CH_0_MEM_INIT_BUSY_SBC_MD_SHIFT: c_int = 8;
+pub const DMA_CH_0_MEM_INIT_BUSY_SBC_MD_MASK: c_uint = 0x100;

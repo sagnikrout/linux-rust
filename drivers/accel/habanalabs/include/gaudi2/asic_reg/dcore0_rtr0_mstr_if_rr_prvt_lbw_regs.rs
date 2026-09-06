@@ -1,0 +1,132 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/accel/habanalabs/include/gaudi2/asic_reg/dcore0_rtr0_mstr_if_rr_prvt_lbw_regs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2016-2020 HabanaLabs, Ltd.
+// All Rights Reserved.
+//
+// This is an auto-generated file
+// DO NOT EDIT BELOW
+//
+// DCORE0_RTR0_MSTR_IF_RR_PRVT_LBW
+// (Prototype: RANGE_REG_LBW)
+//
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_0: c_uint = 0x4142600;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_1: c_uint = 0x4142604;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_2: c_uint = 0x4142608;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_3: c_uint = 0x414260C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_4: c_uint = 0x4142610;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_5: c_uint = 0x4142614;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_6: c_uint = 0x4142618;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_7: c_uint = 0x414261C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_8: c_uint = 0x4142620;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_9: c_uint = 0x4142624;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_10: c_uint = 0x4142628;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_11: c_uint = 0x414262C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_12: c_uint = 0x4142630;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_SHORT_13: c_uint = 0x4142634;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_0: c_uint = 0x4142638;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_1: c_uint = 0x414263C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_2: c_uint = 0x4142640;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_3: c_uint = 0x4142644;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_4: c_uint = 0x4142648;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_5: c_uint = 0x414264C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_6: c_uint = 0x4142650;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_7: c_uint = 0x4142654;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_8: c_uint = 0x4142658;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_9: c_uint = 0x414265C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_10: c_uint = 0x4142660;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_11: c_uint = 0x4142664;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_12: c_uint = 0x4142668;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_SHORT_13: c_uint = 0x414266C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_0: c_uint = 0x4142670;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_1: c_uint = 0x4142674;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_2: c_uint = 0x4142678;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_3: c_uint = 0x414267C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_4: c_uint = 0x4142680;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_5: c_uint = 0x4142684;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_6: c_uint = 0x4142688;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_7: c_uint = 0x414268C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_8: c_uint = 0x4142690;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_9: c_uint = 0x4142694;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_10: c_uint = 0x4142698;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_11: c_uint = 0x414269C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_12: c_uint = 0x41426A0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_SHORT_13: c_uint = 0x41426A4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_0: c_uint = 0x41426A8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_1: c_uint = 0x41426AC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_2: c_uint = 0x41426B0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_3: c_uint = 0x41426B4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_4: c_uint = 0x41426B8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_5: c_uint = 0x41426BC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_6: c_uint = 0x41426C0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_7: c_uint = 0x41426C4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_8: c_uint = 0x41426C8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_9: c_uint = 0x41426CC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_10: c_uint = 0x41426D0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_11: c_uint = 0x41426D4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_12: c_uint = 0x41426D8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_SHORT_13: c_uint = 0x41426DC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_0: c_uint = 0x41426E0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_1: c_uint = 0x41426E4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_2: c_uint = 0x41426E8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MIN_3: c_uint = 0x41426EC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_0: c_uint = 0x41426F0;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_1: c_uint = 0x41426F4;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_2: c_uint = 0x41426F8;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_RANGE_MAX_3: c_uint = 0x41426FC;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_0: c_uint = 0x4142700;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_1: c_uint = 0x4142704;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_2: c_uint = 0x4142708;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MIN_3: c_uint = 0x414270C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_0: c_uint = 0x4142710;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_1: c_uint = 0x4142714;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_2: c_uint = 0x4142718;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_RANGE_MAX_3: c_uint = 0x414271C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_HIT_AW: c_uint = 0x4142720;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_HIT_AW: c_uint = 0x4142724;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_SEC_HIT_AR: c_uint = 0x4142728;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_PRIV_HIT_AR: c_uint = 0x414272C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_AW_RAZWI: c_uint = 0x4142730;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_AR_RAZWI: c_uint = 0x4142734;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_AW_RAZWI_XY: c_uint = 0x4142738;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_AR_RAZWI_XY: c_uint = 0x414273C;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_AW_RAZWI_HAPPENED: c_uint = 0x4142740;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_AR_RAZWI_HAPPENED: c_uint = 0x4142744;
+pub const mmDCORE0_RTR0_MSTR_IF_RR_PRVT_LBW_RAZWI_ERR_RESP: c_uint = 0x4142748;

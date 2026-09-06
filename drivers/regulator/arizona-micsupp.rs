@@ -1,0 +1,357 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/regulator/arizona-micsupp.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// arizona-micsupp.c  --  Microphone supply for Arizona devices
+//
+// Copyright 2012 Wolfson Microelectronics PLC.
+//
+// Author: Mark Brown <broonie@opensource.wolfsonmicro.com>
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct arizona_micsupp {
+    pub regulator: *mut regulator_dev,
+    pub regmap: *mut regmap,
+    pub dapm: *mut snd_soc_dapm_context,
+    pub desc: *const regulator_desc,
+    pub dev: *mut device,
+    pub supply: regulator_consumer_supply,
+    pub init_data: regulator_init_data,
+    pub check_cp_work: work_struct,
+}
+
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_check_cp(work: *mut work_struct) {
+    static void arizona_micsupp_check_cp(struct work_struct *work)
+    {
+    struct arizona_micsupp *micsupp =
+    container_of(work, struct arizona_micsupp, check_cp_work);
+    struct snd_soc_dapm_context *dapm = *micsupp.dapm;
+    const struct regulator_desc *desc = micsupp.desc;
+    unsigned int val;
+    int ret;
+    ret = regmap_read(micsupp.regmap, desc.enable_reg, &val);
+    if (ret != 0) {
+    dev_err(micsupp.dev,
+    "Failed to read CP state: %d\n", ret);
+    return;
+    }
+    if (dapm) {
+    if ((val & (desc.enable_mask | desc.bypass_mask)) ==
+    desc.enable_mask)
+    snd_soc_dapm_force_enable_pin(dapm, "MICSUPP");
+    else
+    snd_soc_dapm_disable_pin(dapm, "MICSUPP");
+    snd_soc_dapm_sync(dapm);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_enable(rdev: *mut regulator_dev) -> c_int {
+    static int arizona_micsupp_enable(struct regulator_dev *rdev)
+    {
+    struct arizona_micsupp *micsupp = rdev_get_drvdata(rdev);
+    int ret;
+    ret = regulator_enable_regmap(rdev);
+    if (ret == 0)
+    schedule_work(&micsupp.check_cp_work);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_disable(rdev: *mut regulator_dev) -> c_int {
+    static int arizona_micsupp_disable(struct regulator_dev *rdev)
+    {
+    struct arizona_micsupp *micsupp = rdev_get_drvdata(rdev);
+    int ret;
+    ret = regulator_disable_regmap(rdev);
+    if (ret == 0)
+    schedule_work(&micsupp.check_cp_work);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_set_bypass(rdev: *mut regulator_dev, ena: bool) -> c_int {
+    static int arizona_micsupp_set_bypass(struct regulator_dev *rdev, bool ena)
+    {
+    struct arizona_micsupp *micsupp = rdev_get_drvdata(rdev);
+    int ret;
+    ret = regulator_set_bypass_regmap(rdev, ena);
+    if (ret == 0)
+    schedule_work(&micsupp.check_cp_work);
+    return ret;
+    }
+    static const struct regulator_ops arizona_micsupp_ops = {
+    .enable = arizona_micsupp_enable,
+    .disable = arizona_micsupp_disable,
+    .is_enabled = regulator_is_enabled_regmap,
+    .list_voltage = regulator_list_voltage_linear_range,
+    .map_voltage = regulator_map_voltage_linear_range,
+    .get_voltage_sel = regulator_get_voltage_sel_regmap,
+    .set_voltage_sel = regulator_set_voltage_sel_regmap,
+    .get_bypass = regulator_get_bypass_regmap,
+    .set_bypass = arizona_micsupp_set_bypass,
+    };
+    static const struct linear_range arizona_micsupp_ranges[] = {
+    REGULATOR_LINEAR_RANGE(1700000, 0,    0x1e, 50000),
+    REGULATOR_LINEAR_RANGE(3300000, 0x1f, 0x1f, 0),
+    };
+    static const struct regulator_desc arizona_micsupp = {
+    .name = "MICVDD",
+    .supply_name = "CPVDD",
+    .type = REGULATOR_VOLTAGE,
+    .n_voltages = 32,
+    .ops = &arizona_micsupp_ops,
+    .vsel_reg = ARIZONA_LDO2_CONTROL_1,
+    .vsel_mask = ARIZONA_LDO2_VSEL_MASK,
+    .enable_reg = ARIZONA_MIC_CHARGE_PUMP_1,
+    .enable_mask = ARIZONA_CPMIC_ENA,
+    .bypass_reg = ARIZONA_MIC_CHARGE_PUMP_1,
+    .bypass_mask = ARIZONA_CPMIC_BYPASS,
+    .linear_ranges = arizona_micsupp_ranges,
+    .n_linear_ranges = ARRAY_SIZE(arizona_micsupp_ranges),
+    .enable_time = 3000,
+    .owner = THIS_MODULE,
+    };
+    static const struct linear_range arizona_micsupp_ext_ranges[] = {
+    REGULATOR_LINEAR_RANGE(900000,  0,    0x14, 25000),
+    REGULATOR_LINEAR_RANGE(1500000, 0x15, 0x27, 100000),
+    };
+    static const struct regulator_desc arizona_micsupp_ext = {
+    .name = "MICVDD",
+    .supply_name = "CPVDD",
+    .type = REGULATOR_VOLTAGE,
+    .n_voltages = 40,
+    .ops = &arizona_micsupp_ops,
+    .vsel_reg = ARIZONA_LDO2_CONTROL_1,
+    .vsel_mask = ARIZONA_LDO2_VSEL_MASK,
+    .enable_reg = ARIZONA_MIC_CHARGE_PUMP_1,
+    .enable_mask = ARIZONA_CPMIC_ENA,
+    .bypass_reg = ARIZONA_MIC_CHARGE_PUMP_1,
+    .bypass_mask = ARIZONA_CPMIC_BYPASS,
+    .linear_ranges = arizona_micsupp_ext_ranges,
+    .n_linear_ranges = ARRAY_SIZE(arizona_micsupp_ext_ranges),
+    .enable_time = 3000,
+    .owner = THIS_MODULE,
+    };
+    static const struct regulator_init_data arizona_micsupp_default = {
+    .constraints = {
+    .valid_ops_mask = REGULATOR_CHANGE_STATUS |
+    REGULATOR_CHANGE_VOLTAGE |
+    REGULATOR_CHANGE_BYPASS,
+    .min_uV = 1700000,
+    .max_uV = 3300000,
+    },
+    .num_consumer_supplies = 1,
+    };
+    static const struct regulator_init_data arizona_micsupp_ext_default = {
+    .constraints = {
+    .valid_ops_mask = REGULATOR_CHANGE_STATUS |
+    REGULATOR_CHANGE_VOLTAGE |
+    REGULATOR_CHANGE_BYPASS,
+    .min_uV = 900000,
+    .max_uV = 3300000,
+    },
+    .num_consumer_supplies = 1,
+    };
+    static const struct regulator_desc madera_micsupp = {
+    .name = "MICVDD",
+    .supply_name = "CPVDD1",
+    .type = REGULATOR_VOLTAGE,
+    .n_voltages = 40,
+    .ops = &arizona_micsupp_ops,
+    .vsel_reg = MADERA_LDO2_CONTROL_1,
+    .vsel_mask = MADERA_LDO2_VSEL_MASK,
+    .enable_reg = MADERA_MIC_CHARGE_PUMP_1,
+    .enable_mask = MADERA_CPMIC_ENA,
+    .bypass_reg = MADERA_MIC_CHARGE_PUMP_1,
+    .bypass_mask = MADERA_CPMIC_BYPASS,
+    .linear_ranges = arizona_micsupp_ext_ranges,
+    .n_linear_ranges = ARRAY_SIZE(arizona_micsupp_ext_ranges),
+    .enable_time = 3000,
+    .owner = THIS_MODULE,
+    };
+    static int arizona_micsupp_of_get_pdata(struct arizona_micsupp_pdata *pdata,
+    struct regulator_config *config,
+    const struct regulator_desc *desc)
+    {
+    struct arizona_micsupp *micsupp = config.driver_data;
+    struct device_node *np;
+    struct regulator_init_data *init_data;
+    np = of_get_child_by_name(config.dev.of_node, "micvdd");
+    if (np) {
+    config.of_node = np;
+    init_data = of_get_regulator_init_data(config.dev, np, desc);
+    if (init_data) {
+    init_data.consumer_supplies = &micsupp.supply;
+    init_data.num_consumer_supplies = 1;
+    pdata.init_data = init_data;
+    }
+    }
+    return 0;
+    }
+    static int arizona_micsupp_common_init(struct platform_device *pdev,
+    struct arizona_micsupp *micsupp,
+    const struct regulator_desc *desc,
+    struct arizona_micsupp_pdata *pdata)
+    {
+    let mut config: regulator_config = { };
+    int ret;
+    INIT_WORK(&micsupp.check_cp_work, arizona_micsupp_check_cp);
+    micsupp.init_data.consumer_supplies = &micsupp.supply;
+    micsupp.supply.dev_name = dev_name(micsupp.dev);
+    micsupp.desc = desc;
+    config.dev = micsupp.dev;
+    config.driver_data = micsupp;
+    config.regmap = micsupp.regmap;
+    if (IS_ENABLED(CONFIG_OF)) {
+    if (!dev_get_platdata(micsupp.dev)) {
+    ret = arizona_micsupp_of_get_pdata(pdata, &config,
+    desc);
+    if (ret < 0)
+    return ret;
+    }
+    }
+    if (pdata.init_data)
+    config.init_data = pdata.init_data;
+    else
+    config.init_data = &micsupp.init_data;
+// Default to regulated mode
+    regmap_update_bits(micsupp.regmap, desc.enable_reg, desc.bypass_mask, 0);
+    micsupp.regulator = devm_regulator_register(&pdev.dev,
+    desc,
+    &config);
+    of_node_put(config.of_node);
+    if (IS_ERR(micsupp.regulator)) {
+    ret = PTR_ERR(micsupp.regulator);
+    dev_err(micsupp.dev, "Failed to register mic supply: %d\n",
+    ret);
+    return ret;
+    }
+    platform_set_drvdata(pdev, micsupp);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_probe(pdev: *mut platform_device) -> c_int {
+    static int arizona_micsupp_probe(struct platform_device *pdev)
+    {
+    struct arizona *arizona = dev_get_drvdata(pdev.dev.parent);
+    const struct regulator_desc *desc;
+    struct arizona_micsupp *micsupp;
+    micsupp = devm_kzalloc(&pdev.dev, sizeof(*micsupp), GFP_KERNEL);
+    if (!micsupp)
+    return -ENOMEM;
+    micsupp.regmap = arizona.regmap;
+    micsupp.dapm = &arizona.dapm;
+    micsupp.dev = arizona.dev;
+    micsupp.supply.supply = "MICVDD";
+//
+// Since the chip usually supplies itself we provide some
+// default init_data for it.  This will be overridden with
+// platform data if provided.
+//
+    switch (arizona.type) {
+    case WM5110:
+    case WM8280:
+    desc = &arizona_micsupp_ext;
+    micsupp.init_data = arizona_micsupp_ext_default;
+    break;
+    default:
+    desc = &arizona_micsupp;
+    micsupp.init_data = arizona_micsupp_default;
+    break;
+    }
+    return arizona_micsupp_common_init(pdev, micsupp, desc,
+    &arizona.pdata.micvdd);
+    }
+#[no_mangle]
+unsafe extern "C" fn madera_micsupp_probe(pdev: *mut platform_device) -> c_int {
+    static int madera_micsupp_probe(struct platform_device *pdev)
+    {
+    struct madera *madera = dev_get_drvdata(pdev.dev.parent);
+    struct arizona_micsupp *micsupp;
+    micsupp = devm_kzalloc(&pdev.dev, sizeof(*micsupp), GFP_KERNEL);
+    if (!micsupp)
+    return -ENOMEM;
+    micsupp.regmap = madera.regmap;
+    micsupp.dapm = &madera.dapm;
+    micsupp.dev = madera.dev;
+    micsupp.init_data = arizona_micsupp_ext_default;
+    micsupp.supply.supply = "MICVDD";
+    return arizona_micsupp_common_init(pdev, micsupp, &madera_micsupp,
+    &madera.pdata.micvdd);
+    }
+    static struct platform_driver arizona_micsupp_driver = {
+    .probe = arizona_micsupp_probe,
+    .driver		= {
+    .name	= "arizona-micsupp",
+    .probe_type = PROBE_FORCE_SYNCHRONOUS,
+    },
+    };
+    static struct platform_driver madera_micsupp_driver = {
+    .probe = madera_micsupp_probe,
+    .driver		= {
+    .name	= "madera-micsupp",
+    .probe_type = PROBE_FORCE_SYNCHRONOUS,
+    },
+    };
+    static struct platform_driver * const arizona_micsupp_drivers[] = {
+    &arizona_micsupp_driver,
+    &madera_micsupp_driver,
+    };
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_init() -> int __init {
+    static int __init arizona_micsupp_init(void)
+    {
+    return platform_register_drivers(arizona_micsupp_drivers,
+    ARRAY_SIZE(arizona_micsupp_drivers));
+    }
+    module_init(arizona_micsupp_init);
+#[no_mangle]
+unsafe extern "C" fn arizona_micsupp_exit() -> void __exit {
+    static void __exit arizona_micsupp_exit(void)
+    {
+    platform_unregister_drivers(arizona_micsupp_drivers,
+    ARRAY_SIZE(arizona_micsupp_drivers));
+    }
+    module_exit(arizona_micsupp_exit);
+// Module information
+    MODULE_AUTHOR("Mark Brown <broonie@opensource.wolfsonmicro.com>");
+    MODULE_DESCRIPTION("Arizona microphone supply driver");
+    MODULE_LICENSE("GPL");
+    MODULE_ALIAS("platform:arizona-micsupp");
+    MODULE_ALIAS("platform:madera-micsupp");

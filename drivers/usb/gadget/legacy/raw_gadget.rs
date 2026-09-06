@@ -1,0 +1,1300 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/usb/gadget/legacy/raw_gadget.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// USB Raw Gadget driver.
+// See Documentation/usb/raw-gadget.rst for more details.
+//
+// Copyright (c) 2020 Google, Inc.
+// Author: Andrey Konovalov <andreyknvl@gmail.com>
+//
+
+    MODULE_DESCRIPTION(DRIVER_DESC);
+    MODULE_AUTHOR("Andrey Konovalov");
+    MODULE_LICENSE("GPL");
+// ----------------------------------------------------------------------
+    static DEFINE_IDA(driver_id_numbers);
+pub const DRIVER_DRIVER_NAME_LENGTH_MAX: c_int = 32;
+
+pub const RAW_EVENT_QUEUE_SIZE: c_int = 16;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_event_queue {
+// See the comment in raw_event_queue_fetch() for locking details.
+    pub lock: spinlock_t,
+    pub sema: semaphore,
+    pub events: [*mut usb_raw_event; RAW_EVENT_QUEUE_SIZE],
+    pub size: c_int,
+}
+
+#[no_mangle]
+unsafe extern "C" fn raw_event_queue_init(queue: *mut raw_event_queue) {
+    static void raw_event_queue_init(struct raw_event_queue *queue)
+    {
+    spin_lock_init(&queue.lock);
+    sema_init(&queue.sema, 0);
+    queue.size = 0;
+    }
+    static int raw_event_queue_add(struct raw_event_queue *queue,
+    enum usb_raw_event_type type, size_t length, const void *data)
+    {
+    unsigned long flags;
+    struct usb_raw_event *event;
+    spin_lock_irqsave(&queue.lock, flags);
+    if (queue.size >= RAW_EVENT_QUEUE_SIZE) {
+    spin_unlock_irqrestore(&queue.lock, flags);
+    return -ENOMEM;
+    }
+    event = kmalloc(sizeof(*event) + length, GFP_ATOMIC);
+    if (!event) {
+    spin_unlock_irqrestore(&queue.lock, flags);
+    return -ENOMEM;
+    }
+    event.type = type;
+    event.length = length;
+    if (event.length)
+    memcpy(&event.data[0], data, length);
+    queue.events[queue.size] = event;
+    queue.size++;
+    up(&queue.sema);
+    spin_unlock_irqrestore(&queue.lock, flags);
+    return 0;
+    }
+    static struct usb_raw_event *raw_event_queue_fetch(
+    struct raw_event_queue *queue)
+    {
+    int ret;
+    unsigned long flags;
+    struct usb_raw_event *event;
+//
+// This function can be called concurrently. We first check that
+// there's at least one event queued by decrementing the semaphore,
+// and then take the lock to protect queue struct fields.
+//
+    ret = down_interruptible(&queue.sema);
+    if (ret)
+    return ERR_PTR(ret);
+    spin_lock_irqsave(&queue.lock, flags);
+//
+// queue->size must have the same value as queue->sema counter (before
+// the down_interruptible() call above), so this check is a fail-safe.
+//
+    if (WARN_ON(!queue.size)) {
+    spin_unlock_irqrestore(&queue.lock, flags);
+    return ERR_PTR(-ENODEV);
+    }
+    event = queue.events[0];
+    queue.size--;
+    memmove(&queue.events[0], &queue.events[1],
+    queue.size * sizeof(queue.events[0]));
+    spin_unlock_irqrestore(&queue.lock, flags);
+    return event;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_event_queue_destroy(queue: *mut raw_event_queue) {
+    static void raw_event_queue_destroy(struct raw_event_queue *queue)
+    {
+    int i;
+    for (i = 0; i < queue.size; i++)
+    kfree(queue.events[i]);
+    queue.size = 0;
+    }
+// ----------------------------------------------------------------------
+    struct raw_dev;
+    enum ep_state {
+    STATE_EP_DISABLED,
+    STATE_EP_ENABLED,
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_ep {
+    pub dev: *mut raw_dev,
+    pub state: enum ep_state,
+    pub ep: *mut usb_ep,
+    pub addr: u8,
+    pub req: *mut usb_request,
+    pub urb_queued: bool,
+    pub disabling: bool,
+    pub status: isize,
+}
+
+    enum dev_state {
+    STATE_DEV_INVALID = 0,
+    STATE_DEV_OPENED,
+    STATE_DEV_INITIALIZED,
+    STATE_DEV_REGISTERING,
+    STATE_DEV_RUNNING,
+    STATE_DEV_CLOSED,
+    STATE_DEV_FAILED
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_dev {
+    pub count: kref,
+    pub lock: spinlock_t,
+    pub udc_name: *const c_char,
+    pub driver: usb_gadget_driver,
+// Reference to misc device:
+    pub dev: *mut device,
+// Make driver names unique
+    pub driver_id_number: c_int,
+// Protected by lock:
+    pub state: enum dev_state,
+    pub gadget_registered: bool,
+    pub gadget: *mut usb_gadget,
+    pub req: *mut usb_request,
+    pub ep0_in_pending: bool,
+    pub ep0_out_pending: bool,
+    pub ep0_urb_queued: bool,
+    pub ep0_status: isize,
+    pub eps: [raw_ep; USB_RAW_EPS_NUM_MAX],
+    pub eps_num: c_int,
+    pub ep0_done: completion,
+    pub queue: raw_event_queue,
+}
+
+    static struct raw_dev *dev_new(void)
+    {
+    struct raw_dev *dev;
+    dev = kzalloc_obj(*dev);
+    if (!dev)
+    return core::ptr::null_mut();
+// Matches kref_put() in raw_release().
+    kref_init(&dev.count);
+    spin_lock_init(&dev.lock);
+    init_completion(&dev.ep0_done);
+    raw_event_queue_init(&dev.queue);
+    dev.driver_id_number = -1;
+    return dev;
+    }
+#[no_mangle]
+unsafe extern "C" fn dev_free(kref: *mut kref) {
+    static void dev_free(struct kref *kref)
+    {
+    struct raw_dev *dev = container_of(kref, struct raw_dev, count);
+    int i;
+    kfree(dev.udc_name);
+    kfree(dev.driver.udc_name);
+    kfree(dev.driver.driver.name);
+    if (dev.driver_id_number >= 0)
+    ida_free(&driver_id_numbers, dev.driver_id_number);
+    if (dev.req) {
+    if (dev.ep0_urb_queued)
+    usb_ep_dequeue(dev.gadget.ep0, dev.req);
+    usb_ep_free_request(dev.gadget.ep0, dev.req);
+    }
+    raw_event_queue_destroy(&dev.queue);
+    for (i = 0; i < dev.eps_num; i++) {
+    if (dev.eps[i].state == STATE_EP_DISABLED)
+    continue;
+    usb_ep_disable(dev.eps[i].ep);
+    usb_ep_free_request(dev.eps[i].ep, dev.eps[i].req);
+    kfree(dev.eps[i].ep.desc);
+    dev.eps[i].state = STATE_EP_DISABLED;
+    }
+    kfree(dev);
+    }
+// ----------------------------------------------------------------------
+    static int raw_queue_event(struct raw_dev *dev,
+    enum usb_raw_event_type type, size_t length, const void *data)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    ret = raw_event_queue_add(&dev.queue, type, length, data);
+    if (ret < 0) {
+    spin_lock_irqsave(&dev.lock, flags);
+    dev.state = STATE_DEV_FAILED;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    }
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_ep0_complete(ep: *mut usb_ep, req: *mut usb_request) {
+    static void gadget_ep0_complete(struct usb_ep *ep, struct usb_request *req)
+    {
+    struct raw_dev *dev = req.context;
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (req.status)
+    dev.ep0_status = req.status;
+    else
+    dev.ep0_status = req.actual;
+    if (dev.ep0_in_pending)
+    dev.ep0_in_pending = false;
+    else
+    dev.ep0_out_pending = false;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    complete(&dev.ep0_done);
+    }
+#[no_mangle]
+unsafe extern "C" fn get_ep_addr(name: *const c_char) -> u8 {
+    static u8 get_ep_addr(const char *name)
+    {
+// If the endpoint has fixed function (named as e.g. "ep12out-bulk"),
+// parse the endpoint address from its name. We deliberately use
+// deprecated simple_strtoul() function here, as the number isn't
+// followed by '\0' nor '\n'.
+//
+    if (isdigit(name[2]))
+    return simple_strtoul(&name[2], core::ptr::null_mut(), 10);
+// Otherwise the endpoint is configurable (named as e.g. "ep-a").
+    return USB_RAW_EP_ADDR_ANY;
+    }
+    static int gadget_bind(struct usb_gadget *gadget,
+    struct usb_gadget_driver *driver)
+    {
+    let mut ret: c_int = 0, i = 0;
+    struct raw_dev *dev = container_of(driver, struct raw_dev, driver);
+    struct usb_request *req;
+    struct usb_ep *ep;
+    unsigned long flags;
+    if (strcmp(gadget.name, dev.udc_name) != 0)
+    return -ENODEV;
+    set_gadget_data(gadget, dev);
+    req = usb_ep_alloc_request(gadget.ep0, GFP_KERNEL);
+    if (!req) {
+    dev_err(&gadget.dev, "usb_ep_alloc_request failed\n");
+    set_gadget_data(gadget, core::ptr::null_mut());
+    return -ENOMEM;
+    }
+    spin_lock_irqsave(&dev.lock, flags);
+    dev.req = req;
+    dev.req.context = dev;
+    dev.req.complete = gadget_ep0_complete;
+    dev.gadget = gadget;
+    gadget_for_each_ep(ep, dev.gadget) {
+    dev.eps[i].ep = ep;
+    dev.eps[i].addr = get_ep_addr(ep.name);
+    dev.eps[i].state = STATE_EP_DISABLED;
+    i++;
+    }
+    dev.eps_num = i;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    dev_dbg(&gadget.dev, "gadget connected\n");
+    ret = raw_queue_event(dev, USB_RAW_EVENT_CONNECT, 0, core::ptr::null_mut());
+    if (ret < 0) {
+    dev_err(&gadget.dev, "failed to queue connect event\n");
+    set_gadget_data(gadget, core::ptr::null_mut());
+    return ret;
+    }
+// Matches kref_put() in gadget_unbind().
+    kref_get(&dev.count);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_unbind(gadget: *mut usb_gadget) {
+    static void gadget_unbind(struct usb_gadget *gadget)
+    {
+    struct raw_dev *dev = get_gadget_data(gadget);
+    set_gadget_data(gadget, core::ptr::null_mut());
+// Matches kref_get() in gadget_bind().
+    kref_put(&dev.count, dev_free);
+    }
+    static int gadget_setup(struct usb_gadget *gadget,
+    const struct usb_ctrlrequest *ctrl)
+    {
+    let mut ret: c_int = 0;
+    struct raw_dev *dev = get_gadget_data(gadget);
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_err(&gadget.dev, "ignoring, device is not running\n");
+    ret = -ENODEV;
+    goto out_unlock;
+    }
+    if (dev.ep0_in_pending || dev.ep0_out_pending) {
+    dev_dbg(&gadget.dev, "stalling, request already pending\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if ((ctrl.bRequestType & USB_DIR_IN) && ctrl.wLength)
+    dev.ep0_in_pending = true;
+    else
+    dev.ep0_out_pending = true;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    ret = raw_queue_event(dev, USB_RAW_EVENT_CONTROL, sizeof(*ctrl), ctrl);
+    if (ret < 0)
+    dev_err(&gadget.dev, "failed to queue control event\n");
+    goto out;
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    out:
+    if (ret == 0 && ctrl.wLength == 0) {
+//
+// Return USB_GADGET_DELAYED_STATUS as a workaround to stop
+// some UDC drivers (e.g. dwc3) from automatically proceeding
+// with the status stage for 0-length transfers.
+// Should be removed once all UDC drivers are fixed to always
+// delay the status stage until a response is queued to EP0.
+//
+    return USB_GADGET_DELAYED_STATUS;
+    }
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_disconnect(gadget: *mut usb_gadget) {
+    static void gadget_disconnect(struct usb_gadget *gadget)
+    {
+    struct raw_dev *dev = get_gadget_data(gadget);
+    int ret;
+    dev_dbg(&gadget.dev, "gadget disconnected\n");
+    ret = raw_queue_event(dev, USB_RAW_EVENT_DISCONNECT, 0, core::ptr::null_mut());
+    if (ret < 0)
+    dev_err(&gadget.dev, "failed to queue disconnect event\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_suspend(gadget: *mut usb_gadget) {
+    static void gadget_suspend(struct usb_gadget *gadget)
+    {
+    struct raw_dev *dev = get_gadget_data(gadget);
+    int ret;
+    dev_dbg(&gadget.dev, "gadget suspended\n");
+    ret = raw_queue_event(dev, USB_RAW_EVENT_SUSPEND, 0, core::ptr::null_mut());
+    if (ret < 0)
+    dev_err(&gadget.dev, "failed to queue suspend event\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_resume(gadget: *mut usb_gadget) {
+    static void gadget_resume(struct usb_gadget *gadget)
+    {
+    struct raw_dev *dev = get_gadget_data(gadget);
+    int ret;
+    dev_dbg(&gadget.dev, "gadget resumed\n");
+    ret = raw_queue_event(dev, USB_RAW_EVENT_RESUME, 0, core::ptr::null_mut());
+    if (ret < 0)
+    dev_err(&gadget.dev, "failed to queue resume event\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_reset(gadget: *mut usb_gadget) {
+    static void gadget_reset(struct usb_gadget *gadget)
+    {
+    struct raw_dev *dev = get_gadget_data(gadget);
+    int ret;
+    dev_dbg(&gadget.dev, "gadget reset\n");
+    ret = raw_queue_event(dev, USB_RAW_EVENT_RESET, 0, core::ptr::null_mut());
+    if (ret < 0)
+    dev_err(&gadget.dev, "failed to queue reset event\n");
+    }
+// ----------------------------------------------------------------------
+    static struct miscdevice raw_misc_device;
+#[no_mangle]
+unsafe extern "C" fn raw_open(inode: *mut inode, fd: *mut file) -> c_int {
+    static int raw_open(struct inode *inode, struct file *fd)
+    {
+    struct raw_dev *dev;
+// Nonblocking I/O is not supported yet.
+    if (fd.f_flags & O_NONBLOCK)
+    return -EINVAL;
+    dev = dev_new();
+    if (!dev)
+    return -ENOMEM;
+    fd.private_data = dev;
+    dev.state = STATE_DEV_OPENED;
+    dev.dev = raw_misc_device.this_device;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_release(inode: *mut inode, fd: *mut file) -> c_int {
+    static int raw_release(struct inode *inode, struct file *fd)
+    {
+    let mut ret: c_int = 0;
+    struct raw_dev *dev = fd.private_data;
+    unsigned long flags;
+    let mut unregister: bool = false;
+    spin_lock_irqsave(&dev.lock, flags);
+    dev.state = STATE_DEV_CLOSED;
+    if (!dev.gadget) {
+    spin_unlock_irqrestore(&dev.lock, flags);
+    goto out_put;
+    }
+    if (dev.gadget_registered)
+    unregister = true;
+    dev.gadget_registered = false;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    if (unregister) {
+    ret = usb_gadget_unregister_driver(&dev.driver);
+    if (ret != 0)
+    dev_err(dev.dev,
+    "usb_gadget_unregister_driver() failed with %d\n",
+    ret);
+// Matches kref_get() in raw_ioctl_run().
+    kref_put(&dev.count, dev_free);
+    }
+    out_put:
+// Matches dev_new() in raw_open().
+    kref_put(&dev.count, dev_free);
+    return ret;
+    }
+// ----------------------------------------------------------------------
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_init(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_init(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    int driver_id_number;
+    struct usb_raw_init arg;
+    char *udc_driver_name;
+    char *udc_device_name;
+    char *driver_driver_name;
+    unsigned long flags;
+    if (copy_from_user(&arg, (void __user *)value, sizeof(arg)))
+    return -EFAULT;
+    switch (arg.speed) {
+    case USB_SPEED_UNKNOWN:
+    arg.speed = USB_SPEED_HIGH;
+    break;
+    case USB_SPEED_LOW:
+    case USB_SPEED_FULL:
+    case USB_SPEED_HIGH:
+    case USB_SPEED_SUPER:
+    break;
+    default:
+    return -EINVAL;
+    }
+    driver_id_number = ida_alloc(&driver_id_numbers, GFP_KERNEL);
+    if (driver_id_number < 0)
+    return driver_id_number;
+    driver_driver_name = kmalloc(DRIVER_DRIVER_NAME_LENGTH_MAX, GFP_KERNEL);
+    if (!driver_driver_name) {
+    ret = -ENOMEM;
+    goto out_free_driver_id_number;
+    }
+    snprintf(driver_driver_name, DRIVER_DRIVER_NAME_LENGTH_MAX,
+    DRIVER_NAME ".%d", driver_id_number);
+    udc_driver_name = kmalloc(UDC_NAME_LENGTH_MAX, GFP_KERNEL);
+    if (!udc_driver_name) {
+    ret = -ENOMEM;
+    goto out_free_driver_driver_name;
+    }
+    ret = strscpy(udc_driver_name, &arg.driver_name[0],
+    UDC_NAME_LENGTH_MAX);
+    if (ret < 0)
+    goto out_free_udc_driver_name;
+    ret = 0;
+    udc_device_name = kmalloc(UDC_NAME_LENGTH_MAX, GFP_KERNEL);
+    if (!udc_device_name) {
+    ret = -ENOMEM;
+    goto out_free_udc_driver_name;
+    }
+    ret = strscpy(udc_device_name, &arg.device_name[0],
+    UDC_NAME_LENGTH_MAX);
+    if (ret < 0)
+    goto out_free_udc_device_name;
+    ret = 0;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_OPENED) {
+    dev_dbg(dev.dev, "fail, device is not opened\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    dev.udc_name = udc_driver_name;
+    dev.driver.function = DRIVER_DESC;
+    dev.driver.max_speed = arg.speed;
+    dev.driver.setup = gadget_setup;
+    dev.driver.disconnect = gadget_disconnect;
+    dev.driver.bind = gadget_bind;
+    dev.driver.unbind = gadget_unbind;
+    dev.driver.suspend = gadget_suspend;
+    dev.driver.resume = gadget_resume;
+    dev.driver.reset = gadget_reset;
+    dev.driver.driver.name = driver_driver_name;
+    dev.driver.udc_name = udc_device_name;
+    dev.driver.match_existing_only = 1;
+    dev.driver_id_number = driver_id_number;
+    dev.state = STATE_DEV_INITIALIZED;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    out_free_udc_device_name:
+    kfree(udc_device_name);
+    out_free_udc_driver_name:
+    kfree(udc_driver_name);
+    out_free_driver_driver_name:
+    kfree(driver_driver_name);
+    out_free_driver_id_number:
+    ida_free(&driver_id_numbers, driver_id_number);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_run(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_run(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    if (value)
+    return -EINVAL;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_INITIALIZED) {
+    dev_dbg(dev.dev, "fail, device is not initialized\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    dev.state = STATE_DEV_REGISTERING;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    ret = usb_gadget_register_driver(&dev.driver);
+    spin_lock_irqsave(&dev.lock, flags);
+    if (ret) {
+    dev_err(dev.dev,
+    "fail, usb_gadget_register_driver returned %d\n", ret);
+    dev.state = STATE_DEV_FAILED;
+    goto out_unlock;
+    }
+    dev.gadget_registered = true;
+    dev.state = STATE_DEV_RUNNING;
+// Matches kref_put() in raw_release().
+    kref_get(&dev.count);
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_event_fetch(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_event_fetch(struct raw_dev *dev, unsigned long value)
+    {
+    struct usb_raw_event arg;
+    unsigned long flags;
+    struct usb_raw_event *event;
+    uint32_t length;
+    if (copy_from_user(&arg, (void __user *)value, sizeof(arg)))
+    return -EFAULT;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return -EINVAL;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return -EBUSY;
+    }
+    spin_unlock_irqrestore(&dev.lock, flags);
+    event = raw_event_queue_fetch(&dev.queue);
+    if (PTR_ERR(event) == -EINTR) {
+    dev_dbg(&dev.gadget.dev, "event fetching interrupted\n");
+    return -EINTR;
+    }
+    if (IS_ERR(event)) {
+    dev_err(&dev.gadget.dev, "failed to fetch event\n");
+    spin_lock_irqsave(&dev.lock, flags);
+    dev.state = STATE_DEV_FAILED;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return -ENODEV;
+    }
+    length = min(arg.length, event.length);
+    if (copy_to_user((void __user *)value, event, sizeof(*event) + length)) {
+    kfree(event);
+    return -EFAULT;
+    }
+    kfree(event);
+    return 0;
+    }
+    static void *raw_alloc_io_data(struct usb_raw_ep_io *io, void __user *ptr,
+    bool get_from_user)
+    {
+    void *data;
+    if (copy_from_user(io, ptr, sizeof(*io)))
+    return ERR_PTR(-EFAULT);
+    if (io.ep >= USB_RAW_EPS_NUM_MAX)
+    return ERR_PTR(-EINVAL);
+    if (!usb_raw_io_flags_valid(io.flags))
+    return ERR_PTR(-EINVAL);
+    if (io.length > USB_RAW_IO_LENGTH_MAX)
+    return ERR_PTR(-EINVAL);
+    if (get_from_user)
+    data = memdup_user(ptr + sizeof(*io), io.length);
+    else {
+    data = kmalloc(io.length, GFP_KERNEL);
+    if (!data)
+    data = ERR_PTR(-ENOMEM);
+    }
+    return data;
+    }
+    static int raw_process_ep0_io(struct raw_dev *dev, struct usb_raw_ep_io *io,
+    void *data, bool in)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (dev.ep0_urb_queued) {
+    dev_dbg(&dev.gadget.dev, "fail, urb already queued\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if ((in && !dev.ep0_in_pending) ||
+    (!in && !dev.ep0_out_pending)) {
+    dev_dbg(&dev.gadget.dev, "fail, wrong direction\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (WARN_ON(in && dev.ep0_out_pending)) {
+    ret = -ENODEV;
+    dev.state = STATE_DEV_FAILED;
+    goto out_unlock;
+    }
+    if (WARN_ON(!in && dev.ep0_in_pending)) {
+    ret = -ENODEV;
+    dev.state = STATE_DEV_FAILED;
+    goto out_unlock;
+    }
+    dev.req.buf = data;
+    dev.req.length = io.length;
+    dev.req.zero = usb_raw_io_flags_zero(io.flags);
+    dev.ep0_urb_queued = true;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    ret = usb_ep_queue(dev.gadget.ep0, dev.req, GFP_KERNEL);
+    if (ret) {
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_queue returned %d\n", ret);
+    spin_lock_irqsave(&dev.lock, flags);
+    goto out_queue_failed;
+    }
+    ret = wait_for_completion_interruptible(&dev.ep0_done);
+    if (ret) {
+    dev_dbg(&dev.gadget.dev, "wait interrupted\n");
+    usb_ep_dequeue(dev.gadget.ep0, dev.req);
+    wait_for_completion(&dev.ep0_done);
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.ep0_status == -ECONNRESET)
+    dev.ep0_status = -EINTR;
+    goto out_interrupted;
+    }
+    spin_lock_irqsave(&dev.lock, flags);
+    out_interrupted:
+    ret = dev.ep0_status;
+    out_queue_failed:
+    dev.ep0_urb_queued = false;
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep0_write(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep0_write(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    void *data;
+    struct usb_raw_ep_io io;
+    data = raw_alloc_io_data(&io, (void __user *)value, true);
+    if (IS_ERR(data))
+    return PTR_ERR(data);
+    ret = raw_process_ep0_io(dev, &io, data, true);
+    kfree(data);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep0_read(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep0_read(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    void *data;
+    struct usb_raw_ep_io io;
+    unsigned int length;
+    data = raw_alloc_io_data(&io, (void __user *)value, false);
+    if (IS_ERR(data))
+    return PTR_ERR(data);
+    ret = raw_process_ep0_io(dev, &io, data, false);
+    if (ret < 0)
+    goto free;
+    length = min_t(unsigned int, io.length, ret);
+    if (copy_to_user((void __user *)(value + sizeof(io)), data, length))
+    ret = -EFAULT;
+    else
+    ret = length;
+    free:
+    kfree(data);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep0_stall(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep0_stall(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    if (value)
+    return -EINVAL;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (dev.ep0_urb_queued) {
+    dev_dbg(&dev.gadget.dev, "fail, urb already queued\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (!dev.ep0_in_pending && !dev.ep0_out_pending) {
+    dev_dbg(&dev.gadget.dev, "fail, no request pending\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    ret = usb_ep_set_halt(dev.gadget.ep0);
+    if (ret < 0)
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_set_halt returned %d\n", ret);
+    if (dev.ep0_in_pending)
+    dev.ep0_in_pending = false;
+    else
+    dev.ep0_out_pending = false;
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep_enable(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep_enable(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0, i;
+    unsigned long flags;
+    struct usb_endpoint_descriptor *desc;
+    struct raw_ep *ep;
+    let mut ep_props_matched: bool = false;
+    desc = memdup_user((void __user *)value, sizeof(*desc));
+    if (IS_ERR(desc))
+    return PTR_ERR(desc);
+//
+// Endpoints with a maxpacket length of 0 can cause crashes in UDC
+// drivers.
+//
+    if (usb_endpoint_maxp(desc) == 0) {
+    dev_dbg(dev.dev, "fail, bad endpoint maxpacket\n");
+    kfree(desc);
+    return -EINVAL;
+    }
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_free;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_free;
+    }
+    for (i = 0; i < dev.eps_num; i++) {
+    ep = &dev.eps[i];
+    if (ep.addr != usb_endpoint_num(desc) &&
+    ep.addr != USB_RAW_EP_ADDR_ANY)
+    continue;
+    if (!usb_gadget_ep_match_desc(dev.gadget, ep.ep, desc, core::ptr::null_mut()))
+    continue;
+    ep_props_matched = true;
+    if (ep.state != STATE_EP_DISABLED)
+    continue;
+    ep.ep.desc = desc;
+    ret = usb_ep_enable(ep.ep);
+    if (ret < 0) {
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_enable returned %d\n", ret);
+    goto out_free;
+    }
+    ep.req = usb_ep_alloc_request(ep.ep, GFP_ATOMIC);
+    if (!ep.req) {
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_alloc_request failed\n");
+    usb_ep_disable(ep.ep);
+    ret = -ENOMEM;
+    goto out_free;
+    }
+    ep.state = STATE_EP_ENABLED;
+    ep.ep.driver_data = ep;
+    ret = i;
+    goto out_unlock;
+    }
+    if (!ep_props_matched) {
+    dev_dbg(&dev.gadget.dev, "fail, bad endpoint descriptor\n");
+    ret = -EINVAL;
+    } else {
+    dev_dbg(&dev.gadget.dev, "fail, no endpoints available\n");
+    ret = -EBUSY;
+    }
+    out_free:
+    kfree(desc);
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep_disable(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep_disable(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0, i = value;
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (i < 0 || i >= dev.eps_num) {
+    dev_dbg(dev.dev, "fail, invalid endpoint\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (dev.eps[i].state == STATE_EP_DISABLED) {
+    dev_dbg(&dev.gadget.dev, "fail, endpoint is not enabled\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (dev.eps[i].disabling) {
+    dev_dbg(&dev.gadget.dev,
+    "fail, disable already in progress\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (dev.eps[i].urb_queued) {
+    dev_dbg(&dev.gadget.dev,
+    "fail, waiting for urb completion\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    dev.eps[i].disabling = true;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    usb_ep_disable(dev.eps[i].ep);
+    spin_lock_irqsave(&dev.lock, flags);
+    usb_ep_free_request(dev.eps[i].ep, dev.eps[i].req);
+    kfree(dev.eps[i].ep.desc);
+    dev.eps[i].state = STATE_EP_DISABLED;
+    dev.eps[i].disabling = false;
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+    static int raw_ioctl_ep_set_clear_halt_wedge(struct raw_dev *dev,
+    unsigned long value, bool set, bool halt)
+    {
+    let mut ret: c_int = 0, i = value;
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (i < 0 || i >= dev.eps_num) {
+    dev_dbg(dev.dev, "fail, invalid endpoint\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (dev.eps[i].state == STATE_EP_DISABLED) {
+    dev_dbg(&dev.gadget.dev, "fail, endpoint is not enabled\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (dev.eps[i].disabling) {
+    dev_dbg(&dev.gadget.dev,
+    "fail, disable is in progress\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (dev.eps[i].urb_queued) {
+    dev_dbg(&dev.gadget.dev,
+    "fail, waiting for urb completion\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (usb_endpoint_xfer_isoc(dev.eps[i].ep.desc)) {
+    dev_dbg(&dev.gadget.dev,
+    "fail, can't halt/wedge ISO endpoint\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (set && halt) {
+    ret = usb_ep_set_halt(dev.eps[i].ep);
+    if (ret < 0)
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_set_halt returned %d\n", ret);
+    } else if (!set && halt) {
+    ret = usb_ep_clear_halt(dev.eps[i].ep);
+    if (ret < 0)
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_clear_halt returned %d\n", ret);
+    } else if (set && !halt) {
+    ret = usb_ep_set_wedge(dev.eps[i].ep);
+    if (ret < 0)
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_set_wedge returned %d\n", ret);
+    }
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn gadget_ep_complete(ep: *mut usb_ep, req: *mut usb_request) {
+    static void gadget_ep_complete(struct usb_ep *ep, struct usb_request *req)
+    {
+    struct raw_ep *r_ep = (struct raw_ep *)ep.driver_data;
+    struct raw_dev *dev = r_ep.dev;
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (req.status)
+    r_ep.status = req.status;
+    else
+    r_ep.status = req.actual;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    complete((struct completion *)req.context);
+    }
+    static int raw_process_ep_io(struct raw_dev *dev, struct usb_raw_ep_io *io,
+    void *data, bool in)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    struct raw_ep *ep;
+    DECLARE_COMPLETION_ONSTACK(done);
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (io.ep >= dev.eps_num) {
+    dev_dbg(&dev.gadget.dev, "fail, invalid endpoint\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    ep = &dev.eps[io.ep];
+    if (ep.state != STATE_EP_ENABLED) {
+    dev_dbg(&dev.gadget.dev, "fail, endpoint is not enabled\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (ep.disabling) {
+    dev_dbg(&dev.gadget.dev,
+    "fail, endpoint is already being disabled\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (ep.urb_queued) {
+    dev_dbg(&dev.gadget.dev, "fail, urb already queued\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    if (in != usb_endpoint_dir_in(ep.ep.desc)) {
+    dev_dbg(&dev.gadget.dev, "fail, wrong direction\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    ep.dev = dev;
+    ep.req.context = &done;
+    ep.req.complete = gadget_ep_complete;
+    ep.req.buf = data;
+    ep.req.length = io.length;
+    ep.req.zero = usb_raw_io_flags_zero(io.flags);
+    ep.urb_queued = true;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    ret = usb_ep_queue(ep.ep, ep.req, GFP_KERNEL);
+    if (ret) {
+    dev_err(&dev.gadget.dev,
+    "fail, usb_ep_queue returned %d\n", ret);
+    spin_lock_irqsave(&dev.lock, flags);
+    goto out_queue_failed;
+    }
+    ret = wait_for_completion_interruptible(&done);
+    if (ret) {
+    dev_dbg(&dev.gadget.dev, "wait interrupted\n");
+    usb_ep_dequeue(ep.ep, ep.req);
+    wait_for_completion(&done);
+    spin_lock_irqsave(&dev.lock, flags);
+    if (ep.status == -ECONNRESET)
+    ep.status = -EINTR;
+    goto out_interrupted;
+    }
+    spin_lock_irqsave(&dev.lock, flags);
+    out_interrupted:
+    ret = ep.status;
+    out_queue_failed:
+    ep.urb_queued = false;
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep_write(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep_write(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    char *data;
+    struct usb_raw_ep_io io;
+    data = raw_alloc_io_data(&io, (void __user *)value, true);
+    if (IS_ERR(data))
+    return PTR_ERR(data);
+    ret = raw_process_ep_io(dev, &io, data, true);
+    kfree(data);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_ep_read(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_ep_read(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    char *data;
+    struct usb_raw_ep_io io;
+    unsigned int length;
+    data = raw_alloc_io_data(&io, (void __user *)value, false);
+    if (IS_ERR(data))
+    return PTR_ERR(data);
+    ret = raw_process_ep_io(dev, &io, data, false);
+    if (ret < 0)
+    goto free;
+    length = min_t(unsigned int, io.length, ret);
+    if (copy_to_user((void __user *)(value + sizeof(io)), data, length))
+    ret = -EFAULT;
+    else
+    ret = length;
+    free:
+    kfree(data);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_configure(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_configure(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    if (value)
+    return -EINVAL;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    usb_gadget_set_state(dev.gadget, USB_STATE_CONFIGURED);
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_vbus_draw(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_vbus_draw(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0;
+    unsigned long flags;
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    goto out_unlock;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    goto out_unlock;
+    }
+    usb_gadget_vbus_draw(dev.gadget, 2 * value);
+    out_unlock:
+    spin_unlock_irqrestore(&dev.lock, flags);
+    return ret;
+    }
+    static void fill_ep_caps(struct usb_ep_caps *caps,
+    struct usb_raw_ep_caps *raw_caps)
+    {
+    raw_caps.type_control = caps.type_control;
+    raw_caps.type_iso = caps.type_iso;
+    raw_caps.type_bulk = caps.type_bulk;
+    raw_caps.type_int = caps.type_int;
+    raw_caps.dir_in = caps.dir_in;
+    raw_caps.dir_out = caps.dir_out;
+    }
+#[no_mangle]
+unsafe extern "C" fn fill_ep_limits(ep: *mut usb_ep, limits: *mut usb_raw_ep_limits) {
+    static void fill_ep_limits(struct usb_ep *ep, struct usb_raw_ep_limits *limits)
+    {
+    limits.maxpacket_limit = ep.maxpacket_limit;
+    limits.max_streams = ep.max_streams;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl_eps_info(dev: *mut raw_dev, value: c_ulong) -> c_int {
+    static int raw_ioctl_eps_info(struct raw_dev *dev, unsigned long value)
+    {
+    let mut ret: c_int = 0, i;
+    unsigned long flags;
+    struct usb_raw_eps_info *info;
+    struct raw_ep *ep;
+    info = kzalloc_obj(*info);
+    if (!info) {
+    ret = -ENOMEM;
+    goto out;
+    }
+    spin_lock_irqsave(&dev.lock, flags);
+    if (dev.state != STATE_DEV_RUNNING) {
+    dev_dbg(dev.dev, "fail, device is not running\n");
+    ret = -EINVAL;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    goto out_free;
+    }
+    if (!dev.gadget) {
+    dev_dbg(dev.dev, "fail, gadget is not bound\n");
+    ret = -EBUSY;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    goto out_free;
+    }
+    for (i = 0; i < dev.eps_num; i++) {
+    ep = &dev.eps[i];
+    strscpy(&info.eps[i].name[0], ep.ep.name,
+    USB_RAW_EP_NAME_MAX);
+    info.eps[i].addr = ep.addr;
+    fill_ep_caps(&ep.ep.caps, &info.eps[i].caps);
+    fill_ep_limits(ep.ep, &info.eps[i].limits);
+    }
+    ret = dev.eps_num;
+    spin_unlock_irqrestore(&dev.lock, flags);
+    if (copy_to_user((void __user *)value, info, sizeof(*info)))
+    ret = -EFAULT;
+    out_free:
+    kfree(info);
+    out:
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn raw_ioctl(fd: *mut file, cmd: c_uint, value: c_ulong) -> c_long {
+    static long raw_ioctl(struct file *fd, unsigned int cmd, unsigned long value)
+    {
+    struct raw_dev *dev = fd.private_data;
+    let mut ret: c_int = 0;
+    if (!dev)
+    return -EBUSY;
+    switch (cmd) {
+    case USB_RAW_IOCTL_INIT:
+    ret = raw_ioctl_init(dev, value);
+    break;
+    case USB_RAW_IOCTL_RUN:
+    ret = raw_ioctl_run(dev, value);
+    break;
+    case USB_RAW_IOCTL_EVENT_FETCH:
+    ret = raw_ioctl_event_fetch(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP0_WRITE:
+    ret = raw_ioctl_ep0_write(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP0_READ:
+    ret = raw_ioctl_ep0_read(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP_ENABLE:
+    ret = raw_ioctl_ep_enable(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP_DISABLE:
+    ret = raw_ioctl_ep_disable(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP_WRITE:
+    ret = raw_ioctl_ep_write(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP_READ:
+    ret = raw_ioctl_ep_read(dev, value);
+    break;
+    case USB_RAW_IOCTL_CONFIGURE:
+    ret = raw_ioctl_configure(dev, value);
+    break;
+    case USB_RAW_IOCTL_VBUS_DRAW:
+    ret = raw_ioctl_vbus_draw(dev, value);
+    break;
+    case USB_RAW_IOCTL_EPS_INFO:
+    ret = raw_ioctl_eps_info(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP0_STALL:
+    ret = raw_ioctl_ep0_stall(dev, value);
+    break;
+    case USB_RAW_IOCTL_EP_SET_HALT:
+    ret = raw_ioctl_ep_set_clear_halt_wedge(
+    dev, value, true, true);
+    break;
+    case USB_RAW_IOCTL_EP_CLEAR_HALT:
+    ret = raw_ioctl_ep_set_clear_halt_wedge(
+    dev, value, false, true);
+    break;
+    case USB_RAW_IOCTL_EP_SET_WEDGE:
+    ret = raw_ioctl_ep_set_clear_halt_wedge(
+    dev, value, true, false);
+    break;
+    default:
+    ret = -EINVAL;
+    }
+    return ret;
+    }
+// ----------------------------------------------------------------------
+    static const struct file_operations raw_fops = {
+    .open =			raw_open,
+    .unlocked_ioctl =	raw_ioctl,
+    .compat_ioctl =		raw_ioctl,
+    .release =		raw_release,
+    };
+    static struct miscdevice raw_misc_device = {
+    .minor = MISC_DYNAMIC_MINOR,
+    .name = DRIVER_NAME,
+    .fops = &raw_fops,
+    };
+    module_misc_device(raw_misc_device);

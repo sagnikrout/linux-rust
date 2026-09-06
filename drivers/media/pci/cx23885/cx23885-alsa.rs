@@ -1,0 +1,512 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/media/pci/cx23885/cx23885-alsa.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Support for CX23885 analog audio capture
+//
+// (c) 2008 Mijhail Moreyra <mijhail.moreyra@gmail.com>
+// Adapted from cx88-alsa.c
+// (c) 2009 Steven Toth <stoth@kernellabs.com>
+//
+
+    if (audio_debug + 1 > level)					\
+    printk(KERN_DEBUG pr_fmt("%s: alsa: " fmt), \
+    chip.dev.name, ##arg); \
+    } while(0)
+//
+    Module global static vars
+//
+    static unsigned int disable_analog_audio;
+    module_param(disable_analog_audio, int, 0644);
+    MODULE_PARM_DESC(disable_analog_audio, "disable analog audio ALSA driver");
+    static unsigned int audio_debug;
+    module_param(audio_debug, int, 0644);
+    MODULE_PARM_DESC(audio_debug, "enable debug messages [analog audio]");
+//
+    Board specific functions
+//
+// Constants taken from cx88-reg.h
+
+pub const GP_COUNT_CONTROL_RESET: c_uint = 0x3;
+    static int cx23885_alsa_dma_init(struct cx23885_audio_dev *chip,
+    unsigned long nr_pages)
+    {
+    struct cx23885_audio_buffer *buf = chip.buf;
+    struct page *pg;
+    int i;
+    buf.vaddr = vmalloc_32(nr_pages << PAGE_SHIFT);
+    if (core::ptr::null_mut() == buf.vaddr) {
+    dprintk(1, "vmalloc_32(%lu pages) failed\n", nr_pages);
+    return -ENOMEM;
+    }
+    dprintk(1, "vmalloc is at addr %p, size=%lu\n",
+    buf.vaddr, nr_pages << PAGE_SHIFT);
+    memset(buf.vaddr, 0, nr_pages << PAGE_SHIFT);
+    buf.nr_pages = nr_pages;
+    buf.sglist = vzalloc(array_size(sizeof(*buf.sglist), buf.nr_pages));
+    if (core::ptr::null_mut() == buf.sglist)
+    goto vzalloc_err;
+    sg_init_table(buf.sglist, buf.nr_pages);
+    for (i = 0; i < buf.nr_pages; i++) {
+    pg = vmalloc_to_page(buf.vaddr + i * PAGE_SIZE);
+    if (core::ptr::null_mut() == pg)
+    goto vmalloc_to_page_err;
+    sg_set_page(&buf.sglist[i], pg, PAGE_SIZE, 0);
+    }
+    return 0;
+    vmalloc_to_page_err:
+    vfree(buf.sglist);
+    buf.sglist = core::ptr::null_mut();
+    vzalloc_err:
+    vfree(buf.vaddr);
+    buf.vaddr = core::ptr::null_mut();
+    return -ENOMEM;
+    }
+#[no_mangle]
+unsafe extern "C" fn cx23885_alsa_dma_map(dev: *mut cx23885_audio_dev) -> c_int {
+    static int cx23885_alsa_dma_map(struct cx23885_audio_dev *dev)
+    {
+    struct cx23885_audio_buffer *buf = dev.buf;
+    buf.sglen = dma_map_sg(&dev.pci.dev, buf.sglist,
+    buf.nr_pages, DMA_FROM_DEVICE);
+    if (0 == buf.sglen) {
+    pr_warn("%s: cx23885_alsa_map_sg failed\n", __func__);
+    return -ENOMEM;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn cx23885_alsa_dma_unmap(dev: *mut cx23885_audio_dev) -> c_int {
+    static int cx23885_alsa_dma_unmap(struct cx23885_audio_dev *dev)
+    {
+    struct cx23885_audio_buffer *buf = dev.buf;
+    if (!buf.sglen)
+    return 0;
+    dma_unmap_sg(&dev.pci.dev, buf.sglist, buf.nr_pages, DMA_FROM_DEVICE);
+    buf.sglen = 0;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn cx23885_alsa_dma_free(buf: *mut cx23885_audio_buffer) -> c_int {
+    static int cx23885_alsa_dma_free(struct cx23885_audio_buffer *buf)
+    {
+    vfree(buf.sglist);
+    buf.sglist = core::ptr::null_mut();
+    vfree(buf.vaddr);
+    buf.vaddr = core::ptr::null_mut();
+    return 0;
+    }
+//
+// BOARD Specific: Sets audio DMA
+//
+#[no_mangle]
+unsafe extern "C" fn cx23885_start_audio_dma(chip: *mut cx23885_audio_dev) -> c_int {
+    static int cx23885_start_audio_dma(struct cx23885_audio_dev *chip)
+    {
+    struct cx23885_audio_buffer *buf = chip.buf;
+    struct cx23885_dev *dev  = chip.dev;
+    struct sram_channel *audio_ch =
+    &dev.sram_channels[AUDIO_SRAM_CHANNEL];
+    dprintk(1, "%s()\n", __func__);
+// Make sure RISC/FIFO are off before changing FIFO/RISC settings
+    cx_clear(AUD_INT_DMA_CTL, 0x11);
+// setup fifo + format - out channel
+    cx23885_sram_channel_setup(chip.dev, audio_ch, buf.bpl,
+    buf.risc.dma);
+// sets bpl size
+    cx_write(AUD_INT_A_LNGTH, buf.bpl);
+// This is required to get good audio (1 seems to be ok)
+    cx_write(AUD_INT_A_MODE, 1);
+// reset counter
+    cx_write(AUD_INT_A_GPCNT_CTL, GP_COUNT_CONTROL_RESET);
+    atomic_set(&chip.count, 0);
+    dprintk(1, "Start audio DMA, %d B/line, %d lines/FIFO, %d periods, %d byte buffer\n",
+    buf.bpl, cx_read(audio_ch.cmds_start+12)>>1,
+    chip.num_periods, buf.bpl * chip.num_periods);
+// Enables corresponding bits at AUD_INT_STAT
+    cx_write(AUDIO_INT_INT_MSK, AUD_INT_OPC_ERR | AUD_INT_DN_SYNC |
+    AUD_INT_DN_RISCI1);
+// Clean any pending interrupt bits already set
+    cx_write(AUDIO_INT_INT_STAT, ~0);
+// enable audio irqs
+    cx_set(PCI_INT_MSK, chip.dev.pci_irqmask | PCI_MSK_AUD_INT);
+// start dma
+    cx_set(DEV_CNTRL2, (1<<5)); /* Enables Risc Processor */
+    cx_set(AUD_INT_DMA_CTL, 0x11); /* audio downstream FIFO and
+    RISC enable */
+    if (audio_debug)
+    cx23885_sram_channel_dump(chip.dev, audio_ch);
+    return 0;
+    }
+//
+// BOARD Specific: Resets audio DMA
+//
+#[no_mangle]
+unsafe extern "C" fn cx23885_stop_audio_dma(chip: *mut cx23885_audio_dev) -> c_int {
+    static int cx23885_stop_audio_dma(struct cx23885_audio_dev *chip)
+    {
+    struct cx23885_dev *dev = chip.dev;
+    dprintk(1, "Stopping audio DMA\n");
+// stop dma
+    cx_clear(AUD_INT_DMA_CTL, 0x11);
+// disable irqs
+    cx_clear(PCI_INT_MSK, PCI_MSK_AUD_INT);
+    cx_clear(AUDIO_INT_INT_MSK, AUD_INT_OPC_ERR | AUD_INT_DN_SYNC |
+    AUD_INT_DN_RISCI1);
+    if (audio_debug)
+    cx23885_sram_channel_dump(chip.dev,
+    &dev.sram_channels[AUDIO_SRAM_CHANNEL]);
+    return 0;
+    }
+//
+// BOARD Specific: Handles audio IRQ
+//
+#[no_mangle]
+pub unsafe extern "C" fn cx23885_audio_irq(dev: *mut cx23885_dev, status: u32, mask: u32) -> c_int {
+    int cx23885_audio_irq(struct cx23885_dev *dev, u32 status, u32 mask)
+    {
+    struct cx23885_audio_dev *chip = dev.audio_dev;
+    if (0 == (status & mask))
+    return 0;
+    cx_write(AUDIO_INT_INT_STAT, status);
+// risc op code error
+    if (status & AUD_INT_OPC_ERR) {
+    pr_warn("%s/1: Audio risc op code error\n",
+    dev.name);
+    cx_clear(AUD_INT_DMA_CTL, 0x11);
+    cx23885_sram_channel_dump(dev,
+    &dev.sram_channels[AUDIO_SRAM_CHANNEL]);
+    }
+    if (status & AUD_INT_DN_SYNC) {
+    dprintk(1, "Downstream sync error\n");
+    cx_write(AUD_INT_A_GPCNT_CTL, GP_COUNT_CONTROL_RESET);
+    return 1;
+    }
+// risc1 downstream
+    if (status & AUD_INT_DN_RISCI1) {
+    atomic_set(&chip.count, cx_read(AUD_INT_A_GPCNT));
+    snd_pcm_period_elapsed(chip.substream);
+    }
+// FIXME: Any other status should deserve a special handling?
+    return 1;
+    }
+#[no_mangle]
+unsafe extern "C" fn dsp_buffer_free(chip: *mut cx23885_audio_dev) -> c_int {
+    static int dsp_buffer_free(struct cx23885_audio_dev *chip)
+    {
+    struct cx23885_riscmem *risc;
+    BUG_ON(!chip.dma_size);
+    dprintk(2, "Freeing buffer\n");
+    cx23885_alsa_dma_unmap(chip);
+    cx23885_alsa_dma_free(chip.buf);
+    risc = &chip.buf.risc;
+    dma_free_coherent(&chip.pci.dev, risc.size, risc.cpu, risc.dma);
+    kfree(chip.buf);
+    chip.buf = core::ptr::null_mut();
+    chip.dma_size = 0;
+    return 0;
+    }
+//
+    ALSA PCM Interface
+//
+// Digital hardware definition
+//
+pub const DEFAULT_FIFO_SIZE: c_int = 4096;
+    static const struct snd_pcm_hardware snd_cx23885_digital_hw = {
+    .info = SNDRV_PCM_INFO_MMAP |
+    SNDRV_PCM_INFO_INTERLEAVED |
+    SNDRV_PCM_INFO_BLOCK_TRANSFER |
+    SNDRV_PCM_INFO_MMAP_VALID,
+    .formats = SNDRV_PCM_FMTBIT_S16_LE,
+    .rates =		SNDRV_PCM_RATE_48000,
+    .rate_min =		48000,
+    .rate_max =		48000,
+    .channels_min = 2,
+    .channels_max = 2,
+// Analog audio output will be full of clicks and pops if there
+    are not exactly four lines in the SRAM FIFO buffer.  */
+    .period_bytes_min = DEFAULT_FIFO_SIZE/4,
+    .period_bytes_max = DEFAULT_FIFO_SIZE/4,
+    .periods_min = 1,
+    .periods_max = 1024,
+    .buffer_bytes_max = (1024*1024),
+    };
+//
+// audio pcm capture open callback
+//
+#[no_mangle]
+unsafe extern "C" fn snd_cx23885_pcm_open(substream: *mut snd_pcm_substream) -> c_int {
+    static int snd_cx23885_pcm_open(struct snd_pcm_substream *substream)
+    {
+    struct cx23885_audio_dev *chip = snd_pcm_substream_chip(substream);
+    struct snd_pcm_runtime *runtime = substream.runtime;
+    int err;
+    if (!chip) {
+    pr_err("BUG: cx23885 can't find device struct. Can't proceed with open\n");
+    return -ENODEV;
+    }
+    err = snd_pcm_hw_constraint_pow2(runtime, 0,
+    SNDRV_PCM_HW_PARAM_PERIODS);
+    if (err < 0)
+    goto _error;
+    chip.substream = substream;
+    runtime.hw = snd_cx23885_digital_hw;
+    if (chip.dev.sram_channels[AUDIO_SRAM_CHANNEL].fifo_size !=
+    DEFAULT_FIFO_SIZE) {
+    unsigned int bpl = chip.dev.
+    sram_channels[AUDIO_SRAM_CHANNEL].fifo_size / 4;
+    bpl &= ~7; /* must be multiple of 8 */
+    runtime.hw.period_bytes_min = bpl;
+    runtime.hw.period_bytes_max = bpl;
+    }
+    return 0;
+    _error:
+    dprintk(1, "Error opening PCM!\n");
+    return err;
+    }
+//
+// audio close callback
+//
+#[no_mangle]
+unsafe extern "C" fn snd_cx23885_close(substream: *mut snd_pcm_substream) -> c_int {
+    static int snd_cx23885_close(struct snd_pcm_substream *substream)
+    {
+    return 0;
+    }
+//
+// hw_params callback
+//
+    static int snd_cx23885_hw_params(struct snd_pcm_substream *substream,
+    struct snd_pcm_hw_params *hw_params)
+    {
+    struct cx23885_audio_dev *chip = snd_pcm_substream_chip(substream);
+    struct cx23885_audio_buffer *buf;
+    int ret;
+    if (substream.runtime.dma_area) {
+    dsp_buffer_free(chip);
+    substream.runtime.dma_area = core::ptr::null_mut();
+    }
+    chip.period_size = params_period_bytes(hw_params);
+    chip.num_periods = params_periods(hw_params);
+    chip.dma_size = chip.period_size * params_periods(hw_params);
+    BUG_ON(!chip.dma_size);
+    BUG_ON(chip.num_periods & (chip.num_periods-1));
+    buf = kzalloc_obj(*buf);
+    if (core::ptr::null_mut() == buf)
+    return -ENOMEM;
+    buf.bpl = chip.period_size;
+    chip.buf = buf;
+    ret = cx23885_alsa_dma_init(chip,
+    (PAGE_ALIGN(chip.dma_size) >> PAGE_SHIFT));
+    if (ret < 0)
+    goto error;
+    ret = cx23885_alsa_dma_map(chip);
+    if (ret < 0)
+    goto error;
+    ret = cx23885_risc_databuffer(chip.pci, &buf.risc, buf.sglist,
+    chip.period_size, chip.num_periods, 1);
+    if (ret < 0) {
+    cx23885_alsa_dma_unmap(chip);
+    goto error;
+    }
+// Loop back to start of program
+    buf.risc.jmp[0] = cpu_to_le32(RISC_JUMP|RISC_IRQ1|RISC_CNT_INC);
+    buf.risc.jmp[1] = cpu_to_le32(buf.risc.dma);
+    buf.risc.jmp[2] = cpu_to_le32(0); /* bits 63-32 */
+    substream.runtime.dma_area = chip.buf.vaddr;
+    substream.runtime.dma_bytes = chip.dma_size;
+    substream.runtime.dma_addr = 0;
+    return 0;
+    error:
+    kfree(buf);
+    chip.buf = core::ptr::null_mut();
+    return ret;
+    }
+//
+// hw free callback
+//
+#[no_mangle]
+unsafe extern "C" fn snd_cx23885_hw_free(substream: *mut snd_pcm_substream) -> c_int {
+    static int snd_cx23885_hw_free(struct snd_pcm_substream *substream)
+    {
+    struct cx23885_audio_dev *chip = snd_pcm_substream_chip(substream);
+    if (substream.runtime.dma_area) {
+    dsp_buffer_free(chip);
+    substream.runtime.dma_area = core::ptr::null_mut();
+    }
+    return 0;
+    }
+//
+// prepare callback
+//
+#[no_mangle]
+unsafe extern "C" fn snd_cx23885_prepare(substream: *mut snd_pcm_substream) -> c_int {
+    static int snd_cx23885_prepare(struct snd_pcm_substream *substream)
+    {
+    return 0;
+    }
+//
+// trigger callback
+//
+    static int snd_cx23885_card_trigger(struct snd_pcm_substream *substream,
+    int cmd)
+    {
+    struct cx23885_audio_dev *chip = snd_pcm_substream_chip(substream);
+    int err;
+// Local interrupts are already disabled by ALSA
+    spin_lock(&chip.lock);
+    switch (cmd) {
+    case SNDRV_PCM_TRIGGER_START:
+    err = cx23885_start_audio_dma(chip);
+    break;
+    case SNDRV_PCM_TRIGGER_STOP:
+    err = cx23885_stop_audio_dma(chip);
+    break;
+    default:
+    err = -EINVAL;
+    break;
+    }
+    spin_unlock(&chip.lock);
+    return err;
+    }
+//
+// pointer callback
+//
+    static snd_pcm_uframes_t snd_cx23885_pointer(
+    struct snd_pcm_substream *substream)
+    {
+    struct cx23885_audio_dev *chip = snd_pcm_substream_chip(substream);
+    struct snd_pcm_runtime *runtime = substream.runtime;
+    u16 count;
+    count = atomic_read(&chip.count);
+    return runtime.period_size * (count & (runtime.periods-1));
+    }
+//
+// page callback (needed for mmap)
+//
+    static struct page *snd_cx23885_page(struct snd_pcm_substream *substream,
+    unsigned long offset)
+    {
+    void *pageptr = substream.runtime.dma_area + offset;
+    return vmalloc_to_page(pageptr);
+    }
+//
+// operators
+//
+    static const struct snd_pcm_ops snd_cx23885_pcm_ops = {
+    .open = snd_cx23885_pcm_open,
+    .close = snd_cx23885_close,
+    .hw_params = snd_cx23885_hw_params,
+    .hw_free = snd_cx23885_hw_free,
+    .prepare = snd_cx23885_prepare,
+    .trigger = snd_cx23885_card_trigger,
+    .pointer = snd_cx23885_pointer,
+    .page = snd_cx23885_page,
+    };
+//
+// create a PCM device
+//
+    static int snd_cx23885_pcm(struct cx23885_audio_dev *chip, int device,
+    char *name)
+    {
+    int err;
+    struct snd_pcm *pcm;
+    err = snd_pcm_new(chip.card, name, device, 0, 1, &pcm);
+    if (err < 0)
+    return err;
+    pcm.private_data = chip;
+    strscpy(pcm.name, name, sizeof(pcm.name));
+    snd_pcm_set_ops(pcm, SNDRV_PCM_STREAM_CAPTURE, &snd_cx23885_pcm_ops);
+    return 0;
+    }
+//
+    Basic Flow for Sound Devices
+//
+// Alsa Constructor - Component probe
+//
+    struct cx23885_audio_dev *cx23885_audio_register(struct cx23885_dev *dev)
+    {
+    struct snd_card *card;
+    struct cx23885_audio_dev *chip;
+    int err;
+    if (disable_analog_audio)
+    return core::ptr::null_mut();
+    if (dev.sram_channels[AUDIO_SRAM_CHANNEL].cmds_start == 0) {
+    pr_warn("%s(): Missing SRAM channel configuration for analog TV Audio\n",
+    __func__);
+    return core::ptr::null_mut();
+    }
+    err = snd_card_new(&dev.pci.dev,
+    SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
+    THIS_MODULE, sizeof(struct cx23885_audio_dev), &card);
+    if (err < 0)
+    goto error_msg;
+    chip = (struct cx23885_audio_dev *) card.private_data;
+    chip.dev = dev;
+    chip.pci = dev.pci;
+    chip.card = card;
+    spin_lock_init(&chip.lock);
+    err = snd_cx23885_pcm(chip, 0, "CX23885 Digital");
+    if (err < 0)
+    goto error;
+    strscpy(card.driver, "CX23885", sizeof(card.driver));
+    sprintf(card.shortname, "Conexant CX23885");
+    sprintf(card.longname, "%s at %s", card.shortname, dev.name);
+    err = snd_card_register(card);
+    if (err < 0)
+    goto error;
+    dprintk(0, "registered ALSA audio device\n");
+    return chip;
+    error:
+    snd_card_free(card);
+    error_msg:
+    pr_err("%s(): Failed to register analog audio adapter\n",
+    __func__);
+    return core::ptr::null_mut();
+    }
+//
+// ALSA destructor
+//
+#[no_mangle]
+pub unsafe extern "C" fn cx23885_audio_unregister(dev: *mut cx23885_dev) {
+    void cx23885_audio_unregister(struct cx23885_dev *dev)
+    {
+    struct cx23885_audio_dev *chip = dev.audio_dev;
+    snd_card_free(chip.card);
+    }

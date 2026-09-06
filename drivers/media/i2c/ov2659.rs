@@ -1,0 +1,1459 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/media/i2c/ov2659.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Omnivision OV2659 CMOS Image Sensor driver
+//
+// Copyright (C) 2015 Texas Instruments, Inc.
+//
+// Benoit Parrot <bparrot@ti.com>
+// Lad, Prabhakar <prabhakar.csengg@gmail.com>
+//
+
+//
+// OV2659 register definitions
+//
+pub const REG_SOFTWARE_STANDBY: c_uint = 0x0100;
+pub const REG_SOFTWARE_RESET: c_uint = 0x0103;
+pub const REG_IO_CTRL00: c_uint = 0x3000;
+pub const REG_IO_CTRL01: c_uint = 0x3001;
+pub const REG_IO_CTRL02: c_uint = 0x3002;
+pub const REG_OUTPUT_VALUE00: c_uint = 0x3008;
+pub const REG_OUTPUT_VALUE01: c_uint = 0x3009;
+pub const REG_OUTPUT_VALUE02: c_uint = 0x300d;
+pub const REG_OUTPUT_SELECT00: c_uint = 0x300e;
+pub const REG_OUTPUT_SELECT01: c_uint = 0x300f;
+pub const REG_OUTPUT_SELECT02: c_uint = 0x3010;
+pub const REG_OUTPUT_DRIVE: c_uint = 0x3011;
+pub const REG_INPUT_READOUT00: c_uint = 0x302d;
+pub const REG_INPUT_READOUT01: c_uint = 0x302e;
+pub const REG_INPUT_READOUT02: c_uint = 0x302f;
+pub const REG_SC_PLL_CTRL0: c_uint = 0x3003;
+pub const REG_SC_PLL_CTRL1: c_uint = 0x3004;
+pub const REG_SC_PLL_CTRL2: c_uint = 0x3005;
+pub const REG_SC_PLL_CTRL3: c_uint = 0x3006;
+pub const REG_SC_CHIP_ID_H: c_uint = 0x300a;
+pub const REG_SC_CHIP_ID_L: c_uint = 0x300b;
+pub const REG_SC_PWC: c_uint = 0x3014;
+pub const REG_SC_CLKRST0: c_uint = 0x301a;
+pub const REG_SC_CLKRST1: c_uint = 0x301b;
+pub const REG_SC_CLKRST2: c_uint = 0x301c;
+pub const REG_SC_CLKRST3: c_uint = 0x301d;
+pub const REG_SC_SUB_ID: c_uint = 0x302a;
+pub const REG_SC_SCCB_ID: c_uint = 0x302b;
+pub const REG_GROUP_ADDRESS_00: c_uint = 0x3200;
+pub const REG_GROUP_ADDRESS_01: c_uint = 0x3201;
+pub const REG_GROUP_ADDRESS_02: c_uint = 0x3202;
+pub const REG_GROUP_ADDRESS_03: c_uint = 0x3203;
+pub const REG_GROUP_ACCESS: c_uint = 0x3208;
+pub const REG_AWB_R_GAIN_H: c_uint = 0x3400;
+pub const REG_AWB_R_GAIN_L: c_uint = 0x3401;
+pub const REG_AWB_G_GAIN_H: c_uint = 0x3402;
+pub const REG_AWB_G_GAIN_L: c_uint = 0x3403;
+pub const REG_AWB_B_GAIN_H: c_uint = 0x3404;
+pub const REG_AWB_B_GAIN_L: c_uint = 0x3405;
+pub const REG_AWB_MANUAL_CONTROL: c_uint = 0x3406;
+pub const REG_TIMING_HS_H: c_uint = 0x3800;
+pub const REG_TIMING_HS_L: c_uint = 0x3801;
+pub const REG_TIMING_VS_H: c_uint = 0x3802;
+pub const REG_TIMING_VS_L: c_uint = 0x3803;
+pub const REG_TIMING_HW_H: c_uint = 0x3804;
+pub const REG_TIMING_HW_L: c_uint = 0x3805;
+pub const REG_TIMING_VH_H: c_uint = 0x3806;
+pub const REG_TIMING_VH_L: c_uint = 0x3807;
+pub const REG_TIMING_DVPHO_H: c_uint = 0x3808;
+pub const REG_TIMING_DVPHO_L: c_uint = 0x3809;
+pub const REG_TIMING_DVPVO_H: c_uint = 0x380a;
+pub const REG_TIMING_DVPVO_L: c_uint = 0x380b;
+pub const REG_TIMING_HTS_H: c_uint = 0x380c;
+pub const REG_TIMING_HTS_L: c_uint = 0x380d;
+pub const REG_TIMING_VTS_H: c_uint = 0x380e;
+pub const REG_TIMING_VTS_L: c_uint = 0x380f;
+pub const REG_TIMING_HOFFS_H: c_uint = 0x3810;
+pub const REG_TIMING_HOFFS_L: c_uint = 0x3811;
+pub const REG_TIMING_VOFFS_H: c_uint = 0x3812;
+pub const REG_TIMING_VOFFS_L: c_uint = 0x3813;
+pub const REG_TIMING_XINC: c_uint = 0x3814;
+pub const REG_TIMING_YINC: c_uint = 0x3815;
+pub const REG_TIMING_VERT_FORMAT: c_uint = 0x3820;
+pub const REG_TIMING_HORIZ_FORMAT: c_uint = 0x3821;
+pub const REG_FORMAT_CTRL00: c_uint = 0x4300;
+pub const REG_VFIFO_READ_START_H: c_uint = 0x4608;
+pub const REG_VFIFO_READ_START_L: c_uint = 0x4609;
+pub const REG_DVP_CTRL02: c_uint = 0x4708;
+pub const REG_ISP_CTRL00: c_uint = 0x5000;
+pub const REG_ISP_CTRL01: c_uint = 0x5001;
+pub const REG_ISP_CTRL02: c_uint = 0x5002;
+pub const REG_LENC_RED_X0_H: c_uint = 0x500c;
+pub const REG_LENC_RED_X0_L: c_uint = 0x500d;
+pub const REG_LENC_RED_Y0_H: c_uint = 0x500e;
+pub const REG_LENC_RED_Y0_L: c_uint = 0x500f;
+pub const REG_LENC_RED_A1: c_uint = 0x5010;
+pub const REG_LENC_RED_B1: c_uint = 0x5011;
+pub const REG_LENC_RED_A2_B2: c_uint = 0x5012;
+pub const REG_LENC_GREEN_X0_H: c_uint = 0x5013;
+pub const REG_LENC_GREEN_X0_L: c_uint = 0x5014;
+pub const REG_LENC_GREEN_Y0_H: c_uint = 0x5015;
+pub const REG_LENC_GREEN_Y0_L: c_uint = 0x5016;
+pub const REG_LENC_GREEN_A1: c_uint = 0x5017;
+pub const REG_LENC_GREEN_B1: c_uint = 0x5018;
+pub const REG_LENC_GREEN_A2_B2: c_uint = 0x5019;
+pub const REG_LENC_BLUE_X0_H: c_uint = 0x501a;
+pub const REG_LENC_BLUE_X0_L: c_uint = 0x501b;
+pub const REG_LENC_BLUE_Y0_H: c_uint = 0x501c;
+pub const REG_LENC_BLUE_Y0_L: c_uint = 0x501d;
+pub const REG_LENC_BLUE_A1: c_uint = 0x501e;
+pub const REG_LENC_BLUE_B1: c_uint = 0x501f;
+pub const REG_LENC_BLUE_A2_B2: c_uint = 0x5020;
+pub const REG_AWB_CTRL00: c_uint = 0x5035;
+pub const REG_AWB_CTRL01: c_uint = 0x5036;
+pub const REG_AWB_CTRL02: c_uint = 0x5037;
+pub const REG_AWB_CTRL03: c_uint = 0x5038;
+pub const REG_AWB_CTRL04: c_uint = 0x5039;
+pub const REG_AWB_LOCAL_LIMIT: c_uint = 0x503a;
+pub const REG_AWB_CTRL12: c_uint = 0x5049;
+pub const REG_AWB_CTRL13: c_uint = 0x504a;
+pub const REG_AWB_CTRL14: c_uint = 0x504b;
+pub const REG_SHARPENMT_THRESH1: c_uint = 0x5064;
+pub const REG_SHARPENMT_THRESH2: c_uint = 0x5065;
+pub const REG_SHARPENMT_OFFSET1: c_uint = 0x5066;
+pub const REG_SHARPENMT_OFFSET2: c_uint = 0x5067;
+pub const REG_DENOISE_THRESH1: c_uint = 0x5068;
+pub const REG_DENOISE_THRESH2: c_uint = 0x5069;
+pub const REG_DENOISE_OFFSET1: c_uint = 0x506a;
+pub const REG_DENOISE_OFFSET2: c_uint = 0x506b;
+pub const REG_SHARPEN_THRESH1: c_uint = 0x506c;
+pub const REG_SHARPEN_THRESH2: c_uint = 0x506d;
+pub const REG_CIP_CTRL00: c_uint = 0x506e;
+pub const REG_CIP_CTRL01: c_uint = 0x506f;
+pub const REG_CMX_SIGN: c_uint = 0x5079;
+pub const REG_CMX_MISC_CTRL: c_uint = 0x507a;
+pub const REG_PRE_ISP_CTRL00: c_uint = 0x50a0;
+
+pub const VERTICAL_COLOR_BAR_MASK: c_uint = 0x53;
+pub const REG_NULL: c_uint = 0x0000	/* Array end token */;
+
+pub const OV2659_ID: c_uint = 0x2656;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sensor_register {
+    pub addr: u16,
+    pub value: u8,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ov2659_framesize {
+    pub width: u16,
+    pub height: u16,
+    pub max_exp_lines: u16,
+    pub regs: *const sensor_register,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ov2659_pll_ctrl {
+    pub ctrl1: u8,
+    pub ctrl2: u8,
+    pub ctrl3: u8,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ov2659_pixfmt {
+    pub code: u32,
+// Output format Register Value (REG_FORMAT_CTRL00)
+    pub format_ctrl_regs: *mut sensor_register,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct pll_ctrl_reg {
+    pub div: c_uint,
+    pub reg: c_uchar,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ov2659 {
+    pub sd: v4l2_subdev,
+    pub pad: media_pad,
+    pub format: v4l2_mbus_framefmt,
+    pub xvclk_frequency: c_uint,
+    pub pdata: *const ov2659_platform_data,
+    pub lock: mutex,
+    pub client: *mut i2c_client,
+    pub ctrls: v4l2_ctrl_handler,
+    pub link_frequency: *mut v4l2_ctrl,
+    pub clk: *mut clk,
+    pub frame_size: *const ov2659_framesize,
+    pub format_ctrl_regs: *mut sensor_register,
+    pub pll: ov2659_pll_ctrl,
+    pub streaming: c_int,
+// used to control the sensor PWDN pin
+    pub pwdn_gpio: *mut gpio_desc,
+// used to control the sensor RESETB pin
+    pub resetb_gpio: *mut gpio_desc,
+}
+
+    static const struct sensor_register ov2659_init_regs[] = {
+    { REG_IO_CTRL00, 0x03 },
+    { REG_IO_CTRL01, 0xff },
+    { REG_IO_CTRL02, 0xe0 },
+    { 0x3633, 0x3d },
+    { 0x3620, 0x02 },
+    { 0x3631, 0x11 },
+    { 0x3612, 0x04 },
+    { 0x3630, 0x20 },
+    { 0x4702, 0x02 },
+    { 0x370c, 0x34 },
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xb7 },
+    { REG_TIMING_DVPHO_H, 0x03 },
+    { REG_TIMING_DVPHO_L, 0x20 },
+    { REG_TIMING_DVPVO_H, 0x02 },
+    { REG_TIMING_DVPVO_L, 0x58 },
+    { REG_TIMING_HTS_H, 0x05 },
+    { REG_TIMING_HTS_L, 0x14 },
+    { REG_TIMING_VTS_H, 0x02 },
+    { REG_TIMING_VTS_L, 0x68 },
+    { REG_TIMING_HOFFS_L, 0x08 },
+    { REG_TIMING_VOFFS_L, 0x02 },
+    { REG_TIMING_XINC, 0x31 },
+    { REG_TIMING_YINC, 0x31 },
+    { 0x3a02, 0x02 },
+    { 0x3a03, 0x68 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0x5c },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x4d },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x02 },
+    { 0x3a15, 0x28 },
+    { REG_DVP_CTRL02, 0x01 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x76 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x18 },
+    { 0x3703, 0x24 },
+    { 0x3704, 0x24 },
+    { 0x3705, 0x0c },
+    { REG_TIMING_VERT_FORMAT, 0x81 },
+    { REG_TIMING_HORIZ_FORMAT, 0x01 },
+    { 0x370a, 0x52 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0x80 },
+    { REG_FORMAT_CTRL00, 0x30 },
+    { 0x5086, 0x02 },
+    { REG_ISP_CTRL00, 0xfb },
+    { REG_ISP_CTRL01, 0x1f },
+    { REG_ISP_CTRL02, 0x00 },
+    { 0x5025, 0x0e },
+    { 0x5026, 0x18 },
+    { 0x5027, 0x34 },
+    { 0x5028, 0x4c },
+    { 0x5029, 0x62 },
+    { 0x502a, 0x74 },
+    { 0x502b, 0x85 },
+    { 0x502c, 0x92 },
+    { 0x502d, 0x9e },
+    { 0x502e, 0xb2 },
+    { 0x502f, 0xc0 },
+    { 0x5030, 0xcc },
+    { 0x5031, 0xe0 },
+    { 0x5032, 0xee },
+    { 0x5033, 0xf6 },
+    { 0x5034, 0x11 },
+    { 0x5070, 0x1c },
+    { 0x5071, 0x5b },
+    { 0x5072, 0x05 },
+    { 0x5073, 0x20 },
+    { 0x5074, 0x94 },
+    { 0x5075, 0xb4 },
+    { 0x5076, 0xb4 },
+    { 0x5077, 0xaf },
+    { 0x5078, 0x05 },
+    { REG_CMX_SIGN, 0x98 },
+    { REG_CMX_MISC_CTRL, 0x21 },
+    { REG_AWB_CTRL00, 0x6a },
+    { REG_AWB_CTRL01, 0x11 },
+    { REG_AWB_CTRL02, 0x92 },
+    { REG_AWB_CTRL03, 0x21 },
+    { REG_AWB_CTRL04, 0xe1 },
+    { REG_AWB_LOCAL_LIMIT, 0x01 },
+    { 0x503c, 0x05 },
+    { 0x503d, 0x08 },
+    { 0x503e, 0x08 },
+    { 0x503f, 0x64 },
+    { 0x5040, 0x58 },
+    { 0x5041, 0x2a },
+    { 0x5042, 0xc5 },
+    { 0x5043, 0x2e },
+    { 0x5044, 0x3a },
+    { 0x5045, 0x3c },
+    { 0x5046, 0x44 },
+    { 0x5047, 0xf8 },
+    { 0x5048, 0x08 },
+    { REG_AWB_CTRL12, 0x70 },
+    { REG_AWB_CTRL13, 0xf0 },
+    { REG_AWB_CTRL14, 0xf0 },
+    { REG_LENC_RED_X0_H, 0x03 },
+    { REG_LENC_RED_X0_L, 0x20 },
+    { REG_LENC_RED_Y0_H, 0x02 },
+    { REG_LENC_RED_Y0_L, 0x5c },
+    { REG_LENC_RED_A1, 0x48 },
+    { REG_LENC_RED_B1, 0x00 },
+    { REG_LENC_RED_A2_B2, 0x66 },
+    { REG_LENC_GREEN_X0_H, 0x03 },
+    { REG_LENC_GREEN_X0_L, 0x30 },
+    { REG_LENC_GREEN_Y0_H, 0x02 },
+    { REG_LENC_GREEN_Y0_L, 0x7c },
+    { REG_LENC_GREEN_A1, 0x40 },
+    { REG_LENC_GREEN_B1, 0x00 },
+    { REG_LENC_GREEN_A2_B2, 0x66 },
+    { REG_LENC_BLUE_X0_H, 0x03 },
+    { REG_LENC_BLUE_X0_L, 0x10 },
+    { REG_LENC_BLUE_Y0_H, 0x02 },
+    { REG_LENC_BLUE_Y0_L, 0x7c },
+    { REG_LENC_BLUE_A1, 0x3a },
+    { REG_LENC_BLUE_B1, 0x00 },
+    { REG_LENC_BLUE_A2_B2, 0x66 },
+    { REG_CIP_CTRL00, 0x44 },
+    { REG_SHARPENMT_THRESH1, 0x08 },
+    { REG_SHARPENMT_THRESH2, 0x10 },
+    { REG_SHARPENMT_OFFSET1, 0x12 },
+    { REG_SHARPENMT_OFFSET2, 0x02 },
+    { REG_SHARPEN_THRESH1, 0x08 },
+    { REG_SHARPEN_THRESH2, 0x10 },
+    { REG_CIP_CTRL01, 0xa6 },
+    { REG_DENOISE_THRESH1, 0x08 },
+    { REG_DENOISE_THRESH2, 0x10 },
+    { REG_DENOISE_OFFSET1, 0x04 },
+    { REG_DENOISE_OFFSET2, 0x12 },
+    { 0x507e, 0x40 },
+    { 0x507f, 0x20 },
+    { 0x507b, 0x02 },
+    { REG_CMX_MISC_CTRL, 0x01 },
+    { 0x5084, 0x0c },
+    { 0x5085, 0x3e },
+    { 0x5005, 0x80 },
+    { 0x3a0f, 0x30 },
+    { 0x3a10, 0x28 },
+    { 0x3a1b, 0x32 },
+    { 0x3a1e, 0x26 },
+    { 0x3a11, 0x60 },
+    { 0x3a1f, 0x14 },
+    { 0x5060, 0x69 },
+    { 0x5061, 0x7d },
+    { 0x5062, 0x7d },
+    { 0x5063, 0x69 },
+    { REG_NULL, 0x00 },
+    };
+// 1280X720 720p
+    static struct sensor_register ov2659_720p[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0xa0 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0xf0 },
+    { REG_TIMING_HW_H, 0x05 },
+    { REG_TIMING_HW_L, 0xbf },
+    { REG_TIMING_VH_H, 0x03 },
+    { REG_TIMING_VH_L, 0xcb },
+    { REG_TIMING_DVPHO_H, 0x05 },
+    { REG_TIMING_DVPHO_L, 0x00 },
+    { REG_TIMING_DVPVO_H, 0x02 },
+    { REG_TIMING_DVPVO_L, 0xd0 },
+    { REG_TIMING_HTS_H, 0x06 },
+    { REG_TIMING_HTS_L, 0x4c },
+    { REG_TIMING_VTS_H, 0x02 },
+    { REG_TIMING_VTS_L, 0xe8 },
+    { REG_TIMING_HOFFS_L, 0x10 },
+    { REG_TIMING_VOFFS_L, 0x06 },
+    { REG_TIMING_XINC, 0x11 },
+    { REG_TIMING_YINC, 0x11 },
+    { REG_TIMING_VERT_FORMAT, 0x80 },
+    { REG_TIMING_HORIZ_FORMAT, 0x00 },
+    { 0x370a, 0x12 },
+    { 0x3a03, 0xe8 },
+    { 0x3a09, 0x6f },
+    { 0x3a0b, 0x5d },
+    { 0x3a15, 0x9a },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0x80 },
+    { REG_ISP_CTRL02, 0x00 },
+    { REG_NULL, 0x00 },
+    };
+// 1600X1200 UXGA
+    static struct sensor_register ov2659_uxga[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xbb },
+    { REG_TIMING_DVPHO_H, 0x06 },
+    { REG_TIMING_DVPHO_L, 0x40 },
+    { REG_TIMING_DVPVO_H, 0x04 },
+    { REG_TIMING_DVPVO_L, 0xb0 },
+    { REG_TIMING_HTS_H, 0x07 },
+    { REG_TIMING_HTS_L, 0x9f },
+    { REG_TIMING_VTS_H, 0x04 },
+    { REG_TIMING_VTS_L, 0xd0 },
+    { REG_TIMING_HOFFS_L, 0x10 },
+    { REG_TIMING_VOFFS_L, 0x06 },
+    { REG_TIMING_XINC, 0x11 },
+    { REG_TIMING_YINC, 0x11 },
+    { 0x3a02, 0x04 },
+    { 0x3a03, 0xd0 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0xb8 },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x9a },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x04 },
+    { 0x3a15, 0x50 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x44 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x30 },
+    { 0x3703, 0x48 },
+    { 0x3704, 0x48 },
+    { 0x3705, 0x18 },
+    { REG_TIMING_VERT_FORMAT, 0x80 },
+    { REG_TIMING_HORIZ_FORMAT, 0x00 },
+    { 0x370a, 0x12 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0x80 },
+    { REG_ISP_CTRL02, 0x00 },
+    { REG_NULL, 0x00 },
+    };
+// 1280X1024 SXGA
+    static struct sensor_register ov2659_sxga[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xb7 },
+    { REG_TIMING_DVPHO_H, 0x05 },
+    { REG_TIMING_DVPHO_L, 0x00 },
+    { REG_TIMING_DVPVO_H, 0x04 },
+    { REG_TIMING_DVPVO_L, 0x00 },
+    { REG_TIMING_HTS_H, 0x07 },
+    { REG_TIMING_HTS_L, 0x9c },
+    { REG_TIMING_VTS_H, 0x04 },
+    { REG_TIMING_VTS_L, 0xd0 },
+    { REG_TIMING_HOFFS_L, 0x10 },
+    { REG_TIMING_VOFFS_L, 0x06 },
+    { REG_TIMING_XINC, 0x11 },
+    { REG_TIMING_YINC, 0x11 },
+    { 0x3a02, 0x02 },
+    { 0x3a03, 0x68 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0x5c },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x4d },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x02 },
+    { 0x3a15, 0x28 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x76 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x18 },
+    { 0x3703, 0x24 },
+    { 0x3704, 0x24 },
+    { 0x3705, 0x0c },
+    { REG_TIMING_VERT_FORMAT, 0x80 },
+    { REG_TIMING_HORIZ_FORMAT, 0x00 },
+    { 0x370a, 0x52 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0x80 },
+    { REG_ISP_CTRL02, 0x00 },
+    { REG_NULL, 0x00 },
+    };
+// 1024X768 SXGA
+    static struct sensor_register ov2659_xga[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xb7 },
+    { REG_TIMING_DVPHO_H, 0x04 },
+    { REG_TIMING_DVPHO_L, 0x00 },
+    { REG_TIMING_DVPVO_H, 0x03 },
+    { REG_TIMING_DVPVO_L, 0x00 },
+    { REG_TIMING_HTS_H, 0x07 },
+    { REG_TIMING_HTS_L, 0x9c },
+    { REG_TIMING_VTS_H, 0x04 },
+    { REG_TIMING_VTS_L, 0xd0 },
+    { REG_TIMING_HOFFS_L, 0x10 },
+    { REG_TIMING_VOFFS_L, 0x06 },
+    { REG_TIMING_XINC, 0x11 },
+    { REG_TIMING_YINC, 0x11 },
+    { 0x3a02, 0x02 },
+    { 0x3a03, 0x68 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0x5c },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x4d },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x02 },
+    { 0x3a15, 0x28 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x76 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x18 },
+    { 0x3703, 0x24 },
+    { 0x3704, 0x24 },
+    { 0x3705, 0x0c },
+    { REG_TIMING_VERT_FORMAT, 0x80 },
+    { REG_TIMING_HORIZ_FORMAT, 0x00 },
+    { 0x370a, 0x52 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0x80 },
+    { REG_ISP_CTRL02, 0x00 },
+    { REG_NULL, 0x00 },
+    };
+// 800X600 SVGA
+    static struct sensor_register ov2659_svga[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xb7 },
+    { REG_TIMING_DVPHO_H, 0x03 },
+    { REG_TIMING_DVPHO_L, 0x20 },
+    { REG_TIMING_DVPVO_H, 0x02 },
+    { REG_TIMING_DVPVO_L, 0x58 },
+    { REG_TIMING_HTS_H, 0x05 },
+    { REG_TIMING_HTS_L, 0x14 },
+    { REG_TIMING_VTS_H, 0x02 },
+    { REG_TIMING_VTS_L, 0x68 },
+    { REG_TIMING_HOFFS_L, 0x08 },
+    { REG_TIMING_VOFFS_L, 0x02 },
+    { REG_TIMING_XINC, 0x31 },
+    { REG_TIMING_YINC, 0x31 },
+    { 0x3a02, 0x02 },
+    { 0x3a03, 0x68 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0x5c },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x4d },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x02 },
+    { 0x3a15, 0x28 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x76 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x18 },
+    { 0x3703, 0x24 },
+    { 0x3704, 0x24 },
+    { 0x3705, 0x0c },
+    { REG_TIMING_VERT_FORMAT, 0x81 },
+    { REG_TIMING_HORIZ_FORMAT, 0x01 },
+    { 0x370a, 0x52 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0x80 },
+    { REG_ISP_CTRL02, 0x00 },
+    { REG_NULL, 0x00 },
+    };
+// 640X480 VGA
+    static struct sensor_register ov2659_vga[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xb7 },
+    { REG_TIMING_DVPHO_H, 0x02 },
+    { REG_TIMING_DVPHO_L, 0x80 },
+    { REG_TIMING_DVPVO_H, 0x01 },
+    { REG_TIMING_DVPVO_L, 0xe0 },
+    { REG_TIMING_HTS_H, 0x05 },
+    { REG_TIMING_HTS_L, 0x14 },
+    { REG_TIMING_VTS_H, 0x02 },
+    { REG_TIMING_VTS_L, 0x68 },
+    { REG_TIMING_HOFFS_L, 0x08 },
+    { REG_TIMING_VOFFS_L, 0x02 },
+    { REG_TIMING_XINC, 0x31 },
+    { REG_TIMING_YINC, 0x31 },
+    { 0x3a02, 0x02 },
+    { 0x3a03, 0x68 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0x5c },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x4d },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x02 },
+    { 0x3a15, 0x28 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x76 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x18 },
+    { 0x3703, 0x24 },
+    { 0x3704, 0x24 },
+    { 0x3705, 0x0c },
+    { REG_TIMING_VERT_FORMAT, 0x81 },
+    { REG_TIMING_HORIZ_FORMAT, 0x01 },
+    { 0x370a, 0x52 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0xa0 },
+    { REG_ISP_CTRL02, 0x10 },
+    { REG_NULL, 0x00 },
+    };
+// 320X240 QVGA
+    static  struct sensor_register ov2659_qvga[] = {
+    { REG_TIMING_HS_H, 0x00 },
+    { REG_TIMING_HS_L, 0x00 },
+    { REG_TIMING_VS_H, 0x00 },
+    { REG_TIMING_VS_L, 0x00 },
+    { REG_TIMING_HW_H, 0x06 },
+    { REG_TIMING_HW_L, 0x5f },
+    { REG_TIMING_VH_H, 0x04 },
+    { REG_TIMING_VH_L, 0xb7 },
+    { REG_TIMING_DVPHO_H, 0x01 },
+    { REG_TIMING_DVPHO_L, 0x40 },
+    { REG_TIMING_DVPVO_H, 0x00 },
+    { REG_TIMING_DVPVO_L, 0xf0 },
+    { REG_TIMING_HTS_H, 0x05 },
+    { REG_TIMING_HTS_L, 0x14 },
+    { REG_TIMING_VTS_H, 0x02 },
+    { REG_TIMING_VTS_L, 0x68 },
+    { REG_TIMING_HOFFS_L, 0x08 },
+    { REG_TIMING_VOFFS_L, 0x02 },
+    { REG_TIMING_XINC, 0x31 },
+    { REG_TIMING_YINC, 0x31 },
+    { 0x3a02, 0x02 },
+    { 0x3a03, 0x68 },
+    { 0x3a08, 0x00 },
+    { 0x3a09, 0x5c },
+    { 0x3a0a, 0x00 },
+    { 0x3a0b, 0x4d },
+    { 0x3a0d, 0x08 },
+    { 0x3a0e, 0x06 },
+    { 0x3a14, 0x02 },
+    { 0x3a15, 0x28 },
+    { 0x3623, 0x00 },
+    { 0x3634, 0x76 },
+    { 0x3701, 0x44 },
+    { 0x3702, 0x18 },
+    { 0x3703, 0x24 },
+    { 0x3704, 0x24 },
+    { 0x3705, 0x0c },
+    { REG_TIMING_VERT_FORMAT, 0x81 },
+    { REG_TIMING_HORIZ_FORMAT, 0x01 },
+    { 0x370a, 0x52 },
+    { REG_VFIFO_READ_START_H, 0x00 },
+    { REG_VFIFO_READ_START_L, 0xa0 },
+    { REG_ISP_CTRL02, 0x10 },
+    { REG_NULL, 0x00 },
+    };
+    static const struct pll_ctrl_reg ctrl3[] = {
+    { 1, 0x00 },
+    { 2, 0x02 },
+    { 3, 0x03 },
+    { 4, 0x06 },
+    { 6, 0x0d },
+    { 8, 0x0e },
+    { 12, 0x0f },
+    { 16, 0x12 },
+    { 24, 0x13 },
+    { 32, 0x16 },
+    { 48, 0x1b },
+    { 64, 0x1e },
+    { 96, 0x1f },
+    { 0, 0x00 },
+    };
+    static const struct pll_ctrl_reg ctrl1[] = {
+    { 2, 0x10 },
+    { 4, 0x20 },
+    { 6, 0x30 },
+    { 8, 0x40 },
+    { 10, 0x50 },
+    { 12, 0x60 },
+    { 14, 0x70 },
+    { 16, 0x80 },
+    { 18, 0x90 },
+    { 20, 0xa0 },
+    { 22, 0xb0 },
+    { 24, 0xc0 },
+    { 26, 0xd0 },
+    { 28, 0xe0 },
+    { 30, 0xf0 },
+    { 0, 0x00 },
+    };
+    static const struct ov2659_framesize ov2659_framesizes[] = {
+    { /* QVGA */
+    .width		= 320,
+    .height		= 240,
+    .regs		= ov2659_qvga,
+    .max_exp_lines	= 248,
+    }, { /* VGA */
+    .width		= 640,
+    .height		= 480,
+    .regs		= ov2659_vga,
+    .max_exp_lines	= 498,
+    }, { /* SVGA */
+    .width		= 800,
+    .height		= 600,
+    .regs		= ov2659_svga,
+    .max_exp_lines	= 498,
+    }, { /* XGA */
+    .width		= 1024,
+    .height		= 768,
+    .regs		= ov2659_xga,
+    .max_exp_lines	= 498,
+    }, { /* 720P */
+    .width		= 1280,
+    .height		= 720,
+    .regs		= ov2659_720p,
+    .max_exp_lines	= 498,
+    }, { /* SXGA */
+    .width		= 1280,
+    .height		= 1024,
+    .regs		= ov2659_sxga,
+    .max_exp_lines	= 1048,
+    }, { /* UXGA */
+    .width		= 1600,
+    .height		= 1200,
+    .regs		= ov2659_uxga,
+    .max_exp_lines	= 498,
+    },
+    };
+// YUV422 YUYV
+    static struct sensor_register ov2659_format_yuyv[] = {
+    { REG_FORMAT_CTRL00, 0x30 },
+    { REG_NULL, 0x0 },
+    };
+// YUV422 UYVY
+    static struct sensor_register ov2659_format_uyvy[] = {
+    { REG_FORMAT_CTRL00, 0x32 },
+    { REG_NULL, 0x0 },
+    };
+// Raw Bayer BGGR
+    static struct sensor_register ov2659_format_bggr[] = {
+    { REG_FORMAT_CTRL00, 0x00 },
+    { REG_NULL, 0x0 },
+    };
+// RGB565
+    static struct sensor_register ov2659_format_rgb565[] = {
+    { REG_FORMAT_CTRL00, 0x60 },
+    { REG_NULL, 0x0 },
+    };
+    static const struct ov2659_pixfmt ov2659_formats[] = {
+    {
+    .code = MEDIA_BUS_FMT_YUYV8_2X8,
+    .format_ctrl_regs = ov2659_format_yuyv,
+    }, {
+    .code = MEDIA_BUS_FMT_UYVY8_2X8,
+    .format_ctrl_regs = ov2659_format_uyvy,
+    }, {
+    .code = MEDIA_BUS_FMT_RGB565_2X8_BE,
+    .format_ctrl_regs = ov2659_format_rgb565,
+    }, {
+    .code = MEDIA_BUS_FMT_SBGGR8_1X8,
+    .format_ctrl_regs = ov2659_format_bggr,
+    },
+    };
+    static inline struct ov2659 *to_ov2659(struct v4l2_subdev *sd)
+    {
+    return container_of(sd, struct ov2659, sd);
+    }
+// sensor register write
+#[no_mangle]
+unsafe extern "C" fn ov2659_write(client: *mut i2c_client, reg: u16, val: u8) -> c_int {
+    static int ov2659_write(struct i2c_client *client, u16 reg, u8 val)
+    {
+    struct i2c_msg msg;
+    u8 buf[3];
+    int ret;
+    buf[0] = reg >> 8;
+    buf[1] = reg & 0xFF;
+    buf[2] = val;
+    msg.addr = client.addr;
+    msg.flags = client.flags;
+    msg.buf = buf;
+    msg.len = sizeof(buf);
+    ret = i2c_transfer(client.adapter, &msg, 1);
+    if (ret >= 0)
+    return 0;
+    dev_dbg(&client.dev,
+    "ov2659 write reg(0x%x val:0x%x) failed !\n", reg, val);
+    return ret;
+    }
+// sensor register read
+#[no_mangle]
+unsafe extern "C" fn ov2659_read(client: *mut i2c_client, reg: u16, val: *mut u8) -> c_int {
+    static int ov2659_read(struct i2c_client *client, u16 reg, u8 *val)
+    {
+    struct i2c_msg msg[2];
+    u8 buf[2];
+    int ret;
+    buf[0] = reg >> 8;
+    buf[1] = reg & 0xFF;
+    msg[0].addr = client.addr;
+    msg[0].flags = client.flags;
+    msg[0].buf = buf;
+    msg[0].len = sizeof(buf);
+    msg[1].addr = client.addr;
+    msg[1].flags = client.flags | I2C_M_RD;
+    msg[1].buf = buf;
+    msg[1].len = 1;
+    ret = i2c_transfer(client.adapter, msg, 2);
+    if (ret >= 0) {
+// val = buf[0];
+    return 0;
+    }
+    dev_dbg(&client.dev,
+    "ov2659 read reg(0x%x val:0x%x) failed !\n", reg, *val);
+    return ret;
+    }
+    static int ov2659_write_array(struct i2c_client *client,
+    const struct sensor_register *regs)
+    {
+    int i, ret = 0;
+    for (i = 0; ret == 0 && regs[i].addr; i++)
+    ret = ov2659_write(client, regs[i].addr, regs[i].value);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_pll_calc_params(ov2659: *mut ov2659) {
+    static void ov2659_pll_calc_params(struct ov2659 *ov2659)
+    {
+    const struct ov2659_platform_data *pdata = ov2659.pdata;
+    let mut ctrl1_reg: u8 = 0, ctrl2_reg = 0, ctrl3_reg = 0;
+    struct i2c_client *client = ov2659.client;
+    let mut desired: c_uint = pdata.link_frequency;
+    u32 prediv, postdiv, mult;
+    let mut bestdelta: u32 = -1;
+    u32 delta, actual;
+    int i, j;
+    for (i = 0; ctrl1[i].div != 0; i++) {
+    postdiv = ctrl1[i].div;
+    for (j = 0; ctrl3[j].div != 0; j++) {
+    prediv = ctrl3[j].div;
+    for (mult = 1; mult <= 63; mult++) {
+    actual  = ov2659.xvclk_frequency;
+    actual *= mult;
+    actual /= prediv;
+    actual /= postdiv;
+    delta = actual - desired;
+    delta = abs(delta);
+    if ((delta < bestdelta) || (bestdelta == -1)) {
+    bestdelta = delta;
+    ctrl1_reg = ctrl1[i].reg;
+    ctrl2_reg = mult;
+    ctrl3_reg = ctrl3[j].reg;
+    }
+    }
+    }
+    }
+    ov2659.pll.ctrl1 = ctrl1_reg;
+    ov2659.pll.ctrl2 = ctrl2_reg;
+    ov2659.pll.ctrl3 = ctrl3_reg;
+    dev_dbg(&client.dev,
+    "Actual reg config: ctrl1_reg: %02x ctrl2_reg: %02x ctrl3_reg: %02x\n",
+    ctrl1_reg, ctrl2_reg, ctrl3_reg);
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_set_pixel_clock(ov2659: *mut ov2659) -> c_int {
+    static int ov2659_set_pixel_clock(struct ov2659 *ov2659)
+    {
+    struct i2c_client *client = ov2659.client;
+    struct sensor_register pll_regs[] = {
+    {REG_SC_PLL_CTRL1, ov2659.pll.ctrl1},
+    {REG_SC_PLL_CTRL2, ov2659.pll.ctrl2},
+    {REG_SC_PLL_CTRL3, ov2659.pll.ctrl3},
+    {REG_NULL, 0x00},
+    };
+    dev_dbg(&client.dev, "%s\n", __func__);
+    return ov2659_write_array(client, pll_regs);
+    };
+#[no_mangle]
+unsafe extern "C" fn ov2659_get_default_format(format: *mut v4l2_mbus_framefmt) {
+    static void ov2659_get_default_format(struct v4l2_mbus_framefmt *format)
+    {
+    format.width = ov2659_framesizes[2].width;
+    format.height = ov2659_framesizes[2].height;
+    format.colorspace = V4L2_COLORSPACE_SRGB;
+    format.code = ov2659_formats[0].code;
+    format.field = V4L2_FIELD_NONE;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_set_streaming(ov2659: *mut ov2659, on: c_int) {
+    static void ov2659_set_streaming(struct ov2659 *ov2659, int on)
+    {
+    struct i2c_client *client = ov2659.client;
+    int ret;
+    on = !!on;
+    dev_dbg(&client.dev, "%s: on: %d\n", __func__, on);
+    ret = ov2659_write(client, REG_SOFTWARE_STANDBY, on);
+    if (ret)
+    dev_err(&client.dev, "ov2659 soft standby failed\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_init(sd: *mut v4l2_subdev, val: u32) -> c_int {
+    static int ov2659_init(struct v4l2_subdev *sd, u32 val)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    return ov2659_write_array(client, ov2659_init_regs);
+    }
+//
+// V4L2 subdev video and pad level operations
+//
+    static int ov2659_enum_mbus_code(struct v4l2_subdev *sd,
+    struct v4l2_subdev_state *sd_state,
+    struct v4l2_subdev_mbus_code_enum *code)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    dev_dbg(&client.dev, "%s:\n", __func__);
+    if (code.index >= ARRAY_SIZE(ov2659_formats))
+    return -EINVAL;
+    code.code = ov2659_formats[code.index].code;
+    return 0;
+    }
+    static int ov2659_enum_frame_sizes(struct v4l2_subdev *sd,
+    struct v4l2_subdev_state *sd_state,
+    struct v4l2_subdev_frame_size_enum *fse)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    let mut i: c_int = ARRAY_SIZE(ov2659_formats);
+    dev_dbg(&client.dev, "%s:\n", __func__);
+    if (fse.index >= ARRAY_SIZE(ov2659_framesizes))
+    return -EINVAL;
+    while (--i)
+    if (fse.code == ov2659_formats[i].code)
+    break;
+    fse.code = ov2659_formats[i].code;
+    fse.min_width  = ov2659_framesizes[fse.index].width;
+    fse.max_width  = fse.min_width;
+    fse.max_height = ov2659_framesizes[fse.index].height;
+    fse.min_height = fse.max_height;
+    return 0;
+    }
+    static int ov2659_get_fmt(struct v4l2_subdev *sd,
+    struct v4l2_subdev_state *sd_state,
+    struct v4l2_subdev_format *fmt)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    struct ov2659 *ov2659 = to_ov2659(sd);
+    dev_dbg(&client.dev, "ov2659_get_fmt\n");
+    if (fmt.which == V4L2_SUBDEV_FORMAT_TRY) {
+    struct v4l2_mbus_framefmt *mf;
+    mf = v4l2_subdev_state_get_format(sd_state, 0);
+    mutex_lock(&ov2659.lock);
+    fmt.format = *mf;
+    mutex_unlock(&ov2659.lock);
+    return 0;
+    }
+    mutex_lock(&ov2659.lock);
+    fmt.format = ov2659.format;
+    mutex_unlock(&ov2659.lock);
+    dev_dbg(&client.dev, "ov2659_get_fmt: %x %dx%d\n",
+    ov2659.format.code, ov2659.format.width,
+    ov2659.format.height);
+    return 0;
+    }
+    static void __ov2659_try_frame_size(struct v4l2_mbus_framefmt *mf,
+    const struct ov2659_framesize **size)
+    {
+    const struct ov2659_framesize *fsize = &ov2659_framesizes[0];
+    const struct ov2659_framesize *match = core::ptr::null_mut();
+    let mut i: c_int = ARRAY_SIZE(ov2659_framesizes);
+    let mut min_err: c_uint = UINT_MAX;
+    while (i--) {
+    int err = abs(fsize.width - mf.width)
+    + abs(fsize.height - mf.height);
+    if ((err < min_err) && (fsize.regs[0].addr)) {
+    min_err = err;
+    match = fsize;
+    }
+    fsize++;
+    }
+    if (!match)
+    match = &ov2659_framesizes[2];
+    mf.width  = match.width;
+    mf.height = match.height;
+    if (size)
+// size = match;
+    }
+    static int ov2659_set_fmt(struct v4l2_subdev *sd,
+    struct v4l2_subdev_state *sd_state,
+    struct v4l2_subdev_format *fmt)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    let mut index: c_int = ARRAY_SIZE(ov2659_formats);
+    struct v4l2_mbus_framefmt *mf = &fmt.format;
+    const struct ov2659_framesize *size = core::ptr::null_mut();
+    struct ov2659 *ov2659 = to_ov2659(sd);
+    let mut ret: c_int = 0;
+    dev_dbg(&client.dev, "ov2659_set_fmt\n");
+    __ov2659_try_frame_size(mf, &size);
+    while (--index >= 0)
+    if (ov2659_formats[index].code == mf.code)
+    break;
+    if (index < 0) {
+    index = 0;
+    mf.code = ov2659_formats[index].code;
+    }
+    mf.colorspace = V4L2_COLORSPACE_SRGB;
+    mf.field = V4L2_FIELD_NONE;
+    mutex_lock(&ov2659.lock);
+    if (fmt.which == V4L2_SUBDEV_FORMAT_TRY) {
+    mf = v4l2_subdev_state_get_format(sd_state, fmt.pad);
+// mf = fmt->format;
+    } else {
+    s64 val;
+    if (ov2659.streaming) {
+    mutex_unlock(&ov2659.lock);
+    return -EBUSY;
+    }
+    ov2659.frame_size = size;
+    ov2659.format = fmt.format;
+    ov2659.format_ctrl_regs =
+    ov2659_formats[index].format_ctrl_regs;
+    if (ov2659.format.code != MEDIA_BUS_FMT_SBGGR8_1X8)
+    val = ov2659.pdata.link_frequency / 2;
+    else
+    val = ov2659.pdata.link_frequency;
+    ret = v4l2_ctrl_s_ctrl_int64(ov2659.link_frequency, val);
+    if (ret < 0)
+    dev_warn(&client.dev,
+    "failed to set link_frequency rate (%d)\n",
+    ret);
+    }
+    mutex_unlock(&ov2659.lock);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_set_frame_size(ov2659: *mut ov2659) -> c_int {
+    static int ov2659_set_frame_size(struct ov2659 *ov2659)
+    {
+    struct i2c_client *client = ov2659.client;
+    dev_dbg(&client.dev, "%s\n", __func__);
+    return ov2659_write_array(ov2659.client, ov2659.frame_size.regs);
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_set_format(ov2659: *mut ov2659) -> c_int {
+    static int ov2659_set_format(struct ov2659 *ov2659)
+    {
+    struct i2c_client *client = ov2659.client;
+    dev_dbg(&client.dev, "%s\n", __func__);
+    return ov2659_write_array(ov2659.client, ov2659.format_ctrl_regs);
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_s_stream(sd: *mut v4l2_subdev, on: c_int) -> c_int {
+    static int ov2659_s_stream(struct v4l2_subdev *sd, int on)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    struct ov2659 *ov2659 = to_ov2659(sd);
+    let mut ret: c_int = 0;
+    dev_dbg(&client.dev, "%s: on: %d\n", __func__, on);
+    mutex_lock(&ov2659.lock);
+    on = !!on;
+    if (ov2659.streaming == on)
+    goto unlock;
+    if (!on) {
+// Stop Streaming Sequence
+    ov2659_set_streaming(ov2659, 0);
+    ov2659.streaming = on;
+    pm_runtime_put(&client.dev);
+    goto unlock;
+    }
+    ret = pm_runtime_resume_and_get(&client.dev);
+    if (ret < 0)
+    goto unlock;
+    ret = ov2659_init(sd, 0);
+    if (!ret)
+    ret = ov2659_set_pixel_clock(ov2659);
+    if (!ret)
+    ret = ov2659_set_frame_size(ov2659);
+    if (!ret)
+    ret = ov2659_set_format(ov2659);
+    if (!ret) {
+    ov2659_set_streaming(ov2659, 1);
+    ov2659.streaming = on;
+    }
+    unlock:
+    mutex_unlock(&ov2659.lock);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_set_test_pattern(ov2659: *mut ov2659, value: c_int) -> c_int {
+    static int ov2659_set_test_pattern(struct ov2659 *ov2659, int value)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(&ov2659.sd);
+    int ret;
+    u8 val;
+    ret = ov2659_read(client, REG_PRE_ISP_CTRL00, &val);
+    if (ret < 0)
+    return ret;
+    switch (value) {
+    case 0:
+    val &= ~TEST_PATTERN_ENABLE;
+    break;
+    case 1:
+    val &= VERTICAL_COLOR_BAR_MASK;
+    val |= TEST_PATTERN_ENABLE;
+    break;
+    }
+    return ov2659_write(client, REG_PRE_ISP_CTRL00, val);
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_s_ctrl(ctrl: *mut v4l2_ctrl) -> c_int {
+    static int ov2659_s_ctrl(struct v4l2_ctrl *ctrl)
+    {
+    struct ov2659 *ov2659 =
+    container_of(ctrl.handler, struct ov2659, ctrls);
+    struct i2c_client *client = ov2659.client;
+// V4L2 controls values will be applied only when power is already up
+    if (!pm_runtime_get_if_in_use(&client.dev))
+    return 0;
+    switch (ctrl.id) {
+    case V4L2_CID_TEST_PATTERN:
+    return ov2659_set_test_pattern(ov2659, ctrl.val);
+    }
+    pm_runtime_put(&client.dev);
+    return 0;
+    }
+    static const struct v4l2_ctrl_ops ov2659_ctrl_ops = {
+    .s_ctrl = ov2659_s_ctrl,
+    };
+    static const char * const ov2659_test_pattern_menu[] = {
+    "Disabled",
+    "Vertical Color Bars",
+    };
+#[no_mangle]
+unsafe extern "C" fn ov2659_power_off(dev: *mut device) -> c_int {
+    static int ov2659_power_off(struct device *dev)
+    {
+    struct i2c_client *client = to_i2c_client(dev);
+    struct v4l2_subdev *sd = i2c_get_clientdata(client);
+    struct ov2659 *ov2659 = to_ov2659(sd);
+    dev_dbg(&client.dev, "%s:\n", __func__);
+    gpiod_set_value(ov2659.pwdn_gpio, 1);
+    clk_disable_unprepare(ov2659.clk);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_power_on(dev: *mut device) -> c_int {
+    static int ov2659_power_on(struct device *dev)
+    {
+    struct i2c_client *client = to_i2c_client(dev);
+    struct v4l2_subdev *sd = i2c_get_clientdata(client);
+    struct ov2659 *ov2659 = to_ov2659(sd);
+    int ret;
+    dev_dbg(&client.dev, "%s:\n", __func__);
+    ret = clk_prepare_enable(ov2659.clk);
+    if (ret) {
+    dev_err(&client.dev, "%s: failed to enable clock\n",
+    __func__);
+    return ret;
+    }
+    gpiod_set_value(ov2659.pwdn_gpio, 0);
+    if (ov2659.resetb_gpio) {
+    gpiod_set_value(ov2659.resetb_gpio, 1);
+    usleep_range(500, 1000);
+    gpiod_set_value(ov2659.resetb_gpio, 0);
+    usleep_range(3000, 5000);
+    }
+    return 0;
+    }
+// -----------------------------------------------------------------------------
+// V4L2 subdev internal operations
+//
+#[no_mangle]
+unsafe extern "C" fn ov2659_open(sd: *mut v4l2_subdev, fh: *mut v4l2_subdev_fh) -> c_int {
+    static int ov2659_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    struct v4l2_mbus_framefmt *format =
+    v4l2_subdev_state_get_format(fh.state, 0);
+    dev_dbg(&client.dev, "%s:\n", __func__);
+    ov2659_get_default_format(format);
+    return 0;
+    }
+    static const struct v4l2_subdev_core_ops ov2659_subdev_core_ops = {
+    .log_status = v4l2_ctrl_subdev_log_status,
+    .subscribe_event = v4l2_ctrl_subdev_subscribe_event,
+    .unsubscribe_event = v4l2_event_subdev_unsubscribe,
+    };
+    static const struct v4l2_subdev_video_ops ov2659_subdev_video_ops = {
+    .s_stream = ov2659_s_stream,
+    };
+    static const struct v4l2_subdev_pad_ops ov2659_subdev_pad_ops = {
+    .enum_mbus_code = ov2659_enum_mbus_code,
+    .enum_frame_size = ov2659_enum_frame_sizes,
+    .get_fmt = ov2659_get_fmt,
+    .set_fmt = ov2659_set_fmt,
+    };
+    static const struct v4l2_subdev_ops ov2659_subdev_ops = {
+    .core  = &ov2659_subdev_core_ops,
+    .video = &ov2659_subdev_video_ops,
+    .pad   = &ov2659_subdev_pad_ops,
+    };
+    static const struct v4l2_subdev_internal_ops ov2659_subdev_internal_ops = {
+    .open = ov2659_open,
+    };
+#[no_mangle]
+unsafe extern "C" fn ov2659_detect(sd: *mut v4l2_subdev) -> c_int {
+    static int ov2659_detect(struct v4l2_subdev *sd)
+    {
+    struct i2c_client *client = v4l2_get_subdevdata(sd);
+    let mut pid: u8 = 0;
+    let mut ver: u8 = 0;
+    int ret;
+    dev_dbg(&client.dev, "%s:\n", __func__);
+    ret = ov2659_write(client, REG_SOFTWARE_RESET, 0x01);
+    if (ret != 0) {
+    dev_err(&client.dev, "Sensor soft reset failed\n");
+    return -ENODEV;
+    }
+    usleep_range(1000, 2000);
+// Check sensor revision
+    ret = ov2659_read(client, REG_SC_CHIP_ID_H, &pid);
+    if (!ret)
+    ret = ov2659_read(client, REG_SC_CHIP_ID_L, &ver);
+    if (!ret) {
+    unsigned short id;
+    id = OV265X_ID(pid, ver);
+    if (id != OV2659_ID) {
+    dev_err(&client.dev,
+    "Sensor detection failed (%04X)\n", id);
+    ret = -ENODEV;
+    } else {
+    dev_info(&client.dev, "Found OV%04X sensor\n", id);
+    }
+    }
+    return ret;
+    }
+    static struct ov2659_platform_data *
+    ov2659_get_pdata(struct i2c_client *client)
+    {
+    struct ov2659_platform_data *pdata;
+    let mut bus_cfg: v4l2_fwnode_endpoint = { .bus_type = 0 };
+    struct device_node *endpoint;
+    int ret;
+    if (!IS_ENABLED(CONFIG_OF) || !client.dev.of_node)
+    return client.dev.platform_data;
+    endpoint = of_graph_get_endpoint_by_regs(client.dev.of_node, 0, -1);
+    if (!endpoint)
+    return core::ptr::null_mut();
+    ret = v4l2_fwnode_endpoint_alloc_parse(of_fwnode_handle(endpoint),
+    &bus_cfg);
+    if (ret) {
+    pdata = core::ptr::null_mut();
+    goto done;
+    }
+    pdata = devm_kzalloc(&client.dev, sizeof(*pdata), GFP_KERNEL);
+    if (!pdata)
+    goto done;
+    if (!bus_cfg.nr_of_link_frequencies) {
+    dev_err(&client.dev,
+    "link-frequencies property not found or too many\n");
+    pdata = core::ptr::null_mut();
+    goto done;
+    }
+    pdata.link_frequency = bus_cfg.link_frequencies[0];
+    done:
+    v4l2_fwnode_endpoint_free(&bus_cfg);
+    of_node_put(endpoint);
+    return pdata;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_probe(client: *mut i2c_client) -> c_int {
+    static int ov2659_probe(struct i2c_client *client)
+    {
+    const struct ov2659_platform_data *pdata = ov2659_get_pdata(client);
+    struct v4l2_subdev *sd;
+    struct ov2659 *ov2659;
+    int ret;
+    if (!pdata) {
+    dev_err(&client.dev, "platform data not specified\n");
+    return -EINVAL;
+    }
+    ov2659 = devm_kzalloc(&client.dev, sizeof(*ov2659), GFP_KERNEL);
+    if (!ov2659)
+    return -ENOMEM;
+    ov2659.pdata = pdata;
+    ov2659.client = client;
+    ov2659.clk = devm_v4l2_sensor_clk_get(&client.dev, "xvclk");
+    if (IS_ERR(ov2659.clk))
+    return dev_err_probe(&client.dev, PTR_ERR(ov2659.clk),
+    "failed to get xvclk\n");
+    ov2659.xvclk_frequency = clk_get_rate(ov2659.clk);
+    if (ov2659.xvclk_frequency < 6000000 ||
+    ov2659.xvclk_frequency > 27000000)
+    return -EINVAL;
+// Optional gpio don't fail if not present
+    ov2659.pwdn_gpio = devm_gpiod_get_optional(&client.dev, "powerdown",
+    GPIOD_OUT_LOW);
+    if (IS_ERR(ov2659.pwdn_gpio))
+    return PTR_ERR(ov2659.pwdn_gpio);
+// Optional gpio don't fail if not present
+    ov2659.resetb_gpio = devm_gpiod_get_optional(&client.dev, "reset",
+    GPIOD_OUT_HIGH);
+    if (IS_ERR(ov2659.resetb_gpio))
+    return PTR_ERR(ov2659.resetb_gpio);
+    v4l2_ctrl_handler_init(&ov2659.ctrls, 2);
+    ov2659.link_frequency =
+    v4l2_ctrl_new_std(&ov2659.ctrls, &ov2659_ctrl_ops,
+    V4L2_CID_PIXEL_RATE,
+    pdata.link_frequency / 2,
+    pdata.link_frequency, 1,
+    pdata.link_frequency);
+    v4l2_ctrl_new_std_menu_items(&ov2659.ctrls, &ov2659_ctrl_ops,
+    V4L2_CID_TEST_PATTERN,
+    ARRAY_SIZE(ov2659_test_pattern_menu) - 1,
+    0, 0, ov2659_test_pattern_menu);
+    if (ov2659.ctrls.error) {
+    dev_err(&client.dev, "%s: control initialization error %d\n",
+    __func__, ov2659.ctrls.error);
+    v4l2_ctrl_handler_free(&ov2659.ctrls);
+    return  ov2659.ctrls.error;
+    }
+    ov2659.sd.ctrl_handler = &ov2659.ctrls;
+    sd = &ov2659.sd;
+    client.flags |= I2C_CLIENT_SCCB;
+    v4l2_i2c_subdev_init(sd, client, &ov2659_subdev_ops);
+    sd.internal_ops = &ov2659_subdev_internal_ops;
+    sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE |
+    V4L2_SUBDEV_FL_HAS_EVENTS;
+    ov2659.pad.flags = MEDIA_PAD_FL_SOURCE;
+    sd.entity.function = MEDIA_ENT_F_CAM_SENSOR;
+    ret = media_entity_pads_init(&sd.entity, 1, &ov2659.pad);
+    if (ret < 0) {
+    v4l2_ctrl_handler_free(&ov2659.ctrls);
+    return ret;
+    }
+    mutex_init(&ov2659.lock);
+    ov2659_get_default_format(&ov2659.format);
+    ov2659.frame_size = &ov2659_framesizes[2];
+    ov2659.format_ctrl_regs = ov2659_formats[0].format_ctrl_regs;
+    ret = ov2659_power_on(&client.dev);
+    if (ret < 0)
+    goto error;
+    ret = ov2659_detect(sd);
+    if (ret < 0)
+    goto error;
+// Calculate the PLL register value needed
+    ov2659_pll_calc_params(ov2659);
+    ret = v4l2_async_register_subdev(&ov2659.sd);
+    if (ret)
+    goto error;
+    dev_info(&client.dev, "%s sensor driver registered !!\n", sd.name);
+    pm_runtime_set_active(&client.dev);
+    pm_runtime_enable(&client.dev);
+    pm_runtime_idle(&client.dev);
+    return 0;
+    error:
+    v4l2_ctrl_handler_free(&ov2659.ctrls);
+    ov2659_power_off(&client.dev);
+    media_entity_cleanup(&sd.entity);
+    mutex_destroy(&ov2659.lock);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn ov2659_remove(client: *mut i2c_client) {
+    static void ov2659_remove(struct i2c_client *client)
+    {
+    struct v4l2_subdev *sd = i2c_get_clientdata(client);
+    struct ov2659 *ov2659 = to_ov2659(sd);
+    v4l2_ctrl_handler_free(&ov2659.ctrls);
+    v4l2_async_unregister_subdev(sd);
+    media_entity_cleanup(&sd.entity);
+    mutex_destroy(&ov2659.lock);
+    pm_runtime_disable(&client.dev);
+    if (!pm_runtime_status_suspended(&client.dev))
+    ov2659_power_off(&client.dev);
+    pm_runtime_set_suspended(&client.dev);
+    }
+    static const struct dev_pm_ops ov2659_pm_ops = {
+    SET_RUNTIME_PM_OPS(ov2659_power_off, ov2659_power_on, core::ptr::null_mut())
+    };
+    static const struct i2c_device_id ov2659_id[] = {
+    { .name = "ov2659" },
+    { /* sentinel */ }
+    };
+    MODULE_DEVICE_TABLE(i2c, ov2659_id);
+
+    static const struct of_device_id ov2659_of_match[] = {
+    { .compatible = "ovti,ov2659", },
+    { /* sentinel */ },
+    };
+    MODULE_DEVICE_TABLE(of, ov2659_of_match);
+
+    static struct i2c_driver ov2659_i2c_driver = {
+    .driver = {
+    .name	= DRIVER_NAME,
+    .pm	= &ov2659_pm_ops,
+    .of_match_table = of_match_ptr(ov2659_of_match),
+    },
+    .probe		= ov2659_probe,
+    .remove		= ov2659_remove,
+    .id_table	= ov2659_id,
+    };
+    module_i2c_driver(ov2659_i2c_driver);
+    MODULE_AUTHOR("Benoit Parrot <bparrot@ti.com>");
+    MODULE_DESCRIPTION("OV2659 CMOS Image Sensor driver");
+    MODULE_LICENSE("GPL v2");

@@ -1,0 +1,67 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/net/netfilter/nf_conntrack_acct.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// (C) 2008 Krzysztof Piotr Oledzki <ole@ans.pl>
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nf_conn_counter {
+    pub packets: core::sync::atomic::AtomicI64,
+    pub bytes: core::sync::atomic::AtomicI64,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nf_conn_acct {
+    pub counter: [nf_conn_counter; IP_CT_DIR_MAX],
+}
+
+extern "C" {
+    pub fn nf_ct_ext_find(_arg: ct, _arg: NF_CT_EXT_ACCT) -> return;
+}
+
+// Check if connection tracking accounting is enabled
+
+// Enable/disable connection tracking accounting
+
+extern "C" {
+    pub fn nf_conntrack_acct_pernet_init(net: *mut net);
+}

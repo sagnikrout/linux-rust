@@ -1,0 +1,99 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/gpu/drm/i915/gt/intel_gt_pm.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: MIT
+//
+// Copyright © 2019 Intel Corporation
+//
+
+extern "C" {
+    pub fn intel_wakeref_is_active(_arg: &gt->wakeref) -> return;
+}
+extern "C" {
+    pub fn intel_wakeref_track(_arg: &gt->wakeref) -> return;
+}
+extern "C" {
+    pub fn intel_wakeref_track(_arg: &gt->wakeref) -> return;
+}
+
+//
+// with_intel_gt_pm_if_awake - if GT is PM awake, get a reference to prevent
+// it to sleep, run some code and then asynchrously put the reference
+// away.
+//
+// @gt: pointer to the gt
+// @wf: pointer to a temporary wakeref.
+//
+
+extern "C" {
+    pub fn intel_wakeref_wait_for_idle(_arg: &gt->wakeref) -> return;
+}
+extern "C" {
+    pub fn intel_gt_pm_init_early(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_pm_init(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_pm_fini(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_suspend_prepare(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_suspend_late(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_resume(gt: *mut intel_gt) -> c_int;
+}
+extern "C" {
+    pub fn intel_gt_resume_early(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_runtime_suspend(gt: *mut intel_gt);
+}
+extern "C" {
+    pub fn intel_gt_runtime_resume(gt: *mut intel_gt) -> c_int;
+}
+extern "C" {
+    pub fn intel_gt_get_awake_time(gt: *const intel_gt) -> ktime_t;
+}
+
+extern "C" {
+    pub fn I915_SELFTEST_ONLY(INTEL_WAKEREF_MOCK_GT: gt->awake ==) -> return;
+}

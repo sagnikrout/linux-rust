@@ -1,0 +1,79 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/trace/events/btrfs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+//
+// First define the enums in the above macros to be exported to userspace via
+// TRACE_DEFINE_ENUM().
+//
+
+//
+// Now redefine the EM and EMe macros to map the enums to the strings that will
+// be printed in the output
+//
+
+pub const BTRFS_FSID_SIZE: c_int = 16;
+
+// file extent item
+
+//
+// The writepage fixup worker deferred a block because this still-running
+// ordered extent covers it.
+//
+// The writepage fixup worker reserved space for a block and set delalloc.
+// Ideally call this while under root->log_mutex (but not always possible).
+//
+// Ideally call this while under root->log_mutex and in the same critical
+// section that calls the btrfs_sync_log_enter() trace event (though it's not
+// always possible).
+//
+
+//
+// For situations when the work is freed, we pass fs_info and a tag that matches
+// the address of the work structure so it can be paired with the scheduling
+// event. DO NOT add anything here that dereferences wtag.
+//
+
+//
+// For type output, we need to output things like "DATA1"
+// (the first data stripe), "DATA2" (the second data stripe),
+// "PQ1" (P stripe),"PQ2" (Q stripe), "REPLACE0" (replace target device).
+//
+
+// This part must be outside protection

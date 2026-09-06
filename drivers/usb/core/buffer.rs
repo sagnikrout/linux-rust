@@ -1,0 +1,220 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/usb/core/buffer.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// DMA memory management for framework level HCD code (hc_driver)
+//
+// This implementation plugs in through generic "usb_bus" level methods,
+// and should work with all USB controllers, regardless of bus type.
+//
+// Released under the GPLv2 only.
+//
+
+//
+// DMA-Coherent Buffers
+//
+// FIXME tune these based on pool statistics ...
+    static size_t pool_max[HCD_BUFFER_POOLS] = {
+    32, 128, 512, 2048,
+    };
+#[no_mangle]
+pub unsafe extern "C" fn usb_init_pool_max() -> void __init {
+    void __init usb_init_pool_max(void)
+    {
+//
+// The pool_max values must never be smaller than
+// ARCH_DMA_MINALIGN.
+//
+    if (ARCH_DMA_MINALIGN <= 32)
+    ;			/* Original value is okay */
+#[no_mangle]
+pub unsafe extern "C" fn if(64: ARCH_DMA_MINALIGN <=) -> else {
+    else if (ARCH_DMA_MINALIGN <= 64)
+    pool_max[0] = 64;
+#[no_mangle]
+pub unsafe extern "C" fn if(128: ARCH_DMA_MINALIGN <=) -> else {
+    else if (ARCH_DMA_MINALIGN <= 128)
+    pool_max[0] = 0;	/* Don't use this pool */
+    else
+    BUILD_BUG();		/* We don't allow this */
+    }
+// SETUP primitives
+//
+// hcd_buffer_create - initialize buffer pools
+// @hcd: the bus whose buffer pools are to be initialized
+//
+// Context: task context, might sleep
+//
+// Call this as part of initializing a host controller that uses the dma
+// memory allocators.  It initializes some pools of dma-coherent memory that
+// will be shared by all drivers using that controller.
+//
+// Call hcd_buffer_destroy() to clean up after using those pools.
+//
+// Return: 0 if successful. A negative errno value otherwise.
+//
+#[no_mangle]
+pub unsafe extern "C" fn hcd_buffer_create(hcd: *mut usb_hcd) -> c_int {
+    int hcd_buffer_create(struct usb_hcd *hcd)
+    {
+    char		name[16];
+    int		i, size;
+    if (hcd.localmem_pool || !hcd_uses_dma(hcd))
+    return 0;
+    for (i = 0; i < HCD_BUFFER_POOLS; i++) {
+    size = pool_max[i];
+    if (!size)
+    continue;
+    snprintf(name, sizeof(name), "buffer-%d", size);
+    hcd.pool[i] = dma_pool_create(name, hcd.self.sysdev,
+    size, size, 0);
+    if (!hcd.pool[i]) {
+    hcd_buffer_destroy(hcd);
+    return -ENOMEM;
+    }
+    }
+    return 0;
+    }
+//
+// hcd_buffer_destroy - deallocate buffer pools
+// @hcd: the bus whose buffer pools are to be destroyed
+//
+// Context: task context, might sleep
+//
+// This frees the buffer pools created by hcd_buffer_create().
+//
+#[no_mangle]
+pub unsafe extern "C" fn hcd_buffer_destroy(hcd: *mut usb_hcd) {
+    void hcd_buffer_destroy(struct usb_hcd *hcd)
+    {
+    int i;
+    if (!IS_ENABLED(CONFIG_HAS_DMA))
+    return;
+    for (i = 0; i < HCD_BUFFER_POOLS; i++) {
+    dma_pool_destroy(hcd.pool[i]);
+    hcd.pool[i] = core::ptr::null_mut();
+    }
+    }
+// sometimes alloc/free could use kmalloc with GFP_DMA, for
+// better sharing and to leverage mm/slab.c intelligence.
+//
+    void *hcd_buffer_alloc(
+    struct usb_bus		*bus,
+    size_t			size,
+    gfp_t			mem_flags,
+    dma_addr_t		*dma
+    )
+    {
+    struct usb_hcd		*hcd = bus_to_hcd(bus);
+    int			i;
+    if (size == 0)
+    return core::ptr::null_mut();
+    if (hcd.localmem_pool)
+    return gen_pool_dma_alloc(hcd.localmem_pool, size, dma);
+// some USB hosts just use PIO
+    if (!hcd_uses_dma(hcd)) {
+// dma = ~(dma_addr_t) 0;
+    return kmalloc(size, mem_flags);
+    }
+    for (i = 0; i < HCD_BUFFER_POOLS; i++) {
+    if (size <= pool_max[i])
+    return dma_pool_alloc(hcd.pool[i], mem_flags, dma);
+    }
+    return dma_alloc_coherent(hcd.self.sysdev, size, dma, mem_flags);
+    }
+    void hcd_buffer_free(
+    struct usb_bus		*bus,
+    size_t			size,
+    void			*addr,
+    dma_addr_t		dma
+    )
+    {
+    struct usb_hcd		*hcd = bus_to_hcd(bus);
+    int			i;
+    if (!addr)
+    return;
+    if (hcd.localmem_pool) {
+    gen_pool_free(hcd.localmem_pool, (unsigned long)addr, size);
+    return;
+    }
+    if (!hcd_uses_dma(hcd)) {
+    kfree(addr);
+    return;
+    }
+    for (i = 0; i < HCD_BUFFER_POOLS; i++) {
+    if (size <= pool_max[i]) {
+    dma_pool_free(hcd.pool[i], addr, dma);
+    return;
+    }
+    }
+    dma_free_coherent(hcd.self.sysdev, size, addr, dma);
+    }
+    void *hcd_buffer_alloc_pages(struct usb_hcd *hcd,
+    size_t size, gfp_t mem_flags, dma_addr_t *dma)
+    {
+    if (size == 0)
+    return core::ptr::null_mut();
+    if (hcd.localmem_pool)
+    return gen_pool_dma_alloc_align(hcd.localmem_pool,
+    size, dma, PAGE_SIZE);
+// some USB hosts just use PIO
+    if (!hcd_uses_dma(hcd)) {
+// dma = DMA_MAPPING_ERROR;
+    return (void *)__get_free_pages(mem_flags,
+    get_order(size));
+    }
+    return dma_alloc_coherent(hcd.self.sysdev,
+    size, dma, mem_flags);
+    }
+    void hcd_buffer_free_pages(struct usb_hcd *hcd,
+    size_t size, void *addr, dma_addr_t dma)
+    {
+    if (!addr)
+    return;
+    if (hcd.localmem_pool) {
+    gen_pool_free(hcd.localmem_pool,
+    (unsigned long)addr, size);
+    return;
+    }
+    if (!hcd_uses_dma(hcd)) {
+    free_pages((unsigned long)addr, get_order(size));
+    return;
+    }
+    dma_free_coherent(hcd.self.sysdev, size, addr, dma);
+    }

@@ -1,0 +1,121 @@
+//! Automatically rewritten from C to Rust
+//! Source: crypto/lzo.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Cryptographic API.
+//
+
+    static void *lzo_alloc_ctx(void)
+    {
+    void *ctx;
+    ctx = kvmalloc(LZO1X_MEM_COMPRESS, GFP_KERNEL);
+    if (!ctx)
+    return ERR_PTR(-ENOMEM);
+    return ctx;
+    }
+#[no_mangle]
+unsafe extern "C" fn lzo_free_ctx(ctx: *mut c_void) {
+    static void lzo_free_ctx(void *ctx)
+    {
+    kvfree(ctx);
+    }
+    static int __lzo_compress(const u8 *src, unsigned int slen,
+    u8 *dst, unsigned int *dlen, void *ctx)
+    {
+    size_t tmp_len = *dlen; /* size_t(ulong) <. uint on 64 bit */
+    int err;
+    err = lzo1x_1_compress_safe(src, slen, dst, &tmp_len, ctx);
+    if (err != LZO_E_OK)
+    return -EINVAL;
+// dlen = tmp_len;
+    return 0;
+    }
+    static int lzo_scompress(struct crypto_scomp *tfm, const u8 *src,
+    unsigned int slen, u8 *dst, unsigned int *dlen,
+    void *ctx)
+    {
+    return __lzo_compress(src, slen, dst, dlen, ctx);
+    }
+    static int __lzo_decompress(const u8 *src, unsigned int slen,
+    u8 *dst, unsigned int *dlen)
+    {
+    int err;
+    size_t tmp_len = *dlen; /* size_t(ulong) <. uint on 64 bit */
+    err = lzo1x_decompress_safe(src, slen, dst, &tmp_len);
+    if (err != LZO_E_OK)
+    return -EINVAL;
+// dlen = tmp_len;
+    return 0;
+    }
+    static int lzo_sdecompress(struct crypto_scomp *tfm, const u8 *src,
+    unsigned int slen, u8 *dst, unsigned int *dlen,
+    void *ctx)
+    {
+    return __lzo_decompress(src, slen, dst, dlen);
+    }
+    static struct scomp_alg scomp = {
+    .streams		= {
+    .alloc_ctx	= lzo_alloc_ctx,
+    .free_ctx	= lzo_free_ctx,
+    },
+    .compress		= lzo_scompress,
+    .decompress		= lzo_sdecompress,
+    .base			= {
+    .cra_name	= "lzo",
+    .cra_driver_name = "lzo-scomp",
+    .cra_module	 = THIS_MODULE,
+    }
+    };
+#[no_mangle]
+unsafe extern "C" fn lzo_mod_init() -> int __init {
+    static int __init lzo_mod_init(void)
+    {
+    return crypto_register_scomp(&scomp);
+    }
+#[no_mangle]
+unsafe extern "C" fn lzo_mod_fini() -> void __exit {
+    static void __exit lzo_mod_fini(void)
+    {
+    crypto_unregister_scomp(&scomp);
+    }
+    module_init(lzo_mod_init);
+    module_exit(lzo_mod_fini);
+    MODULE_LICENSE("GPL");
+    MODULE_DESCRIPTION("LZO Compression Algorithm");
+    MODULE_ALIAS_CRYPTO("lzo");

@@ -1,0 +1,67 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/memfd.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+extern "C" {
+    pub fn memfd_fcntl(file: *mut file, cmd: c_uint, arg: c_uint) -> c_long;
+}
+//
+// Check for any existing seals on mmap, return an error if access is denied due
+// to sealing, or 0 otherwise.
+//
+// We also update VMA flags if appropriate by manipulating the VMA flags pointed
+// to by vma_flags_ptr.
+//
+extern "C" {
+    pub fn memfd_check_seals_mmap(file: *mut file, vma_flags_ptr: *mut vma_flags_t) -> c_int;
+}
+extern "C" {
+    pub fn memfd_get_seals(file: *mut file) -> c_int;
+}
+extern "C" {
+    pub fn memfd_add_seals(file: *mut file, seals: c_uint) -> c_int;
+}
+
+extern "C" {
+    pub fn ERR_PTR(_arg: -EINVAL) -> return;
+}
+extern "C" {
+    pub fn ERR_PTR(_arg: -EINVAL) -> return;
+}
+

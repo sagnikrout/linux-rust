@@ -1,0 +1,1694 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/kernel/acpi/boot.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// boot.c - Architecture-Specific Low-Level ACPI Boot Support
+//
+// Copyright (C) 2001, 2002 Paul Diefenbaugh <paul.s.diefenbaugh@intel.com>
+// Copyright (C) 2001 Jun Nakajima <jun.nakajima@intel.com>
+//
+
+    let mut acpi_force: static int __initdata = 0;
+    int acpi_disabled;
+    EXPORT_SYMBOL(acpi_disabled);
+
+    int acpi_noirq;				/* skip ACPI IRQ initialization */
+    static int acpi_nobgrt;			/* skip ACPI BGRT */
+    static int acpi_spcr_add __initdata;	/* add SPCR-provided console */
+    int acpi_pci_disabled;			/* skip ACPI PCI scan and IRQ initialization */
+    EXPORT_SYMBOL(acpi_pci_disabled);
+    int acpi_lapic;
+    int acpi_ioapic;
+    int acpi_strict;
+    int acpi_disable_cmcff;
+    bool acpi_int_src_ovr[NR_IRQS_LEGACY];
+// ACPI SCI override configuration
+    u8 acpi_sci_flags __initdata;
+    let mut __initdata: u32 acpi_sci_override_gsi = INVALID_ACPI_IRQ;
+    int acpi_skip_timer_override __initdata;
+    int acpi_use_timer_override __initdata;
+    int acpi_fix_pin2_polarity __initdata;
+
+    let mut __initdata: static u64 acpi_lapic_addr = APIC_DEFAULT_PHYS_BASE;
+    static bool has_lapic_cpus __initdata;
+    static bool acpi_support_online_capable;
+
+//
+// Locks related to IOAPIC hotplug
+// Hotplug side:
+// ->device_hotplug_lock
+// ->acpi_ioapic_lock
+// ->ioapic_lock
+// Interrupt mapping side:
+// ->acpi_ioapic_lock
+// ->ioapic_mutex
+// ->ioapic_lock
+//
+    static DEFINE_MUTEX(acpi_ioapic_lock);
+
+// --------------------------------------------------------------------------
+    Boot-time Configuration
+    -------------------------------------------------------------------------- */
+//
+// The default interrupt routing model is PIC (8259).  This gets
+// overridden if IOAPICs are enumerated (below).
+//
+    let mut acpi_irq_model: enum acpi_irq_model_id = ACPI_IRQ_MODEL_PIC;
+//
+// ISA irqs by default are the first 16 gsis but can be
+// any gsi as specified by an interrupt source override.
+//
+    static u32 isa_irq_to_gsi[NR_IRQS_LEGACY] __read_mostly = {
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+    };
+//
+// This is just a simple wrapper around early_memremap(),
+// with sanity checks for phys == 0 and size == 0.
+//
+    void __init __iomem *__acpi_map_table(unsigned long phys, unsigned long size)
+    {
+    if (!phys || !size)
+    return core::ptr::null_mut();
+    return early_memremap(phys, size);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __acpi_unmap_table(map: *mut void __iomem, size: c_ulong) -> void __init {
+    void __init __acpi_unmap_table(void __iomem *map, unsigned long size)
+    {
+    if (!map || !size)
+    return;
+    early_memunmap(map, size);
+    }
+
+#[no_mangle]
+unsafe extern "C" fn acpi_parse_madt(table: *mut acpi_table_header) -> int __init {
+    static int __init acpi_parse_madt(struct acpi_table_header *table)
+    {
+    struct acpi_table_madt *madt = core::ptr::null_mut();
+    if (!boot_cpu_has(X86_FEATURE_APIC))
+    return -EINVAL;
+    madt = (struct acpi_table_madt *)table;
+    if (!madt) {
+    pr_warn("Unable to map MADT\n");
+    return -ENODEV;
+    }
+    if (madt.address) {
+    acpi_lapic_addr = (u64) madt.address;
+    pr_debug("Local APIC address 0x%08x\n", madt.address);
+    }
+    if (madt.flags & ACPI_MADT_PCAT_COMPAT)
+    legacy_pic_pcat_compat();
+// ACPI 6.3 and newer support the online capable bit.
+    if (acpi_gbl_FADT.header.revision > 6 ||
+    (acpi_gbl_FADT.header.revision == 6 &&
+    acpi_gbl_FADT.minor_revision >= 3))
+    acpi_support_online_capable = true;
+    default_acpi_madt_oem_check(madt.header.oem_id,
+    madt.header.oem_table_id);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn acpi_is_processor_usable(lapic_flags: u32) -> bool __init {
+    static bool __init acpi_is_processor_usable(u32 lapic_flags)
+    {
+    if (lapic_flags & ACPI_MADT_ENABLED)
+    return true;
+    if (acpi_support_online_capable)
+    return lapic_flags & ACPI_MADT_ONLINE_CAPABLE;
+//
+// QEMU expects legacy "Enabled=0" LAPIC entries to be counted as usable
+// in order to support CPU hotplug in guests.
+//
+    return !hypervisor_is_type(X86_HYPER_NATIVE);
+    }
+    static int __init
+    acpi_parse_x2apic(union acpi_subtable_headers *header, const unsigned long end)
+    {
+    struct acpi_madt_local_x2apic *processor = core::ptr::null_mut();
+
+    u32 apic_id;
+    u8 enabled;
+
+    processor = (struct acpi_madt_local_x2apic *)header;
+    if (BAD_MADT_ENTRY(processor, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+
+    apic_id = processor.local_apic_id;
+    enabled = processor.lapic_flags & ACPI_MADT_ENABLED;
+// Ignore invalid ID
+    if (apic_id == 0xffffffff)
+    return 0;
+// don't register processors that cannot be onlined
+    if (!acpi_is_processor_usable(processor.lapic_flags))
+    return 0;
+//
+// According to https://uefi.org/specs/ACPI/6.5/05_ACPI_Software_Programming_Model.html#processor-local-x2apic-structure
+// when MADT provides both valid LAPIC and x2APIC entries, the APIC ID
+// in x2APIC must be equal or greater than 0xff.
+//
+    if (has_lapic_cpus && apic_id < 0xff)
+    return 0;
+//
+// We need to register disabled CPU as well to permit
+// counting disabled CPUs. This allows us to size
+// cpus_possible_map more accurately, to permit
+// to not preallocating memory for all NR_CPUS
+// when we use CPU hotplug.
+//
+    if (!apic_id_valid(apic_id)) {
+    if (enabled)
+    pr_warn("x2apic entry ignored\n");
+    return 0;
+    }
+    topology_register_apic(apic_id, processor.uid, enabled);
+
+    pr_warn("x2apic entry ignored\n");
+
+    return 0;
+    }
+    static int __init
+    acpi_check_lapic(union acpi_subtable_headers *header, const unsigned long end)
+    {
+    struct acpi_madt_local_apic *processor = core::ptr::null_mut();
+    processor = (struct acpi_madt_local_apic *)header;
+    if (BAD_MADT_ENTRY(processor, end))
+    return -EINVAL;
+// Ignore invalid ID
+    if (processor.id == 0xff)
+    return 0;
+// Ignore processors that can not be onlined
+    if (!acpi_is_processor_usable(processor.lapic_flags))
+    return 0;
+    has_lapic_cpus = true;
+    return 0;
+    }
+    static int __init
+    acpi_parse_lapic(union acpi_subtable_headers * header, const unsigned long end)
+    {
+    struct acpi_madt_local_apic *processor = core::ptr::null_mut();
+    processor = (struct acpi_madt_local_apic *)header;
+    if (BAD_MADT_ENTRY(processor, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+// Ignore invalid ID
+    if (processor.id == 0xff)
+    return 0;
+// don't register processors that can not be onlined
+    if (!acpi_is_processor_usable(processor.lapic_flags))
+    return 0;
+//
+// We need to register disabled CPU as well to permit
+// counting disabled CPUs. This allows us to size
+// cpus_possible_map more accurately, to permit
+// to not preallocating memory for all NR_CPUS
+// when we use CPU hotplug.
+//
+    topology_register_apic(processor.id,	/* APIC ID */
+    processor.processor_id, /* ACPI ID */
+    processor.lapic_flags & ACPI_MADT_ENABLED);
+    return 0;
+    }
+    static int __init
+    acpi_parse_sapic(union acpi_subtable_headers *header, const unsigned long end)
+    {
+    struct acpi_madt_local_sapic *processor = core::ptr::null_mut();
+    processor = (struct acpi_madt_local_sapic *)header;
+    if (BAD_MADT_ENTRY(processor, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+    topology_register_apic((processor.id << 8) | processor.eid,/* APIC ID */
+    processor.processor_id, /* ACPI ID */
+    processor.lapic_flags & ACPI_MADT_ENABLED);
+    return 0;
+    }
+    static int __init
+    acpi_parse_lapic_addr_ovr(union acpi_subtable_headers * header,
+    const unsigned long end)
+    {
+    struct acpi_madt_local_apic_override *lapic_addr_ovr = core::ptr::null_mut();
+    lapic_addr_ovr = (struct acpi_madt_local_apic_override *)header;
+    if (BAD_MADT_ENTRY(lapic_addr_ovr, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+    acpi_lapic_addr = lapic_addr_ovr.address;
+    return 0;
+    }
+    static int __init
+    acpi_parse_x2apic_nmi(union acpi_subtable_headers *header,
+    const unsigned long end)
+    {
+    struct acpi_madt_local_x2apic_nmi *x2apic_nmi = core::ptr::null_mut();
+    x2apic_nmi = (struct acpi_madt_local_x2apic_nmi *)header;
+    if (BAD_MADT_ENTRY(x2apic_nmi, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+    if (x2apic_nmi.lint != 1)
+    pr_warn("NMI not connected to LINT 1!\n");
+    return 0;
+    }
+    static int __init
+    acpi_parse_lapic_nmi(union acpi_subtable_headers * header, const unsigned long end)
+    {
+    struct acpi_madt_local_apic_nmi *lapic_nmi = core::ptr::null_mut();
+    lapic_nmi = (struct acpi_madt_local_apic_nmi *)header;
+    if (BAD_MADT_ENTRY(lapic_nmi, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+    if (lapic_nmi.lint != 1)
+    pr_warn("NMI not connected to LINT 1!\n");
+    return 0;
+    }
+
+pub const MP_ISA_BUS: c_int = 0;
+    static int __init mp_register_ioapic_irq(u8 bus_irq, u8 polarity,
+    u8 trigger, u32 gsi);
+    static void __init mp_override_legacy_irq(u8 bus_irq, u8 polarity, u8 trigger,
+    u32 gsi)
+    {
+//
+// Check bus_irq boundary.
+//
+    if (bus_irq >= NR_IRQS_LEGACY) {
+    pr_warn("Invalid bus_irq %u for legacy override\n", bus_irq);
+    return;
+    }
+//
+// TBD: This check is for faulty timer entries, where the override
+// erroneously sets the trigger to level, resulting in a HUGE
+// increase of timer interrupts!
+//
+    if ((bus_irq == 0) && (trigger == 3))
+    trigger = 1;
+    if (mp_register_ioapic_irq(bus_irq, polarity, trigger, gsi) < 0)
+    return;
+//
+// Reset default identity mapping if gsi is also an legacy IRQ,
+// otherwise there will be more than one entry with the same GSI
+// and acpi_isa_irq_to_gsi() may give wrong result.
+//
+    if (gsi < nr_legacy_irqs() && isa_irq_to_gsi[gsi] == gsi)
+    isa_irq_to_gsi[gsi] = INVALID_ACPI_IRQ;
+    isa_irq_to_gsi[bus_irq] = gsi;
+    }
+    static void mp_config_acpi_gsi(struct device *dev, u32 gsi, int trigger,
+    int polarity)
+    {
+
+    struct mpc_intsrc mp_irq;
+    struct pci_dev *pdev;
+    unsigned char number;
+    unsigned int devfn;
+    int ioapic;
+    u8 pin;
+    if (!acpi_ioapic)
+    return;
+    if (!dev || !dev_is_pci(dev))
+    return;
+    pdev = to_pci_dev(dev);
+    number = pdev.bus.number;
+    devfn = pdev.devfn;
+    pin = pdev.pin;
+// print the entry should happen on mptable identically
+    mp_irq.type = MP_INTSRC;
+    mp_irq.irqtype = mp_INT;
+    mp_irq.irqflag = (trigger == ACPI_EDGE_SENSITIVE ? 4 : 0x0c) |
+    (polarity == ACPI_ACTIVE_HIGH ? 1 : 3);
+    mp_irq.srcbus = number;
+    mp_irq.srcbusirq = (((devfn >> 3) & 0x1f) << 2) | ((pin - 1) & 3);
+    ioapic = mp_find_ioapic(gsi);
+    mp_irq.dstapic = mpc_ioapic_id(ioapic);
+    mp_irq.dstirq = mp_find_ioapic_pin(ioapic, gsi);
+    mp_save_irq(&mp_irq);
+
+    }
+    static int __init mp_register_ioapic_irq(u8 bus_irq, u8 polarity,
+    u8 trigger, u32 gsi)
+    {
+    struct mpc_intsrc mp_irq;
+    int ioapic, pin;
+// Convert 'gsi' to 'ioapic.pin'(INTIN#)
+    ioapic = mp_find_ioapic(gsi);
+    if (ioapic < 0) {
+    pr_warn("Failed to find ioapic for gsi : %u\n", gsi);
+    return ioapic;
+    }
+    pin = mp_find_ioapic_pin(ioapic, gsi);
+    mp_irq.type = MP_INTSRC;
+    mp_irq.irqtype = mp_INT;
+    mp_irq.irqflag = (trigger << 2) | polarity;
+    mp_irq.srcbus = MP_ISA_BUS;
+    mp_irq.srcbusirq = bus_irq;
+    mp_irq.dstapic = mpc_ioapic_id(ioapic);
+    mp_irq.dstirq = pin;
+    mp_save_irq(&mp_irq);
+    return 0;
+    }
+    static int __init
+    acpi_parse_ioapic(union acpi_subtable_headers * header, const unsigned long end)
+    {
+    struct acpi_madt_io_apic *ioapic = core::ptr::null_mut();
+    struct ioapic_domain_cfg cfg = {
+    .type = IOAPIC_DOMAIN_DYNAMIC,
+    .ops = &mp_ioapic_irqdomain_ops,
+    };
+    ioapic = (struct acpi_madt_io_apic *)header;
+    if (BAD_MADT_ENTRY(ioapic, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+// Statically assign IRQ numbers for IOAPICs hosting legacy IRQs
+    if (ioapic.global_irq_base < nr_legacy_irqs())
+    cfg.type = IOAPIC_DOMAIN_LEGACY;
+    mp_register_ioapic(ioapic.id, ioapic.address, ioapic.global_irq_base,
+    &cfg);
+    return 0;
+    }
+//
+// Parse Interrupt Source Override for the ACPI SCI
+//
+#[no_mangle]
+unsafe extern "C" fn acpi_sci_ioapic_setup(bus_irq: u8, polarity: u16, trigger: u16, gsi: u32) -> void __init {
+    static void __init acpi_sci_ioapic_setup(u8 bus_irq, u16 polarity, u16 trigger, u32 gsi)
+    {
+    if (trigger == 0)	/* compatible SCI trigger is level */
+    trigger = 3;
+    if (polarity == 0)	/* compatible SCI polarity is low */
+    polarity = 3;
+// Command-line over-ride via acpi_sci=
+    if (acpi_sci_flags & ACPI_MADT_TRIGGER_MASK)
+    trigger = (acpi_sci_flags & ACPI_MADT_TRIGGER_MASK) >> 2;
+    if (acpi_sci_flags & ACPI_MADT_POLARITY_MASK)
+    polarity = acpi_sci_flags & ACPI_MADT_POLARITY_MASK;
+    if (bus_irq < NR_IRQS_LEGACY)
+    mp_override_legacy_irq(bus_irq, polarity, trigger, gsi);
+    else
+    mp_register_ioapic_irq(bus_irq, polarity, trigger, gsi);
+    acpi_penalize_sci_irq(bus_irq, trigger, polarity);
+//
+// stash over-ride to indicate we've been here
+// and for later update of acpi_gbl_FADT
+//
+    acpi_sci_override_gsi = gsi;
+    return;
+    }
+    static int __init
+    acpi_parse_int_src_ovr(union acpi_subtable_headers * header,
+    const unsigned long end)
+    {
+    struct acpi_madt_interrupt_override *intsrc = core::ptr::null_mut();
+    intsrc = (struct acpi_madt_interrupt_override *)header;
+    if (BAD_MADT_ENTRY(intsrc, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+    if (intsrc.source_irq < NR_IRQS_LEGACY)
+    acpi_int_src_ovr[intsrc.source_irq] = true;
+    if (intsrc.source_irq == acpi_gbl_FADT.sci_interrupt) {
+    acpi_sci_ioapic_setup(intsrc.source_irq,
+    intsrc.inti_flags & ACPI_MADT_POLARITY_MASK,
+    (intsrc.inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2,
+    intsrc.global_irq);
+    return 0;
+    }
+    if (intsrc.source_irq == 0) {
+    if (acpi_skip_timer_override) {
+    pr_warn("BIOS IRQ0 override ignored.\n");
+    return 0;
+    }
+    if ((intsrc.global_irq == 2) && acpi_fix_pin2_polarity
+    && (intsrc.inti_flags & ACPI_MADT_POLARITY_MASK)) {
+    intsrc.inti_flags &= ~ACPI_MADT_POLARITY_MASK;
+    pr_warn("BIOS IRQ0 pin2 override: forcing polarity to high active.\n");
+    }
+    }
+    mp_override_legacy_irq(intsrc.source_irq,
+    intsrc.inti_flags & ACPI_MADT_POLARITY_MASK,
+    (intsrc.inti_flags & ACPI_MADT_TRIGGER_MASK) >> 2,
+    intsrc.global_irq);
+    return 0;
+    }
+    static int __init
+    acpi_parse_nmi_src(union acpi_subtable_headers * header, const unsigned long end)
+    {
+    struct acpi_madt_nmi_source *nmi_src = core::ptr::null_mut();
+    nmi_src = (struct acpi_madt_nmi_source *)header;
+    if (BAD_MADT_ENTRY(nmi_src, end))
+    return -EINVAL;
+    acpi_table_print_madt_entry(&header.common);
+// TBD: Support nimsrc entries?
+    return 0;
+    }
+
+//
+// acpi_pic_sci_set_trigger()
+//
+// use ELCR to set PIC-mode trigger type for SCI
+//
+// If a PIC-mode SCI is not recognized or gives spurious IRQ7's
+// it may require Edge Trigger -- use "acpi_sci=edge"
+//
+// Port 0x4d0-4d1 are ELCR1 and ELCR2, the Edge/Level Control Registers
+// for the 8259 PIC.  bit[n] = 1 means irq[n] is Level, otherwise Edge.
+// ELCR1 is IRQs 0-7 (IRQ 0, 1, 2 must be 0)
+// ELCR2 is IRQs 8-15 (IRQ 8, 13 must be 0)
+//
+#[no_mangle]
+pub unsafe extern "C" fn acpi_pic_sci_set_trigger(irq: c_uint, trigger: u16) -> void __init {
+    void __init acpi_pic_sci_set_trigger(unsigned int irq, u16 trigger)
+    {
+    let mut mask: c_uint = 1 << irq;
+    unsigned int old, new;
+// Real old ELCR mask
+    old = inb(PIC_ELCR1) | (inb(PIC_ELCR2) << 8);
+//
+// If we use ACPI to set PCI IRQs, then we should clear ELCR
+// since we will set it correctly as we enable the PCI irq
+// routing.
+//
+    new = acpi_noirq ? old : 0;
+//
+// Update SCI information in the ELCR, it isn't in the PCI
+// routing tables..
+//
+    switch (trigger) {
+    case 1:		/* Edge - clear */
+    new &= ~mask;
+    break;
+    case 3:		/* Level - set */
+    new |= mask;
+    break;
+    }
+    if (old == new)
+    return;
+    pr_warn("setting ELCR to %04x (from %04x)\n", new, old);
+    outb(new, PIC_ELCR1);
+    outb(new >> 8, PIC_ELCR2);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn acpi_gsi_to_irq(gsi: u32, irqp: *mut c_uint) -> c_int {
+    int acpi_gsi_to_irq(u32 gsi, unsigned int *irqp)
+    {
+    int rc, irq, trigger, polarity;
+    if (acpi_irq_model == ACPI_IRQ_MODEL_PIC) {
+// irqp = gsi;
+    return 0;
+    }
+    rc = acpi_get_override_irq(gsi, &trigger, &polarity);
+    if (rc)
+    return rc;
+    trigger = trigger ? ACPI_LEVEL_SENSITIVE : ACPI_EDGE_SENSITIVE;
+    polarity = polarity ? ACPI_ACTIVE_LOW : ACPI_ACTIVE_HIGH;
+    irq = acpi_register_gsi(core::ptr::null_mut(), gsi, trigger, polarity);
+    if (irq < 0)
+    return irq;
+// irqp = irq;
+    return 0;
+    }
+    EXPORT_SYMBOL_GPL(acpi_gsi_to_irq);
+#[no_mangle]
+pub unsafe extern "C" fn acpi_isa_irq_to_gsi(isa_irq: unsigned, gsi: *mut u32) -> c_int {
+    int acpi_isa_irq_to_gsi(unsigned isa_irq, u32 *gsi)
+    {
+    if (isa_irq < nr_legacy_irqs() &&
+    isa_irq_to_gsi[isa_irq] != INVALID_ACPI_IRQ) {
+// gsi = isa_irq_to_gsi[isa_irq];
+    return 0;
+    }
+    return -1;
+    }
+    static int acpi_register_gsi_pic(struct device *dev, u32 gsi,
+    int trigger, int polarity)
+    {
+
+//
+// Make sure all (legacy) PCI IRQs are set as level-triggered.
+//
+    if (trigger == ACPI_LEVEL_SENSITIVE)
+    elcr_set_level_irq(gsi);
+
+    return gsi;
+    }
+
+    static int acpi_register_gsi_ioapic(struct device *dev, u32 gsi,
+    int trigger, int polarity)
+    {
+    let mut irq: c_int = gsi;
+
+    int node;
+    struct irq_alloc_info info;
+    node = dev ? dev_to_node(dev) : NUMA_NO_NODE;
+    trigger = trigger == ACPI_EDGE_SENSITIVE ? 0 : 1;
+    polarity = polarity == ACPI_ACTIVE_HIGH ? 0 : 1;
+    ioapic_set_alloc_attr(&info, node, trigger, polarity);
+    mutex_lock(&acpi_ioapic_lock);
+    irq = mp_map_gsi_to_irq(gsi, IOAPIC_MAP_ALLOC, &info);
+// Don't set up the ACPI SCI because it's already set up
+    if (irq >= 0 && enable_update_mptable && gsi != acpi_gbl_FADT.sci_interrupt)
+    mp_config_acpi_gsi(dev, gsi, trigger, polarity);
+    mutex_unlock(&acpi_ioapic_lock);
+
+    return irq;
+    }
+#[no_mangle]
+unsafe extern "C" fn acpi_unregister_gsi_ioapic(gsi: u32) {
+    static void acpi_unregister_gsi_ioapic(u32 gsi)
+    {
+
+    int irq;
+    mutex_lock(&acpi_ioapic_lock);
+    irq = mp_map_gsi_to_irq(gsi, 0, core::ptr::null_mut());
+    if (irq > 0)
+    mp_unmap_irq(irq);
+    mutex_unlock(&acpi_ioapic_lock);
+
+    }
+
+    int (*__acpi_register_gsi)(struct device *dev, u32 gsi,
+    int trigger, int polarity) = acpi_register_gsi_pic;
+    void (*__acpi_unregister_gsi)(u32 gsi) = core::ptr::null_mut();
+
+    int (*acpi_suspend_lowlevel)(void) = x86_acpi_suspend_lowlevel;
+
+    int (*acpi_suspend_lowlevel)(void);
+
+//
+// success: return IRQ number (>=0)
+// failure: return < 0
+//
+#[no_mangle]
+pub unsafe extern "C" fn acpi_register_gsi(dev: *mut device, gsi: u32, trigger: c_int, polarity: c_int) -> c_int {
+    int acpi_register_gsi(struct device *dev, u32 gsi, int trigger, int polarity)
+    {
+    return __acpi_register_gsi(dev, gsi, trigger, polarity);
+    }
+    EXPORT_SYMBOL_GPL(acpi_register_gsi);
+#[no_mangle]
+pub unsafe extern "C" fn acpi_unregister_gsi(gsi: u32) {
+    void acpi_unregister_gsi(u32 gsi)
+    {
+    if (__acpi_unregister_gsi)
+    __acpi_unregister_gsi(gsi);
+    }
+    EXPORT_SYMBOL_GPL(acpi_unregister_gsi);
+
+#[no_mangle]
+unsafe extern "C" fn acpi_set_irq_model_ioapic() -> void __init {
+    static void __init acpi_set_irq_model_ioapic(void)
+    {
+    acpi_irq_model = ACPI_IRQ_MODEL_IOAPIC;
+    __acpi_register_gsi = acpi_register_gsi_ioapic;
+    __acpi_unregister_gsi = acpi_unregister_gsi_ioapic;
+    acpi_ioapic = 1;
+    }
+
+//
+// ACPI based hotplug support for CPU
+//
+
+#[no_mangle]
+unsafe extern "C" fn acpi_map_cpu2node(handle: acpi_handle, cpu: c_int, physid: c_int) -> c_int {
+    static int acpi_map_cpu2node(acpi_handle handle, int cpu, int physid)
+    {
+
+    int nid;
+    nid = acpi_get_node(handle);
+    if (nid != NUMA_NO_NODE) {
+    set_apicid_to_node(physid, nid);
+    numa_set_node(cpu, nid);
+    }
+
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn acpi_map_cpu(handle: acpi_handle, physid: phys_cpuid_t, acpi_id: u32, pcpu: *mut c_int) -> c_int {
+    int acpi_map_cpu(acpi_handle handle, phys_cpuid_t physid, u32 acpi_id, int *pcpu)
+    {
+    let mut cpu: c_int = topology_hotplug_apic(physid, acpi_id);
+    if (cpu < 0) {
+    pr_info("Unable to map lapic to logical cpu number\n");
+    return cpu;
+    }
+    acpi_processor_set_pdc(handle);
+    acpi_map_cpu2node(handle, cpu, physid);
+// pcpu = cpu;
+    return 0;
+    }
+    EXPORT_SYMBOL(acpi_map_cpu);
+#[no_mangle]
+pub unsafe extern "C" fn acpi_unmap_cpu(cpu: c_int) -> c_int {
+    int acpi_unmap_cpu(int cpu)
+    {
+
+    set_apicid_to_node(per_cpu(x86_cpu_to_apicid, cpu), NUMA_NO_NODE);
+
+    topology_hotunplug_apic(cpu);
+    return 0;
+    }
+    EXPORT_SYMBOL(acpi_unmap_cpu);
+
+#[no_mangle]
+pub unsafe extern "C" fn acpi_register_ioapic(handle: acpi_handle, phys_addr: u64, gsi_base: u32) -> c_int {
+    int acpi_register_ioapic(acpi_handle handle, u64 phys_addr, u32 gsi_base)
+    {
+    let mut ret: c_int = -ENOSYS;
+
+    int ioapic_id;
+    u64 addr;
+    struct ioapic_domain_cfg cfg = {
+    .type = IOAPIC_DOMAIN_DYNAMIC,
+    .ops = &mp_ioapic_irqdomain_ops,
+    };
+    ioapic_id = acpi_get_ioapic_id(handle, gsi_base, &addr);
+    if (ioapic_id < 0) {
+    unsigned long long uid;
+    acpi_status status;
+    status = acpi_evaluate_integer(handle, METHOD_NAME__UID,
+    core::ptr::null_mut(), &uid);
+    if (ACPI_FAILURE(status)) {
+    acpi_handle_warn(handle, "failed to get IOAPIC ID.\n");
+    return -EINVAL;
+    }
+    ioapic_id = (int)uid;
+    }
+    mutex_lock(&acpi_ioapic_lock);
+    ret  = mp_register_ioapic(ioapic_id, phys_addr, gsi_base, &cfg);
+    mutex_unlock(&acpi_ioapic_lock);
+
+    return ret;
+    }
+    EXPORT_SYMBOL(acpi_register_ioapic);
+#[no_mangle]
+pub unsafe extern "C" fn acpi_unregister_ioapic(handle: acpi_handle, gsi_base: u32) -> c_int {
+    int acpi_unregister_ioapic(acpi_handle handle, u32 gsi_base)
+    {
+    let mut ret: c_int = -ENOSYS;
+
+    mutex_lock(&acpi_ioapic_lock);
+    ret  = mp_unregister_ioapic(gsi_base);
+    mutex_unlock(&acpi_ioapic_lock);
+
+    return ret;
+    }
+    EXPORT_SYMBOL(acpi_unregister_ioapic);
+//
+// acpi_ioapic_registered - Check whether IOAPIC associated with @gsi_base
+// has been registered
+// @handle:	ACPI handle of the IOAPIC device
+// @gsi_base:	GSI base associated with the IOAPIC
+//
+// Assume caller holds some type of lock to serialize acpi_ioapic_registered()
+// with acpi_register_ioapic()/acpi_unregister_ioapic().
+//
+#[no_mangle]
+pub unsafe extern "C" fn acpi_ioapic_registered(handle: acpi_handle, gsi_base: u32) -> c_int {
+    int acpi_ioapic_registered(acpi_handle handle, u32 gsi_base)
+    {
+    let mut ret: c_int = 0;
+
+    mutex_lock(&acpi_ioapic_lock);
+    ret  = mp_ioapic_registered(gsi_base);
+    mutex_unlock(&acpi_ioapic_lock);
+
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn acpi_parse_sbf(table: *mut acpi_table_header) -> int __init {
+    static int __init acpi_parse_sbf(struct acpi_table_header *table)
+    {
+    struct acpi_table_boot *sb = (struct acpi_table_boot *)table;
+    sbf_port = sb.cmos_index;	/* Save CMOS port */
+    return 0;
+    }
+
+    static struct resource *hpet_res __initdata;
+#[no_mangle]
+unsafe extern "C" fn acpi_parse_hpet(table: *mut acpi_table_header) -> int __init {
+    static int __init acpi_parse_hpet(struct acpi_table_header *table)
+    {
+    struct acpi_table_hpet *hpet_tbl = (struct acpi_table_hpet *)table;
+    if (hpet_tbl.address.space_id != ACPI_SPACE_MEM) {
+    pr_warn("HPET timers must be located in memory.\n");
+    return -1;
+    }
+    hpet_address = hpet_tbl.address.address;
+    hpet_blockid = hpet_tbl.sequence;
+//
+// Some broken BIOSes advertise HPET at 0x0. We really do not
+// want to allocate a resource there.
+//
+    if (!hpet_address) {
+    pr_warn("HPET id: %#x base: %#lx is invalid\n", hpet_tbl.id, hpet_address);
+    return 0;
+    }
+
+//
+// Some even more broken BIOSes advertise HPET at
+// 0xfed0000000000000 instead of 0xfed00000. Fix it up and add
+// some noise:
+//
+    if (hpet_address == 0xfed0000000000000UL) {
+    if (!hpet_force_user) {
+    pr_warn("HPET id: %#x base: 0xfed0000000000000 is bogus, try hpet=force on the kernel command line to fix it up to 0xfed00000.\n",
+    hpet_tbl.id);
+    hpet_address = 0;
+    return 0;
+    }
+    pr_warn("HPET id: %#x base: 0xfed0000000000000 fixed up to 0xfed00000.\n",
+    hpet_tbl.id);
+    hpet_address >>= 32;
+    }
+
+    pr_info("HPET id: %#x base: %#lx\n", hpet_tbl.id, hpet_address);
+//
+// Allocate and initialize the HPET firmware resource for adding into
+// the resource tree during the lateinit timeframe.
+//
+pub const HPET_RESOURCE_NAME_SIZE: c_int = 9;
+    hpet_res = memblock_alloc_or_panic(sizeof(*hpet_res) + HPET_RESOURCE_NAME_SIZE,
+    SMP_CACHE_BYTES);
+    hpet_res.name = (void *)&hpet_res[1];
+    hpet_res.flags = IORESOURCE_MEM;
+    snprintf((char *)hpet_res.name, HPET_RESOURCE_NAME_SIZE, "HPET %u",
+    hpet_tbl.sequence);
+    hpet_res.start = hpet_address;
+    hpet_res.end = hpet_address + (1 * 1024) - 1;
+    return 0;
+    }
+//
+// hpet_insert_resource inserts the HPET resources used into the resource
+// tree.
+//
+#[no_mangle]
+unsafe extern "C" fn hpet_insert_resource() -> __init int {
+    static __init int hpet_insert_resource(void)
+    {
+    if (!hpet_res)
+    return 1;
+    return insert_resource(&iomem_resource, hpet_res);
+    }
+    late_initcall(hpet_insert_resource);
+
+#[no_mangle]
+unsafe extern "C" fn acpi_parse_fadt(table: *mut acpi_table_header) -> int __init {
+    static int __init acpi_parse_fadt(struct acpi_table_header *table)
+    {
+    if (!(acpi_gbl_FADT.boot_flags & ACPI_FADT_LEGACY_DEVICES)) {
+    pr_debug("no legacy devices present\n");
+    x86_platform.legacy.devices.pnpbios = 0;
+    }
+    if (acpi_gbl_FADT.header.revision >= FADT2_REVISION_ID &&
+    !(acpi_gbl_FADT.boot_flags & ACPI_FADT_8042) &&
+    x86_platform.legacy.i8042 != X86_LEGACY_I8042_PLATFORM_ABSENT) {
+    pr_debug("i8042 controller is absent\n");
+    x86_platform.legacy.i8042 = X86_LEGACY_I8042_FIRMWARE_ABSENT;
+    }
+    if (acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_CMOS_RTC) {
+    pr_debug("not registering RTC platform device\n");
+    x86_platform.legacy.rtc = 0;
+    }
+    if (acpi_gbl_FADT.boot_flags & ACPI_FADT_NO_VGA) {
+    pr_debug("probing for VGA not safe\n");
+    x86_platform.legacy.no_vga = 1;
+    }
+
+// detect the location of the ACPI PM Timer
+    if (acpi_gbl_FADT.header.revision >= FADT2_REVISION_ID) {
+// FADT rev. 2
+    if (acpi_gbl_FADT.xpm_timer_block.space_id !=
+    ACPI_ADR_SPACE_SYSTEM_IO)
+    return 0;
+    pmtmr_ioport = acpi_gbl_FADT.xpm_timer_block.address;
+//
+// "X" fields are optional extensions to the original V1.0
+// fields, so we must selectively expand V1.0 fields if the
+// corresponding X field is zero.
+//
+    if (!pmtmr_ioport)
+    pmtmr_ioport = acpi_gbl_FADT.pm_timer_block;
+    } else {
+// FADT rev. 1
+    pmtmr_ioport = acpi_gbl_FADT.pm_timer_block;
+    }
+    if (pmtmr_ioport)
+    pr_info("PM-Timer IO Port: %#x\n", pmtmr_ioport);
+
+    return 0;
+    }
+
+//
+// Parse LAPIC entries in MADT
+// returns 0 on success, < 0 on error
+//
+#[no_mangle]
+unsafe extern "C" fn early_acpi_parse_madt_lapic_addr_ovr() -> int __init {
+    static int __init early_acpi_parse_madt_lapic_addr_ovr(void)
+    {
+    int count;
+    if (!boot_cpu_has(X86_FEATURE_APIC))
+    return -ENODEV;
+//
+// Note that the LAPIC address is obtained from the MADT (32-bit value)
+// and (optionally) overridden by a LAPIC_ADDR_OVR entry (64-bit value).
+//
+    count = acpi_table_parse_madt(ACPI_MADT_TYPE_LOCAL_APIC_OVERRIDE,
+    acpi_parse_lapic_addr_ovr, 0);
+    if (count < 0) {
+    pr_err("Error parsing LAPIC address override entry\n");
+    return count;
+    }
+    register_lapic_address(acpi_lapic_addr);
+    return count;
+    }
+#[no_mangle]
+unsafe extern "C" fn acpi_parse_madt_lapic_entries() -> int __init {
+    static int __init acpi_parse_madt_lapic_entries(void)
+    {
+    int count, x2count = 0;
+    struct acpi_subtable_proc madt_proc[2];
+    int ret;
+    if (!boot_cpu_has(X86_FEATURE_APIC))
+    return -ENODEV;
+    count = acpi_table_parse_madt(ACPI_MADT_TYPE_LOCAL_SAPIC,
+    acpi_parse_sapic, MAX_LOCAL_APIC);
+    if (!count) {
+// Check if there are valid LAPIC entries
+    acpi_table_parse_madt(ACPI_MADT_TYPE_LOCAL_APIC, acpi_check_lapic, MAX_LOCAL_APIC);
+//
+// Enumerate the APIC IDs in the order that they appear in the
+// MADT, no matter LAPIC entry or x2APIC entry is used.
+//
+    memset(madt_proc, 0, sizeof(madt_proc));
+    madt_proc[0].id = ACPI_MADT_TYPE_LOCAL_APIC;
+    madt_proc[0].handler = acpi_parse_lapic;
+    madt_proc[1].id = ACPI_MADT_TYPE_LOCAL_X2APIC;
+    madt_proc[1].handler = acpi_parse_x2apic;
+    ret = acpi_table_parse_entries_array(ACPI_SIG_MADT,
+    sizeof(struct acpi_table_madt),
+    madt_proc, ARRAY_SIZE(madt_proc), MAX_LOCAL_APIC);
+    if (ret < 0) {
+    pr_err("Error parsing LAPIC/X2APIC entries\n");
+    return ret;
+    }
+    count = madt_proc[0].count;
+    x2count = madt_proc[1].count;
+    }
+    if (!count && !x2count) {
+    pr_err("No LAPIC entries present\n");
+// TBD: Cleanup to allow fallback to MPS
+    return -ENODEV;
+    } else if (count < 0 || x2count < 0) {
+    pr_err("Error parsing LAPIC entry\n");
+// TBD: Cleanup to allow fallback to MPS
+    return count;
+    }
+    x2count = acpi_table_parse_madt(ACPI_MADT_TYPE_LOCAL_X2APIC_NMI,
+    acpi_parse_x2apic_nmi, 0);
+    count = acpi_table_parse_madt(ACPI_MADT_TYPE_LOCAL_APIC_NMI,
+    acpi_parse_lapic_nmi, 0);
+    if (count < 0 || x2count < 0) {
+    pr_err("Error parsing LAPIC NMI entry\n");
+// TBD: Cleanup to allow fallback to MPS
+    return count;
+    }
+    return 0;
+    }
+
+#[no_mangle]
+unsafe extern "C" fn mp_config_acpi_legacy_irqs() -> void __init {
+    static void __init mp_config_acpi_legacy_irqs(void)
+    {
+    int i;
+    struct mpc_intsrc mp_irq;
+
+//
+// Fabricate the legacy ISA bus (bus #31).
+//
+    mp_bus_id_to_type[MP_ISA_BUS] = MP_BUS_ISA;
+
+    set_bit(MP_ISA_BUS, mp_bus_not_pci);
+    pr_debug("Bus #%d is ISA (nIRQs: %d)\n", MP_ISA_BUS, nr_legacy_irqs());
+//
+// Use the default configuration for the IRQs 0-15.  Unless
+// overridden by (MADT) interrupt source override entries.
+//
+    for (i = 0; i < nr_legacy_irqs(); i++) {
+    int ioapic, pin;
+    unsigned int dstapic;
+    int idx;
+    u32 gsi;
+// Locate the gsi that irq i maps to.
+    if (acpi_isa_irq_to_gsi(i, &gsi))
+    continue;
+//
+// Locate the IOAPIC that manages the ISA IRQ.
+//
+    ioapic = mp_find_ioapic(gsi);
+    if (ioapic < 0)
+    continue;
+    pin = mp_find_ioapic_pin(ioapic, gsi);
+    dstapic = mpc_ioapic_id(ioapic);
+    for (idx = 0; idx < mp_irq_entries; idx++) {
+    struct mpc_intsrc *irq = mp_irqs + idx;
+// Do we already have a mapping for this ISA IRQ?
+    if (irq.srcbus == MP_ISA_BUS && irq.srcbusirq == i)
+    break;
+// Do we already have a mapping for this IOAPIC pin
+    if (irq.dstapic == dstapic && irq.dstirq == pin)
+    break;
+    }
+    if (idx != mp_irq_entries) {
+    pr_debug("ACPI: IRQ%d used by override.\n", i);
+    continue;	/* IRQ already used */
+    }
+    mp_irq.type = MP_INTSRC;
+    mp_irq.irqflag = 0;	/* Conforming */
+    mp_irq.srcbus = MP_ISA_BUS;
+    mp_irq.dstapic = dstapic;
+    mp_irq.irqtype = mp_INT;
+    mp_irq.srcbusirq = i; /* Identity mapped */
+    mp_irq.dstirq = pin;
+    mp_save_irq(&mp_irq);
+    }
+    }
+//
+// Parse IOAPIC related entries in MADT
+// returns 0 on success, < 0 on error
+//
+#[no_mangle]
+unsafe extern "C" fn acpi_parse_madt_ioapic_entries() -> int __init {
+    static int __init acpi_parse_madt_ioapic_entries(void)
+    {
+    int count;
+//
+// ACPI interpreter is required to complete interrupt setup,
+// so if it is off, don't enumerate the io-apics with ACPI.
+// If MPS is present, it will handle them,
+// otherwise the system will stay in PIC mode
+//
+    if (acpi_disabled || acpi_noirq)
+    return -ENODEV;
+    if (!boot_cpu_has(X86_FEATURE_APIC))
+    return -ENODEV;
+//
+// if "noapic" boot option, don't look for IO-APICs
+//
+    if (ioapic_is_disabled) {
+    pr_info("Skipping IOAPIC probe due to 'noapic' option.\n");
+    return -ENODEV;
+    }
+    count = acpi_table_parse_madt(ACPI_MADT_TYPE_IO_APIC, acpi_parse_ioapic,
+    MAX_IO_APICS);
+    if (!count) {
+    pr_err("No IOAPIC entries present\n");
+    return -ENODEV;
+    } else if (count < 0) {
+    pr_err("Error parsing IOAPIC entry\n");
+    return count;
+    }
+    count = acpi_table_parse_madt(ACPI_MADT_TYPE_INTERRUPT_OVERRIDE,
+    acpi_parse_int_src_ovr,
+    irq_get_nr_irqs());
+    if (count < 0) {
+    pr_err("Error parsing interrupt source overrides entry\n");
+// TBD: Cleanup to allow fallback to MPS
+    return count;
+    }
+//
+// If BIOS did not supply an INT_SRC_OVR for the SCI
+// pretend we got one so we can set the SCI flags.
+// But ignore setting up SCI on hardware reduced platforms.
+//
+    if (acpi_sci_override_gsi == INVALID_ACPI_IRQ && !acpi_gbl_reduced_hardware)
+    acpi_sci_ioapic_setup(acpi_gbl_FADT.sci_interrupt, 0, 0,
+    acpi_gbl_FADT.sci_interrupt);
+// Fill in identity legacy mappings where no override
+    mp_config_acpi_legacy_irqs();
+    count = acpi_table_parse_madt(ACPI_MADT_TYPE_NMI_SOURCE,
+    acpi_parse_nmi_src,
+    irq_get_nr_irqs());
+    if (count < 0) {
+    pr_err("Error parsing NMI SRC entry\n");
+// TBD: Cleanup to allow fallback to MPS
+    return count;
+    }
+    return 0;
+    }
+
+#[no_mangle]
+pub unsafe extern "C" fn acpi_parse_madt_ioapic_entries() -> c_int {
+    static inline int acpi_parse_madt_ioapic_entries(void)
+    {
+    return -1;
+    }
+
+#[no_mangle]
+unsafe extern "C" fn early_acpi_process_madt() -> void __init {
+    static void __init early_acpi_process_madt(void)
+    {
+
+    int error;
+    if (!acpi_table_parse(ACPI_SIG_MADT, acpi_parse_madt)) {
+//
+// Parse MADT LAPIC entries
+//
+    error = early_acpi_parse_madt_lapic_addr_ovr();
+    if (!error) {
+    acpi_lapic = 1;
+    smp_found_config = 1;
+    }
+    if (error == -EINVAL) {
+//
+// Dell Precision Workstation 410, 610 come here.
+//
+    pr_err("Invalid BIOS MADT, disabling ACPI\n");
+    disable_acpi();
+    }
+    }
+
+    }
+#[no_mangle]
+unsafe extern "C" fn acpi_process_madt() -> void __init {
+    static void __init acpi_process_madt(void)
+    {
+
+    int error;
+    if (!acpi_table_parse(ACPI_SIG_MADT, acpi_parse_madt)) {
+//
+// Parse MADT LAPIC entries
+//
+    error = acpi_parse_madt_lapic_entries();
+    if (!error) {
+    acpi_lapic = 1;
+//
+// Parse MADT IO-APIC entries
+//
+    mutex_lock(&acpi_ioapic_lock);
+    error = acpi_parse_madt_ioapic_entries();
+    mutex_unlock(&acpi_ioapic_lock);
+    if (!error) {
+    acpi_set_irq_model_ioapic();
+    smp_found_config = 1;
+    }
+
+//
+// Parse MADT MP Wake entry.
+//
+    acpi_table_parse_madt(ACPI_MADT_TYPE_MULTIPROC_WAKEUP,
+    acpi_parse_mp_wake, 1);
+
+    }
+    if (error == -EINVAL) {
+//
+// Dell Precision Workstation 410, 610 come here.
+//
+    pr_err("Invalid BIOS MADT, disabling ACPI\n");
+    disable_acpi();
+    }
+    } else {
+//
+// ACPI found no MADT, and so ACPI wants UP PIC mode.
+// In the event an MPS table was found, forget it.
+// Boot with "acpi=off" to use MPS on such a system.
+//
+    if (smp_found_config) {
+    pr_warn("No APIC-table, disabling MPS\n");
+    smp_found_config = 0;
+    }
+    }
+//
+// ACPI supports both logical (e.g. Hyper-Threading) and physical
+// processors, where MPS only supports physical.
+//
+    if (acpi_lapic && acpi_ioapic)
+    pr_info("Using ACPI (MADT) for SMP configuration information\n");
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: acpi_lapic) -> else {
+    else if (acpi_lapic)
+    pr_info("Using ACPI for processor (LAPIC) configuration information\n");
+
+    return;
+    }
+#[no_mangle]
+unsafe extern "C" fn disable_acpi_irq(d: *const dmi_system_id) -> int __init {
+    static int __init disable_acpi_irq(const struct dmi_system_id *d)
+    {
+    if (!acpi_force) {
+    pr_notice("%s detected: force use of acpi=noirq\n", d.ident);
+    acpi_noirq_set();
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn disable_acpi_pci(d: *const dmi_system_id) -> int __init {
+    static int __init disable_acpi_pci(const struct dmi_system_id *d)
+    {
+    if (!acpi_force) {
+    pr_notice("%s detected: force use of pci=noacpi\n", d.ident);
+    acpi_disable_pci();
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn disable_acpi_xsdt(d: *const dmi_system_id) -> int __init {
+    static int __init disable_acpi_xsdt(const struct dmi_system_id *d)
+    {
+    if (!acpi_force) {
+    pr_notice("%s detected: force use of acpi=rsdt\n", d.ident);
+    acpi_gbl_do_not_use_xsdt = TRUE;
+    } else {
+    pr_notice("Warning: DMI blacklist says broken, but acpi XSDT forced\n");
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn dmi_disable_acpi(d: *const dmi_system_id) -> int __init {
+    static int __init dmi_disable_acpi(const struct dmi_system_id *d)
+    {
+    if (!acpi_force) {
+    pr_notice("%s detected: acpi off\n", d.ident);
+    disable_acpi();
+    } else {
+    pr_notice("Warning: DMI blacklist says broken, but acpi forced\n");
+    }
+    return 0;
+    }
+//
+// Force ignoring BIOS IRQ0 override
+//
+#[no_mangle]
+unsafe extern "C" fn dmi_ignore_irq0_timer_override(d: *const dmi_system_id) -> int __init {
+    static int __init dmi_ignore_irq0_timer_override(const struct dmi_system_id *d)
+    {
+    if (!acpi_skip_timer_override) {
+    pr_notice("%s detected: Ignoring BIOS IRQ0 override\n",
+    d.ident);
+    acpi_skip_timer_override = 1;
+    }
+    return 0;
+    }
+//
+// ACPI offers an alternative platform interface model that removes
+// ACPI hardware requirements for platforms that do not implement
+// the PC Architecture.
+//
+// We initialize the Hardware-reduced ACPI model here:
+//
+#[no_mangle]
+pub unsafe extern "C" fn acpi_generic_reduced_hw_init() -> void __init {
+    void __init acpi_generic_reduced_hw_init(void)
+    {
+//
+// Override x86_init functions and bypass legacy PIC in
+// hardware reduced ACPI mode.
+//
+    x86_init.timers.timer_init	= x86_init_noop;
+    x86_init.irqs.pre_vector_init	= x86_init_noop;
+    legacy_pic			= &null_legacy_pic;
+    }
+#[no_mangle]
+unsafe extern "C" fn acpi_reduced_hw_init() -> void __init {
+    static void __init acpi_reduced_hw_init(void)
+    {
+    if (acpi_gbl_reduced_hardware)
+    x86_init.acpi.reduced_hw_early_init();
+    }
+//
+// If your system is blacklisted here, but you find that acpi=force
+// works for you, please contact linux-acpi@vger.kernel.org
+//
+    static const struct dmi_system_id acpi_dmi_table[] __initconst = {
+//
+// Boxes that need ACPI disabled
+//
+    {
+    .callback = dmi_disable_acpi,
+    .ident = "IBM Thinkpad",
+    .matches = {
+    DMI_MATCH(DMI_BOARD_VENDOR, "IBM"),
+    DMI_MATCH(DMI_BOARD_NAME, "2629H1G"),
+    },
+    },
+//
+// Boxes that need ACPI PCI IRQ routing disabled
+//
+    {
+    .callback = disable_acpi_irq,
+    .ident = "ASUS A7V",
+    .matches = {
+    DMI_MATCH(DMI_BOARD_VENDOR, "ASUSTeK Computer INC"),
+    DMI_MATCH(DMI_BOARD_NAME, "<A7V>"),
+// newer BIOS, Revision 1011, does work
+    DMI_MATCH(DMI_BIOS_VERSION,
+    "ASUS A7V ACPI BIOS Revision 1007"),
+    },
+    },
+    {
+//
+// Latest BIOS for IBM 600E (1.16) has bad pcinum
+// for LPC bridge, which is needed for the PCI
+// interrupt links to work. DSDT fix is in bug 5966.
+// 2645, 2646 model numbers are shared with 600/600E/600X
+//
+    .callback = disable_acpi_irq,
+    .ident = "IBM Thinkpad 600 Series 2645",
+    .matches = {
+    DMI_MATCH(DMI_BOARD_VENDOR, "IBM"),
+    DMI_MATCH(DMI_BOARD_NAME, "2645"),
+    },
+    },
+    {
+    .callback = disable_acpi_irq,
+    .ident = "IBM Thinkpad 600 Series 2646",
+    .matches = {
+    DMI_MATCH(DMI_BOARD_VENDOR, "IBM"),
+    DMI_MATCH(DMI_BOARD_NAME, "2646"),
+    },
+    },
+//
+// Boxes that need ACPI PCI IRQ routing and PCI scan disabled
+//
+    {			/* _BBN 0 bug */
+    .callback = disable_acpi_pci,
+    .ident = "ASUS PR-DLS",
+    .matches = {
+    DMI_MATCH(DMI_BOARD_VENDOR, "ASUSTeK Computer INC."),
+    DMI_MATCH(DMI_BOARD_NAME, "PR-DLS"),
+    DMI_MATCH(DMI_BIOS_VERSION,
+    "ASUS PR-DLS ACPI BIOS Revision 1010"),
+    DMI_MATCH(DMI_BIOS_DATE, "03/21/2003")
+    },
+    },
+    {
+    .callback = disable_acpi_pci,
+    .ident = "Acer TravelMate 36x Laptop",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "TravelMate 360"),
+    },
+    },
+//
+// Boxes that need ACPI XSDT use disabled due to corrupted tables
+//
+    {
+    .callback = disable_acpi_xsdt,
+    .ident = "Advantech DAC-BJ01",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "NEC"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "Bearlake CRB Board"),
+    DMI_MATCH(DMI_BIOS_VERSION, "V1.12"),
+    DMI_MATCH(DMI_BIOS_DATE, "02/01/2011"),
+    },
+    },
+    {}
+    };
+// second table for DMI checks that should run after early-quirks
+    static const struct dmi_system_id acpi_dmi_table_late[] __initconst = {
+//
+// HP laptops which use a DSDT reporting as HP/SB400/10000,
+// which includes some code which overrides all temperature
+// trip points to 16C if the INTIN2 input of the I/O APIC
+// is enabled.  This input is incorrectly designated the
+// ISA IRQ 0 via an interrupt source override even though
+// it is wired to the output of the master 8259A and INTIN0
+// is not connected at all.  Force ignoring BIOS IRQ0
+// override in that cases.
+//
+    {
+    .callback = dmi_ignore_irq0_timer_override,
+    .ident = "HP nx6115 laptop",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "HP Compaq nx6115"),
+    },
+    },
+    {
+    .callback = dmi_ignore_irq0_timer_override,
+    .ident = "HP NX6125 laptop",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "HP Compaq nx6125"),
+    },
+    },
+    {
+    .callback = dmi_ignore_irq0_timer_override,
+    .ident = "HP NX6325 laptop",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "HP Compaq nx6325"),
+    },
+    },
+    {
+    .callback = dmi_ignore_irq0_timer_override,
+    .ident = "HP 6715b laptop",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "HP Compaq 6715b"),
+    },
+    },
+    {
+    .callback = dmi_ignore_irq0_timer_override,
+    .ident = "FUJITSU SIEMENS",
+    .matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "FUJITSU SIEMENS"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "AMILO PRO V2030"),
+    },
+    },
+    {}
+    };
+//
+// acpi_boot_table_init() and acpi_boot_init()
+// called from setup_arch(), always.
+// 1. checksums all tables
+// 2. enumerates lapics
+// 3. enumerates io-apics
+//
+// acpi_table_init() is separate to allow reading SRAT without
+// other side effects.
+//
+// side effects of acpi_boot_init:
+// acpi_lapic = 1 if LAPIC found
+// acpi_ioapic = 1 if IOAPIC found
+// if (acpi_lapic && acpi_ioapic) smp_found_config = 1;
+// if acpi_blacklisted() acpi_disabled = 1;
+// acpi_irq_model=...
+// ...
+//
+#[no_mangle]
+pub unsafe extern "C" fn acpi_boot_table_init() -> void __init {
+    void __init acpi_boot_table_init(void)
+    {
+    dmi_check_system(acpi_dmi_table);
+//
+// If acpi_disabled, bail out
+//
+    if (acpi_disabled)
+    return;
+//
+// Initialize the ACPI boot-time table parser.
+//
+    if (acpi_locate_initial_tables())
+    disable_acpi();
+    else
+    acpi_reserve_initial_tables();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn early_acpi_boot_init() -> int __init {
+    int __init early_acpi_boot_init(void)
+    {
+    if (acpi_disabled)
+    return 1;
+    acpi_table_init_complete();
+    acpi_table_parse(ACPI_SIG_BOOT, acpi_parse_sbf);
+//
+// blacklist may disable ACPI entirely
+//
+    if (acpi_blacklisted()) {
+    if (acpi_force) {
+    pr_warn("acpi=force override\n");
+    } else {
+    pr_warn("Disabling ACPI support\n");
+    disable_acpi();
+    return 1;
+    }
+    }
+//
+// Process the Multiple APIC Description Table (MADT), if present
+//
+    early_acpi_process_madt();
+//
+// Hardware-reduced ACPI mode initialization:
+//
+    acpi_reduced_hw_init();
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn acpi_boot_init() -> int __init {
+    int __init acpi_boot_init(void)
+    {
+// those are executed after early-quirks are executed
+    dmi_check_system(acpi_dmi_table_late);
+//
+// If acpi_disabled, bail out
+//
+    if (acpi_disabled)
+    return 1;
+    acpi_table_parse(ACPI_SIG_BOOT, acpi_parse_sbf);
+//
+// set sci_int and PM timer address
+//
+    acpi_table_parse(ACPI_SIG_FADT, acpi_parse_fadt);
+//
+// Process the Multiple APIC Description Table (MADT), if present
+//
+    acpi_process_madt();
+    acpi_table_parse(ACPI_SIG_HPET, acpi_parse_hpet);
+    if (IS_ENABLED(CONFIG_ACPI_BGRT) && !acpi_nobgrt)
+    acpi_table_parse(ACPI_SIG_BGRT, acpi_parse_bgrt);
+    if (!acpi_noirq)
+    x86_init.pci.init = pci_acpi_init;
+    acpi_parse_spcr(earlycon_acpi_spcr_enable, acpi_spcr_add);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn parse_acpi(arg: *mut c_char) -> int __init {
+    static int __init parse_acpi(char *arg)
+    {
+    if (!arg)
+    return -EINVAL;
+// "acpi=off" disables both ACPI table parsing and interpreter
+    if (strcmp(arg, "off") == 0) {
+    disable_acpi();
+    }
+// acpi=force to over-ride black-list
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "force") ==) -> else {
+    acpi_force = 1;
+    acpi_disabled = 0;
+    }
+// acpi=strict disables out-of-spec workarounds
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "strict") ==) -> else {
+    acpi_strict = 1;
+    }
+// acpi=rsdt use RSDT instead of XSDT
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "rsdt") ==) -> else {
+    acpi_gbl_do_not_use_xsdt = TRUE;
+    }
+// "acpi=noirq" disables ACPI interrupt routing
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "noirq") ==) -> else {
+    acpi_noirq_set();
+    }
+// "acpi=copy_dsdt" copies DSDT
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "copy_dsdt") ==) -> else {
+    acpi_gbl_copy_dsdt_locally = 1;
+    }
+// "acpi=nocmcff" disables FF mode for corrected errors
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "nocmcff") ==) -> else {
+    acpi_disable_cmcff = 1;
+    }
+// "acpi=spcr" adds the SPCR-provided console as a preferred one
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: strcmp(arg, 0: "spcr") ==) -> else {
+    acpi_spcr_add = 1;
+    } else {
+// Core will printk when we return error.
+    return -EINVAL;
+    }
+    return 0;
+    }
+    early_param("acpi", parse_acpi);
+#[no_mangle]
+unsafe extern "C" fn parse_acpi_bgrt(arg: *mut c_char) -> int __init {
+    static int __init parse_acpi_bgrt(char *arg)
+    {
+    acpi_nobgrt = true;
+    return 0;
+    }
+    early_param("bgrt_disable", parse_acpi_bgrt);
+// FIXME: Using pci= for an ACPI parameter is a travesty.
+#[no_mangle]
+unsafe extern "C" fn parse_pci(arg: *mut c_char) -> int __init {
+    static int __init parse_pci(char *arg)
+    {
+    if (arg && strcmp(arg, "noacpi") == 0)
+    acpi_disable_pci();
+    return 0;
+    }
+    early_param("pci", parse_pci);
+#[no_mangle]
+pub unsafe extern "C" fn acpi_mps_check() -> int __init {
+    int __init acpi_mps_check(void)
+    {
+
+// mptable code is not built-in
+//
+// Xen disables ACPI in PV DomU guests but it still emulates APIC and
+// supports SMP. Returning early here ensures that APIC is not disabled
+// unnecessarily and the guest is not limited to a single vCPU.
+//
+    if (xen_pv_domain() && !xen_initial_domain())
+    return 0;
+    if (acpi_disabled || acpi_noirq) {
+    pr_warn("MPS support code is not built-in, using acpi=off or acpi=noirq or pci=noacpi may have problem\n");
+    return 1;
+    }
+
+    return 0;
+    }
+
+#[no_mangle]
+unsafe extern "C" fn parse_acpi_skip_timer_override(arg: *mut c_char) -> int __init {
+    static int __init parse_acpi_skip_timer_override(char *arg)
+    {
+    acpi_skip_timer_override = 1;
+    return 0;
+    }
+    early_param("acpi_skip_timer_override", parse_acpi_skip_timer_override);
+#[no_mangle]
+unsafe extern "C" fn parse_acpi_use_timer_override(arg: *mut c_char) -> int __init {
+    static int __init parse_acpi_use_timer_override(char *arg)
+    {
+    acpi_use_timer_override = 1;
+    return 0;
+    }
+    early_param("acpi_use_timer_override", parse_acpi_use_timer_override);
+
+#[no_mangle]
+unsafe extern "C" fn setup_acpi_sci(s: *mut c_char) -> int __init {
+    static int __init setup_acpi_sci(char *s)
+    {
+    if (!s)
+    return -EINVAL;
+    if (!strcmp(s, "edge"))
+    acpi_sci_flags =  ACPI_MADT_TRIGGER_EDGE |
+    (acpi_sci_flags & ~ACPI_MADT_TRIGGER_MASK);
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(s, _arg: "level")) -> else {
+    else if (!strcmp(s, "level"))
+    acpi_sci_flags = ACPI_MADT_TRIGGER_LEVEL |
+    (acpi_sci_flags & ~ACPI_MADT_TRIGGER_MASK);
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(s, _arg: "high")) -> else {
+    else if (!strcmp(s, "high"))
+    acpi_sci_flags = ACPI_MADT_POLARITY_ACTIVE_HIGH |
+    (acpi_sci_flags & ~ACPI_MADT_POLARITY_MASK);
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(s, _arg: "low")) -> else {
+    else if (!strcmp(s, "low"))
+    acpi_sci_flags = ACPI_MADT_POLARITY_ACTIVE_LOW |
+    (acpi_sci_flags & ~ACPI_MADT_POLARITY_MASK);
+    else
+    return -EINVAL;
+    return 0;
+    }
+    early_param("acpi_sci", setup_acpi_sci);
+#[no_mangle]
+pub unsafe extern "C" fn __acpi_acquire_global_lock(lock: *mut c_uint) -> c_int {
+    int __acpi_acquire_global_lock(unsigned int *lock)
+    {
+    unsigned int old, new, val;
+    old = READ_ONCE(*lock);
+    do {
+    val = (old >> 1) & 0x1;
+    new = (old & ~0x3) + 2 + val;
+    } while (!try_cmpxchg(lock, &old, new));
+    if (val)
+    return 0;
+    return -1;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __acpi_release_global_lock(lock: *mut c_uint) -> c_int {
+    int __acpi_release_global_lock(unsigned int *lock)
+    {
+    unsigned int old, new;
+    old = READ_ONCE(*lock);
+    do {
+    new = old & ~0x3;
+    } while (!try_cmpxchg(lock, &old, new));
+    return old & 0x1;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_reserve_mem_area(addr: acpi_physical_address, size: usize) -> void __init {
+    void __init arch_reserve_mem_area(acpi_physical_address addr, size_t size)
+    {
+    e820__range_add(addr, size, E820_TYPE_NVS);
+    e820__update_table_print();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn x86_default_set_root_pointer(addr: u64) {
+    void x86_default_set_root_pointer(u64 addr)
+    {
+    boot_params.acpi_rsdp_addr = addr;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn x86_default_get_root_pointer() -> u64 {
+    u64 x86_default_get_root_pointer(void)
+    {
+    return boot_params.acpi_rsdp_addr;
+    }
+
+    void __iomem *x86_acpi_os_ioremap(acpi_physical_address phys, acpi_size size)
+    {
+    return ioremap_cache(phys, size);
+    }
+    void __iomem * (*acpi_os_ioremap)(acpi_physical_address phys, acpi_size size) =
+    x86_acpi_os_ioremap;
+    EXPORT_SYMBOL_GPL(acpi_os_ioremap);
+
+#[no_mangle]
+pub unsafe extern "C" fn acpi_get_cpu_uid(cpu: c_uint, uid: *mut u32) -> c_int {
+    int acpi_get_cpu_uid(unsigned int cpu, u32 *uid)
+    {
+    u32 acpi_id;
+    if (cpu >= nr_cpu_ids)
+    return -EINVAL;
+
+    acpi_id = per_cpu(x86_cpu_to_acpiid, cpu);
+    if (acpi_id == CPU_ACPIID_INVALID)
+    return -ENODEV;
+
+    acpi_id = 0;
+
+// uid = acpi_id;
+    return 0;
+    }
+    EXPORT_SYMBOL_GPL(acpi_get_cpu_uid);

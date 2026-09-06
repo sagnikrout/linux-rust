@@ -1,0 +1,81 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/dt-bindings/clock/ingenic,jz4755-cgu.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+//
+// This header provides clock numbers for the ingenic,jz4755-cgu DT binding.
+//
+pub const JZ4755_CLK_EXT: c_int = 0;
+pub const JZ4755_CLK_OSC32K: c_int = 1;
+pub const JZ4755_CLK_PLL: c_int = 2;
+pub const JZ4755_CLK_PLL_HALF: c_int = 3;
+pub const JZ4755_CLK_EXT_HALF: c_int = 4;
+pub const JZ4755_CLK_CCLK: c_int = 5;
+pub const JZ4755_CLK_H0CLK: c_int = 6;
+pub const JZ4755_CLK_PCLK: c_int = 7;
+pub const JZ4755_CLK_MCLK: c_int = 8;
+pub const JZ4755_CLK_H1CLK: c_int = 9;
+pub const JZ4755_CLK_UDC: c_int = 10;
+pub const JZ4755_CLK_LCD: c_int = 11;
+pub const JZ4755_CLK_UART0: c_int = 12;
+pub const JZ4755_CLK_UART1: c_int = 13;
+pub const JZ4755_CLK_UART2: c_int = 14;
+pub const JZ4755_CLK_DMA: c_int = 15;
+pub const JZ4755_CLK_MMC: c_int = 16;
+pub const JZ4755_CLK_MMC0: c_int = 17;
+pub const JZ4755_CLK_MMC1: c_int = 18;
+pub const JZ4755_CLK_EXT512: c_int = 19;
+pub const JZ4755_CLK_RTC: c_int = 20;
+pub const JZ4755_CLK_UDC_PHY: c_int = 21;
+pub const JZ4755_CLK_I2S: c_int = 22;
+pub const JZ4755_CLK_SPI: c_int = 23;
+pub const JZ4755_CLK_AIC: c_int = 24;
+pub const JZ4755_CLK_ADC: c_int = 25;
+pub const JZ4755_CLK_TCU: c_int = 26;
+pub const JZ4755_CLK_BCH: c_int = 27;
+pub const JZ4755_CLK_I2C: c_int = 28;
+pub const JZ4755_CLK_TVE: c_int = 29;
+pub const JZ4755_CLK_CIM: c_int = 30;
+pub const JZ4755_CLK_AUX_CPU: c_int = 31;
+pub const JZ4755_CLK_AHB1: c_int = 32;
+pub const JZ4755_CLK_IDCT: c_int = 33;
+pub const JZ4755_CLK_DB: c_int = 34;
+pub const JZ4755_CLK_ME: c_int = 35;
+pub const JZ4755_CLK_MC: c_int = 36;
+pub const JZ4755_CLK_TSSI: c_int = 37;
+pub const JZ4755_CLK_IPU: c_int = 38;

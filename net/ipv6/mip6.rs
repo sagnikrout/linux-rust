@@ -1,0 +1,402 @@
+//! Automatically rewritten from C to Rust
+//! Source: net/ipv6/mip6.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Copyright (C)2003-2006 Helsinki University of Technology
+// Copyright (C)2003-2006 USAGI/WIDE Project
+//
+// Authors:
+// Noriaki TAKAMIYA @USAGI
+// Masahide NAKAMURA @USAGI
+//
+
+#[no_mangle]
+pub unsafe extern "C" fn calc_padlen(len: c_uint, n: c_uint) -> c_uint {
+    static inline unsigned int calc_padlen(unsigned int len, unsigned int n)
+    {
+    return (n - len + 16) & 0x7;
+    }
+    static inline void *mip6_padn(__u8 *data, __u8 padlen)
+    {
+    if (!data)
+    return core::ptr::null_mut();
+    if (padlen == 1) {
+    data[0] = IPV6_TLV_PAD1;
+    } else if (padlen > 1) {
+    data[0] = IPV6_TLV_PADN;
+    data[1] = padlen - 2;
+    if (padlen > 2)
+    memset(data+2, 0, data[1]);
+    }
+    return data + padlen;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn mip6_param_prob(skb: *mut sk_buff, code: u8, pos: c_int) {
+    static inline void mip6_param_prob(struct sk_buff *skb, u8 code, int pos)
+    {
+    icmpv6_send(skb, ICMPV6_PARAMPROB, code, pos);
+    }
+#[no_mangle]
+unsafe extern "C" fn mip6_mh_len(type: c_int) -> c_int {
+    static int mip6_mh_len(int type)
+    {
+    let mut len: c_int = 0;
+    switch (type) {
+    case IP6_MH_TYPE_BRR:
+    len = 0;
+    break;
+    case IP6_MH_TYPE_HOTI:
+    case IP6_MH_TYPE_COTI:
+    case IP6_MH_TYPE_BU:
+    case IP6_MH_TYPE_BACK:
+    len = 1;
+    break;
+    case IP6_MH_TYPE_HOT:
+    case IP6_MH_TYPE_COT:
+    case IP6_MH_TYPE_BERROR:
+    len = 2;
+    break;
+    }
+    return len;
+    }
+#[no_mangle]
+unsafe extern "C" fn mip6_mh_filter(sk: *mut sock, skb: *mut sk_buff) -> c_int {
+    static int mip6_mh_filter(struct sock *sk, struct sk_buff *skb)
+    {
+    struct ip6_mh _hdr;
+    const struct ip6_mh *mh;
+    mh = skb_header_pointer(skb, skb_transport_offset(skb),
+    sizeof(_hdr), &_hdr);
+    if (!mh)
+    return -1;
+    if (((mh.ip6mh_hdrlen + 1) << 3) > skb.len)
+    return -1;
+    if (mh.ip6mh_hdrlen < mip6_mh_len(mh.ip6mh_type)) {
+    net_dbg_ratelimited("mip6: MH message too short: %d vs >=%d\n",
+    mh.ip6mh_hdrlen,
+    mip6_mh_len(mh.ip6mh_type));
+    mip6_param_prob(skb, 0, offsetof(struct ip6_mh, ip6mh_hdrlen) +
+    skb_network_header_len(skb));
+    return -1;
+    }
+    if (mh.ip6mh_proto != IPPROTO_NONE) {
+    net_dbg_ratelimited("mip6: MH invalid payload proto = %d\n",
+    mh.ip6mh_proto);
+    mip6_param_prob(skb, 0, offsetof(struct ip6_mh, ip6mh_proto) +
+    skb_network_header_len(skb));
+    return -1;
+    }
+    return 0;
+    }
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct mip6_report_rate_limiter {
+    pub lock: spinlock_t,
+    pub stamp: ktime_t,
+    pub iif: c_int,
+    pub src: in6_addr,
+    pub dst: in6_addr,
+}
+
+    static struct mip6_report_rate_limiter mip6_report_rl = {
+    .lock = __SPIN_LOCK_UNLOCKED(mip6_report_rl.lock)
+    };
+#[no_mangle]
+unsafe extern "C" fn mip6_destopt_input(x: *mut xfrm_state, skb: *mut sk_buff) -> c_int {
+    static int mip6_destopt_input(struct xfrm_state *x, struct sk_buff *skb)
+    {
+    const struct ipv6hdr *iph = ipv6_hdr(skb);
+    struct ipv6_destopt_hdr *destopt = (struct ipv6_destopt_hdr *)skb.data;
+    let mut err: c_int = destopt.nexthdr;
+    spin_lock(&x.lock);
+    if (!ipv6_addr_equal(&iph.saddr, (struct in6_addr *)x.coaddr) &&
+    !ipv6_addr_any((struct in6_addr *)x.coaddr))
+    err = -ENOENT;
+    spin_unlock(&x.lock);
+    return err;
+    }
+// Destination Option Header is inserted.
+// IP Header's src address is replaced with Home Address Option in
+// Destination Option Header.
+//
+#[no_mangle]
+unsafe extern "C" fn mip6_destopt_output(x: *mut xfrm_state, skb: *mut sk_buff) -> c_int {
+    static int mip6_destopt_output(struct xfrm_state *x, struct sk_buff *skb)
+    {
+    struct ipv6hdr *iph;
+    struct ipv6_destopt_hdr *dstopt;
+    struct ipv6_destopt_hao *hao;
+    u8 nexthdr;
+    int len;
+    skb_push(skb, -skb_network_offset(skb));
+    iph = ipv6_hdr(skb);
+    nexthdr = *skb_mac_header(skb);
+// skb_mac_header(skb) = IPPROTO_DSTOPTS;
+    dstopt = (struct ipv6_destopt_hdr *)skb_transport_header(skb);
+    dstopt.nexthdr = nexthdr;
+    hao = mip6_padn((char *)(dstopt + 1),
+    calc_padlen(sizeof(*dstopt), 6));
+    hao.type = IPV6_TLV_HAO;
+    BUILD_BUG_ON(sizeof(*hao) != 18);
+    hao.length = sizeof(*hao) - 2;
+    len = ((char *)hao - (char *)dstopt) + sizeof(*hao);
+    memcpy(&hao.addr, &iph.saddr, sizeof(hao.addr));
+    spin_lock_bh(&x.lock);
+    memcpy(&iph.saddr, x.coaddr, sizeof(iph.saddr));
+    spin_unlock_bh(&x.lock);
+    WARN_ON(len != x.props.header_len);
+    dstopt.hdrlen = (x.props.header_len >> 3) - 1;
+    return 0;
+    }
+    static inline int mip6_report_rl_allow(ktime_t stamp,
+    const struct in6_addr *dst,
+    const struct in6_addr *src, int iif)
+    {
+    let mut allow: c_int = 0;
+    spin_lock_bh(&mip6_report_rl.lock);
+    if (mip6_report_rl.stamp != stamp ||
+    mip6_report_rl.iif != iif ||
+    !ipv6_addr_equal(&mip6_report_rl.src, src) ||
+    !ipv6_addr_equal(&mip6_report_rl.dst, dst)) {
+    mip6_report_rl.stamp = stamp;
+    mip6_report_rl.iif = iif;
+    mip6_report_rl.src = *src;
+    mip6_report_rl.dst = *dst;
+    allow = 1;
+    }
+    spin_unlock_bh(&mip6_report_rl.lock);
+    return allow;
+    }
+    static int mip6_destopt_reject(struct xfrm_state *x, struct sk_buff *skb,
+    const struct flowi *fl)
+    {
+    struct net *net = xs_net(x);
+    struct inet6_skb_parm *opt = (struct inet6_skb_parm *)skb.cb;
+    const struct flowi6 *fl6 = &fl.u.ip6;
+    struct ipv6_destopt_hao *hao = core::ptr::null_mut();
+    struct xfrm_selector sel;
+    int offset;
+    ktime_t stamp;
+    let mut err: c_int = 0;
+    if (unlikely(fl6.flowi6_proto == IPPROTO_MH &&
+    fl6.fl6_mh_type <= IP6_MH_TYPE_MAX))
+    goto out;
+    if (likely(opt.dsthao)) {
+    offset = ipv6_find_tlv(skb, opt.dsthao, IPV6_TLV_HAO);
+    if (likely(offset >= 0))
+    hao = (struct ipv6_destopt_hao *)
+    (skb_network_header(skb) + offset);
+    }
+    stamp = skb_get_ktime(skb);
+    if (!mip6_report_rl_allow(stamp, &ipv6_hdr(skb).daddr,
+    hao ? &hao.addr : &ipv6_hdr(skb).saddr,
+    opt.iif))
+    goto out;
+    memset(&sel, 0, sizeof(sel));
+    memcpy(&sel.daddr, (xfrm_address_t *)&ipv6_hdr(skb).daddr,
+    sizeof(sel.daddr));
+    sel.prefixlen_d = 128;
+    memcpy(&sel.saddr, (xfrm_address_t *)&ipv6_hdr(skb).saddr,
+    sizeof(sel.saddr));
+    sel.prefixlen_s = 128;
+    sel.family = AF_INET6;
+    sel.proto = fl6.flowi6_proto;
+    sel.dport = xfrm_flowi_dport(fl, &fl6.uli);
+    if (sel.dport)
+    sel.dport_mask = htons(~0);
+    sel.sport = xfrm_flowi_sport(fl, &fl6.uli);
+    if (sel.sport)
+    sel.sport_mask = htons(~0);
+    sel.ifindex = fl6.flowi6_oif;
+    err = km_report(net, IPPROTO_DSTOPTS, &sel,
+    (hao ? (xfrm_address_t *)&hao.addr : core::ptr::null_mut()));
+    out:
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn mip6_destopt_init_state(x: *mut xfrm_state, extack: *mut netlink_ext_ack) -> c_int {
+    static int mip6_destopt_init_state(struct xfrm_state *x, struct netlink_ext_ack *extack)
+    {
+    if (x.id.spi) {
+    NL_SET_ERR_MSG(extack, "SPI must be 0");
+    return -EINVAL;
+    }
+    if (x.props.mode != XFRM_MODE_ROUTEOPTIMIZATION) {
+    NL_SET_ERR_MSG(extack, "XFRM mode must be XFRM_MODE_ROUTEOPTIMIZATION");
+    return -EINVAL;
+    }
+    x.props.header_len = sizeof(struct ipv6_destopt_hdr) +
+    calc_padlen(sizeof(struct ipv6_destopt_hdr), 6) +
+    sizeof(struct ipv6_destopt_hao);
+    WARN_ON(x.props.header_len != 24);
+    return 0;
+    }
+//
+// Do nothing about destroying since it has no specific operation for
+// destination options header unlike IPsec protocols.
+//
+#[no_mangle]
+unsafe extern "C" fn mip6_destopt_destroy(x: *mut xfrm_state) {
+    static void mip6_destopt_destroy(struct xfrm_state *x)
+    {
+    }
+    static const struct xfrm_type mip6_destopt_type = {
+    .owner		= THIS_MODULE,
+    .proto		= IPPROTO_DSTOPTS,
+    .flags		= XFRM_TYPE_NON_FRAGMENT | XFRM_TYPE_LOCAL_COADDR,
+    .init_state	= mip6_destopt_init_state,
+    .destructor	= mip6_destopt_destroy,
+    .input		= mip6_destopt_input,
+    .output		= mip6_destopt_output,
+    .reject		= mip6_destopt_reject,
+    };
+#[no_mangle]
+unsafe extern "C" fn mip6_rthdr_input(x: *mut xfrm_state, skb: *mut sk_buff) -> c_int {
+    static int mip6_rthdr_input(struct xfrm_state *x, struct sk_buff *skb)
+    {
+    const struct ipv6hdr *iph = ipv6_hdr(skb);
+    struct rt2_hdr *rt2 = (struct rt2_hdr *)skb.data;
+    let mut err: c_int = rt2.rt_hdr.nexthdr;
+    spin_lock(&x.lock);
+    if (!ipv6_addr_equal(&iph.daddr, (struct in6_addr *)x.coaddr) &&
+    !ipv6_addr_any((struct in6_addr *)x.coaddr))
+    err = -ENOENT;
+    spin_unlock(&x.lock);
+    return err;
+    }
+// Routing Header type 2 is inserted.
+// IP Header's dst address is replaced with Routing Header's Home Address.
+//
+#[no_mangle]
+unsafe extern "C" fn mip6_rthdr_output(x: *mut xfrm_state, skb: *mut sk_buff) -> c_int {
+    static int mip6_rthdr_output(struct xfrm_state *x, struct sk_buff *skb)
+    {
+    struct ipv6hdr *iph;
+    struct rt2_hdr *rt2;
+    u8 nexthdr;
+    skb_push(skb, -skb_network_offset(skb));
+    iph = ipv6_hdr(skb);
+    nexthdr = *skb_mac_header(skb);
+// skb_mac_header(skb) = IPPROTO_ROUTING;
+    rt2 = (struct rt2_hdr *)skb_transport_header(skb);
+    rt2.rt_hdr.nexthdr = nexthdr;
+    rt2.rt_hdr.hdrlen = (x.props.header_len >> 3) - 1;
+    rt2.rt_hdr.type = IPV6_SRCRT_TYPE_2;
+    rt2.rt_hdr.segments_left = 1;
+    memset(&rt2.reserved, 0, sizeof(rt2.reserved));
+    WARN_ON(rt2.rt_hdr.hdrlen != 2);
+    memcpy(&rt2.addr, &iph.daddr, sizeof(rt2.addr));
+    spin_lock_bh(&x.lock);
+    memcpy(&iph.daddr, x.coaddr, sizeof(iph.daddr));
+    spin_unlock_bh(&x.lock);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn mip6_rthdr_init_state(x: *mut xfrm_state, extack: *mut netlink_ext_ack) -> c_int {
+    static int mip6_rthdr_init_state(struct xfrm_state *x, struct netlink_ext_ack *extack)
+    {
+    if (x.id.spi) {
+    NL_SET_ERR_MSG(extack, "SPI must be 0");
+    return -EINVAL;
+    }
+    if (x.props.mode != XFRM_MODE_ROUTEOPTIMIZATION) {
+    NL_SET_ERR_MSG(extack, "XFRM mode must be XFRM_MODE_ROUTEOPTIMIZATION");
+    return -EINVAL;
+    }
+    x.props.header_len = sizeof(struct rt2_hdr);
+    return 0;
+    }
+//
+// Do nothing about destroying since it has no specific operation for routing
+// header type 2 unlike IPsec protocols.
+//
+#[no_mangle]
+unsafe extern "C" fn mip6_rthdr_destroy(x: *mut xfrm_state) {
+    static void mip6_rthdr_destroy(struct xfrm_state *x)
+    {
+    }
+    static const struct xfrm_type mip6_rthdr_type = {
+    .owner		= THIS_MODULE,
+    .proto		= IPPROTO_ROUTING,
+    .flags		= XFRM_TYPE_NON_FRAGMENT | XFRM_TYPE_REMOTE_COADDR,
+    .init_state	= mip6_rthdr_init_state,
+    .destructor	= mip6_rthdr_destroy,
+    .input		= mip6_rthdr_input,
+    .output		= mip6_rthdr_output,
+    };
+#[no_mangle]
+unsafe extern "C" fn mip6_init() -> int __init {
+    static int __init mip6_init(void)
+    {
+    pr_info("Mobile IPv6\n");
+    if (xfrm_register_type(&mip6_destopt_type, AF_INET6) < 0) {
+    pr_info("%s: can't add xfrm type(destopt)\n", __func__);
+    goto mip6_destopt_xfrm_fail;
+    }
+    if (xfrm_register_type(&mip6_rthdr_type, AF_INET6) < 0) {
+    pr_info("%s: can't add xfrm type(rthdr)\n", __func__);
+    goto mip6_rthdr_xfrm_fail;
+    }
+    if (rawv6_mh_filter_register(mip6_mh_filter) < 0) {
+    pr_info("%s: can't add rawv6 mh filter\n", __func__);
+    goto mip6_rawv6_mh_fail;
+    }
+    return 0;
+    mip6_rawv6_mh_fail:
+    xfrm_unregister_type(&mip6_rthdr_type, AF_INET6);
+    mip6_rthdr_xfrm_fail:
+    xfrm_unregister_type(&mip6_destopt_type, AF_INET6);
+    mip6_destopt_xfrm_fail:
+    return -EAGAIN;
+    }
+#[no_mangle]
+unsafe extern "C" fn mip6_fini() -> void __exit {
+    static void __exit mip6_fini(void)
+    {
+    if (rawv6_mh_filter_unregister(mip6_mh_filter) < 0)
+    pr_info("%s: can't remove rawv6 mh filter\n", __func__);
+    xfrm_unregister_type(&mip6_rthdr_type, AF_INET6);
+    xfrm_unregister_type(&mip6_destopt_type, AF_INET6);
+    }
+    module_init(mip6_init);
+    module_exit(mip6_fini);
+    MODULE_DESCRIPTION("IPv6 Mobility driver");
+    MODULE_LICENSE("GPL");
+    MODULE_ALIAS_XFRM_TYPE(AF_INET6, XFRM_PROTO_DSTOPTS);
+    MODULE_ALIAS_XFRM_TYPE(AF_INET6, XFRM_PROTO_ROUTING);

@@ -1,0 +1,294 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpu/drm/i915/gt/selftest_ring_submission.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: MIT
+//
+// Copyright © 2020 Intel Corporation
+//
+
+    static struct i915_vma *create_wally(struct intel_engine_cs *engine)
+    {
+    struct drm_i915_gem_object *obj;
+    struct i915_vma *vma;
+    u32 *cs;
+    int err;
+    obj = i915_gem_object_create_internal(engine.i915, 4096);
+    if (IS_ERR(obj))
+    return ERR_CAST(obj);
+    vma = i915_vma_instance(obj, engine.gt.vm, core::ptr::null_mut());
+    if (IS_ERR(vma)) {
+    i915_gem_object_put(obj);
+    return vma;
+    }
+    err = i915_vma_pin(vma, 0, 0, PIN_USER | PIN_HIGH);
+    if (err) {
+    i915_gem_object_put(obj);
+    return ERR_PTR(err);
+    }
+    err = i915_vma_sync(vma);
+    if (err) {
+    i915_gem_object_put(obj);
+    return ERR_PTR(err);
+    }
+    cs = i915_gem_object_pin_map_unlocked(obj, I915_MAP_WC);
+    if (IS_ERR(cs)) {
+    i915_gem_object_put(obj);
+    return ERR_CAST(cs);
+    }
+    if (GRAPHICS_VER(engine.i915) >= 6) {
+// cs++ = MI_STORE_DWORD_IMM_GEN4;
+// cs++ = 0;
+    } else if (GRAPHICS_VER(engine.i915) >= 4) {
+// cs++ = MI_STORE_DWORD_IMM_GEN4 | MI_USE_GGTT;
+// cs++ = 0;
+    } else {
+// cs++ = MI_STORE_DWORD_IMM | MI_MEM_VIRTUAL;
+    }
+// cs++ = i915_vma_offset(vma) + 4000;
+// cs++ = STACK_MAGIC;
+// cs++ = MI_BATCH_BUFFER_END;
+    i915_gem_object_flush_map(obj);
+    i915_gem_object_unpin_map(obj);
+    vma.private = intel_context_create(engine); /* dummy residuals */
+    if (IS_ERR(vma.private)) {
+    vma = ERR_CAST(vma.private);
+    i915_gem_object_put(obj);
+    }
+    return vma;
+    }
+#[no_mangle]
+unsafe extern "C" fn context_sync(ce: *mut intel_context) -> c_int {
+    static int context_sync(struct intel_context *ce)
+    {
+    struct i915_request *rq;
+    let mut err: c_int = 0;
+    rq = intel_context_create_request(ce);
+    if (IS_ERR(rq))
+    return PTR_ERR(rq);
+    i915_request_get(rq);
+    i915_request_add(rq);
+    if (i915_request_wait(rq, 0, HZ / 5) < 0)
+    err = -ETIME;
+    i915_request_put(rq);
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn new_context_sync(engine: *mut intel_engine_cs) -> c_int {
+    static int new_context_sync(struct intel_engine_cs *engine)
+    {
+    struct intel_context *ce;
+    int err;
+    ce = intel_context_create(engine);
+    if (IS_ERR(ce))
+    return PTR_ERR(ce);
+    err = context_sync(ce);
+    intel_context_put(ce);
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn mixed_contexts_sync(engine: *mut intel_engine_cs, result: *mut u32) -> c_int {
+    static int mixed_contexts_sync(struct intel_engine_cs *engine, u32 *result)
+    {
+    int pass;
+    int err;
+    for (pass = 0; pass < 2; pass++) {
+    WRITE_ONCE(*result, 0);
+    err = context_sync(engine.kernel_context);
+    if (err || READ_ONCE(*result)) {
+    if (!err) {
+    pr_err("pass[%d] wa_bb emitted for the kernel context\n",
+    pass);
+    err = -EINVAL;
+    }
+    return err;
+    }
+    WRITE_ONCE(*result, 0);
+    err = new_context_sync(engine);
+    if (READ_ONCE(*result) != STACK_MAGIC) {
+    if (!err) {
+    pr_err("pass[%d] wa_bb *NOT* emitted after the kernel context\n",
+    pass);
+    err = -EINVAL;
+    }
+    return err;
+    }
+    WRITE_ONCE(*result, 0);
+    err = new_context_sync(engine);
+    if (READ_ONCE(*result) != STACK_MAGIC) {
+    if (!err) {
+    pr_err("pass[%d] wa_bb *NOT* emitted for the user context switch\n",
+    pass);
+    err = -EINVAL;
+    }
+    return err;
+    }
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn double_context_sync_00(engine: *mut intel_engine_cs, result: *mut u32) -> c_int {
+    static int double_context_sync_00(struct intel_engine_cs *engine, u32 *result)
+    {
+    struct intel_context *ce;
+    int err, i;
+    ce = intel_context_create(engine);
+    if (IS_ERR(ce))
+    return PTR_ERR(ce);
+    for (i = 0; i < 2; i++) {
+    WRITE_ONCE(*result, 0);
+    err = context_sync(ce);
+    if (err)
+    break;
+    }
+    intel_context_put(ce);
+    if (err)
+    return err;
+    if (READ_ONCE(*result)) {
+    pr_err("wa_bb emitted between the same user context\n");
+    return -EINVAL;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn kernel_context_sync_00(engine: *mut intel_engine_cs, result: *mut u32) -> c_int {
+    static int kernel_context_sync_00(struct intel_engine_cs *engine, u32 *result)
+    {
+    struct intel_context *ce;
+    int err, i;
+    ce = intel_context_create(engine);
+    if (IS_ERR(ce))
+    return PTR_ERR(ce);
+    for (i = 0; i < 2; i++) {
+    WRITE_ONCE(*result, 0);
+    err = context_sync(ce);
+    if (err)
+    break;
+    err = context_sync(engine.kernel_context);
+    if (err)
+    break;
+    }
+    intel_context_put(ce);
+    if (err)
+    return err;
+    if (READ_ONCE(*result)) {
+    pr_err("wa_bb emitted between the same user context [with intervening kernel]\n");
+    return -EINVAL;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn __live_ctx_switch_wa(engine: *mut intel_engine_cs) -> c_int {
+    static int __live_ctx_switch_wa(struct intel_engine_cs *engine)
+    {
+    struct i915_vma *bb;
+    u32 *result;
+    int err;
+    bb = create_wally(engine);
+    if (IS_ERR(bb))
+    return PTR_ERR(bb);
+    result = i915_gem_object_pin_map_unlocked(bb.obj, I915_MAP_WC);
+    if (IS_ERR(result)) {
+    intel_context_put(bb.private);
+    i915_vma_unpin_and_release(&bb, 0);
+    return PTR_ERR(result);
+    }
+    result += 1000;
+    engine.wa_ctx.vma = bb;
+    err = mixed_contexts_sync(engine, result);
+    if (err)
+    goto out;
+    err = double_context_sync_00(engine, result);
+    if (err)
+    goto out;
+    err = kernel_context_sync_00(engine, result);
+    if (err)
+    goto out;
+    out:
+    intel_context_put(engine.wa_ctx.vma.private);
+    i915_vma_unpin_and_release(&engine.wa_ctx.vma, I915_VMA_RELEASE_MAP);
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn live_ctx_switch_wa(arg: *mut c_void) -> c_int {
+    static int live_ctx_switch_wa(void *arg)
+    {
+    struct intel_gt *gt = arg;
+    struct intel_engine_cs *engine;
+    enum intel_engine_id id;
+//
+// Exercise the inter-context wa batch.
+//
+// Between each user context we run a wa batch, and since it may
+// have implications for user visible state, we have to check that
+// we do actually execute it.
+//
+// The trick we use is to replace the normal wa batch with a custom
+// one that writes to a marker within it, and we can then look for
+// that marker to confirm if the batch was run when we expect it,
+// and equally important it was wasn't run when we don't!
+//
+    for_each_engine(engine, gt, id) {
+    struct i915_vma *saved_wa;
+    int err;
+    if (!intel_engine_can_store_dword(engine))
+    continue;
+    if (IS_GRAPHICS_VER(gt.i915, 4, 5))
+    continue; /* MI_STORE_DWORD is privileged! */
+    saved_wa = fetch_and_zero(&engine.wa_ctx.vma);
+    intel_engine_pm_get(engine);
+    err = __live_ctx_switch_wa(engine);
+    intel_engine_pm_put(engine);
+    if (igt_flush_test(gt.i915))
+    err = -EIO;
+    engine.wa_ctx.vma = saved_wa;
+    if (err)
+    return err;
+    }
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn intel_ring_submission_live_selftests(i915: *mut drm_i915_private) -> c_int {
+    int intel_ring_submission_live_selftests(struct drm_i915_private *i915)
+    {
+    static const struct i915_subtest tests[] = {
+    SUBTEST(live_ctx_switch_wa),
+    };
+    if (to_gt(i915).submission_method > INTEL_SUBMISSION_RING)
+    return 0;
+    return intel_gt_live_subtests(tests, to_gt(i915));
+    }

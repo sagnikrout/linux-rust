@@ -1,0 +1,263 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/mfd/samsung/s2mu005.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// Copyright (c) 2015 Samsung Electronics Co., Ltd
+// Copyright (c) 2026 Kaustabh Chakraborty <kauschluss@disroot.org>
+// Copyright (c) 2026 Łukasz Lebiedziński <kernel@lvkasz.us>
+//
+
+// S2MU005 registers
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum s2mu005_reg {
+    S2MU005_REG_CHGR_INT1,
+    S2MU005_REG_CHGR_INT1M,
+
+    S2MU005_REG_FLED_INT1,
+    S2MU005_REG_FLED_INT1M,
+
+    S2MU005_REG_MUIC_INT1,
+    S2MU005_REG_MUIC_INT2,
+    S2MU005_REG_MUIC_INT1M,
+    S2MU005_REG_MUIC_INT2M,
+
+    S2MU005_REG_CHGR_STATUS0,
+    S2MU005_REG_CHGR_STATUS1,
+    S2MU005_REG_CHGR_STATUS2,
+    S2MU005_REG_CHGR_STATUS3,
+    S2MU005_REG_CHGR_STATUS4,
+    S2MU005_REG_CHGR_STATUS5,
+    S2MU005_REG_CHGR_CTRL0,
+    S2MU005_REG_CHGR_CTRL1,
+    S2MU005_REG_CHGR_CTRL2,
+    S2MU005_REG_CHGR_CTRL3,
+    S2MU005_REG_CHGR_CTRL4,
+    S2MU005_REG_CHGR_CTRL5,
+    S2MU005_REG_CHGR_CTRL6,
+    S2MU005_REG_CHGR_CTRL7,
+    S2MU005_REG_CHGR_CTRL8,
+    S2MU005_REG_CHGR_CTRL9,
+    S2MU005_REG_CHGR_CTRL10,
+    S2MU005_REG_CHGR_CTRL11,
+    S2MU005_REG_CHGR_CTRL12,
+    S2MU005_REG_CHGR_CTRL13,
+    S2MU005_REG_CHGR_CTRL14,
+    S2MU005_REG_CHGR_CTRL15,
+    S2MU005_REG_CHGR_CTRL16,
+    S2MU005_REG_CHGR_CTRL17,
+    S2MU005_REG_CHGR_CTRL18,
+    S2MU005_REG_CHGR_CTRL19,
+    S2MU005_REG_CHGR_TEST0,
+    S2MU005_REG_CHGR_TEST1,
+    S2MU005_REG_CHGR_TEST2,
+    S2MU005_REG_CHGR_TEST3,
+    S2MU005_REG_CHGR_TEST4,
+    S2MU005_REG_CHGR_TEST5,
+    S2MU005_REG_CHGR_TEST6,
+    S2MU005_REG_CHGR_TEST7,
+    S2MU005_REG_CHGR_TEST8,
+    S2MU005_REG_CHGR_TEST9,
+    S2MU005_REG_CHGR_TEST10,
+
+    S2MU005_REG_FLED_STATUS,
+    S2MU005_REG_FLED_CH0_CTRL0,
+    S2MU005_REG_FLED_CH0_CTRL1,
+    S2MU005_REG_FLED_CH0_CTRL2,
+    S2MU005_REG_FLED_CH0_CTRL3,
+    S2MU005_REG_FLED_CH1_CTRL0,
+    S2MU005_REG_FLED_CH1_CTRL1,
+    S2MU005_REG_FLED_CH1_CTRL2,
+    S2MU005_REG_FLED_CH1_CTRL3,
+    S2MU005_REG_FLED_CTRL0,
+    S2MU005_REG_FLED_CTRL1,
+    S2MU005_REG_FLED_CTRL2,
+    S2MU005_REG_FLED_CTRL3,
+    S2MU005_REG_FLED_CTRL4,
+    S2MU005_REG_FLED_CTRL5,
+    S2MU005_REG_FLED_CTRL6,
+
+    S2MU005_REG_RGB_EN,
+    S2MU005_REG_RGB_CH0_CTRL,
+    S2MU005_REG_RGB_CH1_CTRL,
+    S2MU005_REG_RGB_CH2_CTRL,
+    S2MU005_REG_RGB_CH0_RAMP,
+    S2MU005_REG_RGB_CH0_STAY,
+    S2MU005_REG_RGB_CH1_RAMP,
+    S2MU005_REG_RGB_CH1_STAY,
+    S2MU005_REG_RGB_CH2_RAMP,
+    S2MU005_REG_RGB_CH2_STAY,
+    S2MU005_REG_RGB_TEST0,
+    S2MU005_REG_RGB_CTRL0,
+
+    S2MU005_REG_MUIC_ADC,
+    S2MU005_REG_MUIC_DEV1,
+    S2MU005_REG_MUIC_DEV2,
+    S2MU005_REG_MUIC_DEV3,
+    S2MU005_REG_MUIC_BUTTON1,
+    S2MU005_REG_MUIC_BUTTON2,
+    S2MU005_REG_MUIC_RESET,
+    S2MU005_REG_MUIC_CHGTYPE,
+    S2MU005_REG_MUIC_DEVAPPLE,
+    S2MU005_REG_MUIC_BCDRESCAN,
+    S2MU005_REG_MUIC_TEST1,
+    S2MU005_REG_MUIC_TEST2,
+    S2MU005_REG_MUIC_TEST3,
+
+    S2MU005_REG_ID = 0x73,
+
+    S2MU005_REG_MUIC_CTRL1 = 0xb2,
+    S2MU005_REG_MUIC_TIMERSET1,
+    S2MU005_REG_MUIC_TIMERSET2,
+    S2MU005_REG_MUIC_SWCTRL,
+    S2MU005_REG_MUIC_TIMERSET3,
+    S2MU005_REG_MUIC_CTRL2,
+    S2MU005_REG_MUIC_CTRL3,
+
+    S2MU005_REG_MUIC_LDOADC_L = 0xbf,
+    S2MU005_REG_MUIC_LDOADC_H,
+}
+
+// S2MU005_REG_CHGR_STATUS0
+
+pub const S2MU005_CHGR_STAT_DONE: c_int = 8;
+pub const S2MU005_CHGR_STAT_TOPOFF: c_int = 7;
+pub const S2MU005_CHGR_STAT_DONE_FLAG: c_int = 6;
+pub const S2MU005_CHGR_STAT_CV: c_int = 5;
+pub const S2MU005_CHGR_STAT_CC: c_int = 4;
+pub const S2MU005_CHGR_STAT_COOL_CHG: c_int = 3;
+pub const S2MU005_CHGR_STAT_PRE_CHG: c_int = 2;
+// S2MU005_REG_CHGR_STATUS1
+
+pub const S2MU005_CHGR_VBUS_OVP_OVERVOLT: c_int = 2;
+// S2MU005_REG_CHGR_STATUS2
+
+pub const S2MU005_CHGR_BAT_VOLT_DET: c_int = 7;
+pub const S2MU005_CHGR_BAT_FAST_CHG_DET: c_int = 6;
+pub const S2MU005_CHGR_BAT_COOL_CHG_DET: c_int = 5;
+pub const S2MU005_CHGR_BAT_LOW_CHG: c_int = 2;
+pub const S2MU005_CHGR_BAT_SELF_DISCHG: c_int = 1;
+pub const S2MU005_CHGR_BAT_OVP_DET: c_int = 0;
+// S2MU005_REG_CHGR_STATUS3
+
+pub const S2MU005_CHGR_EVT_WDT_RST: c_int = 6;
+pub const S2MU005_CHGR_EVT_WDT_SUSP: c_int = 5;
+pub const S2MU005_CHGR_EVT_VSYS_VUVLO: c_int = 4;
+pub const S2MU005_CHGR_EVT_VSYS_VOVP: c_int = 3;
+pub const S2MU005_CHGR_EVT_THERM_FOLDBACK: c_int = 2;
+pub const S2MU005_CHGR_EVT_THERM_SHUTDOWN: c_int = 1;
+// S2MU005_REG_CHGR_CTRL0
+
+// S2MU005_REG_CHGR_CTRL1
+
+// S2MU005_REG_CHGR_CTRL2
+
+// S2MU005_REG_CHGR_CTRL4
+
+pub const S2MU005_CHGR_OTG_OCP_1P5A: c_uint = 0x3;
+// S2MU005_REG_CHGR_CTRL5
+
+pub const S2MU005_CHGR_VMID_BOOST_5P1V: c_uint = 0x16;
+// S2MU005_REG_CHGR_CTRL6
+
+// S2MU005_REG_CHGR_CTRL7
+
+// S2MU005_REG_CHGR_CTRL8
+
+// S2MU005_REG_CHGR_CTRL10
+
+// S2MU005_REG_CHGR_CTRL11
+
+pub const S2MU005_CHGR_OSC_BOOST_2MHZ: c_uint = 0x3;
+// S2MU005_REG_CHGR_CTRL12
+
+// S2MU005_REG_CHGR_CTRL15
+
+pub const S2MU005_CHGR_OTG_EN_ON: c_uint = 0x3;
+// S2MU005_REG_FLED_STATUS
+
+// S2MU005_REG_FLED_CHx_CTRL0
+
+// S2MU005_REG_FLED_CHx_CTRL1
+
+// S2MU005_REG_FLED_CHx_CTRL2
+
+// S2MU005_REG_FLED_CHx_CTRL3
+
+// S2MU005_REG_FLED_CTRL1
+
+//
+// S2MU005_REG_FLED_CTRL4 - Rev. EVT0
+// S2MU005_REG_FLED_CTRL6 - Rev. EVT1 and later
+//
+
+// S2MU005_REG_RGB_EN
+
+// S2MU005_REG_RGB_CHx_RAMP
+
+// S2MU005_REG_RGB_CHx_STAY
+
+// S2MU005_REG_MUIC_DEV1
+
+// S2MU005_REG_MUIC_DEV2
+
+// S2MU005_REG_MUIC_DEV3
+
+// S2MU005_REG_MUIC_DEVAPPLE
+
+// S2MU005_REG_ID
+
+// S2MU005_REG_MUIC_SWCTRL
+
+pub const S2MU005_MUIC_DM_DP_UART: c_uint = 0x12;
+pub const S2MU005_MUIC_DM_DP_USB: c_uint = 0x09;
+// S2MU005_REG_MUIC_CTRL1
+
+// S2MU005_REG_MUIC_CTRL3
+
+// S2MU005_REG_MUIC_LDOADC_L and S2MU005_REG_MUIC_LDOADC_H
+
+pub const S2MU005_MUIC_VSET_3P0V: c_uint = 0x1f;
+pub const S2MU005_MUIC_VSET_2P6V: c_uint = 0x0e;
+pub const S2MU005_MUIC_VSET_2P4V: c_uint = 0x0c;
+pub const S2MU005_MUIC_VSET_2P2V: c_uint = 0x0a;
+pub const S2MU005_MUIC_VSET_2P0V: c_uint = 0x08;
+pub const S2MU005_MUIC_VSET_1P5V: c_uint = 0x03;
+pub const S2MU005_MUIC_VSET_1P4V: c_uint = 0x02;
+pub const S2MU005_MUIC_VSET_1P2V: c_uint = 0x00;

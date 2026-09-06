@@ -1,0 +1,354 @@
+//! Automatically rewritten from C to Rust
+//! Source: fs/fuse/control.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+    FUSE: Filesystem in Userspace
+    Copyright (C) 2001-2008  Miklos Szeredi <miklos@szeredi.hu>
+//
+
+pub const FUSE_CTL_SUPER_MAGIC: c_uint = 0x65735543;
+//
+// This is non-NULL when the single instance of the control filesystem
+// exists.  Protected by fuse_mutex
+//
+    static struct super_block *fuse_control_sb;
+    static struct fuse_conn *fuse_ctl_file_conn_get(struct file *file)
+    {
+    struct fuse_conn *fc;
+    mutex_lock(&fuse_mutex);
+    fc = file_inode(file).i_private;
+    if (fc)
+    fc = fuse_conn_get(fc);
+    mutex_unlock(&fuse_mutex);
+    return fc;
+    }
+    static ssize_t fuse_conn_abort_write(struct file *file, const char __user *buf,
+    size_t count, loff_t *ppos)
+    {
+    struct fuse_conn *fc = fuse_ctl_file_conn_get(file);
+    if (fc) {
+    fuse_chan_abort(fc.chan, fc.abort_err);
+    fuse_conn_put(fc);
+    }
+    return count;
+    }
+    static ssize_t fuse_conn_waiting_read(struct file *file, char __user *buf,
+    size_t len, loff_t *ppos)
+    {
+    char tmp[32];
+    size_t size;
+    if (!*ppos) {
+    long value;
+    struct fuse_conn *fc = fuse_ctl_file_conn_get(file);
+    if (!fc)
+    return 0;
+    value = fuse_chan_num_waiting(fc.chan);
+    file.private_data = (void *)value;
+    fuse_conn_put(fc);
+    }
+    size = sprintf(tmp, "%ld\n", (long)file.private_data);
+    return simple_read_from_buffer(buf, len, ppos, tmp, size);
+    }
+    static ssize_t fuse_conn_limit_read(struct file *file, char __user *buf,
+    size_t len, loff_t *ppos, unsigned val)
+    {
+    char tmp[32];
+    let mut size: usize = sprintf(tmp, "%u\n", val);
+    return simple_read_from_buffer(buf, len, ppos, tmp, size);
+    }
+    static ssize_t fuse_conn_limit_write(struct file *file, const char __user *buf,
+    size_t count, loff_t *ppos, unsigned *val,
+    unsigned global_limit)
+    {
+    unsigned long t;
+    let mut limit: unsigned = (1 << 16) - 1;
+    int err;
+    if (*ppos)
+    return -EINVAL;
+    err = kstrtoul_from_user(buf, count, 0, &t);
+    if (err)
+    return err;
+    if (!capable(CAP_SYS_ADMIN))
+    limit = min(limit, global_limit);
+    if (t > limit)
+    return -EINVAL;
+// val = t;
+    return count;
+    }
+    static ssize_t fuse_conn_max_background_read(struct file *file,
+    char __user *buf, size_t len,
+    loff_t *ppos)
+    {
+    struct fuse_conn *fc;
+    unsigned val;
+    fc = fuse_ctl_file_conn_get(file);
+    if (!fc)
+    return 0;
+    val = fuse_chan_max_background(fc.chan);
+    fuse_conn_put(fc);
+    return fuse_conn_limit_read(file, buf, len, ppos, val);
+    }
+    static ssize_t fuse_conn_max_background_write(struct file *file,
+    const char __user *buf,
+    size_t count, loff_t *ppos)
+    {
+    let mut val: c_uint = 0;
+    ssize_t ret;
+    ret = fuse_conn_limit_write(file, buf, count, ppos, &val,
+    max_user_bgreq);
+    if (ret > 0) {
+    struct fuse_conn *fc = fuse_ctl_file_conn_get(file);
+    if (fc) {
+    fuse_chan_max_background_set(fc.chan, val);
+    fuse_conn_put(fc);
+    }
+    }
+    return ret;
+    }
+    static ssize_t fuse_conn_congestion_threshold_read(struct file *file,
+    char __user *buf, size_t len,
+    loff_t *ppos)
+    {
+    struct fuse_conn *fc;
+    unsigned val;
+    fc = fuse_ctl_file_conn_get(file);
+    if (!fc)
+    return 0;
+    val = READ_ONCE(fc.congestion_threshold);
+    fuse_conn_put(fc);
+    return fuse_conn_limit_read(file, buf, len, ppos, val);
+    }
+    static ssize_t fuse_conn_congestion_threshold_write(struct file *file,
+    const char __user *buf,
+    size_t count, loff_t *ppos)
+    {
+    let mut val: c_uint = 0;
+    struct fuse_conn *fc;
+    ssize_t ret;
+    ret = fuse_conn_limit_write(file, buf, count, ppos, &val,
+    max_user_congthresh);
+    if (ret <= 0)
+    goto out;
+    fc = fuse_ctl_file_conn_get(file);
+    if (!fc)
+    goto out;
+    WRITE_ONCE(fc.congestion_threshold, val);
+    fuse_conn_put(fc);
+    out:
+    return ret;
+    }
+    static const struct file_operations fuse_ctl_abort_ops = {
+    .open = nonseekable_open,
+    .write = fuse_conn_abort_write,
+    };
+    static const struct file_operations fuse_ctl_waiting_ops = {
+    .open = nonseekable_open,
+    .read = fuse_conn_waiting_read,
+    };
+    static const struct file_operations fuse_conn_max_background_ops = {
+    .open = nonseekable_open,
+    .read = fuse_conn_max_background_read,
+    .write = fuse_conn_max_background_write,
+    };
+    static const struct file_operations fuse_conn_congestion_threshold_ops = {
+    .open = nonseekable_open,
+    .read = fuse_conn_congestion_threshold_read,
+    .write = fuse_conn_congestion_threshold_write,
+    };
+    static struct dentry *fuse_ctl_add_dentry(struct dentry *parent,
+    struct fuse_conn *fc,
+    const char *name, int mode,
+    const struct inode_operations *iop,
+    const struct file_operations *fop)
+    {
+    struct dentry *dentry;
+    struct inode *inode;
+    dentry = d_alloc_name(parent, name);
+    if (!dentry)
+    return core::ptr::null_mut();
+    inode = new_inode(fuse_control_sb);
+    if (!inode) {
+    dput(dentry);
+    return core::ptr::null_mut();
+    }
+    inode.i_ino = get_next_ino();
+    inode.i_mode = mode;
+    inode.i_uid = fc.user_id;
+    inode.i_gid = fc.group_id;
+    simple_inode_init_ts(inode);
+// setting ->i_op to NULL is not allowed
+    if (iop)
+    inode.i_op = iop;
+    inode.i_fop = fop;
+    if (S_ISDIR(mode)) {
+    inc_nlink(d_inode(parent));
+    inc_nlink(inode);
+    }
+    inode.i_private = fc;
+    d_make_persistent(dentry, inode);
+    dput(dentry);
+//
+// We are returning a borrowed reference here - it's only good while
+// fuse_mutex is held.  Actually it's d_make_persistent() return
+// value...
+//
+    return dentry;
+    }
+//
+// Add a connection to the control filesystem (if it exists).  Caller
+// must hold fuse_mutex
+//
+#[no_mangle]
+pub unsafe extern "C" fn fuse_ctl_add_conn(fc: *mut fuse_conn) -> c_int {
+    int fuse_ctl_add_conn(struct fuse_conn *fc)
+    {
+    struct dentry *parent;
+    char name[32];
+    if (!fuse_control_sb || fc.no_control)
+    return 0;
+    parent = fuse_control_sb.s_root;
+    sprintf(name, "%u", fc.dev);
+    parent = fuse_ctl_add_dentry(parent, fc, name, S_IFDIR | 0500,
+    &simple_dir_inode_operations,
+    &simple_dir_operations);
+    if (!parent)
+    goto err;
+    if (!fuse_ctl_add_dentry(parent, fc, "waiting", S_IFREG | 0400,
+    core::ptr::null_mut(), &fuse_ctl_waiting_ops) ||
+    !fuse_ctl_add_dentry(parent, fc, "abort", S_IFREG | 0200,
+    core::ptr::null_mut(), &fuse_ctl_abort_ops) ||
+    !fuse_ctl_add_dentry(parent, fc, "max_background", S_IFREG | 0600,
+    core::ptr::null_mut(), &fuse_conn_max_background_ops) ||
+    !fuse_ctl_add_dentry(parent, fc, "congestion_threshold",
+    S_IFREG | 0600, core::ptr::null_mut(),
+    &fuse_conn_congestion_threshold_ops))
+    goto err;
+    return 0;
+    err:
+    fuse_ctl_remove_conn(fc);
+    return -ENOMEM;
+    }
+#[no_mangle]
+unsafe extern "C" fn remove_one(dentry: *mut dentry) {
+    static void remove_one(struct dentry *dentry)
+    {
+    d_inode(dentry).i_private = core::ptr::null_mut();
+    }
+//
+// Remove a connection from the control filesystem (if it exists).
+// Caller must hold fuse_mutex
+//
+#[no_mangle]
+pub unsafe extern "C" fn fuse_ctl_remove_conn(fc: *mut fuse_conn) {
+    void fuse_ctl_remove_conn(struct fuse_conn *fc)
+    {
+    char name[32];
+    if (!fuse_control_sb || fc.no_control)
+    return;
+    sprintf(name, "%u", fc.dev);
+    simple_remove_by_name(fuse_control_sb.s_root, name, remove_one);
+    }
+#[no_mangle]
+unsafe extern "C" fn fuse_ctl_fill_super(sb: *mut super_block, fsc: *mut fs_context) -> c_int {
+    static int fuse_ctl_fill_super(struct super_block *sb, struct fs_context *fsc)
+    {
+    let mut empty_descr: static struct tree_descr = {""};
+    struct fuse_conn *fc;
+    int err;
+    err = simple_fill_super(sb, FUSE_CTL_SUPER_MAGIC, &empty_descr);
+    if (err)
+    return err;
+    mutex_lock(&fuse_mutex);
+    BUG_ON(fuse_control_sb);
+    fuse_control_sb = sb;
+    list_for_each_entry(fc, &fuse_conn_list, entry) {
+    err = fuse_ctl_add_conn(fc);
+    if (err) {
+    fuse_control_sb = core::ptr::null_mut();
+    mutex_unlock(&fuse_mutex);
+    return err;
+    }
+    }
+    mutex_unlock(&fuse_mutex);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn fuse_ctl_get_tree(fsc: *mut fs_context) -> c_int {
+    static int fuse_ctl_get_tree(struct fs_context *fsc)
+    {
+    return get_tree_single(fsc, fuse_ctl_fill_super);
+    }
+    static const struct fs_context_operations fuse_ctl_context_ops = {
+    .get_tree	= fuse_ctl_get_tree,
+    };
+#[no_mangle]
+unsafe extern "C" fn fuse_ctl_init_fs_context(fsc: *mut fs_context) -> c_int {
+    static int fuse_ctl_init_fs_context(struct fs_context *fsc)
+    {
+    fsc.ops = &fuse_ctl_context_ops;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn fuse_ctl_kill_sb(sb: *mut super_block) {
+    static void fuse_ctl_kill_sb(struct super_block *sb)
+    {
+    mutex_lock(&fuse_mutex);
+    fuse_control_sb = core::ptr::null_mut();
+    mutex_unlock(&fuse_mutex);
+    kill_anon_super(sb);
+    }
+    static struct file_system_type fuse_ctl_fs_type = {
+    .owner		= THIS_MODULE,
+    .name		= "fusectl",
+    .init_fs_context = fuse_ctl_init_fs_context,
+    .kill_sb	= fuse_ctl_kill_sb,
+    };
+    MODULE_ALIAS_FS("fusectl");
+#[no_mangle]
+pub unsafe extern "C" fn fuse_ctl_init() -> int __init {
+    int __init fuse_ctl_init(void)
+    {
+    return register_filesystem(&fuse_ctl_fs_type);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn fuse_ctl_cleanup() -> void __exit {
+    void __exit fuse_ctl_cleanup(void)
+    {
+    unregister_filesystem(&fuse_ctl_fs_type);
+    }

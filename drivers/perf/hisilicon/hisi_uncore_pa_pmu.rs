@@ -1,0 +1,522 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/perf/hisilicon/hisi_uncore_pa_pmu.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// HiSilicon PA uncore Hardware event counters support
+//
+// Copyright (C) 2020 HiSilicon Limited
+// Author: Shaokun Zhang <zhangshaokun@hisilicon.com>
+//
+// This code is based on the uncore PMUs like arm-cci and arm-ccn.
+//
+
+// PA register definition
+pub const PA_PERF_CTRL: c_uint = 0x1c00;
+pub const PA_EVENT_CTRL: c_uint = 0x1c04;
+pub const PA_TT_CTRL: c_uint = 0x1c08;
+pub const PA_TGTID_CTRL: c_uint = 0x1c14;
+pub const PA_SRCID_CTRL: c_uint = 0x1c18;
+// H32 PA interrupt registers
+pub const PA_INT_MASK: c_uint = 0x1c70;
+pub const PA_INT_STATUS: c_uint = 0x1c78;
+pub const PA_INT_CLEAR: c_uint = 0x1c7c;
+pub const H60PA_INT_STATUS: c_uint = 0x1c70;
+pub const H60PA_INT_MASK: c_uint = 0x1c74;
+pub const PA_EVENT_TYPE0: c_uint = 0x1c80;
+pub const PA_PMU_VERSION: c_uint = 0x1cf0;
+pub const PA_EVENT_CNT0_L: c_uint = 0x1d00;
+pub const PA_EVTYPE_MASK: c_uint = 0xff;
+pub const PA_NR_COUNTERS: c_uint = 0x8;
+
+pub const PA_TGTID_NONE: c_int = 0;
+pub const PA_SRCID_NONE: c_int = 0;
+pub const PA_TGTID_MSK_SHIFT: c_int = 12;
+pub const PA_SRCID_MSK_SHIFT: c_int = 12;
+    HISI_PMU_EVENT_ATTR_EXTRACTOR(tgtid_cmd, config1, 10, 0);
+    HISI_PMU_EVENT_ATTR_EXTRACTOR(tgtid_msk, config1, 21, 11);
+    HISI_PMU_EVENT_ATTR_EXTRACTOR(srcid_cmd, config1, 32, 22);
+    HISI_PMU_EVENT_ATTR_EXTRACTOR(srcid_msk, config1, 43, 33);
+    HISI_PMU_EVENT_ATTR_EXTRACTOR(tracetag_en, config1, 44, 44);
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hisi_pa_pmu_int_regs {
+    pub mask_offset: u32,
+    pub clear_offset: u32,
+    pub status_offset: u32,
+}
+
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_enable_tracetag(event: *mut perf_event) {
+    static void hisi_pa_pmu_enable_tracetag(struct perf_event *event)
+    {
+    struct hisi_pmu *pa_pmu = to_hisi_pmu(event.pmu);
+    let mut tt_en: u32 = hisi_get_tracetag_en(event);
+    if (tt_en) {
+    u32 val;
+    val = readl(pa_pmu.base + PA_TT_CTRL);
+    val |= PA_TRACETAG_EN;
+    writel(val, pa_pmu.base + PA_TT_CTRL);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_clear_tracetag(event: *mut perf_event) {
+    static void hisi_pa_pmu_clear_tracetag(struct perf_event *event)
+    {
+    struct hisi_pmu *pa_pmu = to_hisi_pmu(event.pmu);
+    let mut tt_en: u32 = hisi_get_tracetag_en(event);
+    if (tt_en) {
+    u32 val;
+    val = readl(pa_pmu.base + PA_TT_CTRL);
+    val &= ~PA_TRACETAG_EN;
+    writel(val, pa_pmu.base + PA_TT_CTRL);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_config_tgtid(event: *mut perf_event) {
+    static void hisi_pa_pmu_config_tgtid(struct perf_event *event)
+    {
+    struct hisi_pmu *pa_pmu = to_hisi_pmu(event.pmu);
+    let mut cmd: u32 = hisi_get_tgtid_cmd(event);
+    if (cmd) {
+    let mut msk: u32 = hisi_get_tgtid_msk(event);
+    let mut val: u32 = cmd | PA_TGTID_EN | (msk << PA_TGTID_MSK_SHIFT);
+    writel(val, pa_pmu.base + PA_TGTID_CTRL);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_clear_tgtid(event: *mut perf_event) {
+    static void hisi_pa_pmu_clear_tgtid(struct perf_event *event)
+    {
+    struct hisi_pmu *pa_pmu = to_hisi_pmu(event.pmu);
+    let mut cmd: u32 = hisi_get_tgtid_cmd(event);
+    if (cmd)
+    writel(PA_TGTID_NONE, pa_pmu.base + PA_TGTID_CTRL);
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_config_srcid(event: *mut perf_event) {
+    static void hisi_pa_pmu_config_srcid(struct perf_event *event)
+    {
+    struct hisi_pmu *pa_pmu = to_hisi_pmu(event.pmu);
+    let mut cmd: u32 = hisi_get_srcid_cmd(event);
+    if (cmd) {
+    let mut msk: u32 = hisi_get_srcid_msk(event);
+    let mut val: u32 = cmd | PA_SRCID_EN | (msk << PA_SRCID_MSK_SHIFT);
+    writel(val, pa_pmu.base + PA_SRCID_CTRL);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_clear_srcid(event: *mut perf_event) {
+    static void hisi_pa_pmu_clear_srcid(struct perf_event *event)
+    {
+    struct hisi_pmu *pa_pmu = to_hisi_pmu(event.pmu);
+    let mut cmd: u32 = hisi_get_srcid_cmd(event);
+    if (cmd)
+    writel(PA_SRCID_NONE, pa_pmu.base + PA_SRCID_CTRL);
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_enable_filter(event: *mut perf_event) {
+    static void hisi_pa_pmu_enable_filter(struct perf_event *event)
+    {
+    if (event.attr.config1 != 0x0) {
+    hisi_pa_pmu_enable_tracetag(event);
+    hisi_pa_pmu_config_srcid(event);
+    hisi_pa_pmu_config_tgtid(event);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_disable_filter(event: *mut perf_event) {
+    static void hisi_pa_pmu_disable_filter(struct perf_event *event)
+    {
+    if (event.attr.config1 != 0x0) {
+    hisi_pa_pmu_clear_tgtid(event);
+    hisi_pa_pmu_clear_srcid(event);
+    hisi_pa_pmu_clear_tracetag(event);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_get_counter_offset(idx: c_int) -> u32 {
+    static u32 hisi_pa_pmu_get_counter_offset(int idx)
+    {
+    return (PA_EVENT_CNT0_L + idx * 8);
+    }
+    static u64 hisi_pa_pmu_read_counter(struct hisi_pmu *pa_pmu,
+    struct hw_perf_event *hwc)
+    {
+    return readq(pa_pmu.base + hisi_pa_pmu_get_counter_offset(hwc.idx));
+    }
+    static void hisi_pa_pmu_write_counter(struct hisi_pmu *pa_pmu,
+    struct hw_perf_event *hwc, u64 val)
+    {
+    writeq(val, pa_pmu.base + hisi_pa_pmu_get_counter_offset(hwc.idx));
+    }
+    static void hisi_pa_pmu_write_evtype(struct hisi_pmu *pa_pmu, int idx,
+    u32 type)
+    {
+    u32 reg, reg_idx, shift, val;
+//
+// Select the appropriate event select register(PA_EVENT_TYPE0/1).
+// There are 2 event select registers for the 8 hardware counters.
+// Event code is 8-bits and for the former 4 hardware counters,
+// PA_EVENT_TYPE0 is chosen. For the latter 4 hardware counters,
+// PA_EVENT_TYPE1 is chosen.
+//
+    reg = PA_EVENT_TYPE0 + (idx / 4) * 4;
+    reg_idx = idx % 4;
+    shift = 8 * reg_idx;
+// Write event code to pa_EVENT_TYPEx Register
+    val = readl(pa_pmu.base + reg);
+    val &= ~(PA_EVTYPE_MASK << shift);
+    val |= (type << shift);
+    writel(val, pa_pmu.base + reg);
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_start_counters(pa_pmu: *mut hisi_pmu) {
+    static void hisi_pa_pmu_start_counters(struct hisi_pmu *pa_pmu)
+    {
+    u32 val;
+    val = readl(pa_pmu.base + PA_PERF_CTRL);
+    val |= PA_PERF_CTRL_EN;
+    writel(val, pa_pmu.base + PA_PERF_CTRL);
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_stop_counters(pa_pmu: *mut hisi_pmu) {
+    static void hisi_pa_pmu_stop_counters(struct hisi_pmu *pa_pmu)
+    {
+    u32 val;
+    val = readl(pa_pmu.base + PA_PERF_CTRL);
+    val &= ~(PA_PERF_CTRL_EN);
+    writel(val, pa_pmu.base + PA_PERF_CTRL);
+    }
+    static void hisi_pa_pmu_enable_counter(struct hisi_pmu *pa_pmu,
+    struct hw_perf_event *hwc)
+    {
+    u32 val;
+// Enable counter index in PA_EVENT_CTRL register
+    val = readl(pa_pmu.base + PA_EVENT_CTRL);
+    val |= 1 << hwc.idx;
+    writel(val, pa_pmu.base + PA_EVENT_CTRL);
+    }
+    static void hisi_pa_pmu_disable_counter(struct hisi_pmu *pa_pmu,
+    struct hw_perf_event *hwc)
+    {
+    u32 val;
+// Clear counter index in PA_EVENT_CTRL register
+    val = readl(pa_pmu.base + PA_EVENT_CTRL);
+    val &= ~(1 << hwc.idx);
+    writel(val, pa_pmu.base + PA_EVENT_CTRL);
+    }
+    static void hisi_pa_pmu_enable_counter_int(struct hisi_pmu *pa_pmu,
+    struct hw_perf_event *hwc)
+    {
+    struct hisi_pa_pmu_int_regs *regs = pa_pmu.dev_info.private;
+    u32 val;
+// Write 0 to enable interrupt
+    val = readl(pa_pmu.base + regs.mask_offset);
+    val &= ~(1 << hwc.idx);
+    writel(val, pa_pmu.base + regs.mask_offset);
+    }
+    static void hisi_pa_pmu_disable_counter_int(struct hisi_pmu *pa_pmu,
+    struct hw_perf_event *hwc)
+    {
+    struct hisi_pa_pmu_int_regs *regs = pa_pmu.dev_info.private;
+    u32 val;
+// Write 1 to mask interrupt
+    val = readl(pa_pmu.base + regs.mask_offset);
+    val |= 1 << hwc.idx;
+    writel(val, pa_pmu.base + regs.mask_offset);
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_get_int_status(pa_pmu: *mut hisi_pmu) -> u32 {
+    static u32 hisi_pa_pmu_get_int_status(struct hisi_pmu *pa_pmu)
+    {
+    struct hisi_pa_pmu_int_regs *regs = pa_pmu.dev_info.private;
+    return readl(pa_pmu.base + regs.status_offset);
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_clear_int_status(pa_pmu: *mut hisi_pmu, idx: c_int) {
+    static void hisi_pa_pmu_clear_int_status(struct hisi_pmu *pa_pmu, int idx)
+    {
+    struct hisi_pa_pmu_int_regs *regs = pa_pmu.dev_info.private;
+    writel(1 << idx, pa_pmu.base + regs.clear_offset);
+    }
+    static int hisi_pa_pmu_init_data(struct platform_device *pdev,
+    struct hisi_pmu *pa_pmu)
+    {
+    hisi_uncore_pmu_init_topology(pa_pmu, &pdev.dev);
+//
+// As PA PMU is in a SICL, use the SICL_ID and the index ID
+// to identify the PA PMU.
+//
+    if (pa_pmu.topo.sicl_id < 0) {
+    dev_err(&pdev.dev, "Cannot read sicl-id!\n");
+    return -EINVAL;
+    }
+    if (pa_pmu.topo.index_id < 0) {
+    dev_err(&pdev.dev, "Cannot read idx-id!\n");
+    return -EINVAL;
+    }
+    pa_pmu.dev_info = device_get_match_data(&pdev.dev);
+    if (!pa_pmu.dev_info)
+    return -ENODEV;
+    pa_pmu.base = devm_platform_ioremap_resource(pdev, 0);
+    if (IS_ERR(pa_pmu.base)) {
+    dev_err(&pdev.dev, "ioremap failed for pa_pmu resource.\n");
+    return PTR_ERR(pa_pmu.base);
+    }
+    pa_pmu.identifier = readl(pa_pmu.base + PA_PMU_VERSION);
+    return 0;
+    }
+    static struct attribute *hisi_pa_pmu_v2_format_attr[] = {
+    HISI_PMU_FORMAT_ATTR(event, "config:0-7"),
+    HISI_PMU_FORMAT_ATTR(tgtid_cmd, "config1:0-10"),
+    HISI_PMU_FORMAT_ATTR(tgtid_msk, "config1:11-21"),
+    HISI_PMU_FORMAT_ATTR(srcid_cmd, "config1:22-32"),
+    HISI_PMU_FORMAT_ATTR(srcid_msk, "config1:33-43"),
+    HISI_PMU_FORMAT_ATTR(tracetag_en, "config1:44"),
+    core::ptr::null_mut(),
+    };
+    static const struct attribute_group hisi_pa_pmu_v2_format_group = {
+    .name = "format",
+    .attrs = hisi_pa_pmu_v2_format_attr,
+    };
+    static struct attribute *hisi_pa_pmu_v2_events_attr[] = {
+    HISI_PMU_EVENT_ATTR(rx_req,		0x40),
+    HISI_PMU_EVENT_ATTR(tx_req,             0x5c),
+    HISI_PMU_EVENT_ATTR(cycle,		0x78),
+    core::ptr::null_mut()
+    };
+    static const struct attribute_group hisi_pa_pmu_v2_events_group = {
+    .name = "events",
+    .attrs = hisi_pa_pmu_v2_events_attr,
+    };
+    static struct attribute *hisi_pa_pmu_v3_events_attr[] = {
+    HISI_PMU_EVENT_ATTR(tx_req,	0x0),
+    HISI_PMU_EVENT_ATTR(tx_dat,	0x1),
+    HISI_PMU_EVENT_ATTR(tx_snp,	0x2),
+    HISI_PMU_EVENT_ATTR(rx_req,	0x7),
+    HISI_PMU_EVENT_ATTR(rx_dat,	0x8),
+    HISI_PMU_EVENT_ATTR(rx_snp,	0x9),
+    core::ptr::null_mut()
+    };
+    static const struct attribute_group hisi_pa_pmu_v3_events_group = {
+    .name = "events",
+    .attrs = hisi_pa_pmu_v3_events_attr,
+    };
+    static struct attribute *hisi_h60pa_pmu_events_attr[] = {
+    HISI_PMU_EVENT_ATTR(rx_flit,	0x50),
+    HISI_PMU_EVENT_ATTR(tx_flit,	0x65),
+    core::ptr::null_mut()
+    };
+    static const struct attribute_group hisi_h60pa_pmu_events_group = {
+    .name = "events",
+    .attrs = hisi_h60pa_pmu_events_attr,
+    };
+    static struct hisi_pa_pmu_int_regs hisi_pa_pmu_regs = {
+    .mask_offset = PA_INT_MASK,
+    .clear_offset = PA_INT_CLEAR,
+    .status_offset = PA_INT_STATUS,
+    };
+    static const struct attribute_group *hisi_pa_pmu_v2_attr_groups[] = {
+    &hisi_pa_pmu_v2_format_group,
+    &hisi_pa_pmu_v2_events_group,
+    &hisi_pmu_cpumask_attr_group,
+    &hisi_pmu_identifier_group,
+    core::ptr::null_mut()
+    };
+    static const struct hisi_pmu_dev_info hisi_h32pa_v2 = {
+    .name = "pa",
+    .attr_groups = hisi_pa_pmu_v2_attr_groups,
+    .private = &hisi_pa_pmu_regs,
+    };
+    static const struct attribute_group *hisi_pa_pmu_v3_attr_groups[] = {
+    &hisi_pa_pmu_v2_format_group,
+    &hisi_pa_pmu_v3_events_group,
+    &hisi_pmu_cpumask_attr_group,
+    &hisi_pmu_identifier_group,
+    core::ptr::null_mut()
+    };
+    static const struct hisi_pmu_dev_info hisi_h32pa_v3 = {
+    .name = "pa",
+    .attr_groups = hisi_pa_pmu_v3_attr_groups,
+    .private = &hisi_pa_pmu_regs,
+    };
+    static struct hisi_pa_pmu_int_regs hisi_h60pa_pmu_regs = {
+    .mask_offset = H60PA_INT_MASK,
+    .clear_offset = H60PA_INT_STATUS, /* Clear on write */
+    .status_offset = H60PA_INT_STATUS,
+    };
+    static const struct attribute_group *hisi_h60pa_pmu_attr_groups[] = {
+    &hisi_pa_pmu_v2_format_group,
+    &hisi_h60pa_pmu_events_group,
+    &hisi_pmu_cpumask_attr_group,
+    &hisi_pmu_identifier_group,
+    core::ptr::null_mut()
+    };
+    static const struct hisi_pmu_dev_info hisi_h60pa = {
+    .name = "h60pa",
+    .attr_groups = hisi_h60pa_pmu_attr_groups,
+    .private = &hisi_h60pa_pmu_regs,
+    };
+    static const struct hisi_uncore_ops hisi_uncore_pa_ops = {
+    .write_evtype		= hisi_pa_pmu_write_evtype,
+    .get_event_idx		= hisi_uncore_pmu_get_event_idx,
+    .start_counters		= hisi_pa_pmu_start_counters,
+    .stop_counters		= hisi_pa_pmu_stop_counters,
+    .enable_counter		= hisi_pa_pmu_enable_counter,
+    .disable_counter	= hisi_pa_pmu_disable_counter,
+    .enable_counter_int	= hisi_pa_pmu_enable_counter_int,
+    .disable_counter_int	= hisi_pa_pmu_disable_counter_int,
+    .write_counter		= hisi_pa_pmu_write_counter,
+    .read_counter		= hisi_pa_pmu_read_counter,
+    .get_int_status		= hisi_pa_pmu_get_int_status,
+    .clear_int_status	= hisi_pa_pmu_clear_int_status,
+    .enable_filter		= hisi_pa_pmu_enable_filter,
+    .disable_filter		= hisi_pa_pmu_disable_filter,
+    };
+    static int hisi_pa_pmu_dev_probe(struct platform_device *pdev,
+    struct hisi_pmu *pa_pmu)
+    {
+    int ret;
+    ret = hisi_pa_pmu_init_data(pdev, pa_pmu);
+    if (ret)
+    return ret;
+    ret = hisi_uncore_pmu_init_irq(pa_pmu, pdev);
+    if (ret)
+    return ret;
+    pa_pmu.pmu_events.attr_groups = pa_pmu.dev_info.attr_groups;
+    pa_pmu.num_counters = PA_NR_COUNTERS;
+    pa_pmu.ops = &hisi_uncore_pa_ops;
+    pa_pmu.check_event = PA_EVTYPE_MASK;
+    pa_pmu.counter_bits = 64;
+    pa_pmu.dev = &pdev.dev;
+    pa_pmu.on_cpu = -1;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_probe(pdev: *mut platform_device) -> c_int {
+    static int hisi_pa_pmu_probe(struct platform_device *pdev)
+    {
+    struct hisi_pmu *pa_pmu;
+    char *name;
+    int ret;
+    pa_pmu = devm_kzalloc(&pdev.dev, sizeof(*pa_pmu), GFP_KERNEL);
+    if (!pa_pmu)
+    return -ENOMEM;
+    ret = hisi_pa_pmu_dev_probe(pdev, pa_pmu);
+    if (ret)
+    return ret;
+    name = devm_kasprintf(&pdev.dev, GFP_KERNEL, "hisi_sicl%d_%s%d",
+    pa_pmu.topo.sicl_id, pa_pmu.dev_info.name,
+    pa_pmu.topo.index_id);
+    if (!name)
+    return -ENOMEM;
+    ret = cpuhp_state_add_instance(CPUHP_AP_PERF_ARM_HISI_PA_ONLINE,
+    &pa_pmu.node);
+    if (ret) {
+    dev_err(&pdev.dev, "Error %d registering hotplug\n", ret);
+    return ret;
+    }
+    hisi_pmu_init(pa_pmu, THIS_MODULE);
+    ret = perf_pmu_register(&pa_pmu.pmu, name, -1);
+    if (ret) {
+    dev_err(pa_pmu.dev, "PMU register failed, ret = %d\n", ret);
+    cpuhp_state_remove_instance_nocalls(CPUHP_AP_PERF_ARM_HISI_PA_ONLINE,
+    &pa_pmu.node);
+    return ret;
+    }
+    platform_set_drvdata(pdev, pa_pmu);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_remove(pdev: *mut platform_device) {
+    static void hisi_pa_pmu_remove(struct platform_device *pdev)
+    {
+    struct hisi_pmu *pa_pmu = platform_get_drvdata(pdev);
+    perf_pmu_unregister(&pa_pmu.pmu);
+    cpuhp_state_remove_instance_nocalls(CPUHP_AP_PERF_ARM_HISI_PA_ONLINE,
+    &pa_pmu.node);
+    }
+    static const struct acpi_device_id hisi_pa_pmu_acpi_match[] = {
+    { "HISI0273", (kernel_ulong_t)&hisi_h32pa_v2 },
+    { "HISI0275", (kernel_ulong_t)&hisi_h32pa_v3 },
+    { "HISI0274", (kernel_ulong_t)&hisi_h60pa },
+    {}
+    };
+    MODULE_DEVICE_TABLE(acpi, hisi_pa_pmu_acpi_match);
+    static struct platform_driver hisi_pa_pmu_driver = {
+    .driver = {
+    .name = "hisi_pa_pmu",
+    .acpi_match_table = hisi_pa_pmu_acpi_match,
+    .suppress_bind_attrs = true,
+    },
+    .probe = hisi_pa_pmu_probe,
+    .remove = hisi_pa_pmu_remove,
+    };
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_module_init() -> int __init {
+    static int __init hisi_pa_pmu_module_init(void)
+    {
+    int ret;
+    ret = cpuhp_setup_state_multi(CPUHP_AP_PERF_ARM_HISI_PA_ONLINE,
+    "AP_PERF_ARM_HISI_PA_ONLINE",
+    hisi_uncore_pmu_online_cpu,
+    hisi_uncore_pmu_offline_cpu);
+    if (ret) {
+    pr_err("PA PMU: cpuhp state setup failed, ret = %d\n", ret);
+    return ret;
+    }
+    ret = platform_driver_register(&hisi_pa_pmu_driver);
+    if (ret)
+    cpuhp_remove_multi_state(CPUHP_AP_PERF_ARM_HISI_PA_ONLINE);
+    return ret;
+    }
+    module_init(hisi_pa_pmu_module_init);
+#[no_mangle]
+unsafe extern "C" fn hisi_pa_pmu_module_exit() -> void __exit {
+    static void __exit hisi_pa_pmu_module_exit(void)
+    {
+    platform_driver_unregister(&hisi_pa_pmu_driver);
+    cpuhp_remove_multi_state(CPUHP_AP_PERF_ARM_HISI_PA_ONLINE);
+    }
+    module_exit(hisi_pa_pmu_module_exit);
+    MODULE_IMPORT_NS("HISI_PMU");
+    MODULE_DESCRIPTION("HiSilicon Protocol Adapter uncore PMU driver");
+    MODULE_LICENSE("GPL v2");
+    MODULE_AUTHOR("Shaokun Zhang <zhangshaokun@hisilicon.com>");
+    MODULE_AUTHOR("Qi Liu <liuqi115@huawei.com>");

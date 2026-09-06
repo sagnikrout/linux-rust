@@ -1,0 +1,494 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/regulator/slg51000-regulator.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// SLG51000 High PSRR, Multi-Output Regulators
+// Copyright (C) 2019  Dialog Semiconductor
+//
+// Author: Eric Jeong <eric.jeong.opensource@diasemi.com>
+//
+// Registers
+pub const SLG51000_SYSCTL_PATN_ID_B0: c_uint = 0x1105;
+pub const SLG51000_SYSCTL_PATN_ID_B1: c_uint = 0x1106;
+pub const SLG51000_SYSCTL_PATN_ID_B2: c_uint = 0x1107;
+pub const SLG51000_SYSCTL_SYS_CONF_A: c_uint = 0x1109;
+pub const SLG51000_SYSCTL_SYS_CONF_D: c_uint = 0x110c;
+pub const SLG51000_SYSCTL_MATRIX_CONF_A: c_uint = 0x110d;
+pub const SLG51000_SYSCTL_MATRIX_CONF_B: c_uint = 0x110e;
+pub const SLG51000_SYSCTL_REFGEN_CONF_C: c_uint = 0x1111;
+pub const SLG51000_SYSCTL_UVLO_CONF_A: c_uint = 0x1112;
+pub const SLG51000_SYSCTL_FAULT_LOG1: c_uint = 0x1115;
+pub const SLG51000_SYSCTL_EVENT: c_uint = 0x1116;
+pub const SLG51000_SYSCTL_STATUS: c_uint = 0x1117;
+pub const SLG51000_SYSCTL_IRQ_MASK: c_uint = 0x1118;
+pub const SLG51000_IO_GPIO1_CONF: c_uint = 0x1500;
+pub const SLG51000_IO_GPIO2_CONF: c_uint = 0x1501;
+pub const SLG51000_IO_GPIO3_CONF: c_uint = 0x1502;
+pub const SLG51000_IO_GPIO4_CONF: c_uint = 0x1503;
+pub const SLG51000_IO_GPIO5_CONF: c_uint = 0x1504;
+pub const SLG51000_IO_GPIO6_CONF: c_uint = 0x1505;
+pub const SLG51000_IO_GPIO_STATUS: c_uint = 0x1506;
+pub const SLG51000_LUTARRAY_LUT_VAL_0: c_uint = 0x1600;
+pub const SLG51000_LUTARRAY_LUT_VAL_1: c_uint = 0x1601;
+pub const SLG51000_LUTARRAY_LUT_VAL_2: c_uint = 0x1602;
+pub const SLG51000_LUTARRAY_LUT_VAL_3: c_uint = 0x1603;
+pub const SLG51000_LUTARRAY_LUT_VAL_4: c_uint = 0x1604;
+pub const SLG51000_LUTARRAY_LUT_VAL_5: c_uint = 0x1605;
+pub const SLG51000_LUTARRAY_LUT_VAL_6: c_uint = 0x1606;
+pub const SLG51000_LUTARRAY_LUT_VAL_7: c_uint = 0x1607;
+pub const SLG51000_LUTARRAY_LUT_VAL_8: c_uint = 0x1608;
+pub const SLG51000_LUTARRAY_LUT_VAL_9: c_uint = 0x1609;
+pub const SLG51000_LUTARRAY_LUT_VAL_10: c_uint = 0x160a;
+pub const SLG51000_LUTARRAY_LUT_VAL_11: c_uint = 0x160b;
+pub const SLG51000_MUXARRAY_INPUT_SEL_0: c_uint = 0x1700;
+pub const SLG51000_MUXARRAY_INPUT_SEL_1: c_uint = 0x1701;
+pub const SLG51000_MUXARRAY_INPUT_SEL_2: c_uint = 0x1702;
+pub const SLG51000_MUXARRAY_INPUT_SEL_3: c_uint = 0x1703;
+pub const SLG51000_MUXARRAY_INPUT_SEL_4: c_uint = 0x1704;
+pub const SLG51000_MUXARRAY_INPUT_SEL_5: c_uint = 0x1705;
+pub const SLG51000_MUXARRAY_INPUT_SEL_6: c_uint = 0x1706;
+pub const SLG51000_MUXARRAY_INPUT_SEL_7: c_uint = 0x1707;
+pub const SLG51000_MUXARRAY_INPUT_SEL_8: c_uint = 0x1708;
+pub const SLG51000_MUXARRAY_INPUT_SEL_9: c_uint = 0x1709;
+pub const SLG51000_MUXARRAY_INPUT_SEL_10: c_uint = 0x170a;
+pub const SLG51000_MUXARRAY_INPUT_SEL_11: c_uint = 0x170b;
+pub const SLG51000_MUXARRAY_INPUT_SEL_12: c_uint = 0x170c;
+pub const SLG51000_MUXARRAY_INPUT_SEL_13: c_uint = 0x170d;
+pub const SLG51000_MUXARRAY_INPUT_SEL_14: c_uint = 0x170e;
+pub const SLG51000_MUXARRAY_INPUT_SEL_15: c_uint = 0x170f;
+pub const SLG51000_MUXARRAY_INPUT_SEL_16: c_uint = 0x1710;
+pub const SLG51000_MUXARRAY_INPUT_SEL_17: c_uint = 0x1711;
+pub const SLG51000_MUXARRAY_INPUT_SEL_18: c_uint = 0x1712;
+pub const SLG51000_MUXARRAY_INPUT_SEL_19: c_uint = 0x1713;
+pub const SLG51000_MUXARRAY_INPUT_SEL_20: c_uint = 0x1714;
+pub const SLG51000_MUXARRAY_INPUT_SEL_21: c_uint = 0x1715;
+pub const SLG51000_MUXARRAY_INPUT_SEL_22: c_uint = 0x1716;
+pub const SLG51000_MUXARRAY_INPUT_SEL_23: c_uint = 0x1717;
+pub const SLG51000_MUXARRAY_INPUT_SEL_24: c_uint = 0x1718;
+pub const SLG51000_MUXARRAY_INPUT_SEL_25: c_uint = 0x1719;
+pub const SLG51000_MUXARRAY_INPUT_SEL_26: c_uint = 0x171a;
+pub const SLG51000_MUXARRAY_INPUT_SEL_27: c_uint = 0x171b;
+pub const SLG51000_MUXARRAY_INPUT_SEL_28: c_uint = 0x171c;
+pub const SLG51000_MUXARRAY_INPUT_SEL_29: c_uint = 0x171d;
+pub const SLG51000_MUXARRAY_INPUT_SEL_30: c_uint = 0x171e;
+pub const SLG51000_MUXARRAY_INPUT_SEL_31: c_uint = 0x171f;
+pub const SLG51000_MUXARRAY_INPUT_SEL_32: c_uint = 0x1720;
+pub const SLG51000_MUXARRAY_INPUT_SEL_33: c_uint = 0x1721;
+pub const SLG51000_MUXARRAY_INPUT_SEL_34: c_uint = 0x1722;
+pub const SLG51000_MUXARRAY_INPUT_SEL_35: c_uint = 0x1723;
+pub const SLG51000_MUXARRAY_INPUT_SEL_36: c_uint = 0x1724;
+pub const SLG51000_MUXARRAY_INPUT_SEL_37: c_uint = 0x1725;
+pub const SLG51000_MUXARRAY_INPUT_SEL_38: c_uint = 0x1726;
+pub const SLG51000_MUXARRAY_INPUT_SEL_39: c_uint = 0x1727;
+pub const SLG51000_MUXARRAY_INPUT_SEL_40: c_uint = 0x1728;
+pub const SLG51000_MUXARRAY_INPUT_SEL_41: c_uint = 0x1729;
+pub const SLG51000_MUXARRAY_INPUT_SEL_42: c_uint = 0x172a;
+pub const SLG51000_MUXARRAY_INPUT_SEL_43: c_uint = 0x172b;
+pub const SLG51000_MUXARRAY_INPUT_SEL_44: c_uint = 0x172c;
+pub const SLG51000_MUXARRAY_INPUT_SEL_45: c_uint = 0x172d;
+pub const SLG51000_MUXARRAY_INPUT_SEL_46: c_uint = 0x172e;
+pub const SLG51000_MUXARRAY_INPUT_SEL_47: c_uint = 0x172f;
+pub const SLG51000_MUXARRAY_INPUT_SEL_48: c_uint = 0x1730;
+pub const SLG51000_MUXARRAY_INPUT_SEL_49: c_uint = 0x1731;
+pub const SLG51000_MUXARRAY_INPUT_SEL_50: c_uint = 0x1732;
+pub const SLG51000_MUXARRAY_INPUT_SEL_51: c_uint = 0x1733;
+pub const SLG51000_MUXARRAY_INPUT_SEL_52: c_uint = 0x1734;
+pub const SLG51000_MUXARRAY_INPUT_SEL_53: c_uint = 0x1735;
+pub const SLG51000_MUXARRAY_INPUT_SEL_54: c_uint = 0x1736;
+pub const SLG51000_MUXARRAY_INPUT_SEL_55: c_uint = 0x1737;
+pub const SLG51000_MUXARRAY_INPUT_SEL_56: c_uint = 0x1738;
+pub const SLG51000_MUXARRAY_INPUT_SEL_57: c_uint = 0x1739;
+pub const SLG51000_MUXARRAY_INPUT_SEL_58: c_uint = 0x173a;
+pub const SLG51000_MUXARRAY_INPUT_SEL_59: c_uint = 0x173b;
+pub const SLG51000_MUXARRAY_INPUT_SEL_60: c_uint = 0x173c;
+pub const SLG51000_MUXARRAY_INPUT_SEL_61: c_uint = 0x173d;
+pub const SLG51000_MUXARRAY_INPUT_SEL_62: c_uint = 0x173e;
+pub const SLG51000_MUXARRAY_INPUT_SEL_63: c_uint = 0x173f;
+pub const SLG51000_PWRSEQ_RESOURCE_EN_0: c_uint = 0x1900;
+pub const SLG51000_PWRSEQ_RESOURCE_EN_1: c_uint = 0x1901;
+pub const SLG51000_PWRSEQ_RESOURCE_EN_2: c_uint = 0x1902;
+pub const SLG51000_PWRSEQ_RESOURCE_EN_3: c_uint = 0x1903;
+pub const SLG51000_PWRSEQ_RESOURCE_EN_4: c_uint = 0x1904;
+pub const SLG51000_PWRSEQ_RESOURCE_EN_5: c_uint = 0x1905;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_UP0: c_uint = 0x1906;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN0: c_uint = 0x1907;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_UP1: c_uint = 0x1908;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN1: c_uint = 0x1909;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_UP2: c_uint = 0x190a;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN2: c_uint = 0x190b;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_UP3: c_uint = 0x190c;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN3: c_uint = 0x190d;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_UP4: c_uint = 0x190e;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN4: c_uint = 0x190f;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_UP5: c_uint = 0x1910;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN5: c_uint = 0x1911;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MAX_CONF_A: c_uint = 0x1912;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MAX_CONF_B: c_uint = 0x1913;
+pub const SLG51000_PWRSEQ_SLOT_TIME_MAX_CONF_C: c_uint = 0x1914;
+pub const SLG51000_PWRSEQ_INPUT_SENSE_CONF_A: c_uint = 0x1915;
+pub const SLG51000_PWRSEQ_INPUT_SENSE_CONF_B: c_uint = 0x1916;
+pub const SLG51000_LDO1_VSEL: c_uint = 0x2000;
+pub const SLG51000_LDO1_MINV: c_uint = 0x2060;
+pub const SLG51000_LDO1_MAXV: c_uint = 0x2061;
+pub const SLG51000_LDO1_MISC1: c_uint = 0x2064;
+pub const SLG51000_LDO1_VSEL_ACTUAL: c_uint = 0x2065;
+pub const SLG51000_LDO1_EVENT: c_uint = 0x20c0;
+pub const SLG51000_LDO1_STATUS: c_uint = 0x20c1;
+pub const SLG51000_LDO1_IRQ_MASK: c_uint = 0x20c2;
+pub const SLG51000_LDO2_VSEL: c_uint = 0x2200;
+pub const SLG51000_LDO2_MINV: c_uint = 0x2260;
+pub const SLG51000_LDO2_MAXV: c_uint = 0x2261;
+pub const SLG51000_LDO2_MISC1: c_uint = 0x2264;
+pub const SLG51000_LDO2_VSEL_ACTUAL: c_uint = 0x2265;
+pub const SLG51000_LDO2_EVENT: c_uint = 0x22c0;
+pub const SLG51000_LDO2_STATUS: c_uint = 0x22c1;
+pub const SLG51000_LDO2_IRQ_MASK: c_uint = 0x22c2;
+pub const SLG51000_LDO3_VSEL: c_uint = 0x2300;
+pub const SLG51000_LDO3_MINV: c_uint = 0x2360;
+pub const SLG51000_LDO3_MAXV: c_uint = 0x2361;
+pub const SLG51000_LDO3_CONF1: c_uint = 0x2364;
+pub const SLG51000_LDO3_CONF2: c_uint = 0x2365;
+pub const SLG51000_LDO3_VSEL_ACTUAL: c_uint = 0x2366;
+pub const SLG51000_LDO3_EVENT: c_uint = 0x23c0;
+pub const SLG51000_LDO3_STATUS: c_uint = 0x23c1;
+pub const SLG51000_LDO3_IRQ_MASK: c_uint = 0x23c2;
+pub const SLG51000_LDO4_VSEL: c_uint = 0x2500;
+pub const SLG51000_LDO4_MINV: c_uint = 0x2560;
+pub const SLG51000_LDO4_MAXV: c_uint = 0x2561;
+pub const SLG51000_LDO4_CONF1: c_uint = 0x2564;
+pub const SLG51000_LDO4_CONF2: c_uint = 0x2565;
+pub const SLG51000_LDO4_VSEL_ACTUAL: c_uint = 0x2566;
+pub const SLG51000_LDO4_EVENT: c_uint = 0x25c0;
+pub const SLG51000_LDO4_STATUS: c_uint = 0x25c1;
+pub const SLG51000_LDO4_IRQ_MASK: c_uint = 0x25c2;
+pub const SLG51000_LDO5_VSEL: c_uint = 0x2700;
+pub const SLG51000_LDO5_MINV: c_uint = 0x2760;
+pub const SLG51000_LDO5_MAXV: c_uint = 0x2761;
+pub const SLG51000_LDO5_TRIM2: c_uint = 0x2763;
+pub const SLG51000_LDO5_CONF1: c_uint = 0x2765;
+pub const SLG51000_LDO5_CONF2: c_uint = 0x2766;
+pub const SLG51000_LDO5_VSEL_ACTUAL: c_uint = 0x2767;
+pub const SLG51000_LDO5_EVENT: c_uint = 0x27c0;
+pub const SLG51000_LDO5_STATUS: c_uint = 0x27c1;
+pub const SLG51000_LDO5_IRQ_MASK: c_uint = 0x27c2;
+pub const SLG51000_LDO6_VSEL: c_uint = 0x2900;
+pub const SLG51000_LDO6_MINV: c_uint = 0x2960;
+pub const SLG51000_LDO6_MAXV: c_uint = 0x2961;
+pub const SLG51000_LDO6_TRIM2: c_uint = 0x2963;
+pub const SLG51000_LDO6_CONF1: c_uint = 0x2965;
+pub const SLG51000_LDO6_CONF2: c_uint = 0x2966;
+pub const SLG51000_LDO6_VSEL_ACTUAL: c_uint = 0x2967;
+pub const SLG51000_LDO6_EVENT: c_uint = 0x29c0;
+pub const SLG51000_LDO6_STATUS: c_uint = 0x29c1;
+pub const SLG51000_LDO6_IRQ_MASK: c_uint = 0x29c2;
+pub const SLG51000_LDO7_VSEL: c_uint = 0x3100;
+pub const SLG51000_LDO7_MINV: c_uint = 0x3160;
+pub const SLG51000_LDO7_MAXV: c_uint = 0x3161;
+pub const SLG51000_LDO7_CONF1: c_uint = 0x3164;
+pub const SLG51000_LDO7_CONF2: c_uint = 0x3165;
+pub const SLG51000_LDO7_VSEL_ACTUAL: c_uint = 0x3166;
+pub const SLG51000_LDO7_EVENT: c_uint = 0x31c0;
+pub const SLG51000_LDO7_STATUS: c_uint = 0x31c1;
+pub const SLG51000_LDO7_IRQ_MASK: c_uint = 0x31c2;
+pub const SLG51000_OTP_EVENT: c_uint = 0x782b;
+pub const SLG51000_OTP_IRQ_MASK: c_uint = 0x782d;
+pub const SLG51000_OTP_LOCK_OTP_PROG: c_uint = 0x78fe;
+pub const SLG51000_OTP_LOCK_CTRL: c_uint = 0x78ff;
+pub const SLG51000_LOCK_GLOBAL_LOCK_CTRL1: c_uint = 0x8000;
+// Register Bit Fields
+// SLG51000_SYSCTL_PATTERN_ID_BYTE0 = 0x1105
+pub const SLG51000_PATTERN_ID_BYTE0_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_PATTERN_ID_BYTE1 = 0x1106
+pub const SLG51000_PATTERN_ID_BYTE1_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_PATTERN_ID_BYTE2 = 0x1107
+pub const SLG51000_PATTERN_ID_BYTE2_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_SYS_CONF_A = 0x1109
+pub const SLG51000_I2C_ADDRESS_SHIFT: c_int = 0;
+
+pub const SLG51000_I2C_DISABLE_SHIFT: c_int = 7;
+
+// SLG51000_SYSCTL_SYS_CONF_D = 0x110c
+pub const SLG51000_CS_T_DEB_SHIFT: c_int = 6;
+
+pub const SLG51000_I2C_CLR_MODE_SHIFT: c_int = 5;
+
+// SLG51000_SYSCTL_MATRIX_CTRL_CONF_A = 0x110d
+pub const SLG51000_RESOURCE_CTRL_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_MATRIX_CTRL_CONF_B = 0x110e
+pub const SLG51000_MATRIX_EVENT_SENSE_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_REFGEN_CONF_C = 0x1111
+pub const SLG51000_REFGEN_SEL_TEMP_WARN_DEBOUNCE_SHIFT: c_int = 2;
+
+pub const SLG51000_REFGEN_SEL_TEMP_WARN_THR_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_UVLO_CONF_A = 0x1112
+pub const SLG51000_VMON_UVLO_SEL_THR_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_FAULT_LOG1 = 0x1115
+pub const SLG51000_FLT_POR_SHIFT: c_int = 5;
+
+pub const SLG51000_FLT_RST_SHIFT: c_int = 4;
+
+pub const SLG51000_FLT_POWER_SEQ_CRASH_REQ_SHIFT: c_int = 2;
+
+pub const SLG51000_FLT_OVER_TEMP_SHIFT: c_int = 1;
+
+// SLG51000_SYSCTL_EVENT = 0x1116
+pub const SLG51000_EVT_MATRIX_SHIFT: c_int = 1;
+
+pub const SLG51000_EVT_HIGH_TEMP_WARN_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_STATUS = 0x1117
+pub const SLG51000_STA_MATRIX_SHIFT: c_int = 1;
+
+pub const SLG51000_STA_HIGH_TEMP_WARN_SHIFT: c_int = 0;
+
+// SLG51000_SYSCTL_IRQ_MASK = 0x1118
+pub const SLG51000_IRQ_MATRIX_SHIFT: c_int = 1;
+
+pub const SLG51000_IRQ_HIGH_TEMP_WARN_SHIFT: c_int = 0;
+
+// SLG51000_IO_GPIO1_CONF ~ SLG51000_IO_GPIO5_CONF =
+// 0x1500, 0x1501, 0x1502, 0x1503, 0x1504
+//
+pub const SLG51000_GPIO_DIR_SHIFT: c_int = 7;
+
+pub const SLG51000_GPIO_SENS_SHIFT: c_int = 5;
+
+pub const SLG51000_GPIO_INVERT_SHIFT: c_int = 4;
+
+pub const SLG51000_GPIO_BYP_SHIFT: c_int = 3;
+
+pub const SLG51000_GPIO_T_DEB_SHIFT: c_int = 1;
+
+pub const SLG51000_GPIO_LEVEL_SHIFT: c_int = 0;
+
+// SLG51000_IO_GPIO6_CONF = 0x1505
+pub const SLG51000_GPIO6_SENS_SHIFT: c_int = 5;
+
+pub const SLG51000_GPIO6_INVERT_SHIFT: c_int = 4;
+
+pub const SLG51000_GPIO6_T_DEB_SHIFT: c_int = 1;
+
+pub const SLG51000_GPIO6_LEVEL_SHIFT: c_int = 0;
+
+// SLG51000_IO_GPIO_STATUS = 0x1506
+pub const SLG51000_GPIO6_STATUS_SHIFT: c_int = 5;
+
+pub const SLG51000_GPIO5_STATUS_SHIFT: c_int = 4;
+
+pub const SLG51000_GPIO4_STATUS_SHIFT: c_int = 3;
+
+pub const SLG51000_GPIO3_STATUS_SHIFT: c_int = 2;
+
+pub const SLG51000_GPIO2_STATUS_SHIFT: c_int = 1;
+
+pub const SLG51000_GPIO1_STATUS_SHIFT: c_int = 0;
+
+// SLG51000_LUTARRAY_LUT_VAL_0 ~ SLG51000_LUTARRAY_LUT_VAL_11
+// 0x1600, 0x1601, 0x1602, 0x1603, 0x1604, 0x1605,
+// 0x1606, 0x1607, 0x1608, 0x1609, 0x160a, 0x160b
+//
+pub const SLG51000_LUT_VAL_SHIFT: c_int = 0;
+
+// SLG51000_MUXARRAY_INPUT_SEL_0 ~ SLG51000_MUXARRAY_INPUT_SEL_63
+// 0x1700, 0x1701, 0x1702, 0x1703, 0x1704, 0x1705,
+// 0x1706, 0x1707, 0x1708, 0x1709, 0x170a, 0x170b,
+// 0x170c, 0x170d, 0x170e, 0x170f, 0x1710, 0x1711,
+// 0x1712, 0x1713, 0x1714, 0x1715, 0x1716, 0x1717,
+// 0x1718, 0x1719, 0x171a, 0x171b, 0x171c, 0x171d,
+// 0x171e, 0x171f, 0x1720, 0x1721, 0x1722, 0x1723,
+// 0x1724, 0x1725, 0x1726, 0x1727, 0x1728, 0x1729,
+// 0x173a, 0x173b, 0x173c, 0x173d, 0x173e, 0x173f,
+//
+pub const SLG51000_INPUT_SEL_SHIFT: c_int = 0;
+
+// SLG51000_PWRSEQ_RESOURCE_EN_0 ~ SLG51000_PWRSEQ_RESOURCE_EN_5
+// 0x1900, 0x1901, 0x1902, 0x1903, 0x1904, 0x1905
+//
+pub const SLG51000_RESOURCE_EN_DOWN0_SHIFT: c_int = 4;
+
+pub const SLG51000_RESOURCE_EN_UP0_SHIFT: c_int = 0;
+
+// SLG51000_PWRSEQ_SLOT_TIME_MIN_UP0 ~ SLG51000_PWRSEQ_SLOT_TIME_MIN_UP5
+// 0x1906, 0x1908, 0x190a, 0x190c, 0x190e, 0x1910
+//
+pub const SLG51000_SLOT_TIME_MIN_UP_SHIFT: c_int = 0;
+
+// SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN0 ~ SLG51000_PWRSEQ_SLOT_TIME_MIN_DOWN5
+// 0x1907, 0x1909, 0x190b, 0x190d, 0x190f, 0x1911
+//
+pub const SLG51000_SLOT_TIME_MIN_DOWN_SHIFT: c_int = 0;
+
+// SLG51000_PWRSEQ_SLOT_TIME_MAX_CONF_A ~ SLG51000_PWRSEQ_SLOT_TIME_MAX_CONF_C
+// 0x1912, 0x1913, 0x1914
+//
+pub const SLG51000_SLOT_TIME_MAX_DOWN1_SHIFT: c_int = 6;
+
+pub const SLG51000_SLOT_TIME_MAX_UP1_SHIFT: c_int = 4;
+
+pub const SLG51000_SLOT_TIME_MAX_DOWN0_SHIFT: c_int = 2;
+
+pub const SLG51000_SLOT_TIME_MAX_UP0_SHIFT: c_int = 0;
+
+// SLG51000_PWRSEQ_INPUT_SENSE_CONF_A = 0x1915
+pub const SLG51000_TRIG_UP_SENSE_SHIFT: c_int = 6;
+
+pub const SLG51000_UP_EN_SENSE5_SHIFT: c_int = 5;
+
+pub const SLG51000_UP_EN_SENSE4_SHIFT: c_int = 4;
+
+pub const SLG51000_UP_EN_SENSE3_SHIFT: c_int = 3;
+
+pub const SLG51000_UP_EN_SENSE2_SHIFT: c_int = 2;
+
+pub const SLG51000_UP_EN_SENSE1_SHIFT: c_int = 1;
+
+pub const SLG51000_UP_EN_SENSE0_SHIFT: c_int = 0;
+
+// SLG51000_PWRSEQ_INPUT_SENSE_CONF_B = 0x1916
+pub const SLG51000_CRASH_DETECT_SENSE_SHIFT: c_int = 7;
+
+pub const SLG51000_TRIG_DOWN_SENSE_SHIFT: c_int = 6;
+
+pub const SLG51000_DOWN_EN_SENSE5_SHIFT: c_int = 5;
+
+pub const SLG51000_DOWN_EN_SENSE4_SHIFT: c_int = 4;
+
+pub const SLG51000_DOWN_EN_SENSE3_SHIFT: c_int = 3;
+
+pub const SLG51000_DOWN_EN_SENSE2_SHIFT: c_int = 2;
+
+pub const SLG51000_DOWN_EN_SENSE1_SHIFT: c_int = 1;
+
+pub const SLG51000_DOWN_EN_SENSE0_SHIFT: c_int = 0;
+
+// SLG51000_LDO1_VSEL ~ SLG51000_LDO7_VSEL =
+// 0x2000, 0x2200, 0x2300, 0x2500, 0x2700, 0x2900, 0x3100
+//
+pub const SLG51000_VSEL_SHIFT: c_int = 0;
+
+// SLG51000_LDO1_MINV ~ SLG51000_LDO7_MINV =
+// 0x2060, 0x2260, 0x2360, 0x2560, 0x2760, 0x2960, 0x3160
+//
+pub const SLG51000_MINV_SHIFT: c_int = 0;
+
+// SLG51000_LDO1_MAXV ~ SLG51000_LDO7_MAXV =
+// 0x2061, 0x2261, 0x2361, 0x2561, 0x2761, 0x2961, 0x3161
+//
+pub const SLG51000_MAXV_SHIFT: c_int = 0;
+
+// SLG51000_LDO1_MISC1 = 0x2064, SLG51000_LDO2_MISC1 = 0x2264
+pub const SLG51000_SEL_VRANGE_SHIFT: c_int = 0;
+
+// SLG51000_LDO1_VSEL_ACTUAL ~ SLG51000_LDO7_VSEL_ACTUAL =
+// 0x2065, 0x2265, 0x2366, 0x2566, 0x2767, 0x2967, 0x3166
+//
+pub const SLG51000_VSEL_ACTUAL_SHIFT: c_int = 0;
+
+// SLG51000_LDO1_EVENT ~ SLG51000_LDO7_EVENT =
+// 0x20c0, 0x22c0, 0x23c0, 0x25c0, 0x27c0, 0x29c0, 0x31c0
+//
+pub const SLG51000_EVT_ILIM_FLAG_SHIFT: c_int = 0;
+
+pub const SLG51000_EVT_VOUT_OK_FLAG_SHIFT: c_int = 1;
+
+// SLG51000_LDO1_STATUS ~ SLG51000_LDO7_STATUS =
+// 0x20c1, 0x22c1, 0x23c1, 0x25c1, 0x27c1, 0x29c1, 0x31c1
+//
+pub const SLG51000_STA_ILIM_FLAG_SHIFT: c_int = 0;
+
+pub const SLG51000_STA_VOUT_OK_FLAG_SHIFT: c_int = 1;
+
+// SLG51000_LDO1_IRQ_MASK ~ SLG51000_LDO7_IRQ_MASK =
+// 0x20c2, 0x22c2, 0x23c2, 0x25c2, 0x27c2, 0x29c2, 0x31c2
+//
+pub const SLG51000_IRQ_ILIM_FLAG_SHIFT: c_int = 0;
+
+// SLG51000_LDO3_CONF1 ~ SLG51000_LDO7_CONF1 =
+// 0x2364, 0x2564, 0x2765, 0x2965, 0x3164
+//
+pub const SLG51000_SEL_START_ILIM_SHIFT: c_int = 0;
+
+// SLG51000_LDO3_CONF2 ~ SLG51000_LDO7_CONF2 =
+// 0x2365, 0x2565, 0x2766, 0x2966, 0x3165
+//
+pub const SLG51000_SEL_FUNC_ILIM_SHIFT: c_int = 0;
+
+// SLG51000_LDO5_TRIM2 = 0x2763, SLG51000_LDO6_TRIM2 = 0x2963
+pub const SLG51000_SEL_BYP_SLEW_RATE_SHIFT: c_int = 2;
+
+pub const SLG51000_SEL_BYP_VGATE_SHIFT: c_int = 1;
+
+pub const SLG51000_SEL_BYP_MODE_SHIFT: c_int = 0;
+
+// SLG51000_OTP_EVENT = 0x782b
+pub const SLG51000_EVT_CRC_SHIFT: c_int = 0;
+
+// SLG51000_OTP_IRQ_MASK = 0x782d
+pub const SLG51000_IRQ_CRC_SHIFT: c_int = 0;
+
+// SLG51000_OTP_LOCK_OTP_PROG = 0x78fe
+pub const SLG51000_LOCK_OTP_PROG_SHIFT: c_int = 0;
+
+// SLG51000_OTP_LOCK_CTRL = 0x78ff
+pub const SLG51000_LOCK_DFT_SHIFT: c_int = 1;
+
+pub const SLG51000_LOCK_RWT_SHIFT: c_int = 0;
+
+// SLG51000_LOCK_GLOBAL_LOCK_CTRL1 = 0x8000
+pub const SLG51000_LDO7_LOCK_SHIFT: c_int = 7;
+
+pub const SLG51000_LDO6_LOCK_SHIFT: c_int = 6;
+
+pub const SLG51000_LDO5_LOCK_SHIFT: c_int = 5;
+
+pub const SLG51000_LDO4_LOCK_SHIFT: c_int = 4;
+
+pub const SLG51000_LDO3_LOCK_SHIFT: c_int = 3;
+
+pub const SLG51000_LDO2_LOCK_SHIFT: c_int = 2;
+
+pub const SLG51000_LDO1_LOCK_SHIFT: c_int = 1;
+

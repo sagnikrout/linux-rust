@@ -1,0 +1,6713 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/gpu/drm/amd/include/asic_reg/mmhub/mmhub_3_3_0_sh_mask.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+//
+// Copyright 2023 Advanced Micro Devices, Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+// THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
+// OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+//
+
+// Macro flag: #define _mmhub_3_3_0_SH_MASK_HEADER
+// addressBlock: mmhub_dagbdec
+// DAGB0_RDCLI0
+pub const DAGB0_RDCLI0__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI0__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI0__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI0__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI0__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI0__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI0__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI0__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI0__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI0__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI0__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI0__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI0__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI0__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI0__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI0__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI0__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI0__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI0__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI0__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI1
+pub const DAGB0_RDCLI1__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI1__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI1__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI1__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI1__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI1__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI1__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI1__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI1__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI1__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI1__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI1__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI1__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI1__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI1__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI1__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI1__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI1__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI1__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI1__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI2
+pub const DAGB0_RDCLI2__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI2__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI2__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI2__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI2__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI2__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI2__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI2__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI2__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI2__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI2__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI2__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI2__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI2__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI2__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI2__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI2__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI2__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI2__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI2__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI3
+pub const DAGB0_RDCLI3__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI3__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI3__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI3__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI3__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI3__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI3__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI3__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI3__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI3__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI3__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI3__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI3__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI3__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI3__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI3__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI3__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI3__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI3__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI3__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI4
+pub const DAGB0_RDCLI4__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI4__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI4__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI4__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI4__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI4__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI4__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI4__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI4__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI4__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI4__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI4__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI4__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI4__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI4__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI4__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI4__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI4__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI4__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI4__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI5
+pub const DAGB0_RDCLI5__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI5__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI5__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI5__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI5__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI5__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI5__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI5__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI5__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI5__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI5__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI5__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI5__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI5__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI5__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI5__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI5__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI5__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI5__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI5__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI6
+pub const DAGB0_RDCLI6__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI6__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI6__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI6__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI6__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI6__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI6__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI6__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI6__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI6__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI6__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI6__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI6__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI6__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI6__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI6__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI6__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI6__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI6__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI6__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI7
+pub const DAGB0_RDCLI7__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI7__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI7__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI7__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI7__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI7__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI7__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI7__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI7__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI7__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI7__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI7__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI7__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI7__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI7__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI7__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI7__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI7__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI7__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI7__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI8
+pub const DAGB0_RDCLI8__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI8__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI8__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI8__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI8__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI8__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI8__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI8__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI8__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI8__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI8__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI8__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI8__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI8__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI8__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI8__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI8__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI8__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI8__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI8__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI9
+pub const DAGB0_RDCLI9__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI9__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI9__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI9__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI9__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI9__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI9__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI9__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI9__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI9__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI9__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI9__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI9__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI9__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI9__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI9__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI9__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI9__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI9__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI9__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI10
+pub const DAGB0_RDCLI10__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI10__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI10__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI10__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI10__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI10__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI10__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI10__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI10__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI10__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI10__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI10__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI10__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI10__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI10__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI10__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI10__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI10__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI10__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI10__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI11
+pub const DAGB0_RDCLI11__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI11__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI11__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI11__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI11__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI11__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI11__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI11__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI11__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI11__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI11__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI11__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI11__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI11__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI11__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI11__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI11__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI11__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI11__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI11__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI12
+pub const DAGB0_RDCLI12__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI12__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI12__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI12__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI12__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI12__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI12__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI12__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI12__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI12__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI12__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI12__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI12__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI12__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI12__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI12__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI12__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI12__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI12__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI12__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI13
+pub const DAGB0_RDCLI13__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI13__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI13__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI13__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI13__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI13__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI13__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI13__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI13__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI13__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI13__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI13__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI13__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI13__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI13__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI13__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI13__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI13__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI13__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI13__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI14
+pub const DAGB0_RDCLI14__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI14__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI14__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI14__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI14__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI14__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI14__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI14__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI14__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI14__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI14__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI14__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI14__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI14__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI14__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI14__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI14__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI14__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI14__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI14__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI15
+pub const DAGB0_RDCLI15__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI15__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI15__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI15__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI15__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI15__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI15__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI15__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI15__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI15__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI15__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI15__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI15__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI15__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI15__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI15__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI15__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI15__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI15__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI15__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI16
+pub const DAGB0_RDCLI16__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI16__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI16__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI16__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI16__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI16__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI16__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI16__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI16__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI16__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI16__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI16__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI16__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI16__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI16__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI16__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI16__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI16__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI16__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI16__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI17
+pub const DAGB0_RDCLI17__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI17__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI17__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI17__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI17__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI17__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI17__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI17__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI17__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI17__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI17__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI17__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI17__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI17__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI17__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI17__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI17__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI17__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI17__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI17__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI18
+pub const DAGB0_RDCLI18__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI18__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI18__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI18__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI18__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI18__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI18__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI18__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI18__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI18__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI18__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI18__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI18__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI18__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI18__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI18__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI18__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI18__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI18__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI18__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI19
+pub const DAGB0_RDCLI19__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI19__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI19__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI19__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI19__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI19__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI19__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI19__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI19__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI19__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI19__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI19__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI19__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI19__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI19__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI19__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI19__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI19__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI19__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI19__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI20
+pub const DAGB0_RDCLI20__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI20__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI20__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI20__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI20__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI20__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI20__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI20__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI20__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI20__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI20__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI20__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI20__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI20__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI20__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI20__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI20__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI20__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI20__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI20__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI21
+pub const DAGB0_RDCLI21__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI21__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI21__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI21__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI21__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI21__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI21__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI21__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI21__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI21__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI21__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI21__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI21__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI21__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI21__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI21__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI21__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI21__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI21__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI21__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI22
+pub const DAGB0_RDCLI22__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI22__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI22__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI22__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI22__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI22__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI22__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI22__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI22__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI22__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI22__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI22__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI22__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI22__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI22__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI22__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI22__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI22__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI22__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI22__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI23
+pub const DAGB0_RDCLI23__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI23__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI23__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI23__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI23__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI23__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI23__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI23__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI23__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI23__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI23__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI23__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI23__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI23__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI23__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI23__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI23__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI23__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI23__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI23__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI24
+pub const DAGB0_RDCLI24__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI24__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI24__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI24__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI24__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI24__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI24__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI24__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI24__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI24__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI24__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI24__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI24__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI24__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI24__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI24__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI24__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI24__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI24__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI24__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI25
+pub const DAGB0_RDCLI25__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI25__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI25__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI25__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI25__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI25__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI25__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI25__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI25__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI25__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI25__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI25__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI25__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI25__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI25__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI25__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI25__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI25__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI25__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI25__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI26
+pub const DAGB0_RDCLI26__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI26__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI26__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI26__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI26__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI26__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI26__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI26__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI26__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI26__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI26__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI26__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI26__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI26__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI26__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI26__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI26__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI26__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI26__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI26__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI27
+pub const DAGB0_RDCLI27__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI27__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI27__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI27__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI27__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI27__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI27__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI27__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI27__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI27__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI27__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI27__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI27__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI27__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI27__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI27__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI27__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI27__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI27__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI27__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI28
+pub const DAGB0_RDCLI28__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI28__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI28__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI28__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI28__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI28__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI28__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI28__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI28__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI28__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI28__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI28__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI28__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI28__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI28__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI28__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI28__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI28__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI28__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI28__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI29
+pub const DAGB0_RDCLI29__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI29__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI29__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI29__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI29__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI29__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI29__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI29__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI29__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI29__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI29__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI29__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI29__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI29__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI29__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI29__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI29__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI29__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI29__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI29__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RDCLI30
+pub const DAGB0_RDCLI30__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI30__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_RDCLI30__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_RDCLI30__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_RDCLI30__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_RDCLI30__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_RDCLI30__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_RDCLI30__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_RDCLI30__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_RDCLI30__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RDCLI30__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RDCLI30__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_RDCLI30__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RDCLI30__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RDCLI30__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_RDCLI30__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_RDCLI30__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_RDCLI30__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_RDCLI30__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_RDCLI30__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_RD_CNTL
+pub const DAGB0_RD_CNTL__CLI_MAX_BW_WINDOW__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_CNTL__VC_MAX_BW_WINDOW__SHIFT: c_uint = 0x6;
+pub const DAGB0_RD_CNTL__SHARE_VC_NUM__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_CNTL__VC_ROUNDROBIN_EN__SHIFT: c_uint = 0xf;
+pub const DAGB0_RD_CNTL__CLI_MAX_BW_WINDOW_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_RD_CNTL__VC_MAX_BW_WINDOW_MASK: c_uint = 0x00000FC0L;
+pub const DAGB0_RD_CNTL__SHARE_VC_NUM_MASK: c_uint = 0x00007000L;
+pub const DAGB0_RD_CNTL__VC_ROUNDROBIN_EN_MASK: c_uint = 0x00008000L;
+// DAGB0_RD_IO_CNTL
+pub const DAGB0_RD_IO_CNTL__OVERRIDE0_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE0_PRIORITY__SHIFT: c_uint = 0x1;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE0_CLIENT_ID__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE1_ENABLE__SHIFT: c_uint = 0x9;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE1_PRIORITY__SHIFT: c_uint = 0xa;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE1_CLIENT_ID__SHIFT: c_uint = 0xd;
+pub const DAGB0_RD_IO_CNTL__COMMON_PRIORITY__SHIFT: c_uint = 0x12;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE0_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE0_PRIORITY_MASK: c_uint = 0x0000000EL;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE0_CLIENT_ID_MASK: c_uint = 0x000001F0L;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE1_ENABLE_MASK: c_uint = 0x00000200L;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE1_PRIORITY_MASK: c_uint = 0x00001C00L;
+pub const DAGB0_RD_IO_CNTL__OVERRIDE1_CLIENT_ID_MASK: c_uint = 0x0003E000L;
+pub const DAGB0_RD_IO_CNTL__COMMON_PRIORITY_MASK: c_uint = 0x001C0000L;
+// DAGB0_RD_GMI_CNTL
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE0_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE0_PRIORITY__SHIFT: c_uint = 0x1;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE0_CLIENT_ID__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE1_ENABLE__SHIFT: c_uint = 0x9;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE1_PRIORITY__SHIFT: c_uint = 0xa;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE1_CLIENT_ID__SHIFT: c_uint = 0xd;
+pub const DAGB0_RD_GMI_CNTL__COMMON_PRIORITY__SHIFT: c_uint = 0x12;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE0_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE0_PRIORITY_MASK: c_uint = 0x0000000EL;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE0_CLIENT_ID_MASK: c_uint = 0x000001F0L;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE1_ENABLE_MASK: c_uint = 0x00000200L;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE1_PRIORITY_MASK: c_uint = 0x00001C00L;
+pub const DAGB0_RD_GMI_CNTL__OVERRIDE1_CLIENT_ID_MASK: c_uint = 0x0003E000L;
+pub const DAGB0_RD_GMI_CNTL__COMMON_PRIORITY_MASK: c_uint = 0x001C0000L;
+// DAGB0_RD_ADDR_DAGB
+pub const DAGB0_RD_ADDR_DAGB__DAGB_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB__ENABLE_JUMP_AHEAD__SHIFT: c_uint = 0x3;
+pub const DAGB0_RD_ADDR_DAGB__DISABLE_SELF_INIT__SHIFT: c_uint = 0x6;
+pub const DAGB0_RD_ADDR_DAGB__WHOAMI__SHIFT: c_uint = 0x7;
+pub const DAGB0_RD_ADDR_DAGB__JUMP_MODE__SHIFT: c_uint = 0xd;
+pub const DAGB0_RD_ADDR_DAGB__DAGB_ENABLE_MASK: c_uint = 0x00000007L;
+pub const DAGB0_RD_ADDR_DAGB__ENABLE_JUMP_AHEAD_MASK: c_uint = 0x00000038L;
+pub const DAGB0_RD_ADDR_DAGB__DISABLE_SELF_INIT_MASK: c_uint = 0x00000040L;
+pub const DAGB0_RD_ADDR_DAGB__WHOAMI_MASK: c_uint = 0x00001F80L;
+pub const DAGB0_RD_ADDR_DAGB__JUMP_MODE_MASK: c_uint = 0x00002000L;
+// DAGB0_RD_CGTT_CLK_CTRL
+pub const DAGB0_RD_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const DAGB0_RD_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const DAGB0_RD_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const DAGB0_RD_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const DAGB0_RD_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const DAGB0_RD_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const DAGB0_RD_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_RD_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const DAGB0_RD_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const DAGB0_RD_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const DAGB0_RD_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const DAGB0_RD_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const DAGB0_RD_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// DAGB0_L1TLB_RD_CGTT_CLK_CTRL
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const DAGB0_L1TLB_RD_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// DAGB0_RD_ADDR_DAGB_MAX_BURST0
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT0__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT1__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT2__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT3__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT4__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT5__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT6__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT7__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT0_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT1_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT2_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT3_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT4_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT5_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT6_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST0__CLIENT7_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_LAZY_TIMER0
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT0__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT1__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT2__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT3__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT4__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT5__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT6__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT7__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT0_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT1_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT2_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT3_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT4_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT5_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT6_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER0__CLIENT7_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_MAX_BURST1
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT8__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT9__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT10__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT11__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT12__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT13__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT14__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT15__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT8_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT9_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT10_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT11_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT12_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT13_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT14_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST1__CLIENT15_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_LAZY_TIMER1
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT8__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT9__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT10__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT11__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT12__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT13__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT14__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT15__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT8_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT9_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT10_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT11_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT12_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT13_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT14_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER1__CLIENT15_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_MAX_BURST2
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT16__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT17__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT18__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT19__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT20__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT21__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT22__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT23__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT16_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT17_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT18_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT19_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT20_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT21_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT22_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST2__CLIENT23_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_LAZY_TIMER2
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT16__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT17__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT18__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT19__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT20__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT21__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT22__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT23__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT16_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT17_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT18_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT19_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT20_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT21_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT22_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER2__CLIENT23_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_MAX_BURST3
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT24__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT25__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT26__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT27__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT28__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT29__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT30__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT31__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT24_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT25_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT26_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT27_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT28_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT29_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT30_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_MAX_BURST3__CLIENT31_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_ADDR_DAGB_LAZY_TIMER3
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT24__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT25__SHIFT: c_uint = 0x4;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT26__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT27__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT28__SHIFT: c_uint = 0x10;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT29__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT30__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT31__SHIFT: c_uint = 0x1c;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT24_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT25_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT26_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT27_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT28_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT29_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT30_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_RD_ADDR_DAGB_LAZY_TIMER3__CLIENT31_MASK: c_uint = 0xF0000000L;
+// DAGB0_RD_VC0_CNTL
+pub const DAGB0_RD_VC0_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_VC0_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_RD_VC0_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_VC0_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_VC0_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_VC0_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_VC0_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_VC0_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_RD_VC0_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_RD_VC0_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_VC0_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_VC0_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_VC0_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_VC0_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_VC1_CNTL
+pub const DAGB0_RD_VC1_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_VC1_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_RD_VC1_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_VC1_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_VC1_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_VC1_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_VC1_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_VC1_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_RD_VC1_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_RD_VC1_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_VC1_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_VC1_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_VC1_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_VC1_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_VC2_CNTL
+pub const DAGB0_RD_VC2_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_VC2_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_RD_VC2_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_VC2_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_VC2_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_VC2_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_VC2_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_VC2_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_RD_VC2_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_RD_VC2_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_VC2_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_VC2_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_VC2_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_VC2_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_VC3_CNTL
+pub const DAGB0_RD_VC3_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_VC3_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_RD_VC3_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_VC3_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_VC3_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_VC3_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_VC3_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_VC3_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_RD_VC3_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_RD_VC3_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_VC3_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_VC3_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_VC3_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_VC3_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_VC4_CNTL
+pub const DAGB0_RD_VC4_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_VC4_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_RD_VC4_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_VC4_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_VC4_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_VC4_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_VC4_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_VC4_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_RD_VC4_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_RD_VC4_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_VC4_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_VC4_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_VC4_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_VC4_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_VC5_CNTL
+pub const DAGB0_RD_VC5_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_VC5_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_RD_VC5_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_VC5_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_VC5_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_VC5_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_VC5_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_VC5_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_RD_VC5_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_RD_VC5_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_VC5_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_VC5_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_VC5_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_VC5_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_IO_VC_CNTL
+pub const DAGB0_RD_IO_VC_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_IO_VC_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_IO_VC_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_IO_VC_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_IO_VC_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_IO_VC_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_IO_VC_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_RD_IO_VC_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_IO_VC_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_IO_VC_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_IO_VC_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_IO_VC_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_GMI_VC_CNTL
+pub const DAGB0_RD_GMI_VC_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_GMI_VC_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_RD_GMI_VC_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_GMI_VC_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_RD_GMI_VC_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_RD_GMI_VC_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_GMI_VC_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_RD_GMI_VC_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_RD_GMI_VC_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_RD_GMI_VC_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_RD_GMI_VC_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_RD_GMI_VC_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_RD_CNTL_MISC
+pub const DAGB0_RD_CNTL_MISC__STOR_POOL_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_CNTL_MISC__UTCL2_VCI__SHIFT: c_uint = 0x8;
+pub const DAGB0_RD_CNTL_MISC__STOR_POOL_CREDIT_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_RD_CNTL_MISC__UTCL2_VCI_MASK: c_uint = 0x00000700L;
+// DAGB0_RD_TLB_CREDIT
+pub const DAGB0_RD_TLB_CREDIT__TLB0__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_TLB_CREDIT__TLB1__SHIFT: c_uint = 0x5;
+pub const DAGB0_RD_TLB_CREDIT__TLB2__SHIFT: c_uint = 0xa;
+pub const DAGB0_RD_TLB_CREDIT__TLB3__SHIFT: c_uint = 0xf;
+pub const DAGB0_RD_TLB_CREDIT__TLB4__SHIFT: c_uint = 0x14;
+pub const DAGB0_RD_TLB_CREDIT__TLB5__SHIFT: c_uint = 0x19;
+pub const DAGB0_RD_TLB_CREDIT__TLB0_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_RD_TLB_CREDIT__TLB1_MASK: c_uint = 0x000003E0L;
+pub const DAGB0_RD_TLB_CREDIT__TLB2_MASK: c_uint = 0x00007C00L;
+pub const DAGB0_RD_TLB_CREDIT__TLB3_MASK: c_uint = 0x000F8000L;
+pub const DAGB0_RD_TLB_CREDIT__TLB4_MASK: c_uint = 0x01F00000L;
+pub const DAGB0_RD_TLB_CREDIT__TLB5_MASK: c_uint = 0x3E000000L;
+// DAGB0_RDCLI_ASK_PENDING
+pub const DAGB0_RDCLI_ASK_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_ASK_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_GO_PENDING
+pub const DAGB0_RDCLI_GO_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_GO_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_GBLSEND_PENDING
+pub const DAGB0_RDCLI_GBLSEND_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_GBLSEND_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_TLB_PENDING
+pub const DAGB0_RDCLI_TLB_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_TLB_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_OARB_PENDING
+pub const DAGB0_RDCLI_OARB_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_OARB_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_ASK2ARB_PENDING
+pub const DAGB0_RDCLI_ASK2ARB_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_ASK2ARB_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_ASK2DF_PENDING
+pub const DAGB0_RDCLI_ASK2DF_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_ASK2DF_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_OSD_PENDING
+pub const DAGB0_RDCLI_OSD_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_OSD_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_ASK_OSD_PENDING
+pub const DAGB0_RDCLI_ASK_OSD_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_ASK_OSD_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_NOALLOC_OVERRIDE
+pub const DAGB0_RDCLI_NOALLOC_OVERRIDE__ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_NOALLOC_OVERRIDE__ENABLE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RDCLI_NOALLOC_OVERRIDE_VALUE
+pub const DAGB0_RDCLI_NOALLOC_OVERRIDE_VALUE__VALUE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RDCLI_NOALLOC_OVERRIDE_VALUE__VALUE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI0
+pub const DAGB0_WRCLI0__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI0__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI0__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI0__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI0__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI0__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI0__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI0__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI0__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI0__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI0__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI0__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI0__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI0__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI0__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI0__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI0__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI0__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI0__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI0__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI1
+pub const DAGB0_WRCLI1__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI1__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI1__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI1__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI1__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI1__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI1__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI1__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI1__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI1__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI1__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI1__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI1__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI1__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI1__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI1__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI1__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI1__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI1__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI1__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI2
+pub const DAGB0_WRCLI2__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI2__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI2__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI2__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI2__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI2__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI2__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI2__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI2__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI2__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI2__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI2__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI2__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI2__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI2__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI2__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI2__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI2__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI2__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI2__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI3
+pub const DAGB0_WRCLI3__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI3__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI3__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI3__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI3__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI3__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI3__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI3__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI3__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI3__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI3__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI3__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI3__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI3__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI3__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI3__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI3__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI3__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI3__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI3__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI4
+pub const DAGB0_WRCLI4__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI4__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI4__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI4__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI4__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI4__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI4__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI4__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI4__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI4__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI4__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI4__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI4__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI4__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI4__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI4__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI4__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI4__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI4__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI4__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI5
+pub const DAGB0_WRCLI5__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI5__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI5__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI5__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI5__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI5__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI5__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI5__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI5__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI5__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI5__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI5__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI5__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI5__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI5__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI5__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI5__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI5__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI5__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI5__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI6
+pub const DAGB0_WRCLI6__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI6__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI6__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI6__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI6__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI6__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI6__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI6__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI6__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI6__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI6__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI6__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI6__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI6__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI6__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI6__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI6__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI6__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI6__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI6__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI7
+pub const DAGB0_WRCLI7__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI7__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI7__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI7__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI7__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI7__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI7__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI7__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI7__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI7__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI7__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI7__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI7__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI7__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI7__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI7__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI7__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI7__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI7__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI7__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI8
+pub const DAGB0_WRCLI8__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI8__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI8__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI8__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI8__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI8__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI8__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI8__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI8__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI8__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI8__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI8__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI8__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI8__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI8__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI8__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI8__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI8__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI8__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI8__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI9
+pub const DAGB0_WRCLI9__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI9__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI9__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI9__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI9__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI9__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI9__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI9__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI9__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI9__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI9__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI9__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI9__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI9__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI9__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI9__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI9__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI9__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI9__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI9__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI10
+pub const DAGB0_WRCLI10__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI10__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI10__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI10__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI10__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI10__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI10__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI10__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI10__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI10__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI10__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI10__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI10__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI10__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI10__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI10__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI10__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI10__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI10__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI10__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI11
+pub const DAGB0_WRCLI11__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI11__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI11__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI11__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI11__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI11__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI11__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI11__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI11__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI11__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI11__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI11__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI11__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI11__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI11__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI11__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI11__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI11__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI11__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI11__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI12
+pub const DAGB0_WRCLI12__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI12__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI12__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI12__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI12__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI12__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI12__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI12__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI12__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI12__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI12__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI12__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI12__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI12__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI12__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI12__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI12__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI12__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI12__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI12__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI13
+pub const DAGB0_WRCLI13__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI13__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI13__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI13__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI13__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI13__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI13__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI13__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI13__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI13__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI13__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI13__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI13__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI13__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI13__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI13__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI13__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI13__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI13__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI13__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI14
+pub const DAGB0_WRCLI14__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI14__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI14__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI14__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI14__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI14__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI14__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI14__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI14__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI14__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI14__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI14__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI14__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI14__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI14__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI14__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI14__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI14__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI14__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI14__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI15
+pub const DAGB0_WRCLI15__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI15__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI15__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI15__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI15__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI15__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI15__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI15__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI15__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI15__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI15__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI15__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI15__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI15__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI15__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI15__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI15__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI15__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI15__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI15__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI16
+pub const DAGB0_WRCLI16__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI16__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI16__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI16__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI16__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI16__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI16__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI16__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI16__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI16__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI16__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI16__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI16__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI16__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI16__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI16__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI16__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI16__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI16__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI16__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI17
+pub const DAGB0_WRCLI17__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI17__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI17__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI17__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI17__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI17__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI17__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI17__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI17__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI17__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI17__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI17__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI17__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI17__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI17__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI17__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI17__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI17__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI17__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI17__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI18
+pub const DAGB0_WRCLI18__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI18__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI18__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI18__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI18__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI18__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI18__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI18__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI18__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI18__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI18__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI18__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI18__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI18__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI18__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI18__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI18__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI18__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI18__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI18__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI19
+pub const DAGB0_WRCLI19__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI19__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI19__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI19__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI19__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI19__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI19__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI19__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI19__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI19__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI19__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI19__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI19__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI19__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI19__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI19__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI19__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI19__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI19__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI19__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI20
+pub const DAGB0_WRCLI20__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI20__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI20__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI20__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI20__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI20__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI20__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI20__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI20__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI20__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI20__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI20__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI20__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI20__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI20__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI20__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI20__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI20__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI20__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI20__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI21
+pub const DAGB0_WRCLI21__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI21__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI21__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI21__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI21__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI21__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI21__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI21__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI21__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI21__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI21__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI21__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI21__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI21__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI21__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI21__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI21__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI21__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI21__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI21__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI22
+pub const DAGB0_WRCLI22__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI22__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI22__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI22__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI22__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI22__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI22__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI22__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI22__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI22__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI22__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI22__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI22__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI22__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI22__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI22__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI22__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI22__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI22__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI22__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI23
+pub const DAGB0_WRCLI23__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI23__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI23__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI23__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI23__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI23__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI23__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI23__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI23__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI23__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI23__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI23__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI23__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI23__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI23__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI23__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI23__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI23__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI23__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI23__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI24
+pub const DAGB0_WRCLI24__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI24__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI24__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI24__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI24__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI24__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI24__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI24__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI24__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI24__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI24__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI24__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI24__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI24__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI24__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI24__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI24__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI24__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI24__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI24__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI25
+pub const DAGB0_WRCLI25__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI25__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI25__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI25__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI25__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI25__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI25__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI25__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI25__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI25__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI25__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI25__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI25__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI25__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI25__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI25__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI25__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI25__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI25__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI25__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI26
+pub const DAGB0_WRCLI26__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI26__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI26__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI26__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI26__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI26__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI26__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI26__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI26__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI26__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI26__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI26__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI26__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI26__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI26__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI26__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI26__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI26__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI26__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI26__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI27
+pub const DAGB0_WRCLI27__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI27__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI27__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI27__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI27__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI27__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI27__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI27__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI27__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI27__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI27__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI27__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI27__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI27__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI27__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI27__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI27__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI27__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI27__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI27__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI28
+pub const DAGB0_WRCLI28__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI28__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI28__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI28__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI28__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI28__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI28__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI28__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI28__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI28__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI28__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI28__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI28__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI28__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI28__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI28__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI28__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI28__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI28__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI28__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI29
+pub const DAGB0_WRCLI29__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI29__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI29__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI29__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI29__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI29__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI29__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI29__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI29__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI29__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI29__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI29__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI29__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI29__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI29__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI29__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI29__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI29__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI29__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI29__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WRCLI30
+pub const DAGB0_WRCLI30__VIRT_CHAN__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI30__CHECK_TLB_CREDIT__SHIFT: c_uint = 0x3;
+pub const DAGB0_WRCLI30__URG_HIGH__SHIFT: c_uint = 0x4;
+pub const DAGB0_WRCLI30__URG_LOW__SHIFT: c_uint = 0x8;
+pub const DAGB0_WRCLI30__MAX_BW_ENABLE__SHIFT: c_uint = 0xc;
+pub const DAGB0_WRCLI30__MAX_BW__SHIFT: c_uint = 0xd;
+pub const DAGB0_WRCLI30__MIN_BW_ENABLE__SHIFT: c_uint = 0x15;
+pub const DAGB0_WRCLI30__MIN_BW__SHIFT: c_uint = 0x16;
+pub const DAGB0_WRCLI30__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x19;
+pub const DAGB0_WRCLI30__MAX_OSD__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WRCLI30__VIRT_CHAN_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WRCLI30__CHECK_TLB_CREDIT_MASK: c_uint = 0x00000008L;
+pub const DAGB0_WRCLI30__URG_HIGH_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WRCLI30__URG_LOW_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WRCLI30__MAX_BW_ENABLE_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WRCLI30__MAX_BW_MASK: c_uint = 0x001FE000L;
+pub const DAGB0_WRCLI30__MIN_BW_ENABLE_MASK: c_uint = 0x00200000L;
+pub const DAGB0_WRCLI30__MIN_BW_MASK: c_uint = 0x01C00000L;
+pub const DAGB0_WRCLI30__OSD_LIMITER_ENABLE_MASK: c_uint = 0x02000000L;
+pub const DAGB0_WRCLI30__MAX_OSD_MASK: c_uint = 0xFC000000L;
+// DAGB0_WR_CNTL
+pub const DAGB0_WR_CNTL__CLI_MAX_BW_WINDOW__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_CNTL__VC_MAX_BW_WINDOW__SHIFT: c_uint = 0x6;
+pub const DAGB0_WR_CNTL__VC_ROUNDROBIN_EN__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_CNTL__UPDATE_FED__SHIFT: c_uint = 0xd;
+pub const DAGB0_WR_CNTL__UPDATE_NACK__SHIFT: c_uint = 0xe;
+pub const DAGB0_WR_CNTL__CLI_MAX_BW_WINDOW_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_WR_CNTL__VC_MAX_BW_WINDOW_MASK: c_uint = 0x00000FC0L;
+pub const DAGB0_WR_CNTL__VC_ROUNDROBIN_EN_MASK: c_uint = 0x00001000L;
+pub const DAGB0_WR_CNTL__UPDATE_FED_MASK: c_uint = 0x00002000L;
+pub const DAGB0_WR_CNTL__UPDATE_NACK_MASK: c_uint = 0x00004000L;
+// DAGB0_WR_IO_CNTL
+pub const DAGB0_WR_IO_CNTL__OVERRIDE0_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE0_PRIORITY__SHIFT: c_uint = 0x1;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE0_CLIENT_ID__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE1_ENABLE__SHIFT: c_uint = 0x9;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE1_PRIORITY__SHIFT: c_uint = 0xa;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE1_CLIENT_ID__SHIFT: c_uint = 0xd;
+pub const DAGB0_WR_IO_CNTL__COMMON_PRIORITY__SHIFT: c_uint = 0x12;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE0_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE0_PRIORITY_MASK: c_uint = 0x0000000EL;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE0_CLIENT_ID_MASK: c_uint = 0x000001F0L;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE1_ENABLE_MASK: c_uint = 0x00000200L;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE1_PRIORITY_MASK: c_uint = 0x00001C00L;
+pub const DAGB0_WR_IO_CNTL__OVERRIDE1_CLIENT_ID_MASK: c_uint = 0x0003E000L;
+pub const DAGB0_WR_IO_CNTL__COMMON_PRIORITY_MASK: c_uint = 0x001C0000L;
+// DAGB0_WR_GMI_CNTL
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE0_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE0_PRIORITY__SHIFT: c_uint = 0x1;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE0_CLIENT_ID__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE1_ENABLE__SHIFT: c_uint = 0x9;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE1_PRIORITY__SHIFT: c_uint = 0xa;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE1_CLIENT_ID__SHIFT: c_uint = 0xd;
+pub const DAGB0_WR_GMI_CNTL__COMMON_PRIORITY__SHIFT: c_uint = 0x12;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE0_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE0_PRIORITY_MASK: c_uint = 0x0000000EL;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE0_CLIENT_ID_MASK: c_uint = 0x000001F0L;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE1_ENABLE_MASK: c_uint = 0x00000200L;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE1_PRIORITY_MASK: c_uint = 0x00001C00L;
+pub const DAGB0_WR_GMI_CNTL__OVERRIDE1_CLIENT_ID_MASK: c_uint = 0x0003E000L;
+pub const DAGB0_WR_GMI_CNTL__COMMON_PRIORITY_MASK: c_uint = 0x001C0000L;
+// DAGB0_WR_ADDR_DAGB
+pub const DAGB0_WR_ADDR_DAGB__DAGB_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB__ENABLE_JUMP_AHEAD__SHIFT: c_uint = 0x3;
+pub const DAGB0_WR_ADDR_DAGB__DISABLE_SELF_INIT__SHIFT: c_uint = 0x6;
+pub const DAGB0_WR_ADDR_DAGB__WHOAMI__SHIFT: c_uint = 0x7;
+pub const DAGB0_WR_ADDR_DAGB__JUMP_MODE__SHIFT: c_uint = 0xd;
+pub const DAGB0_WR_ADDR_DAGB__DAGB_ENABLE_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WR_ADDR_DAGB__ENABLE_JUMP_AHEAD_MASK: c_uint = 0x00000038L;
+pub const DAGB0_WR_ADDR_DAGB__DISABLE_SELF_INIT_MASK: c_uint = 0x00000040L;
+pub const DAGB0_WR_ADDR_DAGB__WHOAMI_MASK: c_uint = 0x00001F80L;
+pub const DAGB0_WR_ADDR_DAGB__JUMP_MODE_MASK: c_uint = 0x00002000L;
+// DAGB0_WR_CGTT_CLK_CTRL
+pub const DAGB0_WR_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const DAGB0_WR_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const DAGB0_WR_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WR_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const DAGB0_WR_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const DAGB0_WR_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const DAGB0_WR_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_WR_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const DAGB0_WR_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const DAGB0_WR_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const DAGB0_WR_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const DAGB0_WR_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const DAGB0_WR_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// DAGB0_L1TLB_WR_CGTT_CLK_CTRL
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const DAGB0_L1TLB_WR_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// DAGB0_WR_ADDR_DAGB_MAX_BURST0
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT0__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT1__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT2__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT3__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT4__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT5__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT6__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT7__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT0_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT1_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT2_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT3_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT4_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT5_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT6_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST0__CLIENT7_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_LAZY_TIMER0
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT0__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT1__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT2__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT3__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT4__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT5__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT6__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT7__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT0_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT1_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT2_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT3_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT4_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT5_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT6_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER0__CLIENT7_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_MAX_BURST1
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT8__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT9__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT10__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT11__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT12__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT13__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT14__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT15__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT8_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT9_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT10_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT11_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT12_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT13_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT14_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST1__CLIENT15_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_LAZY_TIMER1
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT8__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT9__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT10__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT11__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT12__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT13__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT14__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT15__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT8_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT9_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT10_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT11_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT12_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT13_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT14_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER1__CLIENT15_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_MAX_BURST2
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT16__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT17__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT18__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT19__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT20__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT21__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT22__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT23__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT16_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT17_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT18_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT19_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT20_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT21_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT22_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST2__CLIENT23_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_LAZY_TIMER2
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT16__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT17__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT18__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT19__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT20__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT21__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT22__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT23__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT16_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT17_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT18_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT19_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT20_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT21_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT22_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER2__CLIENT23_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_MAX_BURST3
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT24__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT25__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT26__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT27__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT28__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT29__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT30__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT31__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT24_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT25_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT26_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT27_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT28_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT29_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT30_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_MAX_BURST3__CLIENT31_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_ADDR_DAGB_LAZY_TIMER3
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT24__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT25__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT26__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT27__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT28__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT29__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT30__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT31__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT24_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT25_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT26_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT27_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT28_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT29_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT30_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_ADDR_DAGB_LAZY_TIMER3__CLIENT31_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB
+pub const DAGB0_WR_DATA_DAGB__DAGB_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB__ENABLE_JUMP_AHEAD__SHIFT: c_uint = 0x3;
+pub const DAGB0_WR_DATA_DAGB__DISABLE_SELF_INIT__SHIFT: c_uint = 0x6;
+pub const DAGB0_WR_DATA_DAGB__WHOAMI__SHIFT: c_uint = 0x7;
+pub const DAGB0_WR_DATA_DAGB__DAGB_ENABLE_MASK: c_uint = 0x00000007L;
+pub const DAGB0_WR_DATA_DAGB__ENABLE_JUMP_AHEAD_MASK: c_uint = 0x00000038L;
+pub const DAGB0_WR_DATA_DAGB__DISABLE_SELF_INIT_MASK: c_uint = 0x00000040L;
+pub const DAGB0_WR_DATA_DAGB__WHOAMI_MASK: c_uint = 0x00001F80L;
+// DAGB0_WR_DATA_DAGB_MAX_BURST0
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT0__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT1__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT2__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT3__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT4__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT5__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT6__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT7__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT0_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT1_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT2_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT3_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT4_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT5_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT6_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST0__CLIENT7_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_LAZY_TIMER0
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT0__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT1__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT2__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT3__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT4__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT5__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT6__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT7__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT0_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT1_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT2_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT3_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT4_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT5_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT6_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER0__CLIENT7_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_MAX_BURST1
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT8__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT9__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT10__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT11__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT12__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT13__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT14__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT15__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT8_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT9_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT10_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT11_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT12_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT13_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT14_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST1__CLIENT15_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_LAZY_TIMER1
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT8__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT9__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT10__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT11__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT12__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT13__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT14__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT15__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT8_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT9_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT10_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT11_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT12_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT13_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT14_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER1__CLIENT15_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_MAX_BURST2
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT16__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT17__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT18__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT19__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT20__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT21__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT22__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT23__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT16_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT17_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT18_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT19_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT20_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT21_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT22_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST2__CLIENT23_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_LAZY_TIMER2
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT16__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT17__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT18__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT19__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT20__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT21__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT22__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT23__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT16_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT17_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT18_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT19_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT20_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT21_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT22_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER2__CLIENT23_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_MAX_BURST3
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT24__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT25__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT26__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT27__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT28__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT29__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT30__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT31__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT24_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT25_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT26_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT27_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT28_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT29_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT30_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_MAX_BURST3__CLIENT31_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_DATA_DAGB_LAZY_TIMER3
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT24__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT25__SHIFT: c_uint = 0x4;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT26__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT27__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT28__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT29__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT30__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT31__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT24_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT25_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT26_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT27_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT28_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT29_MASK: c_uint = 0x00F00000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT30_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_WR_DATA_DAGB_LAZY_TIMER3__CLIENT31_MASK: c_uint = 0xF0000000L;
+// DAGB0_WR_VC0_CNTL
+pub const DAGB0_WR_VC0_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_VC0_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_WR_VC0_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_VC0_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_VC0_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_VC0_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_VC0_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_VC0_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_WR_VC0_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_WR_VC0_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_VC0_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_VC0_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_VC0_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_VC0_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_VC1_CNTL
+pub const DAGB0_WR_VC1_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_VC1_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_WR_VC1_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_VC1_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_VC1_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_VC1_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_VC1_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_VC1_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_WR_VC1_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_WR_VC1_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_VC1_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_VC1_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_VC1_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_VC1_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_VC2_CNTL
+pub const DAGB0_WR_VC2_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_VC2_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_WR_VC2_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_VC2_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_VC2_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_VC2_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_VC2_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_VC2_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_WR_VC2_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_WR_VC2_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_VC2_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_VC2_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_VC2_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_VC2_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_VC3_CNTL
+pub const DAGB0_WR_VC3_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_VC3_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_WR_VC3_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_VC3_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_VC3_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_VC3_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_VC3_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_VC3_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_WR_VC3_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_WR_VC3_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_VC3_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_VC3_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_VC3_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_VC3_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_VC4_CNTL
+pub const DAGB0_WR_VC4_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_VC4_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_WR_VC4_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_VC4_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_VC4_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_VC4_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_VC4_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_VC4_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_WR_VC4_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_WR_VC4_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_VC4_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_VC4_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_VC4_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_VC4_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_VC5_CNTL
+pub const DAGB0_WR_VC5_CNTL__STOR_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_VC5_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0xb;
+pub const DAGB0_WR_VC5_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_VC5_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_VC5_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_VC5_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_VC5_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_VC5_CNTL__STOR_CREDIT_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_WR_VC5_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000800L;
+pub const DAGB0_WR_VC5_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_VC5_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_VC5_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_VC5_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_VC5_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_IO_VC_CNTL
+pub const DAGB0_WR_IO_VC_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_IO_VC_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_IO_VC_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_IO_VC_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_IO_VC_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_IO_VC_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_IO_VC_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_WR_IO_VC_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_IO_VC_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_IO_VC_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_IO_VC_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_IO_VC_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_GMI_VC_CNTL
+pub const DAGB0_WR_GMI_VC_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_GMI_VC_CNTL__MAX_BW__SHIFT: c_uint = 0xc;
+pub const DAGB0_WR_GMI_VC_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_GMI_VC_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_WR_GMI_VC_CNTL__OSD_LIMITER_ENABLE__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_GMI_VC_CNTL__MAX_OSD__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_GMI_VC_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_WR_GMI_VC_CNTL__MAX_BW_MASK: c_uint = 0x000FF000L;
+pub const DAGB0_WR_GMI_VC_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00100000L;
+pub const DAGB0_WR_GMI_VC_CNTL__MIN_BW_MASK: c_uint = 0x00E00000L;
+pub const DAGB0_WR_GMI_VC_CNTL__OSD_LIMITER_ENABLE_MASK: c_uint = 0x01000000L;
+pub const DAGB0_WR_GMI_VC_CNTL__MAX_OSD_MASK: c_uint = 0xFE000000L;
+// DAGB0_WR_CNTL_MISC
+pub const DAGB0_WR_CNTL_MISC__STOR_POOL_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_CNTL_MISC__HDP_CID__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_CNTL_MISC__STOR_POOL_CREDIT_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_WR_CNTL_MISC__HDP_CID_MASK: c_uint = 0x00001F00L;
+// DAGB0_WR_TLB_CREDIT
+pub const DAGB0_WR_TLB_CREDIT__TLB0__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_TLB_CREDIT__TLB1__SHIFT: c_uint = 0x5;
+pub const DAGB0_WR_TLB_CREDIT__TLB2__SHIFT: c_uint = 0xa;
+pub const DAGB0_WR_TLB_CREDIT__TLB3__SHIFT: c_uint = 0xf;
+pub const DAGB0_WR_TLB_CREDIT__TLB4__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_TLB_CREDIT__TLB5__SHIFT: c_uint = 0x19;
+pub const DAGB0_WR_TLB_CREDIT__TLB0_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_WR_TLB_CREDIT__TLB1_MASK: c_uint = 0x000003E0L;
+pub const DAGB0_WR_TLB_CREDIT__TLB2_MASK: c_uint = 0x00007C00L;
+pub const DAGB0_WR_TLB_CREDIT__TLB3_MASK: c_uint = 0x000F8000L;
+pub const DAGB0_WR_TLB_CREDIT__TLB4_MASK: c_uint = 0x01F00000L;
+pub const DAGB0_WR_TLB_CREDIT__TLB5_MASK: c_uint = 0x3E000000L;
+// DAGB0_WR_DATA_CREDIT
+pub const DAGB0_WR_DATA_CREDIT__DLOCK_VC_CREDITS__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_CREDIT__LARGE_BURST_CREDITS__SHIFT: c_uint = 0x8;
+pub const DAGB0_WR_DATA_CREDIT__MIDDLE_BURST_CREDITS__SHIFT: c_uint = 0x10;
+pub const DAGB0_WR_DATA_CREDIT__SMALL_BURST_CREDITS__SHIFT: c_uint = 0x18;
+pub const DAGB0_WR_DATA_CREDIT__DLOCK_VC_CREDITS_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_WR_DATA_CREDIT__LARGE_BURST_CREDITS_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_WR_DATA_CREDIT__MIDDLE_BURST_CREDITS_MASK: c_uint = 0x00FF0000L;
+pub const DAGB0_WR_DATA_CREDIT__SMALL_BURST_CREDITS_MASK: c_uint = 0xFF000000L;
+// DAGB0_WR_MISC_CREDIT
+pub const DAGB0_WR_MISC_CREDIT__ATOMIC_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_MISC_CREDIT__DLOCK_VC_NUM__SHIFT: c_uint = 0x6;
+pub const DAGB0_WR_MISC_CREDIT__ATOMIC_CREDIT_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_WR_MISC_CREDIT__DLOCK_VC_NUM_MASK: c_uint = 0x000001C0L;
+// DAGB0_WR_DATA_FIFO_CREDIT_CNTL1
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC0_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC1_CREDIT__SHIFT: c_uint = 0x5;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC2_CREDIT__SHIFT: c_uint = 0xa;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC3_CREDIT__SHIFT: c_uint = 0xf;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__POOL_CREDIT__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__FIX_EQ__SHIFT: c_uint = 0x1b;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__FIX0__SHIFT: c_uint = 0x1c;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC0_CREDIT_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC1_CREDIT_MASK: c_uint = 0x000003E0L;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC2_CREDIT_MASK: c_uint = 0x00007C00L;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__VC3_CREDIT_MASK: c_uint = 0x000F8000L;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__POOL_CREDIT_MASK: c_uint = 0x07F00000L;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__FIX_EQ_MASK: c_uint = 0x08000000L;
+pub const DAGB0_WR_DATA_FIFO_CREDIT_CNTL1__FIX0_MASK: c_uint = 0x10000000L;
+// DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC0_CREDIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC1_CREDIT__SHIFT: c_uint = 0x5;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC2_CREDIT__SHIFT: c_uint = 0xa;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC3_CREDIT__SHIFT: c_uint = 0xf;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__POOL_CREDIT__SHIFT: c_uint = 0x14;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__FIX_EQ__SHIFT: c_uint = 0x1a;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__FIX0__SHIFT: c_uint = 0x1b;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC0_CREDIT_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC1_CREDIT_MASK: c_uint = 0x000003E0L;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC2_CREDIT_MASK: c_uint = 0x00007C00L;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__VC3_CREDIT_MASK: c_uint = 0x000F8000L;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__POOL_CREDIT_MASK: c_uint = 0x03F00000L;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__FIX_EQ_MASK: c_uint = 0x04000000L;
+pub const DAGB0_WR_ATOMIC_FIFO_CREDIT_CNTL1__FIX0_MASK: c_uint = 0x08000000L;
+// DAGB0_WRCLI_ASK_PENDING
+pub const DAGB0_WRCLI_ASK_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_ASK_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_GO_PENDING
+pub const DAGB0_WRCLI_GO_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_GO_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_GBLSEND_PENDING
+pub const DAGB0_WRCLI_GBLSEND_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_GBLSEND_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_TLB_PENDING
+pub const DAGB0_WRCLI_TLB_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_TLB_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_OARB_PENDING
+pub const DAGB0_WRCLI_OARB_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_OARB_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_ASK2ARB_PENDING
+pub const DAGB0_WRCLI_ASK2ARB_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_ASK2ARB_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_ASK2DF_PENDING
+pub const DAGB0_WRCLI_ASK2DF_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_ASK2DF_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_OSD_PENDING
+pub const DAGB0_WRCLI_OSD_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_OSD_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_ASK_OSD_PENDING
+pub const DAGB0_WRCLI_ASK_OSD_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_ASK_OSD_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_DBUS_ASK_PENDING
+pub const DAGB0_WRCLI_DBUS_ASK_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_DBUS_ASK_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_DBUS_GO_PENDING
+pub const DAGB0_WRCLI_DBUS_GO_PENDING__BUSY__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_DBUS_GO_PENDING__BUSY_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_GPU_SNOOP_OVERRIDE
+pub const DAGB0_WRCLI_GPU_SNOOP_OVERRIDE__ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_GPU_SNOOP_OVERRIDE__ENABLE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_GPU_SNOOP_OVERRIDE_VALUE
+pub const DAGB0_WRCLI_GPU_SNOOP_OVERRIDE_VALUE__ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_GPU_SNOOP_OVERRIDE_VALUE__ENABLE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_NOALLOC_OVERRIDE
+pub const DAGB0_WRCLI_NOALLOC_OVERRIDE__ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_NOALLOC_OVERRIDE__ENABLE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_WRCLI_NOALLOC_OVERRIDE_VALUE
+pub const DAGB0_WRCLI_NOALLOC_OVERRIDE_VALUE__VALUE__SHIFT: c_uint = 0x0;
+pub const DAGB0_WRCLI_NOALLOC_OVERRIDE_VALUE__VALUE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_DAGB_DLY
+pub const DAGB0_DAGB_DLY__DLY__SHIFT: c_uint = 0x0;
+pub const DAGB0_DAGB_DLY__CLI__SHIFT: c_uint = 0x8;
+pub const DAGB0_DAGB_DLY__POS__SHIFT: c_uint = 0x10;
+pub const DAGB0_DAGB_DLY__DLY_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_DAGB_DLY__CLI_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_DAGB_DLY__POS_MASK: c_uint = 0x000F0000L;
+// DAGB0_CNTL_MISC
+pub const DAGB0_CNTL_MISC__BW_INIT_CYCLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_CNTL_MISC__BW_INIT_CYCLE_MASK: c_uint = 0x0000003FL;
+// DAGB0_CNTL_MISC2
+pub const DAGB0_CNTL_MISC2__WR_BUSY_OVERRIDE__SHIFT: c_uint = 0x0;
+pub const DAGB0_CNTL_MISC2__RD_BUSY_OVERRIDE__SHIFT: c_uint = 0x1;
+pub const DAGB0_CNTL_MISC2__TLBWR_BUSY_OVERRIDE__SHIFT: c_uint = 0x2;
+pub const DAGB0_CNTL_MISC2__TLBRD_BUSY_OVERRIDE__SHIFT: c_uint = 0x3;
+pub const DAGB0_CNTL_MISC2__SDP_BUSY_OVERRIDE__SHIFT: c_uint = 0x4;
+pub const DAGB0_CNTL_MISC2__SWAP_CTL__SHIFT: c_uint = 0x5;
+pub const DAGB0_CNTL_MISC2__ENABLE_PARITY_CHECK__SHIFT: c_uint = 0x6;
+pub const DAGB0_CNTL_MISC2__RDATA_PARITY_CHECK4NACK__SHIFT: c_uint = 0x7;
+pub const DAGB0_CNTL_MISC2__WDATA_PARITY_CHECK4RAS__SHIFT: c_uint = 0x8;
+pub const DAGB0_CNTL_MISC2__RDRET_FIFO_PERF__SHIFT: c_uint = 0x9;
+pub const DAGB0_CNTL_MISC2__DISABLE_RDRET_TAP_CHAIN_FGCG__SHIFT: c_uint = 0xa;
+pub const DAGB0_CNTL_MISC2__DISABLE_WRRET_TAP_CHAIN_FGCG__SHIFT: c_uint = 0xb;
+pub const DAGB0_CNTL_MISC2__WR_BUSY_OVERRIDE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_CNTL_MISC2__RD_BUSY_OVERRIDE_MASK: c_uint = 0x00000002L;
+pub const DAGB0_CNTL_MISC2__TLBWR_BUSY_OVERRIDE_MASK: c_uint = 0x00000004L;
+pub const DAGB0_CNTL_MISC2__TLBRD_BUSY_OVERRIDE_MASK: c_uint = 0x00000008L;
+pub const DAGB0_CNTL_MISC2__SDP_BUSY_OVERRIDE_MASK: c_uint = 0x00000010L;
+pub const DAGB0_CNTL_MISC2__SWAP_CTL_MASK: c_uint = 0x00000020L;
+pub const DAGB0_CNTL_MISC2__ENABLE_PARITY_CHECK_MASK: c_uint = 0x00000040L;
+pub const DAGB0_CNTL_MISC2__RDATA_PARITY_CHECK4NACK_MASK: c_uint = 0x00000080L;
+pub const DAGB0_CNTL_MISC2__WDATA_PARITY_CHECK4RAS_MASK: c_uint = 0x00000100L;
+pub const DAGB0_CNTL_MISC2__RDRET_FIFO_PERF_MASK: c_uint = 0x00000200L;
+pub const DAGB0_CNTL_MISC2__DISABLE_RDRET_TAP_CHAIN_FGCG_MASK: c_uint = 0x00000400L;
+pub const DAGB0_CNTL_MISC2__DISABLE_WRRET_TAP_CHAIN_FGCG_MASK: c_uint = 0x00000800L;
+// DAGB0_FIFO_EMPTY
+pub const DAGB0_FIFO_EMPTY__EMPTY__SHIFT: c_uint = 0x0;
+pub const DAGB0_FIFO_EMPTY__EMPTY_MASK: c_uint = 0x0001FFFFL;
+// DAGB0_FIFO_FULL
+pub const DAGB0_FIFO_FULL__FULL__SHIFT: c_uint = 0x0;
+pub const DAGB0_FIFO_FULL__FULL_MASK: c_uint = 0x0000FFFFL;
+// DAGB0_RD_CREDITS_FULL
+pub const DAGB0_RD_CREDITS_FULL__FULL__SHIFT: c_uint = 0x0;
+pub const DAGB0_RD_CREDITS_FULL__FULL_MASK: c_uint = 0x0000007FL;
+// DAGB0_WR_CREDITS_FULL
+pub const DAGB0_WR_CREDITS_FULL__FULL__SHIFT: c_uint = 0x0;
+pub const DAGB0_WR_CREDITS_FULL__FULL_MASK: c_uint = 0x0001FFFFL;
+// DAGB0_PERFCOUNTER_LO
+pub const DAGB0_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const DAGB0_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_PERFCOUNTER_HI
+pub const DAGB0_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const DAGB0_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const DAGB0_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const DAGB0_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;
+// DAGB0_PERFCOUNTER0_CFG
+pub const DAGB0_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const DAGB0_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const DAGB0_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const DAGB0_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const DAGB0_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const DAGB0_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const DAGB0_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// DAGB0_PERFCOUNTER1_CFG
+pub const DAGB0_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const DAGB0_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const DAGB0_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const DAGB0_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const DAGB0_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const DAGB0_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const DAGB0_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// DAGB0_PERFCOUNTER2_CFG
+pub const DAGB0_PERFCOUNTER2_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const DAGB0_PERFCOUNTER2_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const DAGB0_PERFCOUNTER2_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const DAGB0_PERFCOUNTER2_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const DAGB0_PERFCOUNTER2_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const DAGB0_PERFCOUNTER2_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_PERFCOUNTER2_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_PERFCOUNTER2_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const DAGB0_PERFCOUNTER2_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const DAGB0_PERFCOUNTER2_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// DAGB0_PERFCOUNTER_RSLT_CNTL
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x00000003L;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const DAGB0_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// DAGB0_L1TLB_REG_RW
+pub const DAGB0_L1TLB_REG_RW__REG_WRITE_L1TLB_CTRL__SHIFT: c_uint = 0x0;
+pub const DAGB0_L1TLB_REG_RW__REG_READ_L1TLB_CTRL__SHIFT: c_uint = 0x1;
+pub const DAGB0_L1TLB_REG_RW__RESERVE__SHIFT: c_uint = 0x2;
+pub const DAGB0_L1TLB_REG_RW__REG_WRITE_L1TLB_CTRL_MASK: c_uint = 0x00000001L;
+pub const DAGB0_L1TLB_REG_RW__REG_READ_L1TLB_CTRL_MASK: c_uint = 0x00000002L;
+pub const DAGB0_L1TLB_REG_RW__RESERVE_MASK: c_uint = 0x3FFFFFFCL;
+// DAGB0_RESERVE1
+pub const DAGB0_RESERVE1__RESERVE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RESERVE1__RESERVE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RESERVE2
+pub const DAGB0_RESERVE2__RESERVE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RESERVE2__RESERVE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RESERVE3
+pub const DAGB0_RESERVE3__RESERVE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RESERVE3__RESERVE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_RESERVE4
+pub const DAGB0_RESERVE4__RESERVE__SHIFT: c_uint = 0x0;
+pub const DAGB0_RESERVE4__RESERVE_MASK: c_uint = 0xFFFFFFFFL;
+// DAGB0_SDP_RD_BW_CNTL
+pub const DAGB0_SDP_RD_BW_CNTL__MAX_BW_ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_RD_BW_CNTL__MIN_BW_ENABLE__SHIFT: c_uint = 0x1;
+pub const DAGB0_SDP_RD_BW_CNTL__MAX_BW_WINDOW__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_RD_BW_CNTL__MAX_BW__SHIFT: c_uint = 0xb;
+pub const DAGB0_SDP_RD_BW_CNTL__MIN_BW__SHIFT: c_uint = 0x15;
+pub const DAGB0_SDP_RD_BW_CNTL__MAX_BW_ENABLE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_SDP_RD_BW_CNTL__MIN_BW_ENABLE_MASK: c_uint = 0x00000002L;
+pub const DAGB0_SDP_RD_BW_CNTL__MAX_BW_WINDOW_MASK: c_uint = 0x000007FCL;
+pub const DAGB0_SDP_RD_BW_CNTL__MAX_BW_MASK: c_uint = 0x001FF800L;
+pub const DAGB0_SDP_RD_BW_CNTL__MIN_BW_MASK: c_uint = 0x07E00000L;
+// DAGB0_SDP_PRIORITY_OVERRIDE
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_PRIORITY__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_CLIENT_ID__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_DRAM_RD__SHIFT: c_uint = 0x9;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_DRAM_WR__SHIFT: c_uint = 0xa;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_GMI_RD__SHIFT: c_uint = 0xb;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_GMI_WR__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_IO_RD__SHIFT: c_uint = 0xd;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_IO_WR__SHIFT: c_uint = 0xe;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_PRIORITY__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_CLIENT_ID__SHIFT: c_uint = 0x14;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_DRAM_RD__SHIFT: c_uint = 0x19;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_DRAM_WR__SHIFT: c_uint = 0x1a;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_GMI_RD__SHIFT: c_uint = 0x1b;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_GMI_WR__SHIFT: c_uint = 0x1c;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_IO_RD__SHIFT: c_uint = 0x1d;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_IO_WR__SHIFT: c_uint = 0x1e;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_PRIORITY_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_CLIENT_ID_MASK: c_uint = 0x000001F0L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_DRAM_RD_MASK: c_uint = 0x00000200L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_DRAM_WR_MASK: c_uint = 0x00000400L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_GMI_RD_MASK: c_uint = 0x00000800L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_GMI_WR_MASK: c_uint = 0x00001000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_IO_RD_MASK: c_uint = 0x00002000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE0_ENABLE_IO_WR_MASK: c_uint = 0x00004000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_PRIORITY_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_CLIENT_ID_MASK: c_uint = 0x01F00000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_DRAM_RD_MASK: c_uint = 0x02000000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_DRAM_WR_MASK: c_uint = 0x04000000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_GMI_RD_MASK: c_uint = 0x08000000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_GMI_WR_MASK: c_uint = 0x10000000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_IO_RD_MASK: c_uint = 0x20000000L;
+pub const DAGB0_SDP_PRIORITY_OVERRIDE__OVERRIDE1_ENABLE_IO_WR_MASK: c_uint = 0x40000000L;
+// DAGB0_SDP_RD_PRIORITY
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC0_PRIORITY__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC1_PRIORITY__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC2_PRIORITY__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC3_PRIORITY__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC4_PRIORITY__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC5_PRIORITY__SHIFT: c_uint = 0x14;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC0_PRIORITY_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC1_PRIORITY_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC2_PRIORITY_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC3_PRIORITY_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC4_PRIORITY_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_SDP_RD_PRIORITY__RD_VC5_PRIORITY_MASK: c_uint = 0x00F00000L;
+// DAGB0_SDP_WR_PRIORITY
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC0_PRIORITY__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC1_PRIORITY__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC2_PRIORITY__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC3_PRIORITY__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC4_PRIORITY__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC5_PRIORITY__SHIFT: c_uint = 0x14;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC0_PRIORITY_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC1_PRIORITY_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC2_PRIORITY_MASK: c_uint = 0x00000F00L;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC3_PRIORITY_MASK: c_uint = 0x0000F000L;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC4_PRIORITY_MASK: c_uint = 0x000F0000L;
+pub const DAGB0_SDP_WR_PRIORITY__WR_VC5_PRIORITY_MASK: c_uint = 0x00F00000L;
+// DAGB0_SDP_RD_CLI2SDP_VC_MAP
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__SRT_VC_MAP__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__NRT_VC_MAP__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__DLOCK_VC_MAP__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__HRT_VC_MAP__SHIFT: c_uint = 0x9;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__IO_VC_MAP__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__GMI_VC_MAP__SHIFT: c_uint = 0xf;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__SRT_VC_MAP_MASK: c_uint = 0x00000007L;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__NRT_VC_MAP_MASK: c_uint = 0x00000038L;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__DLOCK_VC_MAP_MASK: c_uint = 0x000001C0L;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__HRT_VC_MAP_MASK: c_uint = 0x00000E00L;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__IO_VC_MAP_MASK: c_uint = 0x00007000L;
+pub const DAGB0_SDP_RD_CLI2SDP_VC_MAP__GMI_VC_MAP_MASK: c_uint = 0x00038000L;
+// DAGB0_SDP_WR_CLI2SDP_VC_MAP
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__SRT_VC_MAP__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__NRT_VC_MAP__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__DLOCK_VC_MAP__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__HRT_VC_MAP__SHIFT: c_uint = 0x9;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__IO_VC_MAP__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__GMI_VC_MAP__SHIFT: c_uint = 0xf;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__SRT_VC_MAP_MASK: c_uint = 0x00000007L;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__NRT_VC_MAP_MASK: c_uint = 0x00000038L;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__DLOCK_VC_MAP_MASK: c_uint = 0x000001C0L;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__HRT_VC_MAP_MASK: c_uint = 0x00000E00L;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__IO_VC_MAP_MASK: c_uint = 0x00007000L;
+pub const DAGB0_SDP_WR_CLI2SDP_VC_MAP__GMI_VC_MAP_MASK: c_uint = 0x00038000L;
+// DAGB0_SDP_ENABLE
+pub const DAGB0_SDP_ENABLE__ENABLE__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_ENABLE__ENABLE_MASK: c_uint = 0x00000001L;
+// DAGB0_SDP_CREDITS
+pub const DAGB0_SDP_CREDITS__TAG_LIMIT__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_CREDITS__WR_RESP_CREDITS__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_CREDITS__RD_RESP_CREDITS__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_CREDITS__TAG_LIMIT_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_SDP_CREDITS__WR_RESP_CREDITS_MASK: c_uint = 0x00007F00L;
+pub const DAGB0_SDP_CREDITS__RD_RESP_CREDITS_MASK: c_uint = 0x01FF0000L;
+// DAGB0_SDP_TAG_RESERVE0
+pub const DAGB0_SDP_TAG_RESERVE0__VC0__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_TAG_RESERVE0__VC1__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_TAG_RESERVE0__VC2__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_TAG_RESERVE0__VC3__SHIFT: c_uint = 0x18;
+pub const DAGB0_SDP_TAG_RESERVE0__VC0_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_SDP_TAG_RESERVE0__VC1_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_SDP_TAG_RESERVE0__VC2_MASK: c_uint = 0x00FF0000L;
+pub const DAGB0_SDP_TAG_RESERVE0__VC3_MASK: c_uint = 0xFF000000L;
+// DAGB0_SDP_TAG_RESERVE1
+pub const DAGB0_SDP_TAG_RESERVE1__VC4__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_TAG_RESERVE1__VC5__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_TAG_RESERVE1__VC6__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_TAG_RESERVE1__VC7__SHIFT: c_uint = 0x18;
+pub const DAGB0_SDP_TAG_RESERVE1__VC4_MASK: c_uint = 0x000000FFL;
+pub const DAGB0_SDP_TAG_RESERVE1__VC5_MASK: c_uint = 0x0000FF00L;
+pub const DAGB0_SDP_TAG_RESERVE1__VC6_MASK: c_uint = 0x00FF0000L;
+pub const DAGB0_SDP_TAG_RESERVE1__VC7_MASK: c_uint = 0xFF000000L;
+// DAGB0_SDP_VCC_RESERVE0
+pub const DAGB0_SDP_VCC_RESERVE0__VC0_CREDITS__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_VCC_RESERVE0__VC1_CREDITS__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_VCC_RESERVE0__VC2_CREDITS__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_VCC_RESERVE0__VC3_CREDITS__SHIFT: c_uint = 0x12;
+pub const DAGB0_SDP_VCC_RESERVE0__VC4_CREDITS__SHIFT: c_uint = 0x18;
+pub const DAGB0_SDP_VCC_RESERVE0__VC0_CREDITS_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_SDP_VCC_RESERVE0__VC1_CREDITS_MASK: c_uint = 0x00000FC0L;
+pub const DAGB0_SDP_VCC_RESERVE0__VC2_CREDITS_MASK: c_uint = 0x0003F000L;
+pub const DAGB0_SDP_VCC_RESERVE0__VC3_CREDITS_MASK: c_uint = 0x00FC0000L;
+pub const DAGB0_SDP_VCC_RESERVE0__VC4_CREDITS_MASK: c_uint = 0x3F000000L;
+// DAGB0_SDP_VCC_RESERVE1
+pub const DAGB0_SDP_VCC_RESERVE1__VC5_CREDITS__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_VCC_RESERVE1__VC6_CREDITS__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_VCC_RESERVE1__VC7_CREDITS__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_VCC_RESERVE1__DISTRIBUTE_POOL__SHIFT: c_uint = 0x1f;
+pub const DAGB0_SDP_VCC_RESERVE1__VC5_CREDITS_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_SDP_VCC_RESERVE1__VC6_CREDITS_MASK: c_uint = 0x00000FC0L;
+pub const DAGB0_SDP_VCC_RESERVE1__VC7_CREDITS_MASK: c_uint = 0x0003F000L;
+pub const DAGB0_SDP_VCC_RESERVE1__DISTRIBUTE_POOL_MASK: c_uint = 0x80000000L;
+// DAGB0_SDP_ERR_STATUS
+pub const DAGB0_SDP_ERR_STATUS__SDP_RDRSP_STATUS__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_ERR_STATUS__SDP_WRRSP_STATUS__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_ERR_STATUS__SDP_RDRSP_DATASTATUS__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_ERR_STATUS__SDP_RDRSP_DATAPARITY_ERROR__SHIFT: c_uint = 0xa;
+pub const DAGB0_SDP_ERR_STATUS__CLEAR_ERROR_STATUS__SHIFT: c_uint = 0xb;
+pub const DAGB0_SDP_ERR_STATUS__BUSY_ON_ERROR__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_ERR_STATUS__FUE_FLAG__SHIFT: c_uint = 0xd;
+pub const DAGB0_SDP_ERR_STATUS__IGNORE_RDRSP_FED__SHIFT: c_uint = 0xe;
+pub const DAGB0_SDP_ERR_STATUS__INTERRUPT_ON_FATAL__SHIFT: c_uint = 0xf;
+pub const DAGB0_SDP_ERR_STATUS__INTERRUPT_IGNORE_CLI_FATAL__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_ERR_STATUS__LEVEL_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const DAGB0_SDP_ERR_STATUS__BUSY_ON_CMPL_FATAL_ERROR__SHIFT: c_uint = 0x12;
+pub const DAGB0_SDP_ERR_STATUS__SDP_RDRSP_STATUS_MASK: c_uint = 0x0000000FL;
+pub const DAGB0_SDP_ERR_STATUS__SDP_WRRSP_STATUS_MASK: c_uint = 0x000000F0L;
+pub const DAGB0_SDP_ERR_STATUS__SDP_RDRSP_DATASTATUS_MASK: c_uint = 0x00000300L;
+pub const DAGB0_SDP_ERR_STATUS__SDP_RDRSP_DATAPARITY_ERROR_MASK: c_uint = 0x00000400L;
+pub const DAGB0_SDP_ERR_STATUS__CLEAR_ERROR_STATUS_MASK: c_uint = 0x00000800L;
+pub const DAGB0_SDP_ERR_STATUS__BUSY_ON_ERROR_MASK: c_uint = 0x00001000L;
+pub const DAGB0_SDP_ERR_STATUS__FUE_FLAG_MASK: c_uint = 0x00002000L;
+pub const DAGB0_SDP_ERR_STATUS__IGNORE_RDRSP_FED_MASK: c_uint = 0x00004000L;
+pub const DAGB0_SDP_ERR_STATUS__INTERRUPT_ON_FATAL_MASK: c_uint = 0x00008000L;
+pub const DAGB0_SDP_ERR_STATUS__INTERRUPT_IGNORE_CLI_FATAL_MASK: c_uint = 0x00010000L;
+pub const DAGB0_SDP_ERR_STATUS__LEVEL_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const DAGB0_SDP_ERR_STATUS__BUSY_ON_CMPL_FATAL_ERROR_MASK: c_uint = 0x00040000L;
+// DAGB0_SDP_REQ_CNTL
+pub const DAGB0_SDP_REQ_CNTL__REQ_PASS_PW_OVERRIDE_READ__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_REQ_CNTL__REQ_PASS_PW_OVERRIDE_WRITE__SHIFT: c_uint = 0x1;
+pub const DAGB0_SDP_REQ_CNTL__REQ_PASS_PW_OVERRIDE_ATOMIC__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_REQ_CNTL__REQ_CHAIN_OVERRIDE_DRAM__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_REQ_CNTL__REQ_CHAIN_OVERRIDE_GMI__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_REQ_CNTL__INNER_DOMAIN_MODE__SHIFT: c_uint = 0x5;
+pub const DAGB0_SDP_REQ_CNTL__REQ_BLOCK_LEVEL_READ__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_REQ_CNTL__REQ_BLOCK_LEVEL_WRITE__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_REQ_CNTL__REQ_BLOCK_LEVEL_ATOMIC__SHIFT: c_uint = 0xa;
+pub const DAGB0_SDP_REQ_CNTL__REQ_PASS_PW_OVERRIDE_READ_MASK: c_uint = 0x00000001L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_PASS_PW_OVERRIDE_WRITE_MASK: c_uint = 0x00000002L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_PASS_PW_OVERRIDE_ATOMIC_MASK: c_uint = 0x00000004L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_CHAIN_OVERRIDE_DRAM_MASK: c_uint = 0x00000008L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_CHAIN_OVERRIDE_GMI_MASK: c_uint = 0x00000010L;
+pub const DAGB0_SDP_REQ_CNTL__INNER_DOMAIN_MODE_MASK: c_uint = 0x00000020L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_BLOCK_LEVEL_READ_MASK: c_uint = 0x000000C0L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_BLOCK_LEVEL_WRITE_MASK: c_uint = 0x00000300L;
+pub const DAGB0_SDP_REQ_CNTL__REQ_BLOCK_LEVEL_ATOMIC_MASK: c_uint = 0x00000C00L;
+// DAGB0_SDP_MISC_AON
+pub const DAGB0_SDP_MISC_AON__LINKMGR_PARTACK_HYSTERESIS__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_MISC_AON__LINKMGR_PARTACK_DEASSERT_MODE__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_MISC_AON__LINKMGR_PARTACK_HYSTERESIS_MASK: c_uint = 0x00000003L;
+pub const DAGB0_SDP_MISC_AON__LINKMGR_PARTACK_DEASSERT_MODE_MASK: c_uint = 0x00000004L;
+// DAGB0_SDP_MISC
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC0__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC1__SHIFT: c_uint = 0x1;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC2__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC3__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC4__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC5__SHIFT: c_uint = 0x5;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC6__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC7__SHIFT: c_uint = 0x7;
+pub const DAGB0_SDP_MISC__EARLY_SDP_ORIGDATA__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_MISC__LINKMGR_DYNAMIC_MODE__SHIFT: c_uint = 0x9;
+pub const DAGB0_SDP_MISC__LINKMGR_HALT_THRESHOLD__SHIFT: c_uint = 0xb;
+pub const DAGB0_SDP_MISC__LINKMGR_RECONNECT_DELAY__SHIFT: c_uint = 0xd;
+pub const DAGB0_SDP_MISC__LINKMGR_IDLE_THRESHOLD__SHIFT: c_uint = 0xf;
+pub const DAGB0_SDP_MISC__SDP_DAT_FIFO0_MARGIN__SHIFT: c_uint = 0x14;
+pub const DAGB0_SDP_MISC__SDP_DAT_FIFO1_MARGIN__SHIFT: c_uint = 0x15;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC0_MASK: c_uint = 0x00000001L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC1_MASK: c_uint = 0x00000002L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC2_MASK: c_uint = 0x00000004L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC3_MASK: c_uint = 0x00000008L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC4_MASK: c_uint = 0x00000010L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC5_MASK: c_uint = 0x00000020L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC6_MASK: c_uint = 0x00000040L;
+pub const DAGB0_SDP_MISC__EARLYWRRET_ENABLE_VC7_MASK: c_uint = 0x00000080L;
+pub const DAGB0_SDP_MISC__EARLY_SDP_ORIGDATA_MASK: c_uint = 0x00000100L;
+pub const DAGB0_SDP_MISC__LINKMGR_DYNAMIC_MODE_MASK: c_uint = 0x00000600L;
+pub const DAGB0_SDP_MISC__LINKMGR_HALT_THRESHOLD_MASK: c_uint = 0x00001800L;
+pub const DAGB0_SDP_MISC__LINKMGR_RECONNECT_DELAY_MASK: c_uint = 0x00006000L;
+pub const DAGB0_SDP_MISC__LINKMGR_IDLE_THRESHOLD_MASK: c_uint = 0x000F8000L;
+pub const DAGB0_SDP_MISC__SDP_DAT_FIFO0_MARGIN_MASK: c_uint = 0x00100000L;
+pub const DAGB0_SDP_MISC__SDP_DAT_FIFO1_MARGIN_MASK: c_uint = 0x00200000L;
+// DAGB0_SDP_MISC2
+pub const DAGB0_SDP_MISC2__RRET_SWAP_MODE__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_MISC2__BLOCK_REQUESTS__SHIFT: c_uint = 0x1;
+pub const DAGB0_SDP_MISC2__REQUESTS_BLOCKED__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_MISC2__RDRSP_CR_RELEASE_MODE__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_MISC2__RRET_SWAP_MODE_MASK: c_uint = 0x00000001L;
+pub const DAGB0_SDP_MISC2__BLOCK_REQUESTS_MASK: c_uint = 0x00000002L;
+pub const DAGB0_SDP_MISC2__REQUESTS_BLOCKED_MASK: c_uint = 0x00000004L;
+pub const DAGB0_SDP_MISC2__RDRSP_CR_RELEASE_MODE_MASK: c_uint = 0x00000008L;
+// DAGB0_SDP_VCD_RESERVE0
+pub const DAGB0_SDP_VCD_RESERVE0__VC0_CREDITS__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_VCD_RESERVE0__VC1_CREDITS__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_VCD_RESERVE0__VC2_CREDITS__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_VCD_RESERVE0__VC3_CREDITS__SHIFT: c_uint = 0x12;
+pub const DAGB0_SDP_VCD_RESERVE0__VC4_CREDITS__SHIFT: c_uint = 0x18;
+pub const DAGB0_SDP_VCD_RESERVE0__VC0_CREDITS_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_SDP_VCD_RESERVE0__VC1_CREDITS_MASK: c_uint = 0x00000FC0L;
+pub const DAGB0_SDP_VCD_RESERVE0__VC2_CREDITS_MASK: c_uint = 0x0003F000L;
+pub const DAGB0_SDP_VCD_RESERVE0__VC3_CREDITS_MASK: c_uint = 0x00FC0000L;
+pub const DAGB0_SDP_VCD_RESERVE0__VC4_CREDITS_MASK: c_uint = 0x3F000000L;
+// DAGB0_SDP_VCD_RESERVE1
+pub const DAGB0_SDP_VCD_RESERVE1__VC5_CREDITS__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_VCD_RESERVE1__VC6_CREDITS__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_VCD_RESERVE1__VC7_CREDITS__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_VCD_RESERVE1__DISTRIBUTE_POOL__SHIFT: c_uint = 0x12;
+pub const DAGB0_SDP_VCD_RESERVE1__VC5_CREDITS_MASK: c_uint = 0x0000003FL;
+pub const DAGB0_SDP_VCD_RESERVE1__VC6_CREDITS_MASK: c_uint = 0x00000FC0L;
+pub const DAGB0_SDP_VCD_RESERVE1__VC7_CREDITS_MASK: c_uint = 0x0003F000L;
+pub const DAGB0_SDP_VCD_RESERVE1__DISTRIBUTE_POOL_MASK: c_uint = 0x00040000L;
+// DAGB0_SDP_ARB_CNTL0
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2RD_ON_PRI__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2WR_ON_PRI__SHIFT: c_uint = 0x1;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2RD_ON_RES__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2WR_ON_RES__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_ARB_CNTL0__RW_SWITCH_POP_MODE__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_ARB_CNTL0__ERREVENT_ON_ERROR__SHIFT: c_uint = 0x5;
+pub const DAGB0_SDP_ARB_CNTL0__HALTREQ_ON_ERROR__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_ARB_CNTL0__DED_MODE__SHIFT: c_uint = 0x7;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2RD_ON_PRI_MASK: c_uint = 0x00000001L;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2WR_ON_PRI_MASK: c_uint = 0x00000002L;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2RD_ON_RES_MASK: c_uint = 0x00000004L;
+pub const DAGB0_SDP_ARB_CNTL0__EARLY_SW2WR_ON_RES_MASK: c_uint = 0x00000008L;
+pub const DAGB0_SDP_ARB_CNTL0__RW_SWITCH_POP_MODE_MASK: c_uint = 0x00000010L;
+pub const DAGB0_SDP_ARB_CNTL0__ERREVENT_ON_ERROR_MASK: c_uint = 0x00000020L;
+pub const DAGB0_SDP_ARB_CNTL0__HALTREQ_ON_ERROR_MASK: c_uint = 0x00000040L;
+pub const DAGB0_SDP_ARB_CNTL0__DED_MODE_MASK: c_uint = 0x00000080L;
+// DAGB0_SDP_ARB_CNTL1
+pub const DAGB0_SDP_ARB_CNTL1__RD_BURST_LIMIT_CYCL__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_ARB_CNTL1__WR_BURST_LIMIT_CYCL__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_ARB_CNTL1__RD_BURST_LIMIT_DATA__SHIFT: c_uint = 0x10;
+pub const DAGB0_SDP_ARB_CNTL1__WR_BURST_LIMIT_DATA__SHIFT: c_uint = 0x18;
+pub const DAGB0_SDP_ARB_CNTL1__RD_BURST_LIMIT_CYCL_MASK: c_uint = 0x0000007FL;
+pub const DAGB0_SDP_ARB_CNTL1__WR_BURST_LIMIT_CYCL_MASK: c_uint = 0x00007F00L;
+pub const DAGB0_SDP_ARB_CNTL1__RD_BURST_LIMIT_DATA_MASK: c_uint = 0x007F0000L;
+pub const DAGB0_SDP_ARB_CNTL1__WR_BURST_LIMIT_DATA_MASK: c_uint = 0x7F000000L;
+// DAGB0_SDP_CGTT_CLK_CTRL
+pub const DAGB0_SDP_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const DAGB0_SDP_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// DAGB0_SDP_LATENCY_SAMPLING
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_DRAM__SHIFT: c_uint = 0x0;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_DRAM__SHIFT: c_uint = 0x1;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_GMI__SHIFT: c_uint = 0x2;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_GMI__SHIFT: c_uint = 0x3;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_IO__SHIFT: c_uint = 0x4;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_IO__SHIFT: c_uint = 0x5;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_READ__SHIFT: c_uint = 0x6;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_READ__SHIFT: c_uint = 0x7;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_WRITE__SHIFT: c_uint = 0x8;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_WRITE__SHIFT: c_uint = 0x9;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_ATOMIC_RET__SHIFT: c_uint = 0xa;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_ATOMIC_RET__SHIFT: c_uint = 0xb;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_ATOMIC_NORET__SHIFT: c_uint = 0xc;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_ATOMIC_NORET__SHIFT: c_uint = 0xd;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_VC__SHIFT: c_uint = 0xe;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_VC__SHIFT: c_uint = 0x16;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_DRAM_MASK: c_uint = 0x00000001L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_DRAM_MASK: c_uint = 0x00000002L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_GMI_MASK: c_uint = 0x00000004L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_GMI_MASK: c_uint = 0x00000008L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_IO_MASK: c_uint = 0x00000010L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_IO_MASK: c_uint = 0x00000020L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_READ_MASK: c_uint = 0x00000040L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_READ_MASK: c_uint = 0x00000080L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_WRITE_MASK: c_uint = 0x00000100L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_WRITE_MASK: c_uint = 0x00000200L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_ATOMIC_RET_MASK: c_uint = 0x00000400L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_ATOMIC_RET_MASK: c_uint = 0x00000800L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_ATOMIC_NORET_MASK: c_uint = 0x00001000L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_ATOMIC_NORET_MASK: c_uint = 0x00002000L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER0_VC_MASK: c_uint = 0x003FC000L;
+pub const DAGB0_SDP_LATENCY_SAMPLING__SAMPLER1_VC_MASK: c_uint = 0x3FC00000L;
+// addressBlock: mmhub_pctldec
+// PCTL_CTRL
+pub const PCTL_CTRL__PG_ENABLE__SHIFT: c_uint = 0x0;
+pub const PCTL_CTRL__ALLOW_DEEP_SLEEP_MODE__SHIFT: c_uint = 0x1;
+pub const PCTL_CTRL__RSMU_RDTIMER_ENABLE__SHIFT: c_uint = 0x4;
+pub const PCTL_CTRL__RSMU_RDTIMER_THRESHOLD__SHIFT: c_uint = 0x5;
+pub const PCTL_CTRL__STCTRL_RSMU_IDLE_THRESHOLD__SHIFT: c_uint = 0x7;
+pub const PCTL_CTRL__STCTRL_DAGB_IDLE_THRESHOLD__SHIFT: c_uint = 0xe;
+pub const PCTL_CTRL__STCTRL_IGNORE_PROTECTION_FAULT__SHIFT: c_uint = 0x13;
+pub const PCTL_CTRL__UTCL2_LEGACY_MODE__SHIFT: c_uint = 0x14;
+pub const PCTL_CTRL__SDP_DISCONNECT_MODE__SHIFT: c_uint = 0x15;
+pub const PCTL_CTRL__STCTRL_ZSC_IDLE_THRESHOLD__SHIFT: c_uint = 0x16;
+pub const PCTL_CTRL__ZSC_TIMER_ENABLE__SHIFT: c_uint = 0x1b;
+pub const PCTL_CTRL__Z9_PWRDOWN__SHIFT: c_uint = 0x1c;
+pub const PCTL_CTRL__Z9_PWRUP__SHIFT: c_uint = 0x1d;
+pub const PCTL_CTRL__SNR_DISABLE__SHIFT: c_uint = 0x1e;
+pub const PCTL_CTRL__WRACK_GUARD__SHIFT: c_uint = 0x1f;
+pub const PCTL_CTRL__PG_ENABLE_MASK: c_uint = 0x00000001L;
+pub const PCTL_CTRL__ALLOW_DEEP_SLEEP_MODE_MASK: c_uint = 0x0000000EL;
+pub const PCTL_CTRL__RSMU_RDTIMER_ENABLE_MASK: c_uint = 0x00000010L;
+pub const PCTL_CTRL__RSMU_RDTIMER_THRESHOLD_MASK: c_uint = 0x00000060L;
+pub const PCTL_CTRL__STCTRL_RSMU_IDLE_THRESHOLD_MASK: c_uint = 0x00003F80L;
+pub const PCTL_CTRL__STCTRL_DAGB_IDLE_THRESHOLD_MASK: c_uint = 0x0007C000L;
+pub const PCTL_CTRL__STCTRL_IGNORE_PROTECTION_FAULT_MASK: c_uint = 0x00080000L;
+pub const PCTL_CTRL__UTCL2_LEGACY_MODE_MASK: c_uint = 0x00100000L;
+pub const PCTL_CTRL__SDP_DISCONNECT_MODE_MASK: c_uint = 0x00200000L;
+pub const PCTL_CTRL__STCTRL_ZSC_IDLE_THRESHOLD_MASK: c_uint = 0x07C00000L;
+pub const PCTL_CTRL__ZSC_TIMER_ENABLE_MASK: c_uint = 0x08000000L;
+pub const PCTL_CTRL__Z9_PWRDOWN_MASK: c_uint = 0x10000000L;
+pub const PCTL_CTRL__Z9_PWRUP_MASK: c_uint = 0x20000000L;
+pub const PCTL_CTRL__SNR_DISABLE_MASK: c_uint = 0x40000000L;
+pub const PCTL_CTRL__WRACK_GUARD_MASK: c_uint = 0x80000000L;
+// PCTL_MMHUB_DEEPSLEEP_IB
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__SETCLEAR__SHIFT: c_uint = 0x1f;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__DS16_MASK: c_uint = 0x00010000L;
+pub const PCTL_MMHUB_DEEPSLEEP_IB__SETCLEAR_MASK: c_uint = 0x80000000L;
+// PCTL_MMHUB_DEEPSLEEP_OVERRIDE
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS_ATHUB__SHIFT: c_uint = 0x11;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS16_MASK: c_uint = 0x00010000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE__DS_ATHUB_MASK: c_uint = 0x00020000L;
+// PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_MMHUB_DEEPSLEEP_OVERRIDE_IB__DS16_MASK: c_uint = 0x00010000L;
+// PCTL_PG_IGNORE_DEEPSLEEP
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS_ATHUB__SHIFT: c_uint = 0x11;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__ALLIPS__SHIFT: c_uint = 0x12;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS16_MASK: c_uint = 0x00010000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__DS_ATHUB_MASK: c_uint = 0x00020000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP__ALLIPS_MASK: c_uint = 0x00040000L;
+// PCTL_PG_IGNORE_DEEPSLEEP_IB
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__ALLIPS__SHIFT: c_uint = 0x11;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__DS16_MASK: c_uint = 0x00010000L;
+pub const PCTL_PG_IGNORE_DEEPSLEEP_IB__ALLIPS_MASK: c_uint = 0x00020000L;
+// PCTL_SLICE0_CFG_DAGB_WRBUSY
+pub const PCTL_SLICE0_CFG_DAGB_WRBUSY__DB_LNCFG__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_CFG_DAGB_WRBUSY__DB_LNCFG_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_SLICE0_CFG_DAGB_RDBUSY
+pub const PCTL_SLICE0_CFG_DAGB_RDBUSY__DB_LNCFG__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_CFG_DAGB_RDBUSY__DB_LNCFG_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_SLICE0_CFG_DS_ALLOW
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW__DS16_MASK: c_uint = 0x00010000L;
+// PCTL_SLICE0_CFG_DS_ALLOW_IB
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_SLICE0_CFG_DS_ALLOW_IB__DS16_MASK: c_uint = 0x00010000L;
+// PCTL_SLICE1_CFG_DAGB_WRBUSY
+pub const PCTL_SLICE1_CFG_DAGB_WRBUSY__DB_LNCFG__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_CFG_DAGB_WRBUSY__DB_LNCFG_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_SLICE1_CFG_DAGB_RDBUSY
+pub const PCTL_SLICE1_CFG_DAGB_RDBUSY__DB_LNCFG__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_CFG_DAGB_RDBUSY__DB_LNCFG_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_SLICE1_CFG_DS_ALLOW
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW__DS16_MASK: c_uint = 0x00010000L;
+// PCTL_SLICE1_CFG_DS_ALLOW_IB
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS0__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS1__SHIFT: c_uint = 0x1;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS2__SHIFT: c_uint = 0x2;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS3__SHIFT: c_uint = 0x3;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS4__SHIFT: c_uint = 0x4;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS5__SHIFT: c_uint = 0x5;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS6__SHIFT: c_uint = 0x6;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS7__SHIFT: c_uint = 0x7;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS8__SHIFT: c_uint = 0x8;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS9__SHIFT: c_uint = 0x9;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS10__SHIFT: c_uint = 0xa;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS11__SHIFT: c_uint = 0xb;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS12__SHIFT: c_uint = 0xc;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS13__SHIFT: c_uint = 0xd;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS14__SHIFT: c_uint = 0xe;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS15__SHIFT: c_uint = 0xf;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS16__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS0_MASK: c_uint = 0x00000001L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS1_MASK: c_uint = 0x00000002L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS2_MASK: c_uint = 0x00000004L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS3_MASK: c_uint = 0x00000008L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS4_MASK: c_uint = 0x00000010L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS5_MASK: c_uint = 0x00000020L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS6_MASK: c_uint = 0x00000040L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS7_MASK: c_uint = 0x00000080L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS8_MASK: c_uint = 0x00000100L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS9_MASK: c_uint = 0x00000200L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS10_MASK: c_uint = 0x00000400L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS11_MASK: c_uint = 0x00000800L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS12_MASK: c_uint = 0x00001000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS13_MASK: c_uint = 0x00002000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS14_MASK: c_uint = 0x00004000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS15_MASK: c_uint = 0x00008000L;
+pub const PCTL_SLICE1_CFG_DS_ALLOW_IB__DS16_MASK: c_uint = 0x00010000L;
+// PCTL_UTCL2_MISC
+pub const PCTL_UTCL2_MISC__CRITICAL_REGS_LOCK__SHIFT: c_uint = 0xb;
+pub const PCTL_UTCL2_MISC__TILE_IDLE_THRESHOLD__SHIFT: c_uint = 0xc;
+pub const PCTL_UTCL2_MISC__RENG_MEM_LS_ENABLE__SHIFT: c_uint = 0xf;
+pub const PCTL_UTCL2_MISC__STCTRL_FORCE_PGFSM_CMD_DONE__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_MISC__RENG_EXECUTE_ON_REG_UPDATE__SHIFT: c_uint = 0x11;
+pub const PCTL_UTCL2_MISC__RD_TIMER_ENABLE__SHIFT: c_uint = 0x12;
+pub const PCTL_UTCL2_MISC__RENG_MEM_DS_ENABLE__SHIFT: c_uint = 0x13;
+pub const PCTL_UTCL2_MISC__RENG_MEM_LS_TIMER__SHIFT: c_uint = 0x14;
+pub const PCTL_UTCL2_MISC__RENG_MEM_SLEEP_TIMER__SHIFT: c_uint = 0x1a;
+pub const PCTL_UTCL2_MISC__CRITICAL_REGS_LOCK_MASK: c_uint = 0x00000800L;
+pub const PCTL_UTCL2_MISC__TILE_IDLE_THRESHOLD_MASK: c_uint = 0x00007000L;
+pub const PCTL_UTCL2_MISC__RENG_MEM_LS_ENABLE_MASK: c_uint = 0x00008000L;
+pub const PCTL_UTCL2_MISC__STCTRL_FORCE_PGFSM_CMD_DONE_MASK: c_uint = 0x00010000L;
+pub const PCTL_UTCL2_MISC__RENG_EXECUTE_ON_REG_UPDATE_MASK: c_uint = 0x00020000L;
+pub const PCTL_UTCL2_MISC__RD_TIMER_ENABLE_MASK: c_uint = 0x00040000L;
+pub const PCTL_UTCL2_MISC__RENG_MEM_DS_ENABLE_MASK: c_uint = 0x00080000L;
+pub const PCTL_UTCL2_MISC__RENG_MEM_LS_TIMER_MASK: c_uint = 0x03F00000L;
+pub const PCTL_UTCL2_MISC__RENG_MEM_SLEEP_TIMER_MASK: c_uint = 0x3C000000L;
+// PCTL_SLICE0_MISC
+pub const PCTL_SLICE0_MISC__CRITICAL_REGS_LOCK__SHIFT: c_uint = 0xa;
+pub const PCTL_SLICE0_MISC__TILE_IDLE_THRESHOLD__SHIFT: c_uint = 0xb;
+pub const PCTL_SLICE0_MISC__RENG_MEM_LS_ENABLE__SHIFT: c_uint = 0xe;
+pub const PCTL_SLICE0_MISC__STCTRL_FORCE_PGFSM_CMD_DONE__SHIFT: c_uint = 0xf;
+pub const PCTL_SLICE0_MISC__DEEPSLEEP_DISCSDP__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_MISC__RENG_EXECUTE_ON_REG_UPDATE__SHIFT: c_uint = 0x11;
+pub const PCTL_SLICE0_MISC__RD_TIMER_ENABLE__SHIFT: c_uint = 0x12;
+pub const PCTL_SLICE0_MISC__RENG_MEM_DS_ENABLE__SHIFT: c_uint = 0x13;
+pub const PCTL_SLICE0_MISC__RENG_MEM_LS_TIMER__SHIFT: c_uint = 0x14;
+pub const PCTL_SLICE0_MISC__RENG_MEM_SLEEP_TIMER__SHIFT: c_uint = 0x1a;
+pub const PCTL_SLICE0_MISC__OVR_EA_SDP0_PARTACK__SHIFT: c_uint = 0x1e;
+pub const PCTL_SLICE0_MISC__OVR_EA_SDP0_FULLACK__SHIFT: c_uint = 0x1f;
+pub const PCTL_SLICE0_MISC__CRITICAL_REGS_LOCK_MASK: c_uint = 0x00000400L;
+pub const PCTL_SLICE0_MISC__TILE_IDLE_THRESHOLD_MASK: c_uint = 0x00003800L;
+pub const PCTL_SLICE0_MISC__RENG_MEM_LS_ENABLE_MASK: c_uint = 0x00004000L;
+pub const PCTL_SLICE0_MISC__STCTRL_FORCE_PGFSM_CMD_DONE_MASK: c_uint = 0x00008000L;
+pub const PCTL_SLICE0_MISC__DEEPSLEEP_DISCSDP_MASK: c_uint = 0x00010000L;
+pub const PCTL_SLICE0_MISC__RENG_EXECUTE_ON_REG_UPDATE_MASK: c_uint = 0x00020000L;
+pub const PCTL_SLICE0_MISC__RD_TIMER_ENABLE_MASK: c_uint = 0x00040000L;
+pub const PCTL_SLICE0_MISC__RENG_MEM_DS_ENABLE_MASK: c_uint = 0x00080000L;
+pub const PCTL_SLICE0_MISC__RENG_MEM_LS_TIMER_MASK: c_uint = 0x03F00000L;
+pub const PCTL_SLICE0_MISC__RENG_MEM_SLEEP_TIMER_MASK: c_uint = 0x3C000000L;
+pub const PCTL_SLICE0_MISC__OVR_EA_SDP0_PARTACK_MASK: c_uint = 0x40000000L;
+pub const PCTL_SLICE0_MISC__OVR_EA_SDP0_FULLACK_MASK: c_uint = 0x80000000L;
+// PCTL_SLICE1_MISC
+pub const PCTL_SLICE1_MISC__CRITICAL_REGS_LOCK__SHIFT: c_uint = 0xa;
+pub const PCTL_SLICE1_MISC__TILE_IDLE_THRESHOLD__SHIFT: c_uint = 0xb;
+pub const PCTL_SLICE1_MISC__RENG_MEM_LS_ENABLE__SHIFT: c_uint = 0xe;
+pub const PCTL_SLICE1_MISC__STCTRL_FORCE_PGFSM_CMD_DONE__SHIFT: c_uint = 0xf;
+pub const PCTL_SLICE1_MISC__DEEPSLEEP_DISCSDP__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_MISC__RENG_EXECUTE_ON_REG_UPDATE__SHIFT: c_uint = 0x11;
+pub const PCTL_SLICE1_MISC__RD_TIMER_ENABLE__SHIFT: c_uint = 0x12;
+pub const PCTL_SLICE1_MISC__RENG_MEM_DS_ENABLE__SHIFT: c_uint = 0x13;
+pub const PCTL_SLICE1_MISC__RENG_MEM_LS_TIMER__SHIFT: c_uint = 0x14;
+pub const PCTL_SLICE1_MISC__RENG_MEM_SLEEP_TIMER__SHIFT: c_uint = 0x1a;
+pub const PCTL_SLICE1_MISC__OVR_EA_SDP1_PARTACK__SHIFT: c_uint = 0x1e;
+pub const PCTL_SLICE1_MISC__OVR_EA_SDP1_FULLACK__SHIFT: c_uint = 0x1f;
+pub const PCTL_SLICE1_MISC__CRITICAL_REGS_LOCK_MASK: c_uint = 0x00000400L;
+pub const PCTL_SLICE1_MISC__TILE_IDLE_THRESHOLD_MASK: c_uint = 0x00003800L;
+pub const PCTL_SLICE1_MISC__RENG_MEM_LS_ENABLE_MASK: c_uint = 0x00004000L;
+pub const PCTL_SLICE1_MISC__STCTRL_FORCE_PGFSM_CMD_DONE_MASK: c_uint = 0x00008000L;
+pub const PCTL_SLICE1_MISC__DEEPSLEEP_DISCSDP_MASK: c_uint = 0x00010000L;
+pub const PCTL_SLICE1_MISC__RENG_EXECUTE_ON_REG_UPDATE_MASK: c_uint = 0x00020000L;
+pub const PCTL_SLICE1_MISC__RD_TIMER_ENABLE_MASK: c_uint = 0x00040000L;
+pub const PCTL_SLICE1_MISC__RENG_MEM_DS_ENABLE_MASK: c_uint = 0x00080000L;
+pub const PCTL_SLICE1_MISC__RENG_MEM_LS_TIMER_MASK: c_uint = 0x03F00000L;
+pub const PCTL_SLICE1_MISC__RENG_MEM_SLEEP_TIMER_MASK: c_uint = 0x3C000000L;
+pub const PCTL_SLICE1_MISC__OVR_EA_SDP1_PARTACK_MASK: c_uint = 0x40000000L;
+pub const PCTL_SLICE1_MISC__OVR_EA_SDP1_FULLACK_MASK: c_uint = 0x80000000L;
+// PCTL_RENG_CTRL
+pub const PCTL_RENG_CTRL__RENG_EXECUTE_NOW__SHIFT: c_uint = 0x0;
+pub const PCTL_RENG_CTRL__RENG_EXECUTE_NOW_MODE__SHIFT: c_uint = 0x1;
+pub const PCTL_RENG_CTRL__RENG_EXECUTE_NOW_MASK: c_uint = 0x00000001L;
+pub const PCTL_RENG_CTRL__RENG_EXECUTE_NOW_MODE_MASK: c_uint = 0x00000002L;
+// PCTL_UTCL2_RENG_EXECUTE
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_NOW__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_NOW_MODE__SHIFT: c_uint = 0x1;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_NOW_START_PTR__SHIFT: c_uint = 0x2;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_END_PTR__SHIFT: c_uint = 0xd;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_NOW_MASK: c_uint = 0x00000001L;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_NOW_MODE_MASK: c_uint = 0x00000002L;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_NOW_START_PTR_MASK: c_uint = 0x00001FFCL;
+pub const PCTL_UTCL2_RENG_EXECUTE__RENG_EXECUTE_END_PTR_MASK: c_uint = 0x00FFE000L;
+// PCTL_SLICE0_RENG_EXECUTE
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_NOW__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_NOW_MODE__SHIFT: c_uint = 0x1;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_NOW_START_PTR__SHIFT: c_uint = 0x2;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_END_PTR__SHIFT: c_uint = 0xc;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_NOW_MASK: c_uint = 0x00000001L;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_NOW_MODE_MASK: c_uint = 0x00000002L;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_NOW_START_PTR_MASK: c_uint = 0x00000FFCL;
+pub const PCTL_SLICE0_RENG_EXECUTE__RENG_EXECUTE_END_PTR_MASK: c_uint = 0x003FF000L;
+// PCTL_SLICE1_RENG_EXECUTE
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_NOW__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_NOW_MODE__SHIFT: c_uint = 0x1;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_NOW_START_PTR__SHIFT: c_uint = 0x2;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_END_PTR__SHIFT: c_uint = 0xc;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_NOW_MASK: c_uint = 0x00000001L;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_NOW_MODE_MASK: c_uint = 0x00000002L;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_NOW_START_PTR_MASK: c_uint = 0x00000FFCL;
+pub const PCTL_SLICE1_RENG_EXECUTE__RENG_EXECUTE_END_PTR_MASK: c_uint = 0x003FF000L;
+// PCTL_UTCL2_RENG_RAM_INDEX
+pub const PCTL_UTCL2_RENG_RAM_INDEX__RENG_RAM_INDEX__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_RENG_RAM_INDEX__RENG_RAM_INDEX_MASK: c_uint = 0x000007FFL;
+// PCTL_UTCL2_RENG_RAM_DATA
+pub const PCTL_UTCL2_RENG_RAM_DATA__RENG_RAM_DATA__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_RENG_RAM_DATA__RENG_RAM_DATA_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_SLICE0_RENG_RAM_INDEX
+pub const PCTL_SLICE0_RENG_RAM_INDEX__RENG_RAM_INDEX__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_RENG_RAM_INDEX__RENG_RAM_INDEX_MASK: c_uint = 0x000003FFL;
+// PCTL_SLICE0_RENG_RAM_DATA
+pub const PCTL_SLICE0_RENG_RAM_DATA__RENG_RAM_DATA__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_RENG_RAM_DATA__RENG_RAM_DATA_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_SLICE1_RENG_RAM_INDEX
+pub const PCTL_SLICE1_RENG_RAM_INDEX__RENG_RAM_INDEX__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_RENG_RAM_INDEX__RENG_RAM_INDEX_MASK: c_uint = 0x000003FFL;
+// PCTL_SLICE1_RENG_RAM_DATA
+pub const PCTL_SLICE1_RENG_RAM_DATA__RENG_RAM_DATA__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_RENG_RAM_DATA__RENG_RAM_DATA_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE0
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE1
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE2
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE3
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE4
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET0
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL0__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL1__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL0_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL1_MASK: c_uint = 0xFFFF0000L;
+// PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET1
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL2__SHIFT: c_uint = 0x0;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL3__SHIFT: c_uint = 0x10;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL2_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_UTCL2_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL3_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE0
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE1
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE2
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE3
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE4
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET0
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL0__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL1__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL0_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL1_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET1
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL2__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL3__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL2_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE0_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL3_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE0
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE0__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE1
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE1__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE2
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE2__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE3
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE3__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE4
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_BASE__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_LIMIT__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_BASE_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_RANGE4__STCTRL_REGISTER_SAVE_LIMIT_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET0
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL0__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL1__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL0_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET0__STCTRL_REGISTER_SAVE_EXCL1_MASK: c_uint = 0xFFFF0000L;
+// PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET1
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL2__SHIFT: c_uint = 0x0;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL3__SHIFT: c_uint = 0x10;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL2_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_SLICE1_STCTRL_REGISTER_SAVE_EXCL_SET1__STCTRL_REGISTER_SAVE_EXCL3_MASK: c_uint = 0xFFFF0000L;
+// PCTL_STATUS
+pub const PCTL_STATUS__MMHUB_CONFIG_DONE__SHIFT: c_uint = 0x0;
+pub const PCTL_STATUS__MMHUB_INTERLOCK_ENABLE__SHIFT: c_uint = 0x1;
+pub const PCTL_STATUS__MMHUB_FENCE_REQ__SHIFT: c_uint = 0x2;
+pub const PCTL_STATUS__MMHUB_FENCE_ACK__SHIFT: c_uint = 0x3;
+pub const PCTL_STATUS__MMHUB_IDLE__SHIFT: c_uint = 0x4;
+pub const PCTL_STATUS__PGFSM_CMD_STATUS__SHIFT: c_uint = 0x5;
+pub const PCTL_STATUS__RSMU_RDTIMEOUT_CNT__SHIFT: c_uint = 0x7;
+pub const PCTL_STATUS__RSMU_RDTIMEOUT_CLEAR__SHIFT: c_uint = 0xf;
+pub const PCTL_STATUS__MMHUB_POWER__SHIFT: c_uint = 0x10;
+pub const PCTL_STATUS__RENG_RAM_STALE__SHIFT: c_uint = 0x11;
+pub const PCTL_STATUS__UTCL2_RENG_RAM_STALE__SHIFT: c_uint = 0x12;
+pub const PCTL_STATUS__SLICE0_RENG_RAM_STALE__SHIFT: c_uint = 0x13;
+pub const PCTL_STATUS__SLICE1_RENG_RAM_STALE__SHIFT: c_uint = 0x14;
+pub const PCTL_STATUS__MMHUB_CONFIG_DONE_MASK: c_uint = 0x00000001L;
+pub const PCTL_STATUS__MMHUB_INTERLOCK_ENABLE_MASK: c_uint = 0x00000002L;
+pub const PCTL_STATUS__MMHUB_FENCE_REQ_MASK: c_uint = 0x00000004L;
+pub const PCTL_STATUS__MMHUB_FENCE_ACK_MASK: c_uint = 0x00000008L;
+pub const PCTL_STATUS__MMHUB_IDLE_MASK: c_uint = 0x00000010L;
+pub const PCTL_STATUS__PGFSM_CMD_STATUS_MASK: c_uint = 0x00000060L;
+pub const PCTL_STATUS__RSMU_RDTIMEOUT_CNT_MASK: c_uint = 0x00007F80L;
+pub const PCTL_STATUS__RSMU_RDTIMEOUT_CLEAR_MASK: c_uint = 0x00008000L;
+pub const PCTL_STATUS__MMHUB_POWER_MASK: c_uint = 0x00010000L;
+pub const PCTL_STATUS__RENG_RAM_STALE_MASK: c_uint = 0x00020000L;
+pub const PCTL_STATUS__UTCL2_RENG_RAM_STALE_MASK: c_uint = 0x00040000L;
+pub const PCTL_STATUS__SLICE0_RENG_RAM_STALE_MASK: c_uint = 0x00080000L;
+pub const PCTL_STATUS__SLICE1_RENG_RAM_STALE_MASK: c_uint = 0x00100000L;
+// PCTL_PERFCOUNTER_LO
+pub const PCTL_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const PCTL_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// PCTL_PERFCOUNTER_HI
+pub const PCTL_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const PCTL_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const PCTL_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;
+// PCTL_PERFCOUNTER0_CFG
+pub const PCTL_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const PCTL_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const PCTL_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const PCTL_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const PCTL_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const PCTL_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const PCTL_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const PCTL_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const PCTL_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const PCTL_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// PCTL_PERFCOUNTER1_CFG
+pub const PCTL_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const PCTL_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const PCTL_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const PCTL_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const PCTL_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const PCTL_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const PCTL_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const PCTL_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const PCTL_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const PCTL_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// PCTL_PERFCOUNTER_RSLT_CNTL
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x0000000FL;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const PCTL_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// PCTL_RESERVED_0
+pub const PCTL_RESERVED_0__WORD__SHIFT: c_uint = 0x0;
+pub const PCTL_RESERVED_0__BYTE__SHIFT: c_uint = 0x10;
+pub const PCTL_RESERVED_0__BIT7__SHIFT: c_uint = 0x18;
+pub const PCTL_RESERVED_0__BIT6__SHIFT: c_uint = 0x19;
+pub const PCTL_RESERVED_0__BIT5__SHIFT: c_uint = 0x1a;
+pub const PCTL_RESERVED_0__BIT4__SHIFT: c_uint = 0x1b;
+pub const PCTL_RESERVED_0__BIT3__SHIFT: c_uint = 0x1c;
+pub const PCTL_RESERVED_0__BIT2__SHIFT: c_uint = 0x1d;
+pub const PCTL_RESERVED_0__BIT1__SHIFT: c_uint = 0x1e;
+pub const PCTL_RESERVED_0__BIT0__SHIFT: c_uint = 0x1f;
+pub const PCTL_RESERVED_0__WORD_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_RESERVED_0__BYTE_MASK: c_uint = 0x00FF0000L;
+pub const PCTL_RESERVED_0__BIT7_MASK: c_uint = 0x01000000L;
+pub const PCTL_RESERVED_0__BIT6_MASK: c_uint = 0x02000000L;
+pub const PCTL_RESERVED_0__BIT5_MASK: c_uint = 0x04000000L;
+pub const PCTL_RESERVED_0__BIT4_MASK: c_uint = 0x08000000L;
+pub const PCTL_RESERVED_0__BIT3_MASK: c_uint = 0x10000000L;
+pub const PCTL_RESERVED_0__BIT2_MASK: c_uint = 0x20000000L;
+pub const PCTL_RESERVED_0__BIT1_MASK: c_uint = 0x40000000L;
+pub const PCTL_RESERVED_0__BIT0_MASK: c_uint = 0x80000000L;
+// PCTL_RESERVED_1
+pub const PCTL_RESERVED_1__WORD__SHIFT: c_uint = 0x0;
+pub const PCTL_RESERVED_1__BYTE__SHIFT: c_uint = 0x10;
+pub const PCTL_RESERVED_1__BIT7__SHIFT: c_uint = 0x18;
+pub const PCTL_RESERVED_1__BIT6__SHIFT: c_uint = 0x19;
+pub const PCTL_RESERVED_1__BIT5__SHIFT: c_uint = 0x1a;
+pub const PCTL_RESERVED_1__BIT4__SHIFT: c_uint = 0x1b;
+pub const PCTL_RESERVED_1__BIT3__SHIFT: c_uint = 0x1c;
+pub const PCTL_RESERVED_1__BIT2__SHIFT: c_uint = 0x1d;
+pub const PCTL_RESERVED_1__BIT1__SHIFT: c_uint = 0x1e;
+pub const PCTL_RESERVED_1__BIT0__SHIFT: c_uint = 0x1f;
+pub const PCTL_RESERVED_1__WORD_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_RESERVED_1__BYTE_MASK: c_uint = 0x00FF0000L;
+pub const PCTL_RESERVED_1__BIT7_MASK: c_uint = 0x01000000L;
+pub const PCTL_RESERVED_1__BIT6_MASK: c_uint = 0x02000000L;
+pub const PCTL_RESERVED_1__BIT5_MASK: c_uint = 0x04000000L;
+pub const PCTL_RESERVED_1__BIT4_MASK: c_uint = 0x08000000L;
+pub const PCTL_RESERVED_1__BIT3_MASK: c_uint = 0x10000000L;
+pub const PCTL_RESERVED_1__BIT2_MASK: c_uint = 0x20000000L;
+pub const PCTL_RESERVED_1__BIT1_MASK: c_uint = 0x40000000L;
+pub const PCTL_RESERVED_1__BIT0_MASK: c_uint = 0x80000000L;
+// PCTL_RESERVED_2
+pub const PCTL_RESERVED_2__WORD__SHIFT: c_uint = 0x0;
+pub const PCTL_RESERVED_2__BYTE__SHIFT: c_uint = 0x10;
+pub const PCTL_RESERVED_2__BIT7__SHIFT: c_uint = 0x18;
+pub const PCTL_RESERVED_2__BIT6__SHIFT: c_uint = 0x19;
+pub const PCTL_RESERVED_2__BIT5__SHIFT: c_uint = 0x1a;
+pub const PCTL_RESERVED_2__BIT4__SHIFT: c_uint = 0x1b;
+pub const PCTL_RESERVED_2__BIT3__SHIFT: c_uint = 0x1c;
+pub const PCTL_RESERVED_2__BIT2__SHIFT: c_uint = 0x1d;
+pub const PCTL_RESERVED_2__BIT1__SHIFT: c_uint = 0x1e;
+pub const PCTL_RESERVED_2__BIT0__SHIFT: c_uint = 0x1f;
+pub const PCTL_RESERVED_2__WORD_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_RESERVED_2__BYTE_MASK: c_uint = 0x00FF0000L;
+pub const PCTL_RESERVED_2__BIT7_MASK: c_uint = 0x01000000L;
+pub const PCTL_RESERVED_2__BIT6_MASK: c_uint = 0x02000000L;
+pub const PCTL_RESERVED_2__BIT5_MASK: c_uint = 0x04000000L;
+pub const PCTL_RESERVED_2__BIT4_MASK: c_uint = 0x08000000L;
+pub const PCTL_RESERVED_2__BIT3_MASK: c_uint = 0x10000000L;
+pub const PCTL_RESERVED_2__BIT2_MASK: c_uint = 0x20000000L;
+pub const PCTL_RESERVED_2__BIT1_MASK: c_uint = 0x40000000L;
+pub const PCTL_RESERVED_2__BIT0_MASK: c_uint = 0x80000000L;
+// PCTL_RESERVED_3
+pub const PCTL_RESERVED_3__WORD__SHIFT: c_uint = 0x0;
+pub const PCTL_RESERVED_3__BYTE__SHIFT: c_uint = 0x10;
+pub const PCTL_RESERVED_3__BIT7__SHIFT: c_uint = 0x18;
+pub const PCTL_RESERVED_3__BIT6__SHIFT: c_uint = 0x19;
+pub const PCTL_RESERVED_3__BIT5__SHIFT: c_uint = 0x1a;
+pub const PCTL_RESERVED_3__BIT4__SHIFT: c_uint = 0x1b;
+pub const PCTL_RESERVED_3__BIT3__SHIFT: c_uint = 0x1c;
+pub const PCTL_RESERVED_3__BIT2__SHIFT: c_uint = 0x1d;
+pub const PCTL_RESERVED_3__BIT1__SHIFT: c_uint = 0x1e;
+pub const PCTL_RESERVED_3__BIT0__SHIFT: c_uint = 0x1f;
+pub const PCTL_RESERVED_3__WORD_MASK: c_uint = 0x0000FFFFL;
+pub const PCTL_RESERVED_3__BYTE_MASK: c_uint = 0x00FF0000L;
+pub const PCTL_RESERVED_3__BIT7_MASK: c_uint = 0x01000000L;
+pub const PCTL_RESERVED_3__BIT6_MASK: c_uint = 0x02000000L;
+pub const PCTL_RESERVED_3__BIT5_MASK: c_uint = 0x04000000L;
+pub const PCTL_RESERVED_3__BIT4_MASK: c_uint = 0x08000000L;
+pub const PCTL_RESERVED_3__BIT3_MASK: c_uint = 0x10000000L;
+pub const PCTL_RESERVED_3__BIT2_MASK: c_uint = 0x20000000L;
+pub const PCTL_RESERVED_3__BIT1_MASK: c_uint = 0x40000000L;
+pub const PCTL_RESERVED_3__BIT0_MASK: c_uint = 0x80000000L;
+// addressBlock: mmhub_l1tlb_mmutcl1pfdec
+// MMMC_VM_MX_L1_TLB0_STATUS
+pub const MMMC_VM_MX_L1_TLB0_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB0_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB0_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB0_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB0_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB0_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB1_STATUS
+pub const MMMC_VM_MX_L1_TLB1_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB1_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB1_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB1_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB1_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB1_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB2_STATUS
+pub const MMMC_VM_MX_L1_TLB2_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB2_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB2_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB2_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB2_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB2_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB3_STATUS
+pub const MMMC_VM_MX_L1_TLB3_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB3_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB3_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB3_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB3_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB3_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB4_STATUS
+pub const MMMC_VM_MX_L1_TLB4_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB4_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB4_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB4_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB4_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB4_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB5_STATUS
+pub const MMMC_VM_MX_L1_TLB5_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB5_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB5_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB5_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB5_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB5_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB6_STATUS
+pub const MMMC_VM_MX_L1_TLB6_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB6_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB6_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB6_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB6_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB6_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MMMC_VM_MX_L1_TLB7_STATUS
+pub const MMMC_VM_MX_L1_TLB7_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB7_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_MX_L1_TLB7_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_MX_L1_TLB7_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB7_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_MX_L1_TLB7_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// addressBlock: mmhub_l1tlb_mmutcl1pldec
+// MMMC_VM_MX_L1_PERFCOUNTER0_CFG
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_MX_L1_PERFCOUNTER1_CFG
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_MX_L1_PERFCOUNTER2_CFG
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER2_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_MX_L1_PERFCOUNTER3_CFG
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER3_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x0000000FL;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// addressBlock: mmhub_l1tlb_mmutcl1prdec
+// MMMC_VM_MX_L1_PERFCOUNTER_LO
+pub const MMMC_VM_MX_L1_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// MMMC_VM_MX_L1_PERFCOUNTER_HI
+pub const MMMC_VM_MX_L1_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const MMMC_VM_MX_L1_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;
+// addressBlock: mmhub_l1tlb_mmvmtlspfdec
+pub const MMMC_VM_MX_L1_TLS0_CNTL__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x4;
+pub const MMMC_VM_MX_L1_TLS0_CNTL__ALLOW_SUBSEQUENT_PROTECTION_FAULT_STATUS_ADDR_UPDATES__SHIFT: c_uint = 0x5;
+pub const MMMC_VM_MX_L1_TLS0_CNTL__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x00000010L;
+pub const MMMC_VM_MX_L1_TLS0_CNTL__ALLOW_SUBSEQUENT_PROTECTION_FAULT_STATUS_ADDR_UPDATES_MASK: c_uint = 0x00000020L;
+// MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__PROTECTIONS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__MEMORY_CLIENT_ID__SHIFT: c_uint = 0xc;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__MEMORY_CLIENT_RW__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__VMID__SHIFT: c_uint = 0x19;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__ATOMIC__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__PROTECTIONS_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__MEMORY_CLIENT_ID_MASK: c_uint = 0x001FF000L;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__MEMORY_CLIENT_RW_MASK: c_uint = 0x01000000L;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__VMID_MASK: c_uint = 0x1E000000L;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_STATUS__ATOMIC_MASK: c_uint = 0x20000000L;
+// MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_ADDR_LO32
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_ADDR_LO32__LOGICAL_PAGE_ADDR_LO32__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_ADDR_LO32__LOGICAL_PAGE_ADDR_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_ADDR_HI32
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_ADDR_HI32__LOGICAL_PAGE_ADDR_HI4__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLS0_PROTECTION_FAULT_ADDR_HI32__LOGICAL_PAGE_ADDR_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_SAW_CNTL
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_CACHE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_FRAGMENT_PROCESSING__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_PTE_ENDIAN_SWAP_MODE__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_PDE_ENDIAN_SWAP_MODE__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_SAW_CNTL__L2_PDE0_CACHE_TAG_GENERATION_MODE__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_PTE_CACHE_LRU_UPDATE_BY_WRITE__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_PDE0_CACHE_LRU_UPDATE_BY_WRITE__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_SAW_CNTL__ENABLE_DEFAULT_PAGE_OUT_TO_SYSTEM_MEMORY__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_SAW_CNTL__L2_PDE0_CACHE_SPLIT_MODE__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_SAW_CNTL__EFFECTIVE_L2_QUEUE_SIZE__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_SAW_CNTL__PDE_FAULT_CLASSIFICATION__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_SAW_CNTL__CONTEXT1_IDENTITY_ACCESS_MODE__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_SAW_CNTL__IDENTITY_MODE_FRAGMENT_SIZE__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_4K_SWAP_TAG_INDEX_LSBS__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_BIGK_SWAP_TAG_INDEX_LSBS__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_CACHE_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_FRAGMENT_PROCESSING_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_PTE_ENDIAN_SWAP_MODE_MASK: c_uint = 0x0000000CL;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_PDE_ENDIAN_SWAP_MODE_MASK: c_uint = 0x00000030L;
+pub const MMVM_L2_SAW_CNTL__L2_PDE0_CACHE_TAG_GENERATION_MODE_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_PTE_CACHE_LRU_UPDATE_BY_WRITE_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_SAW_CNTL__ENABLE_L2_PDE0_CACHE_LRU_UPDATE_BY_WRITE_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_SAW_CNTL__ENABLE_DEFAULT_PAGE_OUT_TO_SYSTEM_MEMORY_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_SAW_CNTL__L2_PDE0_CACHE_SPLIT_MODE_MASK: c_uint = 0x00007000L;
+pub const MMVM_L2_SAW_CNTL__EFFECTIVE_L2_QUEUE_SIZE_MASK: c_uint = 0x00038000L;
+pub const MMVM_L2_SAW_CNTL__PDE_FAULT_CLASSIFICATION_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_SAW_CNTL__CONTEXT1_IDENTITY_ACCESS_MODE_MASK: c_uint = 0x00180000L;
+pub const MMVM_L2_SAW_CNTL__IDENTITY_MODE_FRAGMENT_SIZE_MASK: c_uint = 0x03E00000L;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_4K_SWAP_TAG_INDEX_LSBS_MASK: c_uint = 0x0C000000L;
+pub const MMVM_L2_SAW_CNTL__L2_CACHE_BIGK_SWAP_TAG_INDEX_LSBS_MASK: c_uint = 0x70000000L;
+// MMVM_L2_SAW_CNTL2
+pub const MMVM_L2_SAW_CNTL2__INVALIDATE_ALL_L1_TLBS__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CNTL2__INVALIDATE_L2_CACHE__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_SAW_CNTL2__DISABLE_INVALIDATE_PER_DOMAIN__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_SAW_CNTL2__DISABLE_BIGK_CACHE_OPTIMIZATION__SHIFT: c_uint = 0x16;
+pub const MMVM_L2_SAW_CNTL2__L2_CACHE_BIGK_VMID_MODE__SHIFT: c_uint = 0x17;
+pub const MMVM_L2_SAW_CNTL2__INVALIDATE_CACHE_MODE__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_SAW_CNTL2__PDE_CACHE_EFFECTIVE_SIZE__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_SAW_CNTL2__INVALIDATE_ALL_L1_TLBS_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_SAW_CNTL2__INVALIDATE_L2_CACHE_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_SAW_CNTL2__DISABLE_INVALIDATE_PER_DOMAIN_MASK: c_uint = 0x00200000L;
+pub const MMVM_L2_SAW_CNTL2__DISABLE_BIGK_CACHE_OPTIMIZATION_MASK: c_uint = 0x00400000L;
+pub const MMVM_L2_SAW_CNTL2__L2_CACHE_BIGK_VMID_MODE_MASK: c_uint = 0x03800000L;
+pub const MMVM_L2_SAW_CNTL2__INVALIDATE_CACHE_MODE_MASK: c_uint = 0x0C000000L;
+pub const MMVM_L2_SAW_CNTL2__PDE_CACHE_EFFECTIVE_SIZE_MASK: c_uint = 0x70000000L;
+// MMVM_L2_SAW_CNTL3
+pub const MMVM_L2_SAW_CNTL3__BANK_SELECT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_UPDATE_MODE__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_UPDATE_WILDCARD_REFERENCE_VALUE__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_ASSOCIATIVITY__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_4K_EFFECTIVE_SIZE__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_EFFECTIVE_SIZE__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_4K_FORCE_MISS__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_FORCE_MISS__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_SAW_CNTL3__PDE_CACHE_FORCE_MISS__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_4K_ASSOCIATIVITY__SHIFT: c_uint = 0x1f;
+pub const MMVM_L2_SAW_CNTL3__BANK_SELECT_MASK: c_uint = 0x0000003FL;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_UPDATE_MODE_MASK: c_uint = 0x000000C0L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_UPDATE_WILDCARD_REFERENCE_VALUE_MASK: c_uint = 0x00001F00L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000F8000L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_ASSOCIATIVITY_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_4K_EFFECTIVE_SIZE_MASK: c_uint = 0x00E00000L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_EFFECTIVE_SIZE_MASK: c_uint = 0x0F000000L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_4K_FORCE_MISS_MASK: c_uint = 0x10000000L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_BIGK_FORCE_MISS_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_SAW_CNTL3__PDE_CACHE_FORCE_MISS_MASK: c_uint = 0x40000000L;
+pub const MMVM_L2_SAW_CNTL3__L2_CACHE_4K_ASSOCIATIVITY_MASK: c_uint = 0x80000000L;
+// MMVM_L2_SAW_CNTL4
+pub const MMVM_L2_SAW_CNTL4__L2_CACHE_4K_PARTITION_COUNT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PDE_REQUEST_PHYSICAL__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PDE_REQUEST_SHARED__SHIFT: c_uint = 0x7;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PDE_REQUEST_SNOOP__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PTE_REQUEST_PHYSICAL__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PTE_REQUEST_SHARED__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PTE_REQUEST_SNOOP__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PDE_REQUEST_PHYSICAL__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PDE_REQUEST_SHARED__SHIFT: c_uint = 0xd;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PDE_REQUEST_SNOOP__SHIFT: c_uint = 0xe;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PTE_REQUEST_PHYSICAL__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PTE_REQUEST_SHARED__SHIFT: c_uint = 0x10;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PTE_REQUEST_SNOOP__SHIFT: c_uint = 0x11;
+pub const MMVM_L2_SAW_CNTL4__L2_CACHE_4K_LRU_ADDR_MATCHING__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_SAW_CNTL4__L2_CACHE_4K_PARTITION_COUNT_MASK: c_uint = 0x0000003FL;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PDE_REQUEST_PHYSICAL_MASK: c_uint = 0x00000040L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PDE_REQUEST_SHARED_MASK: c_uint = 0x00000080L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PDE_REQUEST_SNOOP_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PTE_REQUEST_PHYSICAL_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PTE_REQUEST_SHARED_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT0_PTE_REQUEST_SNOOP_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PDE_REQUEST_PHYSICAL_MASK: c_uint = 0x00001000L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PDE_REQUEST_SHARED_MASK: c_uint = 0x00002000L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PDE_REQUEST_SNOOP_MASK: c_uint = 0x00004000L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PTE_REQUEST_PHYSICAL_MASK: c_uint = 0x00008000L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PTE_REQUEST_SHARED_MASK: c_uint = 0x00010000L;
+pub const MMVM_L2_SAW_CNTL4__VMC_TAP_CONTEXT1_PTE_REQUEST_SNOOP_MASK: c_uint = 0x00020000L;
+pub const MMVM_L2_SAW_CNTL4__L2_CACHE_4K_LRU_ADDR_MATCHING_MASK: c_uint = 0x00040000L;
+// MMVM_L2_SAW_CONTEXT0_CNTL
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x3;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_SAVE__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xd;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_SAVE__SHIFT: c_uint = 0xe;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_SAVE__SHIFT: c_uint = 0x11;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_SAVE__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_SAVE__SHIFT: c_uint = 0x17;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000008L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000010L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000040L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_SAVE_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00001000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00002000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_SAVE_MASK: c_uint = 0x00004000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_SAVE_MASK: c_uint = 0x00020000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00080000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_SAVE_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_SAVE_MASK: c_uint = 0x00800000L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x0F000000L;
+// MMVM_L2_SAW_CONTEXT0_CNTL2
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__ENABLE_CLEAR_PROTECTION_FAULT_STATUS_ADDR_WHEN_INVALIDATE_CONTEXT__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__ENABLE_INTERRUPT_PROCESSING_FOR_SUBSEQUENT_FAULTS_PER_CONTEXT__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__ALLOW_SUBSEQUENT_PROTECTION_FAULT_STATUS_ADDR_UPDATES__SHIFT: c_uint = 0x3;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__WAIT_FOR_IDLE_WHEN_INVALIDATE__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__ENABLE_CLEAR_PROTECTION_FAULT_STATUS_ADDR_WHEN_INVALIDATE_CONTEXT_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__ENABLE_INTERRUPT_PROCESSING_FOR_SUBSEQUENT_FAULTS_PER_CONTEXT_MASK: c_uint = 0x00000004L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__ALLOW_SUBSEQUENT_PROTECTION_FAULT_STATUS_ADDR_UPDATES_MASK: c_uint = 0x00000008L;
+pub const MMVM_L2_SAW_CONTEXT0_CNTL2__WAIT_FOR_IDLE_WHEN_INVALIDATE_MASK: c_uint = 0x00000010L;
+// MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_BASE_ADDR_LO32__PHYSICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_BASE_ADDR_LO32__PHYSICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_BASE_ADDR_HI32__PHYSICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_BASE_ADDR_HI32__PHYSICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXT0_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_SAW_CONTEXTS_DISABLE
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_0__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_1__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_2__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_3__SHIFT: c_uint = 0x3;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_4__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_5__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_6__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_7__SHIFT: c_uint = 0x7;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_8__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_9__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_10__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_11__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_12__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_13__SHIFT: c_uint = 0xd;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_14__SHIFT: c_uint = 0xe;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_15__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_0_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_1_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_2_MASK: c_uint = 0x00000004L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_3_MASK: c_uint = 0x00000008L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_4_MASK: c_uint = 0x00000010L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_5_MASK: c_uint = 0x00000020L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_6_MASK: c_uint = 0x00000040L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_7_MASK: c_uint = 0x00000080L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_8_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_9_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_10_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_11_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_12_MASK: c_uint = 0x00001000L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_13_MASK: c_uint = 0x00002000L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_14_MASK: c_uint = 0x00004000L;
+pub const MMVM_L2_SAW_CONTEXTS_DISABLE__DISABLE_CONTEXT_15_MASK: c_uint = 0x00008000L;
+// MMVM_L2_SAW_PIPES_BUSY_LO32
+pub const MMVM_L2_SAW_PIPES_BUSY_LO32__PIPES_BUSY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_PIPES_BUSY_LO32__PIPES_BUSY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_SAW_PIPES_BUSY_HI32
+pub const MMVM_L2_SAW_PIPES_BUSY_HI32__PIPES_BUSY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_PIPES_BUSY_HI32__PIPES_BUSY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_SAW_PIPES_BUSY_1_LO32
+pub const MMVM_L2_SAW_PIPES_BUSY_1_LO32__PIPES_BUSY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_PIPES_BUSY_1_LO32__PIPES_BUSY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_SAW_PIPES_BUSY_1_HI32
+pub const MMVM_L2_SAW_PIPES_BUSY_1_HI32__PIPES_BUSY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_SAW_PIPES_BUSY_1_HI32__PIPES_BUSY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// addressBlock: mmhub_mmutcl2_mmatcl2dec
+// MM_ATC_L2_CNTL
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_READ_REQUESTS__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_WRITE_REQUESTS__SHIFT: c_uint = 0x3;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_READS_DEPENDS_ON_ADDR_MOD__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_WRITES_DEPENDS_ON_ADDR_MOD__SHIFT: c_uint = 0x7;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_READ_REQUESTS__SHIFT: c_uint = 0x8;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_WRITE_REQUESTS__SHIFT: c_uint = 0xb;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_READS_DEPENDS_ON_ADDR_MOD__SHIFT: c_uint = 0xe;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_WRITES_DEPENDS_ON_ADDR_MOD__SHIFT: c_uint = 0xf;
+pub const MM_ATC_L2_CNTL__CACHE_INVALIDATE_MODE__SHIFT: c_uint = 0x10;
+pub const MM_ATC_L2_CNTL__ENABLE_DEFAULT_PAGE_OUT_TO_SYSTEM_MEMORY__SHIFT: c_uint = 0x13;
+pub const MM_ATC_L2_CNTL__FRAG_APT_INTXN_MODE__SHIFT: c_uint = 0x14;
+pub const MM_ATC_L2_CNTL__CLI_GPA_REQ_FRAG_SIZE__SHIFT: c_uint = 0x16;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_READ_REQUESTS_MASK: c_uint = 0x00000003L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_WRITE_REQUESTS_MASK: c_uint = 0x00000018L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_READS_DEPENDS_ON_ADDR_MOD_MASK: c_uint = 0x00000040L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_TRANSLATION_WRITES_DEPENDS_ON_ADDR_MOD_MASK: c_uint = 0x00000080L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_READ_REQUESTS_MASK: c_uint = 0x00000300L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_WRITE_REQUESTS_MASK: c_uint = 0x00001800L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_READS_DEPENDS_ON_ADDR_MOD_MASK: c_uint = 0x00004000L;
+pub const MM_ATC_L2_CNTL__NUMBER_OF_HOST_TRANSLATION_WRITES_DEPENDS_ON_ADDR_MOD_MASK: c_uint = 0x00008000L;
+pub const MM_ATC_L2_CNTL__CACHE_INVALIDATE_MODE_MASK: c_uint = 0x00070000L;
+pub const MM_ATC_L2_CNTL__ENABLE_DEFAULT_PAGE_OUT_TO_SYSTEM_MEMORY_MASK: c_uint = 0x00080000L;
+pub const MM_ATC_L2_CNTL__FRAG_APT_INTXN_MODE_MASK: c_uint = 0x00300000L;
+pub const MM_ATC_L2_CNTL__CLI_GPA_REQ_FRAG_SIZE_MASK: c_uint = 0x0FC00000L;
+// MM_ATC_L2_CNTL2
+pub const MM_ATC_L2_CNTL2__BANK_SELECT__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CNTL2__NUM_BANKS_LOG2__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_UPDATE_MODE__SHIFT: c_uint = 0x9;
+pub const MM_ATC_L2_CNTL2__ENABLE_L2_CACHE_LRU_UPDATE_BY_WRITE__SHIFT: c_uint = 0xb;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_SWAP_TAG_INDEX_LSBS__SHIFT: c_uint = 0xc;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_VMID_MODE__SHIFT: c_uint = 0xf;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_UPDATE_WILDCARD_REFERENCE_VALUE__SHIFT: c_uint = 0x12;
+pub const MM_ATC_L2_CNTL2__BANK_SELECT_MASK: c_uint = 0x0000003FL;
+pub const MM_ATC_L2_CNTL2__NUM_BANKS_LOG2_MASK: c_uint = 0x000001C0L;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_UPDATE_MODE_MASK: c_uint = 0x00000600L;
+pub const MM_ATC_L2_CNTL2__ENABLE_L2_CACHE_LRU_UPDATE_BY_WRITE_MASK: c_uint = 0x00000800L;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_SWAP_TAG_INDEX_LSBS_MASK: c_uint = 0x00007000L;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_VMID_MODE_MASK: c_uint = 0x00038000L;
+pub const MM_ATC_L2_CNTL2__L2_CACHE_UPDATE_WILDCARD_REFERENCE_VALUE_MASK: c_uint = 0x00FC0000L;
+// MM_ATC_L2_CACHE_DATA0
+pub const MM_ATC_L2_CACHE_DATA0__DATA_REGISTER_VALID__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CACHE_DATA0__CACHE_ENTRY_VALID__SHIFT: c_uint = 0x1;
+pub const MM_ATC_L2_CACHE_DATA0__CACHED_ATTRIBUTES__SHIFT: c_uint = 0x2;
+pub const MM_ATC_L2_CACHE_DATA0__VIRTUAL_PAGE_ADDRESS_HIGH__SHIFT: c_uint = 0x18;
+pub const MM_ATC_L2_CACHE_DATA0__DATA_REGISTER_VALID_MASK: c_uint = 0x00000001L;
+pub const MM_ATC_L2_CACHE_DATA0__CACHE_ENTRY_VALID_MASK: c_uint = 0x00000002L;
+pub const MM_ATC_L2_CACHE_DATA0__CACHED_ATTRIBUTES_MASK: c_uint = 0x00FFFFFCL;
+pub const MM_ATC_L2_CACHE_DATA0__VIRTUAL_PAGE_ADDRESS_HIGH_MASK: c_uint = 0x0F000000L;
+// MM_ATC_L2_CACHE_DATA1
+pub const MM_ATC_L2_CACHE_DATA1__VIRTUAL_PAGE_ADDRESS_LOW__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CACHE_DATA1__VIRTUAL_PAGE_ADDRESS_LOW_MASK: c_uint = 0xFFFFFFFFL;
+// MM_ATC_L2_CACHE_DATA2
+pub const MM_ATC_L2_CACHE_DATA2__PHYSICAL_PAGE_ADDRESS__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CACHE_DATA2__PHYSICAL_PAGE_ADDRESS_MASK: c_uint = 0xFFFFFFFFL;
+// MM_ATC_L2_CNTL3
+pub const MM_ATC_L2_CNTL3__L2_SMALLK_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CNTL3__L2_MIDK_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_CNTL3__L2_BIGK_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0xc;
+pub const MM_ATC_L2_CNTL3__DELAY_SEND_INVALIDATION_REQUEST__SHIFT: c_uint = 0x12;
+pub const MM_ATC_L2_CNTL3__ATS_REQUEST_CREDIT_MINUS1__SHIFT: c_uint = 0x15;
+pub const MM_ATC_L2_CNTL3__COMPCLKREQ_OFF_HYSTERESIS__SHIFT: c_uint = 0x1b;
+pub const MM_ATC_L2_CNTL3__REPEATER_FGCG_OFF__SHIFT: c_uint = 0x1e;
+pub const MM_ATC_L2_CNTL3__L2_SMALLK_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x0000003FL;
+pub const MM_ATC_L2_CNTL3__L2_MIDK_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x00000FC0L;
+pub const MM_ATC_L2_CNTL3__L2_BIGK_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x0003F000L;
+pub const MM_ATC_L2_CNTL3__DELAY_SEND_INVALIDATION_REQUEST_MASK: c_uint = 0x001C0000L;
+pub const MM_ATC_L2_CNTL3__ATS_REQUEST_CREDIT_MINUS1_MASK: c_uint = 0x07E00000L;
+pub const MM_ATC_L2_CNTL3__COMPCLKREQ_OFF_HYSTERESIS_MASK: c_uint = 0x38000000L;
+pub const MM_ATC_L2_CNTL3__REPEATER_FGCG_OFF_MASK: c_uint = 0x40000000L;
+// MM_ATC_L2_CNTL4
+pub const MM_ATC_L2_CNTL4__L2_RT_SMALLK_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CNTL4__L2_RT_MIDK_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_CNTL4__L2_RT_BIGK_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0xc;
+pub const MM_ATC_L2_CNTL4__L2_RT_SMALLK_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x0000003FL;
+pub const MM_ATC_L2_CNTL4__L2_RT_MIDK_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x00000FC0L;
+pub const MM_ATC_L2_CNTL4__L2_RT_BIGK_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x0003F000L;
+// MM_ATC_L2_CNTL5
+pub const MM_ATC_L2_CNTL5__MM_NONRT_IFIFO_ACTIVE_TRANSACTION_LIMIT__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CNTL5__MM_SOFTRT_IFIFO_ACTIVE_TRANSACTION_LIMIT__SHIFT: c_uint = 0xa;
+pub const MM_ATC_L2_CNTL5__MM_NONRT_IFIFO_ACTIVE_TRANSACTION_LIMIT_MASK: c_uint = 0x000003FFL;
+pub const MM_ATC_L2_CNTL5__MM_SOFTRT_IFIFO_ACTIVE_TRANSACTION_LIMIT_MASK: c_uint = 0x000FFC00L;
+// MM_ATC_L2_MM_GROUP_RT_CLASSES
+pub const MM_ATC_L2_MM_GROUP_RT_CLASSES__GROUP_RT_CLASS__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_MM_GROUP_RT_CLASSES__GROUP_RT_CLASS_MASK: c_uint = 0xFFFFFFFFL;
+// MM_ATC_L2_STATUS
+pub const MM_ATC_L2_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_STATUS__NO_OUTSTANDING_AT_REQUESTS__SHIFT: c_uint = 0x1;
+pub const MM_ATC_L2_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MM_ATC_L2_STATUS__NO_OUTSTANDING_AT_REQUESTS_MASK: c_uint = 0x00000002L;
+// MM_ATC_L2_STATUS2
+pub const MM_ATC_L2_STATUS2__IFIFO_NON_FATAL_PARITY_ERROR_INFO__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_STATUS2__IFIFO_FATAL_PARITY_ERROR_INFO__SHIFT: c_uint = 0x8;
+pub const MM_ATC_L2_STATUS2__IFIFO_NON_FATAL_PARITY_ERROR_INFO_MASK: c_uint = 0x000000FFL;
+pub const MM_ATC_L2_STATUS2__IFIFO_FATAL_PARITY_ERROR_INFO_MASK: c_uint = 0x0000FF00L;
+// MM_ATC_L2_MISC_CG
+pub const MM_ATC_L2_MISC_CG__OFFDLY__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_MISC_CG__ENABLE__SHIFT: c_uint = 0x12;
+pub const MM_ATC_L2_MISC_CG__MEM_LS_ENABLE__SHIFT: c_uint = 0x13;
+pub const MM_ATC_L2_MISC_CG__OFFDLY_MASK: c_uint = 0x00000FC0L;
+pub const MM_ATC_L2_MISC_CG__ENABLE_MASK: c_uint = 0x00040000L;
+pub const MM_ATC_L2_MISC_CG__MEM_LS_ENABLE_MASK: c_uint = 0x00080000L;
+// MM_ATC_L2_MEM_POWER_LS
+pub const MM_ATC_L2_MEM_POWER_LS__LS_SETUP__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_MEM_POWER_LS__LS_HOLD__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_MEM_POWER_LS__LS_SETUP_MASK: c_uint = 0x0000003FL;
+pub const MM_ATC_L2_MEM_POWER_LS__LS_HOLD_MASK: c_uint = 0x00000FC0L;
+// MM_ATC_L2_CGTT_CLK_CTRL
+pub const MM_ATC_L2_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const MM_ATC_L2_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// MM_ATC_L2_SDPPORT_CTRL
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPCKEN__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPCKENRCV__SHIFT: c_uint = 0x1;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPDATACKEN__SHIFT: c_uint = 0x2;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPDATACKENRCV__SHIFT: c_uint = 0x3;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_WRRSPCKEN__SHIFT: c_uint = 0x4;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_WRRSPCKENRCV__SHIFT: c_uint = 0x5;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_REQCKEN__SHIFT: c_uint = 0x6;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_REQCKENRCV__SHIFT: c_uint = 0x7;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_ORIGDATACKEN__SHIFT: c_uint = 0x8;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_ORIGDATACKENRCV__SHIFT: c_uint = 0x9;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPCKEN_MASK: c_uint = 0x00000001L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPCKENRCV_MASK: c_uint = 0x00000002L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPDATACKEN_MASK: c_uint = 0x00000004L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_RDRSPDATACKENRCV_MASK: c_uint = 0x00000008L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_WRRSPCKEN_MASK: c_uint = 0x00000010L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_WRRSPCKENRCV_MASK: c_uint = 0x00000020L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_REQCKEN_MASK: c_uint = 0x00000040L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_REQCKENRCV_MASK: c_uint = 0x00000080L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_ORIGDATACKEN_MASK: c_uint = 0x00000100L;
+pub const MM_ATC_L2_SDPPORT_CTRL__SDPVDCI_ORIGDATACKENRCV_MASK: c_uint = 0x00000200L;
+// addressBlock: mmhub_mmutcl2_mmvml2pfdec
+// MMVM_L2_CNTL
+pub const MMVM_L2_CNTL__ENABLE_L2_CACHE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CNTL__ENABLE_L2_FRAGMENT_PROCESSING__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_CNTL__L2_CACHE_PTE_ENDIAN_SWAP_MODE__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_CNTL__L2_CACHE_PDE_ENDIAN_SWAP_MODE__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_CNTL__L2_PDE0_CACHE_TAG_GENERATION_MODE__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_CNTL__ENABLE_L2_PTE_CACHE_LRU_UPDATE_BY_WRITE__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_CNTL__ENABLE_L2_PDE0_CACHE_LRU_UPDATE_BY_WRITE__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CNTL__ENABLE_DEFAULT_PAGE_OUT_TO_SYSTEM_MEMORY__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_CNTL__L2_PDE0_CACHE_SPLIT_MODE__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_CNTL__EFFECTIVE_L2_QUEUE_SIZE__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_CNTL__PDE_FAULT_CLASSIFICATION__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_CNTL__CONTEXT1_IDENTITY_ACCESS_MODE__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_CNTL__IDENTITY_MODE_FRAGMENT_SIZE__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_CNTL__L2_PTE_CACHE_ADDR_MODE__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_CNTL__ENABLE_L2_CACHE_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_CNTL__ENABLE_L2_FRAGMENT_PROCESSING_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_CNTL__L2_CACHE_PTE_ENDIAN_SWAP_MODE_MASK: c_uint = 0x0000000CL;
+pub const MMVM_L2_CNTL__L2_CACHE_PDE_ENDIAN_SWAP_MODE_MASK: c_uint = 0x00000030L;
+pub const MMVM_L2_CNTL__L2_PDE0_CACHE_TAG_GENERATION_MODE_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_CNTL__ENABLE_L2_PTE_CACHE_LRU_UPDATE_BY_WRITE_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_CNTL__ENABLE_L2_PDE0_CACHE_LRU_UPDATE_BY_WRITE_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_CNTL__ENABLE_DEFAULT_PAGE_OUT_TO_SYSTEM_MEMORY_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_CNTL__L2_PDE0_CACHE_SPLIT_MODE_MASK: c_uint = 0x00007000L;
+pub const MMVM_L2_CNTL__EFFECTIVE_L2_QUEUE_SIZE_MASK: c_uint = 0x00038000L;
+pub const MMVM_L2_CNTL__PDE_FAULT_CLASSIFICATION_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_CNTL__CONTEXT1_IDENTITY_ACCESS_MODE_MASK: c_uint = 0x00180000L;
+pub const MMVM_L2_CNTL__IDENTITY_MODE_FRAGMENT_SIZE_MASK: c_uint = 0x03E00000L;
+pub const MMVM_L2_CNTL__L2_PTE_CACHE_ADDR_MODE_MASK: c_uint = 0x0C000000L;
+// MMVM_L2_CNTL2
+pub const MMVM_L2_CNTL2__INVALIDATE_ALL_L1_TLBS__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CNTL2__INVALIDATE_L2_CACHE__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_CNTL2__DISABLE_INVALIDATE_PER_DOMAIN__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_CNTL2__DISABLE_BIGK_CACHE_OPTIMIZATION__SHIFT: c_uint = 0x16;
+pub const MMVM_L2_CNTL2__L2_PTE_CACHE_VMID_MODE__SHIFT: c_uint = 0x17;
+pub const MMVM_L2_CNTL2__INVALIDATE_CACHE_MODE__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_CNTL2__PDE_CACHE_EFFECTIVE_SIZE__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_CNTL2__INVALIDATE_ALL_L1_TLBS_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_CNTL2__INVALIDATE_L2_CACHE_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_CNTL2__DISABLE_INVALIDATE_PER_DOMAIN_MASK: c_uint = 0x00200000L;
+pub const MMVM_L2_CNTL2__DISABLE_BIGK_CACHE_OPTIMIZATION_MASK: c_uint = 0x00400000L;
+pub const MMVM_L2_CNTL2__L2_PTE_CACHE_VMID_MODE_MASK: c_uint = 0x03800000L;
+pub const MMVM_L2_CNTL2__INVALIDATE_CACHE_MODE_MASK: c_uint = 0x0C000000L;
+pub const MMVM_L2_CNTL2__PDE_CACHE_EFFECTIVE_SIZE_MASK: c_uint = 0x70000000L;
+// MMVM_L2_CNTL3
+pub const MMVM_L2_CNTL3__BANK_SELECT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CNTL3__L2_CACHE_UPDATE_MODE__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_CNTL3__L2_CACHE_UPDATE_WILDCARD_REFERENCE_VALUE__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_ASSOCIATIVITY__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_CNTL3__L2_CACHE_4K_EFFECTIVE_SIZE__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_EFFECTIVE_SIZE__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_CNTL3__L2_CACHE_4K_FORCE_MISS__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_FORCE_MISS__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_CNTL3__PDE_CACHE_FORCE_MISS__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_CNTL3__L2_CACHE_4K_ASSOCIATIVITY__SHIFT: c_uint = 0x1f;
+pub const MMVM_L2_CNTL3__BANK_SELECT_MASK: c_uint = 0x0000003FL;
+pub const MMVM_L2_CNTL3__L2_CACHE_UPDATE_MODE_MASK: c_uint = 0x000000C0L;
+pub const MMVM_L2_CNTL3__L2_CACHE_UPDATE_WILDCARD_REFERENCE_VALUE_MASK: c_uint = 0x00001F00L;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000F8000L;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_ASSOCIATIVITY_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_CNTL3__L2_CACHE_4K_EFFECTIVE_SIZE_MASK: c_uint = 0x00E00000L;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_EFFECTIVE_SIZE_MASK: c_uint = 0x0F000000L;
+pub const MMVM_L2_CNTL3__L2_CACHE_4K_FORCE_MISS_MASK: c_uint = 0x10000000L;
+pub const MMVM_L2_CNTL3__L2_CACHE_BIGK_FORCE_MISS_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_CNTL3__PDE_CACHE_FORCE_MISS_MASK: c_uint = 0x40000000L;
+pub const MMVM_L2_CNTL3__L2_CACHE_4K_ASSOCIATIVITY_MASK: c_uint = 0x80000000L;
+// MMVM_L2_STATUS
+pub const MMVM_L2_STATUS__L2_BUSY__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_STATUS__CONTEXT_DOMAIN_BUSY__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_STATUS__FOUND_4K_PTE_CACHE_PARITY_ERRORS__SHIFT: c_uint = 0x11;
+pub const MMVM_L2_STATUS__FOUND_BIGK_PTE_CACHE_PARITY_ERRORS__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_STATUS__FOUND_PDE0_CACHE_PARITY_ERRORS__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_STATUS__FOUND_PDE1_CACHE_PARITY_ERRORS__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_STATUS__FOUND_PDE2_CACHE_PARITY_ERRORS__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_STATUS__L2_BUSY_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_STATUS__CONTEXT_DOMAIN_BUSY_MASK: c_uint = 0x0001FFFEL;
+pub const MMVM_L2_STATUS__FOUND_4K_PTE_CACHE_PARITY_ERRORS_MASK: c_uint = 0x00020000L;
+pub const MMVM_L2_STATUS__FOUND_BIGK_PTE_CACHE_PARITY_ERRORS_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_STATUS__FOUND_PDE0_CACHE_PARITY_ERRORS_MASK: c_uint = 0x00080000L;
+pub const MMVM_L2_STATUS__FOUND_PDE1_CACHE_PARITY_ERRORS_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_STATUS__FOUND_PDE2_CACHE_PARITY_ERRORS_MASK: c_uint = 0x00200000L;
+// MMVM_DUMMY_PAGE_FAULT_CNTL
+pub const MMVM_DUMMY_PAGE_FAULT_CNTL__DUMMY_PAGE_FAULT_ENABLE__SHIFT: c_uint = 0x0;
+pub const MMVM_DUMMY_PAGE_FAULT_CNTL__DUMMY_PAGE_ADDRESS_LOGICAL__SHIFT: c_uint = 0x1;
+pub const MMVM_DUMMY_PAGE_FAULT_CNTL__DUMMY_PAGE_COMPARE_MSBS__SHIFT: c_uint = 0x2;
+pub const MMVM_DUMMY_PAGE_FAULT_CNTL__DUMMY_PAGE_FAULT_ENABLE_MASK: c_uint = 0x00000001L;
+pub const MMVM_DUMMY_PAGE_FAULT_CNTL__DUMMY_PAGE_ADDRESS_LOGICAL_MASK: c_uint = 0x00000002L;
+pub const MMVM_DUMMY_PAGE_FAULT_CNTL__DUMMY_PAGE_COMPARE_MSBS_MASK: c_uint = 0x000000FCL;
+// MMVM_DUMMY_PAGE_FAULT_ADDR_LO32
+pub const MMVM_DUMMY_PAGE_FAULT_ADDR_LO32__DUMMY_PAGE_ADDR_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_DUMMY_PAGE_FAULT_ADDR_LO32__DUMMY_PAGE_ADDR_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_DUMMY_PAGE_FAULT_ADDR_HI32
+pub const MMVM_DUMMY_PAGE_FAULT_ADDR_HI32__DUMMY_PAGE_ADDR_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_DUMMY_PAGE_FAULT_ADDR_HI32__DUMMY_PAGE_ADDR_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_INVALIDATE_CNTL
+pub const MMVM_INVALIDATE_CNTL__PRI_REG_ALTERNATING__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_CNTL__MAX_REG_OUTSTANDING__SHIFT: c_uint = 0x8;
+pub const MMVM_INVALIDATE_CNTL__PRI_REG_ALTERNATING_MASK: c_uint = 0x000000FFL;
+pub const MMVM_INVALIDATE_CNTL__MAX_REG_OUTSTANDING_MASK: c_uint = 0x0000FF00L;
+// MMVM_L2_PROTECTION_FAULT_CNTL
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__ALLOW_SUBSEQUENT_PROTECTION_FAULT_STATUS_ADDR_UPDATES__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x3;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__PDE1_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__PDE2_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__TRANSLATE_FURTHER_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__NACK_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CLIENT_ID_NO_RETRY_FAULT_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__OTHER_CLIENT_ID_NO_RETRY_FAULT_INTERRUPT__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CRASH_ON_NO_RETRY_FAULT__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CRASH_ON_RETRY_FAULT__SHIFT: c_uint = 0x1f;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__ALLOW_SUBSEQUENT_PROTECTION_FAULT_STATUS_ADDR_UPDATES_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000004L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000008L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__PDE1_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000010L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__PDE2_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000020L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__TRANSLATE_FURTHER_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000040L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__NACK_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CLIENT_ID_NO_RETRY_FAULT_INTERRUPT_MASK: c_uint = 0x1FFFE000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__OTHER_CLIENT_ID_NO_RETRY_FAULT_INTERRUPT_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CRASH_ON_NO_RETRY_FAULT_MASK: c_uint = 0x40000000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL__CRASH_ON_RETRY_FAULT_MASK: c_uint = 0x80000000L;
+// MMVM_L2_PROTECTION_FAULT_CNTL2
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__CLIENT_ID_PRT_FAULT_INTERRUPT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__OTHER_CLIENT_ID_PRT_FAULT_INTERRUPT__SHIFT: c_uint = 0x10;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__ACTIVE_PAGE_MIGRATION_PTE__SHIFT: c_uint = 0x11;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__ACTIVE_PAGE_MIGRATION_PTE_READ_RETRY__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__ENABLE_RETRY_FAULT_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__CLIENT_ID_PRT_FAULT_INTERRUPT_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__OTHER_CLIENT_ID_PRT_FAULT_INTERRUPT_MASK: c_uint = 0x00010000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__ACTIVE_PAGE_MIGRATION_PTE_MASK: c_uint = 0x00020000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__ACTIVE_PAGE_MIGRATION_PTE_READ_RETRY_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_PROTECTION_FAULT_CNTL2__ENABLE_RETRY_FAULT_INTERRUPT_MASK: c_uint = 0x00080000L;
+// MMVM_L2_PROTECTION_FAULT_MM_CNTL3
+pub const MMVM_L2_PROTECTION_FAULT_MM_CNTL3__VML1_READ_CLIENT_ID_NO_RETRY_FAULT_INTERRUPT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_MM_CNTL3__VML1_READ_CLIENT_ID_NO_RETRY_FAULT_INTERRUPT_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_PROTECTION_FAULT_MM_CNTL4
+pub const MMVM_L2_PROTECTION_FAULT_MM_CNTL4__VML1_WRITE_CLIENT_ID_NO_RETRY_FAULT_INTERRUPT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_MM_CNTL4__VML1_WRITE_CLIENT_ID_NO_RETRY_FAULT_INTERRUPT_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_PROTECTION_FAULT_STATUS
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__MORE_FAULTS__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__WALKER_ERROR__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__PERMISSION_FAULTS__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__MAPPING_ERROR__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__CID__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__RW__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__ATOMIC__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__VMID__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__VF__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__VFID__SHIFT: c_uint = 0x19;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__PRT__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__FED__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__MORE_FAULTS_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__WALKER_ERROR_MASK: c_uint = 0x0000000EL;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__PERMISSION_FAULTS_MASK: c_uint = 0x000000F0L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__MAPPING_ERROR_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__CID_MASK: c_uint = 0x0003FE00L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__RW_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__ATOMIC_MASK: c_uint = 0x00080000L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__VMID_MASK: c_uint = 0x00F00000L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__VF_MASK: c_uint = 0x01000000L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__VFID_MASK: c_uint = 0x1E000000L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__PRT_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_PROTECTION_FAULT_STATUS__FED_MASK: c_uint = 0x40000000L;
+// MMVM_L2_PROTECTION_FAULT_ADDR_LO32
+pub const MMVM_L2_PROTECTION_FAULT_ADDR_LO32__LOGICAL_PAGE_ADDR_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_ADDR_LO32__LOGICAL_PAGE_ADDR_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_PROTECTION_FAULT_ADDR_HI32
+pub const MMVM_L2_PROTECTION_FAULT_ADDR_HI32__LOGICAL_PAGE_ADDR_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_ADDR_HI32__LOGICAL_PAGE_ADDR_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_PROTECTION_FAULT_DEFAULT_ADDR_LO32
+pub const MMVM_L2_PROTECTION_FAULT_DEFAULT_ADDR_LO32__PHYSICAL_PAGE_ADDR_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_DEFAULT_ADDR_LO32__PHYSICAL_PAGE_ADDR_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_PROTECTION_FAULT_DEFAULT_ADDR_HI32
+pub const MMVM_L2_PROTECTION_FAULT_DEFAULT_ADDR_HI32__PHYSICAL_PAGE_ADDR_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PROTECTION_FAULT_DEFAULT_ADDR_HI32__PHYSICAL_PAGE_ADDR_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_CONTEXT1_IDENTITY_APERTURE_LOW_ADDR_LO32
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_LOW_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_LOW_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_CONTEXT1_IDENTITY_APERTURE_LOW_ADDR_HI32
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_LOW_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_LOW_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_CONTEXT1_IDENTITY_APERTURE_HIGH_ADDR_LO32
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_HIGH_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_HIGH_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_CONTEXT1_IDENTITY_APERTURE_HIGH_ADDR_HI32
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_HIGH_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT1_IDENTITY_APERTURE_HIGH_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_CONTEXT_IDENTITY_PHYSICAL_OFFSET_LO32
+pub const MMVM_L2_CONTEXT_IDENTITY_PHYSICAL_OFFSET_LO32__PHYSICAL_PAGE_OFFSET_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT_IDENTITY_PHYSICAL_OFFSET_LO32__PHYSICAL_PAGE_OFFSET_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_CONTEXT_IDENTITY_PHYSICAL_OFFSET_HI32
+pub const MMVM_L2_CONTEXT_IDENTITY_PHYSICAL_OFFSET_HI32__PHYSICAL_PAGE_OFFSET_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT_IDENTITY_PHYSICAL_OFFSET_HI32__PHYSICAL_PAGE_OFFSET_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_CNTL4
+pub const MMVM_L2_CNTL4__L2_CACHE_4K_PARTITION_COUNT__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CNTL4__VMC_TAP_PDE_REQUEST_PHYSICAL__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_CNTL4__VMC_TAP_PTE_REQUEST_PHYSICAL__SHIFT: c_uint = 0x7;
+pub const MMVM_L2_CNTL4__MM_NONRT_IFIFO_ACTIVE_TRANSACTION_LIMIT__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_CNTL4__MM_SOFTRT_IFIFO_ACTIVE_TRANSACTION_LIMIT__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_CNTL4__BPM_CGCGLS_OVERRIDE__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_CNTL4__GC_CH_FGCG_OFF__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_CNTL4__VFIFO_HEAD_OF_QUEUE__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_CNTL4__VFIFO_VISIBLE_BANK_SILOS__SHIFT: c_uint = 0x1f;
+pub const MMVM_L2_CNTL4__L2_CACHE_4K_PARTITION_COUNT_MASK: c_uint = 0x0000003FL;
+pub const MMVM_L2_CNTL4__VMC_TAP_PDE_REQUEST_PHYSICAL_MASK: c_uint = 0x00000040L;
+pub const MMVM_L2_CNTL4__VMC_TAP_PTE_REQUEST_PHYSICAL_MASK: c_uint = 0x00000080L;
+pub const MMVM_L2_CNTL4__MM_NONRT_IFIFO_ACTIVE_TRANSACTION_LIMIT_MASK: c_uint = 0x0003FF00L;
+pub const MMVM_L2_CNTL4__MM_SOFTRT_IFIFO_ACTIVE_TRANSACTION_LIMIT_MASK: c_uint = 0x0FFC0000L;
+pub const MMVM_L2_CNTL4__BPM_CGCGLS_OVERRIDE_MASK: c_uint = 0x10000000L;
+pub const MMVM_L2_CNTL4__GC_CH_FGCG_OFF_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_CNTL4__VFIFO_HEAD_OF_QUEUE_MASK: c_uint = 0x40000000L;
+pub const MMVM_L2_CNTL4__VFIFO_VISIBLE_BANK_SILOS_MASK: c_uint = 0x80000000L;
+// MMVM_L2_MM_GROUP_RT_CLASSES
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_0_RT_CLASS__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_1_RT_CLASS__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_2_RT_CLASS__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_3_RT_CLASS__SHIFT: c_uint = 0x3;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_4_RT_CLASS__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_5_RT_CLASS__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_6_RT_CLASS__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_7_RT_CLASS__SHIFT: c_uint = 0x7;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_8_RT_CLASS__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_9_RT_CLASS__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_10_RT_CLASS__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_11_RT_CLASS__SHIFT: c_uint = 0xb;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_12_RT_CLASS__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_13_RT_CLASS__SHIFT: c_uint = 0xd;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_14_RT_CLASS__SHIFT: c_uint = 0xe;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_15_RT_CLASS__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_16_RT_CLASS__SHIFT: c_uint = 0x10;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_17_RT_CLASS__SHIFT: c_uint = 0x11;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_18_RT_CLASS__SHIFT: c_uint = 0x12;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_19_RT_CLASS__SHIFT: c_uint = 0x13;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_20_RT_CLASS__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_21_RT_CLASS__SHIFT: c_uint = 0x15;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_22_RT_CLASS__SHIFT: c_uint = 0x16;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_23_RT_CLASS__SHIFT: c_uint = 0x17;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_24_RT_CLASS__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_25_RT_CLASS__SHIFT: c_uint = 0x19;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_26_RT_CLASS__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_27_RT_CLASS__SHIFT: c_uint = 0x1b;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_28_RT_CLASS__SHIFT: c_uint = 0x1c;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_29_RT_CLASS__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_30_RT_CLASS__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_31_RT_CLASS__SHIFT: c_uint = 0x1f;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_0_RT_CLASS_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_1_RT_CLASS_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_2_RT_CLASS_MASK: c_uint = 0x00000004L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_3_RT_CLASS_MASK: c_uint = 0x00000008L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_4_RT_CLASS_MASK: c_uint = 0x00000010L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_5_RT_CLASS_MASK: c_uint = 0x00000020L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_6_RT_CLASS_MASK: c_uint = 0x00000040L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_7_RT_CLASS_MASK: c_uint = 0x00000080L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_8_RT_CLASS_MASK: c_uint = 0x00000100L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_9_RT_CLASS_MASK: c_uint = 0x00000200L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_10_RT_CLASS_MASK: c_uint = 0x00000400L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_11_RT_CLASS_MASK: c_uint = 0x00000800L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_12_RT_CLASS_MASK: c_uint = 0x00001000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_13_RT_CLASS_MASK: c_uint = 0x00002000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_14_RT_CLASS_MASK: c_uint = 0x00004000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_15_RT_CLASS_MASK: c_uint = 0x00008000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_16_RT_CLASS_MASK: c_uint = 0x00010000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_17_RT_CLASS_MASK: c_uint = 0x00020000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_18_RT_CLASS_MASK: c_uint = 0x00040000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_19_RT_CLASS_MASK: c_uint = 0x00080000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_20_RT_CLASS_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_21_RT_CLASS_MASK: c_uint = 0x00200000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_22_RT_CLASS_MASK: c_uint = 0x00400000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_23_RT_CLASS_MASK: c_uint = 0x00800000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_24_RT_CLASS_MASK: c_uint = 0x01000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_25_RT_CLASS_MASK: c_uint = 0x02000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_26_RT_CLASS_MASK: c_uint = 0x04000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_27_RT_CLASS_MASK: c_uint = 0x08000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_28_RT_CLASS_MASK: c_uint = 0x10000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_29_RT_CLASS_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_30_RT_CLASS_MASK: c_uint = 0x40000000L;
+pub const MMVM_L2_MM_GROUP_RT_CLASSES__GROUP_31_RT_CLASS_MASK: c_uint = 0x80000000L;
+// MMVM_L2_BANK_SELECT_RESERVED_CID
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_READ_CLIENT_ID__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_WRITE_CLIENT_ID__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__ENABLE__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_CACHE_INVALIDATION_MODE__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_CACHE_PRIVATE_INVALIDATION__SHIFT: c_uint = 0x19;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_READ_CLIENT_ID_MASK: c_uint = 0x000001FFL;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_WRITE_CLIENT_ID_MASK: c_uint = 0x0007FC00L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__ENABLE_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_CACHE_INVALIDATION_MODE_MASK: c_uint = 0x01000000L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_CACHE_PRIVATE_INVALIDATION_MASK: c_uint = 0x02000000L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID__RESERVED_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x7C000000L;
+// MMVM_L2_BANK_SELECT_RESERVED_CID2
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_READ_CLIENT_ID__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_WRITE_CLIENT_ID__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__ENABLE__SHIFT: c_uint = 0x14;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_CACHE_INVALIDATION_MODE__SHIFT: c_uint = 0x18;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_CACHE_PRIVATE_INVALIDATION__SHIFT: c_uint = 0x19;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_CACHE_FRAGMENT_SIZE__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_READ_CLIENT_ID_MASK: c_uint = 0x000001FFL;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_WRITE_CLIENT_ID_MASK: c_uint = 0x0007FC00L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__ENABLE_MASK: c_uint = 0x00100000L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_CACHE_INVALIDATION_MODE_MASK: c_uint = 0x01000000L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_CACHE_PRIVATE_INVALIDATION_MASK: c_uint = 0x02000000L;
+pub const MMVM_L2_BANK_SELECT_RESERVED_CID2__RESERVED_CACHE_FRAGMENT_SIZE_MASK: c_uint = 0x7C000000L;
+// MMVM_L2_CACHE_PARITY_CNTL
+pub const MMVM_L2_CACHE_PARITY_CNTL__ENABLE_PARITY_CHECKS_IN_4K_PTE_CACHES__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CACHE_PARITY_CNTL__ENABLE_PARITY_CHECKS_IN_BIGK_PTE_CACHES__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_CACHE_PARITY_CNTL__ENABLE_PARITY_CHECKS_IN_PDE_CACHES__SHIFT: c_uint = 0x2;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_PARITY_MISMATCH_IN_4K_PTE_CACHE__SHIFT: c_uint = 0x3;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_PARITY_MISMATCH_IN_BIGK_PTE_CACHE__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_PARITY_MISMATCH_IN_PDE_CACHE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_CACHE_BANK__SHIFT: c_uint = 0x6;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_CACHE_NUMBER__SHIFT: c_uint = 0x9;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_CACHE_ASSOC__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_CACHE_PARITY_CNTL__ENABLE_PARITY_CHECKS_IN_4K_PTE_CACHES_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__ENABLE_PARITY_CHECKS_IN_BIGK_PTE_CACHES_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__ENABLE_PARITY_CHECKS_IN_PDE_CACHES_MASK: c_uint = 0x00000004L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_PARITY_MISMATCH_IN_4K_PTE_CACHE_MASK: c_uint = 0x00000008L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_PARITY_MISMATCH_IN_BIGK_PTE_CACHE_MASK: c_uint = 0x00000010L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_PARITY_MISMATCH_IN_PDE_CACHE_MASK: c_uint = 0x00000020L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_CACHE_BANK_MASK: c_uint = 0x000001C0L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_CACHE_NUMBER_MASK: c_uint = 0x00000E00L;
+pub const MMVM_L2_CACHE_PARITY_CNTL__FORCE_CACHE_ASSOC_MASK: c_uint = 0x0000F000L;
+// MMVM_L2_CGTT_CLK_CTRL
+pub const MMVM_L2_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const MMVM_L2_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const MMVM_L2_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const MMVM_L2_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const MMVM_L2_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const MMVM_L2_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const MMVM_L2_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const MMVM_L2_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const MMVM_L2_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const MMVM_L2_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const MMVM_L2_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// MMVM_L2_CNTL5
+pub const MMVM_L2_CNTL5__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CNTL5__WALKER_PRIORITY_CLIENT_ID__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CNTL5__WALKER_FETCH_PDE_NOALLOC_ENABLE__SHIFT: c_uint = 0xe;
+pub const MMVM_L2_CNTL5__WALKER_FETCH_PDE_MTYPE_ENABLE__SHIFT: c_uint = 0xf;
+pub const MMVM_L2_CNTL5__MM_CLIENT_RET_FGCG_OFF__SHIFT: c_uint = 0x10;
+pub const MMVM_L2_CNTL5__UTCL2_ATC_REQ_FGCG_OFF__SHIFT: c_uint = 0x11;
+pub const MMVM_L2_CNTL5__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CNTL5__WALKER_PRIORITY_CLIENT_ID_MASK: c_uint = 0x00003FE0L;
+pub const MMVM_L2_CNTL5__WALKER_FETCH_PDE_NOALLOC_ENABLE_MASK: c_uint = 0x00004000L;
+pub const MMVM_L2_CNTL5__WALKER_FETCH_PDE_MTYPE_ENABLE_MASK: c_uint = 0x00008000L;
+pub const MMVM_L2_CNTL5__MM_CLIENT_RET_FGCG_OFF_MASK: c_uint = 0x00010000L;
+pub const MMVM_L2_CNTL5__UTCL2_ATC_REQ_FGCG_OFF_MASK: c_uint = 0x00020000L;
+// MMVM_L2_GCR_CNTL
+pub const MMVM_L2_GCR_CNTL__GCR_ENABLE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_GCR_CNTL__GCR_CLIENT_ID__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_GCR_CNTL__GCR_ENABLE_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_GCR_CNTL__GCR_CLIENT_ID_MASK: c_uint = 0x000003FEL;
+// MMVM_L2_CGTT_BUSY_CTRL
+pub const MMVM_L2_CGTT_BUSY_CTRL__READ_DELAY__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CGTT_BUSY_CTRL__ALWAYS_BUSY__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CGTT_BUSY_CTRL__READ_DELAY_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CGTT_BUSY_CTRL__ALWAYS_BUSY_MASK: c_uint = 0x00000020L;
+// MMVM_L2_PTE_CACHE_DUMP_CNTL
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__ENABLE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__READY__SHIFT: c_uint = 0x1;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__BANK__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__CACHE__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__ASSOC__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__INDEX__SHIFT: c_uint = 0x10;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__ENABLE_MASK: c_uint = 0x00000001L;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__READY_MASK: c_uint = 0x00000002L;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__BANK_MASK: c_uint = 0x000000F0L;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__CACHE_MASK: c_uint = 0x00000F00L;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__ASSOC_MASK: c_uint = 0x0000F000L;
+pub const MMVM_L2_PTE_CACHE_DUMP_CNTL__INDEX_MASK: c_uint = 0xFFFF0000L;
+// MMVM_L2_PTE_CACHE_DUMP_READ
+pub const MMVM_L2_PTE_CACHE_DUMP_READ__DATA__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PTE_CACHE_DUMP_READ__DATA_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_L2_BANK_SELECT_MASKS
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK0__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK1__SHIFT: c_uint = 0x4;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK2__SHIFT: c_uint = 0x8;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK3__SHIFT: c_uint = 0xc;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK0_MASK: c_uint = 0x0000000FL;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK1_MASK: c_uint = 0x000000F0L;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK2_MASK: c_uint = 0x00000F00L;
+pub const MMVM_L2_BANK_SELECT_MASKS__MASK3_MASK: c_uint = 0x0000F000L;
+// MMUTCL2_CREDIT_SAFETY_GROUP_RET_CDC
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_RET_CDC__CREDITS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_RET_CDC__UPDATE__SHIFT: c_uint = 0xa;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_RET_CDC__CREDITS_MASK: c_uint = 0x000003FFL;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_RET_CDC__UPDATE_MASK: c_uint = 0x00000400L;
+// MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_CDC
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_CDC__CREDITS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_CDC__UPDATE__SHIFT: c_uint = 0xa;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_CDC__CREDITS_MASK: c_uint = 0x000003FFL;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_CDC__UPDATE_MASK: c_uint = 0x00000400L;
+// MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_NOCDC
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_NOCDC__CREDITS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_NOCDC__UPDATE__SHIFT: c_uint = 0xa;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_NOCDC__CREDITS_MASK: c_uint = 0x000003FFL;
+pub const MMUTCL2_CREDIT_SAFETY_GROUP_CLIENTS_INVREQ_NOCDC__UPDATE_MASK: c_uint = 0x00000400L;
+// MMVML2_CREDIT_SAFETY_IH_FAULT_INTERRUPT
+pub const MMVML2_CREDIT_SAFETY_IH_FAULT_INTERRUPT__CREDITS__SHIFT: c_uint = 0x0;
+pub const MMVML2_CREDIT_SAFETY_IH_FAULT_INTERRUPT__UPDATE__SHIFT: c_uint = 0xa;
+pub const MMVML2_CREDIT_SAFETY_IH_FAULT_INTERRUPT__CREDITS_MASK: c_uint = 0x000003FFL;
+pub const MMVML2_CREDIT_SAFETY_IH_FAULT_INTERRUPT__UPDATE_MASK: c_uint = 0x00000400L;
+// MMVML2_WALKER_CREDIT_SAFETY_FETCH_RDREQ
+pub const MMVML2_WALKER_CREDIT_SAFETY_FETCH_RDREQ__CREDITS__SHIFT: c_uint = 0x0;
+pub const MMVML2_WALKER_CREDIT_SAFETY_FETCH_RDREQ__UPDATE__SHIFT: c_uint = 0xa;
+pub const MMVML2_WALKER_CREDIT_SAFETY_FETCH_RDREQ__CREDITS_MASK: c_uint = 0x000003FFL;
+pub const MMVML2_WALKER_CREDIT_SAFETY_FETCH_RDREQ__UPDATE_MASK: c_uint = 0x00000400L;
+// addressBlock: mmhub_mmutcl2_mmvml2vcdec
+// MMVM_CONTEXT0_CNTL
+pub const MMVM_CONTEXT0_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT0_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT0_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT0_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT0_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT0_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT0_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT0_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT0_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT0_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT0_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT0_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT0_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT0_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT0_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT0_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT1_CNTL
+pub const MMVM_CONTEXT1_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT1_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT1_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT1_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT1_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT1_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT1_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT1_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT1_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT1_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT1_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT1_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT1_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT1_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT1_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT1_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT1_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT1_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT1_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT1_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT1_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT1_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT1_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT1_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT1_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT1_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT1_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT1_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT1_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT1_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT1_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT1_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT1_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT1_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT1_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT1_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT1_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT2_CNTL
+pub const MMVM_CONTEXT2_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT2_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT2_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT2_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT2_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT2_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT2_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT2_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT2_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT2_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT2_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT2_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT2_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT2_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT2_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT2_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT2_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT2_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT2_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT2_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT2_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT2_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT2_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT2_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT2_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT2_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT2_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT2_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT2_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT2_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT2_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT2_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT2_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT2_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT2_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT2_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT2_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT3_CNTL
+pub const MMVM_CONTEXT3_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT3_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT3_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT3_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT3_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT3_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT3_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT3_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT3_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT3_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT3_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT3_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT3_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT3_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT3_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT3_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT3_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT3_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT3_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT3_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT3_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT3_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT3_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT3_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT3_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT3_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT3_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT3_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT3_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT3_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT3_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT3_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT3_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT3_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT3_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT3_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT3_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT4_CNTL
+pub const MMVM_CONTEXT4_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT4_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT4_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT4_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT4_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT4_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT4_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT4_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT4_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT4_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT4_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT4_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT4_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT4_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT4_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT4_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT4_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT4_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT4_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT4_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT4_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT4_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT4_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT4_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT4_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT4_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT4_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT4_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT4_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT4_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT4_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT4_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT4_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT4_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT4_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT4_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT4_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT5_CNTL
+pub const MMVM_CONTEXT5_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT5_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT5_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT5_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT5_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT5_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT5_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT5_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT5_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT5_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT5_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT5_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT5_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT5_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT5_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT5_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT5_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT5_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT5_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT5_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT5_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT5_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT5_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT5_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT5_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT5_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT5_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT5_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT5_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT5_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT5_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT5_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT5_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT5_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT5_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT5_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT5_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT6_CNTL
+pub const MMVM_CONTEXT6_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT6_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT6_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT6_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT6_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT6_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT6_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT6_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT6_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT6_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT6_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT6_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT6_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT6_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT6_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT6_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT6_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT6_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT6_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT6_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT6_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT6_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT6_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT6_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT6_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT6_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT6_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT6_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT6_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT6_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT6_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT6_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT6_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT6_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT6_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT6_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT6_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT7_CNTL
+pub const MMVM_CONTEXT7_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT7_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT7_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT7_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT7_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT7_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT7_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT7_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT7_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT7_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT7_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT7_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT7_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT7_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT7_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT7_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT7_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT7_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT7_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT7_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT7_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT7_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT7_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT7_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT7_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT7_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT7_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT7_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT7_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT7_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT7_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT7_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT7_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT7_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT7_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT7_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT7_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT8_CNTL
+pub const MMVM_CONTEXT8_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT8_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT8_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT8_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT8_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT8_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT8_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT8_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT8_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT8_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT8_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT8_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT8_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT8_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT8_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT8_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT8_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT8_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT8_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT8_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT8_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT8_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT8_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT8_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT8_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT8_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT8_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT8_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT8_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT8_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT8_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT8_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT8_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT8_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT8_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT8_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT8_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT9_CNTL
+pub const MMVM_CONTEXT9_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT9_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT9_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT9_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT9_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT9_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT9_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT9_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT9_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT9_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT9_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT9_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT9_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT9_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT9_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT9_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT9_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT9_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT9_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT9_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT9_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT9_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT9_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT9_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT9_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT9_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT9_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT9_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT9_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT9_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT9_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT9_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT9_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT9_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT9_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT9_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT9_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT10_CNTL
+pub const MMVM_CONTEXT10_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT10_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT10_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT10_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT10_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT10_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT10_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT10_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT10_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT10_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT10_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT10_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT10_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT10_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT10_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT10_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT10_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT10_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT10_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT10_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT10_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT10_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT10_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT10_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT10_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT10_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT10_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT10_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT10_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT10_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT10_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT10_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT10_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT10_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT10_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT10_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT10_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT11_CNTL
+pub const MMVM_CONTEXT11_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT11_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT11_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT11_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT11_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT11_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT11_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT11_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT11_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT11_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT11_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT11_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT11_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT11_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT11_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT11_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT11_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT11_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT11_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT11_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT11_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT11_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT11_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT11_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT11_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT11_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT11_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT11_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT11_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT11_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT11_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT11_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT11_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT11_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT11_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT11_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT11_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT12_CNTL
+pub const MMVM_CONTEXT12_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT12_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT12_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT12_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT12_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT12_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT12_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT12_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT12_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT12_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT12_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT12_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT12_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT12_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT12_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT12_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT12_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT12_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT12_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT12_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT12_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT12_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT12_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT12_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT12_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT12_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT12_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT12_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT12_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT12_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT12_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT12_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT12_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT12_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT12_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT12_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT12_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT13_CNTL
+pub const MMVM_CONTEXT13_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT13_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT13_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT13_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT13_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT13_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT13_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT13_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT13_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT13_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT13_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT13_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT13_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT13_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT13_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT13_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT13_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT13_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT13_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT13_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT13_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT13_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT13_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT13_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT13_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT13_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT13_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT13_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT13_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT13_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT13_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT13_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT13_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT13_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT13_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT13_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT13_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT14_CNTL
+pub const MMVM_CONTEXT14_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT14_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT14_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT14_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT14_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT14_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT14_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT14_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT14_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT14_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT14_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT14_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT14_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT14_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT14_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT14_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT14_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT14_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT14_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT14_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT14_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT14_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT14_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT14_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT14_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT14_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT14_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT14_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT14_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT14_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT14_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT14_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT14_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT14_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT14_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT14_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT14_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXT15_CNTL
+pub const MMVM_CONTEXT15_CNTL__ENABLE_CONTEXT__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_CNTL__PAGE_TABLE_DEPTH__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXT15_CNTL__PAGE_TABLE_BLOCK_SIZE__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXT15_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXT15_CNTL__RETRY_OTHER_FAULT__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXT15_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXT15_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXT15_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXT15_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXT15_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXT15_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXT15_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXT15_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x10;
+pub const MMVM_CONTEXT15_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x11;
+pub const MMVM_CONTEXT15_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x12;
+pub const MMVM_CONTEXT15_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x13;
+pub const MMVM_CONTEXT15_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x14;
+pub const MMVM_CONTEXT15_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT__SHIFT: c_uint = 0x15;
+pub const MMVM_CONTEXT15_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT__SHIFT: c_uint = 0x16;
+pub const MMVM_CONTEXT15_CNTL__ENABLE_CONTEXT_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXT15_CNTL__PAGE_TABLE_DEPTH_MASK: c_uint = 0x00000006L;
+pub const MMVM_CONTEXT15_CNTL__PAGE_TABLE_BLOCK_SIZE_MASK: c_uint = 0x00000078L;
+pub const MMVM_CONTEXT15_CNTL__RETRY_PERMISSION_OR_INVALID_PAGE_FAULT_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXT15_CNTL__RETRY_OTHER_FAULT_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXT15_CNTL__RANGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXT15_CNTL__RANGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXT15_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXT15_CNTL__DUMMY_PAGE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXT15_CNTL__PDE0_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXT15_CNTL__PDE0_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXT15_CNTL__VALID_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00008000L;
+pub const MMVM_CONTEXT15_CNTL__VALID_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00010000L;
+pub const MMVM_CONTEXT15_CNTL__READ_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00020000L;
+pub const MMVM_CONTEXT15_CNTL__READ_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00040000L;
+pub const MMVM_CONTEXT15_CNTL__WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00080000L;
+pub const MMVM_CONTEXT15_CNTL__WRITE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00100000L;
+pub const MMVM_CONTEXT15_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_INTERRUPT_MASK: c_uint = 0x00200000L;
+pub const MMVM_CONTEXT15_CNTL__EXECUTE_PROTECTION_FAULT_ENABLE_DEFAULT_MASK: c_uint = 0x00400000L;
+// MMVM_CONTEXTS_DISABLE
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_0__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_1__SHIFT: c_uint = 0x1;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_2__SHIFT: c_uint = 0x2;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_3__SHIFT: c_uint = 0x3;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_4__SHIFT: c_uint = 0x4;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_5__SHIFT: c_uint = 0x5;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_6__SHIFT: c_uint = 0x6;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_7__SHIFT: c_uint = 0x7;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_8__SHIFT: c_uint = 0x8;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_9__SHIFT: c_uint = 0x9;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_10__SHIFT: c_uint = 0xa;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_11__SHIFT: c_uint = 0xb;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_12__SHIFT: c_uint = 0xc;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_13__SHIFT: c_uint = 0xd;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_14__SHIFT: c_uint = 0xe;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_15__SHIFT: c_uint = 0xf;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_0_MASK: c_uint = 0x00000001L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_1_MASK: c_uint = 0x00000002L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_2_MASK: c_uint = 0x00000004L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_3_MASK: c_uint = 0x00000008L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_4_MASK: c_uint = 0x00000010L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_5_MASK: c_uint = 0x00000020L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_6_MASK: c_uint = 0x00000040L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_7_MASK: c_uint = 0x00000080L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_8_MASK: c_uint = 0x00000100L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_9_MASK: c_uint = 0x00000200L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_10_MASK: c_uint = 0x00000400L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_11_MASK: c_uint = 0x00000800L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_12_MASK: c_uint = 0x00001000L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_13_MASK: c_uint = 0x00002000L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_14_MASK: c_uint = 0x00004000L;
+pub const MMVM_CONTEXTS_DISABLE__DISABLE_CONTEXT_15_MASK: c_uint = 0x00008000L;
+// MMVM_INVALIDATE_ENG0_SEM
+pub const MMVM_INVALIDATE_ENG0_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG0_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG1_SEM
+pub const MMVM_INVALIDATE_ENG1_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG1_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG2_SEM
+pub const MMVM_INVALIDATE_ENG2_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG2_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG3_SEM
+pub const MMVM_INVALIDATE_ENG3_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG3_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG4_SEM
+pub const MMVM_INVALIDATE_ENG4_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG4_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG5_SEM
+pub const MMVM_INVALIDATE_ENG5_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG5_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG6_SEM
+pub const MMVM_INVALIDATE_ENG6_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG6_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG7_SEM
+pub const MMVM_INVALIDATE_ENG7_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG7_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG8_SEM
+pub const MMVM_INVALIDATE_ENG8_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG8_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG9_SEM
+pub const MMVM_INVALIDATE_ENG9_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG9_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG10_SEM
+pub const MMVM_INVALIDATE_ENG10_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG10_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG11_SEM
+pub const MMVM_INVALIDATE_ENG11_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG11_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG12_SEM
+pub const MMVM_INVALIDATE_ENG12_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG12_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG13_SEM
+pub const MMVM_INVALIDATE_ENG13_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG13_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG14_SEM
+pub const MMVM_INVALIDATE_ENG14_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG14_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG15_SEM
+pub const MMVM_INVALIDATE_ENG15_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG15_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG16_SEM
+pub const MMVM_INVALIDATE_ENG16_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG16_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG17_SEM
+pub const MMVM_INVALIDATE_ENG17_SEM__SEMAPHORE__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG17_SEM__SEMAPHORE_MASK: c_uint = 0x00000001L;
+// MMVM_INVALIDATE_ENG0_REQ
+pub const MMVM_INVALIDATE_ENG0_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG0_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG0_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG0_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG0_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG0_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG1_REQ
+pub const MMVM_INVALIDATE_ENG1_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG1_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG1_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG1_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG1_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG1_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG2_REQ
+pub const MMVM_INVALIDATE_ENG2_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG2_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG2_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG2_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG2_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG2_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG3_REQ
+pub const MMVM_INVALIDATE_ENG3_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG3_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG3_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG3_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG3_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG3_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG4_REQ
+pub const MMVM_INVALIDATE_ENG4_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG4_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG4_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG4_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG4_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG4_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG5_REQ
+pub const MMVM_INVALIDATE_ENG5_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG5_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG5_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG5_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG5_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG5_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG6_REQ
+pub const MMVM_INVALIDATE_ENG6_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG6_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG6_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG6_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG6_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG6_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG7_REQ
+pub const MMVM_INVALIDATE_ENG7_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG7_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG7_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG7_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG7_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG7_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG8_REQ
+pub const MMVM_INVALIDATE_ENG8_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG8_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG8_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG8_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG8_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG8_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG9_REQ
+pub const MMVM_INVALIDATE_ENG9_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG9_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG9_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG9_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG9_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG9_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG10_REQ
+pub const MMVM_INVALIDATE_ENG10_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG10_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG10_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG10_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG10_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG10_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG11_REQ
+pub const MMVM_INVALIDATE_ENG11_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG11_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG11_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG11_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG11_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG11_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG12_REQ
+pub const MMVM_INVALIDATE_ENG12_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG12_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG12_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG12_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG12_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG12_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG13_REQ
+pub const MMVM_INVALIDATE_ENG13_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG13_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG13_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG13_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG13_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG13_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG14_REQ
+pub const MMVM_INVALIDATE_ENG14_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG14_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG14_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG14_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG14_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG14_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG15_REQ
+pub const MMVM_INVALIDATE_ENG15_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG15_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG15_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG15_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG15_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG15_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG16_REQ
+pub const MMVM_INVALIDATE_ENG16_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG16_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG16_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG16_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG16_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG16_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG17_REQ
+pub const MMVM_INVALIDATE_ENG17_REQ__PER_VMID_INVALIDATE_REQ__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG17_REQ__FLUSH_TYPE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PTES__SHIFT: c_uint = 0x13;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PDE0__SHIFT: c_uint = 0x14;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PDE1__SHIFT: c_uint = 0x15;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PDE2__SHIFT: c_uint = 0x16;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L1_PTES__SHIFT: c_uint = 0x17;
+pub const MMVM_INVALIDATE_ENG17_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR__SHIFT: c_uint = 0x18;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_4K_PAGES_ONLY__SHIFT: c_uint = 0x1a;
+pub const MMVM_INVALIDATE_ENG17_REQ__PER_VMID_INVALIDATE_REQ_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG17_REQ__FLUSH_TYPE_MASK: c_uint = 0x00070000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PTES_MASK: c_uint = 0x00080000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PDE0_MASK: c_uint = 0x00100000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PDE1_MASK: c_uint = 0x00200000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L2_PDE2_MASK: c_uint = 0x00400000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_L1_PTES_MASK: c_uint = 0x00800000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__CLEAR_PROTECTION_FAULT_STATUS_ADDR_MASK: c_uint = 0x01000000L;
+pub const MMVM_INVALIDATE_ENG17_REQ__INVALIDATE_4K_PAGES_ONLY_MASK: c_uint = 0x04000000L;
+// MMVM_INVALIDATE_ENG0_ACK
+pub const MMVM_INVALIDATE_ENG0_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG0_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG0_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG0_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG1_ACK
+pub const MMVM_INVALIDATE_ENG1_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG1_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG1_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG1_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG2_ACK
+pub const MMVM_INVALIDATE_ENG2_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG2_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG2_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG2_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG3_ACK
+pub const MMVM_INVALIDATE_ENG3_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG3_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG3_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG3_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG4_ACK
+pub const MMVM_INVALIDATE_ENG4_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG4_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG4_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG4_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG5_ACK
+pub const MMVM_INVALIDATE_ENG5_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG5_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG5_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG5_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG6_ACK
+pub const MMVM_INVALIDATE_ENG6_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG6_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG6_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG6_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG7_ACK
+pub const MMVM_INVALIDATE_ENG7_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG7_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG7_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG7_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG8_ACK
+pub const MMVM_INVALIDATE_ENG8_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG8_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG8_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG8_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG9_ACK
+pub const MMVM_INVALIDATE_ENG9_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG9_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG9_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG9_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG10_ACK
+pub const MMVM_INVALIDATE_ENG10_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG10_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG10_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG10_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG11_ACK
+pub const MMVM_INVALIDATE_ENG11_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG11_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG11_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG11_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG12_ACK
+pub const MMVM_INVALIDATE_ENG12_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG12_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG12_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG12_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG13_ACK
+pub const MMVM_INVALIDATE_ENG13_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG13_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG13_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG13_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG14_ACK
+pub const MMVM_INVALIDATE_ENG14_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG14_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG14_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG14_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG15_ACK
+pub const MMVM_INVALIDATE_ENG15_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG15_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG15_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG15_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG16_ACK
+pub const MMVM_INVALIDATE_ENG16_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG16_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG16_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG16_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG17_ACK
+pub const MMVM_INVALIDATE_ENG17_ACK__PER_VMID_INVALIDATE_ACK__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG17_ACK__SEMAPHORE__SHIFT: c_uint = 0x10;
+pub const MMVM_INVALIDATE_ENG17_ACK__PER_VMID_INVALIDATE_ACK_MASK: c_uint = 0x0000FFFFL;
+pub const MMVM_INVALIDATE_ENG17_ACK__SEMAPHORE_MASK: c_uint = 0x00010000L;
+// MMVM_INVALIDATE_ENG0_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG0_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG0_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG0_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG0_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG0_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG0_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG0_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG1_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG1_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG1_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG1_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG1_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG1_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG1_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG1_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG2_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG2_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG2_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG2_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG2_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG2_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG2_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG2_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG3_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG3_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG3_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG3_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG3_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG3_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG3_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG3_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG4_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG4_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG4_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG4_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG4_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG4_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG4_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG4_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG5_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG5_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG5_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG5_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG5_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG5_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG5_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG5_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG6_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG6_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG6_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG6_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG6_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG6_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG6_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG6_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG7_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG7_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG7_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG7_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG7_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG7_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG7_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG7_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG8_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG8_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG8_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG8_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG8_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG8_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG8_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG8_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG9_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG9_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG9_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG9_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG9_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG9_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG9_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG9_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG10_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG10_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG10_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG10_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG10_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG10_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG10_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG10_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG11_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG11_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG11_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG11_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG11_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG11_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG11_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG11_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG12_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG12_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG12_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG12_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG12_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG12_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG12_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG12_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG13_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG13_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG13_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG13_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG13_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG13_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG13_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG13_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG14_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG14_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG14_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG14_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG14_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG14_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG14_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG14_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG15_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG15_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG15_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG15_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG15_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG15_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG15_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG15_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG16_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG16_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG16_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG16_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG16_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG16_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG16_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG16_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_INVALIDATE_ENG17_ADDR_RANGE_LO32
+pub const MMVM_INVALIDATE_ENG17_ADDR_RANGE_LO32__S_BIT__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG17_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31__SHIFT: c_uint = 0x1;
+pub const MMVM_INVALIDATE_ENG17_ADDR_RANGE_LO32__S_BIT_MASK: c_uint = 0x00000001L;
+pub const MMVM_INVALIDATE_ENG17_ADDR_RANGE_LO32__LOGI_PAGE_ADDR_RANGE_LO31_MASK: c_uint = 0xFFFFFFFEL;
+// MMVM_INVALIDATE_ENG17_ADDR_RANGE_HI32
+pub const MMVM_INVALIDATE_ENG17_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5__SHIFT: c_uint = 0x0;
+pub const MMVM_INVALIDATE_ENG17_ADDR_RANGE_HI32__LOGI_PAGE_ADDR_RANGE_HI5_MASK: c_uint = 0x0000001FL;
+// MMVM_CONTEXT0_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT0_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT0_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT0_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT1_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT1_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT1_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT1_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT2_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT2_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT2_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT2_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT3_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT3_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT3_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT3_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT4_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT4_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT4_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT4_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT5_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT5_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT5_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT5_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT6_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT6_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT6_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT6_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT7_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT7_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT7_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT7_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT8_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT8_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT8_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT8_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT9_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT9_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT9_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT9_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT10_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT10_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT10_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT10_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT11_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT11_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT11_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT11_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT12_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT12_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT12_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT12_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT13_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT13_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT13_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT13_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT14_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT14_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT14_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT14_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT15_PAGE_TABLE_BASE_ADDR_LO32
+pub const MMVM_CONTEXT15_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_PAGE_TABLE_BASE_ADDR_LO32__PAGE_DIRECTORY_ENTRY_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT15_PAGE_TABLE_BASE_ADDR_HI32
+pub const MMVM_CONTEXT15_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_PAGE_TABLE_BASE_ADDR_HI32__PAGE_DIRECTORY_ENTRY_HI32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT0_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT0_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT0_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT0_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT1_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT1_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT1_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT1_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT2_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT2_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT2_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT2_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT3_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT3_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT3_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT3_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT4_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT4_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT4_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT4_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT5_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT5_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT5_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT5_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT6_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT6_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT6_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT6_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT7_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT7_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT7_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT7_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT8_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT8_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT8_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT8_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT9_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT9_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT9_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT9_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT10_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT10_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT10_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT10_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT11_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT11_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT11_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT11_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT12_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT12_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT12_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT12_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT13_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT13_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT13_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT13_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT14_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT14_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT14_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT14_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT15_PAGE_TABLE_START_ADDR_LO32
+pub const MMVM_CONTEXT15_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_PAGE_TABLE_START_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT15_PAGE_TABLE_START_ADDR_HI32
+pub const MMVM_CONTEXT15_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_PAGE_TABLE_START_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT0_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT0_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT0_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT0_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT0_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT1_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT1_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT1_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT1_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT1_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT2_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT2_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT2_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT2_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT2_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT3_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT3_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT3_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT3_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT3_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT4_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT4_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT4_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT4_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT4_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT5_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT5_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT5_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT5_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT5_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT6_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT6_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT6_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT6_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT6_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT7_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT7_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT7_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT7_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT7_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT8_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT8_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT8_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT8_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT8_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT9_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT9_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT9_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT9_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT9_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT10_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT10_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT10_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT10_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT10_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT11_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT11_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT11_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT11_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT11_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT12_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT12_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT12_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT12_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT12_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT13_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT13_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT13_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT13_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT13_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT14_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT14_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT14_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT14_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT14_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_CONTEXT15_PAGE_TABLE_END_ADDR_LO32
+pub const MMVM_CONTEXT15_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_PAGE_TABLE_END_ADDR_LO32__LOGICAL_PAGE_NUMBER_LO32_MASK: c_uint = 0xFFFFFFFFL;
+// MMVM_CONTEXT15_PAGE_TABLE_END_ADDR_HI32
+pub const MMVM_CONTEXT15_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4__SHIFT: c_uint = 0x0;
+pub const MMVM_CONTEXT15_PAGE_TABLE_END_ADDR_HI32__LOGICAL_PAGE_NUMBER_HI4_MASK: c_uint = 0x0000000FL;
+// MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT0_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT1_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT2_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT3_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT4_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT5_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT6_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT7_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT8_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT9_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT10_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT11_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT12_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT13_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT14_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES
+pub const MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE__SHIFT: c_uint = 0x0;
+pub const MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE__SHIFT: c_uint = 0x5;
+pub const MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT__SHIFT: c_uint = 0xa;
+pub const MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_SMALLK_FRAGMENT_SIZE_MASK: c_uint = 0x0000001FL;
+pub const MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__L2_CACHE_BIGK_FRAGMENT_SIZE_MASK: c_uint = 0x000003E0L;
+pub const MMVM_L2_CONTEXT15_PER_PFVF_PTE_CACHE_FRAGMENT_SIZES__BANK_SELECT_MASK: c_uint = 0x0000FC00L;
+// addressBlock: mmhub_mmutcl2_mmvml2pldec
+// MMMC_VM_L2_PERFCOUNTER0_CFG
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER1_CFG
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER2_CFG
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER2_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER3_CFG
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER3_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER4_CFG
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER4_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER5_CFG
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER5_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER6_CFG
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER6_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER7_CFG
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMMC_VM_L2_PERFCOUNTER7_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x0000000FL;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const MMMC_VM_L2_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// MMUTCL2_PERFCOUNTER0_CFG
+pub const MMUTCL2_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMUTCL2_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMUTCL2_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMUTCL2_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMUTCL2_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMUTCL2_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMUTCL2_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMUTCL2_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMUTCL2_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMUTCL2_PERFCOUNTER1_CFG
+pub const MMUTCL2_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMUTCL2_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMUTCL2_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMUTCL2_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMUTCL2_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMUTCL2_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMUTCL2_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMUTCL2_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMUTCL2_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMUTCL2_PERFCOUNTER2_CFG
+pub const MMUTCL2_PERFCOUNTER2_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER2_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMUTCL2_PERFCOUNTER2_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMUTCL2_PERFCOUNTER2_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMUTCL2_PERFCOUNTER2_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMUTCL2_PERFCOUNTER2_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMUTCL2_PERFCOUNTER2_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMUTCL2_PERFCOUNTER2_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMUTCL2_PERFCOUNTER2_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMUTCL2_PERFCOUNTER2_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMUTCL2_PERFCOUNTER3_CFG
+pub const MMUTCL2_PERFCOUNTER3_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER3_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MMUTCL2_PERFCOUNTER3_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MMUTCL2_PERFCOUNTER3_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MMUTCL2_PERFCOUNTER3_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MMUTCL2_PERFCOUNTER3_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MMUTCL2_PERFCOUNTER3_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MMUTCL2_PERFCOUNTER3_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MMUTCL2_PERFCOUNTER3_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MMUTCL2_PERFCOUNTER3_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MMUTCL2_PERFCOUNTER_RSLT_CNTL
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x0000000FL;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const MMUTCL2_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// addressBlock: mmhub_mmutcl2_mmvml2prdec
+// MMMC_VM_L2_PERFCOUNTER_LO
+pub const MMMC_VM_L2_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// MMMC_VM_L2_PERFCOUNTER_HI
+pub const MMMC_VM_L2_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_L2_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const MMMC_VM_L2_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const MMMC_VM_L2_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;
+// MMUTCL2_PERFCOUNTER_LO
+pub const MMUTCL2_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// MMUTCL2_PERFCOUNTER_HI
+pub const MMUTCL2_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const MMUTCL2_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const MMUTCL2_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;
+// addressBlock: mmhub_mmutcl2_mmvmsharedhvdec
+// MMVM_PCIE_ATS_CNTL
+pub const MMVM_PCIE_ATS_CNTL__STU__SHIFT: c_uint = 0x10;
+pub const MMVM_PCIE_ATS_CNTL__ATC_ENABLE__SHIFT: c_uint = 0x1f;
+pub const MMVM_PCIE_ATS_CNTL__STU_MASK: c_uint = 0x001F0000L;
+pub const MMVM_PCIE_ATS_CNTL__ATC_ENABLE_MASK: c_uint = 0x80000000L;
+// addressBlock: mmhub_mmutcl2_mmvmsharedpfdec
+// MMMC_VM_NB_MMIOBASE
+pub const MMMC_VM_NB_MMIOBASE__MMIOBASE__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_NB_MMIOBASE__MMIOBASE_MASK: c_uint = 0xFFFFFFFFL;
+// MMMC_VM_NB_MMIOLIMIT
+pub const MMMC_VM_NB_MMIOLIMIT__MMIOLIMIT__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_NB_MMIOLIMIT__MMIOLIMIT_MASK: c_uint = 0xFFFFFFFFL;
+// MMMC_VM_NB_PCI_CTRL
+pub const MMMC_VM_NB_PCI_CTRL__MMIOENABLE__SHIFT: c_uint = 0x17;
+pub const MMMC_VM_NB_PCI_CTRL__MMIOENABLE_MASK: c_uint = 0x00800000L;
+// MMMC_VM_NB_PCI_ARB
+pub const MMMC_VM_NB_PCI_ARB__VGA_HOLE__SHIFT: c_uint = 0x3;
+pub const MMMC_VM_NB_PCI_ARB__VGA_HOLE_MASK: c_uint = 0x00000008L;
+// MMMC_VM_NB_TOP_OF_DRAM_SLOT1
+pub const MMMC_VM_NB_TOP_OF_DRAM_SLOT1__TOP_OF_DRAM__SHIFT: c_uint = 0x17;
+pub const MMMC_VM_NB_TOP_OF_DRAM_SLOT1__TOP_OF_DRAM_MASK: c_uint = 0xFF800000L;
+// MMMC_VM_NB_LOWER_TOP_OF_DRAM2
+pub const MMMC_VM_NB_LOWER_TOP_OF_DRAM2__ENABLE__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_NB_LOWER_TOP_OF_DRAM2__LOWER_TOM2__SHIFT: c_uint = 0x17;
+pub const MMMC_VM_NB_LOWER_TOP_OF_DRAM2__ENABLE_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_NB_LOWER_TOP_OF_DRAM2__LOWER_TOM2_MASK: c_uint = 0xFF800000L;
+// MMMC_VM_NB_UPPER_TOP_OF_DRAM2
+pub const MMMC_VM_NB_UPPER_TOP_OF_DRAM2__UPPER_TOM2__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_NB_UPPER_TOP_OF_DRAM2__UPPER_TOM2_MASK: c_uint = 0x00000FFFL;
+// MMMC_VM_FB_OFFSET
+pub const MMMC_VM_FB_OFFSET__FB_OFFSET__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_FB_OFFSET__FB_OFFSET_MASK: c_uint = 0x00FFFFFFL;
+// MMMC_VM_SYSTEM_APERTURE_DEFAULT_ADDR_LSB
+pub const MMMC_VM_SYSTEM_APERTURE_DEFAULT_ADDR_LSB__PHYSICAL_PAGE_NUMBER_LSB__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_SYSTEM_APERTURE_DEFAULT_ADDR_LSB__PHYSICAL_PAGE_NUMBER_LSB_MASK: c_uint = 0xFFFFFFFFL;
+// MMMC_VM_SYSTEM_APERTURE_DEFAULT_ADDR_MSB
+pub const MMMC_VM_SYSTEM_APERTURE_DEFAULT_ADDR_MSB__PHYSICAL_PAGE_NUMBER_MSB__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_SYSTEM_APERTURE_DEFAULT_ADDR_MSB__PHYSICAL_PAGE_NUMBER_MSB_MASK: c_uint = 0x0000000FL;
+// MMMC_VM_STEERING
+pub const MMMC_VM_STEERING__DEFAULT_STEERING__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_STEERING__DEFAULT_STEERING_MASK: c_uint = 0x00000003L;
+// MMMC_SHARED_VIRT_RESET_REQ
+pub const MMMC_SHARED_VIRT_RESET_REQ__VF__SHIFT: c_uint = 0x0;
+pub const MMMC_SHARED_VIRT_RESET_REQ__PF__SHIFT: c_uint = 0x1f;
+pub const MMMC_SHARED_VIRT_RESET_REQ__VF_MASK: c_uint = 0x0000FFFFL;
+pub const MMMC_SHARED_VIRT_RESET_REQ__PF_MASK: c_uint = 0x80000000L;
+// MMMC_MEM_POWER_LS
+pub const MMMC_MEM_POWER_LS__LS_SETUP__SHIFT: c_uint = 0x0;
+pub const MMMC_MEM_POWER_LS__LS_HOLD__SHIFT: c_uint = 0x6;
+pub const MMMC_MEM_POWER_LS__LS_SETUP_MASK: c_uint = 0x0000003FL;
+pub const MMMC_MEM_POWER_LS__LS_HOLD_MASK: c_uint = 0x00000FC0L;
+// MMMC_VM_CACHEABLE_DRAM_ADDRESS_START
+pub const MMMC_VM_CACHEABLE_DRAM_ADDRESS_START__ADDRESS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_CACHEABLE_DRAM_ADDRESS_START__ADDRESS_MASK: c_uint = 0x000FFFFFL;
+// MMMC_VM_CACHEABLE_DRAM_ADDRESS_END
+pub const MMMC_VM_CACHEABLE_DRAM_ADDRESS_END__ADDRESS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_CACHEABLE_DRAM_ADDRESS_END__ADDRESS_MASK: c_uint = 0x000FFFFFL;
+// MMMC_VM_LOCAL_SYSMEM_ADDRESS_START
+pub const MMMC_VM_LOCAL_SYSMEM_ADDRESS_START__ADDRESS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_LOCAL_SYSMEM_ADDRESS_START__ADDRESS_MASK: c_uint = 0x000FFFFFL;
+// MMMC_VM_LOCAL_SYSMEM_ADDRESS_END
+pub const MMMC_VM_LOCAL_SYSMEM_ADDRESS_END__ADDRESS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_LOCAL_SYSMEM_ADDRESS_END__ADDRESS_MASK: c_uint = 0x000FFFFFL;
+// MMMC_VM_APT_CNTL
+pub const MMMC_VM_APT_CNTL__FORCE_MTYPE_UC__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_APT_CNTL__DIRECT_SYSTEM_EN__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_APT_CNTL__FRAG_APT_INTXN_MODE__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_APT_CNTL__CHECK_IS_LOCAL__SHIFT: c_uint = 0x4;
+pub const MMMC_VM_APT_CNTL__CAP_FRAG_SIZE_2M__SHIFT: c_uint = 0x5;
+pub const MMMC_VM_APT_CNTL__LOCAL_SYSMEM_APERTURE_CNTL__SHIFT: c_uint = 0x6;
+pub const MMMC_VM_APT_CNTL__FORCE_MTYPE_UC_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_APT_CNTL__DIRECT_SYSTEM_EN_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_APT_CNTL__FRAG_APT_INTXN_MODE_MASK: c_uint = 0x0000000CL;
+pub const MMMC_VM_APT_CNTL__CHECK_IS_LOCAL_MASK: c_uint = 0x00000010L;
+pub const MMMC_VM_APT_CNTL__CAP_FRAG_SIZE_2M_MASK: c_uint = 0x00000020L;
+pub const MMMC_VM_APT_CNTL__LOCAL_SYSMEM_APERTURE_CNTL_MASK: c_uint = 0x000000C0L;
+// MMMC_VM_LOCAL_FB_ADDRESS_START
+pub const MMMC_VM_LOCAL_FB_ADDRESS_START__ADDRESS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_LOCAL_FB_ADDRESS_START__ADDRESS_MASK: c_uint = 0x000FFFFFL;
+// MMMC_VM_LOCAL_FB_ADDRESS_END
+pub const MMMC_VM_LOCAL_FB_ADDRESS_END__ADDRESS__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_LOCAL_FB_ADDRESS_END__ADDRESS_MASK: c_uint = 0x000FFFFFL;
+// MMMC_VM_LOCAL_FB_ADDRESS_LOCK_CNTL
+pub const MMMC_VM_LOCAL_FB_ADDRESS_LOCK_CNTL__LOCK__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_LOCAL_FB_ADDRESS_LOCK_CNTL__LOCK_MASK: c_uint = 0x00000001L;
+// MMUTCL2_CGTT_CLK_CTRL
+pub const MMUTCL2_CGTT_CLK_CTRL__ON_DELAY__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_CGTT_CLK_CTRL__OFF_HYSTERESIS__SHIFT: c_uint = 0x5;
+pub const MMUTCL2_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS__SHIFT: c_uint = 0xd;
+pub const MMUTCL2_CGTT_CLK_CTRL__MIN_MGLS__SHIFT: c_uint = 0x1a;
+pub const MMUTCL2_CGTT_CLK_CTRL__CGLS_DISABLE__SHIFT: c_uint = 0x1d;
+pub const MMUTCL2_CGTT_CLK_CTRL__LS_DISABLE__SHIFT: c_uint = 0x1e;
+pub const MMUTCL2_CGTT_CLK_CTRL__BUSY_OVERRIDE__SHIFT: c_uint = 0x1f;
+pub const MMUTCL2_CGTT_CLK_CTRL__ON_DELAY_MASK: c_uint = 0x0000001FL;
+pub const MMUTCL2_CGTT_CLK_CTRL__OFF_HYSTERESIS_MASK: c_uint = 0x00001FE0L;
+pub const MMUTCL2_CGTT_CLK_CTRL__LS_ASSERT_HYSTERESIS_MASK: c_uint = 0x03FFE000L;
+pub const MMUTCL2_CGTT_CLK_CTRL__MIN_MGLS_MASK: c_uint = 0x1C000000L;
+pub const MMUTCL2_CGTT_CLK_CTRL__CGLS_DISABLE_MASK: c_uint = 0x20000000L;
+pub const MMUTCL2_CGTT_CLK_CTRL__LS_DISABLE_MASK: c_uint = 0x40000000L;
+pub const MMUTCL2_CGTT_CLK_CTRL__BUSY_OVERRIDE_MASK: c_uint = 0x80000000L;
+// MMMC_SHARED_ACTIVE_FCN_ID
+pub const MMMC_SHARED_ACTIVE_FCN_ID__VFID__SHIFT: c_uint = 0x0;
+pub const MMMC_SHARED_ACTIVE_FCN_ID__VF__SHIFT: c_uint = 0x1e;
+pub const MMMC_SHARED_ACTIVE_FCN_ID__VFID_MASK: c_uint = 0x0000000FL;
+pub const MMMC_SHARED_ACTIVE_FCN_ID__VF_MASK: c_uint = 0x40000000L;
+// MMUTCL2_CGTT_BUSY_CTRL
+pub const MMUTCL2_CGTT_BUSY_CTRL__READ_DELAY__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_CGTT_BUSY_CTRL__ALWAYS_BUSY__SHIFT: c_uint = 0x5;
+pub const MMUTCL2_CGTT_BUSY_CTRL__READ_DELAY_MASK: c_uint = 0x0000001FL;
+pub const MMUTCL2_CGTT_BUSY_CTRL__ALWAYS_BUSY_MASK: c_uint = 0x00000020L;
+// MMMC_VM_FB_NOALLOC_CNTL
+pub const MMMC_VM_FB_NOALLOC_CNTL__LOCAL_FB_NOALLOC_NOPTE__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_FB_NOALLOC_CNTL__REMOTE_FB_NOALLOC_NOPTE__SHIFT: c_uint = 0x1;
+pub const MMMC_VM_FB_NOALLOC_CNTL__ROUTER_ATCL2_NOALLOC__SHIFT: c_uint = 0x2;
+pub const MMMC_VM_FB_NOALLOC_CNTL__ROUTER_GPA_MODE2_NOALLOC__SHIFT: c_uint = 0x3;
+pub const MMMC_VM_FB_NOALLOC_CNTL__ROUTER_GPA_MODE3_NOALLOC__SHIFT: c_uint = 0x4;
+pub const MMMC_VM_FB_NOALLOC_CNTL__LOCAL_FB_NOALLOC_NOPTE_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_FB_NOALLOC_CNTL__REMOTE_FB_NOALLOC_NOPTE_MASK: c_uint = 0x00000002L;
+pub const MMMC_VM_FB_NOALLOC_CNTL__ROUTER_ATCL2_NOALLOC_MASK: c_uint = 0x00000004L;
+pub const MMMC_VM_FB_NOALLOC_CNTL__ROUTER_GPA_MODE2_NOALLOC_MASK: c_uint = 0x00000008L;
+pub const MMMC_VM_FB_NOALLOC_CNTL__ROUTER_GPA_MODE3_NOALLOC_MASK: c_uint = 0x00000010L;
+// MMUTCL2_HARVEST_BYPASS_GROUPS
+pub const MMUTCL2_HARVEST_BYPASS_GROUPS__BYPASS_GROUPS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_HARVEST_BYPASS_GROUPS__BYPASS_GROUPS_MASK: c_uint = 0xFFFFFFFFL;
+// MMUTCL2_GROUP_RET_FAULT_STATUS
+pub const MMUTCL2_GROUP_RET_FAULT_STATUS__FAULT_GROUPS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_GROUP_RET_FAULT_STATUS__FAULT_GROUPS_MASK: c_uint = 0xFFFFFFFFL;
+// addressBlock: mmhub_mmutcl2_mmvmsharedvcdec
+// MMMC_VM_FB_LOCATION_BASE
+pub const MMMC_VM_FB_LOCATION_BASE__FB_BASE__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_FB_LOCATION_BASE__FB_BASE_MASK: c_uint = 0x00FFFFFFL;
+// MMMC_VM_FB_LOCATION_TOP
+pub const MMMC_VM_FB_LOCATION_TOP__FB_TOP__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_FB_LOCATION_TOP__FB_TOP_MASK: c_uint = 0x00FFFFFFL;
+// MMMC_VM_AGP_TOP
+pub const MMMC_VM_AGP_TOP__AGP_TOP__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_AGP_TOP__AGP_TOP_MASK: c_uint = 0x00FFFFFFL;
+// MMMC_VM_AGP_BOT
+pub const MMMC_VM_AGP_BOT__AGP_BOT__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_AGP_BOT__AGP_BOT_MASK: c_uint = 0x00FFFFFFL;
+// MMMC_VM_AGP_BASE
+pub const MMMC_VM_AGP_BASE__AGP_BASE__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_AGP_BASE__AGP_BASE_MASK: c_uint = 0x00FFFFFFL;
+// MMMC_VM_SYSTEM_APERTURE_LOW_ADDR
+pub const MMMC_VM_SYSTEM_APERTURE_LOW_ADDR__LOGICAL_ADDR__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_SYSTEM_APERTURE_LOW_ADDR__LOGICAL_ADDR_MASK: c_uint = 0x3FFFFFFFL;
+// MMMC_VM_SYSTEM_APERTURE_HIGH_ADDR
+pub const MMMC_VM_SYSTEM_APERTURE_HIGH_ADDR__LOGICAL_ADDR__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_SYSTEM_APERTURE_HIGH_ADDR__LOGICAL_ADDR_MASK: c_uint = 0x3FFFFFFFL;
+// MMMC_VM_MX_L1_TLB_CNTL
+pub const MMMC_VM_MX_L1_TLB_CNTL__ENABLE_L1_TLB__SHIFT: c_uint = 0x0;
+pub const MMMC_VM_MX_L1_TLB_CNTL__SYSTEM_ACCESS_MODE__SHIFT: c_uint = 0x3;
+pub const MMMC_VM_MX_L1_TLB_CNTL__SYSTEM_APERTURE_UNMAPPED_ACCESS__SHIFT: c_uint = 0x5;
+pub const MMMC_VM_MX_L1_TLB_CNTL__ENABLE_ADVANCED_DRIVER_MODEL__SHIFT: c_uint = 0x6;
+pub const MMMC_VM_MX_L1_TLB_CNTL__ECO_BITS__SHIFT: c_uint = 0x7;
+pub const MMMC_VM_MX_L1_TLB_CNTL__MTYPE__SHIFT: c_uint = 0xb;
+pub const MMMC_VM_MX_L1_TLB_CNTL__ENABLE_L1_TLB_MASK: c_uint = 0x00000001L;
+pub const MMMC_VM_MX_L1_TLB_CNTL__SYSTEM_ACCESS_MODE_MASK: c_uint = 0x00000018L;
+pub const MMMC_VM_MX_L1_TLB_CNTL__SYSTEM_APERTURE_UNMAPPED_ACCESS_MASK: c_uint = 0x00000020L;
+pub const MMMC_VM_MX_L1_TLB_CNTL__ENABLE_ADVANCED_DRIVER_MODEL_MASK: c_uint = 0x00000040L;
+pub const MMMC_VM_MX_L1_TLB_CNTL__ECO_BITS_MASK: c_uint = 0x00000780L;
+pub const MMMC_VM_MX_L1_TLB_CNTL__MTYPE_MASK: c_uint = 0x00003800L;
+// addressBlock: mmhub_mmutcl2_mmatcl2pfcntrdec
+// MM_ATC_L2_PERFCOUNTER_LO
+pub const MM_ATC_L2_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// MM_ATC_L2_PERFCOUNTER_HI
+pub const MM_ATC_L2_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const MM_ATC_L2_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const MM_ATC_L2_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;
+// addressBlock: mmhub_mmutcl2_mmatcl2pfcntldec
+// MM_ATC_L2_PERFCOUNTER0_CFG
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MM_ATC_L2_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MM_ATC_L2_PERFCOUNTER1_CFG
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MM_ATC_L2_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MM_ATC_L2_PERFCOUNTER_RSLT_CNTL
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x0000000FL;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const MM_ATC_L2_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// addressBlock: mmhub_mmutcl2_mmvml2pspdec
+// MMUTCL2_TRANSLATION_BYPASS_BY_VMID
+pub const MMUTCL2_TRANSLATION_BYPASS_BY_VMID__TRANS_BYPASS_VMIDS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_TRANSLATION_BYPASS_BY_VMID__GPA_MODE_VMIDS__SHIFT: c_uint = 0x10;
+pub const MMUTCL2_TRANSLATION_BYPASS_BY_VMID__TRANS_BYPASS_VMIDS_MASK: c_uint = 0x0000FFFFL;
+pub const MMUTCL2_TRANSLATION_BYPASS_BY_VMID__GPA_MODE_VMIDS_MASK: c_uint = 0xFFFF0000L;
+// MMVM_IOMMU_GPU_HOST_TRANSLATION_ENABLE
+pub const MMVM_IOMMU_GPU_HOST_TRANSLATION_ENABLE__GPU_HOST_TRANSLATION_ENABLE__SHIFT: c_uint = 0x0;
+pub const MMVM_IOMMU_GPU_HOST_TRANSLATION_ENABLE__GPU_HOST_TRANSLATION_ENABLE_MASK: c_uint = 0x00000001L;
+// MMVM_IOMMU_CONTROL_REGISTER
+pub const MMVM_IOMMU_CONTROL_REGISTER__IOMMUEN__SHIFT: c_uint = 0x0;
+pub const MMVM_IOMMU_CONTROL_REGISTER__IOMMUEN_MASK: c_uint = 0x00000001L;
+// MMVM_IOMMU_PERFORMANCE_OPTIMIZATION_CONTROL_REGISTER
+pub const MMVM_IOMMU_PERFORMANCE_OPTIMIZATION_CONTROL_REGISTER__PERFOPTEN__SHIFT: c_uint = 0xd;
+pub const MMVM_IOMMU_PERFORMANCE_OPTIMIZATION_CONTROL_REGISTER__PERFOPTEN_MASK: c_uint = 0x00002000L;
+// MMUTC_TRANSLATION_FAULT_CNTL0
+pub const MMUTC_TRANSLATION_FAULT_CNTL0__DEFAULT_PHYSICAL_PAGE_ADDRESS_LSB__SHIFT: c_uint = 0x0;
+pub const MMUTC_TRANSLATION_FAULT_CNTL0__DEFAULT_PHYSICAL_PAGE_ADDRESS_LSB_MASK: c_uint = 0xFFFFFFFFL;
+// MMUTC_TRANSLATION_FAULT_CNTL1
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_PHYSICAL_PAGE_ADDRESS_MSB__SHIFT: c_uint = 0x0;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_IO__SHIFT: c_uint = 0x4;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_SPA__SHIFT: c_uint = 0x5;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_SNOOP__SHIFT: c_uint = 0x6;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_PHYSICAL_PAGE_ADDRESS_MSB_MASK: c_uint = 0x0000000FL;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_IO_MASK: c_uint = 0x00000010L;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_SPA_MASK: c_uint = 0x00000020L;
+pub const MMUTC_TRANSLATION_FAULT_CNTL1__DEFAULT_SNOOP_MASK: c_uint = 0x00000040L;
+// MMUTCL2_VSCH_POWER_STATUS
+pub const MMUTCL2_VSCH_POWER_STATUS__POWERED_DOWN__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_VSCH_POWER_STATUS__POWERED_DOWN_MASK: c_uint = 0x00000001L;
+// addressBlock: mmhub_mmutcl2_mml2tlbpspdec
+// MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_CNTL
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_CNTL__ENABLE__SHIFT: c_uint = 0x0;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_CNTL__ENABLE_MASK: c_uint = 0x00000001L;
+// addressBlock: mmhub_mmutcl2_mmatcl2pspdec
+// MM_ATC_L2_IOV_MODE_CNTL
+pub const MM_ATC_L2_IOV_MODE_CNTL__PSEUDO_IOV_EN__SHIFT: c_uint = 0x0;
+pub const MM_ATC_L2_IOV_MODE_CNTL__PSEUDO_IOV_EN_MASK: c_uint = 0x00000001L;
+// addressBlock: mmhub_mmutcl2_mml2tlbpfdec
+// MML2TLB_TLB0_STATUS
+pub const MML2TLB_TLB0_STATUS__BUSY__SHIFT: c_uint = 0x0;
+pub const MML2TLB_TLB0_STATUS__FOUND_PARITY_ERRORS__SHIFT: c_uint = 0x1;
+pub const MML2TLB_TLB0_STATUS__FOUND_APERTURE_FAULTS__SHIFT: c_uint = 0x2;
+pub const MML2TLB_TLB0_STATUS__BUSY_MASK: c_uint = 0x00000001L;
+pub const MML2TLB_TLB0_STATUS__FOUND_PARITY_ERRORS_MASK: c_uint = 0x00000002L;
+pub const MML2TLB_TLB0_STATUS__FOUND_APERTURE_FAULTS_MASK: c_uint = 0x00000004L;
+// MML2TLB_TMZ_CNTL
+pub const MML2TLB_TMZ_CNTL__TMZ_MODULATION__SHIFT: c_uint = 0x0;
+pub const MML2TLB_TMZ_CNTL__TMZ_MODULATION_MASK: c_uint = 0x00000001L;
+// MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_LO
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_LO__ADDR__SHIFT: c_uint = 0x0;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_LO__ADDR_MASK: c_uint = 0xFFFFFFFFL;
+// MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__ADDR__SHIFT: c_uint = 0x0;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__VMID__SHIFT: c_uint = 0x4;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__VFID__SHIFT: c_uint = 0x8;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__VF__SHIFT: c_uint = 0xc;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__GPA__SHIFT: c_uint = 0xd;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__RD_PERM__SHIFT: c_uint = 0xf;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__WR_PERM__SHIFT: c_uint = 0x10;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__EX_PERM__SHIFT: c_uint = 0x11;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__CLIENT_ID__SHIFT: c_uint = 0x12;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__REQ__SHIFT: c_uint = 0x1e;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__ADDR_MASK: c_uint = 0x0000000FL;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__VMID_MASK: c_uint = 0x000000F0L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__VFID_MASK: c_uint = 0x00000F00L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__VF_MASK: c_uint = 0x00001000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__GPA_MASK: c_uint = 0x00006000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__RD_PERM_MASK: c_uint = 0x00008000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__WR_PERM_MASK: c_uint = 0x00010000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__EX_PERM_MASK: c_uint = 0x00020000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__CLIENT_ID_MASK: c_uint = 0x07FC0000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_REQUEST_HI__REQ_MASK: c_uint = 0x40000000L;
+// MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_LO
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_LO__ADDR__SHIFT: c_uint = 0x0;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_LO__ADDR_MASK: c_uint = 0xFFFFFFFFL;
+// MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__ADDR__SHIFT: c_uint = 0x0;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__PERMS__SHIFT: c_uint = 0x4;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__FRAGMENT_SIZE__SHIFT: c_uint = 0x7;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__SNOOP__SHIFT: c_uint = 0xd;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__SPA__SHIFT: c_uint = 0xe;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__IO__SHIFT: c_uint = 0xf;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__PTE_TMZ__SHIFT: c_uint = 0x10;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__NO_PTE__SHIFT: c_uint = 0x11;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__MTYPE__SHIFT: c_uint = 0x12;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__MEMLOG__SHIFT: c_uint = 0x15;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__NACK__SHIFT: c_uint = 0x16;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__LLC_NOALLOC__SHIFT: c_uint = 0x18;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__ACK__SHIFT: c_uint = 0x1f;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__ADDR_MASK: c_uint = 0x0000000FL;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__PERMS_MASK: c_uint = 0x00000070L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__FRAGMENT_SIZE_MASK: c_uint = 0x00001F80L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__SNOOP_MASK: c_uint = 0x00002000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__SPA_MASK: c_uint = 0x00004000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__IO_MASK: c_uint = 0x00008000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__PTE_TMZ_MASK: c_uint = 0x00010000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__NO_PTE_MASK: c_uint = 0x00020000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__MTYPE_MASK: c_uint = 0x001C0000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__MEMLOG_MASK: c_uint = 0x00200000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__NACK_MASK: c_uint = 0x00C00000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__LLC_NOALLOC_MASK: c_uint = 0x01000000L;
+pub const MMUTC_GPUVA_VMID_TRANSLATION_ASSIST_RESPONSE_HI__ACK_MASK: c_uint = 0x80000000L;
+// MMUTCL2_L2TLB_CREDIT_SAFETY_FETCH_RDREQ
+pub const MMUTCL2_L2TLB_CREDIT_SAFETY_FETCH_RDREQ__CREDITS__SHIFT: c_uint = 0x0;
+pub const MMUTCL2_L2TLB_CREDIT_SAFETY_FETCH_RDREQ__WRITE__SHIFT: c_uint = 0xa;
+pub const MMUTCL2_L2TLB_CREDIT_SAFETY_FETCH_RDREQ__CREDITS_MASK: c_uint = 0x000003FFL;
+pub const MMUTCL2_L2TLB_CREDIT_SAFETY_FETCH_RDREQ__WRITE_MASK: c_uint = 0x00000400L;
+// addressBlock: mmhub_mmutcl2_mml2tlbpldec
+// MML2TLB_PERFCOUNTER0_CFG
+pub const MML2TLB_PERFCOUNTER0_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER0_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MML2TLB_PERFCOUNTER0_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MML2TLB_PERFCOUNTER0_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MML2TLB_PERFCOUNTER0_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MML2TLB_PERFCOUNTER0_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MML2TLB_PERFCOUNTER0_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MML2TLB_PERFCOUNTER0_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MML2TLB_PERFCOUNTER0_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MML2TLB_PERFCOUNTER0_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MML2TLB_PERFCOUNTER1_CFG
+pub const MML2TLB_PERFCOUNTER1_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER1_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MML2TLB_PERFCOUNTER1_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MML2TLB_PERFCOUNTER1_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MML2TLB_PERFCOUNTER1_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MML2TLB_PERFCOUNTER1_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MML2TLB_PERFCOUNTER1_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MML2TLB_PERFCOUNTER1_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MML2TLB_PERFCOUNTER1_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MML2TLB_PERFCOUNTER1_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MML2TLB_PERFCOUNTER2_CFG
+pub const MML2TLB_PERFCOUNTER2_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER2_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MML2TLB_PERFCOUNTER2_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MML2TLB_PERFCOUNTER2_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MML2TLB_PERFCOUNTER2_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MML2TLB_PERFCOUNTER2_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MML2TLB_PERFCOUNTER2_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MML2TLB_PERFCOUNTER2_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MML2TLB_PERFCOUNTER2_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MML2TLB_PERFCOUNTER2_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MML2TLB_PERFCOUNTER3_CFG
+pub const MML2TLB_PERFCOUNTER3_CFG__PERF_SEL__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER3_CFG__PERF_SEL_END__SHIFT: c_uint = 0x8;
+pub const MML2TLB_PERFCOUNTER3_CFG__PERF_MODE__SHIFT: c_uint = 0x18;
+pub const MML2TLB_PERFCOUNTER3_CFG__ENABLE__SHIFT: c_uint = 0x1c;
+pub const MML2TLB_PERFCOUNTER3_CFG__CLEAR__SHIFT: c_uint = 0x1d;
+pub const MML2TLB_PERFCOUNTER3_CFG__PERF_SEL_MASK: c_uint = 0x000000FFL;
+pub const MML2TLB_PERFCOUNTER3_CFG__PERF_SEL_END_MASK: c_uint = 0x0000FF00L;
+pub const MML2TLB_PERFCOUNTER3_CFG__PERF_MODE_MASK: c_uint = 0x0F000000L;
+pub const MML2TLB_PERFCOUNTER3_CFG__ENABLE_MASK: c_uint = 0x10000000L;
+pub const MML2TLB_PERFCOUNTER3_CFG__CLEAR_MASK: c_uint = 0x20000000L;
+// MML2TLB_PERFCOUNTER_RSLT_CNTL
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__START_TRIGGER__SHIFT: c_uint = 0x8;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER__SHIFT: c_uint = 0x10;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY__SHIFT: c_uint = 0x18;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL__SHIFT: c_uint = 0x19;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE__SHIFT: c_uint = 0x1a;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__PERF_COUNTER_SELECT_MASK: c_uint = 0x0000000FL;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__START_TRIGGER_MASK: c_uint = 0x0000FF00L;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__STOP_TRIGGER_MASK: c_uint = 0x00FF0000L;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__ENABLE_ANY_MASK: c_uint = 0x01000000L;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__CLEAR_ALL_MASK: c_uint = 0x02000000L;
+pub const MML2TLB_PERFCOUNTER_RSLT_CNTL__STOP_ALL_ON_SATURATE_MASK: c_uint = 0x04000000L;
+// addressBlock: mmhub_mmutcl2_mml2tlbprdec
+// MML2TLB_PERFCOUNTER_LO
+pub const MML2TLB_PERFCOUNTER_LO__COUNTER_LO__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER_LO__COUNTER_LO_MASK: c_uint = 0xFFFFFFFFL;
+// MML2TLB_PERFCOUNTER_HI
+pub const MML2TLB_PERFCOUNTER_HI__COUNTER_HI__SHIFT: c_uint = 0x0;
+pub const MML2TLB_PERFCOUNTER_HI__COMPARE_VALUE__SHIFT: c_uint = 0x10;
+pub const MML2TLB_PERFCOUNTER_HI__COUNTER_HI_MASK: c_uint = 0x0000FFFFL;
+pub const MML2TLB_PERFCOUNTER_HI__COMPARE_VALUE_MASK: c_uint = 0xFFFF0000L;

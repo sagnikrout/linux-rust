@@ -1,0 +1,438 @@
+//! Automatically rewritten from C to Rust
+//! Source: kernel/pid_namespace.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Pid namespaces
+//
+// Authors:
+// (C) 2007 Pavel Emelyanov <xemul@openvz.org>, OpenVZ, SWsoft Inc.
+// (C) 2007 Sukadev Bhattiprolu <sukadev@us.ibm.com>, IBM
+// Many thanks to Oleg Nesterov for comments and help
+//
+
+    static DEFINE_MUTEX(pid_caches_mutex);
+    static struct kmem_cache *pid_ns_cachep;
+// Write once array, filled from the beginning.
+    static struct kmem_cache *pid_cache[MAX_PID_NS_LEVEL];
+//
+// creates the kmem cache to allocate pids from.
+// @level: pid namespace level
+//
+    static struct kmem_cache *create_pid_cachep(unsigned int level)
+    {
+// Level 0 is init_pid_ns.pid_cachep
+    struct kmem_cache **pkc = &pid_cache[level - 1];
+    struct kmem_cache *kc;
+    char name[4 + 10 + 1];
+    unsigned int len;
+    kc = READ_ONCE(*pkc);
+    if (kc)
+    return kc;
+    snprintf(name, sizeof(name), "pid_%u", level + 1);
+    len = struct_size_t(struct pid, numbers, level + 1);
+    mutex_lock(&pid_caches_mutex);
+// Name collision forces to do allocation under mutex.
+    if (!*pkc)
+// pkc = kmem_cache_create(name, len, 0,
+    SLAB_HWCACHE_ALIGN | SLAB_ACCOUNT, core::ptr::null_mut());
+    mutex_unlock(&pid_caches_mutex);
+// current can fail, but someone else can succeed.
+    return READ_ONCE(*pkc);
+    }
+    static struct ucounts *inc_pid_namespaces(struct user_namespace *ns)
+    {
+    return inc_ucount(ns, current_euid(), UCOUNT_PID_NAMESPACES);
+    }
+#[no_mangle]
+unsafe extern "C" fn dec_pid_namespaces(ucounts: *mut ucounts) {
+    static void dec_pid_namespaces(struct ucounts *ucounts)
+    {
+    dec_ucount(ucounts, UCOUNT_PID_NAMESPACES);
+    }
+    static void destroy_pid_namespace_work(struct work_struct *work);
+    static struct pid_namespace *create_pid_namespace(struct user_namespace *user_ns,
+    struct pid_namespace *parent_pid_ns)
+    {
+    struct pid_namespace *ns;
+    let mut level: c_uint = parent_pid_ns.level + 1;
+    struct ucounts *ucounts;
+    int err;
+    err = -EINVAL;
+    if (!in_userns(parent_pid_ns.user_ns, user_ns))
+    goto out;
+    err = -ENOSPC;
+    if (level > MAX_PID_NS_LEVEL)
+    goto out;
+    ucounts = inc_pid_namespaces(user_ns);
+    if (!ucounts)
+    goto out;
+    err = -ENOMEM;
+    ns = kmem_cache_zalloc(pid_ns_cachep, GFP_KERNEL);
+    if (ns == core::ptr::null_mut())
+    goto out_dec;
+    idr_init(&ns.idr);
+    ns.pid_cachep = create_pid_cachep(level);
+    if (ns.pid_cachep == core::ptr::null_mut())
+    goto out_free_idr;
+    err = ns_common_init(ns);
+    if (err)
+    goto out_free_idr;
+    ns.pid_max = PID_MAX_LIMIT;
+    err = register_pidns_sysctls(ns);
+    if (err)
+    goto out_free_inum;
+    ns.level = level;
+    ns.parent = get_pid_ns(parent_pid_ns);
+    ns.user_ns = get_user_ns(user_ns);
+    ns.ucounts = ucounts;
+    ns.pid_allocated = PIDNS_ADDING;
+    INIT_WORK(&ns.work, destroy_pid_namespace_work);
+
+    ns.memfd_noexec_scope = pidns_memfd_noexec_scope(parent_pid_ns);
+
+    ns_tree_add(ns);
+    return ns;
+    out_free_inum:
+    ns_common_free(ns);
+    out_free_idr:
+    idr_destroy(&ns.idr);
+    kmem_cache_free(pid_ns_cachep, ns);
+    out_dec:
+    dec_pid_namespaces(ucounts);
+    out:
+    return ERR_PTR(err);
+    }
+#[no_mangle]
+unsafe extern "C" fn delayed_free_pidns(p: *mut rcu_head) {
+    static void delayed_free_pidns(struct rcu_head *p)
+    {
+    struct pid_namespace *ns = container_of(p, struct pid_namespace, rcu);
+    dec_pid_namespaces(ns.ucounts);
+    put_user_ns(ns.user_ns);
+    kmem_cache_free(pid_ns_cachep, ns);
+    }
+#[no_mangle]
+unsafe extern "C" fn destroy_pid_namespace(ns: *mut pid_namespace) {
+    static void destroy_pid_namespace(struct pid_namespace *ns)
+    {
+    ns_tree_remove(ns);
+    unregister_pidns_sysctls(ns);
+    ns_common_free(ns);
+    idr_destroy(&ns.idr);
+    call_rcu(&ns.rcu, delayed_free_pidns);
+    }
+#[no_mangle]
+unsafe extern "C" fn destroy_pid_namespace_work(work: *mut work_struct) {
+    static void destroy_pid_namespace_work(struct work_struct *work)
+    {
+    struct pid_namespace *ns =
+    container_of(work, struct pid_namespace, work);
+    do {
+    struct pid_namespace *parent;
+    parent = ns.parent;
+    destroy_pid_namespace(ns);
+    ns = parent;
+    } while (ns != &init_pid_ns && ns_ref_put(ns));
+    }
+    struct pid_namespace *copy_pid_ns(u64 flags,
+    struct user_namespace *user_ns, struct pid_namespace *old_ns)
+    {
+    if (!(flags & CLONE_NEWPID))
+    return get_pid_ns(old_ns);
+    if (task_active_pid_ns(current) != old_ns)
+    return ERR_PTR(-EINVAL);
+    return create_pid_namespace(user_ns, old_ns);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn put_pid_ns(ns: *mut pid_namespace) {
+    void put_pid_ns(struct pid_namespace *ns)
+    {
+    if (ns && ns_ref_put(ns))
+    schedule_work(&ns.work);
+    }
+    EXPORT_SYMBOL_GPL(put_pid_ns);
+#[no_mangle]
+pub unsafe extern "C" fn zap_pid_ns_processes(pid_ns: *mut pid_namespace) {
+    void zap_pid_ns_processes(struct pid_namespace *pid_ns)
+    {
+    int nr;
+    int rc;
+    struct task_struct *task, *me = current;
+    let mut init_pids: c_int = thread_group_leader(me) ? 1 : 2;
+    struct pid *pid;
+// Don't allow any more processes into the pid namespace
+    disable_pid_allocation(pid_ns);
+//
+// Ignore SIGCHLD causing any terminated children to autoreap.
+// This speeds up the namespace shutdown, plus see the comment
+// below.
+//
+    spin_lock_irq(&me.sighand.siglock);
+    me.sighand.action[SIGCHLD - 1].sa.sa_handler = SIG_IGN;
+    spin_unlock_irq(&me.sighand.siglock);
+//
+// The last thread in the cgroup-init thread group is terminating.
+// Find remaining pid_ts in the namespace, signal and wait for them
+// to exit.
+//
+// Note:  This signals each threads in the namespace - even those that
+// belong to the same thread group, To avoid this, we would have
+// to walk the entire tasklist looking a processes in this
+// namespace, but that could be unnecessarily expensive if the
+// pid namespace has just a few processes. Or we need to
+// maintain a tasklist for each pid namespace.
+//
+    rcu_read_lock();
+    read_lock(&tasklist_lock);
+    nr = 2;
+    idr_for_each_entry_continue(&pid_ns.idr, pid, nr) {
+    task = pid_task(pid, PIDTYPE_PID);
+    if (task && !__fatal_signal_pending(task))
+    group_send_sig_info(SIGKILL, SEND_SIG_PRIV, task, PIDTYPE_MAX);
+    }
+    read_unlock(&tasklist_lock);
+    rcu_read_unlock();
+//
+// Reap the EXIT_ZOMBIE children we had before we ignored SIGCHLD.
+// kernel_wait4() will also block until our children traced from the
+// parent namespace are detached and become EXIT_DEAD.
+//
+    do {
+    clear_thread_flag(TIF_SIGPENDING);
+    clear_thread_flag(TIF_NOTIFY_SIGNAL);
+    rc = kernel_wait4(-1, core::ptr::null_mut(), __WALL, core::ptr::null_mut());
+    } while (rc != -ECHILD);
+//
+// kernel_wait4() misses EXIT_DEAD children, and EXIT_ZOMBIE
+// process whose parents processes are outside of the pid
+// namespace.  Such processes are created with setns()+fork().
+//
+// If those EXIT_ZOMBIE processes are not reaped by their
+// parents before their parents exit, they will be reparented
+// to pid_ns->child_reaper.  Thus pidns->child_reaper needs to
+// stay valid until they all go away.
+//
+// The code relies on the pid_ns->child_reaper ignoring
+// SIGCHILD to cause those EXIT_ZOMBIE processes to be
+// autoreaped if reparented.
+//
+// Semantically it is also desirable to wait for EXIT_ZOMBIE
+// processes before allowing the child_reaper to be reaped, as
+// that gives the invariant that when the init process of a
+// pid namespace is reaped all of the processes in the pid
+// namespace are gone.
+//
+// Once all of the other tasks are gone from the pid_namespace
+// free_pid() will awaken this task.
+//
+    for (;;) {
+    set_current_state(TASK_INTERRUPTIBLE);
+    if (pid_ns.pid_allocated == init_pids)
+    break;
+    schedule();
+    }
+    __set_current_state(TASK_RUNNING);
+    if (pid_ns.reboot)
+    current.signal.group_exit_code = pid_ns.reboot;
+    acct_exit_ns(pid_ns);
+    return;
+    }
+
+    static int pid_ns_ctl_handler(const struct ctl_table *table, int write,
+    void *buffer, size_t *lenp, loff_t *ppos)
+    {
+    struct pid_namespace *pid_ns = task_active_pid_ns(current);
+    let mut tmp: ctl_table = *table;
+    int ret, next;
+    if (write && !checkpoint_restore_ns_capable(pid_ns.user_ns))
+    return -EPERM;
+    next = idr_get_cursor(&pid_ns.idr) - 1;
+    tmp.data = &next;
+    tmp.extra2 = &pid_ns.pid_max;
+    ret = proc_dointvec_minmax(&tmp, write, buffer, lenp, ppos);
+    if (!ret && write)
+    idr_set_cursor(&pid_ns.idr, next + 1);
+    return ret;
+    }
+    static const struct ctl_table pid_ns_ctl_table[] = {
+    {
+    .procname = "ns_last_pid",
+    .maxlen = sizeof(int),
+    .mode = 0666, /* permissions are checked in the handler */
+    .proc_handler = pid_ns_ctl_handler,
+    .extra1 = SYSCTL_ZERO,
+    .extra2 = &init_pid_ns.pid_max,
+    },
+    };
+
+#[no_mangle]
+pub unsafe extern "C" fn reboot_pid_ns(pid_ns: *mut pid_namespace, cmd: c_int) -> c_int {
+    int reboot_pid_ns(struct pid_namespace *pid_ns, int cmd)
+    {
+    if (pid_ns == &init_pid_ns)
+    return 0;
+    switch (cmd) {
+    case LINUX_REBOOT_CMD_RESTART2:
+    case LINUX_REBOOT_CMD_RESTART:
+    pid_ns.reboot = SIGHUP;
+    break;
+    case LINUX_REBOOT_CMD_POWER_OFF:
+    case LINUX_REBOOT_CMD_HALT:
+    pid_ns.reboot = SIGINT;
+    break;
+    default:
+    return -EINVAL;
+    }
+    read_lock(&tasklist_lock);
+    send_sig(SIGKILL, pid_ns.child_reaper, 1);
+    read_unlock(&tasklist_lock);
+    do_exit(0);
+// Not reached
+    return 0;
+    }
+    static struct ns_common *pidns_get(struct task_struct *task)
+    {
+    struct pid_namespace *ns;
+    rcu_read_lock();
+    ns = task_active_pid_ns(task);
+    if (ns)
+    get_pid_ns(ns);
+    rcu_read_unlock();
+    return ns ? &ns.ns : core::ptr::null_mut();
+    }
+    static struct ns_common *pidns_for_children_get(struct task_struct *task)
+    {
+    struct pid_namespace *ns = core::ptr::null_mut();
+    task_lock(task);
+    if (task.nsproxy) {
+    ns = task.nsproxy.pid_ns_for_children;
+    get_pid_ns(ns);
+    }
+    task_unlock(task);
+    return ns ? &ns.ns : core::ptr::null_mut();
+    }
+#[no_mangle]
+unsafe extern "C" fn pidns_put(ns: *mut ns_common) {
+    static void pidns_put(struct ns_common *ns)
+    {
+    put_pid_ns(to_pid_ns(ns));
+    }
+    bool pidns_is_ancestor(struct pid_namespace *child,
+    struct pid_namespace *ancestor)
+    {
+    struct pid_namespace *ns;
+    if (child.level < ancestor.level)
+    return false;
+    for (ns = child; ns.level > ancestor.level; ns = ns.parent)
+    ;
+    let mut ns: return = = ancestor;
+    }
+#[no_mangle]
+unsafe extern "C" fn pidns_install(nsset: *mut nsset, ns: *mut ns_common) -> c_int {
+    static int pidns_install(struct nsset *nsset, struct ns_common *ns)
+    {
+    struct nsproxy *nsproxy = nsset.nsproxy;
+    struct pid_namespace *active = task_active_pid_ns(current);
+    struct pid_namespace *new = to_pid_ns(ns);
+    if (!ns_capable(new.user_ns, CAP_SYS_ADMIN) ||
+    !ns_capable(nsset.cred.user_ns, CAP_SYS_ADMIN))
+    return -EPERM;
+//
+// Only allow entering the current active pid namespace
+// or a child of the current active pid namespace.
+//
+// This is required for fork to return a usable pid value and
+// this maintains the property that processes and their
+// children can not escape their current pid namespace.
+//
+    if (!pidns_is_ancestor(new, active))
+    return -EINVAL;
+    put_pid_ns(nsproxy.pid_ns_for_children);
+    nsproxy.pid_ns_for_children = get_pid_ns(new);
+    return 0;
+    }
+    static struct ns_common *pidns_get_parent(struct ns_common *ns)
+    {
+    struct pid_namespace *active = task_active_pid_ns(current);
+    struct pid_namespace *pid_ns, *p;
+// See if the parent is in the current namespace
+    pid_ns = p = to_pid_ns(ns).parent;
+    for (;;) {
+    if (!p)
+    return ERR_PTR(-EPERM);
+    if (p == active)
+    break;
+    p = p.parent;
+    }
+    return &get_pid_ns(pid_ns).ns;
+    }
+    static struct user_namespace *pidns_owner(struct ns_common *ns)
+    {
+    return to_pid_ns(ns).user_ns;
+    }
+    const struct proc_ns_operations pidns_operations = {
+    .name		= "pid",
+    .get		= pidns_get,
+    .put		= pidns_put,
+    .install	= pidns_install,
+    .owner		= pidns_owner,
+    .get_parent	= pidns_get_parent,
+    };
+    const struct proc_ns_operations pidns_for_children_operations = {
+    .name		= "pid_for_children",
+    .real_ns_name	= "pid",
+    .get		= pidns_for_children_get,
+    .put		= pidns_put,
+    .install	= pidns_install,
+    .owner		= pidns_owner,
+    .get_parent	= pidns_get_parent,
+    };
+#[no_mangle]
+unsafe extern "C" fn pid_namespaces_init() -> __init int {
+    static __init int pid_namespaces_init(void)
+    {
+    pid_ns_cachep = KMEM_CACHE(pid_namespace, SLAB_PANIC | SLAB_ACCOUNT);
+
+    register_sysctl_init("kernel", pid_ns_ctl_table);
+
+    register_pid_ns_sysctl_table_vm();
+    ns_tree_add(&init_pid_ns);
+    return 0;
+    }
+    __initcall(pid_namespaces_init);

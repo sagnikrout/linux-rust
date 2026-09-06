@@ -1,0 +1,55 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/crypto/intel/qat/qat_c3xxxvf/adf_c3xxxvf_hw_data.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: (BSD-3-Clause OR GPL-2.0-only)
+// Copyright(c) 2015 - 2020 Intel Corporation
+pub const ADF_C3XXXIOV_PMISC_BAR: c_int = 1;
+pub const ADF_C3XXXIOV_ACCELERATORS_MASK: c_uint = 0x1;
+pub const ADF_C3XXXIOV_ACCELENGINES_MASK: c_uint = 0x1;
+pub const ADF_C3XXXIOV_MAX_ACCELERATORS: c_int = 1;
+pub const ADF_C3XXXIOV_MAX_ACCELENGINES: c_int = 1;
+pub const ADF_C3XXXIOV_RX_RINGS_OFFSET: c_int = 8;
+pub const ADF_C3XXXIOV_TX_RINGS_MASK: c_uint = 0xFF;
+pub const ADF_C3XXXIOV_ETR_BAR: c_int = 0;
+pub const ADF_C3XXXIOV_ETR_MAX_BANKS: c_int = 1;
+extern "C" {
+    pub fn adf_init_hw_data_c3xxxiov(hw_data: *mut adf_hw_device_data);
+}
+extern "C" {
+    pub fn adf_clean_hw_data_c3xxxiov(hw_data: *mut adf_hw_device_data);
+}

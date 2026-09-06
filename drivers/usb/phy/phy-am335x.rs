@@ -1,0 +1,156 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/usb/phy/phy-am335x.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct am335x_phy {
+    pub usb_phy_gen: usb_phy_generic,
+    pub phy_ctrl: *mut phy_control,
+    pub id: c_int,
+    pub dr_mode: enum usb_dr_mode,
+}
+
+#[no_mangle]
+unsafe extern "C" fn am335x_init(phy: *mut usb_phy) -> c_int {
+    static int am335x_init(struct usb_phy *phy)
+    {
+    struct am335x_phy *am_phy = dev_get_drvdata(phy.dev);
+    phy_ctrl_power(am_phy.phy_ctrl, am_phy.id, am_phy.dr_mode, true);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn am335x_shutdown(phy: *mut usb_phy) {
+    static void am335x_shutdown(struct usb_phy *phy)
+    {
+    struct am335x_phy *am_phy = dev_get_drvdata(phy.dev);
+    phy_ctrl_power(am_phy.phy_ctrl, am_phy.id, am_phy.dr_mode, false);
+    }
+#[no_mangle]
+unsafe extern "C" fn am335x_phy_probe(pdev: *mut platform_device) -> c_int {
+    static int am335x_phy_probe(struct platform_device *pdev)
+    {
+    struct am335x_phy *am_phy;
+    struct device *dev = &pdev.dev;
+    int ret;
+    am_phy = devm_kzalloc(dev, sizeof(*am_phy), GFP_KERNEL);
+    if (!am_phy)
+    return -ENOMEM;
+    am_phy.phy_ctrl = am335x_get_phy_control(dev);
+    if (!am_phy.phy_ctrl)
+    return -EPROBE_DEFER;
+    am_phy.id = of_alias_get_id(pdev.dev.of_node, "phy");
+    if (am_phy.id < 0) {
+    dev_err(&pdev.dev, "Missing PHY id: %d\n", am_phy.id);
+    return am_phy.id;
+    }
+    am_phy.dr_mode = of_usb_get_dr_mode_by_phy(pdev.dev.of_node, -1);
+    ret = usb_phy_gen_create_phy(dev, &am_phy.usb_phy_gen);
+    if (ret)
+    return ret;
+    am_phy.usb_phy_gen.phy.init = am335x_init;
+    am_phy.usb_phy_gen.phy.shutdown = am335x_shutdown;
+    platform_set_drvdata(pdev, am_phy);
+    device_init_wakeup(dev, true);
+//
+// If we leave PHY wakeup enabled then AM33XX wakes up
+// immediately from DS0. To avoid this we mark dev->power.can_wakeup
+// to false. The same is checked in suspend routine to decide
+// on whether to enable PHY wakeup or not.
+// PHY wakeup works fine in standby mode, there by allowing us to
+// handle remote wakeup, wakeup on disconnect and connect.
+//
+    device_set_wakeup_enable(dev, false);
+    phy_ctrl_power(am_phy.phy_ctrl, am_phy.id, am_phy.dr_mode, false);
+    return usb_add_phy_dev(&am_phy.usb_phy_gen.phy);
+    }
+#[no_mangle]
+unsafe extern "C" fn am335x_phy_remove(pdev: *mut platform_device) {
+    static void am335x_phy_remove(struct platform_device *pdev)
+    {
+    struct am335x_phy *am_phy = platform_get_drvdata(pdev);
+    usb_remove_phy(&am_phy.usb_phy_gen.phy);
+    }
+
+#[no_mangle]
+unsafe extern "C" fn am335x_phy_suspend(dev: *mut device) -> c_int {
+    static int am335x_phy_suspend(struct device *dev)
+    {
+    struct am335x_phy *am_phy = dev_get_drvdata(dev);
+//
+// Enable phy wakeup only if dev->power.can_wakeup is true.
+// Make sure to enable wakeup to support remote wakeup	in
+// standby mode ( same is not supported in OFF(DS0) mode).
+// Enable it by doing
+// echo enabled > /sys/bus/platform/devices/<usb-phy-id>/power/wakeup
+//
+    if (device_may_wakeup(dev))
+    phy_ctrl_wkup(am_phy.phy_ctrl, am_phy.id, true);
+    phy_ctrl_power(am_phy.phy_ctrl, am_phy.id, am_phy.dr_mode, false);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn am335x_phy_resume(dev: *mut device) -> c_int {
+    static int am335x_phy_resume(struct device *dev)
+    {
+    struct am335x_phy	*am_phy = dev_get_drvdata(dev);
+    phy_ctrl_power(am_phy.phy_ctrl, am_phy.id, am_phy.dr_mode, true);
+    if (device_may_wakeup(dev))
+    phy_ctrl_wkup(am_phy.phy_ctrl, am_phy.id, false);
+    return 0;
+    }
+
+    static SIMPLE_DEV_PM_OPS(am335x_pm_ops, am335x_phy_suspend, am335x_phy_resume);
+    static const struct of_device_id am335x_phy_ids[] = {
+    { .compatible = "ti,am335x-usb-phy" },
+    { }
+    };
+    MODULE_DEVICE_TABLE(of, am335x_phy_ids);
+    static struct platform_driver am335x_phy_driver = {
+    .probe          = am335x_phy_probe,
+    .remove         = am335x_phy_remove,
+    .driver         = {
+    .name   = "am335x-phy-driver",
+    .pm = &am335x_pm_ops,
+    .of_match_table = am335x_phy_ids,
+    },
+    };
+    module_platform_driver(am335x_phy_driver);
+    MODULE_DESCRIPTION("AM335x USB PHY Driver");
+    MODULE_LICENSE("GPL v2");

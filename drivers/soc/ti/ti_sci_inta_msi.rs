@@ -1,0 +1,130 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/soc/ti/ti_sci_inta_msi.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Texas Instruments' K3 Interrupt Aggregator MSI bus
+//
+// Copyright (C) 2018-2019 Texas Instruments Incorporated - http://www.ti.com
+// Lokesh Vutla <lokeshvutla@ti.com>
+//
+
+    static void ti_sci_inta_msi_write_msg(struct irq_data *data,
+    struct msi_msg *msg)
+    {
+// Nothing to do
+    }
+    static void ti_sci_inta_msi_compose_msi_msg(struct irq_data *data,
+    struct msi_msg *msg)
+    {
+// Nothing to do
+    }
+#[no_mangle]
+unsafe extern "C" fn ti_sci_inta_msi_update_chip_ops(info: *mut msi_domain_info) {
+    static void ti_sci_inta_msi_update_chip_ops(struct msi_domain_info *info)
+    {
+    struct irq_chip *chip = info.chip;
+    if (WARN_ON(!chip))
+    return;
+    chip.irq_request_resources = irq_chip_request_resources_parent;
+    chip.irq_release_resources = irq_chip_release_resources_parent;
+    chip.irq_compose_msi_msg = ti_sci_inta_msi_compose_msi_msg;
+    chip.irq_write_msi_msg = ti_sci_inta_msi_write_msg;
+    chip.irq_set_type = irq_chip_set_type_parent;
+    chip.irq_unmask = irq_chip_unmask_parent;
+    chip.irq_mask = irq_chip_mask_parent;
+    chip.irq_ack = irq_chip_ack_parent;
+    }
+    struct irq_domain *ti_sci_inta_msi_create_irq_domain(struct fwnode_handle *fwnode,
+    struct msi_domain_info *info,
+    struct irq_domain *parent)
+    {
+    struct irq_domain *domain;
+    ti_sci_inta_msi_update_chip_ops(info);
+    info.flags |= MSI_FLAG_FREE_MSI_DESCS;
+    domain = msi_create_irq_domain(fwnode, info, parent);
+    if (domain)
+    irq_domain_update_bus_token(domain, DOMAIN_BUS_TI_SCI_INTA_MSI);
+    return domain;
+    }
+    EXPORT_SYMBOL_GPL(ti_sci_inta_msi_create_irq_domain);
+    static int ti_sci_inta_msi_alloc_descs(struct device *dev,
+    struct ti_sci_resource *res)
+    {
+    struct msi_desc msi_desc;
+    int set, i, count = 0;
+    memset(&msi_desc, 0, sizeof(msi_desc));
+    msi_desc.nvec_used = 1;
+    for (set = 0; set < res.sets; set++) {
+    for (i = 0; i < res.desc[set].num; i++, count++) {
+    msi_desc.msi_index = res.desc[set].start + i;
+    if (msi_insert_msi_desc(dev, &msi_desc))
+    goto fail;
+    }
+    for (i = 0; i < res.desc[set].num_sec; i++, count++) {
+    msi_desc.msi_index = res.desc[set].start_sec + i;
+    if (msi_insert_msi_desc(dev, &msi_desc))
+    goto fail;
+    }
+    }
+    return count;
+    fail:
+    msi_free_msi_descs(dev);
+    return -ENOMEM;
+    }
+    int ti_sci_inta_msi_domain_alloc_irqs(struct device *dev,
+    struct ti_sci_resource *res)
+    {
+    struct platform_device *pdev = to_platform_device(dev);
+    int ret, nvec;
+    if (pdev.id < 0)
+    return -ENODEV;
+    ret = msi_setup_device_data(dev);
+    if (ret)
+    return ret;
+    guard(msi_descs_lock)(dev);
+    nvec = ti_sci_inta_msi_alloc_descs(dev, res);
+    if (nvec <= 0)
+    return nvec;
+// Use alloc ALL as it's unclear whether there are gaps in the indices
+    ret = msi_domain_alloc_irqs_all_locked(dev, MSI_DEFAULT_DOMAIN, nvec);
+    if (ret)
+    dev_err(dev, "Failed to allocate IRQs %d\n", ret);
+    return ret;
+    }
+    EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain_alloc_irqs);

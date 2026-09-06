@@ -1,0 +1,147 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/mtd/nand/raw/denali_pci.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// NAND Flash Controller Device Driver
+// Copyright © 2009-2010, Intel Corporation and its suppliers.
+//
+
+pub const INTEL_CE4100: c_int = 1;
+pub const INTEL_MRST: c_int = 2;
+// List of platforms this NAND controller has be integrated into
+    static const struct pci_device_id denali_pci_ids[] = {
+    { PCI_VDEVICE(INTEL, 0x0701), .driver_data = INTEL_CE4100 },
+    { PCI_VDEVICE(INTEL, 0x0809), .driver_data = INTEL_MRST },
+    { /* end: all zeroes */ }
+    };
+    MODULE_DEVICE_TABLE(pci, denali_pci_ids);
+    NAND_ECC_CAPS_SINGLE(denali_pci_ecc_caps, denali_calc_ecc_bytes, 512, 8, 15);
+#[no_mangle]
+unsafe extern "C" fn denali_pci_probe(dev: *mut pci_dev, id: *const pci_device_id) -> c_int {
+    static int denali_pci_probe(struct pci_dev *dev, const struct pci_device_id *id)
+    {
+    resource_size_t csr_base, mem_base;
+    unsigned long csr_len, mem_len;
+    struct denali_controller *denali;
+    struct denali_chip *dchip;
+    int nsels, ret, i;
+    denali = devm_kzalloc(&dev.dev, sizeof(*denali), GFP_KERNEL);
+    if (!denali)
+    return -ENOMEM;
+    ret = pcim_enable_device(dev);
+    if (ret) {
+    dev_err(&dev.dev, "Spectra: pci_enable_device failed.\n");
+    return ret;
+    }
+    if (id.driver_data == INTEL_CE4100) {
+    mem_base = pci_resource_start(dev, 0);
+    mem_len = pci_resource_len(dev, 1);
+    csr_base = pci_resource_start(dev, 1);
+    csr_len = pci_resource_len(dev, 1);
+    } else {
+    csr_base = pci_resource_start(dev, 0);
+    csr_len = pci_resource_len(dev, 0);
+    mem_base = pci_resource_start(dev, 1);
+    mem_len = pci_resource_len(dev, 1);
+    if (!mem_len) {
+    mem_base = csr_base + csr_len;
+    mem_len = csr_len;
+    }
+    }
+    pci_set_master(dev);
+    denali.dev = &dev.dev;
+    denali.irq = dev.irq;
+    denali.ecc_caps = &denali_pci_ecc_caps;
+    denali.clk_rate = 50000000;		/* 50 MHz */
+    denali.clk_x_rate = 200000000;		/* 200 MHz */
+    ret = pcim_request_all_regions(dev, DENALI_NAND_NAME);
+    if (ret) {
+    dev_err(&dev.dev, "Spectra: Unable to request memory regions\n");
+    return ret;
+    }
+    denali.reg = devm_ioremap(denali.dev, csr_base, csr_len);
+    if (!denali.reg) {
+    dev_err(&dev.dev, "Spectra: Unable to remap memory region\n");
+    return -ENOMEM;
+    }
+    denali.host = devm_ioremap(denali.dev, mem_base, mem_len);
+    if (!denali.host) {
+    dev_err(&dev.dev, "Spectra: ioremap failed!");
+    return -ENOMEM;
+    }
+    ret = denali_init(denali);
+    if (ret)
+    return ret;
+    nsels = denali.nbanks;
+    dchip = devm_kzalloc(denali.dev, struct_size(dchip, sels, nsels),
+    GFP_KERNEL);
+    if (!dchip) {
+    ret = -ENOMEM;
+    goto out_remove_denali;
+    }
+    dchip.chip.base.ecc.user_conf.flags |= NAND_ECC_MAXIMIZE_STRENGTH;
+    dchip.nsels = nsels;
+    for (i = 0; i < nsels; i++)
+    dchip.sels[i].bank = i;
+    ret = denali_chip_init(denali, dchip);
+    if (ret)
+    goto out_remove_denali;
+    pci_set_drvdata(dev, denali);
+    return 0;
+    out_remove_denali:
+    denali_remove(denali);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn denali_pci_remove(dev: *mut pci_dev) {
+    static void denali_pci_remove(struct pci_dev *dev)
+    {
+    struct denali_controller *denali = pci_get_drvdata(dev);
+    denali_remove(denali);
+    }
+    static struct pci_driver denali_pci_driver = {
+    .name = DENALI_NAND_NAME,
+    .id_table = denali_pci_ids,
+    .probe = denali_pci_probe,
+    .remove = denali_pci_remove,
+    };
+    module_pci_driver(denali_pci_driver);
+    MODULE_DESCRIPTION("PCI driver for Denali NAND controller");
+    MODULE_AUTHOR("Intel Corporation and its suppliers");
+    MODULE_LICENSE("GPL v2");

@@ -1,0 +1,175 @@
+//! Automatically rewritten from C to Rust
+//! Source: tools/objtool/arch/powerpc/decode.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+    const char *arch_reg_name[CFI_NUM_REGS] = {
+    "r0",  "sp",  "r2",  "r3",
+    "r4",  "r5",  "r6",  "r7",
+    "r8",  "r9",  "r10", "r11",
+    "r12", "r13", "r14", "r15",
+    "r16", "r17", "r18", "r19",
+    "r20", "r21", "r22", "r23",
+    "r24", "r25", "r26", "r27",
+    "r28", "r29", "r30", "r31",
+    "ra"
+    };
+#[no_mangle]
+pub unsafe extern "C" fn arch_ftrace_match(name: *const c_char) -> c_int {
+    int arch_ftrace_match(const char *name)
+    {
+    return !strcmp(name, "_mcount");
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_insn_adjusted_addend(insn: *mut instruction, reloc: *mut reloc) -> i64 {
+    s64 arch_insn_adjusted_addend(struct instruction *insn, struct reloc *reloc)
+    {
+    return reloc_addend(reloc);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_callee_saved_reg(reg: c_uchar) -> bool {
+    bool arch_callee_saved_reg(unsigned char reg)
+    {
+    return false;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_decode_hint_reg(sp_reg: u8, base: *mut c_int) -> c_int {
+    int arch_decode_hint_reg(u8 sp_reg, int *base)
+    {
+    exit(-1);
+    }
+    const char *arch_nop_insn(int len)
+    {
+    exit(-1);
+    }
+    const char *arch_ret_insn(int len)
+    {
+    exit(-1);
+    }
+    int arch_decode_instruction(struct objtool_file *file, const struct section *sec,
+    unsigned long offset, unsigned int maxlen,
+    struct instruction *insn)
+    {
+    unsigned int opcode;
+    enum insn_type typ;
+    unsigned long imm;
+    u32 ins;
+    ins = bswap_if_needed(file.elf, *(u32 *)(sec.data.d_buf + offset));
+    opcode = ins >> 26;
+    typ = INSN_OTHER;
+    imm = 0;
+    switch (opcode) {
+    case 18: /* b[l][a] */
+    if (ins == 0x48000005)	/* bl .+4 */
+    typ = INSN_OTHER;
+    else if (ins & 1)	/* bl[a] */
+    typ = INSN_CALL;
+    else		/* b[a] */
+    typ = INSN_JUMP_UNCONDITIONAL;
+    imm = ins & 0x3fffffc;
+    if (imm & 0x2000000)
+    imm -= 0x4000000;
+    imm |= ins & 2;	/* AA flag */
+    break;
+    }
+    if (opcode == 1)
+    insn.len = 8;
+    else
+    insn.len = 4;
+    insn.type = typ;
+    insn.immediate = imm;
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_jump_destination(insn: *mut instruction) -> c_ulong {
+    unsigned long arch_jump_destination(struct instruction *insn)
+    {
+    if (insn.immediate & 2)
+    return insn.immediate & ~2;
+    return insn.offset + insn.immediate;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_pc_relative_reloc(reloc: *mut reloc) -> bool {
+    bool arch_pc_relative_reloc(struct reloc *reloc)
+    {
+//
+// The powerpc build only allows certain relocation types, see
+// relocs_check.sh, and none of those accepted are PC relative.
+//
+    return false;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_initial_func_cfi_state(state: *mut cfi_init_state) {
+    void arch_initial_func_cfi_state(struct cfi_init_state *state)
+    {
+    int i;
+    for (i = 0; i < CFI_NUM_REGS; i++) {
+    state.regs[i].base = CFI_UNDEFINED;
+    state.regs[i].offset = 0;
+    }
+// initial CFA (call frame address)
+    state.cfa.base = CFI_SP;
+    state.cfa.offset = 0;
+// initial LR (return address)
+    state.regs[CFI_RA].base = CFI_CFA;
+    state.regs[CFI_RA].offset = 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_reloc_size(reloc: *mut reloc) -> c_uint {
+    unsigned int arch_reloc_size(struct reloc *reloc)
+    {
+    switch (reloc_type(reloc)) {
+    case R_PPC_REL32:
+    case R_PPC_ADDR32:
+    case R_PPC_UADDR32:
+    case R_PPC_PLT32:
+    case R_PPC_PLTREL32:
+    return 4;
+    default:
+    return 8;
+    }
+    }
+
+#[no_mangle]
+pub unsafe extern "C" fn arch_disas_info_init(dinfo: *mut disassemble_info) -> c_int {
+    int arch_disas_info_init(struct disassemble_info *dinfo)
+    {
+    return disas_info_init(dinfo, bfd_arch_powerpc,
+    bfd_mach_ppc, bfd_mach_ppc64,
+    core::ptr::null_mut());
+    }

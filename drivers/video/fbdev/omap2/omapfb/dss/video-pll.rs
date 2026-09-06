@@ -1,0 +1,188 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/video/fbdev/omap2/omapfb/dss/video-pll.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Copyright (C) 2014 Texas Instruments Ltd
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct dss_video_pll {
+    pub pll: dss_pll,
+    pub dev: *mut device,
+    pub clkctrl_base: *mut void __iomem,
+}
+
+    writel_relaxed(FLD_MOD(readl_relaxed(reg), val, start, end), reg)
+#[no_mangle]
+unsafe extern "C" fn dss_dpll_enable_scp_clk(vpll: *mut dss_video_pll) {
+    static void dss_dpll_enable_scp_clk(struct dss_video_pll *vpll)
+    {
+    REG_MOD(vpll.clkctrl_base, 1, 14, 14); /* CIO_CLK_ICG */
+    }
+#[no_mangle]
+unsafe extern "C" fn dss_dpll_disable_scp_clk(vpll: *mut dss_video_pll) {
+    static void dss_dpll_disable_scp_clk(struct dss_video_pll *vpll)
+    {
+    REG_MOD(vpll.clkctrl_base, 0, 14, 14); /* CIO_CLK_ICG */
+    }
+#[no_mangle]
+unsafe extern "C" fn dss_dpll_power_enable(vpll: *mut dss_video_pll) {
+    static void dss_dpll_power_enable(struct dss_video_pll *vpll)
+    {
+    REG_MOD(vpll.clkctrl_base, 2, 31, 30); /* PLL_POWER_ON_ALL */
+//
+// DRA7x PLL CTRL's PLL_PWR_STATUS seems to always return 0,
+// so we have to use fixed delay here.
+//
+    msleep(1);
+    }
+#[no_mangle]
+unsafe extern "C" fn dss_dpll_power_disable(vpll: *mut dss_video_pll) {
+    static void dss_dpll_power_disable(struct dss_video_pll *vpll)
+    {
+    REG_MOD(vpll.clkctrl_base, 0, 31, 30);	/* PLL_POWER_OFF */
+    }
+#[no_mangle]
+unsafe extern "C" fn dss_video_pll_enable(pll: *mut dss_pll) -> c_int {
+    static int dss_video_pll_enable(struct dss_pll *pll)
+    {
+    struct dss_video_pll *vpll = container_of(pll, struct dss_video_pll, pll);
+    int r;
+    r = dss_runtime_get();
+    if (r)
+    return r;
+    dss_ctrl_pll_enable(pll.id, true);
+    dss_dpll_enable_scp_clk(vpll);
+    r = dss_pll_wait_reset_done(pll);
+    if (r)
+    goto err_reset;
+    dss_dpll_power_enable(vpll);
+    return 0;
+    err_reset:
+    dss_dpll_disable_scp_clk(vpll);
+    dss_ctrl_pll_enable(pll.id, false);
+    dss_runtime_put();
+    return r;
+    }
+#[no_mangle]
+unsafe extern "C" fn dss_video_pll_disable(pll: *mut dss_pll) {
+    static void dss_video_pll_disable(struct dss_pll *pll)
+    {
+    struct dss_video_pll *vpll = container_of(pll, struct dss_video_pll, pll);
+    dss_dpll_power_disable(vpll);
+    dss_dpll_disable_scp_clk(vpll);
+    dss_ctrl_pll_enable(pll.id, false);
+    dss_runtime_put();
+    }
+    static const struct dss_pll_ops dss_pll_ops = {
+    .enable = dss_video_pll_enable,
+    .disable = dss_video_pll_disable,
+    .set_config = dss_pll_write_config_type_a,
+    };
+    static const struct dss_pll_hw dss_dra7_video_pll_hw = {
+    .n_max = (1 << 8) - 1,
+    .m_max = (1 << 12) - 1,
+    .mX_max = (1 << 5) - 1,
+    .fint_min = 500000,
+    .fint_max = 2500000,
+    .clkdco_max = 1800000000,
+    .n_msb = 8,
+    .n_lsb = 1,
+    .m_msb = 20,
+    .m_lsb = 9,
+    .mX_msb[0] = 25,
+    .mX_lsb[0] = 21,
+    .mX_msb[1] = 30,
+    .mX_lsb[1] = 26,
+    .has_refsel = true,
+    };
+    struct dss_pll *dss_video_pll_init(struct platform_device *pdev, int id,
+    struct regulator *regulator)
+    {
+    const char * const reg_name[] = { "pll1", "pll2" };
+    const char * const clkctrl_name[] = { "pll1_clkctrl", "pll2_clkctrl" };
+    const char * const clkin_name[] = { "video1_clk", "video2_clk" };
+    struct dss_video_pll *vpll;
+    void __iomem *pll_base, *clkctrl_base;
+    struct clk *clk;
+    struct dss_pll *pll;
+    int r;
+// PLL CONTROL
+    pll_base = devm_platform_ioremap_resource_byname(pdev, reg_name[id]);
+    if (IS_ERR(pll_base)) {
+    dev_err(&pdev.dev, "failed to ioremap pll%d reg_name\n", id);
+    return ERR_CAST(pll_base);
+    }
+// CLOCK CONTROL
+    clkctrl_base = devm_platform_ioremap_resource_byname(pdev, clkctrl_name[id]);
+    if (IS_ERR(clkctrl_base)) {
+    dev_err(&pdev.dev, "failed to ioremap pll%d clkctrl\n", id);
+    return ERR_CAST(clkctrl_base);
+    }
+// CLKIN
+    clk = devm_clk_get(&pdev.dev, clkin_name[id]);
+    if (IS_ERR(clk)) {
+    DSSERR("can't get video pll clkin\n");
+    return ERR_CAST(clk);
+    }
+    vpll = devm_kzalloc(&pdev.dev, sizeof(*vpll), GFP_KERNEL);
+    if (!vpll)
+    return ERR_PTR(-ENOMEM);
+    vpll.dev = &pdev.dev;
+    vpll.clkctrl_base = clkctrl_base;
+    pll = &vpll.pll;
+    pll.name = id == 0 ? "video0" : "video1";
+    pll.id = id == 0 ? DSS_PLL_VIDEO1 : DSS_PLL_VIDEO2;
+    pll.clkin = clk;
+    pll.regulator = regulator;
+    pll.base = pll_base;
+    pll.hw = &dss_dra7_video_pll_hw;
+    pll.ops = &dss_pll_ops;
+    r = dss_pll_register(pll);
+    if (r)
+    return ERR_PTR(r);
+    return pll;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn dss_video_pll_uninit(pll: *mut dss_pll) {
+    void dss_video_pll_uninit(struct dss_pll *pll)
+    {
+    dss_pll_unregister(pll);
+    }

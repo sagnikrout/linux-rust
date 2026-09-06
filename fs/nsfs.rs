@@ -1,0 +1,659 @@
+//! Automatically rewritten from C to Rust
+//! Source: fs/nsfs.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+    static struct vfsmount *nsfs_mnt;
+    let mut nsfs_root_path: static struct path = {};
+#[no_mangle]
+pub unsafe extern "C" fn nsfs_get_root(path: *mut path) {
+    void nsfs_get_root(struct path *path)
+    {
+// path = nsfs_root_path;
+    path_get(path);
+    }
+    static long ns_ioctl(struct file *filp, unsigned int ioctl,
+    unsigned long arg);
+    static const struct file_operations ns_file_operations = {
+    .unlocked_ioctl = ns_ioctl,
+    .compat_ioctl   = compat_ptr_ioctl,
+    };
+    static char *ns_dname(struct dentry *dentry, char *buffer, int buflen)
+    {
+    struct inode *inode = d_inode(dentry);
+    struct ns_common *ns = inode.i_private;
+    const struct proc_ns_operations *ns_ops = ns.ops;
+    return dynamic_dname(buffer, buflen, "%s:[%llu]",
+    ns_ops.name, inode.i_ino);
+    }
+    const struct dentry_operations ns_dentry_operations = {
+    .d_dname	= ns_dname,
+    .d_prune	= stashed_dentry_prune,
+    };
+#[no_mangle]
+unsafe extern "C" fn nsfs_evict(inode: *mut inode) {
+    static void nsfs_evict(struct inode *inode)
+    {
+    struct ns_common *ns = inode.i_private;
+    __ns_ref_active_put(ns);
+    clear_inode(inode);
+    ns.ops.put(ns);
+    }
+    int ns_get_path_cb(struct path *path, ns_get_path_helper_t *ns_get_cb,
+    void *private_data)
+    {
+    struct ns_common *ns;
+    ns = ns_get_cb(private_data);
+    if (!ns)
+    return -ENOENT;
+    return path_from_stashed(&ns.stashed, nsfs_mnt, ns, path);
+    }
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ns_get_path_task_args {
+    pub ns_ops: *const proc_ns_operations,
+    pub task: *mut task_struct,
+}
+
+    static struct ns_common *ns_get_path_task(void *private_data)
+    {
+    struct ns_get_path_task_args *args = private_data;
+    return args.ns_ops.get(args.task);
+    }
+    int ns_get_path(struct path *path, struct task_struct *task,
+    const struct proc_ns_operations *ns_ops)
+    {
+    struct ns_get_path_task_args args = {
+    .ns_ops	= ns_ops,
+    .task	= task,
+    };
+    return ns_get_path_cb(path, ns_get_path_task, &args);
+    }
+    struct file *open_namespace_file(struct ns_common *ns)
+    {
+    struct path path __free(path_put) = {};
+    int err;
+// call first to consume reference
+    err = path_from_stashed(&ns.stashed, nsfs_mnt, ns, &path);
+    if (err < 0)
+    return ERR_PTR(err);
+    return dentry_open(&path, O_RDONLY, current_cred());
+    }
+//
+// open_namespace - open a namespace
+// @ns: the namespace to open
+//
+// This will consume a reference to @ns indendent of success or failure.
+//
+// Return: A file descriptor on success or a negative error code on failure.
+//
+#[no_mangle]
+pub unsafe extern "C" fn open_namespace(ns: *mut ns_common) -> c_int {
+    int open_namespace(struct ns_common *ns)
+    {
+    struct path path __free(path_put) = {};
+    int err;
+// call first to consume reference
+    err = path_from_stashed(&ns.stashed, nsfs_mnt, ns, &path);
+    if (err < 0)
+    return err;
+    return FD_ADD(O_CLOEXEC, dentry_open(&path, O_RDONLY, current_cred()));
+    }
+    int open_related_ns(struct ns_common *ns,
+    struct ns_common *(*get_ns)(struct ns_common *ns))
+    {
+    struct ns_common *relative;
+    relative = get_ns(ns);
+    if (IS_ERR(relative))
+    return PTR_ERR(relative);
+    return open_namespace(relative);
+    }
+    EXPORT_SYMBOL_GPL(open_related_ns);
+    static int copy_ns_info_to_user(const struct mnt_namespace *mnt_ns,
+    struct mnt_ns_info __user *uinfo, size_t usize,
+    struct mnt_ns_info *kinfo)
+    {
+//
+// If userspace and the kernel have the same struct size it can just
+// be copied. If userspace provides an older struct, only the bits that
+// userspace knows about will be copied. If userspace provides a new
+// struct, only the bits that the kernel knows aobut will be copied and
+// the size value will be set to the size the kernel knows about.
+//
+    kinfo.size		= min(usize, sizeof(*kinfo));
+    kinfo.mnt_ns_id	= mnt_ns.ns.ns_id;
+    kinfo.nr_mounts	= READ_ONCE(mnt_ns.nr_mounts);
+// Subtract the root mount of the mount namespace.
+    if (kinfo.nr_mounts)
+    kinfo.nr_mounts--;
+    if (copy_to_user(uinfo, kinfo, kinfo.size))
+    return -EFAULT;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn nsfs_ioctl_valid(cmd: c_uint) -> bool {
+    static bool nsfs_ioctl_valid(unsigned int cmd)
+    {
+    switch (cmd) {
+    case NS_GET_USERNS:
+    case NS_GET_PARENT:
+    case NS_GET_NSTYPE:
+    case NS_GET_OWNER_UID:
+    case NS_GET_MNTNS_ID:
+    case NS_GET_PID_FROM_PIDNS:
+    case NS_GET_TGID_FROM_PIDNS:
+    case NS_GET_PID_IN_PIDNS:
+    case NS_GET_TGID_IN_PIDNS:
+    case NS_GET_ID:
+    return true;
+    }
+// Extensible ioctls require some extra handling.
+    switch (_IOC_NR(cmd)) {
+    case _IOC_NR(NS_MNT_GET_INFO):
+    return extensible_ioctl_valid(cmd, NS_MNT_GET_INFO, MNT_NS_INFO_SIZE_VER0);
+    case _IOC_NR(NS_MNT_GET_NEXT):
+    return extensible_ioctl_valid(cmd, NS_MNT_GET_NEXT, MNT_NS_INFO_SIZE_VER0);
+    case _IOC_NR(NS_MNT_GET_PREV):
+    return extensible_ioctl_valid(cmd, NS_MNT_GET_PREV, MNT_NS_INFO_SIZE_VER0);
+    }
+    return false;
+    }
+#[no_mangle]
+unsafe extern "C" fn may_use_nsfs_ioctl(cmd: c_uint) -> bool {
+    static bool may_use_nsfs_ioctl(unsigned int cmd)
+    {
+    switch (_IOC_NR(cmd)) {
+    case _IOC_NR(NS_MNT_GET_NEXT):
+    fallthrough;
+    case _IOC_NR(NS_MNT_GET_PREV):
+    return may_see_all_namespaces();
+    }
+    return true;
+    }
+    static long ns_ioctl(struct file *filp, unsigned int ioctl,
+    unsigned long arg)
+    {
+    struct user_namespace *user_ns;
+    struct pid_namespace *pid_ns;
+    struct task_struct *tsk;
+    struct ns_common *ns;
+    struct mnt_namespace *mnt_ns;
+    let mut previous: bool = false;
+    uid_t __user *argp;
+    uid_t uid;
+    int ret;
+    if (!nsfs_ioctl_valid(ioctl))
+    return -ENOIOCTLCMD;
+    if (!may_use_nsfs_ioctl(ioctl))
+    return -EPERM;
+    ns = get_proc_ns(file_inode(filp));
+    switch (ioctl) {
+    case NS_GET_USERNS:
+    return open_related_ns(ns, ns_get_owner);
+    case NS_GET_PARENT:
+    if (!ns.ops.get_parent)
+    return -EINVAL;
+    return open_related_ns(ns, ns.ops.get_parent);
+    case NS_GET_NSTYPE:
+    return ns.ns_type;
+    case NS_GET_OWNER_UID:
+    if (ns.ns_type != CLONE_NEWUSER)
+    return -EINVAL;
+    user_ns = container_of(ns, struct user_namespace, ns);
+    argp = (uid_t __user *) arg;
+    uid = from_kuid_munged(current_user_ns(), user_ns.owner);
+    return put_user(uid, argp);
+    case NS_GET_PID_FROM_PIDNS:
+    fallthrough;
+    case NS_GET_TGID_FROM_PIDNS:
+    fallthrough;
+    case NS_GET_PID_IN_PIDNS:
+    fallthrough;
+    case NS_GET_TGID_IN_PIDNS: {
+    if (ns.ns_type != CLONE_NEWPID)
+    return -EINVAL;
+    ret = -ESRCH;
+    pid_ns = container_of(ns, struct pid_namespace, ns);
+    guard(rcu)();
+    if (ioctl == NS_GET_PID_IN_PIDNS ||
+    ioctl == NS_GET_TGID_IN_PIDNS)
+    tsk = find_task_by_vpid(arg);
+    else
+    tsk = find_task_by_pid_ns(arg, pid_ns);
+    if (!tsk)
+    return ret;
+    switch (ioctl) {
+    case NS_GET_PID_FROM_PIDNS:
+    ret = task_pid_vnr(tsk);
+    break;
+    case NS_GET_TGID_FROM_PIDNS:
+    ret = task_tgid_vnr(tsk);
+    break;
+    case NS_GET_PID_IN_PIDNS:
+    ret = task_pid_nr_ns(tsk, pid_ns);
+    break;
+    case NS_GET_TGID_IN_PIDNS:
+    ret = task_tgid_nr_ns(tsk, pid_ns);
+    break;
+    default:
+    ret = 0;
+    break;
+    }
+    if (!ret)
+    ret = -ESRCH;
+    return ret;
+    }
+    case NS_GET_MNTNS_ID:
+    if (ns.ns_type != CLONE_NEWNS)
+    return -EINVAL;
+    fallthrough;
+    case NS_GET_ID: {
+    __u64 __user *idp;
+    __u64 id;
+    idp = (__u64 __user *)arg;
+    id = ns.ns_id;
+    return put_user(id, idp);
+    }
+    }
+// extensible ioctls
+    switch (_IOC_NR(ioctl)) {
+    case _IOC_NR(NS_MNT_GET_INFO): {
+    let mut kinfo: mnt_ns_info = {};
+    struct mnt_ns_info __user *uinfo = (struct mnt_ns_info __user *)arg;
+    let mut usize: usize = _IOC_SIZE(ioctl);
+    if (ns.ns_type != CLONE_NEWNS)
+    return -EINVAL;
+    if (!uinfo)
+    return -EINVAL;
+    if (usize < MNT_NS_INFO_SIZE_VER0)
+    return -EINVAL;
+    return copy_ns_info_to_user(to_mnt_ns(ns), uinfo, usize, &kinfo);
+    }
+    case _IOC_NR(NS_MNT_GET_PREV):
+    previous = true;
+    fallthrough;
+    case _IOC_NR(NS_MNT_GET_NEXT): {
+    let mut kinfo: mnt_ns_info = {};
+    struct mnt_ns_info __user *uinfo = (struct mnt_ns_info __user *)arg;
+    struct path path __free(path_put) = {};
+    let mut usize: usize = _IOC_SIZE(ioctl);
+    if (ns.ns_type != CLONE_NEWNS)
+    return -EINVAL;
+    if (usize < MNT_NS_INFO_SIZE_VER0)
+    return -EINVAL;
+    mnt_ns = get_sequential_mnt_ns(to_mnt_ns(ns), previous);
+    if (IS_ERR(mnt_ns))
+    return PTR_ERR(mnt_ns);
+    ns = to_ns_common(mnt_ns);
+// Transfer ownership of @mnt_ns reference to @path.
+    ret = path_from_stashed(&ns.stashed, nsfs_mnt, ns, &path);
+    if (ret)
+    return ret;
+    FD_PREPARE(fdf, O_CLOEXEC, dentry_open(&path, O_RDONLY, current_cred()));
+    if (fdf.err)
+    return fdf.err;
+//
+// If @uinfo is passed return all information about the
+// mount namespace as well.
+//
+    ret = copy_ns_info_to_user(to_mnt_ns(ns), uinfo, usize, &kinfo);
+    if (ret)
+    return ret;
+    ret = fd_publish(fdf);
+    break;
+    }
+    default:
+    ret = -ENOTTY;
+    }
+    return ret;
+    }
+    int ns_get_name(char *buf, size_t size, struct task_struct *task,
+    const struct proc_ns_operations *ns_ops)
+    {
+    struct ns_common *ns;
+    let mut res: c_int = -ENOENT;
+    const char *name;
+    ns = ns_ops.get(task);
+    if (ns) {
+    name = ns_ops.real_ns_name ? : ns_ops.name;
+    res = snprintf(buf, size, "%s:[%u]", name, ns.inum);
+    ns_ops.put(ns);
+    }
+    return res;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn proc_ns_file(file: *const file) -> bool {
+    bool proc_ns_file(const struct file *file)
+    {
+    return file.f_op == &ns_file_operations;
+    }
+//
+// ns_match() - Returns true if current namespace matches dev/ino provided.
+// @ns: current namespace
+// @dev: dev_t from nsfs that will be matched against current nsfs
+// @ino: ino_t from nsfs that will be matched against current nsfs
+//
+// Return: true if dev and ino matches the current nsfs.
+//
+#[no_mangle]
+pub unsafe extern "C" fn ns_match(ns: *const ns_common, dev: dev_t, ino: ino_t) -> bool {
+    bool ns_match(const struct ns_common *ns, dev_t dev, ino_t ino)
+    {
+    return (ns.inum == ino) && (nsfs_mnt.mnt_sb.s_dev == dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn nsfs_show_path(seq: *mut seq_file, dentry: *mut dentry) -> c_int {
+    static int nsfs_show_path(struct seq_file *seq, struct dentry *dentry)
+    {
+    struct inode *inode = d_inode(dentry);
+    const struct ns_common *ns = inode.i_private;
+    const struct proc_ns_operations *ns_ops = ns.ops;
+    seq_printf(seq, "%s:[%llu]", ns_ops.name, inode.i_ino);
+    return 0;
+    }
+    static const struct super_operations nsfs_ops = {
+    .statfs = simple_statfs,
+    .evict_inode = nsfs_evict,
+    .show_path = nsfs_show_path,
+    .drop_inode = inode_just_drop,
+    };
+#[no_mangle]
+unsafe extern "C" fn nsfs_init_inode(inode: *mut inode, data: *mut c_void) -> c_int {
+    static int nsfs_init_inode(struct inode *inode, void *data)
+    {
+    struct ns_common *ns = data;
+    inode.i_private = data;
+    inode.i_mode |= S_IRUGO;
+    inode.i_fop = &ns_file_operations;
+    inode.i_ino = ns.inum;
+//
+// Bring the namespace subtree back to life if we have to. This
+// can happen when e.g., all processes using a network namespace
+// and all namespace files or namespace file bind-mounts have
+// died but there are still sockets pinning it. The SIOCGSKNS
+// ioctl on such a socket will resurrect the relevant namespace
+// subtree.
+//
+    __ns_ref_active_get(ns);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn nsfs_put_data(data: *mut c_void) {
+    static void nsfs_put_data(void *data)
+    {
+    struct ns_common *ns = data;
+    ns.ops.put(ns);
+    }
+    static const struct stashed_operations nsfs_stashed_ops = {
+    .init_inode = nsfs_init_inode,
+    .put_data = nsfs_put_data,
+    };
+
+    static int nsfs_encode_fh(struct inode *inode, u32 *fh, int *max_len,
+    struct inode *parent)
+    {
+    struct nsfs_file_handle *fid = (struct nsfs_file_handle *)fh;
+    struct ns_common *ns = inode.i_private;
+    let mut len: c_int = *max_len;
+    if (parent)
+    return FILEID_INVALID;
+    if (len < NSFS_FID_SIZE_U32_VER0) {
+// max_len = NSFS_FID_SIZE_U32_LATEST;
+    return FILEID_INVALID;
+    } else if (len > NSFS_FID_SIZE_U32_LATEST) {
+// max_len = NSFS_FID_SIZE_U32_LATEST;
+    }
+    fid.ns_id	= ns.ns_id;
+    fid.ns_type	= ns.ns_type;
+    fid.ns_inum	= inode.i_ino;
+    return FILEID_NSFS;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn is_current_namespace(ns: *mut ns_common) -> bool {
+    bool is_current_namespace(struct ns_common *ns)
+    {
+    switch (ns.ns_type) {
+
+    case CLONE_NEWCGROUP:
+    return current_in_namespace(to_cg_ns(ns));
+
+    case CLONE_NEWIPC:
+    return current_in_namespace(to_ipc_ns(ns));
+
+    case CLONE_NEWNS:
+    return current_in_namespace(to_mnt_ns(ns));
+
+    case CLONE_NEWNET:
+    return current_in_namespace(to_net_ns(ns));
+
+    case CLONE_NEWPID:
+    return current_in_namespace(to_pid_ns(ns));
+
+    case CLONE_NEWTIME:
+    return current_in_namespace(to_time_ns(ns));
+
+    case CLONE_NEWUSER:
+    return current_in_namespace(to_user_ns(ns));
+
+    case CLONE_NEWUTS:
+    return current_in_namespace(to_uts_ns(ns));
+
+    default:
+    VFS_WARN_ON_ONCE(true);
+    return false;
+    }
+    }
+    static struct dentry *nsfs_fh_to_dentry(struct super_block *sb, struct fid *fh,
+    int fh_len, int fh_type)
+    {
+    struct path path __free(path_put) = {};
+    struct nsfs_file_handle *fid = (struct nsfs_file_handle *)fh;
+    struct user_namespace *owning_ns = core::ptr::null_mut();
+    struct ns_common *ns;
+    int ret;
+    if (fh_len < NSFS_FID_SIZE_U32_VER0)
+    return core::ptr::null_mut();
+// Check that any trailing bytes are zero.
+    if ((fh_len > NSFS_FID_SIZE_U32_LATEST) &&
+    memchr_inv((void *)fid + NSFS_FID_SIZE_U32_LATEST, 0,
+    fh_len - NSFS_FID_SIZE_U32_LATEST))
+    return core::ptr::null_mut();
+    switch (fh_type) {
+    case FILEID_NSFS:
+    break;
+    default:
+    return core::ptr::null_mut();
+    }
+    if (!fid.ns_id)
+    return core::ptr::null_mut();
+// Either both are set or both are unset.
+    if (!fid.ns_inum != !fid.ns_type)
+    return core::ptr::null_mut();
+    scoped_guard(rcu) {
+    ns = ns_tree_lookup_rcu(fid.ns_id, fid.ns_type);
+    if (!ns)
+    return core::ptr::null_mut();
+    VFS_WARN_ON_ONCE(ns.ns_id != fid.ns_id);
+    if (fid.ns_inum && (fid.ns_inum != ns.inum))
+    return core::ptr::null_mut();
+    if (fid.ns_type && (fid.ns_type != ns.ns_type))
+    return core::ptr::null_mut();
+//
+// This is racy because we're not actually taking an
+// active reference. IOW, it could happen that the
+// namespace becomes inactive after this check.
+// We don't care because nsfs_init_inode() will just
+// resurrect the relevant namespace tree for us. If it
+// has been active here we just allow it's resurrection.
+// We could try to take an active reference here and
+// then drop it again. But really, why bother.
+//
+    if (!ns_get_unless_inactive(ns))
+    return core::ptr::null_mut();
+    }
+    switch (ns.ns_type) {
+
+    case CLONE_NEWCGROUP:
+    if (!current_in_namespace(to_cg_ns(ns)))
+    owning_ns = to_cg_ns(ns).user_ns;
+    break;
+
+    case CLONE_NEWIPC:
+    if (!current_in_namespace(to_ipc_ns(ns)))
+    owning_ns = to_ipc_ns(ns).user_ns;
+    break;
+
+    case CLONE_NEWNS:
+    if (!current_in_namespace(to_mnt_ns(ns)))
+    owning_ns = to_mnt_ns(ns).user_ns;
+    break;
+
+    case CLONE_NEWNET:
+    if (!current_in_namespace(to_net_ns(ns)))
+    owning_ns = to_net_ns(ns).user_ns;
+    break;
+
+    case CLONE_NEWPID:
+    if (!current_in_namespace(to_pid_ns(ns))) {
+    owning_ns = to_pid_ns(ns).user_ns;
+    } else if (!READ_ONCE(to_pid_ns(ns).child_reaper)) {
+    ns.ops.put(ns);
+    return ERR_PTR(-EPERM);
+    }
+    break;
+
+    case CLONE_NEWTIME:
+    if (!current_in_namespace(to_time_ns(ns)))
+    owning_ns = to_time_ns(ns).user_ns;
+    break;
+
+    case CLONE_NEWUSER:
+    if (!current_in_namespace(to_user_ns(ns)))
+    owning_ns = to_user_ns(ns);
+    break;
+
+    case CLONE_NEWUTS:
+    if (!current_in_namespace(to_uts_ns(ns)))
+    owning_ns = to_uts_ns(ns).user_ns;
+    break;
+
+    default:
+    return ERR_PTR(-EOPNOTSUPP);
+    }
+    if (owning_ns && !may_see_all_namespaces()) {
+    ns.ops.put(ns);
+    return ERR_PTR(-EPERM);
+    }
+// path_from_stashed() unconditionally consumes the reference.
+    ret = path_from_stashed(&ns.stashed, nsfs_mnt, ns, &path);
+    if (ret)
+    return ERR_PTR(ret);
+    return no_free_ptr(path.dentry);
+    }
+    static int nsfs_export_permission(struct handle_to_path_ctx *ctx,
+    unsigned int oflags)
+    {
+// nsfs_fh_to_dentry() performs all permission checks.
+    return 0;
+    }
+    static struct file *nsfs_export_open(const struct path *path, unsigned int oflags)
+    {
+    return file_open_root(path, "", oflags, 0);
+    }
+    static const struct export_operations nsfs_export_operations = {
+    .encode_fh	= nsfs_encode_fh,
+    .fh_to_dentry	= nsfs_fh_to_dentry,
+    .open		= nsfs_export_open,
+    .permission	= nsfs_export_permission,
+    };
+#[no_mangle]
+unsafe extern "C" fn nsfs_init_fs_context(fc: *mut fs_context) -> c_int {
+    static int nsfs_init_fs_context(struct fs_context *fc)
+    {
+    struct pseudo_fs_context *ctx = init_pseudo(fc, NSFS_MAGIC);
+    if (!ctx)
+    return -ENOMEM;
+    ctx.s_d_flags |= DCACHE_DONTCACHE;
+    ctx.ops = &nsfs_ops;
+    ctx.eops = &nsfs_export_operations;
+    ctx.dops = &ns_dentry_operations;
+    fc.s_fs_info = (void *)&nsfs_stashed_ops;
+    return 0;
+    }
+    static struct file_system_type nsfs = {
+    .name = "nsfs",
+    .init_fs_context = nsfs_init_fs_context,
+    .kill_sb = kill_anon_super,
+    };
+#[no_mangle]
+pub unsafe extern "C" fn nsfs_init() -> void __init {
+    void __init nsfs_init(void)
+    {
+    nsfs_mnt = kern_mount(&nsfs);
+    if (IS_ERR(nsfs_mnt))
+    panic("can't set nsfs up\n");
+    nsfs_mnt.mnt_sb.s_flags &= ~SB_NOUSER;
+    nsfs_root_path.mnt = nsfs_mnt;
+    nsfs_root_path.dentry = nsfs_mnt.mnt_root;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn nsproxy_ns_active_get(ns: *mut nsproxy) {
+    void nsproxy_ns_active_get(struct nsproxy *ns)
+    {
+    ns_ref_active_get(ns.mnt_ns);
+    ns_ref_active_get(ns.uts_ns);
+    ns_ref_active_get(ns.ipc_ns);
+    ns_ref_active_get(ns.pid_ns_for_children);
+    ns_ref_active_get(ns.cgroup_ns);
+    ns_ref_active_get(ns.net_ns);
+    ns_ref_active_get(ns.time_ns);
+    ns_ref_active_get(ns.time_ns_for_children);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn nsproxy_ns_active_put(ns: *mut nsproxy) {
+    void nsproxy_ns_active_put(struct nsproxy *ns)
+    {
+    ns_ref_active_put(ns.mnt_ns);
+    ns_ref_active_put(ns.uts_ns);
+    ns_ref_active_put(ns.ipc_ns);
+    ns_ref_active_put(ns.pid_ns_for_children);
+    ns_ref_active_put(ns.cgroup_ns);
+    ns_ref_active_put(ns.net_ns);
+    ns_ref_active_put(ns.time_ns);
+    ns_ref_active_put(ns.time_ns_for_children);
+    }

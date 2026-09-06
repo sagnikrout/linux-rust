@@ -1,0 +1,160 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/accel/habanalabs/include/gaudi2/asic_reg/dcore0_vdec0_brdg_ctrl_regs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2016-2020 HabanaLabs, Ltd.
+// All Rights Reserved.
+//
+// This is an auto-generated file
+// DO NOT EDIT BELOW
+//
+// DCORE0_VDEC0_BRDG_CTRL
+// (Prototype: VDEC_BRDG_CTRL)
+//
+pub const mmDCORE0_VDEC0_BRDG_CTRL_CGM_DISABLE: c_uint = 0x41E3100;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_IDLE_MASK: c_uint = 0x41E3104;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_APB_CGM_CNT: c_uint = 0x41E3108;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_APB_ARB_WDOG_CNT: c_uint = 0x41E310C;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_GRACEFUL: c_uint = 0x41E3110;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_IDLE_CGM_CNT: c_uint = 0x41E3114;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_CAUSE_INTR: c_uint = 0x41E3120;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_AXI_VIOL_CAUSE: c_uint = 0x41E3124;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_LBW_AXI_VIOL_CAUSE: c_uint = 0x41E3128;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_AXI_VIOL_CLR_STICKY_TERM: c_uint = 0x41E312C;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_CAUSE_INTR_MASK: c_uint = 0x41E3130;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_AXI_VIOL_MASK: c_uint = 0x41E3134;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_LBW_AXI_VIOL_MASK: c_uint = 0x41E3138;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_GIC_INTR_MASK: c_uint = 0x41E3160;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_GIC_INTR_MASK: c_uint = 0x41E3170;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_GIC_INTR_MASK: c_uint = 0x41E3180;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_GIC_INTR_MASK: c_uint = 0x41E3190;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_HBW_AWPROT: c_uint = 0x41E31A0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_HBW_ARPROT: c_uint = 0x41E31A4;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_LBW_AWPROT: c_uint = 0x41E31B0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_LBW_ARPROT: c_uint = 0x41E31B4;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_LBW_SLV_AWPROT: c_uint = 0x41E31C0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_LBW_SLV_ARPROT: c_uint = 0x41E31C4;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_AXI_LEGAL_AXSIZE: c_uint = 0x41E31D0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ARC_MSG_MASK: c_uint = 0x41E3200;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ARC_START_LBW_WDATA: c_uint = 0x41E3230;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ARC_FINISH_LBW_WDATA: c_uint = 0x41E3260;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HWEVENT_TRACE_SEL: c_uint = 0x41E3270;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HWEVENT_TRACE_ADDR: c_uint = 0x41E3280;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_FREE_RUN_CNT_L: c_uint = 0x41E3290;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_FREE_RUN_CNT_H: c_uint = 0x41E3294;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_FREE_RUN_SET_VALUE_L: c_uint = 0x41E32A0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_FREE_RUN_SET_VALUE_H: c_uint = 0x41E32A4;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_BUSY_CNT_L: c_uint = 0x41E32B0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_BUSY_CNT_H: c_uint = 0x41E32B4;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_BUSY_SET_VALUE_L: c_uint = 0x41E32C0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_BUSY_SET_VALUE_H: c_uint = 0x41E32C4;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_CNTR_EN: c_uint = 0x41E32D0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_INTR_MASK: c_uint = 0x41E3300;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_MSIX_FLOW_MASK: c_uint = 0x41E3310;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_WAIT_CNTR: c_uint = 0x41E3320;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_MSIX_WAIT_CNTR: c_uint = 0x41E3330;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_VCD_WAIT_CNTR: c_uint = 0x41E3334;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_VCD_MSIX_WAIT_CNTR: c_uint = 0x41E3338;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_SWREG1_ADDR: c_uint = 0x41E3340;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_APB_WR_ADDR: c_uint = 0x41E3350;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_APB_WR_DATA: c_uint = 0x41E3360;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_CPLQ_HBW_AWPROT: c_uint = 0x41E3380;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_CPLQ_HBW_AWADDR_L: c_uint = 0x41E3390;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_CPLQ_HBW_AWADDR_H: c_uint = 0x41E3394;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_MSIX_LBW_AWPROT: c_uint = 0x41E33C0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_MSIX_LBW_AWADDR: c_uint = 0x41E33D0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_VCD_MSIX_LBW_WDATA: c_uint = 0x41E33E0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_INTR_MASK: c_uint = 0x41E3400;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_MSIX_FLOW_MASK: c_uint = 0x41E3410;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_WAIT_CNTR: c_uint = 0x41E3420;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_MSIX_WAIT_CNTR: c_uint = 0x41E3430;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_L2C_WAIT_CNTR: c_uint = 0x41E3434;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_L2C_MSIX_WAIT_CNTR: c_uint = 0x41E3438;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_SWREG1_ADDR: c_uint = 0x41E3440;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_APB_WR_ADDR: c_uint = 0x41E3450;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_APB_WR_DATA: c_uint = 0x41E3460;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_CPLQ_HBW_AWPROT: c_uint = 0x41E3480;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_CPLQ_HBW_AWADDR_L: c_uint = 0x41E3490;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_CPLQ_HBW_AWADDR_H: c_uint = 0x41E3494;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_MSIX_LBW_AWPROT: c_uint = 0x41E34C0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_MSIX_LBW_AWADDR: c_uint = 0x41E34D0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_L2C_MSIX_LBW_WDATA: c_uint = 0x41E34E0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_INTR_MASK: c_uint = 0x41E3500;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_MSIX_FLOW_MASK: c_uint = 0x41E3510;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_WAIT_CNTR: c_uint = 0x41E3520;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_MSIX_WAIT_CNTR: c_uint = 0x41E3530;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_NRM_WAIT_CNTR: c_uint = 0x41E3534;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_NRM_MSIX_WAIT_CNTR: c_uint = 0x41E3538;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_SWREG1_ADDR: c_uint = 0x41E3540;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_APB_WR_ADDR: c_uint = 0x41E3550;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_APB_WR_DATA: c_uint = 0x41E3560;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_CPLQ_HBW_AWPROT: c_uint = 0x41E3580;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_CPLQ_HBW_AWADDR_L: c_uint = 0x41E3590;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_CPLQ_HBW_AWADDR_H: c_uint = 0x41E3594;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_MSIX_LBW_AWPROT: c_uint = 0x41E35C0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_MSIX_LBW_AWADDR: c_uint = 0x41E35D0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_NRM_MSIX_LBW_WDATA: c_uint = 0x41E35E0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_INTR_MASK: c_uint = 0x41E3600;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_MSIX_FLOW_MASK: c_uint = 0x41E3610;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_WAIT_CNTR: c_uint = 0x41E3620;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_MSIX_WAIT_CNTR: c_uint = 0x41E3630;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_ABNRM_WAIT_CNTR: c_uint = 0x41E3634;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_STAT_ABNRM_MSIX_WAIT_CNTR: c_uint = 0x41E3638;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_SWREG1_ADDR: c_uint = 0x41E3640;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_APB_WR_ADDR: c_uint = 0x41E3650;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_APB_WR_DATA: c_uint = 0x41E3660;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_CPLQ_HBW_AWPROT: c_uint = 0x41E3680;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_CPLQ_HBW_AWADDR_L: c_uint = 0x41E3690;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_CPLQ_HBW_AWADDR_H: c_uint = 0x41E3694;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_MSIX_LBW_AWPROT: c_uint = 0x41E36C0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_MSIX_LBW_AWADDR: c_uint = 0x41E36D0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_ABNRM_MSIX_LBW_WDATA: c_uint = 0x41E36E0;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_AXI_SPLIT_BRESP_ERR_ID: c_uint = 0x41E3700;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_AXI_SPLIT_CFG: c_uint = 0x41E3704;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_AXI_SPLIT_NO_WR_INFLIGHT: c_uint = 0x41E3708;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HWEVENT_MASK: c_uint = 0x41E370C;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HWEVENT_CNTXT: c_uint = 0x41E3714;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_LBW_SLV_TERM_ERR_RESP: c_uint = 0x41E3718;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_LBW_MSTR_TERM_ERR_RESP: c_uint = 0x41E371C;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_DEC_HBW_MSTR_ERR_RESP: c_uint = 0x41E3720;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_VIOL_TERM_STATUS: c_uint = 0x41E3724;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_LAST_AWADDR_TERM_L: c_uint = 0x41E3728;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_LAST_AWADDR_TERM_H: c_uint = 0x41E372C;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_LAST_ARADDR_TERM_L: c_uint = 0x41E3730;
+pub const mmDCORE0_VDEC0_BRDG_CTRL_HBW_LAST_ARADDR_TERM_H: c_uint = 0x41E3734;

@@ -1,0 +1,61 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/uapi/linux/vmcore.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note
+
+pub const VMCOREDD_MAX_NAME_BYTES: c_int = 44;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct vmcoredd_header {
+    pub /: *mut *mut __u32 n_namesz; / Name size,
+    pub /: *mut *mut __u32 n_descsz; / Content size,
+    pub /: *mut *mut __u32 n_type; / NT_VMCOREDD,
+    pub /: *mut *mut __u8 name[8]; / LINUX\0\0\0,
+    pub /: *mut *mut __u8 dump_name[VMCOREDD_MAX_NAME_BYTES]; / Device dump's name,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum hwerr_error_type {
+    HWERR_RECOV_CPU,
+    HWERR_RECOV_MEMORY,
+    HWERR_RECOV_PCI,
+    HWERR_RECOV_CXL,
+    HWERR_RECOV_OTHERS,
+    HWERR_RECOV_MAX,
+}

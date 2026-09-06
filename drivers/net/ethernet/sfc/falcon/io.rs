@@ -1,0 +1,134 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/net/ethernet/sfc/falcon/io.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Driver for Solarflare network controllers and boards
+// Copyright 2005-2006 Fen Systems Ltd.
+// Copyright 2006-2013 Solarflare Communications Inc.
+//
+
+//
+// NIC register I/O
+//
+// Notes on locking strategy for the Falcon architecture:
+//
+// Many CSRs are very wide and cannot be read or written atomically.
+// Writes from the host are buffered by the Bus Interface Unit (BIU)
+// up to 128 bits.  Whenever the host writes part of such a register,
+// the BIU collects the written value and does not write to the
+// underlying register until all 4 dwords have been written.  A
+// similar buffering scheme applies to host access to the NIC's 64-bit
+// SRAM.
+//
+// Writes to different CSRs and 64-bit SRAM words must be serialised,
+// since interleaved access can result in lost writes.  We use
+// ef4_nic::biu_lock for this.
+//
+// We also serialise reads from 128-bit CSRs and SRAM with the same
+// spinlock.  This may not be necessary, but it doesn't really matter
+// as there are no such reads on the fast path.
+//
+// The DMA descriptor pointers (RX_DESC_UPD and TX_DESC_UPD) are
+// 128-bit but are special-cased in the BIU to avoid the need for
+// locking in the host:
+//
+// - They are write-only.
+// - The semantics of writing to these registers are such that
+// replacing the low 96 bits with zero does not affect functionality.
+// - If the host writes to the last dword address of such a register
+// (i.e. the high 32 bits) the underlying register will always be
+// written.  If the collector and the current write together do not
+// provide values for all 128 bits of the register, the low 96 bits
+// will be written as zero.
+// - If the host writes to the address of any other part of such a
+// register while the collector already holds values for some other
+// register, the write is discarded and the collector maintains its
+// current state.
+//
+// The EF10 architecture exposes very few registers to the host and
+// most of them are only 32 bits wide.  The only exceptions are the MC
+// doorbell register pair, which has its own latching, and
+// TX_DESC_UPD, which works in a similar way to the Falcon
+// architecture.
+//
+
+pub const EF4_USE_QWORD_IO: c_int = 1;
+
+// Write a normal 128-bit CSR, locking as appropriate.
+extern "C" {
+    pub fn __attribute__(_arg: (unused)) -> unsigned long flags;
+}
+
+// Write 64-bit SRAM through the supplied mapping, locking as appropriate.
+extern "C" {
+    pub fn __attribute__(_arg: (unused)) -> unsigned long flags;
+}
+
+// Write a 32-bit CSR or the last dword of a special 128-bit CSR
+// No lock required
+// Read a 128-bit CSR, locking as appropriate.
+extern "C" {
+    pub fn __attribute__(_arg: (unused)) -> unsigned long flags;
+}
+// Read 64-bit SRAM through the supplied mapping, locking as appropriate.
+extern "C" {
+    pub fn __attribute__(_arg: (unused)) -> unsigned long flags;
+}
+
+// Read a 32-bit CSR or SRAM
+// Write a 128-bit CSR forming part of a table
+// Read a 128-bit CSR forming part of a table
+// Page size used as step between per-VI registers
+pub const EF4_VI_PAGE_SIZE: c_uint = 0x2000;
+// Calculate offset to page-mapped register
+
+// Write the whole of RX_DESC_UPD or TX_DESC_UPD
+
+// Write a page-mapped 32-bit CSR (EVQ_RPTR, EVQ_TMR (EF10), or the
+// high bits of RX_DESC_UPD or TX_DESC_UPD)
+//
+
+// Write TIMER_COMMAND.  This is a page-mapped 32-bit CSR, but a bug
+// in the BIU means that writes to TIMER_COMMAND[0] invalidate the
+// collector register.
+//
+extern "C" {
+    pub fn __attribute__(_arg: (unused)) -> unsigned long flags;
+}
+

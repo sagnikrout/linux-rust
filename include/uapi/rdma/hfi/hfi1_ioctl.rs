@@ -1,0 +1,213 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/uapi/rdma/hfi/hfi1_ioctl.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR BSD-3-Clause)
+//
+// This file is provided under a dual BSD/GPLv2 license.  When using or
+// redistributing this file, you may do so under either license.
+//
+// GPL LICENSE SUMMARY
+//
+// Copyright(c) 2015 Intel Corporation.
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of version 2 of the GNU General Public License as
+// published by the Free Software Foundation.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+//
+// BSD LICENSE
+//
+// Copyright(c) 2015 Intel Corporation.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// - Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+// - Redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in
+// the documentation and/or other materials provided with the
+// distribution.
+// - Neither the name of Intel Corporation nor the names of its
+// contributors may be used to endorse or promote products derived
+// from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+
+//
+// This structure is passed to the driver to tell it where
+// user code buffers are, sizes, etc.   The offsets and sizes of the
+// fields must remain unchanged, for binary compatibility.  It can
+// be extended, if userversion is changed so user code can tell, if needed
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hfi1_user_info {
+//
+// version of user software, to detect compatibility issues.
+// Should be set to HFI1_USER_SWVERSION.
+//
+    pub userversion: __u32,
+    pub pad: __u32,
+//
+// If two or more processes wish to share a context, each process
+// must set the subcontext_cnt and subcontext_id to the same
+// values.  The only restriction on the subcontext_id is that
+// it be unique for a given node.
+//
+    pub subctxt_cnt: __u16,
+    pub subctxt_id: __u16,
+// 128bit UUID passed in by PSM.
+    pub uuid: [__u8; 16],
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hfi1_ctxt_info {
+    pub /: *mut *mut *mut __aligned_u64 runtime_flags; / chip/drv runtime flags (HFI1_CAP_),
+    pub /: *mut *mut __u32 rcvegr_size; / size of each eager buffer,
+    pub /: *mut *mut __u16 num_active; / number of active units,
+    pub /: *mut *mut __u16 unit; / unit (chip) assigned to caller,
+    pub /: *mut *mut __u16 ctxt; / ctxt on unit assigned to caller,
+    pub /: *mut *mut __u16 subctxt; / subctxt on unit assigned to caller,
+    pub /: *mut *mut __u16 rcvtids; / number of Rcv TIDs for this context,
+    pub /: *mut *mut __u16 credits; / number of PIO credits for this context,
+    pub /: *mut *mut __u16 numa_node; / NUMA node of the assigned device,
+    pub /: *mut *mut __u16 rec_cpu; / cpu # for affinity (0xffff if none),
+    pub /: *mut *mut __u16 send_ctxt; / send context in use by this user context,
+    pub /: *mut *mut __u16 egrtids; / number of RcvArray entries for Eager Rcvs,
+    pub /: *mut *mut __u16 rcvhdrq_cnt; / number of RcvHdrQ entries,
+    pub /: *mut *mut __u16 rcvhdrq_entsize; / size (in bytes) for each RcvHdrQ entry,
+    pub /: *mut *mut __u16 sdma_ring_size; / number of entries in SDMA request ring,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hfi1_tid_info {
+// virtual address of first page in transfer
+    pub vaddr: __aligned_u64,
+// pointer to tid array. this array is big enough
+    pub tidlist: __aligned_u64,
+// number of tids programmed by this request
+    pub tidcnt: __u32,
+// length of transfer buffer programmed by this request
+    pub length: __u32,
+}
+
+//
+// This structure is returned by the driver immediately after
+// open to get implementation-specific info, and info specific to this
+// instance.
+//
+// This struct must have explicit pad fields where type sizes
+// may result in different alignments between 32 and 64 bit
+// programs, since the 64 bit * bit kernel requires the user code
+// to have matching offsets
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hfi1_base_info {
+// version of hardware, for feature checking.
+    pub hw_version: __u32,
+// version of software, for feature checking.
+    pub sw_version: __u32,
+// Job key
+    pub jkey: __u16,
+    pub padding1: __u16,
+//
+// The special QP (queue pair) value that identifies PSM
+// protocol packet from standard IB packets.
+//
+    pub bthqp: __u32,
+// PIO credit return address,
+    pub sc_credits_addr: __aligned_u64,
+//
+// Base address of write-only pio buffers for this process.
+// Each buffer has sendpio_credits*64 bytes.
+//
+    pub pio_bufbase_sop: __aligned_u64,
+//
+// Base address of write-only pio buffers for this process.
+// Each buffer has sendpio_credits*64 bytes.
+//
+    pub pio_bufbase: __aligned_u64,
+// address where receive buffer queue is mapped into
+    pub rcvhdr_bufbase: __aligned_u64,
+// base address of Eager receive buffers.
+    pub rcvegr_bufbase: __aligned_u64,
+// base address of SDMA completion ring
+    pub sdma_comp_bufbase: __aligned_u64,
+//
+// User register base for init code, not to be used directly by
+// protocol or applications.  Always maps real chip register space.
+// the register addresses are:
+// ur_rcvhdrhead, ur_rcvhdrtail, ur_rcvegrhead, ur_rcvegrtail,
+// ur_rcvtidflow
+//
+    pub user_regbase: __aligned_u64,
+// notification events
+    pub events_bufbase: __aligned_u64,
+// status page
+    pub status_bufbase: __aligned_u64,
+// rcvhdrtail update
+    pub rcvhdrtail_base: __aligned_u64,
+//
+// shared memory pages for subctxts if ctxt is shared; these cover
+// all the processes in the group sharing a single context.
+// all have enough space for the num_subcontexts value on this job.
+//
+    pub subctxt_uregbase: __aligned_u64,
+    pub subctxt_rcvegrbuf: __aligned_u64,
+    pub subctxt_rcvhdrbuf: __aligned_u64,
+}

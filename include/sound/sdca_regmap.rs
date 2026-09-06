@@ -1,0 +1,64 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/sound/sdca_regmap.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// The MIPI SDCA specification is available for public downloads at
+// https://www.mipi.org/mipi-sdca-v1-0-download
+//
+// Copyright (C) 2025 Cirrus Logic, Inc. and
+// Cirrus Logic International Semiconductor Ltd.
+//
+extern "C" {
+    pub fn sdca_regmap_readable(function: *mut sdca_function_data, reg: c_uint) -> bool;
+}
+extern "C" {
+    pub fn sdca_regmap_writeable(function: *mut sdca_function_data, reg: c_uint) -> bool;
+}
+extern "C" {
+    pub fn sdca_regmap_volatile(function: *mut sdca_function_data, reg: c_uint) -> bool;
+}
+extern "C" {
+    pub fn sdca_regmap_deferrable(function: *mut sdca_function_data, reg: c_uint) -> bool;
+}
+extern "C" {
+    pub fn sdca_regmap_mbq_size(function: *mut sdca_function_data, reg: c_uint) -> c_int;
+}
+extern "C" {
+    pub fn sdca_regmap_count_constants(dev: *mut device, function: *mut sdca_function_data) -> c_int;
+}

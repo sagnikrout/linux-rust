@@ -1,0 +1,65 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/drm/drm_vblank_helper.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+
+//
+// VBLANK helpers
+//
+// DRM_CRTC_HELPER_VBLANK_FUNCS - Default implementation for VBLANK helpers
+//
+// This macro initializes struct &drm_crtc_helper_funcs to default helpers
+// for VBLANK handling.
+//
+
+//
+// VBLANK timer
+//
+extern "C" {
+    pub fn drm_crtc_vblank_helper_enable_vblank_timer(crtc: *mut drm_crtc) -> c_int;
+}
+extern "C" {
+    pub fn drm_crtc_vblank_helper_disable_vblank_timer(crtc: *mut drm_crtc);
+}
+//
+// DRM_CRTC_VBLANK_TIMER_FUNCS - Default implementation for VBLANK timers
+//
+// This macro initializes struct &drm_crtc_funcs to default helpers for
+// VBLANK timers.
+//
+

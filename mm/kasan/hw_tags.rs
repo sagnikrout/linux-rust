@@ -1,0 +1,433 @@
+//! Automatically rewritten from C to Rust
+//! Source: mm/kasan/hw_tags.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// This file contains core hardware tag-based KASAN code.
+//
+// Copyright (c) 2020 Google, Inc.
+// Author: Andrey Konovalov <andreyknvl@google.com>
+//
+
+    enum kasan_arg {
+    KASAN_ARG_DEFAULT,
+    KASAN_ARG_OFF,
+    KASAN_ARG_ON,
+    };
+    enum kasan_arg_mode {
+    KASAN_ARG_MODE_DEFAULT,
+    KASAN_ARG_MODE_SYNC,
+    KASAN_ARG_MODE_ASYNC,
+    KASAN_ARG_MODE_ASYMM,
+    };
+    enum kasan_arg_vmalloc {
+    KASAN_ARG_VMALLOC_DEFAULT,
+    KASAN_ARG_VMALLOC_OFF,
+    KASAN_ARG_VMALLOC_ON,
+    };
+    static enum kasan_arg kasan_arg __ro_after_init;
+    static enum kasan_arg_mode kasan_arg_mode __ro_after_init;
+    static enum kasan_arg_vmalloc kasan_arg_vmalloc __initdata;
+//
+// Whether the selected mode is synchronous, asynchronous, or asymmetric.
+// Defaults to KASAN_MODE_SYNC.
+//
+    enum kasan_mode kasan_mode __ro_after_init;
+    EXPORT_SYMBOL_GPL(kasan_mode);
+// Whether to enable vmalloc tagging.
+
+    DEFINE_STATIC_KEY_TRUE(kasan_flag_vmalloc);
+
+    DEFINE_STATIC_KEY_FALSE(kasan_flag_vmalloc);
+
+    EXPORT_SYMBOL_GPL(kasan_flag_vmalloc);
+// Whether to check write accesses only.
+    static bool kasan_flag_write_only;
+pub const PAGE_ALLOC_SAMPLE_DEFAULT: c_int = 1;
+pub const PAGE_ALLOC_SAMPLE_ORDER_DEFAULT: c_int = 3;
+//
+// Sampling interval of page_alloc allocation (un)poisoning.
+// Defaults to no sampling.
+//
+    let mut kasan_page_alloc_sample: c_ulong = PAGE_ALLOC_SAMPLE_DEFAULT;
+//
+// Minimum order of page_alloc allocations to be affected by sampling.
+// The default value is chosen to match both
+// PAGE_ALLOC_COSTLY_ORDER and SKB_FRAG_PAGE_ORDER.
+//
+    let mut kasan_page_alloc_sample_order: c_uint = PAGE_ALLOC_SAMPLE_ORDER_DEFAULT;
+    DEFINE_PER_CPU(long, kasan_page_alloc_skip);
+// kasan=off/on
+#[no_mangle]
+unsafe extern "C" fn early_kasan_flag(arg: *mut c_char) -> int __init {
+    static int __init early_kasan_flag(char *arg)
+    {
+    if (!arg)
+    return -EINVAL;
+    if (!strcmp(arg, "off"))
+    kasan_arg = KASAN_ARG_OFF;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(arg, _arg: "on")) -> else {
+    else if (!strcmp(arg, "on"))
+    kasan_arg = KASAN_ARG_ON;
+    else
+    return -EINVAL;
+    return 0;
+    }
+    early_param("kasan", early_kasan_flag);
+// kasan.mode=sync/async/asymm
+#[no_mangle]
+unsafe extern "C" fn early_kasan_mode(arg: *mut c_char) -> int __init {
+    static int __init early_kasan_mode(char *arg)
+    {
+    if (!arg)
+    return -EINVAL;
+    if (!strcmp(arg, "sync"))
+    kasan_arg_mode = KASAN_ARG_MODE_SYNC;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(arg, _arg: "async")) -> else {
+    else if (!strcmp(arg, "async"))
+    kasan_arg_mode = KASAN_ARG_MODE_ASYNC;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(arg, _arg: "asymm")) -> else {
+    else if (!strcmp(arg, "asymm"))
+    kasan_arg_mode = KASAN_ARG_MODE_ASYMM;
+    else
+    return -EINVAL;
+    return 0;
+    }
+    early_param("kasan.mode", early_kasan_mode);
+// kasan.vmalloc=off/on
+#[no_mangle]
+unsafe extern "C" fn early_kasan_flag_vmalloc(arg: *mut c_char) -> int __init {
+    static int __init early_kasan_flag_vmalloc(char *arg)
+    {
+    if (!arg)
+    return -EINVAL;
+    if (!IS_ENABLED(CONFIG_KASAN_VMALLOC))
+    return 0;
+    if (!strcmp(arg, "off"))
+    kasan_arg_vmalloc = KASAN_ARG_VMALLOC_OFF;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(arg, _arg: "on")) -> else {
+    else if (!strcmp(arg, "on"))
+    kasan_arg_vmalloc = KASAN_ARG_VMALLOC_ON;
+    else
+    return -EINVAL;
+    return 0;
+    }
+    early_param("kasan.vmalloc", early_kasan_flag_vmalloc);
+// kasan.write_only=off/on
+#[no_mangle]
+unsafe extern "C" fn early_kasan_flag_write_only(arg: *mut c_char) -> int __init {
+    static int __init early_kasan_flag_write_only(char *arg)
+    {
+    if (!arg)
+    return -EINVAL;
+    if (!strcmp(arg, "off"))
+    kasan_flag_write_only = false;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp(arg, _arg: "on")) -> else {
+    else if (!strcmp(arg, "on"))
+    kasan_flag_write_only = true;
+    else
+    return -EINVAL;
+    return 0;
+    }
+    early_param("kasan.write_only", early_kasan_flag_write_only);
+    static inline const char *kasan_mode_info(void)
+    {
+    if (kasan_mode == KASAN_MODE_ASYNC)
+    return "async";
+#[no_mangle]
+pub unsafe extern "C" fn if(KASAN_MODE_ASYMM: kasan_mode ==) -> else {
+    else if (kasan_mode == KASAN_MODE_ASYMM)
+    return "asymm";
+    else
+    return "sync";
+    }
+// kasan.page_alloc.sample=<sampling interval>
+#[no_mangle]
+unsafe extern "C" fn early_kasan_flag_page_alloc_sample(arg: *mut c_char) -> int __init {
+    static int __init early_kasan_flag_page_alloc_sample(char *arg)
+    {
+    int rv;
+    if (!arg)
+    return -EINVAL;
+    rv = kstrtoul(arg, 0, &kasan_page_alloc_sample);
+    if (rv)
+    return rv;
+    if (!kasan_page_alloc_sample || kasan_page_alloc_sample > LONG_MAX) {
+    kasan_page_alloc_sample = PAGE_ALLOC_SAMPLE_DEFAULT;
+    return -EINVAL;
+    }
+    return 0;
+    }
+    early_param("kasan.page_alloc.sample", early_kasan_flag_page_alloc_sample);
+// kasan.page_alloc.sample.order=<minimum page order>
+#[no_mangle]
+unsafe extern "C" fn early_kasan_flag_page_alloc_sample_order(arg: *mut c_char) -> int __init {
+    static int __init early_kasan_flag_page_alloc_sample_order(char *arg)
+    {
+    int rv;
+    if (!arg)
+    return -EINVAL;
+    rv = kstrtouint(arg, 0, &kasan_page_alloc_sample_order);
+    if (rv)
+    return rv;
+    if (kasan_page_alloc_sample_order > INT_MAX) {
+    kasan_page_alloc_sample_order = PAGE_ALLOC_SAMPLE_ORDER_DEFAULT;
+    return -EINVAL;
+    }
+    return 0;
+    }
+    early_param("kasan.page_alloc.sample.order", early_kasan_flag_page_alloc_sample_order);
+//
+// kasan_init_hw_tags_cpu() is called for each CPU.
+// Not marked as __init as a CPU can be hot-plugged after boot.
+//
+#[no_mangle]
+pub unsafe extern "C" fn kasan_init_hw_tags_cpu() {
+    void kasan_init_hw_tags_cpu(void)
+    {
+//
+// There's no need to check that the hardware is MTE-capable here,
+// as this function is only called for MTE-capable hardware.
+//
+// If KASAN is disabled via command line, don't initialize it.
+// When this function is called, kasan_flag_enabled is not yet
+// set by kasan_init_hw_tags(). Thus, check kasan_arg instead.
+//
+    if (kasan_arg == KASAN_ARG_OFF)
+    return;
+//
+// Enable async or asymm modes only when explicitly requested
+// through the command line.
+//
+    kasan_enable_hw_tags();
+    }
+// kasan_init_hw_tags() is called once on boot CPU.
+#[no_mangle]
+pub unsafe extern "C" fn kasan_init_hw_tags() -> void __init {
+    void __init kasan_init_hw_tags(void)
+    {
+// If hardware doesn't support MTE, don't initialize KASAN.
+    if (!system_supports_mte())
+    return;
+// If KASAN is disabled via command line, don't initialize it.
+    if (kasan_arg == KASAN_ARG_OFF)
+    return;
+    switch (kasan_arg_mode) {
+    case KASAN_ARG_MODE_DEFAULT:
+// Default is specified by kasan_mode definition.
+    break;
+    case KASAN_ARG_MODE_SYNC:
+    kasan_mode = KASAN_MODE_SYNC;
+    break;
+    case KASAN_ARG_MODE_ASYNC:
+    kasan_mode = KASAN_MODE_ASYNC;
+    break;
+    case KASAN_ARG_MODE_ASYMM:
+    kasan_mode = KASAN_MODE_ASYMM;
+    break;
+    }
+    switch (kasan_arg_vmalloc) {
+    case KASAN_ARG_VMALLOC_DEFAULT:
+// Default is specified by kasan_flag_vmalloc definition.
+    break;
+    case KASAN_ARG_VMALLOC_OFF:
+    static_branch_disable(&kasan_flag_vmalloc);
+    break;
+    case KASAN_ARG_VMALLOC_ON:
+    static_branch_enable(&kasan_flag_vmalloc);
+    break;
+    }
+    kasan_init_tags();
+// KASAN is now initialized, enable it.
+    kasan_enable();
+    pr_info("KernelAddressSanitizer initialized (hw-tags, mode=%s, vmalloc=%s, stacktrace=%s, write_only=%s)\n",
+    kasan_mode_info(),
+    str_on_off(kasan_vmalloc_enabled()),
+    str_on_off(kasan_stack_collection_enabled()),
+    str_on_off(kasan_flag_write_only));
+    }
+
+#[no_mangle]
+unsafe extern "C" fn unpoison_vmalloc_pages(addr: *const c_void, tag: u8) {
+    static void unpoison_vmalloc_pages(const void *addr, u8 tag)
+    {
+    struct vm_struct *area;
+    int i;
+//
+// As hardware tag-based KASAN only tags VM_ALLOC vmalloc allocations
+// (see the comment in __kasan_unpoison_vmalloc), all of the pages
+// should belong to a single area.
+//
+    area = find_vm_area((void *)addr);
+    if (WARN_ON(!area))
+    return;
+    for (i = 0; i < area.nr_pages; i++) {
+    struct page *page = area.pages[i];
+    page_kasan_tag_set(page, tag);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn init_vmalloc_pages(start: *const c_void, size: c_ulong) {
+    static void init_vmalloc_pages(const void *start, unsigned long size)
+    {
+    const void *addr;
+    for (addr = start; addr < start + size; addr += PAGE_SIZE) {
+    struct page *page = vmalloc_to_page(addr);
+    clear_highpage_kasan_tagged(page);
+    }
+    }
+    void *__kasan_unpoison_vmalloc(const void *start, unsigned long size,
+    kasan_vmalloc_flags_t flags)
+    {
+    u8 tag;
+    unsigned long redzone_start, redzone_size;
+    if (!kasan_vmalloc_enabled()) {
+    if (flags & KASAN_VMALLOC_INIT)
+    init_vmalloc_pages(start, size);
+    return (void *)start;
+    }
+//
+// Don't tag non-VM_ALLOC mappings, as:
+//
+// 1. Unlike the software KASAN modes, hardware tag-based KASAN only
+// supports tagging physical memory. Therefore, it can only tag a
+// single mapping of normal physical pages.
+// 2. Hardware tag-based KASAN can only tag memory mapped with special
+// mapping protection bits, see arch_vmap_pgprot_tagged().
+// As non-VM_ALLOC mappings can be mapped outside of vmalloc code,
+// providing these bits would require tracking all non-VM_ALLOC
+// mappers.
+//
+// Thus, for VM_ALLOC mappings, hardware tag-based KASAN only tags
+// the first virtual mapping, which is created by vmalloc().
+// Tagging the page_alloc memory backing that vmalloc() allocation is
+// skipped, see ___GFP_SKIP_KASAN.
+//
+// For non-VM_ALLOC allocations, page_alloc memory is tagged as usual.
+//
+    if (!(flags & KASAN_VMALLOC_VM_ALLOC)) {
+    WARN_ON(flags & KASAN_VMALLOC_INIT);
+    return (void *)start;
+    }
+//
+// Don't tag executable memory.
+// The kernel doesn't tolerate having the PC register tagged.
+//
+    if (!(flags & KASAN_VMALLOC_PROT_NORMAL)) {
+    WARN_ON(flags & KASAN_VMALLOC_INIT);
+    return (void *)start;
+    }
+    tag = (flags & KASAN_VMALLOC_KEEP_TAG) ? get_tag(start) : kasan_random_tag();
+    start = set_tag(start, tag);
+// Unpoison and initialize memory up to size.
+    kasan_unpoison(start, size, flags & KASAN_VMALLOC_INIT);
+//
+// Explicitly poison and initialize the in-page vmalloc() redzone.
+// Unlike software KASAN modes, hardware tag-based KASAN doesn't
+// unpoison memory when populating shadow for vmalloc() space.
+//
+    redzone_start = round_up((unsigned long)start + size,
+    KASAN_GRANULE_SIZE);
+    redzone_size = round_up(redzone_start, PAGE_SIZE) - redzone_start;
+    kasan_poison((void *)redzone_start, redzone_size, KASAN_TAG_INVALID,
+    flags & KASAN_VMALLOC_INIT);
+//
+// Set per-page tag flags to allow accessing physical memory for the
+// vmalloc() mapping through page_address(vmalloc_to_page()).
+//
+    unpoison_vmalloc_pages(start, tag);
+    return (void *)start;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __kasan_poison_vmalloc(start: *const c_void, size: c_ulong) {
+    void __kasan_poison_vmalloc(const void *start, unsigned long size)
+    {
+//
+// No tagging here.
+// The physical pages backing the vmalloc() allocation are poisoned
+// through the usual page_alloc paths.
+//
+    }
+
+#[no_mangle]
+pub unsafe extern "C" fn kasan_enable_hw_tags() {
+    void kasan_enable_hw_tags(void)
+    {
+    if (kasan_arg_mode == KASAN_ARG_MODE_ASYNC)
+    hw_enable_tag_checks_async();
+#[no_mangle]
+pub unsafe extern "C" fn if(KASAN_ARG_MODE_ASYMM: kasan_arg_mode ==) -> else {
+    else if (kasan_arg_mode == KASAN_ARG_MODE_ASYMM)
+    hw_enable_tag_checks_asymm();
+    else
+    hw_enable_tag_checks_sync();
+//
+// CPUs can only be in one of two states:
+// - All CPUs support the write_only feature
+// - No CPUs support the write_only feature
+//
+// If the first CPU attempts hw_enable_tag_checks_write_only() and
+// finds the feature unsupported, kasan_flag_write_only is set to OFF
+// to avoid further unnecessary calls on other CPUs.
+//
+    if (kasan_flag_write_only && hw_enable_tag_checks_write_only()) {
+    kasan_flag_write_only = false;
+    pr_err_once("write-only mode is not supported and thus not enabled\n");
+    }
+    }
+
+    EXPORT_SYMBOL_IF_KUNIT(kasan_enable_hw_tags);
+#[no_mangle]
+pub unsafe extern "C" fn kasan_force_async_fault() -> VISIBLE_IF_KUNIT void {
+    VISIBLE_IF_KUNIT void kasan_force_async_fault(void)
+    {
+    hw_force_async_tag_fault();
+    }
+    EXPORT_SYMBOL_IF_KUNIT(kasan_force_async_fault);
+#[no_mangle]
+pub unsafe extern "C" fn kasan_write_only_enabled() -> VISIBLE_IF_KUNIT bool {
+    VISIBLE_IF_KUNIT bool kasan_write_only_enabled(void)
+    {
+    return kasan_flag_write_only;
+    }
+    EXPORT_SYMBOL_IF_KUNIT(kasan_write_only_enabled);

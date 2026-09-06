@@ -1,0 +1,116 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpio/gpio-gpio-mm.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// GPIO driver for the Diamond Systems GPIO-MM
+// Copyright (C) 2016 William Breathitt Gray
+//
+// This driver supports the following Diamond Systems devices: GPIO-MM and
+// GPIO-MM-12.
+//
+
+    MODULE_IMPORT_NS("I8255");
+pub const GPIOMM_EXTENT: c_int = 8;
+
+    static unsigned int base[MAX_NUM_GPIOMM];
+    static unsigned int num_gpiomm;
+    module_param_hw_array(base, uint, ioport, &num_gpiomm, 0);
+    MODULE_PARM_DESC(base, "Diamond Systems GPIO-MM base addresses");
+pub const GPIOMM_NUM_PPI: c_int = 2;
+    static const struct regmap_range gpiomm_volatile_ranges[] = {
+    i8255_volatile_regmap_range(0x0), i8255_volatile_regmap_range(0x4),
+    };
+    static const struct regmap_access_table gpiomm_volatile_table = {
+    .yes_ranges = gpiomm_volatile_ranges,
+    .n_yes_ranges = ARRAY_SIZE(gpiomm_volatile_ranges),
+    };
+    static const struct regmap_config gpiomm_regmap_config = {
+    .reg_bits = 8,
+    .reg_stride = 1,
+    .val_bits = 8,
+    .io_port = true,
+    .max_register = 0x7,
+    .volatile_table = &gpiomm_volatile_table,
+    .cache_type = REGCACHE_FLAT,
+    };
+pub const GPIOMM_NGPIO: c_int = 48;
+    static const char *gpiomm_names[GPIOMM_NGPIO] = {
+    "Port 1A0", "Port 1A1", "Port 1A2", "Port 1A3", "Port 1A4", "Port 1A5",
+    "Port 1A6", "Port 1A7", "Port 1B0", "Port 1B1", "Port 1B2", "Port 1B3",
+    "Port 1B4", "Port 1B5", "Port 1B6", "Port 1B7", "Port 1C0", "Port 1C1",
+    "Port 1C2", "Port 1C3", "Port 1C4", "Port 1C5", "Port 1C6", "Port 1C7",
+    "Port 2A0", "Port 2A1", "Port 2A2", "Port 2A3", "Port 2A4", "Port 2A5",
+    "Port 2A6", "Port 2A7", "Port 2B0", "Port 2B1", "Port 2B2", "Port 2B3",
+    "Port 2B4", "Port 2B5", "Port 2B6", "Port 2B7", "Port 2C0", "Port 2C1",
+    "Port 2C2", "Port 2C3", "Port 2C4", "Port 2C5", "Port 2C6", "Port 2C7",
+    };
+#[no_mangle]
+unsafe extern "C" fn gpiomm_probe(dev: *mut device, id: c_uint) -> c_int {
+    static int gpiomm_probe(struct device *dev, unsigned int id)
+    {
+    let mut name: *const char const = dev_name(dev);
+    let mut config: i8255_regmap_config = {};
+    void __iomem *regs;
+    if (!devm_request_region(dev, base[id], GPIOMM_EXTENT, name)) {
+    dev_err(dev, "Unable to lock port addresses (0x%X-0x%X)\n",
+    base[id], base[id] + GPIOMM_EXTENT);
+    return -EBUSY;
+    }
+    regs = devm_ioport_map(dev, base[id], GPIOMM_EXTENT);
+    if (!regs)
+    return -ENOMEM;
+    config.map = devm_regmap_init_mmio(dev, regs, &gpiomm_regmap_config);
+    if (IS_ERR(config.map))
+    return dev_err_probe(dev, PTR_ERR(config.map),
+    "Unable to initialize register map\n");
+    config.parent = dev;
+    config.num_ppi = GPIOMM_NUM_PPI;
+    config.names = gpiomm_names;
+    return devm_i8255_regmap_register(dev, &config);
+    }
+    static struct isa_driver gpiomm_driver = {
+    .probe = gpiomm_probe,
+    .driver = {
+    .name = "gpio-mm"
+    },
+    };
+    module_isa_driver(gpiomm_driver, num_gpiomm);
+    MODULE_AUTHOR("William Breathitt Gray <vilhelm.gray@gmail.com>");
+    MODULE_DESCRIPTION("Diamond Systems GPIO-MM GPIO driver");
+    MODULE_LICENSE("GPL v2");

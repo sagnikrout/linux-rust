@@ -1,0 +1,63 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/linux/if_arp.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// INET		An implementation of the TCP/IP protocol suite for the LINUX
+// operating system.  INET is implemented using the  BSD Socket
+// interface as the means of communication with the user level.
+//
+// Global definitions for the ARP (RFC 826) protocol.
+//
+// Version:	@(#)if_arp.h	1.0.1	04/16/93
+//
+// Authors:	Original taken from Berkeley UNIX 4.3, (c) UCB 1986-1988
+// Portions taken from the KA9Q/NOS (v2.00m PA0GRI) source.
+// Ross Biro
+// Fred N. van Kempen, <waltje@uWalt.NL.Mugnet.ORG>
+// Florian La Roche,
+// Jonathan Layes <layes@loran.com>
+// Arnaldo Carvalho de Melo <acme@conectiva.com.br> ARPHRD_HWX25
+//
+
+// ARP header, device address and 2 IP addresses
+
+// ARP header, plus 2 device addresses, plus 2 IP addresses.
+// PPP adds its l2 header automatically in ppp_start_xmit().
+// This makes it look like an l3 device to __bpf_redirect() and tcf_mirred_init().
+//

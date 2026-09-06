@@ -1,0 +1,567 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/hwmon/tmp108.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+// Texas Instruments TMP108 SMBus temperature sensor driver
+//
+// Copyright (C) 2016 John Muir <john@jmuir.com>
+//
+
+pub const TMP108_REG_TEMP: c_uint = 0x00;
+pub const TMP108_REG_CONF: c_uint = 0x01;
+pub const TMP108_REG_TLOW: c_uint = 0x02;
+pub const TMP108_REG_THIGH: c_uint = 0x03;
+
+// Configuration register bits.
+// Note: these bit definitions are byte swapped.
+//
+pub const TMP108_CONF_M0: c_uint = 0x0100 /* Sensor mode. */;
+pub const TMP108_CONF_M1: c_uint = 0x0200;
+pub const TMP108_CONF_TM: c_uint = 0x0400 /* Thermostat mode. */;
+pub const TMP108_CONF_FL: c_uint = 0x0800 /* Watchdog flag - TLOW */;
+pub const TMP108_CONF_FH: c_uint = 0x1000 /* Watchdog flag - THIGH */;
+pub const TMP108_CONF_CR0: c_uint = 0x2000 /* Conversion rate. */;
+pub const TMP108_CONF_CR1: c_uint = 0x4000;
+pub const TMP108_CONF_ID: c_uint = 0x8000;
+pub const TMP108_CONF_HYS0: c_uint = 0x0010 /* Hysteresis. */;
+pub const TMP108_CONF_HYS1: c_uint = 0x0020;
+pub const TMP108_CONF_POL: c_uint = 0x0080 /* Polarity of alert. */;
+// Defaults set by the hardware upon reset.
+
+    TMP108_CONF_HYS0 | TMP108_CONF_M1)
+// These bits are read-only.
+
+    TMP108_CONF_ID)
+
+pub const TMP108_MODE_SHUTDOWN: c_uint = 0x0000;
+
+// When M1 is set, M0 is ignored.
+
+pub const TMP108_CONVRATE_0P25HZ: c_uint = 0x0000;
+
+pub const TMP108_HYSTERESIS_0C: c_uint = 0x0000;
+
+pub const TMP108_CONF_CR0_POS: c_int = 13;
+pub const TMP108_CONF_CR1_POS: c_int = 14;
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct tmp108 {
+    pub regmap: *mut regmap,
+    pub orig_config: u16,
+    pub ready_time: c_ulong,
+    pub params: *const tmp108_params,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct tmp108_params {
+    pub config_reg_16bits: bool,
+    pub sample_times: *const u16,
+    pub n_sample_times: usize,
+}
+
+    static const u16 p3t1035_sample_times[] = {4000, 1000, 250, 125};
+    static const u16 tmp108_sample_times[] = {4000, 1000, 250, 63};
+    static const struct tmp108_params p3t1035_data = {
+    .sample_times = p3t1035_sample_times,
+    .n_sample_times  = ARRAY_SIZE(p3t1035_sample_times),
+    .config_reg_16bits = false,
+    };
+    static const struct tmp108_params tmp108_data = {
+    .sample_times = tmp108_sample_times,
+    .n_sample_times  = ARRAY_SIZE(tmp108_sample_times),
+    .config_reg_16bits = true,
+    };
+// convert 12-bit TMP108 register value to milliCelsius
+#[no_mangle]
+pub unsafe extern "C" fn tmp108_temp_reg_to_mC(val: i16) -> c_int {
+    static inline int tmp108_temp_reg_to_mC(s16 val)
+    {
+    return (val & ~0x0f) * 1000 / 256;
+    }
+// convert milliCelsius to left adjusted 12-bit TMP108 register value
+#[no_mangle]
+pub unsafe extern "C" fn tmp108_mC_to_temp_reg(val: c_int) -> u16 {
+    static inline u16 tmp108_mC_to_temp_reg(int val)
+    {
+    return (val * 256) / 1000;
+    }
+    static int tmp108_read(struct device *dev, enum hwmon_sensor_types type,
+    u32 attr, int channel, long *temp)
+    {
+    struct tmp108 *tmp108 = dev_get_drvdata(dev);
+    unsigned int regval;
+    int err, hyst;
+    if (type == hwmon_chip) {
+    if (attr == hwmon_chip_update_interval) {
+    err = regmap_read(tmp108.regmap, TMP108_REG_CONF,
+    &regval);
+    if (err < 0)
+    return err;
+// temp = tmp108->params->sample_times[FIELD_GET(TMP108_CONF_CONVRATE_FLD,
+    regval)];
+    return 0;
+    }
+    return -EOPNOTSUPP;
+    }
+    switch (attr) {
+    case hwmon_temp_input:
+// Is it too early to return a conversion ?
+    if (time_before(jiffies, tmp108.ready_time)) {
+    dev_dbg(dev, "%s: Conversion not ready yet..\n",
+    __func__);
+    return -EAGAIN;
+    }
+    err = regmap_read(tmp108.regmap, TMP108_REG_TEMP, &regval);
+    if (err < 0)
+    return err;
+// temp = tmp108_temp_reg_to_mC(regval);
+    break;
+    case hwmon_temp_min:
+    case hwmon_temp_max:
+    err = regmap_read(tmp108.regmap, attr == hwmon_temp_min ?
+    TMP108_REG_TLOW : TMP108_REG_THIGH, &regval);
+    if (err < 0)
+    return err;
+// temp = tmp108_temp_reg_to_mC(regval);
+    break;
+    case hwmon_temp_min_alarm:
+    case hwmon_temp_max_alarm:
+    err = regmap_read(tmp108.regmap, TMP108_REG_CONF, &regval);
+    if (err < 0)
+    return err;
+// temp = !!(regval & (attr == hwmon_temp_min_alarm ?
+    TMP108_CONF_FL : TMP108_CONF_FH));
+    break;
+    case hwmon_temp_min_hyst:
+    case hwmon_temp_max_hyst:
+    err = regmap_read(tmp108.regmap, TMP108_REG_CONF, &regval);
+    if (err < 0)
+    return err;
+    switch (regval & TMP108_CONF_HYSTERESIS_MASK) {
+    case TMP108_HYSTERESIS_0C:
+    default:
+    hyst = 0;
+    break;
+    case TMP108_HYSTERESIS_1C:
+    hyst = 1000;
+    break;
+    case TMP108_HYSTERESIS_2C:
+    hyst = 2000;
+    break;
+    case TMP108_HYSTERESIS_4C:
+    hyst = 4000;
+    break;
+    }
+    err = regmap_read(tmp108.regmap, attr == hwmon_temp_min_hyst ?
+    TMP108_REG_TLOW : TMP108_REG_THIGH, &regval);
+    if (err < 0)
+    return err;
+// temp = tmp108_temp_reg_to_mC(regval);
+    if (attr == hwmon_temp_min_hyst)
+// temp += hyst;
+    else
+// temp -= hyst;
+    break;
+    default:
+    return -EOPNOTSUPP;
+    }
+    return 0;
+    }
+    static int tmp108_write(struct device *dev, enum hwmon_sensor_types type,
+    u32 attr, int channel, long temp)
+    {
+    struct tmp108 *tmp108 = dev_get_drvdata(dev);
+    u32 regval, mask;
+    size_t len;
+    u8 index;
+    int err;
+    if (type == hwmon_chip) {
+    if (attr == hwmon_chip_update_interval) {
+    len = tmp108.params.n_sample_times;
+    index = find_closest_descending(temp, tmp108.params.sample_times, len);
+    return regmap_update_bits(tmp108.regmap,
+    TMP108_REG_CONF,
+    TMP108_CONF_CONVRATE_MASK,
+    FIELD_PREP(TMP108_CONF_CONVRATE_FLD, index));
+    }
+    return -EOPNOTSUPP;
+    }
+    switch (attr) {
+    case hwmon_temp_min:
+    case hwmon_temp_max:
+    temp = clamp_val(temp, TMP108_TEMP_MIN_MC, TMP108_TEMP_MAX_MC);
+    return regmap_write(tmp108.regmap,
+    attr == hwmon_temp_min ?
+    TMP108_REG_TLOW : TMP108_REG_THIGH,
+    tmp108_mC_to_temp_reg(temp));
+    case hwmon_temp_min_hyst:
+    case hwmon_temp_max_hyst:
+    temp = clamp_val(temp, TMP108_TEMP_MIN_MC, TMP108_TEMP_MAX_MC);
+    err = regmap_read(tmp108.regmap,
+    attr == hwmon_temp_min_hyst ?
+    TMP108_REG_TLOW : TMP108_REG_THIGH,
+    &regval);
+    if (err < 0)
+    return err;
+    if (attr == hwmon_temp_min_hyst)
+    temp -= tmp108_temp_reg_to_mC(regval);
+    else
+    temp = tmp108_temp_reg_to_mC(regval) - temp;
+    if (temp < 500)
+    mask = TMP108_HYSTERESIS_0C;
+#[no_mangle]
+pub unsafe extern "C" fn if(1500: temp <) -> else {
+    else if (temp < 1500)
+    mask = TMP108_HYSTERESIS_1C;
+#[no_mangle]
+pub unsafe extern "C" fn if(3000: temp <) -> else {
+    else if (temp < 3000)
+    mask = TMP108_HYSTERESIS_2C;
+    else
+    mask = TMP108_HYSTERESIS_4C;
+    return regmap_update_bits(tmp108.regmap, TMP108_REG_CONF,
+    TMP108_CONF_HYSTERESIS_MASK, mask);
+    default:
+    return -EOPNOTSUPP;
+    }
+    }
+    static umode_t tmp108_is_visible(const void *data, enum hwmon_sensor_types type,
+    u32 attr, int channel)
+    {
+    const struct tmp108 *tmp108 = data;
+    if (type == hwmon_chip && attr == hwmon_chip_update_interval)
+    return 0644;
+    if (type != hwmon_temp)
+    return 0;
+    switch (attr) {
+    case hwmon_temp_input:
+    case hwmon_temp_min_alarm:
+    case hwmon_temp_max_alarm:
+    return 0444;
+    case hwmon_temp_min:
+    case hwmon_temp_max:
+    return 0644;
+    case hwmon_temp_min_hyst:
+    case hwmon_temp_max_hyst:
+    if (!tmp108.params.config_reg_16bits)
+    return 0;
+    return 0644;
+    default:
+    return 0;
+    }
+    }
+    static const struct hwmon_channel_info * const tmp108_info[] = {
+    HWMON_CHANNEL_INFO(chip,
+    HWMON_C_REGISTER_TZ | HWMON_C_UPDATE_INTERVAL),
+    HWMON_CHANNEL_INFO(temp,
+    HWMON_T_INPUT | HWMON_T_MAX | HWMON_T_MIN |
+    HWMON_T_MIN_HYST | HWMON_T_MAX_HYST |
+    HWMON_T_MIN_ALARM | HWMON_T_MAX_ALARM),
+    core::ptr::null_mut()
+    };
+    static const struct hwmon_ops tmp108_hwmon_ops = {
+    .is_visible = tmp108_is_visible,
+    .read = tmp108_read,
+    .write = tmp108_write,
+    };
+    static const struct hwmon_chip_info tmp108_chip_info = {
+    .ops = &tmp108_hwmon_ops,
+    .info = tmp108_info,
+    };
+#[no_mangle]
+unsafe extern "C" fn tmp108_restore_config(data: *mut c_void) {
+    static void tmp108_restore_config(void *data)
+    {
+    struct tmp108 *tmp108 = data;
+    regmap_write(tmp108.regmap, TMP108_REG_CONF, tmp108.orig_config);
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_is_writeable_reg(dev: *mut device, reg: c_uint) -> bool {
+    static bool tmp108_is_writeable_reg(struct device *dev, unsigned int reg)
+    {
+    return reg != TMP108_REG_TEMP;
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_is_volatile_reg(dev: *mut device, reg: c_uint) -> bool {
+    static bool tmp108_is_volatile_reg(struct device *dev, unsigned int reg)
+    {
+// Configuration register must be volatile to enable FL and FH.
+    let mut reg: return = = TMP108_REG_TEMP || reg == TMP108_REG_CONF;
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_i2c_reg_read(context: *mut c_void, reg: c_uint, val: *mut c_uint) -> c_int {
+    static int tmp108_i2c_reg_read(void *context, unsigned int reg, unsigned int *val)
+    {
+    struct i2c_client *client = context;
+    struct tmp108 *tmp108 = i2c_get_clientdata(client);
+    int ret;
+    if (reg == TMP108_REG_CONF && !tmp108.params.config_reg_16bits) {
+    ret = i2c_smbus_read_byte_data(client, TMP108_REG_CONF);
+    if (ret < 0)
+    return ret;
+// val = ret << 8;
+    return 0;
+    }
+    ret = i2c_smbus_read_word_swapped(client, reg);
+    if (ret < 0)
+    return ret;
+// val = ret;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_i2c_reg_write(context: *mut c_void, reg: c_uint, val: c_uint) -> c_int {
+    static int tmp108_i2c_reg_write(void *context, unsigned int reg, unsigned int val)
+    {
+    struct i2c_client *client = context;
+    struct tmp108 *tmp108 = i2c_get_clientdata(client);
+    if (reg == TMP108_REG_CONF && !tmp108.params.config_reg_16bits)
+    return i2c_smbus_write_byte_data(client, reg, val >> 8);
+    return i2c_smbus_write_word_swapped(client, reg, val);
+    }
+    static const struct regmap_bus tmp108_i2c_regmap_bus = {
+    .reg_read = tmp108_i2c_reg_read,
+    .reg_write = tmp108_i2c_reg_write,
+    };
+#[no_mangle]
+unsafe extern "C" fn tmp108_i3c_reg_read(context: *mut c_void, reg: c_uint, val: *mut c_uint) -> c_int {
+    static int tmp108_i3c_reg_read(void *context, unsigned int reg, unsigned int *val)
+    {
+    struct i3c_device *i3cdev = context;
+    struct tmp108 *tmp108 = i3cdev_get_drvdata(i3cdev);
+    u8 reg_buf[1], val_buf[2];
+    struct i3c_xfer xfers[] = {
+    {
+    .rnw = false,
+    .len = 1,
+    .data.out = reg_buf,
+    },
+    {
+    .rnw = true,
+    .len = 2,
+    .data.in = val_buf,
+    },
+    };
+    int ret;
+    reg_buf[0] = reg;
+    if (reg == TMP108_REG_CONF && !tmp108.params.config_reg_16bits)
+    xfers[1].len--;
+    ret = i3c_device_do_xfers(i3cdev, xfers, 2, I3C_SDR);
+    if (ret < 0)
+    return ret;
+// val = val_buf[0] << 8;
+    if (reg != TMP108_REG_CONF || tmp108.params.config_reg_16bits)
+// val |= val_buf[1];
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_i3c_reg_write(context: *mut c_void, reg: c_uint, val: c_uint) -> c_int {
+    static int tmp108_i3c_reg_write(void *context, unsigned int reg, unsigned int val)
+    {
+    struct i3c_device *i3cdev = context;
+    struct tmp108 *tmp108 = i3cdev_get_drvdata(i3cdev);
+    u8 val_buf[3];
+    struct i3c_xfer xfers[] = {
+    {
+    .rnw = false,
+    .len = 3,
+    .data.out = val_buf,
+    },
+    };
+    val_buf[0] = reg;
+    val_buf[1] = (val >> 8) & 0xff;
+    if (reg == TMP108_REG_CONF && !tmp108.params.config_reg_16bits)
+    xfers[0].len--;
+    else
+    val_buf[2] = val & 0xff;
+    return i3c_device_do_xfers(i3cdev, xfers, 1, I3C_SDR);
+    }
+    static const struct regmap_bus tmp108_i3c_regmap_bus = {
+    .reg_read = tmp108_i3c_reg_read,
+    .reg_write = tmp108_i3c_reg_write,
+    };
+    static const struct regmap_config tmp108_regmap_config = {
+    .reg_bits = 8,
+    .val_bits = 16,
+    .max_register = TMP108_REG_THIGH,
+    .writeable_reg = tmp108_is_writeable_reg,
+    .volatile_reg = tmp108_is_volatile_reg,
+    .val_format_endian = REGMAP_ENDIAN_BIG,
+    .cache_type = REGCACHE_MAPLE,
+    .use_single_read = true,
+    .use_single_write = true,
+    };
+    static int tmp108_common_probe(struct device *dev, struct regmap *regmap, char *name,
+    const struct tmp108_params *params)
+    {
+    struct device *hwmon_dev;
+    struct tmp108 *tmp108;
+    u32 config;
+    int err;
+    err = devm_regulator_get_enable(dev, "vcc");
+    if (err)
+    return dev_err_probe(dev, err, "Failed to enable regulator\n");
+    tmp108 = devm_kzalloc(dev, sizeof(*tmp108), GFP_KERNEL);
+    if (!tmp108)
+    return -ENOMEM;
+    dev_set_drvdata(dev, tmp108);
+    tmp108.regmap = regmap;
+    tmp108.params = params;
+    err = regmap_read(tmp108.regmap, TMP108_REG_CONF, &config);
+    if (err < 0) {
+    dev_err(dev, "error reading config register: %d", err);
+    return err;
+    }
+    tmp108.orig_config = config;
+// Only continuous mode is supported.
+    config &= ~TMP108_CONF_MODE_MASK;
+    config |= TMP108_MODE_CONTINUOUS;
+// Only comparator mode is supported.
+    config &= ~TMP108_CONF_TM;
+    err = regmap_write(tmp108.regmap, TMP108_REG_CONF, config);
+    if (err < 0) {
+    dev_err(dev, "error writing config register: %d", err);
+    return err;
+    }
+    tmp108.ready_time = jiffies;
+    if ((tmp108.orig_config & TMP108_CONF_MODE_MASK) ==
+    TMP108_MODE_SHUTDOWN)
+    tmp108.ready_time +=
+    msecs_to_jiffies(TMP108_CONVERSION_TIME_MS);
+    err = devm_add_action_or_reset(dev, tmp108_restore_config, tmp108);
+    if (err) {
+    dev_err(dev, "add action or reset failed: %d", err);
+    return err;
+    }
+    hwmon_dev = devm_hwmon_device_register_with_info(dev, name,
+    tmp108,
+    &tmp108_chip_info,
+    core::ptr::null_mut());
+    return PTR_ERR_OR_ZERO(hwmon_dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_probe(client: *mut i2c_client) -> c_int {
+    static int tmp108_probe(struct i2c_client *client)
+    {
+    struct device *dev = &client.dev;
+    struct regmap *regmap;
+    if (!i2c_check_functionality(client.adapter,
+    I2C_FUNC_SMBUS_BYTE_DATA | I2C_FUNC_SMBUS_WORD_DATA))
+    return dev_err_probe(dev, -ENODEV,
+    "adapter doesn't support SMBus word transactions\n");
+    regmap = devm_regmap_init(dev, &tmp108_i2c_regmap_bus, client, &tmp108_regmap_config);
+    if (IS_ERR(regmap))
+    return dev_err_probe(dev, PTR_ERR(regmap), "regmap init failed");
+    return tmp108_common_probe(dev, regmap, client.name, i2c_get_match_data(client));
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_suspend(dev: *mut device) -> c_int {
+    static int tmp108_suspend(struct device *dev)
+    {
+    struct tmp108 *tmp108 = dev_get_drvdata(dev);
+    return regmap_update_bits(tmp108.regmap, TMP108_REG_CONF,
+    TMP108_CONF_MODE_MASK, TMP108_MODE_SHUTDOWN);
+    }
+#[no_mangle]
+unsafe extern "C" fn tmp108_resume(dev: *mut device) -> c_int {
+    static int tmp108_resume(struct device *dev)
+    {
+    struct tmp108 *tmp108 = dev_get_drvdata(dev);
+    int err;
+    err = regmap_update_bits(tmp108.regmap, TMP108_REG_CONF,
+    TMP108_CONF_MODE_MASK, TMP108_MODE_CONTINUOUS);
+    tmp108.ready_time = jiffies +
+    msecs_to_jiffies(TMP108_CONVERSION_TIME_MS);
+    return err;
+    }
+    static DEFINE_SIMPLE_DEV_PM_OPS(tmp108_dev_pm_ops, tmp108_suspend, tmp108_resume);
+    static const struct i2c_device_id tmp108_i2c_ids[] = {
+    { .name = "p3t1035", .driver_data = (unsigned long)&p3t1035_data },
+    { .name = "p3t1085", .driver_data = (unsigned long)&tmp108_data },
+    { .name = "tmp108", .driver_data = (unsigned long)&tmp108_data },
+    { }
+    };
+    MODULE_DEVICE_TABLE(i2c, tmp108_i2c_ids);
+    static const struct of_device_id tmp108_of_ids[] = {
+    { .compatible = "nxp,p3t1035", .data = &p3t1035_data },
+    { .compatible = "nxp,p3t1085", .data = &tmp108_data },
+    { .compatible = "ti,tmp108", .data = &tmp108_data },
+    {}
+    };
+    MODULE_DEVICE_TABLE(of, tmp108_of_ids);
+    static struct i2c_driver tmp108_driver = {
+    .driver = {
+    .name	= DRIVER_NAME,
+    .pm	= pm_sleep_ptr(&tmp108_dev_pm_ops),
+    .of_match_table = tmp108_of_ids,
+    },
+    .probe		= tmp108_probe,
+    .id_table	= tmp108_i2c_ids,
+    };
+    static const struct i3c_device_id p3t1085_i3c_ids[] = {
+    I3C_DEVICE(0x011B, 0x1529, &tmp108_data),
+    I3C_DEVICE(0x011B, 0x152B, &p3t1035_data),
+    {}
+    };
+    MODULE_DEVICE_TABLE(i3c, p3t1085_i3c_ids);
+#[no_mangle]
+unsafe extern "C" fn p3t1085_i3c_probe(i3cdev: *mut i3c_device) -> c_int {
+    static int p3t1085_i3c_probe(struct i3c_device *i3cdev)
+    {
+    struct device *dev = i3cdev_to_dev(i3cdev);
+    struct regmap *regmap;
+    const struct i3c_device_id *id;
+    regmap = devm_regmap_init(dev, &tmp108_i3c_regmap_bus, i3cdev, &tmp108_regmap_config);
+    if (IS_ERR(regmap))
+    return dev_err_probe(dev, PTR_ERR(regmap),
+    "Failed to register i3c regmap\n");
+    id = i3c_device_match_id(i3cdev, p3t1085_i3c_ids);
+    return tmp108_common_probe(dev, regmap, "p3t1085_i3c", id.data);
+    }
+    static struct i3c_driver p3t1085_driver = {
+    .driver = {
+    .name = "p3t1085_i3c",
+    },
+    .probe = p3t1085_i3c_probe,
+    .id_table = p3t1085_i3c_ids,
+    };
+    module_i3c_i2c_driver(p3t1085_driver, &tmp108_driver)
+    MODULE_AUTHOR("John Muir <john@jmuir.com>");
+    MODULE_DESCRIPTION("Texas Instruments TMP108 temperature sensor driver");
+    MODULE_LICENSE("GPL");

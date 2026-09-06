@@ -1,0 +1,221 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpu/drm/nouveau/nv84_fence.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+//
+// Copyright 2012 Red Hat Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+// THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
+// OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+//
+// Authors: Ben Skeggs
+//
+
+    static int
+    nv84_fence_emit32(struct nouveau_channel *chan, u64 virtual, u32 sequence)
+    {
+    struct nvif_push *push = &chan.chan.push;
+    let mut ret: c_int = PUSH_WAIT(push, 8);
+    if (ret == 0) {
+    PUSH_MTHD(push, NV826F, SET_CONTEXT_DMA_SEMAPHORE, chan.vram.handle);
+    PUSH_MTHD(push, NV826F, SEMAPHOREA,
+    NVVAL(NV826F, SEMAPHOREA, OFFSET_UPPER, upper_32_bits(virtual)),
+    SEMAPHOREB, lower_32_bits(virtual),
+    SEMAPHOREC, sequence,
+    SEMAPHORED,
+    NVDEF(NV826F, SEMAPHORED, OPERATION, RELEASE),
+    NON_STALLED_INTERRUPT, 0);
+    PUSH_KICK(push);
+    }
+    return ret;
+    }
+    static int
+    nv84_fence_sync32(struct nouveau_channel *chan, u64 virtual, u32 sequence)
+    {
+    struct nvif_push *push = &chan.chan.push;
+    let mut ret: c_int = PUSH_WAIT(push, 7);
+    if (ret == 0) {
+    PUSH_MTHD(push, NV826F, SET_CONTEXT_DMA_SEMAPHORE, chan.vram.handle);
+    PUSH_MTHD(push, NV826F, SEMAPHOREA,
+    NVVAL(NV826F, SEMAPHOREA, OFFSET_UPPER, upper_32_bits(virtual)),
+    SEMAPHOREB, lower_32_bits(virtual),
+    SEMAPHOREC, sequence,
+    SEMAPHORED,
+    NVDEF(NV826F, SEMAPHORED, OPERATION, ACQ_GEQ));
+    PUSH_KICK(push);
+    }
+    return ret;
+    }
+    static inline u32
+    nv84_fence_chid(struct nouveau_channel *chan)
+    {
+    return chan.cli.drm.runl[chan.runlist].chan_id_base + chan.chid;
+    }
+    static int
+    nv84_fence_emit(struct nouveau_fence *fence)
+    {
+    struct nouveau_channel *chan = fence.channel;
+    struct nv84_fence_chan *fctx = chan.fence;
+    let mut addr: u64 = fctx.vma.addr + nv84_fence_chid(chan) * 16;
+    return fctx.base.emit32(chan, addr, fence.base.seqno);
+    }
+    static int
+    nv84_fence_sync(struct nouveau_fence *fence,
+    struct nouveau_channel *prev, struct nouveau_channel *chan)
+    {
+    struct nv84_fence_chan *fctx = chan.fence;
+    let mut addr: u64 = fctx.vma.addr + nv84_fence_chid(prev) * 16;
+    return fctx.base.sync32(chan, addr, fence.base.seqno);
+    }
+    static u32
+    nv84_fence_read(struct nouveau_channel *chan)
+    {
+    struct nv84_fence_priv *priv = chan.cli.drm.fence;
+    return nouveau_bo_rd32(priv.bo, nv84_fence_chid(chan) * 16/4);
+    }
+    static void
+    nv84_fence_context_del(struct nouveau_channel *chan)
+    {
+    struct nv84_fence_priv *priv = chan.cli.drm.fence;
+    struct nv84_fence_chan *fctx = chan.fence;
+    nouveau_bo_wr32(priv.bo, nv84_fence_chid(chan) * 16 / 4, fctx.base.sequence);
+    mutex_lock(&priv.mutex);
+    nouveau_vma_del(&fctx.vma);
+    mutex_unlock(&priv.mutex);
+    nouveau_fence_context_del(&fctx.base);
+    chan.fence = core::ptr::null_mut();
+    nouveau_fence_context_free(&fctx.base);
+    }
+    int
+    nv84_fence_context_new(struct nouveau_channel *chan)
+    {
+    struct nv84_fence_priv *priv = chan.cli.drm.fence;
+    struct nv84_fence_chan *fctx;
+    int ret;
+    fctx = chan.fence = kzalloc_obj(*fctx);
+    if (!fctx)
+    return -ENOMEM;
+    nouveau_fence_context_new(chan, &fctx.base);
+    fctx.base.emit = nv84_fence_emit;
+    fctx.base.sync = nv84_fence_sync;
+    fctx.base.read = nv84_fence_read;
+    fctx.base.emit32 = nv84_fence_emit32;
+    fctx.base.sync32 = nv84_fence_sync32;
+    fctx.base.sequence = nv84_fence_read(chan);
+    mutex_lock(&priv.mutex);
+    ret = nouveau_vma_new(priv.bo, chan.vmm, &fctx.vma);
+    mutex_unlock(&priv.mutex);
+    if (ret)
+    nv84_fence_context_del(chan);
+    return ret;
+    }
+    static bool
+    nv84_fence_suspend(struct nouveau_drm *drm)
+    {
+    struct nv84_fence_priv *priv = drm.fence;
+    int i;
+    priv.suspend = vmalloc(array_size(sizeof(u32), drm.chan_total));
+    if (priv.suspend) {
+    for (i = 0; i < drm.chan_total; i++)
+    priv.suspend[i] = nouveau_bo_rd32(priv.bo, i*4);
+    }
+    return priv.suspend != core::ptr::null_mut();
+    }
+    static void
+    nv84_fence_resume(struct nouveau_drm *drm)
+    {
+    struct nv84_fence_priv *priv = drm.fence;
+    int i;
+    if (priv.suspend) {
+    for (i = 0; i < drm.chan_total; i++)
+    nouveau_bo_wr32(priv.bo, i*4, priv.suspend[i]);
+    vfree(priv.suspend);
+    priv.suspend = core::ptr::null_mut();
+    }
+    }
+    static void
+    nv84_fence_destroy(struct nouveau_drm *drm)
+    {
+    struct nv84_fence_priv *priv = drm.fence;
+    nouveau_bo_unpin_del(&priv.bo);
+    drm.fence = core::ptr::null_mut();
+    kfree(priv);
+    }
+    int
+    nv84_fence_create(struct nouveau_drm *drm)
+    {
+    struct nv84_fence_priv *priv;
+    u32 domain;
+    int ret;
+    priv = drm.fence = kzalloc_obj(*priv);
+    if (!priv)
+    return -ENOMEM;
+    priv.base.dtor = nv84_fence_destroy;
+    priv.base.suspend = nv84_fence_suspend;
+    priv.base.resume = nv84_fence_resume;
+    priv.base.context_new = nv84_fence_context_new;
+    priv.base.context_del = nv84_fence_context_del;
+    priv.base.uevent = true;
+    mutex_init(&priv.mutex);
+// Use VRAM if there is any ; otherwise fallback to system memory
+    domain = drm.client.device.info.ram_size != 0 ?
+    NOUVEAU_GEM_DOMAIN_VRAM :
+//
+// fences created in sysmem must be non-cached or we
+// will lose CPU/GPU coherency!
+//
+    NOUVEAU_GEM_DOMAIN_GART | NOUVEAU_GEM_DOMAIN_COHERENT;
+    ret = nouveau_bo_new_map(&drm.client, domain, 16 * drm.chan_total, &priv.bo);
+    if (ret)
+    nv84_fence_destroy(drm);
+    return ret;
+    }

@@ -1,0 +1,66 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/gpu/drm/i915/display/intel_de.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: MIT
+//
+// Copyright © 2019 Intel Corporation
+//
+
+extern "C" {
+    pub fn to_intel_uncore(_arg: display->drm) -> return;
+}
+extern "C" {
+    pub fn intel_de_read8(display: *mut intel_display, reg: intel_reg_t) -> u8;
+}
+extern "C" {
+    pub fn intel_de_write8(display: *mut intel_display, reg: intel_reg_t, val: u8);
+}
+extern "C" {
+    pub fn intel_de_read16(display: *mut intel_display, reg: intel_reg_t) -> u16;
+}
+//
+// Unlocked mmio-accessors, think carefully before using these.
+//
+// Certain architectures will die if the same cacheline is concurrently accessed
+// by different clients (e.g. on Ivybridge). Access to registers should
+// therefore generally be serialised, by either the dev_priv->uncore.lock or
+// a more localised lock guarding all access to that bank of registers.
+//
+extern "C" {
+    pub fn intel_uncore_read_notrace(_arg: __to_uncore(display), _arg: reg) -> return;
+}

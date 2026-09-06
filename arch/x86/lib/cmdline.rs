@@ -1,0 +1,247 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/lib/cmdline.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Misc librarized functions for cmdline poking.
+//
+
+#[no_mangle]
+pub unsafe extern "C" fn myisspace(c: u8) -> c_int {
+    static inline int myisspace(u8 c)
+    {
+    return c <= ' ';	/* Close enough approximation */
+    }
+//
+// Find a boolean option (like quiet,noapic,nosmp....)
+//
+// @cmdline: the cmdline string
+// @max_cmdline_size: the maximum size of cmdline
+// @option: option string to look for
+//
+// Returns the position of that @option (starts counting with 1)
+// or 0 on not found.  @option will only be found if it is found
+// as an entire word in @cmdline.  For instance, if @option="car"
+// then a cmdline which contains "cart" will not match.
+//
+    static int
+    __cmdline_find_option_bool(const char *cmdline, int max_cmdline_size,
+    const char *option)
+    {
+    char c;
+    let mut pos: c_int = 0, wstart = 0;
+    const char *opptr = core::ptr::null_mut();
+    enum {
+    st_wordstart = 0,	/* Start of word/after whitespace */
+    st_wordcmp,	/* Comparing this word */
+    st_wordskip,	/* Miscompare, skip */
+    } state = st_wordstart;
+    if (!cmdline)
+    return -1;      /* No command line */
+//
+// This 'pos' check ensures we do not overrun
+// a non-NULL-terminated 'cmdline'
+//
+    while (pos < max_cmdline_size) {
+    c = *(char *)cmdline++;
+    pos++;
+    switch (state) {
+    case st_wordstart:
+    if (!c)
+    return 0;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: myisspace(c)) -> else {
+    else if (myisspace(c))
+    break;
+    state = st_wordcmp;
+    opptr = option;
+    wstart = pos;
+    fallthrough;
+    case st_wordcmp:
+    if (!*opptr) {
+//
+// We matched all the way to the end of the
+// option we were looking for.  If the
+// command-line has a space _or_ ends, then
+// we matched!
+//
+    if (!c || myisspace(c))
+    return wstart;
+//
+// We hit the end of the option, but _not_
+// the end of a word on the cmdline.  Not
+// a match.
+//
+    } else if (!c) {
+//
+// Hit the NULL terminator on the end of
+// cmdline.
+//
+    return 0;
+    } else if (c == *opptr++) {
+//
+// We are currently matching, so continue
+// to the next character on the cmdline.
+//
+    break;
+    }
+    state = st_wordskip;
+    fallthrough;
+    case st_wordskip:
+    if (!c)
+    return 0;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: myisspace(c)) -> else {
+    else if (myisspace(c))
+    state = st_wordstart;
+    break;
+    }
+    }
+    return 0;	/* Buffer overrun */
+    }
+//
+// Find a non-boolean option (i.e. option=argument). In accordance with
+// standard Linux practice, if this option is repeated, this returns the
+// last instance on the command line.
+//
+// @cmdline: the cmdline string
+// @max_cmdline_size: the maximum size of cmdline
+// @option: option string to look for
+// @buffer: memory buffer to return the option argument
+// @bufsize: size of the supplied memory buffer
+//
+// Returns the length of the argument (regardless of if it was
+// truncated to fit in the buffer), or -1 on not found.
+//
+    static int
+    __cmdline_find_option(const char *cmdline, int max_cmdline_size,
+    const char *option, char *buffer, int bufsize)
+    {
+    char c;
+    let mut pos: c_int = 0, len = -1;
+    const char *opptr = core::ptr::null_mut();
+    char *bufptr = buffer;
+    enum {
+    st_wordstart = 0,	/* Start of word/after whitespace */
+    st_wordcmp,	/* Comparing this word */
+    st_wordskip,	/* Miscompare, skip */
+    st_bufcpy,	/* Copying this to buffer */
+    } state = st_wordstart;
+    if (!cmdline)
+    return -1;      /* No command line */
+//
+// This 'pos' check ensures we do not overrun
+// a non-NULL-terminated 'cmdline'
+//
+    while (pos++ < max_cmdline_size) {
+    c = *(char *)cmdline++;
+    if (!c)
+    break;
+    switch (state) {
+    case st_wordstart:
+    if (myisspace(c))
+    break;
+    state = st_wordcmp;
+    opptr = option;
+    fallthrough;
+    case st_wordcmp:
+    if ((c == '=') && !*opptr) {
+//
+// We matched all the way to the end of the
+// option we were looking for, prepare to
+// copy the argument.
+//
+    len = 0;
+    bufptr = buffer;
+    state = st_bufcpy;
+    break;
+    } else if (c == *opptr++) {
+//
+// We are currently matching, so continue
+// to the next character on the cmdline.
+//
+    break;
+    }
+    state = st_wordskip;
+    fallthrough;
+    case st_wordskip:
+    if (myisspace(c))
+    state = st_wordstart;
+    break;
+    case st_bufcpy:
+    if (myisspace(c)) {
+    state = st_wordstart;
+    } else {
+//
+// Increment len, but don't overrun the
+// supplied buffer and leave room for the
+// NULL terminator.
+//
+    if (++len < bufsize)
+// bufptr++ = c;
+    }
+    break;
+    }
+    }
+    if (bufsize)
+// bufptr = '\0';
+    return len;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn cmdline_find_option_bool(cmdline: *const c_char, option: *const c_char) -> c_int {
+    int cmdline_find_option_bool(const char *cmdline, const char *option)
+    {
+    int ret;
+    ret = __cmdline_find_option_bool(cmdline, COMMAND_LINE_SIZE, option);
+    if (ret > 0)
+    return ret;
+    if (IS_ENABLED(CONFIG_CMDLINE_BOOL) && !builtin_cmdline_added)
+    return __cmdline_find_option_bool(builtin_cmdline, COMMAND_LINE_SIZE, option);
+    return ret;
+    }
+    int cmdline_find_option(const char *cmdline, const char *option, char *buffer,
+    int bufsize)
+    {
+    int ret;
+    ret = __cmdline_find_option(cmdline, COMMAND_LINE_SIZE, option, buffer, bufsize);
+    if (ret > 0)
+    return ret;
+    if (IS_ENABLED(CONFIG_CMDLINE_BOOL) && !builtin_cmdline_added)
+    return __cmdline_find_option(builtin_cmdline, COMMAND_LINE_SIZE, option, buffer, bufsize);
+    return ret;
+    }

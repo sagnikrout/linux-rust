@@ -1,0 +1,1133 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/coco/tdx/tdx.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// Copyright (C) 2021-2022 Intel Corporation
+
+// MMIO direction
+pub const EPT_READ: c_int = 0;
+pub const EPT_WRITE: c_int = 1;
+// Port I/O direction
+pub const PORT_READ: c_int = 0;
+pub const PORT_WRITE: c_int = 1;
+// See Exit Qualification for I/O Instructions in VMX documentation
+
+// TDX Module call error codes
+
+pub const TDCALL_INVALID_OPERAND: c_uint = 0xc0000100;
+pub const TDCALL_OPERAND_BUSY: c_uint = 0x80000200;
+pub const TDREPORT_SUBTYPE_0: c_int = 0;
+    static atomic_long_t nr_shared;
+// Called from __tdx_hypercall() for unrecoverable failure
+#[no_mangle]
+pub unsafe extern "C" fn __tdx_hypercall_failed() -> noinstr void __noreturn {
+    noinstr void __noreturn __tdx_hypercall_failed(void)
+    {
+    instrumentation_begin();
+    panic("TDVMCALL failed. TDX module bug?");
+    }
+
+    long tdx_kvm_hypercall(unsigned int nr, unsigned long p1, unsigned long p2,
+    unsigned long p3, unsigned long p4)
+    {
+    struct tdx_module_args args = {
+    .r10 = nr,
+    .r11 = p1,
+    .r12 = p2,
+    .r13 = p3,
+    .r14 = p4,
+    };
+    return __tdx_hypercall(&args);
+    }
+    EXPORT_SYMBOL_GPL(tdx_kvm_hypercall);
+
+//
+// Used for TDX guests to make calls directly to the TD module.  This
+// should only be used for calls that have no legitimate reason to fail
+// or where the kernel can not survive the call failing.
+//
+#[no_mangle]
+pub unsafe extern "C" fn tdcall(fn: u64, args: *mut tdx_module_args) {
+    static inline void tdcall(u64 fn, struct tdx_module_args *args)
+    {
+    if (__tdcall_ret(fn, args))
+    panic("TDCALL %lld failed (Buggy TDX module!)\n", fn);
+    }
+// Read TD-scoped metadata
+#[no_mangle]
+pub unsafe extern "C" fn tdg_vm_rd(field: u64, value: *mut u64) -> u64 {
+    static inline u64 tdg_vm_rd(u64 field, u64 *value)
+    {
+    struct tdx_module_args args = {
+    .rdx = field,
+    };
+    u64 ret;
+    ret = __tdcall_ret(TDG_VM_RD, &args);
+// value = args.r8;
+    return ret;
+    }
+// Write TD-scoped metadata
+#[no_mangle]
+pub unsafe extern "C" fn tdg_vm_wr(field: u64, value: u64, mask: u64) -> u64 {
+    static inline u64 tdg_vm_wr(u64 field, u64 value, u64 mask)
+    {
+    struct tdx_module_args args = {
+    .rdx = field,
+    .r8 = value,
+    .r9 = mask,
+    };
+    return __tdcall(TDG_VM_WR, &args);
+    }
+//
+// tdx_mcall_get_report0() - Wrapper to get TDREPORT0 (a.k.a. TDREPORT
+// subtype 0) using TDG.MR.REPORT TDCALL.
+// @reportdata: Address of the input buffer which contains user-defined
+// REPORTDATA to be included into TDREPORT.
+// @tdreport: Address of the output buffer to store TDREPORT.
+//
+// Refer to section titled "TDG.MR.REPORT leaf" in the TDX Module v1.0
+// specification for more information on TDG.MR.REPORT TDCALL.
+//
+// It is used in the TDX guest driver module to get the TDREPORT0.
+//
+// Return 0 on success, -ENXIO for invalid operands, -EBUSY for busy operation,
+// or -EIO on other TDCALL failures.
+//
+#[no_mangle]
+pub unsafe extern "C" fn tdx_mcall_get_report0(reportdata: *mut u8, tdreport: *mut u8) -> c_int {
+    int tdx_mcall_get_report0(u8 *reportdata, u8 *tdreport)
+    {
+    struct tdx_module_args args = {
+    .rcx = virt_to_phys(tdreport),
+    .rdx = virt_to_phys(reportdata),
+    .r8 = TDREPORT_SUBTYPE_0,
+    };
+    u64 ret;
+    ret = __tdcall(TDG_MR_REPORT, &args);
+    if (ret) {
+    if (TDCALL_RETURN_CODE(ret) == TDCALL_INVALID_OPERAND)
+    return -ENXIO;
+#[no_mangle]
+pub unsafe extern "C" fn if(TDCALL_OPERAND_BUSY: TDCALL_RETURN_CODE(ret) ==) -> else {
+    else if (TDCALL_RETURN_CODE(ret) == TDCALL_OPERAND_BUSY)
+    return -EBUSY;
+    return -EIO;
+    }
+    return 0;
+    }
+    EXPORT_SYMBOL_GPL(tdx_mcall_get_report0);
+//
+// tdx_mcall_extend_rtmr() - Wrapper to extend RTMR registers using
+// TDG.MR.RTMR.EXTEND TDCALL.
+// @index: Index of RTMR register to be extended.
+// @data: Address of the input buffer with RTMR register extend data.
+//
+// Refer to section titled "TDG.MR.RTMR.EXTEND leaf" in the TDX Module v1.0
+// specification for more information on TDG.MR.RTMR.EXTEND TDCALL.
+//
+// It is used in the TDX guest driver module to allow user to extend the RTMR
+// registers.
+//
+// Return 0 on success, -ENXIO for invalid operands, -EBUSY for busy operation,
+// or -EIO on other TDCALL failures.
+//
+#[no_mangle]
+pub unsafe extern "C" fn tdx_mcall_extend_rtmr(index: u8, data: *mut u8) -> c_int {
+    int tdx_mcall_extend_rtmr(u8 index, u8 *data)
+    {
+    struct tdx_module_args args = {
+    .rcx = virt_to_phys(data),
+    .rdx = index,
+    };
+    u64 ret;
+    ret = __tdcall(TDG_MR_RTMR_EXTEND, &args);
+    if (ret) {
+    if (TDCALL_RETURN_CODE(ret) == TDCALL_INVALID_OPERAND)
+    return -ENXIO;
+    if (TDCALL_RETURN_CODE(ret) == TDCALL_OPERAND_BUSY)
+    return -EBUSY;
+    return -EIO;
+    }
+    return 0;
+    }
+    EXPORT_SYMBOL_GPL(tdx_mcall_extend_rtmr);
+//
+// tdx_hcall_get_quote() - Wrapper to request TD Quote using GetQuote
+// hypercall.
+// @buf: Address of the directly mapped shared kernel buffer which
+// contains TDREPORT. The same buffer will be used by VMM to
+// store the generated TD Quote output.
+// @size: size of the tdquote buffer (4KB-aligned).
+//
+// Refer to section titled "TDG.VP.VMCALL<GetQuote>" in the TDX GHCI
+// v1.0 specification for more information on GetQuote hypercall.
+// It is used in the TDX guest driver module to get the TD Quote.
+//
+// Return 0 on success or error code on failure.
+//
+#[no_mangle]
+pub unsafe extern "C" fn tdx_hcall_get_quote(buf: *mut u8, size: usize) -> u64 {
+    u64 tdx_hcall_get_quote(u8 *buf, size_t size)
+    {
+// Since buf is a shared memory, set the shared (decrypted) bits
+    return _tdx_hypercall(TDVMCALL_GET_QUOTE, cc_mkdec(virt_to_phys(buf)), size, 0, 0);
+    }
+    EXPORT_SYMBOL_GPL(tdx_hcall_get_quote);
+#[no_mangle]
+unsafe extern "C" fn tdx_panic(msg: *const c_char) -> void __noreturn {
+    static void __noreturn tdx_panic(const char *msg)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = TDVMCALL_REPORT_FATAL_ERROR,
+    .r12 = 0, /* Error code: 0 is Panic */
+    };
+    union {
+// Define register order according to the GHCI
+    struct { u64 r14, r15, rbx, rdi, rsi, r8, r9, rdx; };
+    char bytes[64] __nonstring;
+    } message;
+// VMM assumes '\0' in byte 65, if the message took all 64 bytes
+    strtomem_pad(message.bytes, msg, '\0');
+    args.r8  = message.r8;
+    args.r9  = message.r9;
+    args.r14 = message.r14;
+    args.r15 = message.r15;
+    args.rdi = message.rdi;
+    args.rsi = message.rsi;
+    args.rbx = message.rbx;
+    args.rdx = message.rdx;
+//
+// This hypercall should never return and it is not safe
+// to keep the guest running. Call it forever if it
+// happens to return.
+//
+    while (1)
+    __tdx_hypercall(&args);
+    }
+//
+// The kernel cannot handle #VEs when accessing normal kernel memory. Ensure
+// that no #VE will be delivered for accesses to TD-private memory.
+//
+// TDX 1.0 does not allow the guest to disable SEPT #VE on its own. The VMM
+// controls if the guest will receive such #VE with TD attribute
+// TDX_TD_ATTR_SEPT_VE_DISABLE.
+//
+// Newer TDX modules allow the guest to control if it wants to receive SEPT
+// violation #VEs.
+//
+// Check if the feature is available and disable SEPT #VE if possible.
+//
+// If the TD is allowed to disable/enable SEPT #VEs, the TDX_TD_ATTR_SEPT_VE_DISABLE
+// attribute is no longer reliable. It reflects the initial state of the
+// control for the TD, but it will not be updated if someone (e.g. bootloader)
+// changes it before the kernel starts. Kernel must check TDCS_TD_CTLS bit to
+// determine if SEPT #VEs are enabled or disabled.
+//
+#[no_mangle]
+unsafe extern "C" fn disable_sept_ve(td_attr: u64) {
+    static void disable_sept_ve(u64 td_attr)
+    {
+    const char *msg = "TD misconfiguration: SEPT #VE has to be disabled";
+    let mut debug: bool = td_attr & TDX_TD_ATTR_DEBUG;
+    u64 config, controls;
+// Is this TD allowed to disable SEPT #VE
+    tdg_vm_rd(TDCS_CONFIG_FLAGS, &config);
+    if (!(config & TDCS_CONFIG_FLEXIBLE_PENDING_VE)) {
+// No SEPT #VE controls for the guest: check the attribute
+    if (td_attr & TDX_TD_ATTR_SEPT_VE_DISABLE)
+    return;
+// Relax SEPT_VE_DISABLE check for debug TD for backtraces
+    if (debug)
+    pr_warn("%s\n", msg);
+    else
+    tdx_panic(msg);
+    return;
+    }
+// Check if SEPT #VE has been disabled before us
+    tdg_vm_rd(TDCS_TD_CTLS, &controls);
+    if (controls & TD_CTLS_PENDING_VE_DISABLE)
+    return;
+// Keep #VEs enabled for splats in debugging environments
+    if (debug)
+    return;
+// Disable SEPT #VEs
+    tdg_vm_wr(TDCS_TD_CTLS, TD_CTLS_PENDING_VE_DISABLE,
+    TD_CTLS_PENDING_VE_DISABLE);
+    }
+//
+// TDX 1.0 generates a #VE when accessing topology-related CPUID leafs (0xB and
+// 0x1F) and the X2APIC_APICID MSR. The kernel returns all zeros on CPUID #VEs.
+// In practice, this means that the kernel can only boot with a plain topology.
+// Any complications will cause problems.
+//
+// The ENUM_TOPOLOGY feature allows the VMM to provide topology information.
+// Enabling the feature  eliminates topology-related #VEs: the TDX module
+// virtualizes accesses to the CPUID leafs and the MSR.
+//
+// Enable ENUM_TOPOLOGY if it is available.
+//
+#[no_mangle]
+unsafe extern "C" fn enable_cpu_topology_enumeration() {
+    static void enable_cpu_topology_enumeration(void)
+    {
+    u64 configured;
+// Has the VMM provided a valid topology configuration?
+    tdg_vm_rd(TDCS_TOPOLOGY_ENUM_CONFIGURED, &configured);
+    if (!configured) {
+    pr_err("VMM did not configure X2APIC_IDs properly\n");
+    return;
+    }
+    tdg_vm_wr(TDCS_TD_CTLS, TD_CTLS_ENUM_TOPOLOGY, TD_CTLS_ENUM_TOPOLOGY);
+    }
+#[no_mangle]
+unsafe extern "C" fn reduce_unnecessary_ve() {
+    static void reduce_unnecessary_ve(void)
+    {
+    let mut err: u64 = tdg_vm_wr(TDCS_TD_CTLS, TD_CTLS_REDUCE_VE, TD_CTLS_REDUCE_VE);
+    if (err == TDX_SUCCESS)
+    return;
+//
+// Enabling REDUCE_VE includes ENUM_TOPOLOGY. Only try to
+// enable ENUM_TOPOLOGY if REDUCE_VE was not successful.
+//
+    enable_cpu_topology_enumeration();
+    }
+#[no_mangle]
+unsafe extern "C" fn tdx_setup(cc_mask: *mut u64) {
+    static void tdx_setup(u64 *cc_mask)
+    {
+    let mut args: tdx_module_args = {};
+    unsigned int gpa_width;
+    u64 td_attr;
+//
+// TDINFO TDX module call is used to get the TD execution environment
+// information like GPA width, number of available vcpus, debug mode
+// information, etc. More details about the ABI can be found in TDX
+// Guest-Host-Communication Interface (GHCI), section 2.4.2 TDCALL
+// [TDG.VP.INFO].
+//
+    tdcall(TDG_VP_INFO, &args);
+//
+// The highest bit of a guest physical address is the "sharing" bit.
+// Set it for shared pages and clear it for private pages.
+//
+// The GPA width that comes out of this call is critical. TDX guests
+// can not meaningfully run without it.
+//
+    gpa_width = args.rcx & GENMASK(5, 0);
+// cc_mask = BIT_ULL(gpa_width - 1);
+    td_attr = args.rdx;
+// Kernel does not use NOTIFY_ENABLES and does not need random #VEs
+    tdg_vm_wr(TDCS_NOTIFY_ENABLES, 0, -1ULL);
+    disable_sept_ve(td_attr);
+    reduce_unnecessary_ve();
+    }
+//
+// The TDX module spec states that #VE may be injected for a limited set of
+// reasons:
+//
+// - Emulation of the architectural #VE injection on EPT violation;
+//
+// - As a result of guest TD execution of a disallowed instruction,
+// a disallowed MSR access, or CPUID virtualization;
+//
+// - A notification to the guest TD about anomalous behavior;
+//
+// The last one is opt-in and is not used by the kernel.
+//
+// The Intel Software Developer's Manual describes cases when instruction
+// length field can be used in section "Information for VM Exits Due to
+// Instruction Execution".
+//
+// For TDX, it ultimately means GET_VEINFO provides reliable instruction length
+// information if #VE occurred due to instruction execution, but not for EPT
+// violations.
+//
+#[no_mangle]
+unsafe extern "C" fn ve_instr_len(ve: *mut ve_info) -> c_int {
+    static int ve_instr_len(struct ve_info *ve)
+    {
+    switch (ve.exit_reason) {
+    case EXIT_REASON_HLT:
+    case EXIT_REASON_MSR_READ:
+    case EXIT_REASON_MSR_WRITE:
+    case EXIT_REASON_CPUID:
+    case EXIT_REASON_IO_INSTRUCTION:
+// It is safe to use ve->instr_len for #VE due instructions
+    return ve.instr_len;
+    case EXIT_REASON_EPT_VIOLATION:
+//
+// For EPT violations, ve->insn_len is not defined. For those,
+// the kernel must decode instructions manually and should not
+// be using this function.
+//
+    WARN_ONCE(1, "ve.instr_len is not defined for EPT violations");
+    return 0;
+    default:
+    WARN_ONCE(1, "Unexpected #VE-type: %lld\n", ve.exit_reason);
+    return ve.instr_len;
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn __halt(irq_disabled: bool) -> u64 __cpuidle {
+    static u64 __cpuidle __halt(const bool irq_disabled)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = hcall_func(EXIT_REASON_HLT),
+    .r12 = irq_disabled,
+    };
+//
+// Emulate HLT operation via hypercall. More info about ABI
+// can be found in TDX Guest-Host-Communication Interface
+// (GHCI), section 3.8 TDG.VP.VMCALL<Instruction.HLT>.
+//
+// The VMM uses the "IRQ disabled" param to understand IRQ
+// enabled status (RFLAGS.IF) of the TD guest and to determine
+// whether or not it should schedule the halted vCPU if an
+// IRQ becomes pending. E.g. if IRQs are disabled, the VMM
+// can keep the vCPU in virtual HLT, even if an IRQ is
+// pending, without hanging/breaking the guest.
+//
+    return __tdx_hypercall(&args);
+    }
+#[no_mangle]
+unsafe extern "C" fn handle_halt(ve: *mut ve_info) -> c_int {
+    static int handle_halt(struct ve_info *ve)
+    {
+    let mut irq_disabled: bool = irqs_disabled();
+//
+// HLT with IRQs enabled is unsafe, as an IRQ that is intended to be a
+// wake event may be consumed before requesting HLT emulation, leaving
+// the vCPU blocking indefinitely.
+//
+    if (WARN_ONCE(!irq_disabled, "HLT emulation with IRQs enabled"))
+    return -EIO;
+    if (__halt(irq_disabled))
+    return -EIO;
+    return ve_instr_len(ve);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn tdx_halt() -> void __cpuidle {
+    void __cpuidle tdx_halt(void)
+    {
+    let mut irq_disabled: bool = false;
+//
+// Use WARN_ONCE() to report the failure.
+//
+    if (__halt(irq_disabled))
+    WARN_ONCE(1, "HLT instruction emulation failed\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn tdx_safe_halt() -> void __cpuidle {
+    static void __cpuidle tdx_safe_halt(void)
+    {
+    tdx_halt();
+//
+// "__cpuidle" section doesn't support instrumentation, so stick
+// with raw_* variant that avoids tracing hooks.
+//
+    raw_local_irq_enable();
+    }
+#[no_mangle]
+unsafe extern "C" fn read_msr(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int read_msr(struct pt_regs *regs, struct ve_info *ve)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = hcall_func(EXIT_REASON_MSR_READ),
+    .r12 = regs.cx,
+    };
+//
+// Emulate the MSR read via hypercall. More info about ABI
+// can be found in TDX Guest-Host-Communication Interface
+// (GHCI), section titled "TDG.VP.VMCALL<Instruction.RDMSR>".
+//
+    if (__tdx_hypercall(&args))
+    return -EIO;
+    regs.ax = lower_32_bits(args.r11);
+    regs.dx = upper_32_bits(args.r11);
+    return ve_instr_len(ve);
+    }
+#[no_mangle]
+unsafe extern "C" fn write_msr(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int write_msr(struct pt_regs *regs, struct ve_info *ve)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = hcall_func(EXIT_REASON_MSR_WRITE),
+    .r12 = regs.cx,
+    .r13 = (u64)regs.dx << 32 | regs.ax,
+    };
+//
+// Emulate the MSR write via hypercall. More info about ABI
+// can be found in TDX Guest-Host-Communication Interface
+// (GHCI) section titled "TDG.VP.VMCALL<Instruction.WRMSR>".
+//
+    if (__tdx_hypercall(&args))
+    return -EIO;
+    return ve_instr_len(ve);
+    }
+#[no_mangle]
+unsafe extern "C" fn handle_cpuid(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int handle_cpuid(struct pt_regs *regs, struct ve_info *ve)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = hcall_func(EXIT_REASON_CPUID),
+    .r12 = regs.ax,
+    .r13 = regs.cx,
+    };
+//
+// Only allow VMM to control range reserved for hypervisor
+// communication.
+//
+// Return all-zeros for any CPUID outside the range. It matches CPU
+// behaviour for non-supported leaf.
+//
+    if (regs.ax < 0x40000000 || regs.ax > 0x4FFFFFFF) {
+    regs.ax = regs.bx = regs.cx = regs.dx = 0;
+    return ve_instr_len(ve);
+    }
+//
+// Emulate the CPUID instruction via a hypercall. More info about
+// ABI can be found in TDX Guest-Host-Communication Interface
+// (GHCI), section titled "VP.VMCALL<Instruction.CPUID>".
+//
+    if (__tdx_hypercall(&args))
+    return -EIO;
+//
+// As per TDX GHCI CPUID ABI, r12-r15 registers contain contents of
+// EAX, EBX, ECX, EDX registers after the CPUID instruction execution.
+// So copy the register contents back to pt_regs.
+//
+    regs.ax = args.r12;
+    regs.bx = args.r13;
+    regs.cx = args.r14;
+    regs.dx = args.r15;
+    return ve_instr_len(ve);
+    }
+#[no_mangle]
+unsafe extern "C" fn mmio_read(size: c_int, addr: c_ulong, val: *mut c_ulong) -> bool {
+    static bool mmio_read(int size, unsigned long addr, unsigned long *val)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = hcall_func(EXIT_REASON_EPT_VIOLATION),
+    .r12 = size,
+    .r13 = EPT_READ,
+    .r14 = addr,
+    };
+    if (__tdx_hypercall(&args))
+    return false;
+// val = args.r11;
+    return true;
+    }
+#[no_mangle]
+unsafe extern "C" fn mmio_write(size: c_int, addr: c_ulong, val: c_ulong) -> bool {
+    static bool mmio_write(int size, unsigned long addr, unsigned long val)
+    {
+    return !_tdx_hypercall(hcall_func(EXIT_REASON_EPT_VIOLATION), size,
+    EPT_WRITE, addr, val);
+    }
+#[no_mangle]
+unsafe extern "C" fn handle_mmio(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int handle_mmio(struct pt_regs *regs, struct ve_info *ve)
+    {
+    unsigned long *reg, val, vaddr;
+    char buffer[MAX_INSN_SIZE];
+    enum insn_mmio_type mmio;
+    let mut insn: insn = {};
+    int size, extend_size;
+    let mut extend_val: u8 = 0;
+// Only in-kernel MMIO is supported
+    if (WARN_ON_ONCE(user_mode(regs)))
+    return -EFAULT;
+    if (copy_from_kernel_nofault(buffer, (void *)regs.ip, MAX_INSN_SIZE))
+    return -EFAULT;
+    if (insn_decode(&insn, buffer, MAX_INSN_SIZE, INSN_MODE_64))
+    return -EINVAL;
+    mmio = insn_decode_mmio(&insn, &size);
+    if (WARN_ON_ONCE(mmio == INSN_MMIO_DECODE_FAILED))
+    return -EINVAL;
+    if (mmio != INSN_MMIO_WRITE_IMM && mmio != INSN_MMIO_MOVS) {
+    reg = insn_get_modrm_reg_ptr(&insn, regs);
+    if (!reg)
+    return -EINVAL;
+    }
+    if (!fault_in_kernel_space(ve.gla)) {
+    WARN_ONCE(1, "Access to userspace address is not supported");
+    return -EINVAL;
+    }
+//
+// Reject EPT violation #VEs that split pages.
+//
+// MMIO accesses are supposed to be naturally aligned and therefore
+// never cross page boundaries. Seeing split page accesses indicates
+// a bug or a load_unaligned_zeropad() that stepped into an MMIO page.
+//
+// load_unaligned_zeropad() will recover using exception fixups.
+//
+    vaddr = (unsigned long)insn_get_addr_ref(&insn, regs);
+    if (vaddr / PAGE_SIZE != (vaddr + size - 1) / PAGE_SIZE)
+    return -EFAULT;
+// Handle writes first
+    switch (mmio) {
+    case INSN_MMIO_WRITE:
+    memcpy(&val, reg, size);
+    if (!mmio_write(size, ve.gpa, val))
+    return -EIO;
+    return insn.length;
+    case INSN_MMIO_WRITE_IMM:
+    val = insn.immediate.value;
+    if (!mmio_write(size, ve.gpa, val))
+    return -EIO;
+    return insn.length;
+    case INSN_MMIO_READ:
+    case INSN_MMIO_READ_ZERO_EXTEND:
+    case INSN_MMIO_READ_SIGN_EXTEND:
+// Reads are handled below
+    break;
+    case INSN_MMIO_MOVS:
+    case INSN_MMIO_DECODE_FAILED:
+//
+// MMIO was accessed with an instruction that could not be
+// decoded or handled properly. It was likely not using io.h
+// helpers or accessed MMIO accidentally.
+//
+    return -EINVAL;
+    default:
+    WARN_ONCE(1, "Unknown insn_decode_mmio() decode value?");
+    return -EINVAL;
+    }
+// Handle reads
+    if (!mmio_read(size, ve.gpa, &val))
+    return -EIO;
+    switch (mmio) {
+    case INSN_MMIO_READ:
+// Zero-extend for 32-bit operation
+    extend_size = size == 4 ? sizeof(*reg) : 0;
+    break;
+    case INSN_MMIO_READ_ZERO_EXTEND:
+// Zero extend based on operand size
+    extend_size = insn.opnd_bytes;
+    break;
+    case INSN_MMIO_READ_SIGN_EXTEND:
+// Sign extend based on operand size
+    extend_size = insn.opnd_bytes;
+    if (size == 1 && val & BIT(7))
+    extend_val = 0xFF;
+#[no_mangle]
+pub unsafe extern "C" fn if(BIT(15): size > 1 && val &) -> else {
+    else if (size > 1 && val & BIT(15))
+    extend_val = 0xFF;
+    break;
+    default:
+// All other cases has to be covered with the first switch()
+    WARN_ON_ONCE(1);
+    return -EINVAL;
+    }
+    if (extend_size)
+    memset(reg, extend_val, extend_size);
+    memcpy(reg, &val, size);
+    return insn.length;
+    }
+#[no_mangle]
+unsafe extern "C" fn handle_in(regs: *mut pt_regs, size: c_int, port: c_int) -> bool {
+    static bool handle_in(struct pt_regs *regs, int size, int port)
+    {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = hcall_func(EXIT_REASON_IO_INSTRUCTION),
+    .r12 = size,
+    .r13 = PORT_READ,
+    .r14 = port,
+    };
+    bool success;
+    u64 val;
+//
+// Emulate the I/O read via hypercall. More info about ABI can be found
+// in TDX Guest-Host-Communication Interface (GHCI) section titled
+// "TDG.VP.VMCALL<Instruction.IO>".
+//
+    success = !__tdx_hypercall(&args);
+    val = success ? args.r11 : 0;
+    insn_assign_reg(&regs.ax, val, size);
+    return success;
+    }
+#[no_mangle]
+unsafe extern "C" fn handle_out(regs: *mut pt_regs, size: c_int, port: c_int) -> bool {
+    static bool handle_out(struct pt_regs *regs, int size, int port)
+    {
+    let mut mask: u64 = GENMASK(BITS_PER_BYTE * size - 1, 0);
+//
+// Emulate the I/O write via hypercall. More info about ABI can be found
+// in TDX Guest-Host-Communication Interface (GHCI) section titled
+// "TDG.VP.VMCALL<Instruction.IO>".
+//
+    return !_tdx_hypercall(hcall_func(EXIT_REASON_IO_INSTRUCTION), size,
+    PORT_WRITE, port, regs.ax & mask);
+    }
+//
+// Emulate I/O using hypercall.
+//
+// Assumes the IO instruction was using ax, which is enforced
+// by the standard io.h macros.
+//
+// Return True on success or False on failure.
+//
+#[no_mangle]
+unsafe extern "C" fn handle_io(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int handle_io(struct pt_regs *regs, struct ve_info *ve)
+    {
+    let mut exit_qual: u32 = ve.exit_qual;
+    int size, port;
+    bool in, ret;
+    if (VE_IS_IO_STRING(exit_qual))
+    return -EIO;
+    in   = VE_IS_IO_IN(exit_qual);
+    size = VE_GET_IO_SIZE(exit_qual);
+    port = VE_GET_PORT_NUM(exit_qual);
+    if (in)
+    ret = handle_in(regs, size, port);
+    else
+    ret = handle_out(regs, size, port);
+    if (!ret)
+    return -EIO;
+    return ve_instr_len(ve);
+    }
+//
+// Early #VE exception handler. Only handles a subset of port I/O.
+// Intended only for earlyprintk. If failed, return false.
+//
+#[no_mangle]
+pub unsafe extern "C" fn tdx_early_handle_ve(regs: *mut pt_regs) -> __init bool {
+    __init bool tdx_early_handle_ve(struct pt_regs *regs)
+    {
+    struct ve_info ve;
+    int insn_len;
+    tdx_get_ve_info(&ve);
+    if (ve.exit_reason != EXIT_REASON_IO_INSTRUCTION)
+    return false;
+    insn_len = handle_io(regs, &ve);
+    if (insn_len < 0)
+    return false;
+    regs.ip += insn_len;
+    return true;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn tdx_get_ve_info(ve: *mut ve_info) {
+    void tdx_get_ve_info(struct ve_info *ve)
+    {
+    let mut args: tdx_module_args = {};
+//
+// Called during #VE handling to retrieve the #VE info from the
+// TDX module.
+//
+// This has to be called early in #VE handling.  A "nested" #VE which
+// occurs before this will raise a #DF and is not recoverable.
+//
+// The call retrieves the #VE info from the TDX module, which also
+// clears the "#VE valid" flag. This must be done before anything else
+// because any #VE that occurs while the valid flag is set will lead to
+// #DF.
+//
+// Note, the TDX module treats virtual NMIs as inhibited if the #VE
+// valid flag is set. It means that NMI=>#VE will not result in a #DF.
+//
+    tdcall(TDG_VP_VEINFO_GET, &args);
+// Transfer the output parameters
+    ve.exit_reason = args.rcx;
+    ve.exit_qual   = args.rdx;
+    ve.gla         = args.r8;
+    ve.gpa         = args.r9;
+    ve.instr_len   = lower_32_bits(args.r10);
+    ve.instr_info  = upper_32_bits(args.r10);
+    }
+//
+// Handle the user initiated #VE.
+//
+// On success, returns the number of bytes RIP should be incremented (>=0)
+// or -errno on error.
+//
+#[no_mangle]
+unsafe extern "C" fn virt_exception_user(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int virt_exception_user(struct pt_regs *regs, struct ve_info *ve)
+    {
+    switch (ve.exit_reason) {
+    case EXIT_REASON_CPUID:
+    return handle_cpuid(regs, ve);
+    default:
+    pr_warn("Unexpected #VE: %lld\n", ve.exit_reason);
+    return -EIO;
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn is_private_gpa(gpa: u64) -> bool {
+    static inline bool is_private_gpa(u64 gpa)
+    {
+    let mut gpa: return = = cc_mkenc(gpa);
+    }
+//
+// Handle the kernel #VE.
+//
+// On success, returns the number of bytes RIP should be incremented (>=0)
+// or -errno on error.
+//
+#[no_mangle]
+unsafe extern "C" fn virt_exception_kernel(regs: *mut pt_regs, ve: *mut ve_info) -> c_int {
+    static int virt_exception_kernel(struct pt_regs *regs, struct ve_info *ve)
+    {
+    switch (ve.exit_reason) {
+    case EXIT_REASON_HLT:
+    return handle_halt(ve);
+    case EXIT_REASON_MSR_READ:
+    return read_msr(regs, ve);
+    case EXIT_REASON_MSR_WRITE:
+    return write_msr(regs, ve);
+    case EXIT_REASON_CPUID:
+    return handle_cpuid(regs, ve);
+    case EXIT_REASON_EPT_VIOLATION:
+    if (is_private_gpa(ve.gpa))
+    panic("Unexpected EPT-violation on private memory.");
+    return handle_mmio(regs, ve);
+    case EXIT_REASON_IO_INSTRUCTION:
+    return handle_io(regs, ve);
+    default:
+    pr_warn("Unexpected #VE: %lld\n", ve.exit_reason);
+    return -EIO;
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn tdx_handle_virt_exception(regs: *mut pt_regs, ve: *mut ve_info) -> bool {
+    bool tdx_handle_virt_exception(struct pt_regs *regs, struct ve_info *ve)
+    {
+    int insn_len;
+    if (user_mode(regs))
+    insn_len = virt_exception_user(regs, ve);
+    else
+    insn_len = virt_exception_kernel(regs, ve);
+    if (insn_len < 0)
+    return false;
+// After successful #VE handling, move the IP
+    regs.ip += insn_len;
+    return true;
+    }
+#[no_mangle]
+unsafe extern "C" fn tdx_tlb_flush_required(private: bool) -> bool {
+    static bool tdx_tlb_flush_required(bool private)
+    {
+//
+// TDX guest is responsible for flushing TLB on private->shared
+// transition. VMM is responsible for flushing on shared->private.
+//
+// The VMM _can't_ flush private addresses as it can't generate PAs
+// with the guest's HKID.  Shared memory isn't subject to integrity
+// checking, i.e. the VMM doesn't need to flush for its own protection.
+//
+// There's no need to flush when converting from shared to private,
+// as flushing is the VMM's responsibility in this case, e.g. it must
+// flush to avoid integrity failures in the face of a buggy or
+// malicious guest.
+//
+    return !private;
+    }
+#[no_mangle]
+unsafe extern "C" fn tdx_cache_flush_required() -> bool {
+    static bool tdx_cache_flush_required(void)
+    {
+//
+// AMD SME/SEV can avoid cache flushing if HW enforces cache coherence.
+// TDX doesn't have such capability.
+//
+// Flush cache unconditionally.
+//
+    return true;
+    }
+//
+// Notify the VMM about page mapping conversion. More info about ABI
+// can be found in TDX Guest-Host-Communication Interface (GHCI),
+// section "TDG.VP.VMCALL<MapGPA>".
+//
+#[no_mangle]
+unsafe extern "C" fn tdx_map_gpa(start: phys_addr_t, end: phys_addr_t, enc: bool) -> bool {
+    static bool tdx_map_gpa(phys_addr_t start, phys_addr_t end, bool enc)
+    {
+// Retrying the hypercall a second time should succeed; use 3 just in case
+    let mut max_retries_per_page: c_int = 3;
+    let mut retry_count: c_int = 0;
+    if (!enc) {
+// Set the shared (decrypted) bits:
+    start |= cc_mkdec(0);
+    end   |= cc_mkdec(0);
+    }
+    while (retry_count < max_retries_per_page) {
+    struct tdx_module_args args = {
+    .r10 = TDX_HYPERCALL_STANDARD,
+    .r11 = TDVMCALL_MAP_GPA,
+    .r12 = start,
+    .r13 = end - start };
+    u64 map_fail_paddr;
+    let mut ret: u64 = __tdx_hypercall(&args);
+    if (ret != TDVMCALL_STATUS_RETRY)
+    return !ret;
+//
+// The guest must retry the operation for the pages in the
+// region starting at the GPA specified in R11. R11 comes
+// from the untrusted VMM. Sanity check it.
+//
+    map_fail_paddr = args.r11;
+    if (map_fail_paddr < start || map_fail_paddr >= end)
+    return false;
+// "Consume" a retry without forward progress
+    if (map_fail_paddr == start) {
+    retry_count++;
+    continue;
+    }
+    start = map_fail_paddr;
+    retry_count = 0;
+    }
+    return false;
+    }
+//
+// Inform the VMM of the guest's intent for this physical page: shared with
+// the VMM or private to the guest.  The VMM is expected to change its mapping
+// of the page in response.
+//
+#[no_mangle]
+unsafe extern "C" fn tdx_enc_status_changed(vaddr: c_ulong, numpages: c_int, enc: bool) -> bool {
+    static bool tdx_enc_status_changed(unsigned long vaddr, int numpages, bool enc)
+    {
+    let mut start: phys_addr_t = __pa(vaddr);
+    let mut end: phys_addr_t = __pa(vaddr + numpages * PAGE_SIZE);
+    if (!tdx_map_gpa(start, end, enc))
+    return false;
+// shared->private conversion requires memory to be accepted before use
+    if (enc)
+    return tdx_accept_memory(start, end);
+    return true;
+    }
+    static int tdx_enc_status_change_prepare(unsigned long vaddr, int numpages,
+    bool enc)
+    {
+//
+// Only handle shared->private conversion here.
+// See the comment in tdx_early_init().
+//
+    if (enc && !tdx_enc_status_changed(vaddr, numpages, enc))
+    return -EIO;
+    return 0;
+    }
+    static int tdx_enc_status_change_finish(unsigned long vaddr, int numpages,
+    bool enc)
+    {
+//
+// Only handle private->shared conversion here.
+// See the comment in tdx_early_init().
+//
+    if (!enc && !tdx_enc_status_changed(vaddr, numpages, enc))
+    return -EIO;
+    if (enc)
+    atomic_long_sub(numpages, &nr_shared);
+    else
+    atomic_long_add(numpages, &nr_shared);
+    return 0;
+    }
+// Stop new private<->shared conversions
+#[no_mangle]
+unsafe extern "C" fn tdx_kexec_begin() {
+    static void tdx_kexec_begin(void)
+    {
+    if (!IS_ENABLED(CONFIG_KEXEC_CORE))
+    return;
+//
+// Crash kernel reaches here with interrupts disabled: can't wait for
+// conversions to finish.
+//
+// If race happened, just report and proceed.
+//
+    if (!set_memory_enc_stop_conversion())
+    pr_warn("Failed to stop shared<.private conversions\n");
+    }
+// Walk direct mapping and convert all shared memory back to private
+#[no_mangle]
+unsafe extern "C" fn tdx_kexec_finish() {
+    static void tdx_kexec_finish(void)
+    {
+    unsigned long addr, end;
+    let mut found: c_long = 0, shared;
+    if (!IS_ENABLED(CONFIG_KEXEC_CORE))
+    return;
+    lockdep_assert_irqs_disabled();
+    addr = PAGE_OFFSET;
+    end  = PAGE_OFFSET + get_max_mapped();
+    while (addr < end) {
+    unsigned long size;
+    unsigned int level;
+    pte_t *pte;
+    pte = lookup_address(addr, &level);
+    size = page_level_size(level);
+    if (pte && pte_decrypted(*pte)) {
+    let mut pages: c_int = size / PAGE_SIZE;
+//
+// Touching memory with shared bit set triggers implicit
+// conversion to shared.
+//
+// Make sure nobody touches the shared range from
+// now on.
+//
+    set_pte(pte, __pte(0));
+//
+// Memory encryption state persists across kexec.
+// If tdx_enc_status_changed() fails in the first
+// kernel, it leaves memory in an unknown state.
+//
+// If that memory remains shared, accessing it in the
+// *next* kernel through a private mapping will result
+// in an unrecoverable guest shutdown.
+//
+// The kdump kernel boot is not impacted as it uses
+// a pre-reserved memory range that is always private.
+// However, gathering crash information could lead to
+// a crash if it accesses unconverted memory through
+// a private mapping which is possible when accessing
+// that memory through /proc/vmcore, for example.
+//
+// In all cases, print error info in order to leave
+// enough bread crumbs for debugging.
+//
+    if (!tdx_enc_status_changed(addr, pages, true)) {
+    pr_err("Failed to unshare range %#lx-%#lx\n",
+    addr, addr + size);
+    }
+    found += pages;
+    }
+    addr += size;
+    }
+    __flush_tlb_all();
+    shared = atomic_long_read(&nr_shared);
+    if (shared != found) {
+    pr_err("shared page accounting is off\n");
+    pr_err("nr_shared = %ld, nr_found = %ld\n", shared, found);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn tdx_announce() -> __init void {
+    static __init void tdx_announce(void)
+    {
+    let mut args: tdx_module_args = {};
+    u64 controls;
+    pr_info("Guest detected\n");
+    tdcall(TDG_VP_INFO, &args);
+    tdx_dump_attributes(args.rdx);
+    tdg_vm_rd(TDCS_TD_CTLS, &controls);
+    tdx_dump_td_ctls(controls);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn tdx_early_init() -> void __init {
+    void __init tdx_early_init(void)
+    {
+    u64 cc_mask;
+    u32 eax, sig[3];
+    cpuid_count(TDX_CPUID_LEAF_ID, 0, &eax, &sig[0], &sig[2],  &sig[1]);
+    if (memcmp(TDX_IDENT, sig, sizeof(sig)))
+    return;
+    setup_force_cpu_cap(X86_FEATURE_TDX_GUEST);
+// TSC is the only reliable clock in TDX guest
+    setup_force_cpu_cap(X86_FEATURE_TSC_RELIABLE);
+    cc_vendor = CC_VENDOR_INTEL;
+// Configure the TD
+    tdx_setup(&cc_mask);
+    cc_set_mask(cc_mask);
+//
+// All bits above GPA width are reserved and kernel treats shared bit
+// as flag, not as part of physical address.
+//
+// Adjust physical mask to only cover valid GPA bits.
+//
+    physical_mask &= cc_mask - 1;
+//
+// The kernel mapping should match the TDX metadata for the page.
+// load_unaligned_zeropad() can touch memory *adjacent* to that which is
+// owned by the caller and can catch even _momentary_ mismatches.  Bad
+// things happen on mismatch:
+//
+// - Private mapping => Shared Page  == Guest shutdown
+// - Shared mapping  => Private Page == Recoverable #VE
+//
+// guest.enc_status_change_prepare() converts the page from
+// shared=>private before the mapping becomes private.
+//
+// guest.enc_status_change_finish() converts the page from
+// private=>shared after the mapping becomes private.
+//
+// In both cases there is a temporary shared mapping to a private page,
+// which can result in a #VE.  But, there is never a private mapping to
+// a shared page.
+//
+    x86_platform.guest.enc_status_change_prepare = tdx_enc_status_change_prepare;
+    x86_platform.guest.enc_status_change_finish  = tdx_enc_status_change_finish;
+    x86_platform.guest.enc_cache_flush_required  = tdx_cache_flush_required;
+    x86_platform.guest.enc_tlb_flush_required    = tdx_tlb_flush_required;
+    x86_platform.guest.enc_kexec_begin	     = tdx_kexec_begin;
+    x86_platform.guest.enc_kexec_finish	     = tdx_kexec_finish;
+//
+// Avoid "sti;hlt" execution in TDX guests as HLT induces a #VE that
+// will enable interrupts before HLT TDCALL invocation if executed
+// in STI-shadow, possibly resulting in missed wakeup events.
+//
+// Modify all possible HLT execution paths to use TDX specific routines
+// that directly execute TDCALL and toggle the interrupt state as
+// needed after TDCALL completion. This also reduces HLT related #VEs
+// in addition to having a reliable halt logic execution.
+//
+    pv_ops.irq.safe_halt = tdx_safe_halt;
+    pv_ops.irq.halt = tdx_halt;
+//
+// TDX intercepts the RDMSR to read the X2APIC ID in the parallel
+// bringup low level code. That raises #VE which cannot be handled
+// there.
+//
+// Intel-TDX has a secure RDMSR hypercall, but that needs to be
+// implemented separately in the low level startup ASM code.
+// Until that is in place, disable parallel bringup for TDX.
+//
+    x86_cpuinit.parallel_bringup = false;
+    tdx_announce();
+    }

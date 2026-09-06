@@ -1,0 +1,111 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/kernel/fred.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+// #DB in the kernel would imply the use of a kernel debugger.
+
+//
+// #DF is the highest level because a #DF means "something went wrong
+// *while delivering an exception*." The number of cases for which that
+// can happen with FRED is drastically reduced and basically amounts to
+// "the stack you pointed me to is broken." Thus, always change stacks
+// on #DF, which means it should be at the highest level.
+//
+
+    DEFINE_PER_CPU(unsigned long, fred_rsp0);
+    EXPORT_PER_CPU_SYMBOL(fred_rsp0);
+#[no_mangle]
+pub unsafe extern "C" fn cpu_init_fred_exceptions() {
+    void cpu_init_fred_exceptions(void)
+    {
+//
+// If a kernel event is delivered before a CPU goes to user level for
+// the first time, its SS is NULL thus NULL is pushed into the SS field
+// of the FRED stack frame.  But before ERETS is executed, the CPU may
+// context switch to another task and go to user level.  Then when the
+// CPU comes back to kernel mode, SS is changed to __KERNEL_DS.  Later
+// when ERETS is executed to return from the kernel event handler, a #GP
+// fault is generated because SS doesn't match the SS saved in the FRED
+// stack frame.
+//
+// Initialize SS to __KERNEL_DS when enabling FRED to avoid such #GPs.
+//
+    loadsegment(ss, __KERNEL_DS);
+    wrmsrq(MSR_IA32_FRED_CONFIG,
+// Reserve for CALL emulation
+    FRED_CONFIG_REDZONE |
+    FRED_CONFIG_INT_STKLVL(0) |
+    FRED_CONFIG_ENTRYPOINT(asm_fred_entrypoint_user));
+    wrmsrq(MSR_IA32_FRED_STKLVLS, 0);
+//
+// Ater a CPU offline/online cycle, the FRED RSP0 MSR should be
+// resynchronized with its per-CPU cache.
+//
+    wrmsrq(MSR_IA32_FRED_RSP0, __this_cpu_read(fred_rsp0));
+    wrmsrq(MSR_IA32_FRED_RSP1, 0);
+    wrmsrq(MSR_IA32_FRED_RSP2, 0);
+    wrmsrq(MSR_IA32_FRED_RSP3, 0);
+// Enable FRED
+    cr4_set_bits(X86_CR4_FRED);
+// Any further IDT use is a bug
+    idt_invalidate();
+// Use int $0x80 for 32-bit system calls in FRED mode
+    setup_clear_cpu_cap(X86_FEATURE_SYSFAST32);
+    setup_clear_cpu_cap(X86_FEATURE_SYSCALL32);
+    }
+// Must be called after setup_cpu_entry_areas()
+#[no_mangle]
+pub unsafe extern "C" fn cpu_init_fred_rsps() {
+    void cpu_init_fred_rsps(void)
+    {
+//
+// The purpose of separate stacks for NMI, #DB and #MC *in the kernel
+// (remember that user space faults are always taken on stack level 0)
+// is to avoid overflowing the kernel stack.
+//
+    wrmsrq(MSR_IA32_FRED_STKLVLS,
+    FRED_STKLVL(X86_TRAP_DB,  FRED_DB_STACK_LEVEL) |
+    FRED_STKLVL(X86_TRAP_NMI, FRED_NMI_STACK_LEVEL) |
+    FRED_STKLVL(X86_TRAP_MC,  FRED_MC_STACK_LEVEL) |
+    FRED_STKLVL(X86_TRAP_DF,  FRED_DF_STACK_LEVEL));
+// The FRED equivalents to IST stacks...
+    wrmsrq(MSR_IA32_FRED_RSP1, __this_cpu_ist_top_va(DB));
+    wrmsrq(MSR_IA32_FRED_RSP2, __this_cpu_ist_top_va(NMI));
+    wrmsrq(MSR_IA32_FRED_RSP3, __this_cpu_ist_top_va(DF));
+    }

@@ -1,0 +1,142 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/arm64/kernel/smp_spin_table.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Spin Table SMP initialisation
+//
+// Copyright (C) 2013 ARM Ltd.
+//
+
+    extern void secondary_holding_pen(void);
+#[no_mangle]
+pub unsafe extern "C" fn __section(_arg: ".mmuoff.data.read") -> volatile unsigned long {
+    volatile unsigned long __section(".mmuoff.data.read")
+    secondary_holding_pen_release = INVALID_HWID;
+    static phys_addr_t cpu_release_addr[NR_CPUS];
+//
+// Write secondary_holding_pen_release in a way that is guaranteed to be
+// visible to all observers, irrespective of whether they're taking part
+// in coherency or not.  This is necessary for the hotplug code to work
+// reliably.
+//
+#[no_mangle]
+unsafe extern "C" fn write_pen_release(val: u64) {
+    static void write_pen_release(u64 val)
+    {
+    void *start = (void *)&secondary_holding_pen_release;
+    let mut size: c_ulong = sizeof(secondary_holding_pen_release);
+    secondary_holding_pen_release = val;
+    dcache_clean_inval_poc((unsigned long)start, (unsigned long)start + size);
+    }
+#[no_mangle]
+unsafe extern "C" fn smp_spin_table_cpu_init(cpu: c_uint) -> c_int {
+    static int smp_spin_table_cpu_init(unsigned int cpu)
+    {
+    struct device_node *dn;
+    int ret;
+    dn = of_get_cpu_node(cpu, core::ptr::null_mut());
+    if (!dn)
+    return -ENODEV;
+//
+// Determine the address from which the CPU is polling.
+//
+    ret = of_property_read_u64(dn, "cpu-release-addr",
+    &cpu_release_addr[cpu]);
+    if (ret)
+    pr_err("CPU %d: missing or invalid cpu-release-addr property\n",
+    cpu);
+    of_node_put(dn);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn smp_spin_table_cpu_prepare(cpu: c_uint) -> c_int {
+    static int smp_spin_table_cpu_prepare(unsigned int cpu)
+    {
+    __le64 __iomem *release_addr;
+    let mut pa_holding_pen: phys_addr_t = __pa_symbol(secondary_holding_pen);
+    if (!cpu_release_addr[cpu])
+    return -ENODEV;
+//
+// The cpu-release-addr may or may not be inside the linear mapping.
+// As ioremap_cache will either give us a new mapping or reuse the
+// existing linear mapping, we can use it to cover both cases. In
+// either case the memory will be MT_NORMAL.
+//
+    release_addr = ioremap_cache(cpu_release_addr[cpu],
+    sizeof(*release_addr));
+    if (!release_addr)
+    return -ENOMEM;
+//
+// We write the release address as LE regardless of the native
+// endianness of the kernel. Therefore, any boot-loaders that
+// read this address need to convert this address to the
+// boot-loader's endianness before jumping. This is mandated by
+// the boot protocol.
+//
+    writeq_relaxed(pa_holding_pen, release_addr);
+    dcache_clean_inval_poc(( unsigned long)release_addr,
+    ( unsigned long)release_addr +
+    sizeof(*release_addr));
+//
+// Send an event to wake up the secondary CPU.
+//
+    sev();
+    iounmap(release_addr);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn smp_spin_table_cpu_boot(cpu: c_uint) -> c_int {
+    static int smp_spin_table_cpu_boot(unsigned int cpu)
+    {
+//
+// Update the pen release flag.
+//
+    write_pen_release(cpu_logical_map(cpu));
+//
+// Send an event, causing the secondaries to read pen_release.
+//
+    sev();
+    return 0;
+    }
+    const struct cpu_operations smp_spin_table_ops = {
+    .name		= "spin-table",
+    .cpu_init	= smp_spin_table_cpu_init,
+    .cpu_prepare	= smp_spin_table_cpu_prepare,
+    .cpu_boot	= smp_spin_table_cpu_boot,
+    };

@@ -1,0 +1,340 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/accel/habanalabs/include/goya/asic_reg/mme_cmdq_masks.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2016-2018 HabanaLabs, Ltd.
+// All Rights Reserved.
+//
+// This is an auto-generated file
+// DO NOT EDIT BELOW
+//
+// MME_CMDQ (Prototype: CMDQ)
+//
+// MME_CMDQ_GLBL_CFG0
+pub const MME_CMDQ_GLBL_CFG0_PQF_EN_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_CFG0_PQF_EN_MASK: c_uint = 0x1;
+pub const MME_CMDQ_GLBL_CFG0_CQF_EN_SHIFT: c_int = 1;
+pub const MME_CMDQ_GLBL_CFG0_CQF_EN_MASK: c_uint = 0x2;
+pub const MME_CMDQ_GLBL_CFG0_CP_EN_SHIFT: c_int = 2;
+pub const MME_CMDQ_GLBL_CFG0_CP_EN_MASK: c_uint = 0x4;
+pub const MME_CMDQ_GLBL_CFG0_DMA_EN_SHIFT: c_int = 3;
+pub const MME_CMDQ_GLBL_CFG0_DMA_EN_MASK: c_uint = 0x8;
+// MME_CMDQ_GLBL_CFG1
+pub const MME_CMDQ_GLBL_CFG1_PQF_STOP_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_CFG1_PQF_STOP_MASK: c_uint = 0x1;
+pub const MME_CMDQ_GLBL_CFG1_CQF_STOP_SHIFT: c_int = 1;
+pub const MME_CMDQ_GLBL_CFG1_CQF_STOP_MASK: c_uint = 0x2;
+pub const MME_CMDQ_GLBL_CFG1_CP_STOP_SHIFT: c_int = 2;
+pub const MME_CMDQ_GLBL_CFG1_CP_STOP_MASK: c_uint = 0x4;
+pub const MME_CMDQ_GLBL_CFG1_DMA_STOP_SHIFT: c_int = 3;
+pub const MME_CMDQ_GLBL_CFG1_DMA_STOP_MASK: c_uint = 0x8;
+pub const MME_CMDQ_GLBL_CFG1_PQF_FLUSH_SHIFT: c_int = 8;
+pub const MME_CMDQ_GLBL_CFG1_PQF_FLUSH_MASK: c_uint = 0x100;
+pub const MME_CMDQ_GLBL_CFG1_CQF_FLUSH_SHIFT: c_int = 9;
+pub const MME_CMDQ_GLBL_CFG1_CQF_FLUSH_MASK: c_uint = 0x200;
+pub const MME_CMDQ_GLBL_CFG1_CP_FLUSH_SHIFT: c_int = 10;
+pub const MME_CMDQ_GLBL_CFG1_CP_FLUSH_MASK: c_uint = 0x400;
+pub const MME_CMDQ_GLBL_CFG1_DMA_FLUSH_SHIFT: c_int = 11;
+pub const MME_CMDQ_GLBL_CFG1_DMA_FLUSH_MASK: c_uint = 0x800;
+// MME_CMDQ_GLBL_PROT
+pub const MME_CMDQ_GLBL_PROT_PQF_PROT_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_PROT_PQF_PROT_MASK: c_uint = 0x1;
+pub const MME_CMDQ_GLBL_PROT_CQF_PROT_SHIFT: c_int = 1;
+pub const MME_CMDQ_GLBL_PROT_CQF_PROT_MASK: c_uint = 0x2;
+pub const MME_CMDQ_GLBL_PROT_CP_PROT_SHIFT: c_int = 2;
+pub const MME_CMDQ_GLBL_PROT_CP_PROT_MASK: c_uint = 0x4;
+pub const MME_CMDQ_GLBL_PROT_DMA_PROT_SHIFT: c_int = 3;
+pub const MME_CMDQ_GLBL_PROT_DMA_PROT_MASK: c_uint = 0x8;
+pub const MME_CMDQ_GLBL_PROT_PQF_ERR_PROT_SHIFT: c_int = 4;
+pub const MME_CMDQ_GLBL_PROT_PQF_ERR_PROT_MASK: c_uint = 0x10;
+pub const MME_CMDQ_GLBL_PROT_CQF_ERR_PROT_SHIFT: c_int = 5;
+pub const MME_CMDQ_GLBL_PROT_CQF_ERR_PROT_MASK: c_uint = 0x20;
+pub const MME_CMDQ_GLBL_PROT_CP_ERR_PROT_SHIFT: c_int = 6;
+pub const MME_CMDQ_GLBL_PROT_CP_ERR_PROT_MASK: c_uint = 0x40;
+pub const MME_CMDQ_GLBL_PROT_DMA_ERR_PROT_SHIFT: c_int = 7;
+pub const MME_CMDQ_GLBL_PROT_DMA_ERR_PROT_MASK: c_uint = 0x80;
+// MME_CMDQ_GLBL_ERR_CFG
+pub const MME_CMDQ_GLBL_ERR_CFG_PQF_ERR_INT_EN_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_ERR_CFG_PQF_ERR_INT_EN_MASK: c_uint = 0x1;
+pub const MME_CMDQ_GLBL_ERR_CFG_PQF_ERR_MSG_EN_SHIFT: c_int = 1;
+pub const MME_CMDQ_GLBL_ERR_CFG_PQF_ERR_MSG_EN_MASK: c_uint = 0x2;
+pub const MME_CMDQ_GLBL_ERR_CFG_PQF_STOP_ON_ERR_SHIFT: c_int = 2;
+pub const MME_CMDQ_GLBL_ERR_CFG_PQF_STOP_ON_ERR_MASK: c_uint = 0x4;
+pub const MME_CMDQ_GLBL_ERR_CFG_CQF_ERR_INT_EN_SHIFT: c_int = 3;
+pub const MME_CMDQ_GLBL_ERR_CFG_CQF_ERR_INT_EN_MASK: c_uint = 0x8;
+pub const MME_CMDQ_GLBL_ERR_CFG_CQF_ERR_MSG_EN_SHIFT: c_int = 4;
+pub const MME_CMDQ_GLBL_ERR_CFG_CQF_ERR_MSG_EN_MASK: c_uint = 0x10;
+pub const MME_CMDQ_GLBL_ERR_CFG_CQF_STOP_ON_ERR_SHIFT: c_int = 5;
+pub const MME_CMDQ_GLBL_ERR_CFG_CQF_STOP_ON_ERR_MASK: c_uint = 0x20;
+pub const MME_CMDQ_GLBL_ERR_CFG_CP_ERR_INT_EN_SHIFT: c_int = 6;
+pub const MME_CMDQ_GLBL_ERR_CFG_CP_ERR_INT_EN_MASK: c_uint = 0x40;
+pub const MME_CMDQ_GLBL_ERR_CFG_CP_ERR_MSG_EN_SHIFT: c_int = 7;
+pub const MME_CMDQ_GLBL_ERR_CFG_CP_ERR_MSG_EN_MASK: c_uint = 0x80;
+pub const MME_CMDQ_GLBL_ERR_CFG_CP_STOP_ON_ERR_SHIFT: c_int = 8;
+pub const MME_CMDQ_GLBL_ERR_CFG_CP_STOP_ON_ERR_MASK: c_uint = 0x100;
+pub const MME_CMDQ_GLBL_ERR_CFG_DMA_ERR_INT_EN_SHIFT: c_int = 9;
+pub const MME_CMDQ_GLBL_ERR_CFG_DMA_ERR_INT_EN_MASK: c_uint = 0x200;
+pub const MME_CMDQ_GLBL_ERR_CFG_DMA_ERR_MSG_EN_SHIFT: c_int = 10;
+pub const MME_CMDQ_GLBL_ERR_CFG_DMA_ERR_MSG_EN_MASK: c_uint = 0x400;
+pub const MME_CMDQ_GLBL_ERR_CFG_DMA_STOP_ON_ERR_SHIFT: c_int = 11;
+pub const MME_CMDQ_GLBL_ERR_CFG_DMA_STOP_ON_ERR_MASK: c_uint = 0x800;
+// MME_CMDQ_GLBL_ERR_ADDR_LO
+pub const MME_CMDQ_GLBL_ERR_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_ERR_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_GLBL_ERR_ADDR_HI
+pub const MME_CMDQ_GLBL_ERR_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_ERR_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_GLBL_ERR_WDATA
+pub const MME_CMDQ_GLBL_ERR_WDATA_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_ERR_WDATA_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_GLBL_SECURE_PROPS
+pub const MME_CMDQ_GLBL_SECURE_PROPS_ASID_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_SECURE_PROPS_ASID_MASK: c_uint = 0x3FF;
+pub const MME_CMDQ_GLBL_SECURE_PROPS_MMBP_SHIFT: c_int = 10;
+pub const MME_CMDQ_GLBL_SECURE_PROPS_MMBP_MASK: c_uint = 0x400;
+// MME_CMDQ_GLBL_NON_SECURE_PROPS
+pub const MME_CMDQ_GLBL_NON_SECURE_PROPS_ASID_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_NON_SECURE_PROPS_ASID_MASK: c_uint = 0x3FF;
+pub const MME_CMDQ_GLBL_NON_SECURE_PROPS_MMBP_SHIFT: c_int = 10;
+pub const MME_CMDQ_GLBL_NON_SECURE_PROPS_MMBP_MASK: c_uint = 0x400;
+// MME_CMDQ_GLBL_STS0
+pub const MME_CMDQ_GLBL_STS0_PQF_IDLE_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_STS0_PQF_IDLE_MASK: c_uint = 0x1;
+pub const MME_CMDQ_GLBL_STS0_CQF_IDLE_SHIFT: c_int = 1;
+pub const MME_CMDQ_GLBL_STS0_CQF_IDLE_MASK: c_uint = 0x2;
+pub const MME_CMDQ_GLBL_STS0_CP_IDLE_SHIFT: c_int = 2;
+pub const MME_CMDQ_GLBL_STS0_CP_IDLE_MASK: c_uint = 0x4;
+pub const MME_CMDQ_GLBL_STS0_DMA_IDLE_SHIFT: c_int = 3;
+pub const MME_CMDQ_GLBL_STS0_DMA_IDLE_MASK: c_uint = 0x8;
+pub const MME_CMDQ_GLBL_STS0_PQF_IS_STOP_SHIFT: c_int = 4;
+pub const MME_CMDQ_GLBL_STS0_PQF_IS_STOP_MASK: c_uint = 0x10;
+pub const MME_CMDQ_GLBL_STS0_CQF_IS_STOP_SHIFT: c_int = 5;
+pub const MME_CMDQ_GLBL_STS0_CQF_IS_STOP_MASK: c_uint = 0x20;
+pub const MME_CMDQ_GLBL_STS0_CP_IS_STOP_SHIFT: c_int = 6;
+pub const MME_CMDQ_GLBL_STS0_CP_IS_STOP_MASK: c_uint = 0x40;
+pub const MME_CMDQ_GLBL_STS0_DMA_IS_STOP_SHIFT: c_int = 7;
+pub const MME_CMDQ_GLBL_STS0_DMA_IS_STOP_MASK: c_uint = 0x80;
+// MME_CMDQ_GLBL_STS1
+pub const MME_CMDQ_GLBL_STS1_PQF_RD_ERR_SHIFT: c_int = 0;
+pub const MME_CMDQ_GLBL_STS1_PQF_RD_ERR_MASK: c_uint = 0x1;
+pub const MME_CMDQ_GLBL_STS1_CQF_RD_ERR_SHIFT: c_int = 1;
+pub const MME_CMDQ_GLBL_STS1_CQF_RD_ERR_MASK: c_uint = 0x2;
+pub const MME_CMDQ_GLBL_STS1_CP_RD_ERR_SHIFT: c_int = 2;
+pub const MME_CMDQ_GLBL_STS1_CP_RD_ERR_MASK: c_uint = 0x4;
+pub const MME_CMDQ_GLBL_STS1_CP_UNDEF_CMD_ERR_SHIFT: c_int = 3;
+pub const MME_CMDQ_GLBL_STS1_CP_UNDEF_CMD_ERR_MASK: c_uint = 0x8;
+pub const MME_CMDQ_GLBL_STS1_CP_STOP_OP_SHIFT: c_int = 4;
+pub const MME_CMDQ_GLBL_STS1_CP_STOP_OP_MASK: c_uint = 0x10;
+pub const MME_CMDQ_GLBL_STS1_CP_MSG_WR_ERR_SHIFT: c_int = 5;
+pub const MME_CMDQ_GLBL_STS1_CP_MSG_WR_ERR_MASK: c_uint = 0x20;
+pub const MME_CMDQ_GLBL_STS1_DMA_RD_ERR_SHIFT: c_int = 8;
+pub const MME_CMDQ_GLBL_STS1_DMA_RD_ERR_MASK: c_uint = 0x100;
+pub const MME_CMDQ_GLBL_STS1_DMA_WR_ERR_SHIFT: c_int = 9;
+pub const MME_CMDQ_GLBL_STS1_DMA_WR_ERR_MASK: c_uint = 0x200;
+pub const MME_CMDQ_GLBL_STS1_DMA_RD_MSG_ERR_SHIFT: c_int = 10;
+pub const MME_CMDQ_GLBL_STS1_DMA_RD_MSG_ERR_MASK: c_uint = 0x400;
+pub const MME_CMDQ_GLBL_STS1_DMA_WR_MSG_ERR_SHIFT: c_int = 11;
+pub const MME_CMDQ_GLBL_STS1_DMA_WR_MSG_ERR_MASK: c_uint = 0x800;
+// MME_CMDQ_CQ_CFG0
+pub const MME_CMDQ_CQ_CFG0_RESERVED_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_CFG0_RESERVED_MASK: c_uint = 0x1;
+// MME_CMDQ_CQ_CFG1
+pub const MME_CMDQ_CQ_CFG1_CREDIT_LIM_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_CFG1_CREDIT_LIM_MASK: c_uint = 0xFFFF;
+pub const MME_CMDQ_CQ_CFG1_MAX_INFLIGHT_SHIFT: c_int = 16;
+pub const MME_CMDQ_CQ_CFG1_MAX_INFLIGHT_MASK: c_uint = 0xFFFF0000;
+// MME_CMDQ_CQ_ARUSER
+pub const MME_CMDQ_CQ_ARUSER_NOSNOOP_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_ARUSER_NOSNOOP_MASK: c_uint = 0x1;
+pub const MME_CMDQ_CQ_ARUSER_WORD_SHIFT: c_int = 1;
+pub const MME_CMDQ_CQ_ARUSER_WORD_MASK: c_uint = 0x2;
+// MME_CMDQ_CQ_PTR_LO
+pub const MME_CMDQ_CQ_PTR_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_PTR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_PTR_HI
+pub const MME_CMDQ_CQ_PTR_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_PTR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_TSIZE
+pub const MME_CMDQ_CQ_TSIZE_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_TSIZE_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_CTL
+pub const MME_CMDQ_CQ_CTL_RPT_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_CTL_RPT_MASK: c_uint = 0xFFFF;
+pub const MME_CMDQ_CQ_CTL_CTL_SHIFT: c_int = 16;
+pub const MME_CMDQ_CQ_CTL_CTL_MASK: c_uint = 0xFFFF0000;
+// MME_CMDQ_CQ_PTR_LO_STS
+pub const MME_CMDQ_CQ_PTR_LO_STS_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_PTR_LO_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_PTR_HI_STS
+pub const MME_CMDQ_CQ_PTR_HI_STS_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_PTR_HI_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_TSIZE_STS
+pub const MME_CMDQ_CQ_TSIZE_STS_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_TSIZE_STS_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_CTL_STS
+pub const MME_CMDQ_CQ_CTL_STS_RPT_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_CTL_STS_RPT_MASK: c_uint = 0xFFFF;
+pub const MME_CMDQ_CQ_CTL_STS_CTL_SHIFT: c_int = 16;
+pub const MME_CMDQ_CQ_CTL_STS_CTL_MASK: c_uint = 0xFFFF0000;
+// MME_CMDQ_CQ_STS0
+pub const MME_CMDQ_CQ_STS0_CQ_CREDIT_CNT_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_STS0_CQ_CREDIT_CNT_MASK: c_uint = 0xFFFF;
+pub const MME_CMDQ_CQ_STS0_CQ_FREE_CNT_SHIFT: c_int = 16;
+pub const MME_CMDQ_CQ_STS0_CQ_FREE_CNT_MASK: c_uint = 0xFFFF0000;
+// MME_CMDQ_CQ_STS1
+pub const MME_CMDQ_CQ_STS1_CQ_INFLIGHT_CNT_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_STS1_CQ_INFLIGHT_CNT_MASK: c_uint = 0xFFFF;
+pub const MME_CMDQ_CQ_STS1_CQ_BUF_EMPTY_SHIFT: c_int = 30;
+pub const MME_CMDQ_CQ_STS1_CQ_BUF_EMPTY_MASK: c_uint = 0x40000000;
+pub const MME_CMDQ_CQ_STS1_CQ_BUSY_SHIFT: c_int = 31;
+pub const MME_CMDQ_CQ_STS1_CQ_BUSY_MASK: c_uint = 0x80000000;
+// MME_CMDQ_CQ_RD_RATE_LIM_EN
+pub const MME_CMDQ_CQ_RD_RATE_LIM_EN_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_RD_RATE_LIM_EN_VAL_MASK: c_uint = 0x1;
+// MME_CMDQ_CQ_RD_RATE_LIM_RST_TOKEN
+pub const MME_CMDQ_CQ_RD_RATE_LIM_RST_TOKEN_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_RD_RATE_LIM_RST_TOKEN_VAL_MASK: c_uint = 0xFFFF;
+// MME_CMDQ_CQ_RD_RATE_LIM_SAT
+pub const MME_CMDQ_CQ_RD_RATE_LIM_SAT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_RD_RATE_LIM_SAT_VAL_MASK: c_uint = 0xFFFF;
+// MME_CMDQ_CQ_RD_RATE_LIM_TOUT
+pub const MME_CMDQ_CQ_RD_RATE_LIM_TOUT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_RD_RATE_LIM_TOUT_VAL_MASK: c_uint = 0x7FFFFFFF;
+// MME_CMDQ_CQ_IFIFO_CNT
+pub const MME_CMDQ_CQ_IFIFO_CNT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_IFIFO_CNT_VAL_MASK: c_uint = 0x3;
+// MME_CMDQ_CP_MSG_BASE0_ADDR_LO
+pub const MME_CMDQ_CP_MSG_BASE0_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE0_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE0_ADDR_HI
+pub const MME_CMDQ_CP_MSG_BASE0_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE0_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE1_ADDR_LO
+pub const MME_CMDQ_CP_MSG_BASE1_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE1_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE1_ADDR_HI
+pub const MME_CMDQ_CP_MSG_BASE1_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE1_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE2_ADDR_LO
+pub const MME_CMDQ_CP_MSG_BASE2_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE2_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE2_ADDR_HI
+pub const MME_CMDQ_CP_MSG_BASE2_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE2_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE3_ADDR_LO
+pub const MME_CMDQ_CP_MSG_BASE3_ADDR_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE3_ADDR_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_MSG_BASE3_ADDR_HI
+pub const MME_CMDQ_CP_MSG_BASE3_ADDR_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_MSG_BASE3_ADDR_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_LDMA_TSIZE_OFFSET
+pub const MME_CMDQ_CP_LDMA_TSIZE_OFFSET_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_LDMA_TSIZE_OFFSET_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_LDMA_SRC_BASE_LO_OFFSET
+pub const MME_CMDQ_CP_LDMA_SRC_BASE_LO_OFFSET_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_LDMA_SRC_BASE_LO_OFFSET_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_LDMA_SRC_BASE_HI_OFFSET
+pub const MME_CMDQ_CP_LDMA_SRC_BASE_HI_OFFSET_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_LDMA_SRC_BASE_HI_OFFSET_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_LDMA_DST_BASE_LO_OFFSET
+pub const MME_CMDQ_CP_LDMA_DST_BASE_LO_OFFSET_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_LDMA_DST_BASE_LO_OFFSET_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_LDMA_DST_BASE_HI_OFFSET
+pub const MME_CMDQ_CP_LDMA_DST_BASE_HI_OFFSET_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_LDMA_DST_BASE_HI_OFFSET_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_LDMA_COMMIT_OFFSET
+pub const MME_CMDQ_CP_LDMA_COMMIT_OFFSET_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_LDMA_COMMIT_OFFSET_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_FENCE0_RDATA
+pub const MME_CMDQ_CP_FENCE0_RDATA_INC_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE0_RDATA_INC_VAL_MASK: c_uint = 0xF;
+// MME_CMDQ_CP_FENCE1_RDATA
+pub const MME_CMDQ_CP_FENCE1_RDATA_INC_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE1_RDATA_INC_VAL_MASK: c_uint = 0xF;
+// MME_CMDQ_CP_FENCE2_RDATA
+pub const MME_CMDQ_CP_FENCE2_RDATA_INC_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE2_RDATA_INC_VAL_MASK: c_uint = 0xF;
+// MME_CMDQ_CP_FENCE3_RDATA
+pub const MME_CMDQ_CP_FENCE3_RDATA_INC_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE3_RDATA_INC_VAL_MASK: c_uint = 0xF;
+// MME_CMDQ_CP_FENCE0_CNT
+pub const MME_CMDQ_CP_FENCE0_CNT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE0_CNT_VAL_MASK: c_uint = 0xFF;
+// MME_CMDQ_CP_FENCE1_CNT
+pub const MME_CMDQ_CP_FENCE1_CNT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE1_CNT_VAL_MASK: c_uint = 0xFF;
+// MME_CMDQ_CP_FENCE2_CNT
+pub const MME_CMDQ_CP_FENCE2_CNT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE2_CNT_VAL_MASK: c_uint = 0xFF;
+// MME_CMDQ_CP_FENCE3_CNT
+pub const MME_CMDQ_CP_FENCE3_CNT_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_FENCE3_CNT_VAL_MASK: c_uint = 0xFF;
+// MME_CMDQ_CP_STS
+pub const MME_CMDQ_CP_STS_MSG_INFLIGHT_CNT_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_STS_MSG_INFLIGHT_CNT_MASK: c_uint = 0xFFFF;
+pub const MME_CMDQ_CP_STS_ERDY_SHIFT: c_int = 16;
+pub const MME_CMDQ_CP_STS_ERDY_MASK: c_uint = 0x10000;
+pub const MME_CMDQ_CP_STS_RRDY_SHIFT: c_int = 17;
+pub const MME_CMDQ_CP_STS_RRDY_MASK: c_uint = 0x20000;
+pub const MME_CMDQ_CP_STS_MRDY_SHIFT: c_int = 18;
+pub const MME_CMDQ_CP_STS_MRDY_MASK: c_uint = 0x40000;
+pub const MME_CMDQ_CP_STS_SW_STOP_SHIFT: c_int = 19;
+pub const MME_CMDQ_CP_STS_SW_STOP_MASK: c_uint = 0x80000;
+pub const MME_CMDQ_CP_STS_FENCE_ID_SHIFT: c_int = 20;
+pub const MME_CMDQ_CP_STS_FENCE_ID_MASK: c_uint = 0x300000;
+pub const MME_CMDQ_CP_STS_FENCE_IN_PROGRESS_SHIFT: c_int = 22;
+pub const MME_CMDQ_CP_STS_FENCE_IN_PROGRESS_MASK: c_uint = 0x400000;
+// MME_CMDQ_CP_CURRENT_INST_LO
+pub const MME_CMDQ_CP_CURRENT_INST_LO_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_CURRENT_INST_LO_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_CURRENT_INST_HI
+pub const MME_CMDQ_CP_CURRENT_INST_HI_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_CURRENT_INST_HI_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CP_BARRIER_CFG
+pub const MME_CMDQ_CP_BARRIER_CFG_EBGUARD_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_BARRIER_CFG_EBGUARD_MASK: c_uint = 0xFFF;
+// MME_CMDQ_CP_DBG_0
+pub const MME_CMDQ_CP_DBG_0_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CP_DBG_0_VAL_MASK: c_uint = 0xFF;
+// MME_CMDQ_CQ_BUF_ADDR
+pub const MME_CMDQ_CQ_BUF_ADDR_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_BUF_ADDR_VAL_MASK: c_uint = 0xFFFFFFFF;
+// MME_CMDQ_CQ_BUF_RDATA
+pub const MME_CMDQ_CQ_BUF_RDATA_VAL_SHIFT: c_int = 0;
+pub const MME_CMDQ_CQ_BUF_RDATA_VAL_MASK: c_uint = 0xFFFFFFFF;

@@ -1,0 +1,274 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/arm64/kernel/efi.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Extensible Firmware Interface
+//
+// Based on Extensible Firmware Interface Specification version 2.4
+//
+// Copyright (C) 2013, 2014 Linaro Ltd.
+//
+
+#[no_mangle]
+unsafe extern "C" fn region_is_misaligned(md: *const efi_memory_desc_t) -> bool {
+    static bool region_is_misaligned(const efi_memory_desc_t *md)
+    {
+    if (PAGE_SIZE == EFI_PAGE_SIZE)
+    return false;
+    return !PAGE_ALIGNED(md.phys_addr) ||
+    !PAGE_ALIGNED(md.num_pages << EFI_PAGE_SHIFT);
+    }
+//
+// Only regions of type EFI_RUNTIME_SERVICES_CODE need to be
+// executable, everything else can be mapped with the XN bits
+// set. Also take the new (optional) RO/XP bits into account.
+//
+#[no_mangle]
+unsafe extern "C" fn create_mapping_protection(md: *mut efi_memory_desc_t) -> __init ptval_t {
+    static __init ptval_t create_mapping_protection(efi_memory_desc_t *md)
+    {
+    let mut attr: u64 = md.attribute;
+    let mut type: u32 = md.type;
+    if (type == EFI_MEMORY_MAPPED_IO) {
+    let mut prot: pgprot_t = __pgprot(PROT_DEVICE_nGnRE);
+    if (arm64_is_protected_mmio(md.phys_addr,
+    md.num_pages << EFI_PAGE_SHIFT))
+    prot = pgprot_encrypted(prot);
+    else
+    prot = pgprot_decrypted(prot);
+    return pgprot_val(prot);
+    }
+    if (region_is_misaligned(md)) {
+    static bool __initdata code_is_misaligned;
+//
+// Regions that are not aligned to the OS page size cannot be
+// mapped with strict permissions, as those might interfere
+// with the permissions that are needed by the adjacent
+// region's mapping. However, if we haven't encountered any
+// misaligned runtime code regions so far, we can safely use
+// non-executable permissions for non-code regions.
+//
+    code_is_misaligned |= (type == EFI_RUNTIME_SERVICES_CODE);
+    return code_is_misaligned ? pgprot_val(PAGE_KERNEL_EXEC)
+    : pgprot_val(PAGE_KERNEL);
+    }
+// R--
+    if ((attr & (EFI_MEMORY_XP | EFI_MEMORY_RO)) ==
+    (EFI_MEMORY_XP | EFI_MEMORY_RO))
+    return pgprot_val(PAGE_KERNEL_RO);
+// R-X
+    if (attr & EFI_MEMORY_RO)
+    return pgprot_val(PAGE_KERNEL_ROX);
+// RW-
+    if (((attr & (EFI_MEMORY_RP | EFI_MEMORY_WP | EFI_MEMORY_XP)) ==
+    EFI_MEMORY_XP) ||
+    type != EFI_RUNTIME_SERVICES_CODE)
+    return pgprot_val(PAGE_KERNEL);
+// RWX
+    return pgprot_val(PAGE_KERNEL_EXEC);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn efi_create_mapping(mm: *mut mm_struct, md: *mut efi_memory_desc_t) -> int __init {
+    int __init efi_create_mapping(struct mm_struct *mm, efi_memory_desc_t *md)
+    {
+    let mut prot_val: ptval_t = create_mapping_protection(md);
+    bool page_mappings_only = (md.type == EFI_RUNTIME_SERVICES_CODE ||
+    md.type == EFI_RUNTIME_SERVICES_DATA);
+//
+// If this region is not aligned to the page size used by the OS, the
+// mapping will be rounded outwards, and may end up sharing a page
+// frame with an adjacent runtime memory region. Given that the page
+// table descriptor covering the shared page will be rewritten when the
+// adjacent region gets mapped, we must avoid block mappings here so we
+// don't have to worry about splitting them when that happens.
+//
+    if (region_is_misaligned(md))
+    page_mappings_only = true;
+    create_pgd_mapping(mm, md.phys_addr, md.virt_addr,
+    md.num_pages << EFI_PAGE_SHIFT,
+    __pgprot(prot_val | PTE_NG), page_mappings_only);
+    return 0;
+    }
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct set_perm_data {
+    pub md: *const efi_memory_desc_t,
+    pub has_bti: bool,
+}
+
+#[no_mangle]
+unsafe extern "C" fn set_permissions(ptep: *mut pte_t, addr: c_ulong, data: *mut c_void) -> int __init {
+    static int __init set_permissions(pte_t *ptep, unsigned long addr, void *data)
+    {
+    struct set_perm_data *spd = data;
+    const efi_memory_desc_t *md = spd.md;
+    let mut pte: pte_t = __ptep_get(ptep);
+    if (md.attribute & EFI_MEMORY_RO)
+    pte = set_pte_bit(pte, __pgprot(PTE_RDONLY));
+    if (md.attribute & EFI_MEMORY_XP)
+    pte = set_pte_bit(pte, __pgprot(PTE_PXN));
+#[no_mangle]
+pub unsafe extern "C" fn if(spd->has_bti: system_supports_bti_kernel() &&) -> else {
+    else if (system_supports_bti_kernel() && spd.has_bti)
+    pte = set_pte_bit(pte, __pgprot(PTE_GP));
+    __set_pte(ptep, pte);
+    return 0;
+    }
+    int __init efi_set_mapping_permissions(struct mm_struct *mm,
+    efi_memory_desc_t *md,
+    bool has_bti)
+    {
+    let mut data: set_perm_data = { md, has_bti };
+    BUG_ON(md.type != EFI_RUNTIME_SERVICES_CODE &&
+    md.type != EFI_RUNTIME_SERVICES_DATA);
+    if (region_is_misaligned(md))
+    return 0;
+//
+// Calling apply_to_page_range() is only safe on regions that are
+// guaranteed to be mapped down to pages. Since we are only called
+// for regions that have been mapped using efi_create_mapping() above
+// (and this is checked by the generic Memory Attributes table parsing
+// routines), there is no need to check that again here.
+//
+    return apply_to_page_range(mm, md.virt_addr,
+    md.num_pages << EFI_PAGE_SHIFT,
+    set_permissions, &data);
+    }
+//
+// UpdateCapsule() depends on the system being shutdown via
+// ResetSystem().
+//
+#[no_mangle]
+pub unsafe extern "C" fn efi_poweroff_required() -> bool {
+    bool efi_poweroff_required(void)
+    {
+    return efi_enabled(EFI_RUNTIME_SERVICES);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn efi_handle_corrupted_x18(s: efi_status_t, f: *const c_char) -> asmlinkage efi_status_t {
+    asmlinkage efi_status_t efi_handle_corrupted_x18(efi_status_t s, const char *f)
+    {
+    pr_err_ratelimited(FW_BUG "register x18 corrupted by EFI %s\n", f);
+    return s;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_efi_call_virt_setup() {
+    void arch_efi_call_virt_setup(void)
+    {
+    efi_runtime_assert_lock_held();
+    if (preemptible() && (current.flags & PF_KTHREAD)) {
+//
+// Disable migration to ensure that a preempted EFI runtime
+// service call will be resumed on the same CPU. This avoids
+// potential issues with EFI runtime calls that are preempted
+// while polling for an asynchronous completion of a secure
+// firmware call, which may not permit the CPU to change.
+//
+    migrate_disable();
+    kthread_use_mm(&efi_mm);
+    } else {
+    efi_virtmap_load();
+    }
+    __efi_fpsimd_begin();
+//
+// Enable access to the valid TTBR0_EL1 and invoke the errata
+// workaround directly since there is no return from exception when
+// invoking the EFI run-time services.
+//
+    uaccess_ttbr0_enable();
+    post_ttbr_update_workaround();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_efi_call_virt_teardown() {
+    void arch_efi_call_virt_teardown(void)
+    {
+    __efi_fpsimd_end();
+//
+// Defer the switch to the current thread's TTBR0_EL1 until
+// uaccess_enable(). Do so before efi_virtmap_unload() updates the
+// saved TTBR0 value, so the userland page tables are not activated
+// inadvertently over the back of an exception.
+//
+    uaccess_ttbr0_disable();
+    if (preemptible() && (current.flags & PF_KTHREAD)) {
+    kthread_unuse_mm(&efi_mm);
+    migrate_enable();
+    } else {
+    efi_virtmap_unload();
+    }
+    }
+    asmlinkage u64 *efi_rt_stack_top __ro_after_init;
+    asmlinkage efi_status_t __efi_rt_asm_recover(void);
+#[no_mangle]
+pub unsafe extern "C" fn efi_runtime_fixup_exception(regs: *mut pt_regs, msg: *const c_char) -> bool {
+    bool efi_runtime_fixup_exception(struct pt_regs *regs, const char *msg)
+    {
+// Check whether the exception occurred while running the firmware
+    if (!current_in_efi() || regs.pc >= TASK_SIZE_64)
+    return false;
+    pr_err(FW_BUG "Unable to handle %s in EFI runtime service\n", msg);
+    add_taint(TAINT_FIRMWARE_WORKAROUND, LOCKDEP_STILL_OK);
+    clear_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+    regs.regs[0]	= EFI_ABORTED;
+    regs.regs[30]	= efi_rt_stack_top[-1];
+    regs.pc	= (u64)__efi_rt_asm_recover;
+    if (IS_ENABLED(CONFIG_SHADOW_CALL_STACK))
+    regs.regs[18] = efi_rt_stack_top[-2];
+    return true;
+    }
+// EFI requires 8 KiB of stack space for runtime services
+    static_assert(THREAD_SIZE >= SZ_8K);
+#[no_mangle]
+unsafe extern "C" fn arm64_efi_rt_init() -> int __init {
+    static int __init arm64_efi_rt_init(void)
+    {
+    void *p;
+    if (!efi_enabled(EFI_RUNTIME_SERVICES))
+    return 0;
+    p = arch_alloc_vmap_stack(THREAD_SIZE, NUMA_NO_NODE);
+    if (!p) {
+    pr_warn("Failed to allocate EFI runtime stack\n");
+    clear_bit(EFI_RUNTIME_SERVICES, &efi.flags);
+    return -ENOMEM;
+    }
+    kmemleak_not_leak(p);
+    efi_rt_stack_top = p + THREAD_SIZE;
+    return 0;
+    }
+    core_initcall(arm64_efi_rt_init);

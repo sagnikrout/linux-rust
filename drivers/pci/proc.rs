@@ -1,0 +1,483 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/pci/proc.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Procfs interface for the PCI bus
+//
+// Copyright (c) 1997--1999 Martin Mares <mj@ucw.cz>
+//
+
+    static int proc_initialized;	/* = 0 */
+    static DEFINE_MUTEX(pci_proc_lock);
+#[no_mangle]
+unsafe extern "C" fn proc_bus_pci_lseek(file: *mut file, off: loff_t, whence: c_int) -> loff_t {
+    static loff_t proc_bus_pci_lseek(struct file *file, loff_t off, int whence)
+    {
+    struct pci_dev *dev = pde_data(file_inode(file));
+    return fixed_size_llseek(file, off, whence, dev.cfg_size);
+    }
+    static ssize_t proc_bus_pci_read(struct file *file, char __user *buf,
+    size_t nbytes, loff_t *ppos)
+    {
+    struct pci_dev *dev = pde_data(file_inode(file));
+    let mut pos: c_uint = *ppos;
+    unsigned int cnt, size;
+//
+// Normal users can read only the standardized portion of the
+// configuration space as several chips lock up when trying to read
+// undefined locations (think of Intel PIIX4 as a typical example).
+//
+    if (file_ns_capable(file, &init_user_ns, CAP_SYS_ADMIN))
+    size = dev.cfg_size;
+#[no_mangle]
+pub unsafe extern "C" fn if(PCI_HEADER_TYPE_CARDBUS: dev->hdr_type ==) -> else {
+    else if (dev.hdr_type == PCI_HEADER_TYPE_CARDBUS)
+    size = 128;
+    else
+    size = 64;
+    if (!nbytes)
+    return 0;
+    if (pos >= size)
+    return 0;
+    if (nbytes >= size)
+    nbytes = size;
+    if (pos + nbytes > size)
+    nbytes = size - pos;
+    cnt = nbytes;
+    if (!access_ok(buf, cnt))
+    return -EINVAL;
+    pci_config_pm_runtime_get(dev);
+    if ((pos & 1) && cnt) {
+    unsigned char val;
+    pci_user_read_config_byte(dev, pos, &val);
+    __put_user(val, buf);
+    buf++;
+    pos++;
+    cnt--;
+    }
+    if ((pos & 3) && cnt > 2) {
+    unsigned short val;
+    pci_user_read_config_word(dev, pos, &val);
+    __put_user(cpu_to_le16(val), (__le16 __user *) buf);
+    buf += 2;
+    pos += 2;
+    cnt -= 2;
+    }
+    while (cnt >= 4) {
+    unsigned int val;
+    pci_user_read_config_dword(dev, pos, &val);
+    __put_user(cpu_to_le32(val), (__le32 __user *) buf);
+    buf += 4;
+    pos += 4;
+    cnt -= 4;
+    cond_resched();
+    }
+    if (cnt >= 2) {
+    unsigned short val;
+    pci_user_read_config_word(dev, pos, &val);
+    __put_user(cpu_to_le16(val), (__le16 __user *) buf);
+    buf += 2;
+    pos += 2;
+    cnt -= 2;
+    }
+    if (cnt) {
+    unsigned char val;
+    pci_user_read_config_byte(dev, pos, &val);
+    __put_user(val, buf);
+    pos++;
+    }
+    pci_config_pm_runtime_put(dev);
+// ppos = pos;
+    return nbytes;
+    }
+    static ssize_t proc_bus_pci_write(struct file *file, const char __user *buf,
+    size_t nbytes, loff_t *ppos)
+    {
+    struct inode *ino = file_inode(file);
+    struct pci_dev *dev = pde_data(ino);
+    let mut pos: c_int = *ppos;
+    let mut size: c_int = dev.cfg_size;
+    int cnt, ret;
+    ret = security_locked_down(LOCKDOWN_PCI_ACCESS);
+    if (ret)
+    return ret;
+    if (!nbytes)
+    return 0;
+    if (resource_is_exclusive(&dev.driver_exclusive_resource, pos, nbytes)) {
+    pci_warn_once(dev, "%s: Unexpected write to kernel-exclusive config offset %x",
+    current.comm, pos);
+    add_taint(TAINT_USER, LOCKDEP_STILL_OK);
+    }
+    if (pos >= size)
+    return 0;
+    if (nbytes >= size)
+    nbytes = size;
+    if (pos + nbytes > size)
+    nbytes = size - pos;
+    cnt = nbytes;
+    if (!access_ok(buf, cnt))
+    return -EINVAL;
+    pci_config_pm_runtime_get(dev);
+    if ((pos & 1) && cnt) {
+    unsigned char val;
+    __get_user(val, buf);
+    pci_user_write_config_byte(dev, pos, val);
+    buf++;
+    pos++;
+    cnt--;
+    }
+    if ((pos & 3) && cnt > 2) {
+    __le16 val;
+    __get_user(val, (__le16 __user *) buf);
+    pci_user_write_config_word(dev, pos, le16_to_cpu(val));
+    buf += 2;
+    pos += 2;
+    cnt -= 2;
+    }
+    while (cnt >= 4) {
+    __le32 val;
+    __get_user(val, (__le32 __user *) buf);
+    pci_user_write_config_dword(dev, pos, le32_to_cpu(val));
+    buf += 4;
+    pos += 4;
+    cnt -= 4;
+    }
+    if (cnt >= 2) {
+    __le16 val;
+    __get_user(val, (__le16 __user *) buf);
+    pci_user_write_config_word(dev, pos, le16_to_cpu(val));
+    buf += 2;
+    pos += 2;
+    cnt -= 2;
+    }
+    if (cnt) {
+    unsigned char val;
+    __get_user(val, buf);
+    pci_user_write_config_byte(dev, pos, val);
+    pos++;
+    }
+    pci_config_pm_runtime_put(dev);
+// ppos = pos;
+    i_size_write(ino, dev.cfg_size);
+    return nbytes;
+    }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct pci_filp_private {
+    pub mmap_state: enum pci_mmap_state,
+    pub write_combine: c_int,
+}
+
+    static long proc_bus_pci_ioctl(struct file *file, unsigned int cmd,
+    unsigned long arg)
+    {
+    struct pci_dev *dev = pde_data(file_inode(file));
+
+    struct pci_filp_private *fpriv = file.private_data;
+
+    let mut ret: c_int = 0;
+    ret = security_locked_down(LOCKDOWN_PCI_ACCESS);
+    if (ret)
+    return ret;
+    switch (cmd) {
+    case PCIIOC_CONTROLLER:
+    ret = pci_domain_nr(dev.bus);
+    break;
+
+    case PCIIOC_MMAP_IS_IO:
+    if (!arch_can_pci_mmap_io())
+    return -EINVAL;
+    fpriv.mmap_state = pci_mmap_io;
+    break;
+    case PCIIOC_MMAP_IS_MEM:
+    fpriv.mmap_state = pci_mmap_mem;
+    break;
+    case PCIIOC_WRITE_COMBINE:
+    if (arch_can_pci_mmap_wc()) {
+    if (arg)
+    fpriv.write_combine = 1;
+    else
+    fpriv.write_combine = 0;
+    break;
+    }
+// If arch decided it can't, fall through...
+    fallthrough;
+
+    default:
+    ret = -EINVAL;
+    break;
+    }
+    return ret;
+    }
+
+#[no_mangle]
+unsafe extern "C" fn proc_bus_pci_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_int {
+    static int proc_bus_pci_mmap(struct file *file, struct vm_area_struct *vma)
+    {
+    struct pci_dev *dev = pde_data(file_inode(file));
+    struct pci_filp_private *fpriv = file.private_data;
+    resource_size_t start, end;
+    int i, ret, write_combine = 0, res_bit = IORESOURCE_MEM;
+    if (!capable(CAP_SYS_RAWIO) ||
+    security_locked_down(LOCKDOWN_PCI_ACCESS))
+    return -EPERM;
+// Skip devices with non-mappable BARs
+    if (dev.non_mappable_bars)
+    return -EINVAL;
+    if (fpriv.mmap_state == pci_mmap_io) {
+    if (!arch_can_pci_mmap_io())
+    return -EINVAL;
+    res_bit = IORESOURCE_IO;
+    }
+// Make sure the caller is mapping a real resource for this device
+    for (i = 0; i < PCI_STD_NUM_BARS; i++) {
+    if (dev.resource[i].flags & res_bit &&
+    pci_mmap_fits(dev, i, vma,  PCI_MMAP_PROCFS))
+    break;
+    }
+    if (i >= PCI_STD_NUM_BARS)
+    return -ENODEV;
+    if (fpriv.mmap_state == pci_mmap_mem &&
+    fpriv.write_combine) {
+    if (dev.resource[i].flags & IORESOURCE_PREFETCH)
+    write_combine = 1;
+    else
+    return -EINVAL;
+    }
+    if (dev.resource[i].flags & IORESOURCE_MEM &&
+    iomem_is_exclusive(dev.resource[i].start))
+    return -EINVAL;
+    pci_resource_to_user(dev, i, &dev.resource[i], &start, &end);
+// Adjust vm_pgoff to be the offset within the resource
+    vma.vm_pgoff -= start >> PAGE_SHIFT;
+    ret = pci_mmap_resource_range(dev, i, vma,
+    fpriv.mmap_state, write_combine);
+    if (ret < 0)
+    return ret;
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn proc_bus_pci_open(inode: *mut inode, file: *mut file) -> c_int {
+    static int proc_bus_pci_open(struct inode *inode, struct file *file)
+    {
+    struct pci_filp_private *fpriv = kmalloc_obj(*fpriv);
+    if (!fpriv)
+    return -ENOMEM;
+    fpriv.mmap_state = pci_mmap_io;
+    fpriv.write_combine = 0;
+    file.private_data = fpriv;
+    file.f_mapping = iomem_get_mapping();
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn proc_bus_pci_release(inode: *mut inode, file: *mut file) -> c_int {
+    static int proc_bus_pci_release(struct inode *inode, struct file *file)
+    {
+    kfree(file.private_data);
+    file.private_data = core::ptr::null_mut();
+    return 0;
+    }
+
+    static const struct proc_ops proc_bus_pci_ops = {
+    .proc_lseek	= proc_bus_pci_lseek,
+    .proc_read	= proc_bus_pci_read,
+    .proc_write	= proc_bus_pci_write,
+    .proc_ioctl	= proc_bus_pci_ioctl,
+
+    .proc_compat_ioctl = proc_bus_pci_ioctl,
+
+    .proc_open	= proc_bus_pci_open,
+    .proc_release	= proc_bus_pci_release,
+    .proc_mmap	= proc_bus_pci_mmap,
+
+    .proc_get_unmapped_area = get_pci_unmapped_area,
+
+    };
+// iterator
+    static void *pci_seq_start(struct seq_file *m, loff_t *pos)
+    {
+    struct pci_dev *dev = core::ptr::null_mut();
+    let mut n: loff_t = *pos;
+    for_each_pci_dev(dev) {
+    if (!n--)
+    break;
+    }
+    return dev;
+    }
+    static void *pci_seq_next(struct seq_file *m, void *v, loff_t *pos)
+    {
+    struct pci_dev *dev = v;
+    (*pos)++;
+    dev = pci_get_device(PCI_ANY_ID, PCI_ANY_ID, dev);
+    return dev;
+    }
+#[no_mangle]
+unsafe extern "C" fn pci_seq_stop(m: *mut seq_file, v: *mut c_void) {
+    static void pci_seq_stop(struct seq_file *m, void *v)
+    {
+    if (v) {
+    struct pci_dev *dev = v;
+    pci_dev_put(dev);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn show_device(m: *mut seq_file, v: *mut c_void) -> c_int {
+    static int show_device(struct seq_file *m, void *v)
+    {
+    const struct pci_dev *dev = v;
+    const struct pci_driver *drv;
+    int i;
+    if (dev == core::ptr::null_mut())
+    return 0;
+    drv = pci_dev_driver(dev);
+    seq_printf(m, "%02x%02x\t%04x%04x\t%x",
+    dev.bus.number,
+    dev.devfn,
+    dev.vendor,
+    dev.device,
+    dev.irq);
+// only print standard and ROM resources to preserve compatibility
+    for (i = 0; i <= PCI_ROM_RESOURCE; i++) {
+    resource_size_t start, end;
+    pci_resource_to_user(dev, i, &dev.resource[i], &start, &end);
+    seq_printf(m, "\t%16llx",
+    (unsigned long long)(start |
+    (dev.resource[i].flags & PCI_REGION_FLAG_MASK)));
+    }
+    for (i = 0; i <= PCI_ROM_RESOURCE; i++) {
+    resource_size_t start, end;
+    pci_resource_to_user(dev, i, &dev.resource[i], &start, &end);
+    seq_printf(m, "\t%16llx",
+    dev.resource[i].start < dev.resource[i].end ?
+    (unsigned long long)(end - start) + 1 : 0);
+    }
+    seq_putc(m, '\t');
+    if (drv)
+    seq_puts(m, drv.name);
+    seq_putc(m, '\n');
+    return 0;
+    }
+    static const struct seq_operations proc_bus_pci_devices_op = {
+    .start	= pci_seq_start,
+    .next	= pci_seq_next,
+    .stop	= pci_seq_stop,
+    .show	= show_device
+    };
+    static struct proc_dir_entry *proc_bus_pci_dir;
+#[no_mangle]
+unsafe extern "C" fn __pci_proc_attach_bus(bus: *mut pci_bus) -> c_int {
+    static int __pci_proc_attach_bus(struct pci_bus *bus)
+    {
+    struct proc_dir_entry *dir;
+    char name[16];
+    lockdep_assert_held(&pci_proc_lock);
+    if (!proc_initialized)
+    return -EACCES;
+    if (bus.procdir)
+    return 0;
+    if (pci_proc_domain(bus))
+    sprintf(name, "%04x:%02x", pci_domain_nr(bus), bus.number);
+    else
+    sprintf(name, "%02x", bus.number);
+    dir = proc_mkdir(name, proc_bus_pci_dir);
+    if (!dir)
+    return -ENOMEM;
+    bus.procdir = dir;
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn pci_proc_attach_device(dev: *mut pci_dev) -> c_int {
+    int pci_proc_attach_device(struct pci_dev *dev)
+    {
+    struct pci_bus *bus = dev.bus;
+    struct proc_dir_entry *entry;
+    char name[16];
+    int ret;
+    guard(mutex)(&pci_proc_lock);
+    if (dev.procent)
+    return 0;
+    ret = __pci_proc_attach_bus(bus);
+    if (ret)
+    return ret;
+    sprintf(name, "%02x.%x", PCI_SLOT(dev.devfn), PCI_FUNC(dev.devfn));
+    entry = proc_create_data(name, S_IFREG | S_IRUGO | S_IWUSR,
+    bus.procdir, &proc_bus_pci_ops, dev);
+    if (!entry)
+    return -ENOMEM;
+    proc_set_size(entry, dev.cfg_size);
+    dev.procent = entry;
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn pci_proc_detach_device(dev: *mut pci_dev) -> c_int {
+    int pci_proc_detach_device(struct pci_dev *dev)
+    {
+    guard(mutex)(&pci_proc_lock);
+    proc_remove(dev.procent);
+    dev.procent = core::ptr::null_mut();
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn pci_proc_detach_bus(bus: *mut pci_bus) -> c_int {
+    int pci_proc_detach_bus(struct pci_bus *bus)
+    {
+    guard(mutex)(&pci_proc_lock);
+    proc_remove(bus.procdir);
+    bus.procdir = core::ptr::null_mut();
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn pci_proc_init() -> int __init {
+    static int __init pci_proc_init(void)
+    {
+    struct pci_dev *dev = core::ptr::null_mut();
+    scoped_guard(mutex, &pci_proc_lock) {
+    proc_bus_pci_dir = proc_mkdir("bus/pci", core::ptr::null_mut());
+    proc_create_seq("devices", 0, proc_bus_pci_dir,
+    &proc_bus_pci_devices_op);
+    proc_initialized = 1;
+    }
+    pci_lock_rescan_remove();
+    for_each_pci_dev(dev)
+    pci_proc_attach_device(dev);
+    pci_unlock_rescan_remove();
+    return 0;
+    }
+    device_initcall(pci_proc_init);

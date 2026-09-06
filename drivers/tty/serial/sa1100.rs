@@ -1,0 +1,828 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/tty/serial/sa1100.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// Driver for SA11x0 serial ports
+//
+// Based on drivers/char/serial.c, by Linus Torvalds, Theodore Ts'o.
+//
+// Copyright (C) 2000 Deep Blue Solutions Ltd.
+//
+
+// We've been assigned a range on the "Low-density serial ports" major
+pub const SERIAL_SA1100_MAJOR: c_int = 204;
+pub const MINOR_START: c_int = 5;
+pub const NR_PORTS: c_int = 3;
+pub const SA1100_ISR_PASS_LIMIT: c_int = 256;
+//
+// Convert from ignore_status_mask or read_status_mask to UTSR[01]
+//
+
+//
+// This is the size of our serial port register set.
+//
+pub const UART_PORT_SIZE: c_uint = 0x24;
+//
+// This determines how often we check the modem status signals
+// for any change.  They generally aren't connected to an IRQ
+// so we have to poll them.  We also check immediately before
+// filling the TX fifo incase CTS has been dropped.
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sa1100_port {
+    pub port: uart_port,
+    pub timer: timer_list,
+    pub old_status: c_uint,
+    pub gpios: *mut mctrl_gpios,
+}
+
+//
+// Handle any change of modem status signal since we were last called.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_mctrl_check(sport: *mut sa1100_port) {
+    static void sa1100_mctrl_check(struct sa1100_port *sport)
+    {
+    unsigned int status, changed;
+    status = sport.port.ops.get_mctrl(&sport.port);
+    changed = status ^ sport.old_status;
+    if (changed == 0)
+    return;
+    sport.old_status = status;
+    if (changed & TIOCM_RI)
+    sport.port.icount.rng++;
+    if (changed & TIOCM_DSR)
+    sport.port.icount.dsr++;
+    if (changed & TIOCM_CAR)
+    uart_handle_dcd_change(&sport.port, status & TIOCM_CAR);
+    if (changed & TIOCM_CTS)
+    uart_handle_cts_change(&sport.port, status & TIOCM_CTS);
+    wake_up_interruptible(&sport.port.state.port.delta_msr_wait);
+    }
+//
+// This is our per-port timeout handler, for checking the
+// modem status signals.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_timeout(t: *mut timer_list) {
+    static void sa1100_timeout(struct timer_list *t)
+    {
+    struct sa1100_port *sport = timer_container_of(sport, t, timer);
+    unsigned long flags;
+    if (sport.port.state) {
+    uart_port_lock_irqsave(&sport.port, &flags);
+    sa1100_mctrl_check(sport);
+    uart_port_unlock_irqrestore(&sport.port, flags);
+    mod_timer(&sport.timer, jiffies + MCTRL_TIMEOUT);
+    }
+    }
+//
+// interrupts disabled on entry
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_stop_tx(port: *mut uart_port) {
+    static void sa1100_stop_tx(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    u32 utcr3;
+    utcr3 = UART_GET_UTCR3(sport);
+    UART_PUT_UTCR3(sport, utcr3 & ~UTCR3_TIE);
+    sport.port.read_status_mask &= ~UTSR0_TO_SM(UTSR0_TFS);
+    }
+//
+// port locked and interrupts disabled
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_start_tx(port: *mut uart_port) {
+    static void sa1100_start_tx(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    u32 utcr3;
+    utcr3 = UART_GET_UTCR3(sport);
+    sport.port.read_status_mask |= UTSR0_TO_SM(UTSR0_TFS);
+    UART_PUT_UTCR3(sport, utcr3 | UTCR3_TIE);
+    }
+//
+// Interrupts enabled
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_stop_rx(port: *mut uart_port) {
+    static void sa1100_stop_rx(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    u32 utcr3;
+    utcr3 = UART_GET_UTCR3(sport);
+    UART_PUT_UTCR3(sport, utcr3 & ~UTCR3_RIE);
+    }
+//
+// Set the modem control timer to fire immediately.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_enable_ms(port: *mut uart_port) {
+    static void sa1100_enable_ms(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    mod_timer(&sport.timer, jiffies);
+    mctrl_gpio_enable_ms(sport.gpios);
+    }
+    static void
+    sa1100_rx_chars(struct sa1100_port *sport)
+    {
+    unsigned int status;
+    u8 ch, flg;
+    status = UTSR1_TO_SM(UART_GET_UTSR1(sport)) |
+    UTSR0_TO_SM(UART_GET_UTSR0(sport));
+    while (status & UTSR1_TO_SM(UTSR1_RNE)) {
+    ch = UART_GET_CHAR(sport);
+    sport.port.icount.rx++;
+    flg = TTY_NORMAL;
+//
+// note that the error handling code is
+// out of the main execution path
+//
+    if (status & UTSR1_TO_SM(UTSR1_PRE | UTSR1_FRE | UTSR1_ROR)) {
+    if (status & UTSR1_TO_SM(UTSR1_PRE))
+    sport.port.icount.parity++;
+#[no_mangle]
+pub unsafe extern "C" fn if(UTSR1_TO_SM(UTSR1_FRE): status &) -> else {
+    else if (status & UTSR1_TO_SM(UTSR1_FRE))
+    sport.port.icount.frame++;
+    if (status & UTSR1_TO_SM(UTSR1_ROR))
+    sport.port.icount.overrun++;
+    status &= sport.port.read_status_mask;
+    if (status & UTSR1_TO_SM(UTSR1_PRE))
+    flg = TTY_PARITY;
+#[no_mangle]
+pub unsafe extern "C" fn if(UTSR1_TO_SM(UTSR1_FRE): status &) -> else {
+    else if (status & UTSR1_TO_SM(UTSR1_FRE))
+    flg = TTY_FRAME;
+    sport.port.sysrq = 0;
+    }
+    if (uart_handle_sysrq_char(&sport.port, ch))
+    goto ignore_char;
+    uart_insert_char(&sport.port, status, UTSR1_TO_SM(UTSR1_ROR), ch, flg);
+    ignore_char:
+    status = UTSR1_TO_SM(UART_GET_UTSR1(sport)) |
+    UTSR0_TO_SM(UART_GET_UTSR0(sport));
+    }
+    tty_flip_buffer_push(&sport.port.state.port);
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_tx_chars(sport: *mut sa1100_port) {
+    static void sa1100_tx_chars(struct sa1100_port *sport)
+    {
+    u8 ch;
+//
+// Check the modem control lines before
+// transmitting anything.
+//
+    sa1100_mctrl_check(sport);
+    uart_port_tx(&sport.port, ch,
+    UART_GET_UTSR1(sport) & UTSR1_TNF,
+    UART_PUT_CHAR(sport, ch));
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_int(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
+    static irqreturn_t sa1100_int(int irq, void *dev_id)
+    {
+    struct sa1100_port *sport = dev_id;
+    unsigned int status, pass_counter = 0;
+    uart_port_lock(&sport.port);
+    status = UART_GET_UTSR0(sport);
+    status &= SM_TO_UTSR0(sport.port.read_status_mask) | ~UTSR0_TFS;
+    do {
+    if (status & (UTSR0_RFS | UTSR0_RID)) {
+// Clear the receiver idle bit, if set
+    if (status & UTSR0_RID)
+    UART_PUT_UTSR0(sport, UTSR0_RID);
+    sa1100_rx_chars(sport);
+    }
+// Clear the relevant break bits
+    if (status & (UTSR0_RBB | UTSR0_REB))
+    UART_PUT_UTSR0(sport, status & (UTSR0_RBB | UTSR0_REB));
+    if (status & UTSR0_RBB)
+    sport.port.icount.brk++;
+    if (status & UTSR0_REB)
+    uart_handle_break(&sport.port);
+    if (status & UTSR0_TFS)
+    sa1100_tx_chars(sport);
+    if (pass_counter++ > SA1100_ISR_PASS_LIMIT)
+    break;
+    status = UART_GET_UTSR0(sport);
+    status &= SM_TO_UTSR0(sport.port.read_status_mask) |
+    ~UTSR0_TFS;
+    } while (status & (UTSR0_TFS | UTSR0_RFS | UTSR0_RID));
+    uart_port_unlock(&sport.port);
+    return IRQ_HANDLED;
+    }
+//
+// Return TIOCSER_TEMT when transmitter is not busy.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_tx_empty(port: *mut uart_port) -> c_uint {
+    static unsigned int sa1100_tx_empty(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    return UART_GET_UTSR1(sport) & UTSR1_TBY ? 0 : TIOCSER_TEMT;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_get_mctrl(port: *mut uart_port) -> c_uint {
+    static unsigned int sa1100_get_mctrl(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    let mut ret: c_int = TIOCM_CTS | TIOCM_DSR | TIOCM_CAR;
+    mctrl_gpio_get(sport.gpios, &ret);
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_set_mctrl(port: *mut uart_port, mctrl: c_uint) {
+    static void sa1100_set_mctrl(struct uart_port *port, unsigned int mctrl)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    mctrl_gpio_set(sport.gpios, mctrl);
+    }
+//
+// Interrupts always disabled.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_break_ctl(port: *mut uart_port, break_state: c_int) {
+    static void sa1100_break_ctl(struct uart_port *port, int break_state)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    unsigned long flags;
+    unsigned int utcr3;
+    uart_port_lock_irqsave(&sport.port, &flags);
+    utcr3 = UART_GET_UTCR3(sport);
+    if (break_state == -1)
+    utcr3 |= UTCR3_BRK;
+    else
+    utcr3 &= ~UTCR3_BRK;
+    UART_PUT_UTCR3(sport, utcr3);
+    uart_port_unlock_irqrestore(&sport.port, flags);
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_startup(port: *mut uart_port) -> c_int {
+    static int sa1100_startup(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    int retval;
+//
+// Allocate the IRQ
+//
+    retval = request_irq(sport.port.irq, sa1100_int, 0,
+    "sa11x0-uart", sport);
+    if (retval)
+    return retval;
+//
+// Finally, clear and enable interrupts
+//
+    UART_PUT_UTSR0(sport, -1);
+    UART_PUT_UTCR3(sport, UTCR3_RXE | UTCR3_TXE | UTCR3_RIE);
+//
+// Enable modem status interrupts
+//
+    uart_port_lock_irq(&sport.port);
+    sa1100_enable_ms(&sport.port);
+    uart_port_unlock_irq(&sport.port);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_shutdown(port: *mut uart_port) {
+    static void sa1100_shutdown(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+//
+// Stop our timer.
+//
+    timer_delete_sync(&sport.timer);
+//
+// Free the interrupt
+//
+    free_irq(sport.port.irq, sport);
+//
+// Disable all interrupts, port and break condition.
+//
+    UART_PUT_UTCR3(sport, 0);
+    }
+    static void
+    sa1100_set_termios(struct uart_port *port, struct ktermios *termios,
+    const struct ktermios *old)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    unsigned long flags;
+    unsigned int utcr0, old_utcr3, baud, quot;
+    let mut old_csize: c_uint = old ? old.c_cflag & CSIZE : CS8;
+//
+// We only support CS7 and CS8.
+//
+    while ((termios.c_cflag & CSIZE) != CS7 &&
+    (termios.c_cflag & CSIZE) != CS8) {
+    termios.c_cflag &= ~CSIZE;
+    termios.c_cflag |= old_csize;
+    old_csize = CS8;
+    }
+    if ((termios.c_cflag & CSIZE) == CS8)
+    utcr0 = UTCR0_DSS;
+    else
+    utcr0 = 0;
+    if (termios.c_cflag & CSTOPB)
+    utcr0 |= UTCR0_SBS;
+    if (termios.c_cflag & PARENB) {
+    utcr0 |= UTCR0_PE;
+    if (!(termios.c_cflag & PARODD))
+    utcr0 |= UTCR0_OES;
+    }
+//
+// Ask the core to calculate the divisor for us.
+//
+    baud = uart_get_baud_rate(port, termios, old, 0, port.uartclk/16);
+    quot = uart_get_divisor(port, baud);
+    timer_delete_sync(&sport.timer);
+    uart_port_lock_irqsave(&sport.port, &flags);
+    sport.port.read_status_mask &= UTSR0_TO_SM(UTSR0_TFS);
+    sport.port.read_status_mask |= UTSR1_TO_SM(UTSR1_ROR);
+    if (termios.c_iflag & INPCK)
+    sport.port.read_status_mask |=
+    UTSR1_TO_SM(UTSR1_FRE | UTSR1_PRE);
+    if (termios.c_iflag & (BRKINT | PARMRK))
+    sport.port.read_status_mask |=
+    UTSR0_TO_SM(UTSR0_RBB | UTSR0_REB);
+//
+// Characters to ignore
+//
+    sport.port.ignore_status_mask = 0;
+    if (termios.c_iflag & IGNPAR)
+    sport.port.ignore_status_mask |=
+    UTSR1_TO_SM(UTSR1_FRE | UTSR1_PRE);
+    if (termios.c_iflag & IGNBRK) {
+    sport.port.ignore_status_mask |=
+    UTSR0_TO_SM(UTSR0_RBB | UTSR0_REB);
+//
+// If we're ignoring parity and break indicators,
+// ignore overruns too (for real raw support).
+//
+    if (termios.c_iflag & IGNPAR)
+    sport.port.ignore_status_mask |=
+    UTSR1_TO_SM(UTSR1_ROR);
+    }
+//
+// Update the per-port timeout.
+//
+    uart_update_timeout(port, termios.c_cflag, baud);
+//
+// disable interrupts and drain transmitter
+//
+    old_utcr3 = UART_GET_UTCR3(sport);
+    UART_PUT_UTCR3(sport, old_utcr3 & ~(UTCR3_RIE | UTCR3_TIE));
+    while (UART_GET_UTSR1(sport) & UTSR1_TBY)
+    barrier();
+// then, disable everything
+    UART_PUT_UTCR3(sport, 0);
+// set the parity, stop bits and data size
+    UART_PUT_UTCR0(sport, utcr0);
+// set the baud rate
+    quot -= 1;
+    UART_PUT_UTCR1(sport, ((quot & 0xf00) >> 8));
+    UART_PUT_UTCR2(sport, (quot & 0xff));
+    UART_PUT_UTSR0(sport, -1);
+    UART_PUT_UTCR3(sport, old_utcr3);
+    if (UART_ENABLE_MS(&sport.port, termios.c_cflag))
+    sa1100_enable_ms(&sport.port);
+    uart_port_unlock_irqrestore(&sport.port, flags);
+    }
+    static const char *sa1100_type(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    return sport.port.type == PORT_SA1100 ? "SA1100" : core::ptr::null_mut();
+    }
+//
+// Release the memory region(s) being used by 'port'.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_release_port(port: *mut uart_port) {
+    static void sa1100_release_port(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    release_mem_region(sport.port.mapbase, UART_PORT_SIZE);
+    }
+//
+// Request the memory region(s) being used by 'port'.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_request_port(port: *mut uart_port) -> c_int {
+    static int sa1100_request_port(struct uart_port *port)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    return request_mem_region(sport.port.mapbase, UART_PORT_SIZE,
+    "sa11x0-uart") != core::ptr::null_mut() ? 0 : -EBUSY;
+    }
+//
+// Configure/autoconfigure the port.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_config_port(port: *mut uart_port, flags: c_int) {
+    static void sa1100_config_port(struct uart_port *port, int flags)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    if (flags & UART_CONFIG_TYPE &&
+    sa1100_request_port(&sport.port) == 0)
+    sport.port.type = PORT_SA1100;
+    }
+//
+// Verify the new serial_struct (for TIOCSSERIAL).
+// The only change we allow are to the flags and type, and
+// even then only between PORT_SA1100 and PORT_UNKNOWN
+//
+    static int
+    sa1100_verify_port(struct uart_port *port, struct serial_struct *ser)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    let mut ret: c_int = 0;
+    if (ser.type != PORT_UNKNOWN && ser.type != PORT_SA1100)
+    ret = -EINVAL;
+    if (sport.port.irq != ser.irq)
+    ret = -EINVAL;
+    if (ser.io_type != SERIAL_IO_MEM)
+    ret = -EINVAL;
+    if (sport.port.uartclk / 16 != ser.baud_base)
+    ret = -EINVAL;
+    if ((void *)sport.port.mapbase != ser.iomem_base)
+    ret = -EINVAL;
+    if (sport.port.iobase != ser.port)
+    ret = -EINVAL;
+    if (ser.hub6 != 0)
+    ret = -EINVAL;
+    return ret;
+    }
+    static struct uart_ops sa1100_pops = {
+    .tx_empty	= sa1100_tx_empty,
+    .set_mctrl	= sa1100_set_mctrl,
+    .get_mctrl	= sa1100_get_mctrl,
+    .stop_tx	= sa1100_stop_tx,
+    .start_tx	= sa1100_start_tx,
+    .stop_rx	= sa1100_stop_rx,
+    .enable_ms	= sa1100_enable_ms,
+    .break_ctl	= sa1100_break_ctl,
+    .startup	= sa1100_startup,
+    .shutdown	= sa1100_shutdown,
+    .set_termios	= sa1100_set_termios,
+    .type		= sa1100_type,
+    .release_port	= sa1100_release_port,
+    .request_port	= sa1100_request_port,
+    .config_port	= sa1100_config_port,
+    .verify_port	= sa1100_verify_port,
+    };
+    static struct sa1100_port sa1100_ports[NR_PORTS];
+//
+// Setup the SA1100 serial ports.  Note that we don't include the IrDA
+// port here since we have our own SIR/FIR driver (see drivers/net/irda)
+//
+// Note also that we support "console=ttySAx" where "x" is either 0 or 1.
+// Which serial port this ends up being depends on the machine you're
+// running this kernel on.  I'm not convinced that this is a good idea,
+// but that's the way it traditionally works.
+//
+// Note that NanoEngine UART3 becomes UART2, and UART2 is no longer
+// used here.
+//
+#[no_mangle]
+unsafe extern "C" fn sa1100_init_ports() -> void __init {
+    static void __init sa1100_init_ports(void)
+    {
+    let mut first: static int = 1;
+    int i;
+    if (!first)
+    return;
+    first = 0;
+    for (i = 0; i < NR_PORTS; i++) {
+    sa1100_ports[i].port.uartclk   = 3686400;
+    sa1100_ports[i].port.ops       = &sa1100_pops;
+    sa1100_ports[i].port.fifosize  = 8;
+    sa1100_ports[i].port.line      = i;
+    sa1100_ports[i].port.iotype    = UPIO_MEM;
+    timer_setup(&sa1100_ports[i].timer, sa1100_timeout, 0);
+    }
+//
+// make transmit lines outputs, so that when the port
+// is closed, the output is in the MARK state.
+//
+    PPDR |= PPC_TXD1 | PPC_TXD3;
+    PPSR |= PPC_TXD1 | PPC_TXD3;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sa1100_register_uart_fns(fns: *mut sa1100_port_fns) {
+    void sa1100_register_uart_fns(struct sa1100_port_fns *fns)
+    {
+    if (fns.get_mctrl)
+    sa1100_pops.get_mctrl = fns.get_mctrl;
+    if (fns.set_mctrl)
+    sa1100_pops.set_mctrl = fns.set_mctrl;
+    sa1100_pops.pm       = fns.pm;
+//
+// FIXME: fns->set_wake is unused - this should be called from
+// the suspend() callback if device_may_wakeup(dev)) is set.
+//
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sa1100_register_uart(idx: c_int, port: c_int) -> void __init {
+    void __init sa1100_register_uart(int idx, int port)
+    {
+    if (idx >= NR_PORTS) {
+    printk(KERN_ERR "%s: bad index number %d\n", __func__, idx);
+    return;
+    }
+    switch (port) {
+    case 1:
+    sa1100_ports[idx].port.membase = (void __iomem *)&Ser1UTCR0;
+    sa1100_ports[idx].port.mapbase = _Ser1UTCR0;
+    sa1100_ports[idx].port.irq     = IRQ_Ser1UART;
+    sa1100_ports[idx].port.flags   = UPF_BOOT_AUTOCONF;
+    break;
+    case 2:
+    sa1100_ports[idx].port.membase = (void __iomem *)&Ser2UTCR0;
+    sa1100_ports[idx].port.mapbase = _Ser2UTCR0;
+    sa1100_ports[idx].port.irq     = IRQ_Ser2ICP;
+    sa1100_ports[idx].port.flags   = UPF_BOOT_AUTOCONF;
+    break;
+    case 3:
+    sa1100_ports[idx].port.membase = (void __iomem *)&Ser3UTCR0;
+    sa1100_ports[idx].port.mapbase = _Ser3UTCR0;
+    sa1100_ports[idx].port.irq     = IRQ_Ser3UART;
+    sa1100_ports[idx].port.flags   = UPF_BOOT_AUTOCONF;
+    break;
+    default:
+    printk(KERN_ERR "%s: bad port number %d\n", __func__, port);
+    }
+    }
+
+#[no_mangle]
+unsafe extern "C" fn sa1100_console_putchar(port: *mut uart_port, ch: c_uchar) {
+    static void sa1100_console_putchar(struct uart_port *port, unsigned char ch)
+    {
+    struct sa1100_port *sport =
+    container_of(port, struct sa1100_port, port);
+    while (!(UART_GET_UTSR1(sport) & UTSR1_TNF))
+    barrier();
+    UART_PUT_CHAR(sport, ch);
+    }
+//
+// Interrupts are disabled on entering
+//
+    static void
+    sa1100_console_write(struct console *co, const char *s, unsigned int count)
+    {
+    struct sa1100_port *sport = &sa1100_ports[co.index];
+    unsigned int old_utcr3, status;
+//
+// First, save UTCR3 and then disable interrupts
+//
+    old_utcr3 = UART_GET_UTCR3(sport);
+    UART_PUT_UTCR3(sport, (old_utcr3 & ~(UTCR3_RIE | UTCR3_TIE)) |
+    UTCR3_TXE);
+    uart_console_write(&sport.port, s, count, sa1100_console_putchar);
+//
+// Finally, wait for transmitter to become empty
+// and restore UTCR3
+//
+    do {
+    status = UART_GET_UTSR1(sport);
+    } while (status & UTSR1_TBY);
+    UART_PUT_UTCR3(sport, old_utcr3);
+    }
+//
+// If the port was already initialised (eg, by a boot loader),
+// try to determine the current setup.
+//
+    static void __init
+    sa1100_console_get_options(struct sa1100_port *sport, int *baud,
+    int *parity, int *bits)
+    {
+    unsigned int utcr3;
+    utcr3 = UART_GET_UTCR3(sport) & (UTCR3_RXE | UTCR3_TXE);
+    if (utcr3 == (UTCR3_RXE | UTCR3_TXE)) {
+// ok, the port was enabled
+    unsigned int utcr0, quot;
+    utcr0 = UART_GET_UTCR0(sport);
+// parity = 'n';
+    if (utcr0 & UTCR0_PE) {
+    if (utcr0 & UTCR0_OES)
+// parity = 'e';
+    else
+// parity = 'o';
+    }
+    if (utcr0 & UTCR0_DSS)
+// bits = 8;
+    else
+// bits = 7;
+    quot = UART_GET_UTCR2(sport) | UART_GET_UTCR1(sport) << 8;
+    quot &= 0xfff;
+// baud = sport->port.uartclk / (16 * (quot + 1));
+    }
+    }
+    static int __init
+    sa1100_console_setup(struct console *co, char *options)
+    {
+    struct sa1100_port *sport;
+    let mut baud: c_int = 9600;
+    let mut bits: c_int = 8;
+    let mut parity: c_int = 'n';
+    let mut flow: c_int = 'n';
+//
+// Check whether an invalid uart number has been specified, and
+// if so, search for the first available port that does have
+// console support.
+//
+    if (co.index == -1 || co.index >= NR_PORTS)
+    co.index = 0;
+    sport = &sa1100_ports[co.index];
+    if (options)
+    uart_parse_options(options, &baud, &parity, &bits, &flow);
+    else
+    sa1100_console_get_options(sport, &baud, &parity, &bits);
+    return uart_set_options(&sport.port, co, baud, parity, bits, flow);
+    }
+    static struct uart_driver sa1100_reg;
+    static struct console sa1100_console = {
+    .name		= "ttySA",
+    .write		= sa1100_console_write,
+    .device		= uart_console_device,
+    .setup		= sa1100_console_setup,
+    .flags		= CON_PRINTBUFFER,
+    .index		= -1,
+    .data		= &sa1100_reg,
+    };
+#[no_mangle]
+unsafe extern "C" fn sa1100_rs_console_init() -> int __init {
+    static int __init sa1100_rs_console_init(void)
+    {
+    sa1100_init_ports();
+    register_console(&sa1100_console);
+    return 0;
+    }
+    console_initcall(sa1100_rs_console_init);
+
+    static struct uart_driver sa1100_reg = {
+    .owner			= THIS_MODULE,
+    .driver_name		= "ttySA",
+    .dev_name		= "ttySA",
+    .major			= SERIAL_SA1100_MAJOR,
+    .minor			= MINOR_START,
+    .nr			= NR_PORTS,
+    .cons			= SA1100_CONSOLE,
+    };
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_suspend(dev: *mut platform_device, state: pm_message_t) -> c_int {
+    static int sa1100_serial_suspend(struct platform_device *dev, pm_message_t state)
+    {
+    struct sa1100_port *sport = platform_get_drvdata(dev);
+    if (sport)
+    uart_suspend_port(&sa1100_reg, &sport.port);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_resume(dev: *mut platform_device) -> c_int {
+    static int sa1100_serial_resume(struct platform_device *dev)
+    {
+    struct sa1100_port *sport = platform_get_drvdata(dev);
+    if (sport)
+    uart_resume_port(&sa1100_reg, &sport.port);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_add_one_port(sport: *mut sa1100_port, dev: *mut platform_device) -> c_int {
+    static int sa1100_serial_add_one_port(struct sa1100_port *sport, struct platform_device *dev)
+    {
+    sport.port.dev = &dev.dev;
+    sport.port.has_sysrq = IS_ENABLED(CONFIG_SERIAL_SA1100_CONSOLE);
+// mctrl_gpio_init() requires that the GPIO driver supports interrupts,
+// but we need to support GPIO drivers for hardware that has no such
+// interrupts.  Use mctrl_gpio_init_noauto() instead.
+    sport.gpios = mctrl_gpio_init_noauto(sport.port.dev, 0);
+    if (IS_ERR(sport.gpios)) {
+    let mut err: c_int = PTR_ERR(sport.gpios);
+    dev_err(sport.port.dev, "failed to get mctrl gpios: %d\n",
+    err);
+    if (err == -EPROBE_DEFER)
+    return err;
+    sport.gpios = core::ptr::null_mut();
+    }
+    platform_set_drvdata(dev, sport);
+    return uart_add_one_port(&sa1100_reg, &sport.port);
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_probe(dev: *mut platform_device) -> c_int {
+    static int sa1100_serial_probe(struct platform_device *dev)
+    {
+    struct resource *res;
+    int i;
+    res = platform_get_resource(dev, IORESOURCE_MEM, 0);
+    if (!res)
+    return -EINVAL;
+    for (i = 0; i < NR_PORTS; i++)
+    if (sa1100_ports[i].port.mapbase == res.start)
+    break;
+    if (i == NR_PORTS)
+    return -ENODEV;
+    sa1100_serial_add_one_port(&sa1100_ports[i], dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_remove(pdev: *mut platform_device) {
+    static void sa1100_serial_remove(struct platform_device *pdev)
+    {
+    struct sa1100_port *sport = platform_get_drvdata(pdev);
+    if (sport)
+    uart_remove_one_port(&sa1100_reg, &sport.port);
+    }
+    static struct platform_driver sa11x0_serial_driver = {
+    .probe		= sa1100_serial_probe,
+    .remove		= sa1100_serial_remove,
+    .suspend	= sa1100_serial_suspend,
+    .resume		= sa1100_serial_resume,
+    .driver		= {
+    .name	= "sa11x0-uart",
+    },
+    };
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_init() -> int __init {
+    static int __init sa1100_serial_init(void)
+    {
+    int ret;
+    printk(KERN_INFO "Serial: SA11x0 driver\n");
+    sa1100_init_ports();
+    ret = uart_register_driver(&sa1100_reg);
+    if (ret == 0) {
+    ret = platform_driver_register(&sa11x0_serial_driver);
+    if (ret)
+    uart_unregister_driver(&sa1100_reg);
+    }
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn sa1100_serial_exit() -> void __exit {
+    static void __exit sa1100_serial_exit(void)
+    {
+    platform_driver_unregister(&sa11x0_serial_driver);
+    uart_unregister_driver(&sa1100_reg);
+    }
+    module_init(sa1100_serial_init);
+    module_exit(sa1100_serial_exit);
+    MODULE_AUTHOR("Deep Blue Solutions Ltd");
+    MODULE_DESCRIPTION("SA1100 generic serial port driver");
+    MODULE_LICENSE("GPL");
+    MODULE_ALIAS_CHARDEV_MAJOR(SERIAL_SA1100_MAJOR);
+    MODULE_ALIAS("platform:sa11x0-uart");

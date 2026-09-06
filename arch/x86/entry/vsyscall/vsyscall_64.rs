@@ -1,0 +1,394 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/entry/vsyscall/vsyscall_64.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright (c) 2012-2014 Andy Lutomirski <luto@amacapital.net>
+//
+// Based on the original implementation which is:
+// Copyright (C) 2001 Andrea Arcangeli <andrea@suse.de> SuSE
+// Copyright 2003 Andi Kleen, SuSE Labs.
+//
+// Parts of the original code have been moved to arch/x86/vdso/vma.c
+//
+// This file implements vsyscall emulation.  vsyscalls are a legacy ABI:
+// Userspace can request certain kernel services by calling fixed
+// addresses.  This concept is problematic:
+//
+// - It interferes with ASLR.
+// - It's awkward to write code that lives in kernel addresses but is
+// callable by userspace at fixed addresses.
+// - The whole concept is impossible for 32-bit compat userspace.
+// - UML cannot easily virtualize a vsyscall.
+//
+// As of mid-2014, I believe that there is no new userspace code that
+// will use a vsyscall if the vDSO is present.  I hope that there will
+// soon be no new userspace code that will ever use a vsyscall.
+//
+// The code in this file emulates vsyscalls when notified of a page
+// fault or a general protection fault to a vsyscall address.
+//
+
+// Macro flag: #define CREATE_TRACE_POINTS
+
+    static enum { EMULATE, XONLY, NONE } vsyscall_mode __ro_after_init =
+
+    NONE;
+
+    XONLY;
+
+#[no_mangle]
+unsafe extern "C" fn vsyscall_setup(str: *mut c_char) -> int __init {
+    static int __init vsyscall_setup(char *str)
+    {
+    if (str) {
+    if (!strcmp("emulate", str))
+    vsyscall_mode = EMULATE;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp("xonly", _arg: str)) -> else {
+    else if (!strcmp("xonly", str))
+    vsyscall_mode = XONLY;
+#[no_mangle]
+pub unsafe extern "C" fn if(_arg: !strcmp("none", _arg: str)) -> else {
+    else if (!strcmp("none", str))
+    vsyscall_mode = NONE;
+    else
+    return -EINVAL;
+    if (cpu_feature_enabled(X86_FEATURE_LASS) && vsyscall_mode == EMULATE) {
+    setup_clear_cpu_cap(X86_FEATURE_LASS);
+    pr_warn_once("x86/cpu: Disabling LASS due to vsyscall=emulate\n");
+    }
+    return 0;
+    }
+    return -EINVAL;
+    }
+    early_param("vsyscall", vsyscall_setup);
+    static void warn_bad_vsyscall(const char *level, struct pt_regs *regs,
+    const char *message)
+    {
+    if (!show_unhandled_signals)
+    return;
+    printk_ratelimited("%s%s[%d] %s ip:%lx cs:%x sp:%lx ax:%lx si:%lx di:%lx\n",
+    level, current.comm, task_pid_nr(current),
+    message, regs.ip, regs.cs,
+    regs.sp, regs.ax, regs.si, regs.di);
+    }
+#[no_mangle]
+unsafe extern "C" fn addr_to_vsyscall_nr(addr: c_ulong) -> c_int {
+    static int addr_to_vsyscall_nr(unsigned long addr)
+    {
+    int nr;
+    if ((addr & ~0xC00UL) != VSYSCALL_ADDR)
+    return -EINVAL;
+    nr = (addr & 0xC00UL) >> 10;
+    if (nr >= 3)
+    return -EINVAL;
+    return nr;
+    }
+#[no_mangle]
+unsafe extern "C" fn write_ok_or_segv(ptr: c_ulong, size: usize) -> bool {
+    static bool write_ok_or_segv(unsigned long ptr, size_t size)
+    {
+    if (!access_ok((void __user *)ptr, size)) {
+    struct thread_struct *thread = &current.thread;
+    thread.error_code	= X86_PF_USER | X86_PF_WRITE;
+    thread.cr2		= ptr;
+    thread.trap_nr		= X86_TRAP_PF;
+    force_sig_fault(SIGSEGV, SEGV_MAPERR, (void __user *)ptr);
+    return false;
+    } else {
+    return true;
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn __emulate_vsyscall(regs: *mut pt_regs, address: c_ulong) -> bool {
+    static bool __emulate_vsyscall(struct pt_regs *regs, unsigned long address)
+    {
+    unsigned long caller, orig_dx;
+    int vsyscall_nr, syscall_nr;
+    bool skip;
+    long ret;
+// Confirm that the fault happened in 64-bit user mode
+    if (!user_64bit_mode(regs))
+    return false;
+    if (vsyscall_mode == NONE) {
+    warn_bad_vsyscall(KERN_INFO, regs,
+    "vsyscall attempted with vsyscall=none");
+    return false;
+    }
+    vsyscall_nr = addr_to_vsyscall_nr(address);
+    trace_emulate_vsyscall(vsyscall_nr);
+    if (vsyscall_nr < 0) {
+    warn_bad_vsyscall(KERN_WARNING, regs,
+    "misaligned vsyscall (exploit attempt or buggy program) -- look up the vsyscall kernel parameter if you need a workaround");
+    goto sigsegv;
+    }
+    if (get_user(caller, (unsigned long __user *)regs.sp) != 0) {
+    warn_bad_vsyscall(KERN_WARNING, regs,
+    "vsyscall with bad stack (exploit attempt?)");
+    goto sigsegv;
+    }
+//
+// Check for access_ok violations and find the syscall nr.
+//
+// NULL is a valid user pointer (in the access_ok sense) on 32-bit and
+// 64-bit, so we don't need to special-case it here.  For all the
+// vsyscalls, NULL means "don't write anything" not "write it at
+// address 0".
+//
+    switch (vsyscall_nr) {
+    case 0:
+    if (!write_ok_or_segv(regs.di, sizeof(struct __kernel_old_timeval)) ||
+    !write_ok_or_segv(regs.si, sizeof(struct timezone))) {
+    ret = -EFAULT;
+    goto check_fault;
+    }
+    syscall_nr = __NR_gettimeofday;
+    break;
+    case 1:
+    if (!write_ok_or_segv(regs.di, sizeof(__kernel_old_time_t))) {
+    ret = -EFAULT;
+    goto check_fault;
+    }
+    syscall_nr = __NR_time;
+    break;
+    case 2:
+    if (!write_ok_or_segv(regs.di, sizeof(unsigned)) ||
+    !write_ok_or_segv(regs.si, sizeof(unsigned))) {
+    ret = -EFAULT;
+    goto check_fault;
+    }
+    syscall_nr = __NR_getcpu;
+    break;
+    }
+//
+// Handle seccomp.  regs->ip must be the original value.
+// See seccomp_send_sigsys and Documentation/userspace-api/seccomp_filter.rst.
+//
+// We could optimize the seccomp disabled case, but performance
+// here doesn't matter.
+//
+    regs.orig_ax = syscall_nr;
+    regs.ax = -ENOSYS;
+    skip = !seccomp_permit_syscall();
+    if ((!skip && regs.orig_ax != syscall_nr) || regs.ip != address) {
+    warn_bad_vsyscall(KERN_DEBUG, regs,
+    "seccomp tried to change syscall nr or ip");
+    force_exit_sig(SIGSYS);
+    return true;
+    }
+    regs.orig_ax = -1;
+    if (skip)
+    goto do_ret;
+//
+// With a real vsyscall, page faults cause SIGSEGV.
+//
+    ret = -EFAULT;
+    switch (vsyscall_nr) {
+    case 0:
+// this decodes regs->di and regs->si on its own
+    ret = __x64_sys_gettimeofday(regs);
+    break;
+    case 1:
+// this decodes regs->di on its own
+    ret = __x64_sys_time(regs);
+    break;
+    case 2:
+// while we could clobber regs->dx, we didn't in the past...
+    orig_dx = regs.dx;
+    regs.dx = 0;
+// this decodes regs->di, regs->si and regs->dx on its own
+    ret = __x64_sys_getcpu(regs);
+    regs.dx = orig_dx;
+    break;
+    }
+    check_fault:
+    if (ret == -EFAULT) {
+// Bad news -- userspace fed a bad pointer to a vsyscall.
+    warn_bad_vsyscall(KERN_INFO, regs,
+    "vsyscall fault (exploit attempt?)");
+    goto sigsegv;
+    }
+    regs.ax = ret;
+    do_ret:
+// Emulate a ret instruction.
+    regs.ip = caller;
+    regs.sp += 8;
+    return true;
+    sigsegv:
+    force_sig(SIGSEGV);
+    return true;
+    }
+    bool emulate_vsyscall_pf(unsigned long error_code, struct pt_regs *regs,
+    unsigned long address)
+    {
+// Write faults or kernel-privilege faults never get fixed up.
+    if ((error_code & (X86_PF_WRITE | X86_PF_USER)) != X86_PF_USER)
+    return false;
+//
+// Assume that faults at regs->ip are because of an instruction
+// fetch. Return early and avoid emulation for faults during
+// data accesses:
+//
+    if (address != regs.ip) {
+// Failed vsyscall read
+    if (vsyscall_mode == EMULATE)
+    return false;
+// User code tried and failed to read the vsyscall page.
+    warn_bad_vsyscall(KERN_INFO, regs,
+    "vsyscall read attempt denied -- look up the vsyscall kernel parameter if you need a workaround");
+    return false;
+    }
+//
+// X86_PF_INSTR is only set when NX is supported.  When
+// available, use it to double-check that the emulation code
+// is only being used for instruction fetches:
+//
+    if (cpu_feature_enabled(X86_FEATURE_NX))
+    WARN_ON_ONCE(!(error_code & X86_PF_INSTR));
+    return __emulate_vsyscall(regs, address);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn emulate_vsyscall_gp(regs: *mut pt_regs) -> bool {
+    bool emulate_vsyscall_gp(struct pt_regs *regs)
+    {
+// Without LASS, vsyscall accesses are expected to generate a #PF
+    if (!cpu_feature_enabled(X86_FEATURE_LASS))
+    return false;
+// Emulate only if the RIP points to the vsyscall address
+    if (!is_vsyscall_vaddr(regs.ip))
+    return false;
+    return __emulate_vsyscall(regs, regs.ip);
+    }
+//
+// A pseudo VMA to allow ptrace access for the vsyscall page.  This only
+// covers the 64bit vsyscall page now. 32bit has a real VMA now and does
+// not need special handling anymore:
+//
+    static const char *gate_vma_name(struct vm_area_struct *vma)
+    {
+    return "[vsyscall]";
+    }
+    static const struct vm_operations_struct gate_vma_ops = {
+    .name = gate_vma_name,
+    };
+    static struct vm_area_struct gate_vma __ro_after_init = {
+    .vm_start	= VSYSCALL_ADDR,
+    .vm_end		= VSYSCALL_ADDR + PAGE_SIZE,
+    .vm_page_prot	= PAGE_READONLY_EXEC,
+    .vm_flags	= VM_READ | VM_EXEC,
+    .vm_ops		= &gate_vma_ops,
+    };
+    struct vm_area_struct *get_gate_vma(struct mm_struct *mm)
+    {
+
+    if (!mm || !test_bit(MM_CONTEXT_HAS_VSYSCALL, &mm.context.flags))
+    return core::ptr::null_mut();
+
+    if (vsyscall_mode == NONE)
+    return core::ptr::null_mut();
+    return &gate_vma;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn in_gate_area(mm: *mut mm_struct, addr: c_ulong) -> c_int {
+    int in_gate_area(struct mm_struct *mm, unsigned long addr)
+    {
+    struct vm_area_struct *vma = get_gate_vma(mm);
+    if (!vma)
+    return 0;
+    return (addr >= vma.vm_start) && (addr < vma.vm_end);
+    }
+//
+// Use this when you have no reliable mm, typically from interrupt
+// context. It is less reliable than using a task's mm and may give
+// false positives.
+//
+#[no_mangle]
+pub unsafe extern "C" fn in_gate_area_no_mm(addr: c_ulong) -> c_int {
+    int in_gate_area_no_mm(unsigned long addr)
+    {
+    return vsyscall_mode != NONE && (addr & PAGE_MASK) == VSYSCALL_ADDR;
+    }
+//
+// The VSYSCALL page is the only user-accessible page in the kernel address
+// range.  Normally, the kernel page tables can have _PAGE_USER clear, but
+// the tables covering VSYSCALL_ADDR need _PAGE_USER set if vsyscalls
+// are enabled.
+//
+// Some day we may create a "minimal" vsyscall mode in which we emulate
+// vsyscalls but leave the page not present.  If so, we skip calling
+// this.
+//
+#[no_mangle]
+pub unsafe extern "C" fn set_vsyscall_pgtable_user_bits(root: *mut pgd_t) -> void __init {
+    void __init set_vsyscall_pgtable_user_bits(pgd_t *root)
+    {
+    pgd_t *pgd;
+    p4d_t *p4d;
+    pud_t *pud;
+    pmd_t *pmd;
+    pgd = pgd_offset_pgd(root, VSYSCALL_ADDR);
+    set_pgd(pgd, __pgd(pgd_val(*pgd) | _PAGE_USER));
+    p4d = p4d_offset(pgd, VSYSCALL_ADDR);
+    set_p4d(p4d, __p4d(p4d_val(*p4d) | _PAGE_USER));
+    pud = pud_offset(p4d, VSYSCALL_ADDR);
+    set_pud(pud, __pud(pud_val(*pud) | _PAGE_USER));
+    pmd = pmd_offset(pud, VSYSCALL_ADDR);
+    set_pmd(pmd, __pmd(pmd_val(*pmd) | _PAGE_USER));
+    }
+#[no_mangle]
+pub unsafe extern "C" fn map_vsyscall() -> void __init {
+    void __init map_vsyscall(void)
+    {
+    extern char __vsyscall_page;
+    let mut physaddr_vsyscall: c_ulong = __pa_symbol(&__vsyscall_page);
+//
+// For full emulation, the page needs to exist for real.  In
+// execute-only mode, there is no PTE at all backing the vsyscall
+// page.
+//
+    if (vsyscall_mode == EMULATE) {
+    __set_fixmap(VSYSCALL_PAGE, physaddr_vsyscall,
+    PAGE_KERNEL_VVAR);
+    set_vsyscall_pgtable_user_bits(swapper_pg_dir);
+    }
+    if (vsyscall_mode == XONLY)
+    vm_flags_init(&gate_vma, VM_EXEC);
+    BUILD_BUG_ON((unsigned long)__fix_to_virt(VSYSCALL_PAGE) !=
+    (unsigned long)VSYSCALL_ADDR);
+    }

@@ -1,0 +1,71 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/net/ethernet/mellanox/mlx5/core/fw_reset.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0 OR Linux-OpenIB
+// Copyright (c) 2020, Mellanox Technologies inc.  All rights reserved.
+
+extern "C" {
+    pub fn mlx5_fw_reset_query(dev: *mut mlx5_core_dev, reset_level: *mut u8, reset_type: *mut u8) -> c_int;
+}
+extern "C" {
+    pub fn mlx5_fw_reset_set_live_patch(dev: *mut mlx5_core_dev) -> c_int;
+}
+extern "C" {
+    pub fn mlx5_fw_reset_in_progress(dev: *mut mlx5_core_dev) -> bool;
+}
+extern "C" {
+    pub fn mlx5_fw_reset_wait_reset_done(dev: *mut mlx5_core_dev) -> c_int;
+}
+extern "C" {
+    pub fn mlx5_sync_reset_unload_flow(dev: *mut mlx5_core_dev, locked: bool);
+}
+extern "C" {
+    pub fn mlx5_fw_reset_events_start(dev: *mut mlx5_core_dev);
+}
+extern "C" {
+    pub fn mlx5_fw_reset_events_stop(dev: *mut mlx5_core_dev);
+}
+extern "C" {
+    pub fn mlx5_drain_fw_reset(dev: *mut mlx5_core_dev);
+}
+extern "C" {
+    pub fn mlx5_fw_reset_init(dev: *mut mlx5_core_dev) -> c_int;
+}
+extern "C" {
+    pub fn mlx5_fw_reset_cleanup(dev: *mut mlx5_core_dev);
+}

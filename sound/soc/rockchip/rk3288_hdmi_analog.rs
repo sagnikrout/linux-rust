@@ -1,0 +1,249 @@
+//! Automatically rewritten from C to Rust
+//! Source: sound/soc/rockchip/rk3288_hdmi_analog.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Rockchip machine ASoC driver for RK3288 boards that have an HDMI and analog
+// audio output
+//
+// Copyright (c) 2016, Collabora Ltd.
+//
+// Authors: Sjoerd Simons <sjoerd.simons@collabora.com>,
+// Romain Perier <romain.perier@collabora.com>
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct rk_drvdata {
+    pub gpio_hp_en: *mut gpio_desc,
+}
+
+    static int rk_hp_power(struct snd_soc_dapm_widget *w,
+    struct snd_kcontrol *k, int event)
+    {
+    struct snd_soc_card *card = snd_soc_dapm_to_card(w.dapm);
+    struct rk_drvdata *machine = snd_soc_card_get_drvdata(card);
+    gpiod_set_value_cansleep(machine.gpio_hp_en,
+    SND_SOC_DAPM_EVENT_ON(event));
+    return 0;
+    }
+    static struct snd_soc_jack headphone_jack;
+    static struct snd_soc_jack_pin headphone_jack_pins[] = {
+    {
+    .pin = "Analog",
+    .mask = SND_JACK_HEADPHONE
+    },
+    };
+    static const struct snd_soc_dapm_widget rk_dapm_widgets[] = {
+    SND_SOC_DAPM_HP("Analog", rk_hp_power),
+    SND_SOC_DAPM_LINE("HDMI", core::ptr::null_mut()),
+    };
+    static const struct snd_kcontrol_new rk_mc_controls[] = {
+    SOC_DAPM_PIN_SWITCH("Analog"),
+    SOC_DAPM_PIN_SWITCH("HDMI"),
+    };
+    static int rk_hw_params(struct snd_pcm_substream *substream,
+    struct snd_pcm_hw_params *params)
+    {
+    let mut ret: c_int = 0;
+    struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
+    struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
+    struct snd_soc_dai *codec_dai = snd_soc_rtd_to_codec(rtd, 0);
+    int mclk;
+    switch (params_rate(params)) {
+    case 8000:
+    case 16000:
+    case 24000:
+    case 32000:
+    case 48000:
+    case 64000:
+    case 96000:
+    mclk = 12288000;
+    break;
+    case 192000:
+    mclk = 24576000;
+    break;
+    case 11025:
+    case 22050:
+    case 44100:
+    case 88200:
+    mclk = 11289600;
+    break;
+    default:
+    return -EINVAL;
+    }
+    ret = snd_soc_dai_set_sysclk(cpu_dai, 0, mclk,
+    SND_SOC_CLOCK_OUT);
+    if (ret && ret != -ENOTSUPP) {
+    dev_err(codec_dai.dev, "Can't set cpu clock %d\n", ret);
+    return ret;
+    }
+    ret = snd_soc_dai_set_sysclk(codec_dai, 0, mclk,
+    SND_SOC_CLOCK_IN);
+    if (ret && ret != -ENOTSUPP) {
+    dev_err(codec_dai.dev, "Can't set codec clock %d\n", ret);
+    return ret;
+    }
+    return 0;
+    }
+    static struct snd_soc_jack_gpio rk_hp_jack_gpio = {
+    .name = "rockchip,hp-det",
+    .report = SND_JACK_HEADPHONE,
+    .debounce_time = 150
+    };
+#[no_mangle]
+unsafe extern "C" fn rk_init(runtime: *mut snd_soc_pcm_runtime) -> c_int {
+    static int rk_init(struct snd_soc_pcm_runtime *runtime)
+    {
+    struct snd_soc_card *card = runtime.card;
+    struct device *dev = card.dev;
+// Enable optional Headset Jack detection
+    if (of_property_present(dev.of_node, "rockchip,hp-det-gpios")) {
+    rk_hp_jack_gpio.gpiod_dev = dev;
+    snd_soc_card_jack_new_pins(runtime.card, "Headphone Jack",
+    SND_JACK_HEADPHONE, &headphone_jack,
+    headphone_jack_pins,
+    ARRAY_SIZE(headphone_jack_pins));
+    snd_soc_jack_add_gpios(&headphone_jack, 1, &rk_hp_jack_gpio);
+    }
+    return 0;
+    }
+    static const struct snd_soc_ops rk_ops = {
+    .hw_params = rk_hw_params,
+    };
+    SND_SOC_DAILINK_DEFS(audio,
+    DAILINK_COMP_ARRAY(COMP_EMPTY()),
+    DAILINK_COMP_ARRAY(COMP_CODEC(core::ptr::null_mut(), core::ptr::null_mut()),
+    COMP_CODEC("hdmi-audio-codec.2.auto", "i2s-hifi")),
+    DAILINK_COMP_ARRAY(COMP_EMPTY()));
+    static struct snd_soc_dai_link rk_dailink = {
+    .name = "Codecs",
+    .stream_name = "Audio",
+    .init = rk_init,
+    .ops = &rk_ops,
+// Set codecs as slave
+    .dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
+    SND_SOC_DAIFMT_CBC_CFC,
+    SND_SOC_DAILINK_REG(audio),
+    };
+    static struct snd_soc_card snd_soc_card_rk = {
+    .name = "ROCKCHIP-I2S",
+    .dai_link = &rk_dailink,
+    .num_links = 1,
+    .num_aux_devs = 0,
+    .dapm_widgets = rk_dapm_widgets,
+    .num_dapm_widgets = ARRAY_SIZE(rk_dapm_widgets),
+    .controls = rk_mc_controls,
+    .num_controls = ARRAY_SIZE(rk_mc_controls),
+    };
+#[no_mangle]
+unsafe extern "C" fn snd_rk_mc_probe(pdev: *mut platform_device) -> c_int {
+    static int snd_rk_mc_probe(struct platform_device *pdev)
+    {
+    int ret;
+    struct snd_soc_card *card = &snd_soc_card_rk;
+    struct device_node *np = pdev.dev.of_node;
+    struct rk_drvdata *machine;
+    struct of_phandle_args args;
+    machine = devm_kzalloc(&pdev.dev, sizeof(struct rk_drvdata),
+    GFP_KERNEL);
+    if (!machine)
+    return -ENOMEM;
+    card.dev = &pdev.dev;
+    machine.gpio_hp_en = devm_gpiod_get_optional(&pdev.dev, "rockchip,hp-en", GPIOD_OUT_LOW);
+    if (IS_ERR(machine.gpio_hp_en))
+    return PTR_ERR(machine.gpio_hp_en);
+    gpiod_set_consumer_name(machine.gpio_hp_en, "hp_en");
+    ret = snd_soc_of_parse_card_name(card, "rockchip,model");
+    if (ret)
+    return ret;
+    rk_dailink.codecs[0].of_node = of_parse_phandle(np,
+    "rockchip,audio-codec",
+    0);
+    if (!rk_dailink.codecs[0].of_node) {
+    dev_err(&pdev.dev,
+    "Property 'rockchip,audio-codec' missing or invalid\n");
+    return -EINVAL;
+    }
+    ret = of_parse_phandle_with_fixed_args(np, "rockchip,audio-codec",
+    0, 0, &args);
+    if (ret) {
+    dev_err(&pdev.dev,
+    "Unable to parse property 'rockchip,audio-codec'\n");
+    return ret;
+    }
+    ret = snd_soc_get_dai_name(&args, &rk_dailink.codecs[0].dai_name);
+    if (ret)
+    return dev_err_probe(&pdev.dev, ret,
+    "Unable to get codec_dai_name\n");
+    rk_dailink.cpus.of_node = of_parse_phandle(np, "rockchip,i2s-controller",
+    0);
+    if (!rk_dailink.cpus.of_node) {
+    dev_err(&pdev.dev,
+    "Property 'rockchip,i2s-controller' missing or invalid\n");
+    return -EINVAL;
+    }
+    rk_dailink.platforms.of_node = rk_dailink.cpus.of_node;
+    ret = snd_soc_of_parse_audio_routing(card, "rockchip,routing");
+    if (ret)
+    return ret;
+    snd_soc_card_set_drvdata(card, machine);
+    ret = devm_snd_soc_register_card(&pdev.dev, card);
+    if (ret)
+    return dev_err_probe(&pdev.dev, ret,
+    "Soc register card failed\n");
+    return 0;
+    }
+    static const struct of_device_id rockchip_sound_of_match[] = {
+    { .compatible = "rockchip,rk3288-hdmi-analog", },
+    {},
+    };
+    MODULE_DEVICE_TABLE(of, rockchip_sound_of_match);
+    static struct platform_driver rockchip_sound_driver = {
+    .probe = snd_rk_mc_probe,
+    .driver = {
+    .name = DRV_NAME,
+    .pm = &snd_soc_pm_ops,
+    .of_match_table = rockchip_sound_of_match,
+    },
+    };
+    module_platform_driver(rockchip_sound_driver);
+    MODULE_AUTHOR("Sjoerd Simons <sjoerd.simons@collabora.com>");
+    MODULE_DESCRIPTION("Rockchip RK3288 machine ASoC driver");
+    MODULE_LICENSE("GPL v2");
+    MODULE_ALIAS("platform:" DRV_NAME);

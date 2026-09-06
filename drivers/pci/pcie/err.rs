@@ -1,0 +1,300 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/pci/pcie/err.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// This file implements the error recovery as a core part of PCIe error
+// reporting. When a PCIe error is delivered, an error message will be
+// collected and printed to console, then, an error recovery procedure
+// will be executed by following the PCI error recovery rules.
+//
+// Copyright (C) 2006 Intel Corp.
+// Tom Long Nguyen (tom.l.nguyen@intel.com)
+// Zhang Yanmin (yanmin.zhang@intel.com)
+//
+
+    static pci_ers_result_t merge_result(enum pci_ers_result orig,
+    enum pci_ers_result new)
+    {
+    if (new == PCI_ERS_RESULT_NO_AER_DRIVER)
+    return PCI_ERS_RESULT_NO_AER_DRIVER;
+    if (new == PCI_ERS_RESULT_NONE)
+    return orig;
+    switch (orig) {
+    case PCI_ERS_RESULT_CAN_RECOVER:
+    case PCI_ERS_RESULT_RECOVERED:
+    orig = new;
+    break;
+    case PCI_ERS_RESULT_DISCONNECT:
+    if (new == PCI_ERS_RESULT_NEED_RESET)
+    orig = PCI_ERS_RESULT_NEED_RESET;
+    break;
+    default:
+    break;
+    }
+    return orig;
+    }
+    static int report_error_detected(struct pci_dev *dev,
+    pci_channel_state_t state,
+    enum pci_ers_result *result)
+    {
+    struct pci_driver *pdrv;
+    pci_ers_result_t vote;
+    const struct pci_error_handlers *err_handler;
+    device_lock(&dev.dev);
+    pdrv = dev.driver;
+    if (pci_dev_is_disconnected(dev)) {
+    vote = PCI_ERS_RESULT_DISCONNECT;
+    } else if (!pci_dev_set_io_state(dev, state)) {
+    pci_info(dev, "can't recover (state transition %u . %u invalid)\n",
+    dev.error_state, state);
+    vote = PCI_ERS_RESULT_NONE;
+    } else if (!pdrv || !pdrv.err_handler ||
+    !pdrv.err_handler.error_detected) {
+//
+// If any device in the subtree does not have an error_detected
+// callback, PCI_ERS_RESULT_NO_AER_DRIVER prevents subsequent
+// error callbacks of "any" device in the subtree, and will
+// exit in the disconnected error state.
+//
+    if (dev.hdr_type != PCI_HEADER_TYPE_BRIDGE) {
+    vote = PCI_ERS_RESULT_NO_AER_DRIVER;
+    pci_info(dev, "can't recover (no error_detected callback)\n");
+    } else {
+    vote = PCI_ERS_RESULT_NONE;
+    }
+    } else {
+    err_handler = pdrv.err_handler;
+    vote = err_handler.error_detected(dev, state);
+    }
+    pci_uevent_ers(dev, vote);
+// result = merge_result(*result, vote);
+    device_unlock(&dev.dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn pci_pm_runtime_get_sync(pdev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int pci_pm_runtime_get_sync(struct pci_dev *pdev, void *data)
+    {
+    pm_runtime_get_sync(&pdev.dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn pci_pm_runtime_put(pdev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int pci_pm_runtime_put(struct pci_dev *pdev, void *data)
+    {
+    pm_runtime_put(&pdev.dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn report_frozen_detected(dev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int report_frozen_detected(struct pci_dev *dev, void *data)
+    {
+    return report_error_detected(dev, pci_channel_io_frozen, data);
+    }
+#[no_mangle]
+unsafe extern "C" fn report_normal_detected(dev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int report_normal_detected(struct pci_dev *dev, void *data)
+    {
+    return report_error_detected(dev, pci_channel_io_normal, data);
+    }
+#[no_mangle]
+unsafe extern "C" fn report_perm_failure_detected(dev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int report_perm_failure_detected(struct pci_dev *dev, void *data)
+    {
+    struct pci_driver *pdrv;
+    const struct pci_error_handlers *err_handler;
+    device_lock(&dev.dev);
+    pdrv = dev.driver;
+    if (!pdrv || !pdrv.err_handler || !pdrv.err_handler.error_detected)
+    goto out;
+    err_handler = pdrv.err_handler;
+    err_handler.error_detected(dev, pci_channel_io_perm_failure);
+    out:
+    pci_uevent_ers(dev, PCI_ERS_RESULT_DISCONNECT);
+    device_unlock(&dev.dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn report_mmio_enabled(dev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int report_mmio_enabled(struct pci_dev *dev, void *data)
+    {
+    struct pci_driver *pdrv;
+    pci_ers_result_t vote, *result = data;
+    const struct pci_error_handlers *err_handler;
+    device_lock(&dev.dev);
+    pdrv = dev.driver;
+    if (!pdrv || !pdrv.err_handler || !pdrv.err_handler.mmio_enabled)
+    goto out;
+    err_handler = pdrv.err_handler;
+    vote = err_handler.mmio_enabled(dev);
+// result = merge_result(*result, vote);
+    out:
+    device_unlock(&dev.dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn report_slot_reset(dev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int report_slot_reset(struct pci_dev *dev, void *data)
+    {
+    struct pci_driver *pdrv;
+    pci_ers_result_t vote, *result = data;
+    const struct pci_error_handlers *err_handler;
+    device_lock(&dev.dev);
+    pdrv = dev.driver;
+    if (!pci_dev_set_io_state(dev, pci_channel_io_normal) ||
+    !pdrv || !pdrv.err_handler || !pdrv.err_handler.slot_reset)
+    goto out;
+    err_handler = pdrv.err_handler;
+    vote = err_handler.slot_reset(dev);
+// result = merge_result(*result, vote);
+    out:
+    device_unlock(&dev.dev);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn report_resume(dev: *mut pci_dev, data: *mut c_void) -> c_int {
+    static int report_resume(struct pci_dev *dev, void *data)
+    {
+    struct pci_driver *pdrv;
+    const struct pci_error_handlers *err_handler;
+    device_lock(&dev.dev);
+    pdrv = dev.driver;
+    if (!pci_dev_set_io_state(dev, pci_channel_io_normal) ||
+    !pdrv || !pdrv.err_handler || !pdrv.err_handler.resume)
+    goto out;
+    err_handler = pdrv.err_handler;
+    err_handler.resume(dev);
+    out:
+    pci_uevent_ers(dev, PCI_ERS_RESULT_RECOVERED);
+    device_unlock(&dev.dev);
+    return 0;
+    }
+//
+// pci_walk_bridge - walk bridges potentially AER affected
+// @bridge:	bridge which may be a Port, an RCEC, or an RCiEP
+// @cb:		callback to be called for each device found
+// @userdata:	arbitrary pointer to be passed to callback
+//
+// If the device provided is a bridge, walk the subordinate bus, including
+// any bridged devices on buses under this bus.  Call the provided callback
+// on each device found.
+//
+// If the device provided has no subordinate bus, e.g., an RCEC or RCiEP,
+// call the callback on the device itself.
+//
+    static void pci_walk_bridge(struct pci_dev *bridge,
+    int (*cb)(struct pci_dev *, void *),
+    void *userdata)
+    {
+    if (bridge.subordinate)
+    pci_walk_bus(bridge.subordinate, cb, userdata);
+    else
+    cb(bridge, userdata);
+    }
+    pci_ers_result_t pcie_do_recovery(struct pci_dev *dev,
+    pci_channel_state_t state,
+    pci_ers_result_t (*reset_subordinates)(struct pci_dev *pdev))
+    {
+    let mut type: c_int = pci_pcie_type(dev);
+    struct pci_dev *bridge;
+    let mut status: pci_ers_result_t = PCI_ERS_RESULT_CAN_RECOVER;
+    struct pci_host_bridge *host = pci_find_host_bridge(dev.bus);
+//
+// If the error was detected by a Root Port, Downstream Port, RCEC,
+// or RCiEP, recovery runs on the device itself.  For Ports, that
+// also includes any subordinate devices.
+//
+// If it was detected by another device (Endpoint, etc), recovery
+// runs on the device and anything else under the same Port, i.e.,
+// everything under "bridge".
+//
+    if (type == PCI_EXP_TYPE_ROOT_PORT ||
+    type == PCI_EXP_TYPE_DOWNSTREAM ||
+    type == PCI_EXP_TYPE_RC_EC ||
+    type == PCI_EXP_TYPE_RC_END)
+    bridge = dev;
+    else
+    bridge = pci_upstream_bridge(dev);
+    pci_walk_bridge(bridge, pci_pm_runtime_get_sync, core::ptr::null_mut());
+    pci_dbg(bridge, "broadcast error_detected message\n");
+    if (state == pci_channel_io_frozen)
+    pci_walk_bridge(bridge, report_frozen_detected, &status);
+    else
+    pci_walk_bridge(bridge, report_normal_detected, &status);
+    if (status == PCI_ERS_RESULT_CAN_RECOVER) {
+    status = PCI_ERS_RESULT_RECOVERED;
+    pci_dbg(bridge, "broadcast mmio_enabled message\n");
+    pci_walk_bridge(bridge, report_mmio_enabled, &status);
+    }
+    if (status == PCI_ERS_RESULT_NEED_RESET ||
+    state == pci_channel_io_frozen) {
+    if (reset_subordinates(bridge) != PCI_ERS_RESULT_RECOVERED) {
+    pci_warn(bridge, "subordinate device reset failed\n");
+    goto failed;
+    }
+    }
+    if (status == PCI_ERS_RESULT_NEED_RESET) {
+    status = PCI_ERS_RESULT_RECOVERED;
+    pci_dbg(bridge, "broadcast slot_reset message\n");
+    pci_walk_bridge(bridge, report_slot_reset, &status);
+    }
+    if (status != PCI_ERS_RESULT_RECOVERED)
+    goto failed;
+    pci_dbg(bridge, "broadcast resume message\n");
+    pci_walk_bridge(bridge, report_resume, &status);
+//
+// If we have native control of AER, clear error status in the device
+// that detected the error.  If the platform retained control of AER,
+// it is responsible for clearing this status.  In that case, the
+// signaling device may not even be visible to the OS.
+//
+    if (host.native_aer || pcie_ports_native) {
+    pcie_clear_device_status(dev);
+    pci_aer_clear_nonfatal_status(dev);
+    }
+    pci_walk_bridge(bridge, pci_pm_runtime_put, core::ptr::null_mut());
+    pci_info(bridge, "device recovery successful\n");
+    return status;
+    failed:
+    pci_walk_bridge(bridge, pci_pm_runtime_put, core::ptr::null_mut());
+    pci_walk_bridge(bridge, report_perm_failure_detected, core::ptr::null_mut());
+    pci_info(bridge, "device recovery failed\n");
+    return status;
+    }
+    EXPORT_SYMBOL_GPL(pcie_do_recovery);

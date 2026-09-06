@@ -1,0 +1,269 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/acpi/riscv/irq.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Copyright (C) 2023-2024, Ventana Micro Systems Inc
+// Author: Sunil V L <sunilvl@ventanamicro.com>
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct riscv_ext_intc_list {
+    pub handle: acpi_handle,
+    pub gsi_base: u32,
+    pub nr_irqs: u32,
+    pub nr_idcs: u32,
+    pub id: u32,
+    pub type: u32,
+    pub flag: u32,
+    pub list: list_head,
+}
+
+    LIST_HEAD(ext_intc_list);
+#[no_mangle]
+unsafe extern "C" fn irqchip_cmp_func(in0: *const c_void, in1: *const c_void) -> c_int {
+    static int irqchip_cmp_func(const void *in0, const void *in1)
+    {
+    struct acpi_probe_entry *elem0 = (struct acpi_probe_entry *)in0;
+    struct acpi_probe_entry *elem1 = (struct acpi_probe_entry *)in1;
+    return (elem0.type > elem1.type) - (elem0.type < elem1.type);
+    }
+//
+// On RISC-V, RINTC structures in MADT should be probed before any other
+// interrupt controller structures and IMSIC before APLIC. The interrupt
+// controller subtypes in MADT of ACPI spec for RISC-V are defined in
+// the incremental order like RINTC(24)->IMSIC(25)->APLIC(26)->PLIC(27).
+// Hence, simply sorting the subtypes in incremental order will
+// establish the required order.
+//
+#[no_mangle]
+pub unsafe extern "C" fn arch_sort_irqchip_probe(ap_head: *mut acpi_probe_entry, nr: c_int) {
+    void arch_sort_irqchip_probe(struct acpi_probe_entry *ap_head, int nr)
+    {
+    struct acpi_probe_entry *ape = ap_head;
+    if (nr == 1 || !ACPI_COMPARE_NAMESEG(ACPI_SIG_MADT, ape.id))
+    return;
+    sort(ape, nr, sizeof(*ape), irqchip_cmp_func, core::ptr::null_mut());
+    }
+#[no_mangle]
+unsafe extern "C" fn riscv_acpi_update_gsi_handle(gsi_base: u32, handle: acpi_handle) -> acpi_status {
+    static acpi_status riscv_acpi_update_gsi_handle(u32 gsi_base, acpi_handle handle)
+    {
+    struct riscv_ext_intc_list *ext_intc_element;
+    struct list_head *i, *tmp;
+    list_for_each_safe(i, tmp, &ext_intc_list) {
+    ext_intc_element = list_entry(i, struct riscv_ext_intc_list, list);
+    if (gsi_base == ext_intc_element.gsi_base) {
+    ext_intc_element.handle = handle;
+    return AE_OK;
+    }
+    }
+    return AE_NOT_FOUND;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn riscv_acpi_update_gsi_range(gsi_base: u32, nr_irqs: u32) -> c_int {
+    int riscv_acpi_update_gsi_range(u32 gsi_base, u32 nr_irqs)
+    {
+    struct riscv_ext_intc_list *ext_intc_element;
+    list_for_each_entry(ext_intc_element, &ext_intc_list, list) {
+    if (gsi_base == ext_intc_element.gsi_base &&
+    (ext_intc_element.flag & RISCV_ACPI_INTC_FLAG_PENDING)) {
+    ext_intc_element.nr_irqs = nr_irqs;
+    ext_intc_element.flag &= ~RISCV_ACPI_INTC_FLAG_PENDING;
+    return 0;
+    }
+    }
+    return -ENODEV;
+    }
+    int riscv_acpi_get_gsi_info(struct fwnode_handle *fwnode, u32 *gsi_base,
+    u32 *id, u32 *nr_irqs, u32 *nr_idcs)
+    {
+    struct riscv_ext_intc_list *ext_intc_element;
+    struct list_head *i;
+    list_for_each(i, &ext_intc_list) {
+    ext_intc_element = list_entry(i, struct riscv_ext_intc_list, list);
+    if (ext_intc_element.handle == ACPI_HANDLE_FWNODE(fwnode)) {
+// gsi_base = ext_intc_element->gsi_base;
+// id = ext_intc_element->id;
+// nr_irqs = ext_intc_element->nr_irqs;
+    if (nr_idcs)
+// nr_idcs = ext_intc_element->nr_idcs;
+    return 0;
+    }
+    }
+    return -ENODEV;
+    }
+    struct fwnode_handle *riscv_acpi_get_gsi_domain_id(u32 gsi)
+    {
+    struct riscv_ext_intc_list *ext_intc_element;
+    struct acpi_device *adev;
+    struct list_head *i;
+    list_for_each(i, &ext_intc_list) {
+    ext_intc_element = list_entry(i, struct riscv_ext_intc_list, list);
+    if (gsi >= ext_intc_element.gsi_base &&
+    gsi < (ext_intc_element.gsi_base + ext_intc_element.nr_irqs)) {
+    adev = acpi_fetch_acpi_dev(ext_intc_element.handle);
+    if (!adev)
+    return core::ptr::null_mut();
+    return acpi_fwnode_handle(adev);
+    }
+    }
+    return core::ptr::null_mut();
+    }
+    static int __init riscv_acpi_register_ext_intc(u32 gsi_base, u32 nr_irqs, u32 nr_idcs,
+    u32 id, u32 type)
+    {
+    struct riscv_ext_intc_list *ext_intc_element, *node, *prev;
+    ext_intc_element = kzalloc_obj(*ext_intc_element);
+    if (!ext_intc_element)
+    return -ENOMEM;
+    ext_intc_element.gsi_base = gsi_base;
+// If nr_irqs is zero, indicate it in flag and set to max range possible
+    if (nr_irqs) {
+    ext_intc_element.nr_irqs = nr_irqs;
+    } else {
+    ext_intc_element.flag |= RISCV_ACPI_INTC_FLAG_PENDING;
+    ext_intc_element.nr_irqs = U32_MAX - ext_intc_element.gsi_base;
+    }
+    ext_intc_element.nr_idcs = nr_idcs;
+    ext_intc_element.id = id;
+    list_for_each_entry(node, &ext_intc_list, list) {
+    if (node.gsi_base < ext_intc_element.gsi_base)
+    break;
+    }
+// Adjust the previous node's GSI range if that has pending registration
+    prev = list_prev_entry(node, list);
+    if (!list_entry_is_head(prev, &ext_intc_list, list)) {
+    if (prev.flag & RISCV_ACPI_INTC_FLAG_PENDING)
+    prev.nr_irqs = ext_intc_element.gsi_base - prev.gsi_base;
+    }
+    list_add_tail(&ext_intc_element.list, &node.list);
+    return 0;
+    }
+    static acpi_status __init riscv_acpi_create_gsi_map_smsi(acpi_handle handle, u32 level,
+    void *context, void **return_value)
+    {
+    acpi_status status;
+    u64 gbase;
+    if (!acpi_has_method(handle, "_GSB")) {
+    acpi_handle_err(handle, "_GSB method not found\n");
+    return AE_ERROR;
+    }
+    status = acpi_evaluate_integer(handle, "_GSB", core::ptr::null_mut(), &gbase);
+    if (ACPI_FAILURE(status)) {
+    acpi_handle_err(handle, "failed to evaluate _GSB method\n");
+    return status;
+    }
+    riscv_acpi_register_ext_intc(gbase, 0, 0, 0, ACPI_RISCV_IRQCHIP_SMSI);
+    status = riscv_acpi_update_gsi_handle((u32)gbase, handle);
+    if (ACPI_FAILURE(status)) {
+    acpi_handle_err(handle, "failed to find the GSI mapping entry\n");
+    return status;
+    }
+    return AE_OK;
+    }
+    static acpi_status __init riscv_acpi_create_gsi_map(acpi_handle handle, u32 level,
+    void *context, void **return_value)
+    {
+    acpi_status status;
+    u64 gbase;
+    if (!acpi_has_method(handle, "_GSB")) {
+    acpi_handle_err(handle, "_GSB method not found\n");
+    return AE_ERROR;
+    }
+    status = acpi_evaluate_integer(handle, "_GSB", core::ptr::null_mut(), &gbase);
+    if (ACPI_FAILURE(status)) {
+    acpi_handle_err(handle, "failed to evaluate _GSB method\n");
+    return status;
+    }
+    status = riscv_acpi_update_gsi_handle((u32)gbase, handle);
+    if (ACPI_FAILURE(status)) {
+    acpi_handle_err(handle, "failed to find the GSI mapping entry\n");
+    return status;
+    }
+    return AE_OK;
+    }
+    static int __init riscv_acpi_aplic_parse_madt(union acpi_subtable_headers *header,
+    const unsigned long end)
+    {
+    struct acpi_madt_aplic *aplic = (struct acpi_madt_aplic *)header;
+    return riscv_acpi_register_ext_intc(aplic.gsi_base, aplic.num_sources, aplic.num_idcs,
+    aplic.id, ACPI_RISCV_IRQCHIP_APLIC);
+    }
+    static int __init riscv_acpi_plic_parse_madt(union acpi_subtable_headers *header,
+    const unsigned long end)
+    {
+    struct acpi_madt_plic *plic = (struct acpi_madt_plic *)header;
+    return riscv_acpi_register_ext_intc(plic.gsi_base, plic.num_irqs, 0,
+    plic.id, ACPI_RISCV_IRQCHIP_PLIC);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn riscv_acpi_init_gsi_mapping() -> void __init {
+    void __init riscv_acpi_init_gsi_mapping(void)
+    {
+// There can be either PLIC or APLIC
+    if (acpi_table_parse_madt(ACPI_MADT_TYPE_PLIC, riscv_acpi_plic_parse_madt, 0) > 0) {
+    acpi_get_devices("RSCV0001", riscv_acpi_create_gsi_map, core::ptr::null_mut(), core::ptr::null_mut());
+    return;
+    }
+    if (acpi_table_parse_madt(ACPI_MADT_TYPE_APLIC, riscv_acpi_aplic_parse_madt, 0) > 0)
+    acpi_get_devices("RSCV0002", riscv_acpi_create_gsi_map, core::ptr::null_mut(), core::ptr::null_mut());
+// Unlike PLIC/APLIC, SYSMSI doesn't have MADT
+    acpi_get_devices("RSCV0006", riscv_acpi_create_gsi_map_smsi, core::ptr::null_mut(), core::ptr::null_mut());
+    }
+#[no_mangle]
+pub unsafe extern "C" fn acpi_get_riscv_gsi_handle(gsi: u32) -> acpi_handle {
+    acpi_handle acpi_get_riscv_gsi_handle(u32 gsi)
+    {
+    struct riscv_ext_intc_list *ext_intc_element;
+    struct list_head *i;
+    list_for_each(i, &ext_intc_list) {
+    ext_intc_element = list_entry(i, struct riscv_ext_intc_list, list);
+    if (gsi >= ext_intc_element.gsi_base &&
+    gsi < (ext_intc_element.gsi_base + ext_intc_element.nr_irqs))
+    return ext_intc_element.handle;
+    }
+    return core::ptr::null_mut();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn arch_acpi_add_auto_dep(handle: acpi_handle) -> u32 {
+    u32 arch_acpi_add_auto_dep(acpi_handle handle)
+    {
+    return acpi_irq_add_auto_dep(handle);
+    }

@@ -1,0 +1,891 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi2.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// Copyright (c) 2024, Fuzhou Rockchip Electronics Co., Ltd
+//
+// Modified by Heiko Stuebner <heiko.stuebner@cherry.de>
+// This generic Synopsys DesignWare MIPI DSI2 host driver is based on the
+// Rockchip version from rockchip/dw-mipi-dsi2.c converted to use bridge APIs.
+//
+
+pub const DSI2_PWR_UP: c_uint = 0x000c;
+pub const RESET: c_int = 0;
+
+pub const DSI2_SOFT_RESET: c_uint = 0x0010;
+
+pub const INT_ST_MAIN: c_uint = 0x0014;
+pub const DSI2_MODE_CTRL: c_uint = 0x0018;
+pub const DSI2_MODE_STATUS: c_uint = 0x001c;
+pub const DSI2_CORE_STATUS: c_uint = 0x0020;
+
+pub const MANUAL_MODE_CFG: c_uint = 0x0024;
+
+pub const DSI2_TIMEOUT_HSTX_CFG: c_uint = 0x0048;
+
+pub const DSI2_TIMEOUT_HSTXRDY_CFG: c_uint = 0x004c;
+
+pub const DSI2_TIMEOUT_LPRX_CFG: c_uint = 0x0050;
+
+pub const DSI2_TIMEOUT_LPTXRDY_CFG: c_uint = 0x0054;
+
+pub const DSI2_TIMEOUT_LPTXTRIG_CFG: c_uint = 0x0058;
+
+pub const DSI2_TIMEOUT_LPTXULPS_CFG: c_uint = 0x005c;
+
+pub const DSI2_TIMEOUT_BTA_CFG: c_uint = 0x60;
+
+pub const DSI2_PHY_MODE_CFG: c_uint = 0x0100;
+
+pub const CONTINUOUS_CLK: c_int = 0;
+pub const DSI2_PHY_LP2HS_MAN_CFG: c_uint = 0x010c;
+
+pub const DSI2_PHY_HS2LP_MAN_CFG: c_uint = 0x0114;
+
+pub const DSI2_PHY_MAX_RD_T_MAN_CFG: c_uint = 0x011c;
+
+pub const DSI2_PHY_ESC_CMD_T_MAN_CFG: c_uint = 0x0124;
+
+pub const DSI2_PHY_ESC_BYTE_T_MAN_CFG: c_uint = 0x012c;
+
+pub const DSI2_PHY_IPI_RATIO_MAN_CFG: c_uint = 0x0134;
+
+pub const DSI2_PHY_SYS_RATIO_MAN_CFG: c_uint = 0x013C;
+
+pub const DSI2_DSI_GENERAL_CFG: c_uint = 0x0200;
+
+pub const DSI2_DSI_VCID_CFG: c_uint = 0x0204;
+
+pub const DSI2_DSI_SCRAMBLING_CFG: c_uint = 0x0208;
+
+pub const DSI2_DSI_VID_TX_CFG: c_uint = 0x020c;
+
+pub const DSI2_CRI_TX_HDR: c_uint = 0x02c0;
+
+pub const DSI2_CRI_TX_PLD: c_uint = 0x02c4;
+pub const DSI2_CRI_RX_HDR: c_uint = 0x02c8;
+pub const DSI2_CRI_RX_PLD: c_uint = 0x02cc;
+pub const DSI2_IPI_COLOR_MAN_CFG: c_uint = 0x0300;
+
+pub const IPI_DEPTH_5_6_5_BITS: c_uint = 0x02;
+pub const IPI_DEPTH_6_BITS: c_uint = 0x03;
+pub const IPI_DEPTH_8_BITS: c_uint = 0x05;
+pub const IPI_DEPTH_10_BITS: c_uint = 0x06;
+
+pub const IPI_FORMAT_RGB: c_uint = 0x0;
+pub const IPI_FORMAT_DSC: c_uint = 0x0b;
+pub const DSI2_IPI_VID_HSA_MAN_CFG: c_uint = 0x0304;
+
+pub const DSI2_IPI_VID_HBP_MAN_CFG: c_uint = 0x030c;
+
+pub const DSI2_IPI_VID_HACT_MAN_CFG: c_uint = 0x0314;
+
+pub const DSI2_IPI_VID_HLINE_MAN_CFG: c_uint = 0x031c;
+
+pub const DSI2_IPI_VID_VSA_MAN_CFG: c_uint = 0x0324;
+
+pub const DSI2_IPI_PIX_PKT_CFG: c_uint = 0x0344;
+
+pub const DSI2_INT_ST_PHY: c_uint = 0x0400;
+pub const DSI2_INT_MASK_PHY: c_uint = 0x0404;
+pub const DSI2_INT_ST_TO: c_uint = 0x0410;
+pub const DSI2_INT_MASK_TO: c_uint = 0x0414;
+pub const DSI2_INT_ST_ACK: c_uint = 0x0420;
+pub const DSI2_INT_MASK_ACK: c_uint = 0x0424;
+pub const DSI2_INT_ST_IPI: c_uint = 0x0430;
+pub const DSI2_INT_MASK_IPI: c_uint = 0x0434;
+pub const DSI2_INT_ST_FIFO: c_uint = 0x0440;
+pub const DSI2_INT_MASK_FIFO: c_uint = 0x0444;
+pub const DSI2_INT_ST_PRI: c_uint = 0x0450;
+pub const DSI2_INT_MASK_PRI: c_uint = 0x0454;
+pub const DSI2_INT_ST_CRI: c_uint = 0x0460;
+pub const DSI2_INT_MASK_CRI: c_uint = 0x0464;
+pub const DSI2_INT_FORCE_CRI: c_uint = 0x0468;
+
+pub const MODE_STATUS_TIMEOUT_US: c_int = 10000;
+pub const CMD_PKT_STATUS_TIMEOUT_US: c_int = 20000;
+    enum vid_mode_type {
+    VID_MODE_TYPE_NON_BURST_SYNC_PULSES,
+    VID_MODE_TYPE_NON_BURST_SYNC_EVENTS,
+    VID_MODE_TYPE_BURST,
+    };
+    enum mode_ctrl {
+    IDLE_MODE,
+    AUTOCALC_MODE,
+    COMMAND_MODE,
+    VIDEO_MODE,
+    DATA_STREAM_MODE,
+    VIDEO_TEST_MODE,
+    DATA_STREAM_TEST_MODE,
+    };
+    enum ppi_width {
+    PPI_WIDTH_8_BITS,
+    PPI_WIDTH_16_BITS,
+    PPI_WIDTH_32_BITS,
+    };
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cmd_header {
+    pub cmd_type: u8,
+    pub delay: u8,
+    pub payload_length: u8,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct dw_mipi_dsi2 {
+    pub bridge: drm_bridge,
+    pub dsi_host: mipi_dsi_host,
+    pub panel_bridge: *mut drm_bridge,
+    pub dev: *mut device,
+    pub regmap: *mut regmap,
+    pub pclk: *mut clk,
+    pub sys_clk: *mut clk,
+    pub /: *mut *mut unsigned int lane_mbps; / per lane,
+    pub channel: u32,
+    pub lanes: u32,
+    pub format: u32,
+    pub mode_flags: c_ulong,
+    pub mode: drm_display_mode,
+    pub plat_data: *const dw_mipi_dsi2_plat_data,
+}
+
+    static inline struct dw_mipi_dsi2 *host_to_dsi2(struct mipi_dsi_host *host)
+    {
+    return container_of(host, struct dw_mipi_dsi2, dsi_host);
+    }
+    static inline struct dw_mipi_dsi2 *bridge_to_dsi2(struct drm_bridge *bridge)
+    {
+    return container_of(bridge, struct dw_mipi_dsi2, bridge);
+    }
+#[no_mangle]
+unsafe extern "C" fn cri_fifos_wait_avail(dsi2: *mut dw_mipi_dsi2) -> c_int {
+    static int cri_fifos_wait_avail(struct dw_mipi_dsi2 *dsi2)
+    {
+    u32 sts, mask;
+    int ret;
+    mask = CRI_BUSY | CRT_FIFOS_NOT_EMPTY;
+    ret = regmap_read_poll_timeout(dsi2.regmap, DSI2_CORE_STATUS, sts,
+    !(sts & mask), 0, CMD_PKT_STATUS_TIMEOUT_US);
+    if (ret < 0) {
+    dev_err(dsi2.dev, "command interface is busy\n");
+    return ret;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_set_vid_mode(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_set_vid_mode(struct dw_mipi_dsi2 *dsi2)
+    {
+    let mut val: u32 = 0, mode;
+    int ret;
+    if (dsi2.mode_flags & MIPI_DSI_MODE_VIDEO_NO_HFP)
+    val |= BLK_HFP_HS_EN;
+    if (dsi2.mode_flags & MIPI_DSI_MODE_VIDEO_NO_HBP)
+    val |= BLK_HBP_HS_EN;
+    if (dsi2.mode_flags & MIPI_DSI_MODE_VIDEO_NO_HSA)
+    val |= BLK_HSA_HS_EN;
+    if (dsi2.mode_flags & MIPI_DSI_MODE_VIDEO_BURST)
+    val |= VID_MODE_TYPE_BURST;
+#[no_mangle]
+pub unsafe extern "C" fn if(MIPI_DSI_MODE_VIDEO_SYNC_PULSE: dsi2->mode_flags &) -> else {
+    else if (dsi2.mode_flags & MIPI_DSI_MODE_VIDEO_SYNC_PULSE)
+    val |= VID_MODE_TYPE_NON_BURST_SYNC_PULSES;
+    else
+    val |= VID_MODE_TYPE_NON_BURST_SYNC_EVENTS;
+    regmap_write(dsi2.regmap, DSI2_DSI_VID_TX_CFG, val);
+    regmap_write(dsi2.regmap, DSI2_MODE_CTRL, VIDEO_MODE);
+    ret = regmap_read_poll_timeout(dsi2.regmap, DSI2_MODE_STATUS,
+    mode, mode & VIDEO_MODE,
+    1000, MODE_STATUS_TIMEOUT_US);
+    if (ret < 0)
+    dev_err(dsi2.dev, "failed to enter video mode\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_set_data_stream_mode(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_set_data_stream_mode(struct dw_mipi_dsi2 *dsi2)
+    {
+    u32 mode;
+    int ret;
+    regmap_write(dsi2.regmap, DSI2_MODE_CTRL, DATA_STREAM_MODE);
+    ret = regmap_read_poll_timeout(dsi2.regmap, DSI2_MODE_STATUS,
+    mode, mode & DATA_STREAM_MODE,
+    1000, MODE_STATUS_TIMEOUT_US);
+    if (ret < 0)
+    dev_err(dsi2.dev, "failed to enter data stream mode\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_set_cmd_mode(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_set_cmd_mode(struct dw_mipi_dsi2 *dsi2)
+    {
+    u32 mode;
+    int ret;
+    regmap_write(dsi2.regmap, DSI2_MODE_CTRL, COMMAND_MODE);
+    ret = regmap_read_poll_timeout(dsi2.regmap, DSI2_MODE_STATUS,
+    mode, mode & COMMAND_MODE,
+    1000, MODE_STATUS_TIMEOUT_US);
+    if (ret < 0)
+    dev_err(dsi2.dev, "failed to enter data stream mode\n");
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_host_softrst(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_host_softrst(struct dw_mipi_dsi2 *dsi2)
+    {
+    regmap_write(dsi2.regmap, DSI2_SOFT_RESET, 0x0);
+    usleep_range(50, 100);
+    regmap_write(dsi2.regmap, DSI2_SOFT_RESET,
+    SYS_RSTN | PHY_RSTN | IPI_RSTN);
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_phy_clk_mode_cfg(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_phy_clk_mode_cfg(struct dw_mipi_dsi2 *dsi2)
+    {
+    u32 sys_clk, esc_clk_div;
+    let mut val: u32 = 0;
+//
+// clk_type should be NON_CONTINUOUS_CLK before
+// initial deskew calibration be sent.
+//
+    val |= NON_CONTINUOUS_CLK;
+// The maximum value of the escape clock frequency is 20MHz
+    sys_clk = clk_get_rate(dsi2.sys_clk) / USEC_PER_SEC;
+    esc_clk_div = DIV_ROUND_UP(sys_clk, 20 * 2);
+    val |= PHY_LPTX_CLK_DIV(esc_clk_div);
+    regmap_write(dsi2.regmap, DSI2_PHY_CLK_CFG, val);
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_phy_ratio_cfg(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_phy_ratio_cfg(struct dw_mipi_dsi2 *dsi2)
+    {
+    struct drm_display_mode *mode = &dsi2.mode;
+    let mut sys_clk: u64 = clk_get_rate(dsi2.sys_clk);
+    u64 pixel_clk, ipi_clk, phy_hsclk;
+    u64 tmp;
+//
+// in DPHY mode, the phy_hstx_clk is exactly 1/16 the Lane high-speed
+// data rate; In CPHY mode, the phy_hstx_clk is exactly 1/7 the trio
+// high speed symbol rate.
+//
+    phy_hsclk = DIV_ROUND_CLOSEST_ULL(dsi2.lane_mbps * USEC_PER_SEC, 16);
+// IPI_RATIO_MAN_CFG = PHY_HSTX_CLK / IPI_CLK
+    pixel_clk = mode.crtc_clock * MSEC_PER_SEC;
+    ipi_clk = pixel_clk / 4;
+    tmp = DIV_ROUND_CLOSEST_ULL(phy_hsclk << 16, ipi_clk);
+    regmap_write(dsi2.regmap, DSI2_PHY_IPI_RATIO_MAN_CFG,
+    PHY_IPI_RATIO(tmp));
+//
+// SYS_RATIO_MAN_CFG = MIPI_DCPHY_HSCLK_Freq / MIPI_DCPHY_HSCLK_Freq
+//
+    tmp = DIV_ROUND_CLOSEST_ULL(phy_hsclk << 16, sys_clk);
+    regmap_write(dsi2.regmap, DSI2_PHY_SYS_RATIO_MAN_CFG,
+    PHY_SYS_RATIO(tmp));
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_lp2hs_or_hs2lp_cfg(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_lp2hs_or_hs2lp_cfg(struct dw_mipi_dsi2 *dsi2)
+    {
+    const struct dw_mipi_dsi2_phy_ops *phy_ops = dsi2.plat_data.phy_ops;
+    struct dw_mipi_dsi2_phy_timing timing;
+    int ret;
+    ret = phy_ops.get_timing(dsi2.plat_data.priv_data,
+    dsi2.lane_mbps, &timing);
+    if (ret)
+    dev_err(dsi2.dev, "Retrieving phy timings failed\n");
+    regmap_write(dsi2.regmap, DSI2_PHY_LP2HS_MAN_CFG, PHY_LP2HS_TIME(timing.data_lp2hs));
+    regmap_write(dsi2.regmap, DSI2_PHY_HS2LP_MAN_CFG, PHY_HS2LP_TIME(timing.data_hs2lp));
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_phy_init(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_phy_init(struct dw_mipi_dsi2 *dsi2)
+    {
+    const struct dw_mipi_dsi2_phy_ops *phy_ops = dsi2.plat_data.phy_ops;
+    struct dw_mipi_dsi2_phy_iface iface;
+    let mut val: u32 = 0;
+    phy_ops.get_interface(dsi2.plat_data.priv_data, &iface);
+    switch (iface.ppi_width) {
+    case 8:
+    val |= PPI_WIDTH(PPI_WIDTH_8_BITS);
+    break;
+    case 16:
+    val |= PPI_WIDTH(PPI_WIDTH_16_BITS);
+    break;
+    case 32:
+    val |= PPI_WIDTH(PPI_WIDTH_32_BITS);
+    break;
+    default:
+// Caught in probe
+    break;
+    }
+    val |= PHY_LANES(dsi2.lanes);
+    val |= PHY_TYPE(DW_MIPI_DSI2_DPHY);
+    regmap_write(dsi2.regmap, DSI2_PHY_MODE_CFG, val);
+    dw_mipi_dsi2_phy_clk_mode_cfg(dsi2);
+    dw_mipi_dsi2_phy_ratio_cfg(dsi2);
+    dw_mipi_dsi2_lp2hs_or_hs2lp_cfg(dsi2);
+// phy configuration 8 - 10
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_tx_option_set(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_tx_option_set(struct dw_mipi_dsi2 *dsi2)
+    {
+    u32 val;
+    val = BTA_EN | EOTP_TX_EN;
+    if (dsi2.mode_flags & MIPI_DSI_MODE_NO_EOT_PACKET)
+    val &= ~EOTP_TX_EN;
+    regmap_write(dsi2.regmap, DSI2_DSI_GENERAL_CFG, val);
+    regmap_write(dsi2.regmap, DSI2_DSI_VCID_CFG, TX_VCID(dsi2.channel));
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_ipi_color_coding_cfg(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_ipi_color_coding_cfg(struct dw_mipi_dsi2 *dsi2)
+    {
+    u32 val, color_depth;
+    switch (dsi2.format) {
+    case MIPI_DSI_FMT_RGB666:
+    case MIPI_DSI_FMT_RGB666_PACKED:
+    color_depth = IPI_DEPTH_6_BITS;
+    break;
+    case MIPI_DSI_FMT_RGB565:
+    color_depth = IPI_DEPTH_5_6_5_BITS;
+    break;
+    case MIPI_DSI_FMT_RGB888:
+    default:
+    color_depth = IPI_DEPTH_8_BITS;
+    break;
+    }
+    val = IPI_DEPTH(color_depth) |
+    IPI_FORMAT(IPI_FORMAT_RGB);
+    regmap_write(dsi2.regmap, DSI2_IPI_COLOR_MAN_CFG, val);
+    }
+    static void dw_mipi_dsi2_vertical_timing_config(struct dw_mipi_dsi2 *dsi2,
+    const struct drm_display_mode *mode)
+    {
+    u32 vactive, vsa, vfp, vbp;
+    vactive = mode.vdisplay;
+    vsa = mode.vsync_end - mode.vsync_start;
+    vfp = mode.vsync_start - mode.vdisplay;
+    vbp = mode.vtotal - mode.vsync_end;
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_VSA_MAN_CFG, VID_VSA_LINES(vsa));
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_VBP_MAN_CFG, VID_VBP_LINES(vbp));
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_VACT_MAN_CFG, VID_VACT_LINES(vactive));
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_VFP_MAN_CFG, VID_VFP_LINES(vfp));
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_ipi_set(dsi2: *mut dw_mipi_dsi2) {
+    static void dw_mipi_dsi2_ipi_set(struct dw_mipi_dsi2 *dsi2)
+    {
+    struct drm_display_mode *mode = &dsi2.mode;
+    u32 hline, hsa, hbp, hact;
+    u64 hline_time, hsa_time, hbp_time, hact_time, tmp;
+    u64 pixel_clk, phy_hs_clk;
+    u16 val;
+    val = mode.hdisplay;
+    regmap_write(dsi2.regmap, DSI2_IPI_PIX_PKT_CFG, MAX_PIX_PKT(val));
+    dw_mipi_dsi2_ipi_color_coding_cfg(dsi2);
+//
+// if the controller is intended to operate in data stream mode,
+// no more steps are required.
+//
+    if (!(dsi2.mode_flags & MIPI_DSI_MODE_VIDEO))
+    return;
+    hact = mode.hdisplay;
+    hsa = mode.hsync_end - mode.hsync_start;
+    hbp = mode.htotal - mode.hsync_end;
+    hline = mode.htotal;
+    pixel_clk = mode.crtc_clock * MSEC_PER_SEC;
+    phy_hs_clk = DIV_ROUND_CLOSEST_ULL(dsi2.lane_mbps * USEC_PER_SEC, 16);
+    tmp = hsa * phy_hs_clk;
+    hsa_time = DIV_ROUND_CLOSEST_ULL(tmp << 16, pixel_clk);
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_HSA_MAN_CFG, VID_HSA_TIME(hsa_time));
+    tmp = hbp * phy_hs_clk;
+    hbp_time = DIV_ROUND_CLOSEST_ULL(tmp << 16, pixel_clk);
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_HBP_MAN_CFG, VID_HBP_TIME(hbp_time));
+    tmp = hact * phy_hs_clk;
+    hact_time = DIV_ROUND_CLOSEST_ULL(tmp << 16, pixel_clk);
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_HACT_MAN_CFG, VID_HACT_TIME(hact_time));
+    tmp = hline * phy_hs_clk;
+    hline_time = DIV_ROUND_CLOSEST_ULL(tmp << 16, pixel_clk);
+    regmap_write(dsi2.regmap, DSI2_IPI_VID_HLINE_MAN_CFG, VID_HLINE_TIME(hline_time));
+    dw_mipi_dsi2_vertical_timing_config(dsi2, mode);
+    }
+    static void
+    dw_mipi_dsi2_work_mode(struct dw_mipi_dsi2 *dsi2, u32 mode)
+    {
+//
+// select controller work in Manual mode
+// Manual: MANUAL_MODE_EN
+// Automatic: 0
+//
+    regmap_write(dsi2.regmap, MANUAL_MODE_CFG, mode);
+    }
+    static int dw_mipi_dsi2_host_attach(struct mipi_dsi_host *host,
+    struct mipi_dsi_device *device)
+    {
+    struct dw_mipi_dsi2 *dsi2 = host_to_dsi2(host);
+    const struct dw_mipi_dsi2_plat_data *pdata = dsi2.plat_data;
+    struct drm_bridge *bridge;
+    int ret;
+    if (device.lanes > dsi2.plat_data.max_data_lanes) {
+    dev_err(dsi2.dev, "the number of data lanes(%u) is too many\n",
+    device.lanes);
+    return -EINVAL;
+    }
+    dsi2.lanes = device.lanes;
+    dsi2.channel = device.channel;
+    dsi2.format = device.format;
+    dsi2.mode_flags = device.mode_flags;
+    bridge = devm_drm_of_get_bridge(dsi2.dev, dsi2.dev.of_node, 1, 0);
+    if (IS_ERR(bridge))
+    return PTR_ERR(bridge);
+    bridge.pre_enable_prev_first = true;
+    dsi2.panel_bridge = bridge;
+    drm_bridge_add(&dsi2.bridge);
+    if (pdata.host_ops && pdata.host_ops.attach) {
+    ret = pdata.host_ops.attach(pdata.priv_data, device);
+    if (ret < 0)
+    goto err_remove_bridge;
+    }
+    return 0;
+    err_remove_bridge:
+    drm_bridge_remove(&dsi2.bridge);
+    return ret;
+    }
+    static int dw_mipi_dsi2_host_detach(struct mipi_dsi_host *host,
+    struct mipi_dsi_device *device)
+    {
+    struct dw_mipi_dsi2 *dsi2 = host_to_dsi2(host);
+    const struct dw_mipi_dsi2_plat_data *pdata = dsi2.plat_data;
+    int ret;
+    if (pdata.host_ops && pdata.host_ops.detach) {
+    ret = pdata.host_ops.detach(pdata.priv_data, device);
+    if (ret < 0)
+    return ret;
+    }
+    drm_bridge_remove(&dsi2.bridge);
+    drm_of_panel_bridge_remove(host.dev.of_node, 1, 0);
+    return 0;
+    }
+    static int dw_mipi_dsi2_gen_pkt_hdr_write(struct dw_mipi_dsi2 *dsi2,
+    u32 hdr_val, bool lpm)
+    {
+    int ret;
+    regmap_write(dsi2.regmap, DSI2_CRI_TX_HDR, hdr_val | CMD_TX_MODE(lpm));
+    ret = cri_fifos_wait_avail(dsi2);
+    if (ret) {
+    dev_err(dsi2.dev, "failed to write command header\n");
+    return ret;
+    }
+    return 0;
+    }
+    static int dw_mipi_dsi2_write(struct dw_mipi_dsi2 *dsi2,
+    const struct mipi_dsi_packet *packet, bool lpm)
+    {
+    const u8 *tx_buf = packet.payload;
+    let mut len: c_int = packet.payload_length, pld_data_bytes = sizeof(u32);
+    __le32 word;
+// Send payload
+    while (len) {
+    if (len < pld_data_bytes) {
+    word = 0;
+    memcpy(&word, tx_buf, len);
+    regmap_write(dsi2.regmap, DSI2_CRI_TX_PLD, le32_to_cpu(word));
+    len = 0;
+    } else {
+    memcpy(&word, tx_buf, pld_data_bytes);
+    regmap_write(dsi2.regmap, DSI2_CRI_TX_PLD, le32_to_cpu(word));
+    tx_buf += pld_data_bytes;
+    len -= pld_data_bytes;
+    }
+    }
+    word = 0;
+    memcpy(&word, packet.header, sizeof(packet.header));
+    return dw_mipi_dsi2_gen_pkt_hdr_write(dsi2, le32_to_cpu(word), lpm);
+    }
+    static int dw_mipi_dsi2_read(struct dw_mipi_dsi2 *dsi2,
+    const struct mipi_dsi_msg *msg)
+    {
+    u8 *payload = msg.rx_buf;
+    int i, j, ret, len = msg.rx_len;
+    u8 data_type;
+    u16 wc;
+    u32 val;
+    ret = regmap_read_poll_timeout(dsi2.regmap, DSI2_CORE_STATUS,
+    val, val & CRI_RD_DATA_AVAIL,
+    100, CMD_PKT_STATUS_TIMEOUT_US);
+    if (ret) {
+    dev_err(dsi2.dev, "CRI has no available read data\n");
+    return ret;
+    }
+    regmap_read(dsi2.regmap, DSI2_CRI_RX_HDR, &val);
+    data_type = val & 0x3f;
+    if (mipi_dsi_packet_format_is_short(data_type)) {
+    for (i = 0; i < len && i < 2; i++)
+    payload[i] = (val >> (8 * (i + 1))) & 0xff;
+    return 0;
+    }
+    wc = (val >> 8) & 0xffff;
+// Receive payload
+    for (i = 0; i < len && i < wc; i += 4) {
+    regmap_read(dsi2.regmap, DSI2_CRI_RX_PLD, &val);
+    for (j = 0; j < 4 && j + i < len && j + i < wc; j++)
+    payload[i + j] = val >> (8 * j);
+    }
+    return 0;
+    }
+    static ssize_t dw_mipi_dsi2_host_transfer(struct mipi_dsi_host *host,
+    const struct mipi_dsi_msg *msg)
+    {
+    struct dw_mipi_dsi2 *dsi2 = host_to_dsi2(host);
+    let mut lpm: bool = msg.flags & MIPI_DSI_MSG_USE_LPM;
+    struct mipi_dsi_packet packet;
+    int ret, nb_bytes;
+    regmap_update_bits(dsi2.regmap, DSI2_DSI_VID_TX_CFG,
+    LPDT_DISPLAY_CMD_EN,
+    lpm ? LPDT_DISPLAY_CMD_EN : 0);
+// create a packet to the DSI protocol
+    ret = mipi_dsi_create_packet(&packet, msg);
+    if (ret) {
+    dev_err(dsi2.dev, "failed to create packet: %d\n", ret);
+    return ret;
+    }
+    ret = cri_fifos_wait_avail(dsi2);
+    if (ret)
+    return ret;
+    ret = dw_mipi_dsi2_write(dsi2, &packet, lpm);
+    if (ret)
+    return ret;
+    if (msg.rx_buf && msg.rx_len) {
+    ret = dw_mipi_dsi2_read(dsi2, msg);
+    if (ret < 0)
+    return ret;
+    nb_bytes = msg.rx_len;
+    } else {
+    nb_bytes = packet.size;
+    }
+    return nb_bytes;
+    }
+    static const struct mipi_dsi_host_ops dw_mipi_dsi2_host_ops = {
+    .attach = dw_mipi_dsi2_host_attach,
+    .detach = dw_mipi_dsi2_host_detach,
+    .transfer = dw_mipi_dsi2_host_transfer,
+    };
+    static u32 *
+    dw_mipi_dsi2_bridge_atomic_get_input_bus_fmts(struct drm_bridge *bridge,
+    struct drm_bridge_state *bridge_state,
+    struct drm_crtc_state *crtc_state,
+    struct drm_connector_state *conn_state,
+    u32 output_fmt,
+    unsigned int *num_input_fmts)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+    const struct dw_mipi_dsi2_plat_data *pdata = dsi2.plat_data;
+    u32 *input_fmts;
+    if (pdata.get_input_bus_fmts)
+    return pdata.get_input_bus_fmts(pdata.priv_data,
+    bridge, bridge_state,
+    crtc_state, conn_state,
+    output_fmt, num_input_fmts);
+// Fall back to MEDIA_BUS_FMT_FIXED as the only input format.
+    input_fmts = kmalloc_obj(*input_fmts);
+    if (!input_fmts)
+    return core::ptr::null_mut();
+    input_fmts[0] = MEDIA_BUS_FMT_FIXED;
+// num_input_fmts = 1;
+    return input_fmts;
+    }
+    static int dw_mipi_dsi2_bridge_atomic_check(struct drm_bridge *bridge,
+    struct drm_bridge_state *bridge_state,
+    struct drm_crtc_state *crtc_state,
+    struct drm_connector_state *conn_state)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+    const struct dw_mipi_dsi2_plat_data *pdata = dsi2.plat_data;
+    bool ret;
+    bridge_state.input_bus_cfg.flags =
+    DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE;
+    if (pdata.mode_fixup) {
+    ret = pdata.mode_fixup(pdata.priv_data, &crtc_state.mode,
+    &crtc_state.adjusted_mode);
+    if (!ret) {
+    DRM_DEBUG_DRIVER("failed to fixup mode " DRM_MODE_FMT "\n",
+    DRM_MODE_ARG(&crtc_state.mode));
+    return -EINVAL;
+    }
+    }
+    return 0;
+    }
+    static void dw_mipi_dsi2_bridge_post_atomic_disable(struct drm_bridge *bridge,
+    struct drm_atomic_commit *state)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+    const struct dw_mipi_dsi2_phy_ops *phy_ops = dsi2.plat_data.phy_ops;
+    regmap_write(dsi2.regmap, DSI2_IPI_PIX_PKT_CFG, 0);
+//
+// Switch to command mode before panel-bridge post_disable &
+// panel unprepare.
+// Note: panel-bridge disable & panel disable has been called
+// before by the drm framework.
+//
+    dw_mipi_dsi2_set_cmd_mode(dsi2);
+    regmap_write(dsi2.regmap, DSI2_PWR_UP, RESET);
+    if (phy_ops.power_off)
+    phy_ops.power_off(dsi2.plat_data.priv_data);
+    clk_disable_unprepare(dsi2.sys_clk);
+    clk_disable_unprepare(dsi2.pclk);
+    pm_runtime_put(dsi2.dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn dw_mipi_dsi2_get_lanes(dsi2: *mut dw_mipi_dsi2) -> c_uint {
+    static unsigned int dw_mipi_dsi2_get_lanes(struct dw_mipi_dsi2 *dsi2)
+    {
+// single-dsi, so no other instance to consider
+    return dsi2.lanes;
+    }
+    static void dw_mipi_dsi2_mode_set(struct dw_mipi_dsi2 *dsi2,
+    const struct drm_display_mode *adjusted_mode)
+    {
+    const struct dw_mipi_dsi2_phy_ops *phy_ops = dsi2.plat_data.phy_ops;
+    void *priv_data = dsi2.plat_data.priv_data;
+    let mut lanes: u32 = dw_mipi_dsi2_get_lanes(dsi2);
+    int ret;
+    clk_prepare_enable(dsi2.pclk);
+    clk_prepare_enable(dsi2.sys_clk);
+    ret = phy_ops.get_lane_mbps(priv_data, adjusted_mode, dsi2.mode_flags,
+    lanes, dsi2.format, &dsi2.lane_mbps);
+    if (ret)
+    DRM_DEBUG_DRIVER("Phy get_lane_mbps() failed\n");
+    pm_runtime_get_sync(dsi2.dev);
+    dw_mipi_dsi2_host_softrst(dsi2);
+    regmap_write(dsi2.regmap, DSI2_PWR_UP, RESET);
+    dw_mipi_dsi2_work_mode(dsi2, MANUAL_MODE_EN);
+    dw_mipi_dsi2_phy_init(dsi2);
+    if (phy_ops.power_on)
+    phy_ops.power_on(dsi2.plat_data.priv_data);
+    dw_mipi_dsi2_tx_option_set(dsi2);
+//
+// initial deskew calibration is send after phy_power_on,
+// then we can configure clk_type.
+//
+    regmap_update_bits(dsi2.regmap, DSI2_PHY_CLK_CFG, CLK_TYPE_MASK,
+    dsi2.mode_flags & MIPI_DSI_CLOCK_NON_CONTINUOUS ? NON_CONTINUOUS_CLK :
+    CONTINUOUS_CLK);
+    regmap_write(dsi2.regmap, DSI2_PWR_UP, POWER_UP);
+    dw_mipi_dsi2_set_cmd_mode(dsi2);
+    dw_mipi_dsi2_ipi_set(dsi2);
+    }
+    static void dw_mipi_dsi2_bridge_atomic_pre_enable(struct drm_bridge *bridge,
+    struct drm_atomic_commit *state)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+// Power up the dsi ctl into a command mode
+    dw_mipi_dsi2_mode_set(dsi2, &dsi2.mode);
+    }
+    static void dw_mipi_dsi2_bridge_mode_set(struct drm_bridge *bridge,
+    const struct drm_display_mode *mode,
+    const struct drm_display_mode *adjusted_mode)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+// Store the display mode for later use in pre_enable callback
+    drm_mode_copy(&dsi2.mode, adjusted_mode);
+    }
+    static void dw_mipi_dsi2_bridge_atomic_enable(struct drm_bridge *bridge,
+    struct drm_atomic_commit *state)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+// Switch to video mode for panel-bridge enable & panel enable
+    if (dsi2.mode_flags & MIPI_DSI_MODE_VIDEO)
+    dw_mipi_dsi2_set_vid_mode(dsi2);
+    else
+    dw_mipi_dsi2_set_data_stream_mode(dsi2);
+    }
+    static enum drm_mode_status
+    dw_mipi_dsi2_bridge_mode_valid(struct drm_bridge *bridge,
+    const struct drm_display_info *info,
+    const struct drm_display_mode *mode)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+    const struct dw_mipi_dsi2_plat_data *pdata = dsi2.plat_data;
+    let mut mode_status: enum drm_mode_status = MODE_OK;
+    if (pdata.mode_valid)
+    mode_status = pdata.mode_valid(pdata.priv_data, mode,
+    dsi2.mode_flags,
+    dw_mipi_dsi2_get_lanes(dsi2),
+    dsi2.format);
+    return mode_status;
+    }
+    static int dw_mipi_dsi2_bridge_attach(struct drm_bridge *bridge,
+    struct drm_encoder *encoder,
+    enum drm_bridge_attach_flags flags)
+    {
+    struct dw_mipi_dsi2 *dsi2 = bridge_to_dsi2(bridge);
+// Set the encoder type as caller does not know it
+    encoder.encoder_type = DRM_MODE_ENCODER_DSI;
+// Attach the panel-bridge to the dsi bridge
+    return drm_bridge_attach(encoder, dsi2.panel_bridge, bridge,
+    flags);
+    }
+    static const struct drm_bridge_funcs dw_mipi_dsi2_bridge_funcs = {
+    .atomic_duplicate_state	= drm_atomic_helper_bridge_duplicate_state,
+    .atomic_destroy_state	= drm_atomic_helper_bridge_destroy_state,
+    .atomic_get_input_bus_fmts = dw_mipi_dsi2_bridge_atomic_get_input_bus_fmts,
+    .atomic_check		= dw_mipi_dsi2_bridge_atomic_check,
+    .atomic_create_state		= drm_atomic_helper_bridge_create_state,
+    .atomic_pre_enable	= dw_mipi_dsi2_bridge_atomic_pre_enable,
+    .atomic_enable		= dw_mipi_dsi2_bridge_atomic_enable,
+    .atomic_post_disable	= dw_mipi_dsi2_bridge_post_atomic_disable,
+    .mode_set		= dw_mipi_dsi2_bridge_mode_set,
+    .mode_valid		= dw_mipi_dsi2_bridge_mode_valid,
+    .attach			= dw_mipi_dsi2_bridge_attach,
+    };
+    static const struct regmap_config dw_mipi_dsi2_regmap_config = {
+    .name = "dsi2-host",
+    .reg_bits = 32,
+    .val_bits = 32,
+    .reg_stride = 4,
+    };
+    static struct dw_mipi_dsi2 *
+    __dw_mipi_dsi2_probe(struct platform_device *pdev,
+    const struct dw_mipi_dsi2_plat_data *plat_data)
+    {
+    struct device *dev = &pdev.dev;
+    struct reset_control *apb_rst;
+    struct dw_mipi_dsi2 *dsi2;
+    int ret;
+    dsi2 = devm_drm_bridge_alloc(dev, struct dw_mipi_dsi2, bridge,
+    &dw_mipi_dsi2_bridge_funcs);
+    if (IS_ERR(dsi2))
+    return ERR_CAST(dsi2);
+    dsi2.dev = dev;
+    dsi2.plat_data = plat_data;
+    if (!plat_data.phy_ops.init || !plat_data.phy_ops.get_lane_mbps ||
+    !plat_data.phy_ops.get_timing)
+    return dev_err_ptr_probe(dev, -ENODEV, "Phy not properly configured\n");
+    if (!plat_data.regmap) {
+    void __iomem *base = devm_platform_ioremap_resource(pdev, 0);
+    if (IS_ERR(base))
+    return dev_err_cast_probe(dev, base, "failed to registers\n");
+    dsi2.regmap = devm_regmap_init_mmio(dev, base,
+    &dw_mipi_dsi2_regmap_config);
+    if (IS_ERR(dsi2.regmap))
+    return dev_err_cast_probe(dev, dsi2.regmap, "failed to init regmap\n");
+    } else {
+    dsi2.regmap = plat_data.regmap;
+    }
+    dsi2.pclk = devm_clk_get(dev, "pclk");
+    if (IS_ERR(dsi2.pclk))
+    return dev_err_cast_probe(dev, dsi2.pclk, "Unable to get pclk\n");
+    dsi2.sys_clk = devm_clk_get(dev, "sys");
+    if (IS_ERR(dsi2.sys_clk))
+    return dev_err_cast_probe(dev, dsi2.sys_clk, "Unable to get sys_clk\n");
+//
+// Note that the reset was not defined in the initial device tree, so
+// we have to be prepared for it not being found.
+//
+    apb_rst = devm_reset_control_get_optional_exclusive(dev, "apb");
+    if (IS_ERR(apb_rst))
+    return dev_err_cast_probe(dev, apb_rst, "Unable to get reset control\n");
+    if (apb_rst) {
+    ret = clk_prepare_enable(dsi2.pclk);
+    if (ret) {
+    dev_err(dev, "%s: Failed to enable pclk\n", __func__);
+    return ERR_PTR(ret);
+    }
+    reset_control_assert(apb_rst);
+    usleep_range(10, 20);
+    reset_control_deassert(apb_rst);
+    clk_disable_unprepare(dsi2.pclk);
+    }
+    devm_pm_runtime_enable(dev);
+    dsi2.dsi_host.ops = &dw_mipi_dsi2_host_ops;
+    dsi2.dsi_host.dev = dev;
+    ret = mipi_dsi_host_register(&dsi2.dsi_host);
+    if (ret) {
+    dev_err(dev, "Failed to register MIPI host: %d\n", ret);
+    pm_runtime_disable(dev);
+    return ERR_PTR(ret);
+    }
+    dsi2.bridge.driver_private = dsi2;
+    dsi2.bridge.of_node = pdev.dev.of_node;
+    return dsi2;
+    }
+#[no_mangle]
+unsafe extern "C" fn __dw_mipi_dsi2_remove(dsi2: *mut dw_mipi_dsi2) {
+    static void __dw_mipi_dsi2_remove(struct dw_mipi_dsi2 *dsi2)
+    {
+    mipi_dsi_host_unregister(&dsi2.dsi_host);
+    }
+//
+// Probe/remove API, used to create the bridge instance.
+//
+    struct dw_mipi_dsi2 *
+    dw_mipi_dsi2_probe(struct platform_device *pdev,
+    const struct dw_mipi_dsi2_plat_data *plat_data)
+    {
+    return __dw_mipi_dsi2_probe(pdev, plat_data);
+    }
+    EXPORT_SYMBOL_GPL(dw_mipi_dsi2_probe);
+#[no_mangle]
+pub unsafe extern "C" fn dw_mipi_dsi2_remove(dsi2: *mut dw_mipi_dsi2) {
+    void dw_mipi_dsi2_remove(struct dw_mipi_dsi2 *dsi2)
+    {
+    __dw_mipi_dsi2_remove(dsi2);
+    }
+    EXPORT_SYMBOL_GPL(dw_mipi_dsi2_remove);
+//
+// Bind/unbind API, used from platforms based on the component framework
+// to attach the bridge to an encoder.
+//
+#[no_mangle]
+pub unsafe extern "C" fn dw_mipi_dsi2_bind(dsi2: *mut dw_mipi_dsi2, encoder: *mut drm_encoder) -> c_int {
+    int dw_mipi_dsi2_bind(struct dw_mipi_dsi2 *dsi2, struct drm_encoder *encoder)
+    {
+    return drm_bridge_attach(encoder, &dsi2.bridge, core::ptr::null_mut(), 0);
+    }
+    EXPORT_SYMBOL_GPL(dw_mipi_dsi2_bind);
+#[no_mangle]
+pub unsafe extern "C" fn dw_mipi_dsi2_unbind(dsi2: *mut dw_mipi_dsi2) {
+    void dw_mipi_dsi2_unbind(struct dw_mipi_dsi2 *dsi2)
+    {
+    }
+    EXPORT_SYMBOL_GPL(dw_mipi_dsi2_unbind);
+    MODULE_AUTHOR("Guochun Huang <hero.huang@rock-chips.com>");
+    MODULE_AUTHOR("Heiko Stuebner <heiko.stuebner@cherry.de>");
+    MODULE_DESCRIPTION("DW MIPI DSI2 host controller driver");
+    MODULE_LICENSE("GPL");
+    MODULE_ALIAS("platform:dw-mipi-dsi2");

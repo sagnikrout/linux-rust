@@ -1,0 +1,352 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/net/ethernet/stmicro/stmmac/dwmac-motorcomm.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// DWMAC glue driver for Motorcomm PCI Ethernet controllers
+//
+// Copyright (c) 2025-2026 Yao Zi <me@ziyao.cc>
+//
+
+pub const PCI_VENDOR_ID_MOTORCOMM: c_uint = 0x1f0a;
+// Register definition
+pub const EPHY_CTRL: c_uint = 0x1004;
+// Clearing this bit asserts resets for internal MDIO bus and PHY
+
+pub const OOB_WOL_CTRL: c_uint = 0x1010;
+
+pub const MGMT_INT_CTRL0: c_uint = 0x1100;
+pub const INT_MODERATION: c_uint = 0x1108;
+
+pub const EFUSE_OP_CTRL_0: c_uint = 0x1500;
+
+pub const EFUSE_OP_ROW_READ: c_uint = 0x1;
+
+pub const EFUSE_OP_CTRL_1: c_uint = 0x1504;
+
+pub const SYS_RESET: c_uint = 0x152c;
+
+pub const GMAC_OFFSET: c_uint = 0x2000;
+// Constants
+pub const EFUSE_READ_TIMEOUT_US: c_int = 20000;
+pub const EFUSE_PATCH_REGION_OFFSET: c_int = 18;
+pub const EFUSE_PATCH_MAX_NUM: c_int = 39;
+pub const EFUSE_ADDR_MACA0LR: c_uint = 0x1520;
+pub const EFUSE_ADDR_MACA0HR: c_uint = 0x1524;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct motorcomm_efuse_patch {
+    pub addr: __le16,
+    pub data: __le32,
+    pub __packed: },
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct dwmac_motorcomm_priv {
+    pub base: *mut void __iomem,
+}
+
+    static int motorcomm_efuse_read_byte(struct dwmac_motorcomm_priv *priv,
+    u8 offset, u8 *byte)
+    {
+    u32 reg;
+    int ret;
+    writel(FIELD_PREP(EFUSE_OP_MODE, EFUSE_OP_ROW_READ)	|
+    FIELD_PREP(EFUSE_OP_ADDR, offset)		|
+    EFUSE_OP_START, priv.base + EFUSE_OP_CTRL_0);
+    ret = readl_poll_timeout(priv.base + EFUSE_OP_CTRL_1,
+    reg, reg & EFUSE_OP_DONE, 2000,
+    EFUSE_READ_TIMEOUT_US);
+// byte = FIELD_GET(EFUSE_OP_RD_DATA, reg);
+    return ret;
+    }
+    static int motorcomm_efuse_read_patch(struct dwmac_motorcomm_priv *priv,
+    u8 index,
+    struct motorcomm_efuse_patch *patch)
+    {
+    u8 *p = (u8 *)patch, offset;
+    int i, ret;
+    for (i = 0; i < sizeof(*patch); i++) {
+    offset = EFUSE_PATCH_REGION_OFFSET + sizeof(*patch) * index + i;
+    ret = motorcomm_efuse_read_byte(priv, offset, &p[i]);
+    if (ret)
+    return ret;
+    }
+    return 0;
+    }
+    static int motorcomm_efuse_get_patch_value(struct dwmac_motorcomm_priv *priv,
+    u16 addr, u32 *value)
+    {
+    struct motorcomm_efuse_patch patch;
+    int i, ret;
+    for (i = 0; i < EFUSE_PATCH_MAX_NUM; i++) {
+    ret = motorcomm_efuse_read_patch(priv, i, &patch);
+    if (ret)
+    return ret;
+    if (patch.addr == 0) {
+    return -ENOENT;
+    } else if (le16_to_cpu(patch.addr) == addr) {
+// value = le32_to_cpu(patch.data);
+    return 0;
+    }
+    }
+    return -ENOENT;
+    }
+    static int motorcomm_efuse_read_mac(struct device *dev,
+    struct dwmac_motorcomm_priv *priv, u8 *mac)
+    {
+    u32 maca0lr, maca0hr;
+    int ret;
+    ret = motorcomm_efuse_get_patch_value(priv, EFUSE_ADDR_MACA0LR,
+    &maca0lr);
+    if (ret)
+    return dev_err_probe(dev, ret,
+    "failed to read maca0lr from eFuse\n");
+    ret = motorcomm_efuse_get_patch_value(priv, EFUSE_ADDR_MACA0HR,
+    &maca0hr);
+    if (ret)
+    return dev_err_probe(dev, ret,
+    "failed to read maca0hr from eFuse\n");
+    mac[0] = FIELD_GET(GENMASK(15, 8), maca0hr);
+    mac[1] = FIELD_GET(GENMASK(7, 0), maca0hr);
+    mac[2] = FIELD_GET(GENMASK(31, 24), maca0lr);
+    mac[3] = FIELD_GET(GENMASK(23, 16), maca0lr);
+    mac[4] = FIELD_GET(GENMASK(15, 8), maca0lr);
+    mac[5] = FIELD_GET(GENMASK(7, 0), maca0lr);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_deassert_mdio_phy_reset(priv: *mut dwmac_motorcomm_priv) {
+    static void motorcomm_deassert_mdio_phy_reset(struct dwmac_motorcomm_priv *priv)
+    {
+    let mut reg: u32 = readl(priv.base + EPHY_CTRL);
+    reg |= EPHY_MDIO_PHY_RESET;
+    writel(reg, priv.base + EPHY_CTRL);
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_reset(priv: *mut dwmac_motorcomm_priv) {
+    static void motorcomm_reset(struct dwmac_motorcomm_priv *priv)
+    {
+    let mut reg: u32 = readl(priv.base + SYS_RESET);
+    reg &= ~SYS_RESET_RESET;
+    writel(reg, priv.base + SYS_RESET);
+    reg |= SYS_RESET_RESET;
+    writel(reg, priv.base + SYS_RESET);
+    motorcomm_deassert_mdio_phy_reset(priv);
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_init(priv: *mut dwmac_motorcomm_priv) {
+    static void motorcomm_init(struct dwmac_motorcomm_priv *priv)
+    {
+    writel(0x0, priv.base + MGMT_INT_CTRL0);
+    writel(FIELD_PREP(INT_MODERATION_RX, 200) |
+    FIELD_PREP(INT_MODERATION_TX, 200),
+    priv.base + INT_MODERATION);
+//
+// OOB WOL must be disabled during normal operation, or DMA interrupts
+// cannot be delivered to the host.
+//
+    writel(OOB_WOL_CTRL_DIS, priv.base + OOB_WOL_CTRL);
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_resume(dev: *mut device, bsp_priv: *mut c_void) -> c_int {
+    static int motorcomm_resume(struct device *dev, void *bsp_priv)
+    {
+    struct dwmac_motorcomm_priv *priv = bsp_priv;
+    int ret;
+    ret = stmmac_pci_plat_resume(dev, bsp_priv);
+    if (ret)
+    return ret;
+//
+// When recovering from D3hot, EPHY_MDIO_PHY_RESET is automatically
+// asserted, and must be deasserted for normal operation.
+//
+    motorcomm_deassert_mdio_phy_reset(priv);
+    motorcomm_init(priv);
+    return 0;
+    }
+    static struct plat_stmmacenet_data *
+    motorcomm_default_plat_data(struct pci_dev *pdev)
+    {
+    struct plat_stmmacenet_data *plat;
+    struct device *dev = &pdev.dev;
+    plat = stmmac_plat_dat_alloc(dev);
+    if (!plat)
+    return core::ptr::null_mut();
+    plat.mdio_bus_data = devm_kzalloc(dev, sizeof(*plat.mdio_bus_data),
+    GFP_KERNEL);
+    if (!plat.mdio_bus_data)
+    return core::ptr::null_mut();
+    plat.axi = devm_kzalloc(dev, sizeof(*plat.axi), GFP_KERNEL);
+    if (!plat.axi)
+    return core::ptr::null_mut();
+    plat.dma_cfg.pbl		= DEFAULT_DMA_PBL;
+    plat.dma_cfg.pblx8		= true;
+    plat.dma_cfg.txpbl		= 32;
+    plat.dma_cfg.rxpbl		= 32;
+    plat.dma_cfg.eame		= true;
+    plat.dma_cfg.mixed_burst	= true;
+    plat.axi.axi_wr_osr_lmt	= 1;
+    plat.axi.axi_rd_osr_lmt	= 1;
+    plat.axi.axi_blen_regval	= DMA_AXI_BLEN4 | DMA_AXI_BLEN8 |
+    DMA_AXI_BLEN16 | DMA_AXI_BLEN32;
+    plat.bus_id		= pci_dev_id(pdev);
+    plat.phy_interface	= PHY_INTERFACE_MODE_GMII;
+//
+// YT6801 requires an 25MHz clock input/oscillator to function, which
+// is likely the source of CSR clock.
+//
+    plat.clk_csr		= STMMAC_CSR_20_35M;
+    plat.tx_coe		= 1;
+    plat.rx_coe		= 1;
+    plat.clk_ref_rate	= 125000000;
+    plat.core_type		= DWMAC_CORE_GMAC4;
+    plat.suspend		= stmmac_pci_plat_suspend;
+    plat.resume		= motorcomm_resume;
+    plat.flags		= STMMAC_FLAG_TSO_EN |
+    STMMAC_FLAG_EN_TX_LPI_CLK_PHY_CAP;
+    return plat;
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_free_irq(data: *mut c_void) {
+    static void motorcomm_free_irq(void *data)
+    {
+    struct pci_dev *pdev = data;
+    pci_free_irq_vectors(pdev);
+    }
+    static int motorcomm_setup_irq(struct pci_dev *pdev,
+    struct stmmac_resources *res,
+    struct plat_stmmacenet_data *plat)
+    {
+    int ret;
+    ret = pci_alloc_irq_vectors(pdev, 6, 6, PCI_IRQ_MSIX);
+    if (ret > 0) {
+    res.rx_irq[0]	= pci_irq_vector(pdev, 0);
+    res.tx_irq[0]	= pci_irq_vector(pdev, 4);
+    res.irq	= pci_irq_vector(pdev, 5);
+    plat.flags |= STMMAC_FLAG_MULTI_MSI_EN;
+    } else {
+    dev_info(&pdev.dev, "failed to allocate MSI-X vector: %d\n",
+    ret);
+    dev_info(&pdev.dev, "try MSI instead\n");
+    ret = pci_alloc_irq_vectors(pdev, 1, 1, PCI_IRQ_MSI);
+    if (ret < 0)
+    return dev_err_probe(&pdev.dev, ret,
+    "failed to allocate MSI\n");
+    res.irq = pci_irq_vector(pdev, 0);
+    }
+    return devm_add_action_or_reset(&pdev.dev, motorcomm_free_irq, pdev);
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_probe(pdev: *mut pci_dev, id: *const pci_device_id) -> c_int {
+    static int motorcomm_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+    {
+    struct plat_stmmacenet_data *plat;
+    struct dwmac_motorcomm_priv *priv;
+    let mut res: stmmac_resources = {};
+    int ret;
+    priv = devm_kzalloc(&pdev.dev, sizeof(*priv), GFP_KERNEL);
+    if (!priv)
+    return -ENOMEM;
+    plat = motorcomm_default_plat_data(pdev);
+    if (!plat)
+    return -ENOMEM;
+    plat.bsp_priv = priv;
+    ret = pcim_enable_device(pdev);
+    if (ret)
+    return dev_err_probe(&pdev.dev, ret,
+    "failed to enable device\n");
+    priv.base = pcim_iomap_region(pdev, 0, DRIVER_NAME);
+    if (IS_ERR(priv.base))
+    return dev_err_probe(&pdev.dev, PTR_ERR(priv.base),
+    "failed to map IO region\n");
+    pci_set_master(pdev);
+//
+// Some PCIe addons cards based on YT6801 don't deliver MSI(X) with ASPM
+// enabled. Sadly there isn't a reliable way to read out OEM of the
+// card, so let's disable L1 state unconditionally for safety.
+//
+    ret = pci_disable_link_state(pdev, PCIE_LINK_STATE_L1);
+    if (ret)
+    dev_warn(&pdev.dev, "failed to disable L1 state: %d\n", ret);
+    motorcomm_reset(priv);
+//
+// After system reset, the eFuse controller needs time to load
+// its internal data. Without this delay, eFuse reads return
+// all zeros, causing MAC address detection to fail.
+//
+    usleep_range(2000, 5000);
+    ret = motorcomm_efuse_read_mac(&pdev.dev, priv, res.mac);
+    if (ret == -ENOENT) {
+    dev_warn(&pdev.dev, "eFuse contains no valid MAC address\n");
+    dev_warn(&pdev.dev, "fallback to random MAC address\n");
+    eth_random_addr(res.mac);
+    } else if (ret) {
+    return dev_err_probe(&pdev.dev, ret,
+    "failed to read MAC address from eFuse\n");
+    }
+    ret = motorcomm_setup_irq(pdev, &res, plat);
+    if (ret)
+    return dev_err_probe(&pdev.dev, ret, "failed to setup IRQ\n");
+    motorcomm_init(priv);
+    res.addr = priv.base + GMAC_OFFSET;
+    return stmmac_dvr_probe(&pdev.dev, plat, &res);
+    }
+#[no_mangle]
+unsafe extern "C" fn motorcomm_remove(pdev: *mut pci_dev) {
+    static void motorcomm_remove(struct pci_dev *pdev)
+    {
+    stmmac_dvr_remove(&pdev.dev);
+    }
+    static const struct pci_device_id dwmac_motorcomm_pci_id_table[] = {
+    { PCI_DEVICE(PCI_VENDOR_ID_MOTORCOMM, 0x6801) },
+    { },
+    };
+    MODULE_DEVICE_TABLE(pci, dwmac_motorcomm_pci_id_table);
+    static struct pci_driver dwmac_motorcomm_pci_driver = {
+    .name = DRIVER_NAME,
+    .id_table = dwmac_motorcomm_pci_id_table,
+    .probe = motorcomm_probe,
+    .remove = motorcomm_remove,
+    .driver = {
+    .pm = &stmmac_simple_pm_ops,
+    },
+    };
+    module_pci_driver(dwmac_motorcomm_pci_driver);
+    MODULE_DESCRIPTION("DWMAC glue driver for Motorcomm PCI Ethernet controllers");
+    MODULE_AUTHOR("Yao Zi <me@ziyao.cc>");
+    MODULE_LICENSE("GPL");

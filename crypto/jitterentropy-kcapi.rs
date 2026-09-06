@@ -1,0 +1,311 @@
+//! Automatically rewritten from C to Rust
+//! Source: crypto/jitterentropy-kcapi.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+//
+// Non-physical true random number generator based on timing jitter --
+// Linux Kernel Crypto API specific code
+//
+// Copyright Stephan Mueller <smueller@chronox.de>, 2015 - 2023
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 1. Redistributions of source code must retain the above copyright
+// notice, and the entire permission notice in its entirety,
+// including the disclaimer of warranties.
+// 2. Redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in the
+// documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote
+// products derived from this software without specific prior
+// written permission.
+//
+// ALTERNATIVELY, this product may be distributed under the terms of
+// the GNU General Public License, in which case the provisions of the GPL2 are
+// required INSTEAD OF the above restrictions.  (This clause is
+// necessary due to a potential bad interaction between the GPL and
+// the restrictions contained in a BSD-style copyright.)
+//
+// THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, ALL OF
+// WHICH ARE HEREBY DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+// OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+// BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+// USE OF THIS SOFTWARE, EVEN IF NOT ADVISED OF THE POSSIBILITY OF SUCH
+// DAMAGE.
+//
+
+//
+// Helper function
+//
+    void *jent_kvzalloc(unsigned int len)
+    {
+    return kvzalloc(len, GFP_KERNEL);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn jent_kvzfree(ptr: *mut c_void, len: c_uint) {
+    void jent_kvzfree(void *ptr, unsigned int len)
+    {
+    kvfree_sensitive(ptr, len);
+    }
+    void *jent_zalloc(unsigned int len)
+    {
+    return kzalloc(len, GFP_KERNEL);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn jent_zfree(ptr: *mut c_void) {
+    void jent_zfree(void *ptr)
+    {
+    kfree_sensitive(ptr);
+    }
+//
+// Obtain a high-resolution time stamp value. The time stamp is used to measure
+// the execution time of a given code path and its variations. Hence, the time
+// stamp must have a sufficiently high resolution.
+//
+// Note, if the function returns zero because a given architecture does not
+// implement a high-resolution time stamp, the RNG code's runtime test
+// will detect it and will not produce output.
+//
+#[no_mangle]
+pub unsafe extern "C" fn jent_get_nstime(out: *mut __u64) {
+    void jent_get_nstime(__u64 *out)
+    {
+    let mut tmp: __u64 = 0;
+    tmp = random_get_entropy();
+//
+// If random_get_entropy does not return a value, i.e. it is not
+// implemented for a given architecture, use a clock source.
+// hoping that there are timers we can work with.
+//
+    if (tmp == 0)
+    tmp = ktime_get_ns();
+// out = tmp;
+    jent_raw_hires_entropy_store(tmp);
+    }
+    void jent_hash_time(struct sha3_ctx *hash_state, __u64 time, u8 *addtl,
+    unsigned int addtl_len, __u64 hash_loop_cnt,
+    unsigned int stuck)
+    {
+    struct sha3_ctx tmp_state; /* zeroized by sha3_final() */
+    u8 intermediary[SHA3_256_DIGEST_SIZE];
+    let mut j: __u64 = 0;
+    kmsan_unpoison_memory(intermediary, sizeof(intermediary));
+//
+// This loop fills a buffer which is injected into the entropy pool.
+// The main reason for this loop is to execute something over which we
+// can perform a timing measurement. The injection of the resulting
+// data into the pool is performed to ensure the result is used and
+// the compiler cannot optimize the loop away in case the result is not
+// used at all. Yet that data is considered "additional information"
+// considering the terminology from SP800-90A without any entropy.
+//
+// Note, it does not matter which or how much data you inject, we are
+// interested in one Keccack1600 compression operation performed with
+// the sha3_final.
+//
+    for (j = 0; j < hash_loop_cnt; j++) {
+    sha3_256_init(&tmp_state);
+    sha3_update(&tmp_state, intermediary, sizeof(intermediary));
+    sha3_update(&tmp_state, addtl, addtl_len);
+    sha3_final(&tmp_state, intermediary);
+    }
+//
+// Inject the data from the previous loop into the pool. This data is
+// not considered to contain any entropy, but it stirs the pool a bit.
+//
+    sha3_update(hash_state, intermediary, sizeof(intermediary));
+//
+// Insert the time stamp into the hash context representing the pool.
+//
+// If the time stamp is stuck, do not finally insert the value into the
+// entropy pool. Although this operation should not do any harm even
+// when the time stamp has no entropy, SP800-90B requires that any
+// conditioning operation to have an identical amount of input data
+// according to section 3.1.5.
+//
+    if (stuck) {
+    time = 0;
+    }
+    sha3_update(hash_state, (u8 *)&time, sizeof(__u64));
+    memzero_explicit(intermediary, sizeof(intermediary));
+    }
+    void jent_read_random_block(struct sha3_ctx *hash_state, char *dst,
+    unsigned int dst_len)
+    {
+    u8 jent_block[SHA3_256_DIGEST_SIZE];
+// Obtain data from entropy pool and re-initialize it
+    sha3_final(hash_state, jent_block);
+    sha3_256_init(hash_state);
+    sha3_update(hash_state, jent_block, sizeof(jent_block));
+    if (dst_len)
+    memcpy(dst, jent_block, dst_len);
+    memzero_explicit(jent_block, sizeof(jent_block));
+    }
+//
+// Kernel crypto API interface
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct jitterentropy {
+    pub jent_lock: mutex,
+    pub entropy_collector: *mut rand_data,
+    pub hash_state: sha3_ctx,
+}
+
+#[no_mangle]
+unsafe extern "C" fn jent_kcapi_cleanup(tfm: *mut crypto_tfm) {
+    static void jent_kcapi_cleanup(struct crypto_tfm *tfm)
+    {
+    struct jitterentropy *rng = crypto_tfm_ctx(tfm);
+    mutex_lock(&rng.jent_lock);
+    memzero_explicit(&rng.hash_state, sizeof(rng.hash_state));
+    if (rng.entropy_collector)
+    jent_entropy_collector_free(rng.entropy_collector);
+    rng.entropy_collector = core::ptr::null_mut();
+    mutex_unlock(&rng.jent_lock);
+    }
+#[no_mangle]
+unsafe extern "C" fn jent_kcapi_init(tfm: *mut crypto_tfm) -> c_int {
+    static int jent_kcapi_init(struct crypto_tfm *tfm)
+    {
+    struct jitterentropy *rng = crypto_tfm_ctx(tfm);
+    let mut ret: c_int = 0;
+    mutex_init(&rng.jent_lock);
+// Use SHA3-256 as conditioner
+    sha3_256_init(&rng.hash_state);
+    rng.entropy_collector = jent_entropy_collector_alloc(
+    CONFIG_CRYPTO_JITTERENTROPY_OSR, 0, &rng.hash_state);
+    if (!rng.entropy_collector) {
+    ret = -ENOMEM;
+    goto err;
+    }
+    return 0;
+    err:
+    jent_kcapi_cleanup(tfm);
+    return ret;
+    }
+    static int jent_kcapi_random(struct crypto_rng *tfm,
+    const u8 *src, unsigned int slen,
+    u8 *rdata, unsigned int dlen)
+    {
+    struct jitterentropy *rng = crypto_rng_ctx(tfm);
+    let mut ret: c_int = 0;
+    mutex_lock(&rng.jent_lock);
+    ret = jent_read_entropy(rng.entropy_collector, rdata, dlen);
+    if (ret == -3) {
+// Handle permanent health test error
+//
+// If the kernel was booted with fips=1, it implies that
+// the entire kernel acts as a FIPS 140 module. In this case
+// an SP800-90B permanent health test error is treated as
+// a FIPS module error.
+//
+    if (fips_enabled)
+    panic("Jitter RNG permanent health test failure\n");
+    pr_err("Jitter RNG permanent health test failure\n");
+    ret = -EFAULT;
+    } else if (ret == -2) {
+// Handle intermittent health test error
+    pr_warn_ratelimited("Reset Jitter RNG due to intermittent health test failure\n");
+    ret = -EAGAIN;
+    } else if (ret == -1) {
+// Handle other errors
+    ret = -EINVAL;
+    }
+    mutex_unlock(&rng.jent_lock);
+    return ret;
+    }
+    static int jent_kcapi_reset(struct crypto_rng *tfm,
+    const u8 *seed, unsigned int slen)
+    {
+    return 0;
+    }
+    static struct rng_alg jent_alg = {
+    .generate		= jent_kcapi_random,
+    .seed			= jent_kcapi_reset,
+    .seedsize		= 0,
+    .base			= {
+    .cra_name               = "jitterentropy_rng",
+    .cra_driver_name        = "jitterentropy_rng",
+    .cra_priority           = 100,
+    .cra_ctxsize            = sizeof(struct jitterentropy),
+    .cra_module             = THIS_MODULE,
+    .cra_init               = jent_kcapi_init,
+    .cra_exit               = jent_kcapi_cleanup,
+    }
+    };
+#[no_mangle]
+unsafe extern "C" fn jent_mod_init() -> int __init {
+    static int __init jent_mod_init(void)
+    {
+    struct sha3_ctx hash_state;
+    let mut ret: c_int = 0;
+    jent_testing_init();
+    sha3_256_init(&hash_state);
+    ret = jent_entropy_init(CONFIG_CRYPTO_JITTERENTROPY_OSR, 0, &hash_state,
+    core::ptr::null_mut());
+    memzero_explicit(&hash_state, sizeof(hash_state));
+    if (ret) {
+// Handle permanent health test error
+    if (fips_enabled)
+    panic("jitterentropy: Initialization failed with host not compliant with requirements: %d\n", ret);
+    jent_testing_exit();
+    pr_info("jitterentropy: Initialization failed with host not compliant with requirements: %d\n", ret);
+    return -EFAULT;
+    }
+    return crypto_register_rng(&jent_alg);
+    }
+#[no_mangle]
+unsafe extern "C" fn jent_mod_exit() -> void __exit {
+    static void __exit jent_mod_exit(void)
+    {
+    jent_testing_exit();
+    crypto_unregister_rng(&jent_alg);
+    }
+    module_init(jent_mod_init);
+    module_exit(jent_mod_exit);
+    MODULE_LICENSE("Dual BSD/GPL");
+    MODULE_AUTHOR("Stephan Mueller <smueller@chronox.de>");
+    MODULE_DESCRIPTION("Non-physical True Random Number Generator based on CPU Jitter");
+    MODULE_ALIAS_CRYPTO("jitterentropy_rng");

@@ -1,0 +1,62 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/media/dvb-frontends/zl10036.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Driver for Zarlink ZL10036 DVB-S silicon tuner
+//
+// Copyright (C) 2006 Tino Reichardt
+// Copyright (C) 2007-2009 Matthias Schwarzott <zzam@gentoo.org>
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct zl10036_config {
+    pub tuner_address: u8,
+    pub rf_loop_enable: c_int,
+}
+
+//
+// zl10036_attach - Attach a zl10036 tuner to the supplied frontend structure.
+//
+// @fe: Frontend to attach to.
+// @config: zl10036_config structure.
+// @i2c: pointer to struct i2c_adapter.
+// return: FE pointer on success, NULL on failure.
+//
+

@@ -1,0 +1,132 @@
+//! Automatically rewritten from C to Rust
+//! Source: sound/firewire/dice/dice-weiss.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// dice-weiss.c - a part of driver for DICE based devices
+//
+// Copyright (c) 2023 Rolf Anderegg and Michele Perrone
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct dice_weiss_spec {
+    pub tx_pcm_chs: [c_uint; MAX_STREAMS][SND_DICE_RATE_MODE_COUNT],
+    pub rx_pcm_chs: [c_uint; MAX_STREAMS][SND_DICE_RATE_MODE_COUNT],
+}
+
+// Weiss DAC202: 192kHz 2-channel DAC
+    static const struct dice_weiss_spec dac202 = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss MAN301: 192kHz 2-channel music archive network player
+    static const struct dice_weiss_spec man301 = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss INT202: 192kHz unidirectional 2-channel digital Firewire nterface
+    static const struct dice_weiss_spec int202 = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss INT203: 192kHz bidirectional 2-channel digital Firewire nterface
+    static const struct dice_weiss_spec int203 = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss ADC2: 192kHz A/D converter with microphone preamps and line nputs
+    static const struct dice_weiss_spec adc2 = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss DAC2/Minerva: 192kHz 2-channel DAC
+    static const struct dice_weiss_spec dac2_minerva = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss Vesta: 192kHz 2-channel Firewire to AES/EBU interface
+    static const struct dice_weiss_spec vesta = {
+    .tx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    .rx_pcm_chs = {{2, 2, 2}, {0, 0, 0} },
+    };
+// Weiss AFI1: 192kHz 24-channel Firewire to ADAT or AES/EBU interface
+    static const struct dice_weiss_spec afi1 = {
+    .tx_pcm_chs = {{24, 16, 8}, {0, 0, 0} },
+    .rx_pcm_chs = {{24, 16, 8}, {0, 0, 0} },
+    };
+#[no_mangle]
+pub unsafe extern "C" fn snd_dice_detect_weiss_formats(dice: *mut snd_dice) -> c_int {
+    int snd_dice_detect_weiss_formats(struct snd_dice *dice)
+    {
+    static const struct {
+    u32 model_id;
+    const struct dice_weiss_spec *spec;
+    } *entry, entries[] = {
+    {0x000007, &dac202},
+    {0x000008, &dac202}, // Maya edition: same audio I/O as DAC202.
+    {0x000006, &int202},
+    {0x00000a, &int203},
+    {0x00000b, &man301},
+    {0x000001, &adc2},
+    {0x000003, &dac2_minerva},
+    {0x000002, &vesta},
+    {0x000004, &afi1},
+    };
+    struct fw_csr_iterator it;
+    int key, val, model_id;
+    int i;
+    model_id = 0;
+    fw_csr_iterator_init(&it, dice.unit.directory);
+    while (fw_csr_iterator_next(&it, &key, &val)) {
+    if (key == CSR_MODEL) {
+    model_id = val;
+    break;
+    }
+    }
+    for (i = 0; i < ARRAY_SIZE(entries); ++i) {
+    entry = entries + i;
+    if (entry.model_id == model_id)
+    break;
+    }
+    if (i == ARRAY_SIZE(entries))
+    return -ENODEV;
+    memcpy(dice.tx_pcm_chs, entry.spec.tx_pcm_chs,
+    MAX_STREAMS * SND_DICE_RATE_MODE_COUNT * sizeof(unsigned int));
+    memcpy(dice.rx_pcm_chs, entry.spec.rx_pcm_chs,
+    MAX_STREAMS * SND_DICE_RATE_MODE_COUNT * sizeof(unsigned int));
+    return 0;
+    }

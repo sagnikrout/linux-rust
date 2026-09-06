@@ -1,0 +1,192 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/phy/mediatek/phy-mtk-ufs.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright (C) 2019 MediaTek Inc.
+// Author: Stanley Chu <stanley.chu@mediatek.com>
+//
+
+// mphy register and offsets
+pub const MP_GLB_DIG_8C: c_uint = 0x008C;
+
+pub const MP_LN_DIG_RX_9C: c_uint = 0xA09C;
+
+pub const MP_LN_DIG_RX_AC: c_uint = 0xA0AC;
+
+pub const MP_LN_RX_44: c_uint = 0xB044;
+
+pub const UFSPHY_CLKS_CNT: c_int = 2;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ufs_mtk_phy {
+    pub dev: *mut device,
+    pub mmio: *mut void __iomem,
+    pub clks: [clk_bulk_data; UFSPHY_CLKS_CNT],
+}
+
+    static struct ufs_mtk_phy *get_ufs_mtk_phy(struct phy *generic_phy)
+    {
+    return (struct ufs_mtk_phy *)phy_get_drvdata(generic_phy);
+    }
+#[no_mangle]
+unsafe extern "C" fn ufs_mtk_phy_clk_init(phy: *mut ufs_mtk_phy) -> c_int {
+    static int ufs_mtk_phy_clk_init(struct ufs_mtk_phy *phy)
+    {
+    struct device *dev = phy.dev;
+    struct clk_bulk_data *clks = phy.clks;
+    clks[0].id = "unipro";
+    clks[1].id = "mp";
+    return devm_clk_bulk_get(dev, UFSPHY_CLKS_CNT, clks);
+    }
+#[no_mangle]
+unsafe extern "C" fn ufs_mtk_phy_set_active(phy: *mut ufs_mtk_phy) {
+    static void ufs_mtk_phy_set_active(struct ufs_mtk_phy *phy)
+    {
+    void __iomem *mmio = phy.mmio;
+// release DA_MP_PLL_PWR_ON
+    mtk_phy_set_bits(mmio + MP_GLB_DIG_8C, PLL_PWR_ON);
+    mtk_phy_clear_bits(mmio + MP_GLB_DIG_8C, FRC_FRC_PWR_ON);
+// release DA_MP_PLL_ISO_EN
+    mtk_phy_clear_bits(mmio + MP_GLB_DIG_8C, PLL_ISO_EN);
+    mtk_phy_clear_bits(mmio + MP_GLB_DIG_8C, FRC_PLL_ISO_EN);
+// release DA_MP_CDR_PWR_ON
+    mtk_phy_set_bits(mmio + MP_LN_RX_44, CDR_PWR_ON);
+    mtk_phy_clear_bits(mmio + MP_LN_RX_44, FRC_CDR_PWR_ON);
+// release DA_MP_CDR_ISO_EN
+    mtk_phy_clear_bits(mmio + MP_LN_RX_44, CDR_ISO_EN);
+    mtk_phy_clear_bits(mmio + MP_LN_RX_44, FRC_CDR_ISO_EN);
+// release DA_MP_RX0_SQ_EN
+    mtk_phy_set_bits(mmio + MP_LN_DIG_RX_AC, RX_SQ_EN);
+    mtk_phy_clear_bits(mmio + MP_LN_DIG_RX_AC, FRC_RX_SQ_EN);
+// delay 1us to wait DIFZ stable
+    udelay(1);
+// release DIFZ
+    mtk_phy_clear_bits(mmio + MP_LN_DIG_RX_9C, FSM_DIFZ_FRC);
+    }
+#[no_mangle]
+unsafe extern "C" fn ufs_mtk_phy_set_deep_hibern(phy: *mut ufs_mtk_phy) {
+    static void ufs_mtk_phy_set_deep_hibern(struct ufs_mtk_phy *phy)
+    {
+    void __iomem *mmio = phy.mmio;
+// force DIFZ
+    mtk_phy_set_bits(mmio + MP_LN_DIG_RX_9C, FSM_DIFZ_FRC);
+// force DA_MP_RX0_SQ_EN
+    mtk_phy_set_bits(mmio + MP_LN_DIG_RX_AC, FRC_RX_SQ_EN);
+    mtk_phy_clear_bits(mmio + MP_LN_DIG_RX_AC, RX_SQ_EN);
+// force DA_MP_CDR_ISO_EN
+    mtk_phy_set_bits(mmio + MP_LN_RX_44, FRC_CDR_ISO_EN);
+    mtk_phy_set_bits(mmio + MP_LN_RX_44, CDR_ISO_EN);
+// force DA_MP_CDR_PWR_ON
+    mtk_phy_set_bits(mmio + MP_LN_RX_44, FRC_CDR_PWR_ON);
+    mtk_phy_clear_bits(mmio + MP_LN_RX_44, CDR_PWR_ON);
+// force DA_MP_PLL_ISO_EN
+    mtk_phy_set_bits(mmio + MP_GLB_DIG_8C, FRC_PLL_ISO_EN);
+    mtk_phy_set_bits(mmio + MP_GLB_DIG_8C, PLL_ISO_EN);
+// force DA_MP_PLL_PWR_ON
+    mtk_phy_set_bits(mmio + MP_GLB_DIG_8C, FRC_FRC_PWR_ON);
+    mtk_phy_clear_bits(mmio + MP_GLB_DIG_8C, PLL_PWR_ON);
+    }
+#[no_mangle]
+unsafe extern "C" fn ufs_mtk_phy_power_on(generic_phy: *mut phy) -> c_int {
+    static int ufs_mtk_phy_power_on(struct phy *generic_phy)
+    {
+    struct ufs_mtk_phy *phy = get_ufs_mtk_phy(generic_phy);
+    int ret;
+    ret = clk_bulk_prepare_enable(UFSPHY_CLKS_CNT, phy.clks);
+    if (ret)
+    return ret;
+    ufs_mtk_phy_set_active(phy);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ufs_mtk_phy_power_off(generic_phy: *mut phy) -> c_int {
+    static int ufs_mtk_phy_power_off(struct phy *generic_phy)
+    {
+    struct ufs_mtk_phy *phy = get_ufs_mtk_phy(generic_phy);
+    ufs_mtk_phy_set_deep_hibern(phy);
+    clk_bulk_disable_unprepare(UFSPHY_CLKS_CNT, phy.clks);
+    return 0;
+    }
+    static const struct phy_ops ufs_mtk_phy_ops = {
+    .power_on       = ufs_mtk_phy_power_on,
+    .power_off      = ufs_mtk_phy_power_off,
+    .owner          = THIS_MODULE,
+    };
+#[no_mangle]
+unsafe extern "C" fn ufs_mtk_phy_probe(pdev: *mut platform_device) -> c_int {
+    static int ufs_mtk_phy_probe(struct platform_device *pdev)
+    {
+    struct device *dev = &pdev.dev;
+    struct phy *generic_phy;
+    struct phy_provider *phy_provider;
+    struct ufs_mtk_phy *phy;
+    int ret;
+    phy = devm_kzalloc(dev, sizeof(*phy), GFP_KERNEL);
+    if (!phy)
+    return -ENOMEM;
+    phy.mmio = devm_platform_ioremap_resource(pdev, 0);
+    if (IS_ERR(phy.mmio))
+    return PTR_ERR(phy.mmio);
+    phy.dev = dev;
+    ret = ufs_mtk_phy_clk_init(phy);
+    if (ret)
+    return ret;
+    generic_phy = devm_phy_create(dev, core::ptr::null_mut(), &ufs_mtk_phy_ops);
+    if (IS_ERR(generic_phy))
+    return PTR_ERR(generic_phy);
+    phy_set_drvdata(generic_phy, phy);
+    phy_provider = devm_of_phy_provider_register(dev, of_phy_simple_xlate);
+    return PTR_ERR_OR_ZERO(phy_provider);
+    }
+    static const struct of_device_id ufs_mtk_phy_of_match[] = {
+    {.compatible = "mediatek,mt8183-ufsphy"},
+    {},
+    };
+    MODULE_DEVICE_TABLE(of, ufs_mtk_phy_of_match);
+    static struct platform_driver ufs_mtk_phy_driver = {
+    .probe = ufs_mtk_phy_probe,
+    .driver = {
+    .of_match_table = ufs_mtk_phy_of_match,
+    .name = "ufs_mtk_phy",
+    },
+    };
+    module_platform_driver(ufs_mtk_phy_driver);
+    MODULE_DESCRIPTION("Universal Flash Storage (UFS) MediaTek MPHY");
+    MODULE_AUTHOR("Stanley Chu <stanley.chu@mediatek.com>");
+    MODULE_LICENSE("GPL v2");

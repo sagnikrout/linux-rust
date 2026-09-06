@@ -1,0 +1,68 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/net/ethernet/sfc/falcon/workarounds.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Driver for Solarflare network controllers and boards
+// Copyright 2006-2013 Solarflare Communications Inc.
+//
+// Hardware workarounds.
+// Bug numbers are from Solarflare's Bugzilla.
+//
+
+pub const EF4_WORKAROUND_10G(efx): c_int = 1;
+// Bit-bashed I2C reads cause performance drop
+
+// Truncated IPv4 packets can confuse the TX packet parser
+
+// Spurious parity errors in TSORT buffers
+
+// Unaligned read request >512 bytes after aligning may break TSORT
+
+// iSCSI parsing errors
+
+// RX events go missing
+
+// RX_RESET on A1
+
+// Increase filter depth to avoid RX_RESET
+
+// Flushes may never complete
+
+// Leak overlength packets rather than free
+

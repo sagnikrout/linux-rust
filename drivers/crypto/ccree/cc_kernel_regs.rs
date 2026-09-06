@@ -1,0 +1,201 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/crypto/ccree/cc_kernel_regs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// Copyright (C) 2012-2019 ARM Limited (or its affiliates).
+// --------------------------------------
+// BLOCK: DSCRPTR
+// --------------------------------------
+pub const CC_DSCRPTR_COMPLETION_COUNTER_REG_OFFSET: c_uint = 0xE00UL;
+pub const CC_DSCRPTR_COMPLETION_COUNTER_COMPLETION_COUNTER_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_COMPLETION_COUNTER_COMPLETION_COUNTER_BIT_SIZE: c_uint = 0x6UL;
+pub const CC_DSCRPTR_COMPLETION_COUNTER_OVERFLOW_COUNTER_BIT_SHIFT: c_uint = 0x6UL;
+pub const CC_DSCRPTR_COMPLETION_COUNTER_OVERFLOW_COUNTER_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_SW_RESET_REG_OFFSET: c_uint = 0xE40UL;
+pub const CC_DSCRPTR_SW_RESET_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_SW_RESET_VALUE_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_REG_OFFSET: c_uint = 0xE60UL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_NUM_OF_DSCRPTR_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_NUM_OF_DSCRPTR_BIT_SIZE: c_uint = 0xAUL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_DSCRPTR_SRAM_SIZE_BIT_SHIFT: c_uint = 0xAUL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_DSCRPTR_SRAM_SIZE_BIT_SIZE: c_uint = 0xCUL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_SRAM_SIZE_BIT_SHIFT: c_uint = 0x16UL;
+pub const CC_DSCRPTR_QUEUE_SRAM_SIZE_SRAM_SIZE_BIT_SIZE: c_uint = 0x3UL;
+pub const CC_DSCRPTR_SINGLE_ADDR_EN_REG_OFFSET: c_uint = 0xE64UL;
+pub const CC_DSCRPTR_SINGLE_ADDR_EN_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_SINGLE_ADDR_EN_VALUE_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_MEASURE_CNTR_REG_OFFSET: c_uint = 0xE68UL;
+pub const CC_DSCRPTR_MEASURE_CNTR_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_MEASURE_CNTR_VALUE_BIT_SIZE: c_uint = 0x20UL;
+pub const CC_DSCRPTR_QUEUE_WORD0_REG_OFFSET: c_uint = 0xE80UL;
+pub const CC_DSCRPTR_QUEUE_WORD0_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WORD0_VALUE_BIT_SIZE: c_uint = 0x20UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_REG_OFFSET: c_uint = 0xE84UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_DIN_DMA_MODE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_DIN_DMA_MODE_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_DIN_SIZE_BIT_SHIFT: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_DIN_SIZE_BIT_SIZE: c_uint = 0x18UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_NS_BIT_BIT_SHIFT: c_uint = 0x1AUL;
+pub const CC_DSCRPTR_QUEUE_WORD1_NS_BIT_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_DIN_CONST_VALUE_BIT_SHIFT: c_uint = 0x1BUL;
+pub const CC_DSCRPTR_QUEUE_WORD1_DIN_CONST_VALUE_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_NOT_LAST_BIT_SHIFT: c_uint = 0x1CUL;
+pub const CC_DSCRPTR_QUEUE_WORD1_NOT_LAST_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_LOCK_QUEUE_BIT_SHIFT: c_uint = 0x1DUL;
+pub const CC_DSCRPTR_QUEUE_WORD1_LOCK_QUEUE_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD1_NOT_USED_BIT_SHIFT: c_uint = 0x1EUL;
+pub const CC_DSCRPTR_QUEUE_WORD1_NOT_USED_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD2_REG_OFFSET: c_uint = 0xE88UL;
+pub const CC_DSCRPTR_QUEUE_WORD2_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WORD2_VALUE_BIT_SIZE: c_uint = 0x20UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_REG_OFFSET: c_uint = 0xE8CUL;
+pub const CC_DSCRPTR_QUEUE_WORD3_DOUT_DMA_MODE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_DOUT_DMA_MODE_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_DOUT_SIZE_BIT_SHIFT: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_DOUT_SIZE_BIT_SIZE: c_uint = 0x18UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_NS_BIT_BIT_SHIFT: c_uint = 0x1AUL;
+pub const CC_DSCRPTR_QUEUE_WORD3_NS_BIT_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_DOUT_LAST_IND_BIT_SHIFT: c_uint = 0x1BUL;
+pub const CC_DSCRPTR_QUEUE_WORD3_DOUT_LAST_IND_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_HASH_XOR_BIT_BIT_SHIFT: c_uint = 0x1DUL;
+pub const CC_DSCRPTR_QUEUE_WORD3_HASH_XOR_BIT_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_NOT_USED_BIT_SHIFT: c_uint = 0x1EUL;
+pub const CC_DSCRPTR_QUEUE_WORD3_NOT_USED_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD3_QUEUE_LAST_IND_BIT_SHIFT: c_uint = 0x1FUL;
+pub const CC_DSCRPTR_QUEUE_WORD3_QUEUE_LAST_IND_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_REG_OFFSET: c_uint = 0xE90UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_DATA_FLOW_MODE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_DATA_FLOW_MODE_BIT_SIZE: c_uint = 0x6UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_AES_SEL_N_HASH_BIT_SHIFT: c_uint = 0x6UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_AES_SEL_N_HASH_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_AES_XOR_CRYPTO_KEY_BIT_SHIFT: c_uint = 0x7UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_AES_XOR_CRYPTO_KEY_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_ACK_NEEDED_BIT_SHIFT: c_uint = 0x8UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_ACK_NEEDED_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_MODE_BIT_SHIFT: c_uint = 0xAUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_MODE_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CMAC_SIZE0_BIT_SHIFT: c_uint = 0xEUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CMAC_SIZE0_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_DO_BIT_SHIFT: c_uint = 0xFUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_DO_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_CONF0_BIT_SHIFT: c_uint = 0x11UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_CONF0_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_CONF1_BIT_SHIFT: c_uint = 0x13UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_CONF1_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_CONF2_BIT_SHIFT: c_uint = 0x14UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_CIPHER_CONF2_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_KEY_SIZE_BIT_SHIFT: c_uint = 0x16UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_KEY_SIZE_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_SETUP_OPERATION_BIT_SHIFT: c_uint = 0x18UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_SETUP_OPERATION_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_DIN_SRAM_ENDIANNESS_BIT_SHIFT: c_uint = 0x1CUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_DIN_SRAM_ENDIANNESS_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_DOUT_SRAM_ENDIANNESS_BIT_SHIFT: c_uint = 0x1DUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_DOUT_SRAM_ENDIANNESS_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_WORD_SWAP_BIT_SHIFT: c_uint = 0x1EUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_WORD_SWAP_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD4_BYTES_SWAP_BIT_SHIFT: c_uint = 0x1FUL;
+pub const CC_DSCRPTR_QUEUE_WORD4_BYTES_SWAP_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_DSCRPTR_QUEUE_WORD5_REG_OFFSET: c_uint = 0xE94UL;
+pub const CC_DSCRPTR_QUEUE_WORD5_DIN_ADDR_HIGH_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WORD5_DIN_ADDR_HIGH_BIT_SIZE: c_uint = 0x10UL;
+pub const CC_DSCRPTR_QUEUE_WORD5_DOUT_ADDR_HIGH_BIT_SHIFT: c_uint = 0x10UL;
+pub const CC_DSCRPTR_QUEUE_WORD5_DOUT_ADDR_HIGH_BIT_SIZE: c_uint = 0x10UL;
+pub const CC_DSCRPTR_QUEUE_WATERMARK_REG_OFFSET: c_uint = 0xE98UL;
+pub const CC_DSCRPTR_QUEUE_WATERMARK_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_WATERMARK_VALUE_BIT_SIZE: c_uint = 0xAUL;
+pub const CC_DSCRPTR_QUEUE_CONTENT_REG_OFFSET: c_uint = 0xE9CUL;
+pub const CC_DSCRPTR_QUEUE_CONTENT_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_DSCRPTR_QUEUE_CONTENT_VALUE_BIT_SIZE: c_uint = 0xAUL;
+// --------------------------------------
+// BLOCK: AXI_P
+// --------------------------------------
+pub const CC_AXIM_MON_INFLIGHT_REG_OFFSET: c_uint = 0xB00UL;
+pub const CC_AXIM_MON_INFLIGHT_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_AXIM_MON_INFLIGHT_VALUE_BIT_SIZE: c_uint = 0x8UL;
+pub const CC_AXIM_MON_INFLIGHTLAST_REG_OFFSET: c_uint = 0xB40UL;
+pub const CC_AXIM_MON_INFLIGHTLAST_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_AXIM_MON_INFLIGHTLAST_VALUE_BIT_SIZE: c_uint = 0x8UL;
+pub const CC_AXIM_MON_COMP_REG_OFFSET: c_uint = 0xB80UL;
+pub const CC_AXIM_MON_COMP8_REG_OFFSET: c_uint = 0xBA0UL;
+pub const CC_AXIM_MON_COMP_VALUE_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_AXIM_MON_COMP_VALUE_BIT_SIZE: c_uint = 0x10UL;
+pub const CC_AXIM_MON_ERR_REG_OFFSET: c_uint = 0xBC4UL;
+pub const CC_AXIM_MON_ERR_BRESP_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_AXIM_MON_ERR_BRESP_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_AXIM_MON_ERR_BID_BIT_SHIFT: c_uint = 0x2UL;
+pub const CC_AXIM_MON_ERR_BID_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_AXIM_MON_ERR_RRESP_BIT_SHIFT: c_uint = 0x10UL;
+pub const CC_AXIM_MON_ERR_RRESP_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_AXIM_MON_ERR_RID_BIT_SHIFT: c_uint = 0x12UL;
+pub const CC_AXIM_MON_ERR_RID_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_AXIM_CFG_REG_OFFSET: c_uint = 0xBE8UL;
+pub const CC_AXIM_CFG_BRESPMASK_BIT_SHIFT: c_uint = 0x4UL;
+pub const CC_AXIM_CFG_BRESPMASK_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_AXIM_CFG_RRESPMASK_BIT_SHIFT: c_uint = 0x5UL;
+pub const CC_AXIM_CFG_RRESPMASK_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_AXIM_CFG_INFLTMASK_BIT_SHIFT: c_uint = 0x6UL;
+pub const CC_AXIM_CFG_INFLTMASK_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_AXIM_CFG_COMPMASK_BIT_SHIFT: c_uint = 0x7UL;
+pub const CC_AXIM_CFG_COMPMASK_BIT_SIZE: c_uint = 0x1UL;
+pub const CC_AXIM_ACE_CONST_REG_OFFSET: c_uint = 0xBECUL;
+pub const CC_AXIM_ACE_CONST_ARDOMAIN_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_AXIM_ACE_CONST_ARDOMAIN_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_AXIM_ACE_CONST_AWDOMAIN_BIT_SHIFT: c_uint = 0x2UL;
+pub const CC_AXIM_ACE_CONST_AWDOMAIN_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_AXIM_ACE_CONST_ARBAR_BIT_SHIFT: c_uint = 0x4UL;
+pub const CC_AXIM_ACE_CONST_ARBAR_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_AXIM_ACE_CONST_AWBAR_BIT_SHIFT: c_uint = 0x6UL;
+pub const CC_AXIM_ACE_CONST_AWBAR_BIT_SIZE: c_uint = 0x2UL;
+pub const CC_AXIM_ACE_CONST_ARSNOOP_BIT_SHIFT: c_uint = 0x8UL;
+pub const CC_AXIM_ACE_CONST_ARSNOOP_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_AXIM_ACE_CONST_AWSNOOP_NOT_ALIGNED_BIT_SHIFT: c_uint = 0xCUL;
+pub const CC_AXIM_ACE_CONST_AWSNOOP_NOT_ALIGNED_BIT_SIZE: c_uint = 0x3UL;
+pub const CC_AXIM_ACE_CONST_AWSNOOP_ALIGNED_BIT_SHIFT: c_uint = 0xFUL;
+pub const CC_AXIM_ACE_CONST_AWSNOOP_ALIGNED_BIT_SIZE: c_uint = 0x3UL;
+pub const CC_AXIM_ACE_CONST_AWADDR_NOT_MASKED_BIT_SHIFT: c_uint = 0x12UL;
+pub const CC_AXIM_ACE_CONST_AWADDR_NOT_MASKED_BIT_SIZE: c_uint = 0x7UL;
+pub const CC_AXIM_ACE_CONST_AWLEN_VAL_BIT_SHIFT: c_uint = 0x19UL;
+pub const CC_AXIM_ACE_CONST_AWLEN_VAL_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_AXIM_CACHE_PARAMS_REG_OFFSET: c_uint = 0xBF0UL;
+pub const CC_AXIM_CACHE_PARAMS_AWCACHE_LAST_BIT_SHIFT: c_uint = 0x0UL;
+pub const CC_AXIM_CACHE_PARAMS_AWCACHE_LAST_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_AXIM_CACHE_PARAMS_AWCACHE_BIT_SHIFT: c_uint = 0x4UL;
+pub const CC_AXIM_CACHE_PARAMS_AWCACHE_BIT_SIZE: c_uint = 0x4UL;
+pub const CC_AXIM_CACHE_PARAMS_ARCACHE_BIT_SHIFT: c_uint = 0x8UL;
+pub const CC_AXIM_CACHE_PARAMS_ARCACHE_BIT_SIZE: c_uint = 0x4UL;

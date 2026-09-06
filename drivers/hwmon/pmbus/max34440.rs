@@ -1,0 +1,835 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/hwmon/pmbus/max34440.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Hardware monitoring driver for Maxim MAX34440/MAX34441
+//
+// Copyright (c) 2011 Ericsson AB.
+// Copyright (c) 2012 Guenter Roeck
+//
+
+    enum chips {
+    adpm12160,
+    adpm12200,
+    adpm12250,
+    max34440,
+    max34441,
+    max34446,
+    max34451,
+    max34452,
+    max34460,
+    max34461,
+    };
+//
+// Firmware is sometimes not ready if we try and read the
+// data from the page immediately after setting. Maxim
+// recommends 50us delay due to the chip failing to clock
+// stretch long enough here.
+//
+pub const MAX34440_PAGE_CHANGE_DELAY: c_int = 50;
+pub const MAX34440_MFR_VOUT_PEAK: c_uint = 0xd4;
+pub const MAX34440_MFR_IOUT_PEAK: c_uint = 0xd5;
+pub const MAX34440_MFR_TEMPERATURE_PEAK: c_uint = 0xd6;
+pub const MAX34440_MFR_VOUT_MIN: c_uint = 0xd7;
+pub const MAX34446_MFR_POUT_PEAK: c_uint = 0xe0;
+pub const MAX34446_MFR_POUT_AVG: c_uint = 0xe1;
+pub const MAX34446_MFR_IOUT_AVG: c_uint = 0xe2;
+pub const MAX34446_MFR_TEMPERATURE_AVG: c_uint = 0xe3;
+
+//
+// The whole max344* family have IOUT_OC_WARN_LIMIT and IOUT_OC_FAULT_LIMIT
+// swapped from the standard pmbus spec addresses.
+// For max34451, version MAX34451ETNA6+ and later has this issue fixed.
+//
+pub const MAX34440_IOUT_OC_WARN_LIMIT: c_uint = 0x46;
+pub const MAX34440_IOUT_OC_FAULT_LIMIT: c_uint = 0x4A;
+pub const MAX34451ETNA6_MFR_REV: c_uint = 0x0012;
+pub const MAX34451ETNA8_MFR_REV: c_uint = 0x0014;
+pub const MAX34451_MFR_CHANNEL_CONFIG: c_uint = 0xe4;
+pub const MAX34451_MFR_CHANNEL_CONFIG_SEL_MASK: c_uint = 0x3f;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct max34440_data {
+    pub id: c_int,
+    pub info: pmbus_driver_info,
+    pub iout_oc_warn_limit: u8,
+    pub iout_oc_fault_limit: u8,
+}
+
+    static int max34440_read_word_data(struct i2c_client *client, int page,
+    int phase, int reg)
+    {
+    int ret;
+    const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
+    const struct max34440_data *data = to_max34440_data(info);
+    switch (reg) {
+    case PMBUS_IOUT_OC_FAULT_LIMIT:
+    ret = pmbus_read_word_data(client, page, phase,
+    data.iout_oc_fault_limit);
+    break;
+    case PMBUS_IOUT_OC_WARN_LIMIT:
+    ret = pmbus_read_word_data(client, page, phase,
+    data.iout_oc_warn_limit);
+    break;
+    case PMBUS_VIN_OV_FAULT_LIMIT:
+    case PMBUS_VIN_OV_WARN_LIMIT:
+    case PMBUS_VIN_UV_WARN_LIMIT:
+    case PMBUS_VIN_UV_FAULT_LIMIT:
+    case PMBUS_MFR_VIN_MIN:
+    case PMBUS_MFR_VIN_MAX:
+    case PMBUS_IIN_OC_WARN_LIMIT:
+    case PMBUS_IIN_OC_FAULT_LIMIT:
+    case PMBUS_MFR_IIN_MAX:
+    case PMBUS_MFR_VOUT_MIN:
+    case PMBUS_MFR_VOUT_MAX:
+    case PMBUS_IOUT_UC_FAULT_LIMIT:
+    case PMBUS_MFR_IOUT_MAX:
+    case PMBUS_UT_WARN_LIMIT:
+    case PMBUS_UT_FAULT_LIMIT:
+    case PMBUS_MFR_MAX_TEMP_1:
+//
+// MAX34451/MAX34452/ADPM family do not support VIN/IIN limit
+// registers, manufacturer-specific min/max registers, or
+// undercurrent/undertemperature fault limits. Accessing these
+// triggers CML error and asserts ALERT.
+//
+    if (data.id == max34451 || data.id == max34452 ||
+    data.id == adpm12160 || data.id == adpm12200 ||
+    data.id == adpm12250)
+    return -ENXIO;
+    ret = -ENODATA;
+    break;
+    case PMBUS_VOUT_OV_WARN_LIMIT:
+    if (data.id == max34452)
+    return -ENXIO;
+    return -ENODATA;
+    case PMBUS_VIRT_READ_VOUT_MIN:
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34440_MFR_VOUT_MIN);
+    break;
+    case PMBUS_VIRT_READ_VOUT_MAX:
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34440_MFR_VOUT_PEAK);
+    break;
+    case PMBUS_VIRT_READ_IOUT_AVG:
+    if (data.id != max34446 && data.id != max34451 &&
+    data.id != max34452 && data.id != adpm12160 &&
+    data.id != adpm12200 && data.id != adpm12250)
+    return -ENXIO;
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34446_MFR_IOUT_AVG);
+    break;
+    case PMBUS_VIRT_READ_IOUT_MAX:
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34440_MFR_IOUT_PEAK);
+    break;
+    case PMBUS_VIRT_READ_POUT_AVG:
+    if (data.id != max34446)
+    return -ENXIO;
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34446_MFR_POUT_AVG);
+    break;
+    case PMBUS_VIRT_READ_POUT_MAX:
+    if (data.id != max34446)
+    return -ENXIO;
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34446_MFR_POUT_PEAK);
+    break;
+    case PMBUS_VIRT_READ_TEMP_AVG:
+    if (data.id != max34446 && data.id != max34460 &&
+    data.id != max34461)
+    return -ENXIO;
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34446_MFR_TEMPERATURE_AVG);
+    break;
+    case PMBUS_VIRT_READ_TEMP_MAX:
+    ret = pmbus_read_word_data(client, page, phase,
+    MAX34440_MFR_TEMPERATURE_PEAK);
+    break;
+    case PMBUS_VIRT_RESET_POUT_HISTORY:
+    if (data.id != max34446)
+    return -ENXIO;
+    ret = 0;
+    break;
+    case PMBUS_VIRT_RESET_VOUT_HISTORY:
+    case PMBUS_VIRT_RESET_IOUT_HISTORY:
+    case PMBUS_VIRT_RESET_TEMP_HISTORY:
+    ret = 0;
+    break;
+    default:
+    ret = -ENODATA;
+    break;
+    }
+    return ret;
+    }
+    static int max34440_write_word_data(struct i2c_client *client, int page,
+    int reg, u16 word)
+    {
+    const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
+    const struct max34440_data *data = to_max34440_data(info);
+    int ret;
+    switch (reg) {
+    case PMBUS_IOUT_OC_FAULT_LIMIT:
+    ret = pmbus_write_word_data(client, page, data.iout_oc_fault_limit,
+    word);
+    break;
+    case PMBUS_IOUT_OC_WARN_LIMIT:
+    ret = pmbus_write_word_data(client, page, data.iout_oc_warn_limit,
+    word);
+    break;
+    case PMBUS_VOUT_OV_WARN_LIMIT:
+    if (data.id == max34452)
+    return -ENXIO;
+    return -ENODATA;
+    case PMBUS_VIRT_RESET_POUT_HISTORY:
+    ret = pmbus_write_word_data(client, page,
+    MAX34446_MFR_POUT_PEAK, 0);
+    if (ret)
+    break;
+    ret = pmbus_write_word_data(client, page,
+    MAX34446_MFR_POUT_AVG, 0);
+    break;
+    case PMBUS_VIRT_RESET_VOUT_HISTORY:
+    ret = pmbus_write_word_data(client, page,
+    MAX34440_MFR_VOUT_MIN, 0x7fff);
+    if (ret)
+    break;
+    ret = pmbus_write_word_data(client, page,
+    MAX34440_MFR_VOUT_PEAK, 0);
+    break;
+    case PMBUS_VIRT_RESET_IOUT_HISTORY:
+    ret = pmbus_write_word_data(client, page,
+    MAX34440_MFR_IOUT_PEAK, 0);
+    if (!ret && (data.id == max34446 || data.id == max34451 ||
+    data.id == max34452 || data.id == adpm12160 ||
+    data.id == adpm12200 || data.id == adpm12250))
+    ret = pmbus_write_word_data(client, page,
+    MAX34446_MFR_IOUT_AVG, 0);
+    break;
+    case PMBUS_VIRT_RESET_TEMP_HISTORY:
+    ret = pmbus_write_word_data(client, page,
+    MAX34440_MFR_TEMPERATURE_PEAK,
+    0x8000);
+    if (!ret && data.id == max34446)
+    ret = pmbus_write_word_data(client, page,
+    MAX34446_MFR_TEMPERATURE_AVG, 0);
+    break;
+    default:
+    ret = -ENODATA;
+    break;
+    }
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn max34440_read_byte_data(client: *mut i2c_client, page: c_int, reg: c_int) -> c_int {
+    static int max34440_read_byte_data(struct i2c_client *client, int page, int reg)
+    {
+    let mut ret: c_int = 0;
+    int mfg_status;
+    if (page >= 0) {
+    ret = pmbus_set_page(client, page, 0xff);
+    if (ret < 0)
+    return ret;
+    }
+    switch (reg) {
+    case PMBUS_STATUS_IOUT:
+    mfg_status = pmbus_read_word_data(client, 0, 0xff,
+    PMBUS_STATUS_MFR_SPECIFIC);
+    if (mfg_status < 0)
+    return mfg_status;
+    if (mfg_status & MAX34440_STATUS_OC_WARN)
+    ret |= PB_IOUT_OC_WARNING;
+    if (mfg_status & MAX34440_STATUS_OC_FAULT)
+    ret |= PB_IOUT_OC_FAULT;
+    break;
+    case PMBUS_STATUS_TEMPERATURE:
+    mfg_status = pmbus_read_word_data(client, 0, 0xff,
+    PMBUS_STATUS_MFR_SPECIFIC);
+    if (mfg_status < 0)
+    return mfg_status;
+    if (mfg_status & MAX34440_STATUS_OT_WARN)
+    ret |= PB_TEMP_OT_WARNING;
+    if (mfg_status & MAX34440_STATUS_OT_FAULT)
+    ret |= PB_TEMP_OT_FAULT;
+    break;
+    default:
+    ret = -ENODATA;
+    break;
+    }
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn max34451_read_byte_data(client: *mut i2c_client, page: c_int, reg: c_int) -> c_int {
+    static int max34451_read_byte_data(struct i2c_client *client, int page, int reg)
+    {
+    const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
+    const struct max34440_data *data = to_max34440_data(info);
+    switch (reg) {
+    case PMBUS_STATUS_BYTE:
+    case PMBUS_STATUS_OTHER:
+//
+// MAX34451/MAX34452/ADPM family do not support STATUS_BYTE or
+// STATUS_OTHER registers. Accessing them triggers CML
+// error and asserts ALERT.
+//
+    if (data.id == max34451 || data.id == max34452 ||
+    data.id == adpm12160 || data.id == adpm12200 ||
+    data.id == adpm12250)
+    return -ENXIO;
+    return -ENODATA;
+    default:
+    return -ENODATA;
+    }
+    }
+    static int max34451_write_byte_data(struct i2c_client *client, int page,
+    int reg, u8 byte)
+    {
+    const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
+    const struct max34440_data *data = to_max34440_data(info);
+    switch (reg) {
+    case PMBUS_STATUS_BYTE:
+    case PMBUS_STATUS_OTHER:
+//
+// MAX34451/MAX34452/ADPM family do not support STATUS_BYTE or
+// STATUS_OTHER registers. Writing to them triggers CML
+// error and asserts ALERT.
+//
+    if (data.id == max34451 || data.id == max34452 ||
+    data.id == adpm12160 || data.id == adpm12200 ||
+    data.id == adpm12250)
+    return -ENXIO;
+    return -ENODATA;
+    default:
+    return -ENODATA;
+    }
+    }
+    static int max34451_set_supported_funcs(struct i2c_client *client,
+    struct max34440_data *data)
+    {
+//
+// Each of the channel 0-15 can be configured to monitor the following
+// functions based on MFR_CHANNEL_CONFIG[5:0]
+// 0x10: Sequencing + voltage monitoring (only valid for PAGES 0–11)
+// 0x20: Voltage monitoring (no sequencing)
+// 0x21: Voltage read only
+// 0x22: Current monitoring
+// 0x23: Current read only
+// 0x30: General-purpose input active low
+// 0x34: General-purpose input active high
+// 0x00:  Disabled
+//
+    int page, rv;
+    let mut max34451_na6: bool = false;
+    rv = i2c_smbus_read_word_data(client, PMBUS_MFR_REVISION);
+    if (rv < 0)
+    return rv;
+    if (data.id == max34451 && rv >= MAX34451ETNA6_MFR_REV) {
+    max34451_na6 = true;
+    data.info.format[PSC_VOLTAGE_IN] = direct;
+    data.info.format[PSC_CURRENT_IN] = direct;
+    data.info.b[PSC_VOLTAGE_IN] = 0;
+    data.info.b[PSC_CURRENT_IN] = 0;
+    if (rv >= MAX34451ETNA8_MFR_REV) {
+    data.info.m[PSC_VOLTAGE_IN] = 125;
+    data.info.R[PSC_VOLTAGE_IN] = 0;
+    data.info.m[PSC_VOLTAGE_OUT] = 125;
+    data.info.R[PSC_VOLTAGE_OUT] = 0;
+    data.info.m[PSC_CURRENT_IN] = 250;
+    data.info.R[PSC_CURRENT_IN] = -1;
+    data.info.m[PSC_CURRENT_OUT] = 250;
+    data.info.R[PSC_CURRENT_OUT] = -1;
+    } else {
+    data.info.m[PSC_VOLTAGE_IN] = 1;
+    data.info.R[PSC_VOLTAGE_IN] = 3;
+    data.info.m[PSC_CURRENT_IN] = 1;
+    data.info.R[PSC_CURRENT_IN] = 2;
+    }
+    data.iout_oc_fault_limit = PMBUS_IOUT_OC_FAULT_LIMIT;
+    data.iout_oc_warn_limit = PMBUS_IOUT_OC_WARN_LIMIT;
+    }
+    for (page = 0; page < 16; page++) {
+    rv = i2c_smbus_write_byte_data(client, PMBUS_PAGE, page);
+    fsleep(MAX34440_PAGE_CHANGE_DELAY);
+    if (rv < 0)
+    return rv;
+    rv = i2c_smbus_read_word_data(client,
+    MAX34451_MFR_CHANNEL_CONFIG);
+    if (rv < 0)
+    return rv;
+    switch (rv & MAX34451_MFR_CHANNEL_CONFIG_SEL_MASK) {
+    case 0x10:
+    case 0x20:
+    data.info.func[page] = PMBUS_HAVE_VOUT |
+    PMBUS_HAVE_STATUS_VOUT;
+    if (max34451_na6)
+    data.info.func[page] |= PMBUS_HAVE_VIN |
+    PMBUS_HAVE_STATUS_INPUT;
+    break;
+    case 0x21:
+    data.info.func[page] = PMBUS_HAVE_VOUT;
+    if (max34451_na6)
+    data.info.func[page] |= PMBUS_HAVE_VIN;
+    break;
+    case 0x22:
+    data.info.func[page] = PMBUS_HAVE_IOUT |
+    PMBUS_HAVE_STATUS_IOUT;
+    if (max34451_na6)
+    data.info.func[page] |= PMBUS_HAVE_IIN |
+    PMBUS_HAVE_STATUS_INPUT;
+    break;
+    case 0x23:
+    data.info.func[page] = PMBUS_HAVE_IOUT;
+    if (max34451_na6)
+    data.info.func[page] |= PMBUS_HAVE_IIN;
+    break;
+    default:
+    break;
+    }
+    }
+    return 0;
+    }
+    static struct pmbus_driver_info max34440_info[] = {
+    [adpm12160] = {
+    .pages = 19,
+    .format[PSC_VOLTAGE_IN] = direct,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_CURRENT_IN] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .m[PSC_VOLTAGE_IN] = 125,
+    .b[PSC_VOLTAGE_IN] = 0,
+    .R[PSC_VOLTAGE_IN] = 0,
+    .m[PSC_VOLTAGE_OUT] = 125,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 0,
+    .m[PSC_CURRENT_IN] = 250,
+    .b[PSC_CURRENT_IN] = 0,
+    .R[PSC_CURRENT_IN] = -1,
+    .m[PSC_CURRENT_OUT] = 250,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = -1,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+// absent func below [18] are not for monitoring
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[4] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[5] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[6] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[7] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[8] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[9] = PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT,
+    .func[10] = PMBUS_HAVE_IIN | PMBUS_HAVE_STATUS_INPUT,
+    .func[18] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34451_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_byte_data = max34451_write_byte_data,
+    .write_word_data = max34440_write_word_data,
+    },
+    [adpm12200] = {
+    .pages = 19,
+    .format[PSC_VOLTAGE_IN] = direct,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_CURRENT_IN] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .m[PSC_VOLTAGE_IN] = 125,
+    .b[PSC_VOLTAGE_IN] = 0,
+    .R[PSC_VOLTAGE_IN] = 0,
+    .m[PSC_VOLTAGE_OUT] = 125,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 0,
+    .m[PSC_CURRENT_IN] = 250,
+    .b[PSC_CURRENT_IN] = 0,
+    .R[PSC_CURRENT_IN] = -1,
+    .m[PSC_CURRENT_OUT] = 250,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = -1,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+// absent func below [18] are not for monitoring
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[4] = PMBUS_HAVE_STATUS_IOUT,
+    .func[5] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[6] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[7] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[8] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[9] = PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT,
+    .func[10] = PMBUS_HAVE_IIN | PMBUS_HAVE_STATUS_INPUT,
+    .func[14] = PMBUS_HAVE_IOUT,
+    .func[18] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34451_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_byte_data = max34451_write_byte_data,
+    .write_word_data = max34440_write_word_data,
+    },
+    [adpm12250] = {
+    .pages = 19,
+    .format[PSC_VOLTAGE_IN] = direct,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_CURRENT_IN] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .m[PSC_VOLTAGE_IN] = 125,
+    .b[PSC_VOLTAGE_IN] = 0,
+    .R[PSC_VOLTAGE_IN] = 0,
+    .m[PSC_VOLTAGE_OUT] = 125,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 0,
+    .m[PSC_CURRENT_IN] = 250,
+    .b[PSC_CURRENT_IN] = 0,
+    .R[PSC_CURRENT_IN] = -1,
+    .m[PSC_CURRENT_OUT] = 250,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = -1,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+// absent func below [18] are not for monitoring
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[4] = PMBUS_HAVE_STATUS_IOUT,
+    .func[5] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[6] = PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[9] = PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT,
+    .func[10] = PMBUS_HAVE_IIN | PMBUS_HAVE_STATUS_INPUT,
+    .func[14] = PMBUS_HAVE_IOUT,
+    .func[18] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34451_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_byte_data = max34451_write_byte_data,
+    .write_word_data = max34440_write_word_data,
+    },
+    [max34440] = {
+    .pages = 14,
+    .format[PSC_VOLTAGE_IN] = direct,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .m[PSC_VOLTAGE_IN] = 1,
+    .b[PSC_VOLTAGE_IN] = 0,
+    .R[PSC_VOLTAGE_IN] = 3,	    /* R = 0 in datasheet reflects mV */
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,    /* R = 0 in datasheet reflects mV */
+    .m[PSC_CURRENT_OUT] = 1,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = 3,    /* R = 0 in datasheet reflects mA */
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+    .func[0] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[1] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[3] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[4] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[5] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[6] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[7] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[8] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[9] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[10] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[11] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[12] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[13] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34440_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    [max34441] = {
+    .pages = 12,
+    .format[PSC_VOLTAGE_IN] = direct,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .format[PSC_FAN] = direct,
+    .m[PSC_VOLTAGE_IN] = 1,
+    .b[PSC_VOLTAGE_IN] = 0,
+    .R[PSC_VOLTAGE_IN] = 3,
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,
+    .m[PSC_CURRENT_OUT] = 1,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = 3,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+    .m[PSC_FAN] = 1,
+    .b[PSC_FAN] = 0,
+    .R[PSC_FAN] = 0,
+    .func[0] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[1] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[3] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[4] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[5] = PMBUS_HAVE_FAN12 | PMBUS_HAVE_STATUS_FAN12,
+    .func[6] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[7] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[8] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[9] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[10] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[11] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34440_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    [max34446] = {
+    .pages = 7,
+    .format[PSC_VOLTAGE_IN] = direct,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .format[PSC_POWER] = direct,
+    .m[PSC_VOLTAGE_IN] = 1,
+    .b[PSC_VOLTAGE_IN] = 0,
+    .R[PSC_VOLTAGE_IN] = 3,
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,
+    .m[PSC_CURRENT_OUT] = 1,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = 3,
+    .m[PSC_POWER] = 1,
+    .b[PSC_POWER] = 0,
+    .R[PSC_POWER] = 3,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+    .func[0] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT | PMBUS_HAVE_POUT,
+    .func[1] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT | PMBUS_HAVE_POUT,
+    .func[3] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+    | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT,
+    .func[4] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[5] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[6] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34440_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    [max34451] = {
+    .pages = 21,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,
+    .m[PSC_CURRENT_OUT] = 1,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = 2,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+// func 0-15 is set dynamically before probing
+    .func[16] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[17] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[18] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[19] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[20] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34451_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_byte_data = max34451_write_byte_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    [max34452] = {
+    .pages = 21,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .format[PSC_CURRENT_OUT] = direct,
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,
+    .m[PSC_CURRENT_OUT] = 1,
+    .b[PSC_CURRENT_OUT] = 0,
+    .R[PSC_CURRENT_OUT] = 2,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+// func 0-15 is set dynamically before probing
+    .func[16] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[17] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[18] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[19] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[20] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_byte_data = max34451_read_byte_data,
+    .read_word_data = max34440_read_word_data,
+    .write_byte_data = max34451_write_byte_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    [max34460] = {
+    .pages = 18,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+    .func[0] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[1] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[3] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[4] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[5] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[6] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[7] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[8] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[9] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[10] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[11] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[13] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[14] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[15] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[16] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[17] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_word_data = max34440_read_word_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    [max34461] = {
+    .pages = 23,
+    .format[PSC_VOLTAGE_OUT] = direct,
+    .format[PSC_TEMPERATURE] = direct,
+    .m[PSC_VOLTAGE_OUT] = 1,
+    .b[PSC_VOLTAGE_OUT] = 0,
+    .R[PSC_VOLTAGE_OUT] = 3,
+    .m[PSC_TEMPERATURE] = 1,
+    .b[PSC_TEMPERATURE] = 0,
+    .R[PSC_TEMPERATURE] = 2,
+    .func[0] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[1] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[2] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[3] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[4] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[5] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[6] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[7] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[8] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[9] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[10] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[11] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[12] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[13] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[14] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+    .func[15] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT,
+// page 16 is reserved
+    .func[17] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[18] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[19] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[20] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .func[21] = PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
+    .read_word_data = max34440_read_word_data,
+    .write_word_data = max34440_write_word_data,
+    .page_change_delay = MAX34440_PAGE_CHANGE_DELAY,
+    },
+    };
+#[no_mangle]
+unsafe extern "C" fn max34440_probe(client: *mut i2c_client) -> c_int {
+    static int max34440_probe(struct i2c_client *client)
+    {
+    struct max34440_data *data;
+    int rv;
+    data = devm_kzalloc(&client.dev, sizeof(struct max34440_data),
+    GFP_KERNEL);
+    if (!data)
+    return -ENOMEM;
+    data.id = (uintptr_t)i2c_get_match_data(client);
+    data.info = max34440_info[data.id];
+    data.iout_oc_fault_limit = MAX34440_IOUT_OC_FAULT_LIMIT;
+    data.iout_oc_warn_limit = MAX34440_IOUT_OC_WARN_LIMIT;
+    if (data.id == max34451 || data.id == max34452) {
+    rv = max34451_set_supported_funcs(client, data);
+    if (rv)
+    return rv;
+    } else if (data.id == adpm12160 || data.id == adpm12200 ||
+    data.id == adpm12250) {
+    data.iout_oc_fault_limit = PMBUS_IOUT_OC_FAULT_LIMIT;
+    data.iout_oc_warn_limit = PMBUS_IOUT_OC_WARN_LIMIT;
+    }
+    return pmbus_do_probe(client, &data.info);
+    }
+    static const struct i2c_device_id max34440_id[] = {
+    { .name = "adpm12160", .driver_data = adpm12160 },
+    { .name = "adpm12200", .driver_data = adpm12200 },
+    { .name = "adpm12250", .driver_data = adpm12250 },
+    { .name = "max34440", .driver_data = max34440 },
+    { .name = "max34441", .driver_data = max34441 },
+    { .name = "max34446", .driver_data = max34446 },
+    { .name = "max34451", .driver_data = max34451 },
+    { .name = "max34452", .driver_data = max34452 },
+    { .name = "max34460", .driver_data = max34460 },
+    { .name = "max34461", .driver_data = max34461 },
+    { }
+    };
+    MODULE_DEVICE_TABLE(i2c, max34440_id);
+// This is the driver that will be inserted
+    static struct i2c_driver max34440_driver = {
+    .driver = {
+    .name = "max34440",
+    },
+    .probe = max34440_probe,
+    .id_table = max34440_id,
+    };
+    module_i2c_driver(max34440_driver);
+    MODULE_AUTHOR("Guenter Roeck");
+    MODULE_DESCRIPTION("PMBus driver for Maxim MAX34440/MAX34441");
+    MODULE_LICENSE("GPL");
+    MODULE_IMPORT_NS("PMBUS");

@@ -1,0 +1,90 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/asm-generic/percpu.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+//
+// __percpu_qual is the qualifier for the percpu named address space.
+//
+// Most arches use generic named address space for percpu variables but
+// some arches define percpu variables in different named address space
+// (on the x86 arch, percpu variable may be declared as being relative
+// to the %fs or %gs segments using __seg_fs or __seg_gs named address
+// space qualifier).
+//
+
+//
+// per_cpu_offset() is the offset that has to be added to a
+// percpu variable to get to the instance for a certain processor.
+//
+// Most arches use the __per_cpu_offset array for those offsets but
+// some arches have their own ways of determining the offset (x86_64, s390).
+//
+
+//
+// Determine the offset for the currently active processor.
+// An arch may define __my_cpu_offset to provide a more effective
+// means of obtaining the offset to the per cpu variables of the
+// current processor.
+//
+
+//
+// Arch may define arch_raw_cpu_ptr() to provide more efficient address
+// translations for raw_cpu_ptr().
+//
+
+extern "C" {
+    pub fn setup_per_cpu_areas();
+}
+
+// Macro flag: #define PER_CPU_ATTRIBUTES
+
+// raw_cpu_ptr(&(pcp));						\
+
+// raw_cpu_ptr(&(pcp)) op val;					\
+
+// __p += val;							\
+// __p;								\
+
+// __p = nval;							\
+
+// (ovalp) = __val;					\
+
+// __p = nval;						\
+// (ovalp) = __val;					\
+

@@ -1,0 +1,172 @@
+//! Automatically rewritten from C to Rust
+//! Source: samples/bpf/offwaketime_user.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+// Copyright (c) 2016 Facebook
+//
+
+pub const PRINT_RAW_ADDR: c_int = 0;
+// counts, stackmap
+    static int map_fd[2];
+#[no_mangle]
+unsafe extern "C" fn print_ksym(addr: __u64) {
+    static void print_ksym(__u64 addr)
+    {
+    struct ksym *sym;
+    if (!addr)
+    return;
+    sym = ksym_search(addr);
+    if (!sym) {
+    printf("ksym not found. Is kallsyms loaded?\n");
+    return;
+    }
+    if (PRINT_RAW_ADDR)
+    printf("%s/%llx;", sym.name, addr);
+    else
+    printf("%s;", sym.name);
+    }
+pub const TASK_COMM_LEN: c_int = 16;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct key_t {
+    pub waker: [c_char; TASK_COMM_LEN],
+    pub target: [c_char; TASK_COMM_LEN],
+    pub wret: __u32,
+    pub tret: __u32,
+}
+
+#[no_mangle]
+unsafe extern "C" fn print_stack(key: *mut key_t, count: __u64) {
+    static void print_stack(struct key_t *key, __u64 count)
+    {
+    __u64 ip[PERF_MAX_STACK_DEPTH] = {};
+    static bool warned;
+    int i;
+    printf("%s;", key.target);
+    if (bpf_map_lookup_elem(map_fd[1], &key.tret, ip) != 0) {
+    printf("---;");
+    } else {
+    for (i = PERF_MAX_STACK_DEPTH - 1; i >= 0; i--)
+    print_ksym(ip[i]);
+    }
+    printf("-;");
+    if (bpf_map_lookup_elem(map_fd[1], &key.wret, ip) != 0) {
+    printf("---;");
+    } else {
+    for (i = 0; i < PERF_MAX_STACK_DEPTH; i++)
+    print_ksym(ip[i]);
+    }
+    printf(";%s %lld\n", key.waker, count);
+    if ((key.tret == -EEXIST || key.wret == -EEXIST) && !warned) {
+    printf("stackmap collisions seen. Consider increasing size\n");
+    warned = true;
+    } else if (((int)(key.tret) < 0 || (int)(key.wret) < 0)) {
+    printf("err stackid %d %d\n", key.tret, key.wret);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn print_stacks(fd: c_int) {
+    static void print_stacks(int fd)
+    {
+    let mut key: key_t = {}, next_key;
+    __u64 value;
+    while (bpf_map_get_next_key(fd, &key, &next_key) == 0) {
+    bpf_map_lookup_elem(fd, &next_key, &value);
+    print_stack(&next_key, value);
+    key = next_key;
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn int_exit(sig: c_int) {
+    static void int_exit(int sig)
+    {
+    print_stacks(map_fd[0]);
+    exit(0);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn main(argc: c_int, argv: *mut c_char) -> c_int {
+    int main(int argc, char **argv)
+    {
+    struct bpf_object *obj = core::ptr::null_mut();
+    struct bpf_link *links[2];
+    struct bpf_program *prog;
+    let mut delay: c_int = 1, i = 0;
+    char filename[256];
+    if (load_kallsyms()) {
+    printf("failed to process /proc/kallsyms\n");
+    return 2;
+    }
+    snprintf(filename, sizeof(filename), "%s.bpf.o", argv[0]);
+    obj = bpf_object__open_file(filename, core::ptr::null_mut());
+    if (libbpf_get_error(obj)) {
+    fprintf(stderr, "ERROR: opening BPF object file failed\n");
+    obj = core::ptr::null_mut();
+    goto cleanup;
+    }
+// load BPF program
+    if (bpf_object__load(obj)) {
+    fprintf(stderr, "ERROR: loading BPF object file failed\n");
+    goto cleanup;
+    }
+    map_fd[0] = bpf_object__find_map_fd_by_name(obj, "counts");
+    map_fd[1] = bpf_object__find_map_fd_by_name(obj, "stackmap");
+    if (map_fd[0] < 0 || map_fd[1] < 0) {
+    fprintf(stderr, "ERROR: finding a map in obj file failed\n");
+    goto cleanup;
+    }
+    signal(SIGINT, int_exit);
+    signal(SIGTERM, int_exit);
+    bpf_object__for_each_program(prog, obj) {
+    links[i] = bpf_program__attach(prog);
+    if (libbpf_get_error(links[i])) {
+    fprintf(stderr, "ERROR: bpf_program__attach failed\n");
+    links[i] = core::ptr::null_mut();
+    goto cleanup;
+    }
+    i++;
+    }
+    if (argc > 1)
+    delay = atoi(argv[1]);
+    sleep(delay);
+    print_stacks(map_fd[0]);
+    cleanup:
+    for (i--; i >= 0; i--)
+    bpf_link__destroy(links[i]);
+    bpf_object__close(obj);
+    return 0;
+    }

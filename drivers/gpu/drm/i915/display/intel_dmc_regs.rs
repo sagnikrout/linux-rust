@@ -1,0 +1,495 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/gpu/drm/i915/display/intel_dmc_regs.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: MIT
+//
+// Copyright © 2022 Intel Corporation
+//
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum dmc_event_id {
+    DMC_EVENT_TRUE = 0x0,
+    DMC_EVENT_FALSE = 0x1,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum maindmc_event_id {
+    MAINDMC_EVENT_CMP_ZERO = 0x8,
+    MAINDMC_EVENT_CMP_ODD = 0x9,
+    MAINDMC_EVENT_CMP_NEG = 0xa,
+    MAINDMC_EVENT_CMP_CARRY = 0xb,
+
+    MAINDMC_EVENT_TMR0_DONE = 0x14,
+    MAINDMC_EVENT_TMR1_DONE = 0x15,
+    MAINDMC_EVENT_TMR2_DONE = 0x16,
+    MAINDMC_EVENT_COUNT0_DONE = 0x17,
+    MAINDMC_EVENT_COUNT1_DONE = 0x18,
+    MAINDMC_EVENT_PERF_CNTR_DARBF = 0x19,
+
+    MAINDMC_EVENT_SCANLINE_INRANGE_FQ_A_TRIGGER = 0x22,
+    MAINDMC_EVENT_SCANLINE_INRANGE_FQ_B_TRIGGER = 0x23,
+    MAINDMC_EVENT_SCANLINE_INRANGE_FQ_C_TRIGGER = 0x24,
+    MAINDMC_EVENT_SCANLINE_INRANGE_FQ_D_TRIGGER = 0x25,
+    MAINDMC_EVENT_1KHZ_FQ_A_TRIGGER = 0x26,
+    MAINDMC_EVENT_1KHZ_FQ_B_TRIGGER = 0x27,
+    MAINDMC_EVENT_1KHZ_FQ_C_TRIGGER = 0x28,
+    MAINDMC_EVENT_1KHZ_FQ_D_TRIGGER = 0x29,
+    MAINDMC_EVENT_SCANLINE_COMP_A = 0x2a,
+    MAINDMC_EVENT_SCANLINE_COMP_B = 0x2b,
+    MAINDMC_EVENT_SCANLINE_COMP_C = 0x2c,
+    MAINDMC_EVENT_SCANLINE_COMP_D = 0x2d,
+    MAINDMC_EVENT_VBLANK_DELAYED_A = 0x2e,
+    MAINDMC_EVENT_VBLANK_DELAYED_B = 0x2f,
+    MAINDMC_EVENT_VBLANK_DELAYED_C = 0x30,
+    MAINDMC_EVENT_VBLANK_DELAYED_D = 0x31,
+    MAINDMC_EVENT_VBLANK_A = 0x32,
+    MAINDMC_EVENT_VBLANK_B = 0x33,
+    MAINDMC_EVENT_VBLANK_C = 0x34,
+    MAINDMC_EVENT_VBLANK_D = 0x35,
+    MAINDMC_EVENT_HBLANK_A = 0x36,
+    MAINDMC_EVENT_HBLANK_B = 0x37,
+    MAINDMC_EVENT_HBLANK_C = 0x38,
+    MAINDMC_EVENT_HBLANK_D = 0x39,
+    MAINDMC_EVENT_VSYNC_A = 0x3a,
+    MAINDMC_EVENT_VSYNC_B = 0x3b,
+    MAINDMC_EVENT_VSYNC_C = 0x3c,
+    MAINDMC_EVENT_VSYNC_D = 0x3d,
+    MAINDMC_EVENT_SCANLINE_A = 0x3e,
+    MAINDMC_EVENT_SCANLINE_B = 0x3f,
+    MAINDMC_EVENT_SCANLINE_C = 0x40,
+    MAINDMC_EVENT_SCANLINE_D = 0x41,
+
+    MAINDMC_EVENT_PLANE1_FLIP_A = 0x42,
+    MAINDMC_EVENT_PLANE2_FLIP_A = 0x43,
+    MAINDMC_EVENT_PLANE3_FLIP_A = 0x44,
+    MAINDMC_EVENT_PLANE4_FLIP_A = 0x45,
+    MAINDMC_EVENT_PLANE5_FLIP_A = 0x46,
+    MAINDMC_EVENT_PLANE6_FLIP_A = 0x47,
+    MAINDMC_EVENT_PLANE7_FLIP_A = 0x48,
+    MAINDMC_EVENT_PLANE1_FLIP_B = 0x49,
+    MAINDMC_EVENT_PLANE2_FLIP_B = 0x4a,
+    MAINDMC_EVENT_PLANE3_FLIP_B = 0x4b,
+    MAINDMC_EVENT_PLANE4_FLIP_B = 0x4c,
+    MAINDMC_EVENT_PLANE5_FLIP_B = 0x4d,
+    MAINDMC_EVENT_PLANE6_FLIP_B = 0x4e,
+    MAINDMC_EVENT_PLANE7_FLIP_B = 0x4f,
+    MAINDMC_EVENT_PLANE1_FLIP_C = 0x50,
+    MAINDMC_EVENT_PLANE2_FLIP_C = 0x51,
+    MAINDMC_EVENT_PLANE3_FLIP_C = 0x52,
+    MAINDMC_EVENT_PLANE4_FLIP_C = 0x53,
+    MAINDMC_EVENT_PLANE5_FLIP_C = 0x54,
+    MAINDMC_EVENT_PLANE6_FLIP_C = 0x55,
+    MAINDMC_EVENT_PLANE7_FLIP_C = 0x56,
+    MAINDMC_EVENT_PLANE1_FLIP_D = 0x57,
+    MAINDMC_EVENT_PLANE2_FLIP_D = 0x58,
+    MAINDMC_EVENT_PLANE3_FLIP_D = 0x59,
+    MAINDMC_EVENT_PLANE4_FLIP_D = 0x5a,
+    MAINDMC_EVENT_PLANE5_FLIP_D = 0x5b,
+    MAINDMC_EVENT_PLANE6_FLIP_D = 0x5c,
+    MAINDMC_EVENT_PLANE7_FLIP_D = 0x5d,
+    MAINDMC_EVENT_PLANE1_FLIP_DONE_A = 0x5e,
+    MAINDMC_EVENT_PLANE2_FLIP_DONE_A = 0x5f,
+    MAINDMC_EVENT_PLANE3_FLIP_DONE_A = 0x60,
+    MAINDMC_EVENT_PLANE4_FLIP_DONE_A = 0x61,
+    MAINDMC_EVENT_PLANE5_FLIP_DONE_A = 0x62,
+    MAINDMC_EVENT_PLANE6_FLIP_DONE_A = 0x63,
+    MAINDMC_EVENT_PLANE7_FLIP_DONE_A = 0x64,
+    MAINDMC_EVENT_PLANE1_FLIP_DONE_B = 0x65,
+    MAINDMC_EVENT_PLANE2_FLIP_DONE_B = 0x66,
+    MAINDMC_EVENT_PLANE3_FLIP_DONE_B = 0x67,
+    MAINDMC_EVENT_PLANE4_FLIP_DONE_B = 0x68,
+    MAINDMC_EVENT_PLANE5_FLIP_DONE_B = 0x69,
+    MAINDMC_EVENT_PLANE6_FLIP_DONE_B = 0x6a,
+    MAINDMC_EVENT_PLANE7_FLIP_DONE_B = 0x6b,
+    MAINDMC_EVENT_PLANE1_FLIP_DONE_C = 0x6c,
+    MAINDMC_EVENT_PLANE2_FLIP_DONE_C = 0x6d,
+    MAINDMC_EVENT_PLANE3_FLIP_DONE_C = 0x6e,
+    MAINDMC_EVENT_PLANE4_FLIP_DONE_C = 0x6f,
+    MAINDMC_EVENT_PLANE5_FLIP_DONE_C = 0x70,
+    MAINDMC_EVENT_PLANE6_FLIP_DONE_C = 0x71,
+    MAINDMC_EVENT_PLANE7_FLIP_DONE_C = 0x72,
+    MAINDMC_EVENT_PLANE1_FLIP_DONE_D = 0x73,
+    MAINDMC_EVENT_PLANE2_FLIP_DONE_D = 0x74,
+    MAINDMC_EVENT_PLANE3_FLIP_DONE_D = 0x75,
+    MAINDMC_EVENT_PLANE4_FLIP_DONE_D = 0x76,
+    MAINDMC_EVENT_PLANE5_FLIP_DONE_D = 0x77,
+    MAINDMC_EVENT_PLANE6_FLIP_DONE_D = 0x78,
+    MAINDMC_EVENT_PLANE7_FLIP_DONE_D = 0x79,
+
+    MAINDMC_EVENT_WIDI_GTT_FAULT_SL1 = 0x7d,
+    MAINDMC_EVENT_WIDI_GTT_FAULT_SL2 = 0x7e,
+    MAINDMC_EVENT_WIDI_CAP_ACTIVE_SL1 = 0x7f,
+    MAINDMC_EVENT_WIDI_CAP_ACTIVE_SL2 = 0x80,
+
+    MAINDMC_EVENT_RENUKE_A = 0x85,
+    MAINDMC_EVENT_RENUKE_B = 0x86,
+    MAINDMC_EVENT_RENUKE_C = 0x87,
+    MAINDMC_EVENT_RENUKE_D = 0x88,
+    MAINDMC_EVENT_DPFC_FIFO_FULL_A = 0x89,
+    MAINDMC_EVENT_DPFC_FIFO_FULL_B = 0x8a,
+    MAINDMC_EVENT_DPFC_FIFO_FULL_C = 0x8b,
+    MAINDMC_EVENT_DPFC_FIFO_FULL_D = 0x8c,
+    MAINDMC_EVENT_DPFC_PIXEL_CNT_MISMATCH_A = 0x8d,
+    MAINDMC_EVENT_DPFC_PIXEL_CNT_MISMATCH_B = 0x8e,
+    MAINDMC_EVENT_DPFC_PIXEL_CNT_MISMATCH_C = 0x8f,
+    MAINDMC_EVENT_DPFC_PIXEL_CNT_MISMATCH_D = 0x90,
+    MAINDMC_EVENT_DPFC_COMPTAG_UNDERRUN_A = 0x91,
+    MAINDMC_EVENT_DPFC_COMPTAG_UNDERRUN_B = 0x92,
+    MAINDMC_EVENT_DPFC_COMPTAG_UNDERRUN_C = 0x93,
+    MAINDMC_EVENT_DPFC_COMPTAG_UNDERRUN_D = 0x94,
+    MAINDMC_EVENT_DPFC_FIFO_NOT_EMPTY_A = 0x95,
+    MAINDMC_EVENT_DPFC_FIFO_NOT_EMPTY_B = 0x96,
+    MAINDMC_EVENT_DPFC_FIFO_NOT_EMPTY_C = 0x97,
+    MAINDMC_EVENT_DPFC_FIFO_NOT_EMPTY_D = 0x98,
+    MAINDMC_EVENT_DPFC_COMPTAG_MISMATCH_A = 0x99,
+    MAINDMC_EVENT_DPFC_COMPTAG_MISMATCH_B = 0x9a,
+    MAINDMC_EVENT_DPFC_COMPTAG_MISMATCH_C = 0x9b,
+    MAINDMC_EVENT_DPFC_COMPTAG_MISMATCH_D = 0x9c,
+    MAINDMC_EVENT_DISP_PCH_INT = 0x9d,
+    MAINDMC_EVENT_GTT_ERR = 0x9e,
+    MAINDMC_EVENT_VTD_ERR = 0x9f,
+    MAINDMC_EVENT_FULL_FQ_WAKE_TRIGGER_A = 0xa0,
+    MAINDMC_EVENT_FULL_FQ_WAKE_TRIGGER_B = 0xa1,
+    MAINDMC_EVENT_FULL_FQ_WAKE_TRIGGER_C = 0xa2,
+    MAINDMC_EVENT_FULL_FQ_WAKE_TRIGGER_D = 0xa3,
+    MAINDMC_EVENT_PIPEDMC_CHICKEN_FW_EVENT_A = 0xa4,
+    MAINDMC_EVENT_PIPEDMC_CHICKEN_FW_EVENT_B = 0xa5,
+    MAINDMC_EVENT_PIPEDMC_CHICKEN_FW_EVENT_C = 0xa6,
+    MAINDMC_EVENT_PIPEDMC_CHICKEN_FW_EVENT_D = 0xa7,
+
+    MAINDMC_EVENT_DC_CLOCK_OFF_START_EDP = 0xb2,
+    MAINDMC_EVENT_DC_CLOCK_OFF_START_DSI = 0xb3,
+    MAINDMC_EVENT_DCPR_DMC_CSR_START = 0xb4,
+    MAINDMC_EVENT_IN_PSR = 0xb5,
+
+    MAINDMC_EVENT_IN_MEMUP = 0xb7,
+    MAINDMC_EVENT_IN_VGA = 0xb8,
+
+    MAINDMC_EVENT_IN_KVM_SESSION = 0xba,
+    MAINDMC_EVENT_DEWAKE = 0xbb,
+
+    MAINDMC_EVENT_TRAP_HIT = 0xbd,
+    MAINDMC_EVENT_CLK_USEC = 0xbe,
+    MAINDMC_EVENT_CLK_MSEC = 0xbf,
+
+    MAINDMC_EVENT_CHICKEN1 = 0xc8,
+    MAINDMC_EVENT_CHICKEN2 = 0xc9,
+    MAINDMC_EVENT_CHICKEN3 = 0xca,
+    MAINDMC_EVENT_DDT_UBP = 0xcb,
+
+    MAINDMC_EVENT_HP_LATENCY = 0xcd,
+    MAINDMC_EVENT_LP_LATENCY = 0xce,
+    MAINDMC_EVENT_WIDI_LP_REQ_SL1 = 0xcf,
+    MAINDMC_EVENT_WIDI_LP_REQ_SL2 = 0xd0,
+
+    MAINDMC_EVENT_DG_DMC_EVT_0 = 0xd3,
+    MAINDMC_EVENT_DG_DMC_EVT_1 = 0xd4,
+    MAINDMC_EVENT_DG_DMC_EVT_2 = 0xd5,
+    MAINDMC_EVENT_DG_DMC_EVT_3 = 0xd6,
+    MAINDMC_EVENT_DG_DMC_EVT_4 = 0xd7,
+    MAINDMC_EVENT_DACFE_CLK_STOP = 0xd8,
+    MAINDMC_EVENT_DACFE_AZILIA_SDI_WAKE = 0xd9,
+    MAINDMC_EVENT_AUDIO_DOUBLE_FUNC_GRP_RST = 0xda,
+    MAINDMC_EVENT_AUDIO_CMD_VALID = 0xdb,
+    MAINDMC_EVENT_AUDIO_FRM_SYNC_BCLK = 0xdc,
+    MAINDMC_EVENT_AUDIO_FRM_SYNC_CDCLK = 0xdd,
+    MAINDMC_EVENT_AUDIO_PRESENCE_DETECT_A = 0xde,
+    MAINDMC_EVENT_AUDIO_PRESENCE_DETECT_B = 0xdf,
+    MAINDMC_EVENT_AUDIO_PRESENCE_DETECT_C = 0xe0,
+    MAINDMC_EVENT_AUDIO_PRESENCE_DETECT_E = 0xe1,
+    MAINDMC_EVENT_CMTG_SCANLINE_IN_GB_DC6v = 0xe2,
+    MAINDMC_EVENT_DCPR_CMTG_SCANLINE_OUTSIDE_GB = 0xe3,
+    MAINDMC_EVENT_DC6v_BACKWARD_COMPAT = 0xe4,
+    MAINDMC_EVENT_DPMA_PM_ABORT = 0xe5,
+
+    MAINDMC_EVENT_STACK_OVF = 0xfc,
+    MAINDMC_EVENT_NO_CLAIM = 0xfd,
+    MAINDMC_EVENT_UNK_CMD = 0xfe,
+    MAINDMC_EVENT_HTP_MOD = 0xff,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum pipedmc_event_id {
+    PIPEDMC_EVENT_TMR0_DONE = 0x14,
+    PIPEDMC_EVENT_TMR1_DONE = 0x15,
+    PIPEDMC_EVENT_TMR2_DONE = 0x16,
+    PIPEDMC_EVENT_COUNT0_DONE = 0x17,
+    PIPEDMC_EVENT_COUNT1_DONE = 0x18,
+    PIPEDMC_EVENT_PGA_PGB_RESTORE_DONE = 0x19,
+    PIPEDMC_EVENT_PG1_PG2_RESTORE_DONE = 0x1a,
+    PIPEDMC_EVENT_PGA_PGB_SAVE_DONE = 0x1b,
+    PIPEDMC_EVENT_PG1_PG2_SAVE_DONE = 0x1c,
+
+    PIPEDMC_EVENT_FULL_FQ_WAKE_TRIGGER = 0x2b,
+    PIPEDMC_EVENT_1KHZ_FQ_TRIGGER = 0x2c,
+    PIPEDMC_EVENT_SCANLINE_INRANGE_FQ_TRIGGER = 0x2d,
+    PIPEDMC_EVENT_SCANLINE_INRANGE = 0x2e,
+    PIPEDMC_EVENT_SCANLINE_OUTRANGE = 0x2f,
+    PIPEDMC_EVENT_SCANLINE_EQUAL = 0x30,
+    PIPEDMC_EVENT_DELAYED_VBLANK = 0x31,
+    PIPEDMC_EVENT_VBLANK = 0x32,
+    PIPEDMC_EVENT_HBLANK = 0x33,
+    PIPEDMC_EVENT_VSYNC = 0x34,
+    PIPEDMC_EVENT_SCANLINE_FROM_DMUX = 0x35,
+    PIPEDMC_EVENT_PLANE1_FLIP = 0x36,
+    PIPEDMC_EVENT_PLANE2_FLIP = 0x37,
+    PIPEDMC_EVENT_PLANE3_FLIP = 0x38,
+    PIPEDMC_EVENT_PLANE4_FLIP = 0x39,
+    PIPEDMC_EVENT_PLANE5_FLIP = 0x3a,
+    PIPEDMC_EVENT_PLANE6_FLIP = 0x3b,
+    PIPEDMC_EVENT_PLANE7_FLIP = 0x3c,
+    PIPEDMC_EVENT_ADAPTIVE_DCB_TRIGGER = 0x3d,
+
+    PIPEDMC_EVENT_PLANE1_FLIP_DONE = 0x56,
+    PIPEDMC_EVENT_PLANE2_FLIP_DONE = 0x57,
+    PIPEDMC_EVENT_PLANE3_FLIP_DONE = 0x58,
+    PIPEDMC_EVENT_PLANE4_FLIP_DONE = 0x59,
+    PIPEDMC_EVENT_PLANE5_FLIP_DONE = 0x5a,
+    PIPEDMC_EVENT_PLANE6_FLIP_DONE = 0x5b,
+    PIPEDMC_EVENT_PLANE7_FLIP_DONE = 0x5c,
+
+    PIPEDMC_EVENT_GTT_ERR = 0x9b,
+
+    PIPEDMC_EVENT_IN_PSR = 0xb5,
+    PIPEDMC_EVENT_DSI_DMC_IDLE = 0xb6,
+    PIPEDMC_EVENT_PSR2_DMC_IDLE = 0xb7,
+    PIPEDMC_EVENT_IN_VGA = 0xb8,
+
+    PIPEDMC_EVENT_TRAP_HIT = 0xbd,
+    PIPEDMC_EVENT_CLK_USEC = 0xbe,
+    PIPEDMC_EVENT_CLK_MSEC = 0xbf,
+
+    PIPEDMC_EVENT_CHICKEN1 = 0xc8,
+    PIPEDMC_EVENT_CHICKEN2 = 0xc9,
+    PIPEDMC_EVENT_CHICKEN3 = 0xca,
+    PIPEDMC_EVENT_DDT_UBP = 0xcb,
+
+    PIPEDMC_EVENT_LP_LATENCY = 0xce,
+
+    PIPEDMC_EVENT_LACE_PART_A_HIST_TRIGGER = 0xdf,
+    PIPEDMC_EVENT_LACE_PART_B_HIST_TRIGGER = 0xe0,
+
+    PIPEDMC_EVENT_STACK_OVF = 0xfc,
+    PIPEDMC_EVENT_NO_CLAIM = 0xfd,
+    PIPEDMC_EVENT_UNK_CMD = 0xfe,
+    PIPEDMC_EVENT_HTP_MOD = 0xff,
+}
+
+pub const DMC_SSP_BASE_ADDR_GEN9: c_uint = 0x00002FC0;
+pub const _PIPEDMC_CONTROL_A: c_uint = 0x45250;
+pub const _PIPEDMC_CONTROL_B: c_uint = 0x45254;
+
+pub const _PIPEDMC_LOAD_HTP_A: c_uint = 0x5f000;
+pub const _PIPEDMC_LOAD_HTP_B: c_uint = 0x5f400;
+
+pub const _PIPEDMC_CTL_A: c_uint = 0x5f064;
+pub const _PIPEDMC_CTL_B: c_uint = 0x5f464;
+
+pub const _PIPEDMC_STATUS_A: c_uint = 0x5f06c;
+pub const _PIPEDMC_STATUS_B: c_uint = 0x5f46c;
+
+// PIPEDMC_INT_VECTOR values defined by firmware
+
+pub const _PIPEDMC_FQ_CTRL_A: c_uint = 0x5f078;
+pub const _PIPEDMC_FQ_CTRL_B: c_uint = 0x5f478;
+
+pub const _PIPEDMC_FQ_STATUS_A: c_uint = 0x5f098;
+pub const _PIPEDMC_FQ_STATUS_B: c_uint = 0x5f498;
+
+pub const _PIPEDMC_FPQ_ATOMIC_TP_A: c_uint = 0x5f0a0;
+pub const _PIPEDMC_FPQ_ATOMIC_TP_B: c_uint = 0x5f4a0;
+
+pub const _PIPEDMC_FPQ_LINES_TO_W1_A: c_uint = 0x5f0a4;
+pub const _PIPEDMC_FPQ_LINES_TO_W1_B: c_uint = 0x5f4a4;
+
+pub const _PIPEDMC_FPQ_LINES_TO_W2_A: c_uint = 0x5f0a8;
+pub const _PIPEDMC_FPQ_LINES_TO_W2_B: c_uint = 0x5f4a8;
+
+pub const _PIPEDMC_SCANLINECMP_A: c_uint = 0x5f11c;
+pub const _PIPEDMC_SCANLINECMP_B: c_uint = 0x5f51c;
+
+pub const _PIPEDMC_SCANLINECMPLOWER_A: c_uint = 0x5f120;
+pub const _PIPEDMC_SCANLINECMPLOWER_B: c_uint = 0x5f520;
+
+pub const _PIPEDMC_SCANLINECMPUPPER_A: c_uint = 0x5f124;
+pub const _PIPEDMC_SCANLINECMPUPPER_B: c_uint = 0x5f524;
+
+pub const _PIPEDMC_FPQ1_HP_A: c_uint = 0x5f128;
+pub const _PIPEDMC_FPQ2_HP_A: c_uint = 0x5f138;
+pub const _PIPEDMC_FPQ3_HP_A: c_uint = 0x5f168;
+pub const _PIPEDMC_FPQ4_HP_A: c_uint = 0x5f174;
+pub const _PIPEDMC_FPQ5_HP_A: c_uint = 0x5f180;
+pub const _PIPEDMC_FPQ1_HP_B: c_uint = 0x5f528;
+pub const _PIPEDMC_FPQ2_HP_B: c_uint = 0x5f538;
+pub const _PIPEDMC_FPQ3_HP_B: c_uint = 0x5f568;
+pub const _PIPEDMC_FPQ4_HP_B: c_uint = 0x5f574;
+pub const _PIPEDMC_FPQ5_HP_B: c_uint = 0x5f580;
+
+pub const _PIPEDMC_FPQ1_TP_A: c_uint = 0x5f12c;
+pub const _PIPEDMC_FPQ2_TP_A: c_uint = 0x5f13c;
+pub const _PIPEDMC_FPQ3_TP_A: c_uint = 0x5f16c;
+pub const _PIPEDMC_FPQ4_TP_A: c_uint = 0x5f178;
+pub const _PIPEDMC_FPQ5_TP_A: c_uint = 0x5f184;
+pub const _PIPEDMC_FPQ1_TP_B: c_uint = 0x5f52c;
+pub const _PIPEDMC_FPQ2_TP_B: c_uint = 0x5f53c;
+pub const _PIPEDMC_FPQ3_TP_B: c_uint = 0x5f56c;
+pub const _PIPEDMC_FPQ4_TP_B: c_uint = 0x5f578;
+pub const _PIPEDMC_FPQ5_TP_B: c_uint = 0x5f584;
+
+pub const _PIPEDMC_FPQ1_CHP_A: c_uint = 0x5f130;
+pub const _PIPEDMC_FPQ2_CHP_A: c_uint = 0x5f140;
+pub const _PIPEDMC_FPQ3_CHP_A: c_uint = 0x5f170;
+pub const _PIPEDMC_FPQ4_CHP_A: c_uint = 0x5f17c;
+pub const _PIPEDMC_FPQ5_CHP_A: c_uint = 0x5f188;
+pub const _PIPEDMC_FPQ1_CHP_B: c_uint = 0x5f530;
+pub const _PIPEDMC_FPQ2_CHP_B: c_uint = 0x5f540;
+pub const _PIPEDMC_FPQ3_CHP_B: c_uint = 0x5f570;
+pub const _PIPEDMC_FPQ4_CHP_B: c_uint = 0x5f57c;
+pub const _PIPEDMC_FPQ5_CHP_B: c_uint = 0x5f588;
+
+pub const _PIPEDMC_FPQ_TS_A: c_uint = 0x5f134;
+pub const _PIPEDMC_FPQ_TS_B: c_uint = 0x5f534;
+
+pub const _PIPEDMC_SCANLINE_RO_A: c_uint = 0x5f144;
+pub const _PIPEDMC_SCANLINE_RO_B: c_uint = 0x5f544;
+
+pub const _PIPEDMC_FPQ_CTL1_A: c_uint = 0x5f160;
+pub const _PIPEDMC_FPQ_CTL1_B: c_uint = 0x5f560;
+
+pub const _PIPEDMC_FPQ_CTL2_A: c_uint = 0x5f164;
+pub const _PIPEDMC_FPQ_CTL2_B: c_uint = 0x5f564;
+
+pub const _PIPEDMC_INTERRUPT_A: c_uint = 0x5f190 /* lnl+ */;
+pub const _PIPEDMC_INTERRUPT_B: c_uint = 0x5f590 /* lnl+ */;
+
+pub const _PIPEDMC_INTERRUPT_MASK_A: c_uint = 0x5f194 /* lnl+ */;
+pub const _PIPEDMC_INTERRUPT_MASK_B: c_uint = 0x5f594 /* lnl+ */;
+
+pub const PIPEDMC_BLOCK_PKGC_SW_A: c_uint = 0x5f1d0;
+pub const PIPEDMC_BLOCK_PKGC_SW_B: c_uint = 0x5F5d0;
+
+pub const _ADLP_PIPEDMC_REG_MMIO_BASE_A: c_uint = 0x5f000;
+pub const _TGL_PIPEDMC_REG_MMIO_BASE_A: c_uint = 0x92000;
+
+pub const __DMC_REG_MMIO_BASE: c_uint = 0x8f000;
+
+pub const DMC_EVENT_HANDLER_COUNT_GEN12: c_int = 8;
+pub const _DMC_EVT_HTP_0: c_uint = 0x8f004;
+
+pub const _DMC_EVT_CTL_0: c_uint = 0x8f034;
+
+pub const DMC_EVT_CTL_TYPE_LEVEL_0: c_int = 0;
+pub const DMC_EVT_CTL_TYPE_LEVEL_1: c_int = 1;
+pub const DMC_EVT_CTL_TYPE_EDGE_1_0: c_int = 2;
+pub const DMC_EVT_CTL_TYPE_EDGE_0_1: c_int = 3;
+
+pub const DMC_HTP_ADDR_SKL: c_uint = 0x00500034;
+
+pub const DMC_LAST_WRITE_VALUE: c_uint = 0xc003b400;
+pub const DMC_MMIO_START_RANGE: c_uint = 0x80000;
+pub const DMC_MMIO_END_RANGE: c_uint = 0x8FFFF;
+pub const DMC_V1_MMIO_START_RANGE: c_uint = 0x80000;
+pub const TGL_MAIN_MMIO_START: c_uint = 0x8F000;
+pub const TGL_MAIN_MMIO_END: c_uint = 0x8FFFF;
+pub const _TGL_PIPEA_MMIO_START: c_uint = 0x92000;
+pub const _TGL_PIPEA_MMIO_END: c_uint = 0x93FFF;
+pub const _TGL_PIPEB_MMIO_START: c_uint = 0x96000;
+pub const _TGL_PIPEB_MMIO_END: c_uint = 0x97FFF;
+pub const ADLP_PIPE_MMIO_START: c_uint = 0x5F000;
+pub const ADLP_PIPE_MMIO_END: c_uint = 0x5FFFF;
+
+// plane/general flip queue entries
+
+// LNL
+// DW0 pts
+// DW1 head
+// DW2 size/etc.
+
+// DW3 reserved (plane queues)
+// DW3 second DSB head (general queue)
+// DW4 second DSB size/etc. (general queue)
+// DW5 reserved (general queue)
+// PTL+
+// DW0 pts
+// DW1 reserved
+// DW2 size/etc.
+
+// DW3 head
+// DW4 second DSB size/etc. (general queue)
+// DW5 second DSB head (general queue)
+// undocumented magic DMC variables
+
+pub const _PIPEDMC_DCB_CTL_A: c_uint = 0x5f1a0;
+pub const _PIPEDMC_DCB_CTL_B: c_uint = 0x5f5a0;
+
+pub const _PIPEDMC_DCB_VBLANK_A: c_uint = 0x5f1bc;
+pub const _PIPEDMC_DCB_VBLANK_B: c_uint = 0x5f5bc;
+
+pub const _PIPEDMC_DCB_SLOPE_A: c_uint = 0x5f1b8;
+pub const _PIPEDMC_DCB_SLOPE_B: c_uint = 0x5f5b8;
+
+pub const _PIPEDMC_DCB_GUARDBAND_A: c_uint = 0x5f1b4;
+pub const _PIPEDMC_DCB_GUARDBAND_B: c_uint = 0x5f5b4;
+
+pub const _PIPEDMC_DCB_MAX_INCREASE_A: c_uint = 0x5f1ac;
+pub const _PIPEDMC_DCB_MAX_INCREASE_B: c_uint = 0x5f5ac;
+
+pub const _PIPEDMC_DCB_MAX_DECREASE_A: c_uint = 0x5f1b0;
+pub const _PIPEDMC_DCB_MAX_DECREASE_B: c_uint = 0x5f5b0;
+
+pub const _PIPEDMC_DCB_VMIN_A: c_uint = 0x5f1a4;
+pub const _PIPEDMC_DCB_VMIN_B: c_uint = 0x5f5a4;
+
+pub const _PIPEDMC_DCB_VMAX_A: c_uint = 0x5f1a8;
+pub const _PIPEDMC_DCB_VMAX_B: c_uint = 0x5f5a8;
+
+pub const _PIPEDMC_DCB_DEBUG_A: c_uint = 0x5f1c0;
+pub const _PIPEDMC_DCB_DEBUG_B: c_uint = 0x5f5c0;
+
+pub const _PIPEDMC_EVT_CTL_3_A: c_uint = 0x5f040;
+pub const _PIPEDMC_EVT_CTL_3_B: c_uint = 0x5f440;
+
+pub const _PIPEDMC_DCB_FLIP_COUNT_A: c_uint = 0x906a4;
+pub const _PIPEDMC_DCB_FLIP_COUNT_B: c_uint = 0x986a4;
+
+pub const _PIPEDMC_DCB_BALANCE_RESET_A: c_uint = 0x906a8;
+pub const _PIPEDMC_DCB_BALANCE_RESET_B: c_uint = 0x986a8;
+

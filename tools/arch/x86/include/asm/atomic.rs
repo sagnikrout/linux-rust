@@ -1,0 +1,76 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: tools/arch/x86/include/asm/atomic.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+//
+// Atomic operations that C can't guarantee us.  Useful for
+// resource counting etc..
+//
+
+//
+// atomic_read - read atomic variable
+// @v: pointer of type atomic_t
+//
+// Atomically reads the value of @v.
+//
+extern "C" {
+    pub fn READ_ONCE(_arg: (v)->counter) -> return;
+}
+//
+// atomic_set - set atomic variable
+// @v: pointer of type atomic_t
+// @i: required value
+//
+// Atomically sets the value of @v to @i.
+//
+// atomic_inc - increment atomic variable
+// @v: pointer of type atomic_t
+//
+// Atomically increments @v by 1.
+//
+// atomic_dec_and_test - decrement and test
+// @v: pointer of type atomic_t
+//
+// Atomically decrements @v by 1 and
+// returns true if the result is 0, or false for all other
+// cases.
+//
+extern "C" {
+    pub fn cmpxchg(_arg: &v->counter, _arg: old, _arg: new) -> return;
+}

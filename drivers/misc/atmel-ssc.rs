@@ -1,0 +1,271 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/misc/atmel-ssc.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Atmel SSC driver
+//
+// Copyright (C) 2007 Atmel Corporation
+//
+
+// Serialize access to ssc_list and user count
+    static DEFINE_MUTEX(user_lock);
+    static LIST_HEAD(ssc_list);
+    struct ssc_device *ssc_request(unsigned int ssc_num)
+    {
+    let mut ssc_valid: c_int = 0;
+    struct ssc_device *ssc;
+    mutex_lock(&user_lock);
+    list_for_each_entry(ssc, &ssc_list, list) {
+    if (ssc.pdev.dev.of_node) {
+    if (of_alias_get_id(ssc.pdev.dev.of_node, "ssc")
+    == ssc_num) {
+    ssc.pdev.id = ssc_num;
+    ssc_valid = 1;
+    break;
+    }
+    } else if (ssc.pdev.id == ssc_num) {
+    ssc_valid = 1;
+    break;
+    }
+    }
+    if (!ssc_valid) {
+    mutex_unlock(&user_lock);
+    pr_err("ssc: ssc%d platform device is missing\n", ssc_num);
+    return ERR_PTR(-ENODEV);
+    }
+    if (ssc.user) {
+    mutex_unlock(&user_lock);
+    dev_dbg(&ssc.pdev.dev, "module busy\n");
+    return ERR_PTR(-EBUSY);
+    }
+    ssc.user++;
+    mutex_unlock(&user_lock);
+    clk_prepare(ssc.clk);
+    return ssc;
+    }
+    EXPORT_SYMBOL(ssc_request);
+#[no_mangle]
+pub unsafe extern "C" fn ssc_free(ssc: *mut ssc_device) {
+    void ssc_free(struct ssc_device *ssc)
+    {
+    let mut disable_clk: bool = true;
+    mutex_lock(&user_lock);
+    if (ssc.user)
+    ssc.user--;
+    else {
+    disable_clk = false;
+    dev_dbg(&ssc.pdev.dev, "device already free\n");
+    }
+    mutex_unlock(&user_lock);
+    if (disable_clk)
+    clk_unprepare(ssc.clk);
+    }
+    EXPORT_SYMBOL(ssc_free);
+    static struct atmel_ssc_platform_data at91rm9200_config = {
+    .use_dma = 0,
+    .has_fslen_ext = 0,
+    };
+    static struct atmel_ssc_platform_data at91sam9rl_config = {
+    .use_dma = 0,
+    .has_fslen_ext = 1,
+    };
+    static struct atmel_ssc_platform_data at91sam9g45_config = {
+    .use_dma = 1,
+    .has_fslen_ext = 1,
+    };
+    static const struct platform_device_id atmel_ssc_devtypes[] = {
+    {
+    .name = "at91rm9200_ssc",
+    .driver_data = (unsigned long) &at91rm9200_config,
+    }, {
+    .name = "at91sam9rl_ssc",
+    .driver_data = (unsigned long) &at91sam9rl_config,
+    }, {
+    .name = "at91sam9g45_ssc",
+    .driver_data = (unsigned long) &at91sam9g45_config,
+    }, {
+// sentinel
+    }
+    };
+
+    static const struct of_device_id atmel_ssc_dt_ids[] = {
+    {
+    .compatible = "atmel,at91rm9200-ssc",
+    .data = &at91rm9200_config,
+    }, {
+    .compatible = "atmel,at91sam9rl-ssc",
+    .data = &at91sam9rl_config,
+    }, {
+    .compatible = "atmel,at91sam9g45-ssc",
+    .data = &at91sam9g45_config,
+    }, {
+// sentinel
+    }
+    };
+    MODULE_DEVICE_TABLE(of, atmel_ssc_dt_ids);
+
+    static inline const struct atmel_ssc_platform_data *
+    atmel_ssc_get_driver_data(struct platform_device *pdev)
+    {
+    if (pdev.dev.of_node) {
+    const struct of_device_id *match;
+    match = of_match_node(atmel_ssc_dt_ids, pdev.dev.of_node);
+    if (match == core::ptr::null_mut())
+    return core::ptr::null_mut();
+    return match.data;
+    }
+    return (struct atmel_ssc_platform_data *)
+    platform_get_device_id(pdev).driver_data;
+    }
+
+#[no_mangle]
+unsafe extern "C" fn ssc_sound_dai_probe(ssc: *mut ssc_device) -> c_int {
+    static int ssc_sound_dai_probe(struct ssc_device *ssc)
+    {
+    struct device_node *np = ssc.pdev.dev.of_node;
+    int ret;
+    int id;
+    ssc.sound_dai = false;
+    if (!of_property_present(np, "#sound-dai-cells"))
+    return 0;
+    id = of_alias_get_id(np, "ssc");
+    if (id < 0)
+    return id;
+    ret = atmel_ssc_set_audio(id);
+    ssc.sound_dai = !ret;
+    return ret;
+    }
+#[no_mangle]
+unsafe extern "C" fn ssc_sound_dai_remove(ssc: *mut ssc_device) {
+    static void ssc_sound_dai_remove(struct ssc_device *ssc)
+    {
+    if (!ssc.sound_dai)
+    return;
+    atmel_ssc_put_audio(of_alias_get_id(ssc.pdev.dev.of_node, "ssc"));
+    }
+
+#[no_mangle]
+pub unsafe extern "C" fn ssc_sound_dai_probe(ssc: *mut ssc_device) -> c_int {
+    static inline int ssc_sound_dai_probe(struct ssc_device *ssc)
+    {
+    if (of_property_present(ssc.pdev.dev.of_node, "#sound-dai-cells"))
+    return -ENOTSUPP;
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ssc_sound_dai_remove(ssc: *mut ssc_device) {
+    static inline void ssc_sound_dai_remove(struct ssc_device *ssc)
+    {
+    }
+
+#[no_mangle]
+unsafe extern "C" fn ssc_probe(pdev: *mut platform_device) -> c_int {
+    static int ssc_probe(struct platform_device *pdev)
+    {
+    struct resource *regs;
+    struct ssc_device *ssc;
+    const struct atmel_ssc_platform_data *plat_dat;
+    ssc = devm_kzalloc(&pdev.dev, sizeof(struct ssc_device), GFP_KERNEL);
+    if (!ssc) {
+    dev_dbg(&pdev.dev, "out of memory\n");
+    return -ENOMEM;
+    }
+    ssc.pdev = pdev;
+    plat_dat = atmel_ssc_get_driver_data(pdev);
+    if (!plat_dat)
+    return -ENODEV;
+    ssc.pdata = (struct atmel_ssc_platform_data *)plat_dat;
+    if (pdev.dev.of_node) {
+    struct device_node *np = pdev.dev.of_node;
+    ssc.clk_from_rk_pin =
+    of_property_read_bool(np, "atmel,clk-from-rk-pin");
+    }
+    ssc.regs = devm_platform_get_and_ioremap_resource(pdev, 0, &regs);
+    if (IS_ERR(ssc.regs))
+    return PTR_ERR(ssc.regs);
+    ssc.phybase = regs.start;
+    ssc.clk = devm_clk_get(&pdev.dev, "pclk");
+    if (IS_ERR(ssc.clk)) {
+    dev_dbg(&pdev.dev, "no pclk clock defined\n");
+    return -ENXIO;
+    }
+// disable all interrupts
+    clk_prepare_enable(ssc.clk);
+    ssc_writel(ssc.regs, IDR, -1);
+    ssc_readl(ssc.regs, SR);
+    clk_disable_unprepare(ssc.clk);
+    ssc.irq = platform_get_irq(pdev, 0);
+    if (ssc.irq < 0) {
+    dev_dbg(&pdev.dev, "could not get irq\n");
+    return ssc.irq;
+    }
+    mutex_lock(&user_lock);
+    list_add_tail(&ssc.list, &ssc_list);
+    mutex_unlock(&user_lock);
+    platform_set_drvdata(pdev, ssc);
+    dev_info(&pdev.dev, "Atmel SSC device at 0x%p (irq %d)\n",
+    ssc.regs, ssc.irq);
+    if (ssc_sound_dai_probe(ssc))
+    dev_err(&pdev.dev, "failed to auto-setup ssc for audio\n");
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ssc_remove(pdev: *mut platform_device) {
+    static void ssc_remove(struct platform_device *pdev)
+    {
+    struct ssc_device *ssc = platform_get_drvdata(pdev);
+    ssc_sound_dai_remove(ssc);
+    mutex_lock(&user_lock);
+    list_del(&ssc.list);
+    mutex_unlock(&user_lock);
+    }
+    static struct platform_driver ssc_driver = {
+    .driver		= {
+    .name		= "ssc",
+    .of_match_table	= of_match_ptr(atmel_ssc_dt_ids),
+    },
+    .id_table	= atmel_ssc_devtypes,
+    .probe		= ssc_probe,
+    .remove		= ssc_remove,
+    };
+    module_platform_driver(ssc_driver);
+    MODULE_AUTHOR("Hans-Christian Noren Egtvedt <egtvedt@samfundet.no>");
+    MODULE_DESCRIPTION("SSC driver for Atmel AT91");
+    MODULE_LICENSE("GPL");
+    MODULE_ALIAS("platform:ssc");

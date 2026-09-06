@@ -1,0 +1,250 @@
+//! Automatically rewritten from C to Rust
+//! Source: sound/virtio/virtio_jack.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// virtio-snd: Virtio sound device
+// Copyright (C) 2021 OpenSynergy GmbH
+//
+
+//
+// DOC: Implementation Status
+//
+// At the moment jacks have a simple implementation and can only be used to
+// receive notifications about a plugged in/out device.
+//
+// VIRTIO_SND_R_JACK_REMAP
+// is not supported
+//
+// struct virtio_jack - VirtIO jack.
+// @jack: Kernel jack control.
+// @nid: Functional group node identifier.
+// @features: Jack virtio feature bit map (1 << VIRTIO_SND_JACK_F_XXX).
+// @defconf: Pin default configuration value.
+// @caps: Pin capabilities value.
+// @connected: Current jack connection status.
+// @type: Kernel jack type (SND_JACK_XXX).
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct virtio_jack {
+    pub jack: *mut snd_jack,
+    pub nid: u32,
+    pub features: u32,
+    pub defconf: u32,
+    pub caps: u32,
+    pub connected: bool,
+    pub type: c_int,
+}
+
+//
+// virtsnd_jack_get_label() - Get the name string for the jack.
+// @vjack: VirtIO jack.
+//
+// Returns the jack name based on the default pin configuration value (see HDA
+// specification).
+//
+// Context: Any context.
+// Return: Name string.
+//
+    static const char *virtsnd_jack_get_label(struct virtio_jack *vjack)
+    {
+    let mut defconf: c_uint = vjack.defconf;
+    unsigned int device =
+    (defconf & AC_DEFCFG_DEVICE) >> AC_DEFCFG_DEVICE_SHIFT;
+    unsigned int location =
+    (defconf & AC_DEFCFG_LOCATION) >> AC_DEFCFG_LOCATION_SHIFT;
+    switch (device) {
+    case AC_JACK_LINE_OUT:
+    return "Line Out";
+    case AC_JACK_SPEAKER:
+    return "Speaker";
+    case AC_JACK_HP_OUT:
+    return "Headphone";
+    case AC_JACK_CD:
+    return "CD";
+    case AC_JACK_SPDIF_OUT:
+    case AC_JACK_DIG_OTHER_OUT:
+    if (location == AC_JACK_LOC_HDMI)
+    return "HDMI Out";
+    else
+    return "SPDIF Out";
+    case AC_JACK_LINE_IN:
+    return "Line";
+    case AC_JACK_AUX:
+    return "Aux";
+    case AC_JACK_MIC_IN:
+    return "Mic";
+    case AC_JACK_SPDIF_IN:
+    return "SPDIF In";
+    case AC_JACK_DIG_OTHER_IN:
+    return "Digital In";
+    default:
+    return "Misc";
+    }
+    }
+//
+// virtsnd_jack_get_type() - Get the type for the jack.
+// @vjack: VirtIO jack.
+//
+// Returns the jack type based on the default pin configuration value (see HDA
+// specification).
+//
+// Context: Any context.
+// Return: SND_JACK_XXX value.
+//
+#[no_mangle]
+unsafe extern "C" fn virtsnd_jack_get_type(vjack: *mut virtio_jack) -> c_int {
+    static int virtsnd_jack_get_type(struct virtio_jack *vjack)
+    {
+    let mut defconf: c_uint = vjack.defconf;
+    unsigned int device =
+    (defconf & AC_DEFCFG_DEVICE) >> AC_DEFCFG_DEVICE_SHIFT;
+    switch (device) {
+    case AC_JACK_LINE_OUT:
+    case AC_JACK_SPEAKER:
+    return SND_JACK_LINEOUT;
+    case AC_JACK_HP_OUT:
+    return SND_JACK_HEADPHONE;
+    case AC_JACK_SPDIF_OUT:
+    case AC_JACK_DIG_OTHER_OUT:
+    return SND_JACK_AVOUT;
+    case AC_JACK_MIC_IN:
+    return SND_JACK_MICROPHONE;
+    default:
+    return SND_JACK_LINEIN;
+    }
+    }
+//
+// virtsnd_jack_parse_cfg() - Parse the jack configuration.
+// @snd: VirtIO sound device.
+//
+// This function is called during initial device initialization.
+//
+// Context: Any context that permits to sleep.
+// Return: 0 on success, -errno on failure.
+//
+#[no_mangle]
+pub unsafe extern "C" fn virtsnd_jack_parse_cfg(snd: *mut virtio_snd) -> c_int {
+    int virtsnd_jack_parse_cfg(struct virtio_snd *snd)
+    {
+    struct virtio_device *vdev = snd.vdev;
+    struct virtio_snd_jack_info *info;
+    u32 i;
+    int rc;
+    virtio_cread_le(vdev, struct virtio_snd_config, jacks, &snd.njacks);
+    if (!snd.njacks)
+    return 0;
+    snd.jacks = devm_kcalloc(&vdev.dev, snd.njacks, sizeof(*snd.jacks),
+    GFP_KERNEL);
+    if (!snd.jacks)
+    return -ENOMEM;
+    info = kzalloc_objs(*info, snd.njacks);
+    if (!info)
+    return -ENOMEM;
+    rc = virtsnd_ctl_query_info(snd, VIRTIO_SND_R_JACK_INFO, 0, snd.njacks,
+    sizeof(*info), info);
+    if (rc)
+    goto on_exit;
+    for (i = 0; i < snd.njacks; ++i) {
+    struct virtio_jack *vjack = &snd.jacks[i];
+    vjack.nid = le32_to_cpu(info[i].hdr.hda_fn_nid);
+    vjack.features = le32_to_cpu(info[i].features);
+    vjack.defconf = le32_to_cpu(info[i].hda_reg_defconf);
+    vjack.caps = le32_to_cpu(info[i].hda_reg_caps);
+    vjack.connected = info[i].connected;
+    }
+    on_exit:
+    kfree(info);
+    return rc;
+    }
+//
+// virtsnd_jack_build_devs() - Build ALSA controls for jacks.
+// @snd: VirtIO sound device.
+//
+// Context: Any context that permits to sleep.
+// Return: 0 on success, -errno on failure.
+//
+#[no_mangle]
+pub unsafe extern "C" fn virtsnd_jack_build_devs(snd: *mut virtio_snd) -> c_int {
+    int virtsnd_jack_build_devs(struct virtio_snd *snd)
+    {
+    u32 i;
+    int rc;
+    for (i = 0; i < snd.njacks; ++i) {
+    struct virtio_jack *vjack = &snd.jacks[i];
+    vjack.type = virtsnd_jack_get_type(vjack);
+    rc = snd_jack_new(snd.card, virtsnd_jack_get_label(vjack),
+    vjack.type, &vjack.jack, true, true);
+    if (rc)
+    return rc;
+    if (vjack.jack)
+    vjack.jack.private_data = vjack;
+    snd_jack_report(vjack.jack,
+    vjack.connected ? vjack.type : 0);
+    }
+    return 0;
+    }
+//
+// virtsnd_jack_event() - Handle the jack event notification.
+// @snd: VirtIO sound device.
+// @event: VirtIO sound event.
+//
+// Context: Interrupt context.
+//
+#[no_mangle]
+pub unsafe extern "C" fn virtsnd_jack_event(snd: *mut virtio_snd, event: *mut virtio_snd_event) {
+    void virtsnd_jack_event(struct virtio_snd *snd, struct virtio_snd_event *event)
+    {
+    let mut jack_id: u32 = le32_to_cpu(event.data);
+    struct virtio_jack *vjack;
+    if (jack_id >= snd.njacks)
+    return;
+    vjack = &snd.jacks[jack_id];
+    switch (le32_to_cpu(event.hdr.code)) {
+    case VIRTIO_SND_EVT_JACK_CONNECTED:
+    vjack.connected = true;
+    break;
+    case VIRTIO_SND_EVT_JACK_DISCONNECTED:
+    vjack.connected = false;
+    break;
+    default:
+    return;
+    }
+    snd_jack_report(vjack.jack, vjack.connected ? vjack.type : 0);
+    }

@@ -1,0 +1,130 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/net/phy/phy_link_topology.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0+
+//
+// Infrastructure to handle all PHY devices connected to a given netdev,
+// either directly or indirectly attached.
+//
+// Copyright (c) 2023 Maxime Chevallier<maxime.chevallier@bootlin.com>
+//
+
+#[no_mangle]
+unsafe extern "C" fn netdev_alloc_phy_link_topology(dev: *mut net_device) -> c_int {
+    static int netdev_alloc_phy_link_topology(struct net_device *dev)
+    {
+    struct phy_link_topology *topo;
+    topo = kzalloc_obj(*topo);
+    if (!topo)
+    return -ENOMEM;
+    xa_init_flags(&topo.phys, XA_FLAGS_ALLOC1);
+    topo.next_phy_index = 1;
+    dev.link_topo = topo;
+    return 0;
+    }
+    int phy_link_topo_add_phy(struct net_device *dev,
+    struct phy_device *phy,
+    enum phy_upstream upt, void *upstream)
+    {
+    struct phy_link_topology *topo = dev.link_topo;
+    struct phy_device_node *pdn;
+    int ret;
+// ethtool ops may run without rtnl_lock, and rtnl_lock is what
+// currently protects the PHY topology. No driver currently mixes
+// the two, flag if someone tries. See also:
+// - ethnl_req_get_phydev()
+// - phy_detach()
+//
+    if (WARN_ON_ONCE(netdev_need_ops_lock(dev)))
+    return -EOPNOTSUPP;
+    if (!topo) {
+    ret = netdev_alloc_phy_link_topology(dev);
+    if (ret)
+    return ret;
+    topo = dev.link_topo;
+    }
+    pdn = kzalloc_obj(*pdn);
+    if (!pdn)
+    return -ENOMEM;
+    pdn.phy = phy;
+    switch (upt) {
+    case PHY_UPSTREAM_MAC:
+    pdn.upstream.netdev = (struct net_device *)upstream;
+    if (phy_on_sfp(phy))
+    pdn.parent_sfp_bus = pdn.upstream.netdev.sfp_bus;
+    break;
+    case PHY_UPSTREAM_PHY:
+    pdn.upstream.phydev = (struct phy_device *)upstream;
+    if (phy_on_sfp(phy))
+    pdn.parent_sfp_bus = pdn.upstream.phydev.sfp_bus;
+    break;
+    default:
+    ret = -EINVAL;
+    goto err;
+    }
+    pdn.upstream_type = upt;
+// Attempt to re-use a previously allocated phy_index
+    if (phy.phyindex)
+    ret = xa_insert(&topo.phys, phy.phyindex, pdn, GFP_KERNEL);
+    else
+    ret = xa_alloc_cyclic(&topo.phys, &phy.phyindex, pdn,
+    xa_limit_32b, &topo.next_phy_index,
+    GFP_KERNEL);
+    if (ret < 0)
+    goto err;
+    return 0;
+    err:
+    kfree(pdn);
+    return ret;
+    }
+    EXPORT_SYMBOL_GPL(phy_link_topo_add_phy);
+    void phy_link_topo_del_phy(struct net_device *dev,
+    struct phy_device *phy)
+    {
+    struct phy_link_topology *topo = dev.link_topo;
+    struct phy_device_node *pdn;
+    if (!topo)
+    return;
+    pdn = xa_erase(&topo.phys, phy.phyindex);
+// We delete the PHY from the topology, however we don't re-set the
+// phy->phyindex field. If the PHY isn't gone, we can re-assign it the
+// same index next time it's added back to the topology
+//
+    kfree(pdn);
+    }
+    EXPORT_SYMBOL_GPL(phy_link_topo_del_phy);

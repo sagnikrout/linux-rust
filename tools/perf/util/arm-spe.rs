@@ -1,0 +1,62 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: tools/perf/util/arm-spe.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Arm Statistical Profiling Extensions (SPE) support
+// Copyright (c) 2017-2018, Arm Ltd.
+//
+
+// Macro flag: #define INCLUDE__PERF_ARM_SPE_H__
+
+//
+// The old metadata format (defined above) does not include a
+// field for version number. Version 1 is reserved and starts
+// from version 2.
+//
+// Number of sizeof(u64)
+// PMU type shared by CPUs
+// Number of CPUs
+// Magic number
+// CPU logical number in system
+// Number of parameters
+// CPU MIDR
+// Associated PMU type
+// Minimal interval
+// Event filter
+pub const ARM_SPE_HEADER_CURRENT_VERSION: c_int = 2;

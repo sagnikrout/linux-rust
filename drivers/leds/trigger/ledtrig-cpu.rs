@@ -1,0 +1,191 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/leds/trigger/ledtrig-cpu.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// ledtrig-cpu.c - LED trigger based on CPU activity
+//
+// This LED trigger will be registered for first 8 CPUs and named
+// as cpu0..cpu7. There's additional trigger called cpu that
+// is on when any CPU is active.
+//
+// If you want support for arbitrary number of CPUs, make it one trigger,
+// with additional sysfs file selecting which CPU to watch.
+//
+// It can be bound to any LED just like other triggers using either a
+// board file or via sysfs interface.
+//
+// An API named ledtrig_cpu is exported for any user, who want to add CPU
+// activity indication in their code.
+//
+// Copyright 2011 Linus Walleij <linus.walleij@linaro.org>
+// Copyright 2011 - 2012 Bryan Wu <bryan.wu@canonical.com>
+//
+
+pub const MAX_NAME_LEN: c_int = 8;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct led_trigger_cpu {
+    pub is_active: bool,
+    pub name: [c_char; MAX_NAME_LEN],
+    pub _trig: *mut led_trigger,
+}
+
+    static DEFINE_PER_CPU(struct led_trigger_cpu, cpu_trig);
+    static struct led_trigger *trig_cpu_all;
+    let mut num_active_cpus: static atomic_t = ATOMIC_INIT(0);
+//
+// ledtrig_cpu - emit a CPU event as a trigger
+// @ledevt: CPU event to be emitted
+//
+// Emit a CPU event on a CPU core, which will trigger a
+// bound LED to turn on or turn off.
+//
+#[no_mangle]
+pub unsafe extern "C" fn ledtrig_cpu(ledevt: enum cpu_led_event) {
+    void ledtrig_cpu(enum cpu_led_event ledevt)
+    {
+    struct led_trigger_cpu *trig = this_cpu_ptr(&cpu_trig);
+    let mut is_active: bool = trig.is_active;
+// Locate the correct CPU LED
+    switch (ledevt) {
+    case CPU_LED_IDLE_END:
+    case CPU_LED_START:
+// Will turn the LED on, max brightness
+    is_active = true;
+    break;
+    case CPU_LED_IDLE_START:
+    case CPU_LED_STOP:
+    case CPU_LED_HALTED:
+// Will turn the LED off
+    is_active = false;
+    break;
+    default:
+// Will leave the LED as it is
+    break;
+    }
+    if (is_active != trig.is_active) {
+    unsigned int active_cpus;
+    unsigned int total_cpus;
+// Update trigger state
+    trig.is_active = is_active;
+    atomic_add(is_active ? 1 : -1, &num_active_cpus);
+    active_cpus = atomic_read(&num_active_cpus);
+    total_cpus = num_present_cpus();
+    led_trigger_event(trig._trig,
+    is_active ? LED_FULL : LED_OFF);
+    led_trigger_event(trig_cpu_all,
+    DIV_ROUND_UP(LED_FULL * active_cpus, total_cpus));
+    }
+    }
+    EXPORT_SYMBOL(ledtrig_cpu);
+#[no_mangle]
+unsafe extern "C" fn ledtrig_cpu_syscore_suspend(data: *mut c_void) -> c_int {
+    static int ledtrig_cpu_syscore_suspend(void *data)
+    {
+    ledtrig_cpu(CPU_LED_STOP);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ledtrig_cpu_syscore_resume(data: *mut c_void) {
+    static void ledtrig_cpu_syscore_resume(void *data)
+    {
+    ledtrig_cpu(CPU_LED_START);
+    }
+#[no_mangle]
+unsafe extern "C" fn ledtrig_cpu_syscore_shutdown(data: *mut c_void) {
+    static void ledtrig_cpu_syscore_shutdown(void *data)
+    {
+    ledtrig_cpu(CPU_LED_HALTED);
+    }
+    static const struct syscore_ops ledtrig_cpu_syscore_ops = {
+    .shutdown	= ledtrig_cpu_syscore_shutdown,
+    .suspend	= ledtrig_cpu_syscore_suspend,
+    .resume		= ledtrig_cpu_syscore_resume,
+    };
+    static struct syscore ledtrig_cpu_syscore = {
+    .ops = &ledtrig_cpu_syscore_ops,
+    };
+#[no_mangle]
+unsafe extern "C" fn ledtrig_online_cpu(cpu: c_uint) -> c_int {
+    static int ledtrig_online_cpu(unsigned int cpu)
+    {
+    ledtrig_cpu(CPU_LED_START);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ledtrig_prepare_down_cpu(cpu: c_uint) -> c_int {
+    static int ledtrig_prepare_down_cpu(unsigned int cpu)
+    {
+    ledtrig_cpu(CPU_LED_STOP);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ledtrig_cpu_init() -> int __init {
+    static int __init ledtrig_cpu_init(void)
+    {
+    unsigned int cpu;
+    int ret;
+// Supports up to 9999 cpu cores
+    BUILD_BUG_ON(CONFIG_NR_CPUS > 9999);
+//
+// Registering a trigger for all CPUs.
+//
+    led_trigger_register_simple("cpu", &trig_cpu_all);
+//
+// Registering CPU led trigger for each CPU core here
+// ignores CPU hotplug, but after this CPU hotplug works
+// fine with this trigger.
+//
+    for_each_possible_cpu(cpu) {
+    struct led_trigger_cpu *trig = &per_cpu(cpu_trig, cpu);
+    if (cpu >= 8)
+    continue;
+    snprintf(trig.name, MAX_NAME_LEN, "cpu%u", cpu);
+    led_trigger_register_simple(trig.name, &trig._trig);
+    }
+    register_syscore(&ledtrig_cpu_syscore);
+    ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "leds/trigger:starting",
+    ledtrig_online_cpu, ledtrig_prepare_down_cpu);
+    if (ret < 0)
+    pr_err("CPU hotplug notifier for ledtrig-cpu could not be registered: %d\n",
+    ret);
+    pr_info("ledtrig-cpu: registered to indicate activity on CPUs\n");
+    return 0;
+    }
+    device_initcall(ledtrig_cpu_init);

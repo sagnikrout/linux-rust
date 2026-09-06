@@ -1,0 +1,1207 @@
+//! Automatically rewritten from C to Rust
+//! Source: fs/overlayfs/readdir.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// Copyright (C) 2011 Novell Inc.
+//
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ovl_cache_entry {
+    pub len: c_uint,
+    pub type: c_uint,
+    pub real_ino: u64,
+    pub ino: u64,
+    pub l_node: list_head,
+    pub node: rb_node,
+    pub next_maybe_whiteout: *mut ovl_cache_entry,
+    pub is_upper: bool,
+    pub is_whiteout: bool,
+    pub check_xwhiteout: bool,
+    pub c_name: *const c_char,
+    pub c_len: c_int,
+    pub name: [c_char; ],
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ovl_dir_cache {
+    pub refcount: c_long,
+    pub version: u64,
+    pub entries: list_head,
+    pub root: rb_root,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ovl_readdir_data {
+    pub ctx: dir_context,
+    pub dentry: *mut dentry,
+    pub is_lowest: bool,
+    pub root: *mut rb_root,
+    pub list: *mut list_head,
+    pub middle: list_head,
+    pub first_maybe_whiteout: *mut ovl_cache_entry,
+    pub map: *mut unicode_map,
+    pub count: c_int,
+    pub err: c_int,
+    pub is_upper: bool,
+    pub d_type_supported: bool,
+    pub in_xwhiteouts_dir: bool,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ovl_dir_file {
+    pub is_real: bool,
+    pub is_upper: bool,
+    pub cache: *mut ovl_dir_cache,
+    pub cursor: *mut list_head,
+    pub realfile: *mut file,
+    pub upperfile: *mut file,
+}
+
+    static struct ovl_cache_entry *ovl_cache_entry_from_node(struct rb_node *n)
+    {
+    return rb_entry(n, struct ovl_cache_entry, node);
+    }
+    static int ovl_casefold(struct ovl_readdir_data *rdd, const char *str, int len,
+    char **dst)
+    {
+    let mut qstr: qstr = { .name = str, .len = len };
+    char *cf_name;
+    int cf_len;
+    if (!IS_ENABLED(CONFIG_UNICODE) || !rdd.map ||
+    name_is_dot_dotdot(str, len))
+    return 0;
+    cf_name = kmalloc(NAME_MAX, GFP_KERNEL);
+    if (!cf_name) {
+    rdd.err = -ENOMEM;
+    return -ENOMEM;
+    }
+    cf_len = utf8_casefold(rdd.map, &qstr, cf_name, NAME_MAX);
+    if (cf_len > 0)
+// dst = cf_name;
+    else
+    kfree(cf_name);
+    return cf_len;
+    }
+    static bool ovl_cache_entry_find_link(const char *name, int len,
+    struct rb_node ***link,
+    struct rb_node **parent)
+    {
+    let mut found: bool = false;
+    struct rb_node **newp = *link;
+    while (!found && *newp) {
+    int cmp;
+    struct ovl_cache_entry *tmp;
+// parent = *newp;
+    tmp = ovl_cache_entry_from_node(*newp);
+    cmp = strncmp(name, tmp.c_name, len);
+    if (cmp > 0)
+    newp = &tmp.node.rb_right;
+#[no_mangle]
+pub unsafe extern "C" fn if(tmp->c_len: cmp < 0 || len <) -> else {
+    else if (cmp < 0 || len < tmp.c_len)
+    newp = &tmp.node.rb_left;
+    else
+    found = true;
+    }
+// link = newp;
+    return found;
+    }
+    static struct ovl_cache_entry *ovl_cache_entry_find(struct rb_root *root,
+    const char *name, int len)
+    {
+    struct rb_node *node = root.rb_node;
+    int cmp;
+    while (node) {
+    struct ovl_cache_entry *p = ovl_cache_entry_from_node(node);
+    cmp = strncmp(name, p.c_name, len);
+    if (cmp > 0)
+    node = p.node.rb_right;
+#[no_mangle]
+pub unsafe extern "C" fn if(p->c_len: cmp < 0 || len <) -> else {
+    else if (cmp < 0 || len < p.c_len)
+    node = p.node.rb_left;
+    else
+    return p;
+    }
+    return core::ptr::null_mut();
+    }
+    static bool ovl_calc_d_ino(struct ovl_readdir_data *rdd,
+    struct ovl_cache_entry *p)
+    {
+// Don't care if not doing ovl_iter()
+    if (!rdd.dentry)
+    return false;
+// Always recalc d_ino when remapping lower inode numbers
+    if (ovl_xino_bits(OVL_FS(rdd.dentry.d_sb)))
+    return true;
+// Always recalc d_ino for parent
+    if (name_is_dotdot(p.name, p.len))
+    return true;
+// If this is lower, then native d_ino will do
+    if (!rdd.is_upper)
+    return false;
+//
+// Recalc d_ino for '.' and for all entries if dir is impure (contains
+// copied up entries)
+//
+    if (name_is_dot(p.name, p.len) ||
+    ovl_test_flag(OVL_IMPURE, d_inode(rdd.dentry)))
+    return true;
+    return false;
+    }
+    static struct ovl_cache_entry *ovl_cache_entry_new(struct ovl_readdir_data *rdd,
+    const char *name, int len,
+    const char *c_name, int c_len,
+    u64 ino, unsigned int d_type)
+    {
+    struct ovl_cache_entry *p;
+    p = kmalloc_flex(*p, name, len + 1);
+    if (!p)
+    return core::ptr::null_mut();
+    memcpy(p.name, name, len);
+    p.name[len] = '\0';
+    p.len = len;
+    p.type = d_type;
+    p.real_ino = ino;
+    p.ino = ino;
+// Defer setting d_ino for upper entry to ovl_iterate()
+    if (ovl_calc_d_ino(rdd, p))
+    p.ino = 0;
+    p.is_upper = rdd.is_upper;
+    p.is_whiteout = false;
+// Defer check for overlay.whiteout to ovl_iterate()
+    p.check_xwhiteout = rdd.in_xwhiteouts_dir && d_type == DT_REG;
+    if (c_name && c_name != name) {
+    p.c_name = c_name;
+    p.c_len = c_len;
+    } else {
+    p.c_name = p.name;
+    p.c_len = len;
+    }
+    if (d_type == DT_CHR) {
+    p.next_maybe_whiteout = rdd.first_maybe_whiteout;
+    rdd.first_maybe_whiteout = p;
+    }
+    return p;
+    }
+// Return 0 for found, 1 for added, <0 for error
+    static int ovl_cache_entry_add_rb(struct ovl_readdir_data *rdd,
+    const char *name, int len,
+    const char *c_name, int c_len,
+    u64 ino,
+    unsigned int d_type)
+    {
+    struct rb_node **newp = &rdd.root.rb_node;
+    struct rb_node *parent = core::ptr::null_mut();
+    struct ovl_cache_entry *p;
+    if (ovl_cache_entry_find_link(c_name, c_len, &newp, &parent))
+    return 0;
+    p = ovl_cache_entry_new(rdd, name, len, c_name, c_len, ino, d_type);
+    if (p == core::ptr::null_mut()) {
+    rdd.err = -ENOMEM;
+    return -ENOMEM;
+    }
+    list_add_tail(&p.l_node, rdd.list);
+    rb_link_node(&p.node, parent, newp);
+    rb_insert_color(&p.node, rdd.root);
+    return 1;
+    }
+// Return 0 for found, 1 for added, <0 for error
+    static int ovl_fill_lowest(struct ovl_readdir_data *rdd,
+    const char *name, int namelen,
+    const char *c_name, int c_len,
+    loff_t offset, u64 ino, unsigned int d_type)
+    {
+    struct ovl_cache_entry *p;
+    p = ovl_cache_entry_find(rdd.root, c_name, c_len);
+    if (p) {
+    list_move_tail(&p.l_node, &rdd.middle);
+    return 0;
+    } else {
+    p = ovl_cache_entry_new(rdd, name, namelen, c_name, c_len,
+    ino, d_type);
+    if (p == core::ptr::null_mut())
+    rdd.err = -ENOMEM;
+    else
+    list_add_tail(&p.l_node, &rdd.middle);
+    }
+    return rdd.err ?: 1;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_cache_entry_free(p: *mut ovl_cache_entry) {
+    static void ovl_cache_entry_free(struct ovl_cache_entry *p)
+    {
+    if (p.c_name != p.name)
+    kfree(p.c_name);
+    kfree(p);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ovl_cache_free(list: *mut list_head) {
+    void ovl_cache_free(struct list_head *list)
+    {
+    struct ovl_cache_entry *p;
+    struct ovl_cache_entry *n;
+    list_for_each_entry_safe(p, n, list, l_node)
+    ovl_cache_entry_free(p);
+    INIT_LIST_HEAD(list);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ovl_dir_cache_free(inode: *mut inode) {
+    void ovl_dir_cache_free(struct inode *inode)
+    {
+    struct ovl_dir_cache *cache = ovl_dir_cache(inode);
+    if (cache) {
+    ovl_cache_free(&cache.entries);
+    kfree(cache);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_cache_put(od: *mut ovl_dir_file, inode: *mut inode) {
+    static void ovl_cache_put(struct ovl_dir_file *od, struct inode *inode)
+    {
+    struct ovl_dir_cache *cache = od.cache;
+    WARN_ON(cache.refcount <= 0);
+    cache.refcount--;
+    if (!cache.refcount) {
+    if (ovl_dir_cache(inode) == cache)
+    ovl_set_dir_cache(inode, core::ptr::null_mut());
+    ovl_cache_free(&cache.entries);
+    kfree(cache);
+    }
+    }
+    static bool ovl_fill_merge(struct dir_context *ctx, const char *name,
+    int namelen, loff_t offset, u64 ino,
+    unsigned int d_type)
+    {
+    struct ovl_readdir_data *rdd =
+    container_of(ctx, struct ovl_readdir_data, ctx);
+    struct ovl_fs *ofs = OVL_FS(rdd.dentry.d_sb);
+    const char *c_name = core::ptr::null_mut();
+    char *cf_name = core::ptr::null_mut();
+    let mut c_len: c_int = 0, ret;
+    if (ofs.casefold)
+    c_len = ovl_casefold(rdd, name, namelen, &cf_name);
+    if (rdd.err)
+    return false;
+    if (c_len <= 0) {
+    c_name = name;
+    c_len = namelen;
+    } else {
+    c_name = cf_name;
+    }
+    rdd.count++;
+    if (!rdd.is_lowest)
+    ret = ovl_cache_entry_add_rb(rdd, name, namelen, c_name, c_len, ino, d_type);
+    else
+    ret = ovl_fill_lowest(rdd, name, namelen, c_name, c_len, offset, ino, d_type);
+//
+// If ret == 1, that means that c_name is being used as part of struct
+// ovl_cache_entry and will be freed at ovl_cache_free(). Otherwise,
+// c_name was found in the rb-tree so we can free it here.
+//
+    if (ret != 1 && c_name != name)
+    kfree(c_name);
+    return ret >= 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_check_whiteouts(path: *const path, rdd: *mut ovl_readdir_data) -> c_int {
+    static int ovl_check_whiteouts(const struct path *path, struct ovl_readdir_data *rdd)
+    {
+    struct dentry *dentry, *dir = path.dentry;
+    while (rdd.first_maybe_whiteout) {
+    struct ovl_cache_entry *p =
+    rdd.first_maybe_whiteout;
+    rdd.first_maybe_whiteout = p.next_maybe_whiteout;
+    dentry = lookup_one_positive_killable(mnt_idmap(path.mnt),
+    &QSTR_LEN(p.name, p.len),
+    dir);
+    if (!IS_ERR(dentry)) {
+    p.is_whiteout = ovl_is_whiteout(dentry);
+    dput(dentry);
+    } else if (PTR_ERR(dentry) == -EINTR) {
+    return -EINTR;
+    }
+    }
+    return 0;
+    }
+    static inline int ovl_dir_read(const struct path *realpath,
+    struct ovl_readdir_data *rdd)
+    {
+    struct file *realfile;
+    int err;
+    realfile = ovl_path_open(realpath, O_RDONLY | O_LARGEFILE);
+    if (IS_ERR(realfile))
+    return PTR_ERR(realfile);
+    rdd.first_maybe_whiteout = core::ptr::null_mut();
+    rdd.ctx.pos = 0;
+    do {
+    rdd.count = 0;
+    rdd.err = 0;
+    err = iterate_dir(realfile, &rdd.ctx);
+    if (err >= 0)
+    err = rdd.err;
+    } while (!err && rdd.count);
+    if (!err && rdd.first_maybe_whiteout && rdd.dentry)
+    err = ovl_check_whiteouts(realpath, rdd);
+    fput(realfile);
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_dir_reset(file: *mut file) {
+    static void ovl_dir_reset(struct file *file)
+    {
+    struct ovl_dir_file *od = file.private_data;
+    struct ovl_dir_cache *cache = od.cache;
+    struct inode *inode = file_inode(file);
+    bool is_real;
+    if (cache && ovl_inode_version_get(inode) != cache.version) {
+    ovl_cache_put(od, inode);
+    od.cache = core::ptr::null_mut();
+    od.cursor = core::ptr::null_mut();
+    }
+    is_real = ovl_dir_is_real(inode);
+    if (od.is_real != is_real) {
+// is_real can only become false when dir is copied up
+    if (WARN_ON(is_real))
+    return;
+    od.is_real = false;
+    }
+    }
+    static int ovl_dir_read_merged(struct dentry *dentry, struct list_head *list,
+    struct rb_root *root)
+    {
+    int err;
+    struct path realpath;
+    struct ovl_readdir_data rdd = {
+    .ctx.actor = ovl_fill_merge,
+    .ctx.count = INT_MAX,
+    .dentry = dentry,
+    .list = list,
+    .root = root,
+    .is_lowest = false,
+    .map = core::ptr::null_mut(),
+    };
+    int idx, next;
+    const struct ovl_layer *layer;
+    struct ovl_fs *ofs = OVL_FS(dentry.d_sb);
+    for (idx = 0; idx != -1; idx = next) {
+    next = ovl_path_next(idx, dentry, &realpath, &layer);
+    if (ofs.casefold)
+    rdd.map = sb_encoding(realpath.dentry.d_sb);
+    rdd.is_upper = ovl_dentry_upper(dentry) == realpath.dentry;
+    rdd.in_xwhiteouts_dir = layer.has_xwhiteouts &&
+    ovl_dentry_has_xwhiteouts(dentry);
+    if (next != -1) {
+    err = ovl_dir_read(&realpath, &rdd);
+    if (err)
+    break;
+    } else {
+//
+// Insert lowest layer entries before upper ones, this
+// allows offsets to be reasonably constant
+//
+    list_add(&rdd.middle, rdd.list);
+    rdd.is_lowest = true;
+    err = ovl_dir_read(&realpath, &rdd);
+    list_del(&rdd.middle);
+    }
+    }
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_seek_cursor(od: *mut ovl_dir_file, pos: loff_t) {
+    static void ovl_seek_cursor(struct ovl_dir_file *od, loff_t pos)
+    {
+    struct list_head *p;
+    let mut off: loff_t = 0;
+    list_for_each(p, &od.cache.entries) {
+    if (off >= pos)
+    break;
+    off++;
+    }
+// Cursor is safe since the cache is stable
+    od.cursor = p;
+    }
+    static struct ovl_dir_cache *ovl_cache_get(struct dentry *dentry)
+    {
+    int res;
+    struct ovl_dir_cache *cache;
+    struct inode *inode = d_inode(dentry);
+    cache = ovl_dir_cache(inode);
+    if (cache && ovl_inode_version_get(inode) == cache.version) {
+    WARN_ON(!cache.refcount);
+    cache.refcount++;
+    return cache;
+    }
+    ovl_set_dir_cache(d_inode(dentry), core::ptr::null_mut());
+    cache = kzalloc_obj(struct ovl_dir_cache);
+    if (!cache)
+    return ERR_PTR(-ENOMEM);
+    cache.refcount = 1;
+    INIT_LIST_HEAD(&cache.entries);
+    cache.root = RB_ROOT;
+    res = ovl_dir_read_merged(dentry, &cache.entries, &cache.root);
+    if (res) {
+    ovl_cache_free(&cache.entries);
+    kfree(cache);
+    return ERR_PTR(res);
+    }
+    cache.version = ovl_inode_version_get(inode);
+    ovl_set_dir_cache(inode, cache);
+    return cache;
+    }
+// Map inode number to lower fs unique range
+    static u64 ovl_remap_lower_ino(u64 ino, int xinobits, int fsid,
+    const char *name, int namelen, bool warn)
+    {
+    let mut xinoshift: c_uint = 64 - xinobits;
+    if (unlikely(ino >> xinoshift)) {
+    if (warn) {
+    pr_warn_ratelimited("d_ino too big (%.*s, ino=%llu, xinobits=%d)\n",
+    namelen, name, ino, xinobits);
+    }
+    return ino;
+    }
+//
+// The lowest xinobit is reserved for mapping the non-peresistent inode
+// numbers range, but this range is only exposed via st_ino, not here.
+//
+    return ino | ((u64)fsid) << (xinoshift + 1);
+    }
+//
+// Set d_ino for upper entries if needed. Non-upper entries should always report
+// the uppermost real inode ino and should not call this function.
+//
+// When not all layer are on same fs, report real ino also for upper.
+//
+// When all layers are on the same fs, and upper has a reference to
+// copy up origin, call vfs_getattr() on the overlay entry to make
+// sure that d_ino will be consistent with st_ino from stat(2).
+//
+// Also checks the overlay.whiteout xattr by doing a full lookup which will return
+// negative in this case.
+//
+#[no_mangle]
+unsafe extern "C" fn ovl_cache_update(path: *const path, p: *mut ovl_cache_entry, update_ino: bool) -> c_int {
+    static int ovl_cache_update(const struct path *path, struct ovl_cache_entry *p, bool update_ino)
+    {
+    struct dentry *dir = path.dentry;
+    struct ovl_fs *ofs = OVL_FS(dir.d_sb);
+    struct dentry *this = core::ptr::null_mut();
+    enum ovl_path_type type;
+    let mut ino: u64 = p.real_ino;
+    let mut xinobits: c_int = ovl_xino_bits(ofs);
+    let mut err: c_int = 0;
+    if (!ovl_same_dev(ofs) && !p.check_xwhiteout)
+    goto out;
+    if (name_is_dot_dotdot(p.name, p.len)) {
+    if (p.len == 1) {
+    this = dget(dir);
+    goto get;
+    }
+    if (p.len == 2) {
+// we shall not be moved
+    this = dget(dir.d_parent);
+    goto get;
+    }
+    }
+// This checks also for xwhiteouts
+    this = lookup_one(mnt_idmap(path.mnt), &QSTR_LEN(p.name, p.len), dir);
+    if (IS_ERR_OR_NULL(this) || !this.d_inode) {
+// Mark a stale entry
+    p.is_whiteout = true;
+    if (IS_ERR(this)) {
+    err = PTR_ERR(this);
+    this = core::ptr::null_mut();
+    goto fail;
+    }
+    goto out;
+    }
+    get:
+    if (!ovl_same_dev(ofs) || !update_ino)
+    goto out;
+    type = ovl_path_type(this);
+    if (OVL_TYPE_ORIGIN(type)) {
+    struct kstat stat;
+    let mut statpath: path = *path;
+    statpath.dentry = this;
+    err = vfs_getattr(&statpath, &stat, STATX_INO, 0);
+    if (err)
+    goto fail;
+//
+// Directory inode is always on overlay st_dev.
+// Non-dir with ovl_same_dev() could be on pseudo st_dev in case
+// of xino bits overflow.
+//
+    WARN_ON_ONCE(S_ISDIR(stat.mode) &&
+    dir.d_sb.s_dev != stat.dev);
+    ino = stat.ino;
+    } else if (xinobits && !OVL_TYPE_UPPER(type)) {
+    ino = ovl_remap_lower_ino(ino, xinobits,
+    ovl_layer_lower(this).fsid,
+    p.name, p.len,
+    ovl_xino_warn(ofs));
+    }
+    out:
+    p.ino = ino;
+    dput(this);
+    return err;
+    fail:
+    pr_warn_ratelimited("failed to look up (%s) for ino (%i)\n",
+    p.name, err);
+    goto out;
+    }
+    static bool ovl_fill_plain(struct dir_context *ctx, const char *name,
+    int namelen, loff_t offset, u64 ino,
+    unsigned int d_type)
+    {
+    struct ovl_cache_entry *p;
+    struct ovl_readdir_data *rdd =
+    container_of(ctx, struct ovl_readdir_data, ctx);
+    rdd.count++;
+    p = ovl_cache_entry_new(rdd, name, namelen, core::ptr::null_mut(), 0, ino, d_type);
+    if (p == core::ptr::null_mut()) {
+    rdd.err = -ENOMEM;
+    return false;
+    }
+    list_add_tail(&p.l_node, rdd.list);
+    return true;
+    }
+    static int ovl_dir_read_impure(const struct path *path,  struct list_head *list,
+    struct rb_root *root)
+    {
+    int err;
+    struct path realpath;
+    struct ovl_cache_entry *p, *n;
+    struct ovl_readdir_data rdd = {
+    .ctx.actor = ovl_fill_plain,
+    .ctx.count = INT_MAX,
+    .list = list,
+    .root = root,
+    };
+    INIT_LIST_HEAD(list);
+// root = RB_ROOT;
+    ovl_path_upper(path.dentry, &realpath);
+    err = ovl_dir_read(&realpath, &rdd);
+    if (err)
+    return err;
+    list_for_each_entry_safe(p, n, list, l_node) {
+    if (!name_is_dot_dotdot(p.name, p.len)) {
+    err = ovl_cache_update(path, p, true);
+    if (err)
+    return err;
+    }
+    if (p.ino == p.real_ino) {
+    list_del(&p.l_node);
+    ovl_cache_entry_free(p);
+    } else {
+    struct rb_node **newp = &root.rb_node;
+    struct rb_node *parent = core::ptr::null_mut();
+    if (WARN_ON(ovl_cache_entry_find_link(p.name, p.len,
+    &newp, &parent)))
+    return -EIO;
+    rb_link_node(&p.node, parent, newp);
+    rb_insert_color(&p.node, root);
+    }
+    }
+    return 0;
+    }
+    static struct ovl_dir_cache *ovl_cache_get_impure(const struct path *path)
+    {
+    int res;
+    struct dentry *dentry = path.dentry;
+    struct inode *inode = d_inode(dentry);
+    struct ovl_fs *ofs = OVL_FS(dentry.d_sb);
+    struct ovl_dir_cache *cache;
+    cache = ovl_dir_cache(inode);
+    if (cache && ovl_inode_version_get(inode) == cache.version)
+    return cache;
+// Impure cache is not refcounted, free it here
+    ovl_dir_cache_free(inode);
+    ovl_set_dir_cache(inode, core::ptr::null_mut());
+    cache = kzalloc_obj(struct ovl_dir_cache);
+    if (!cache)
+    return ERR_PTR(-ENOMEM);
+    res = ovl_dir_read_impure(path, &cache.entries, &cache.root);
+    if (res) {
+    ovl_cache_free(&cache.entries);
+    kfree(cache);
+    return ERR_PTR(res);
+    }
+    if (list_empty(&cache.entries)) {
+//
+// A good opportunity to get rid of an unneeded "impure" flag.
+// Removing the "impure" xattr is best effort.
+//
+    if (!ovl_want_write(dentry)) {
+    ovl_removexattr(ofs, ovl_dentry_upper(dentry),
+    OVL_XATTR_IMPURE);
+    ovl_drop_write(dentry);
+    }
+    ovl_clear_flag(OVL_IMPURE, inode);
+    kfree(cache);
+    return core::ptr::null_mut();
+    }
+    cache.version = ovl_inode_version_get(inode);
+    ovl_set_dir_cache(inode, cache);
+    return cache;
+    }
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ovl_readdir_translate {
+    pub orig_ctx: *mut dir_context,
+    pub cache: *mut ovl_dir_cache,
+    pub ctx: dir_context,
+    pub parent_ino: u64,
+    pub fsid: c_int,
+    pub xinobits: c_int,
+    pub xinowarn: bool,
+}
+
+    static bool ovl_fill_real(struct dir_context *ctx, const char *name,
+    int namelen, loff_t offset, u64 ino,
+    unsigned int d_type)
+    {
+    struct ovl_readdir_translate *rdt =
+    container_of(ctx, struct ovl_readdir_translate, ctx);
+    struct dir_context *orig_ctx = rdt.orig_ctx;
+    bool res;
+    if (rdt.parent_ino && name_is_dotdot(name, namelen)) {
+    ino = rdt.parent_ino;
+    } else if (rdt.cache) {
+    struct ovl_cache_entry *p;
+    p = ovl_cache_entry_find(&rdt.cache.root, name, namelen);
+    if (p)
+    ino = p.ino;
+    } else if (rdt.xinobits) {
+    ino = ovl_remap_lower_ino(ino, rdt.xinobits, rdt.fsid,
+    name, namelen, rdt.xinowarn);
+    }
+    res = orig_ctx.actor(orig_ctx, name, namelen, offset, ino, d_type);
+    ctx.count = orig_ctx.count;
+    return res;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_is_impure_dir(file: *mut file) -> bool {
+    static bool ovl_is_impure_dir(struct file *file)
+    {
+    struct ovl_dir_file *od = file.private_data;
+    struct inode *dir = file_inode(file);
+//
+// Only upper dir can be impure, but if we are in the middle of
+// iterating a lower real dir, dir could be copied up and marked
+// impure. We only want the impure cache if we started iterating
+// a real upper dir to begin with.
+//
+    return od.is_upper && ovl_test_flag(OVL_IMPURE, dir);
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_iterate_real(file: *mut file, ctx: *mut dir_context) -> c_int {
+    static int ovl_iterate_real(struct file *file, struct dir_context *ctx)
+    {
+    int err;
+    struct ovl_dir_file *od = file.private_data;
+    struct dentry *dir = file.f_path.dentry;
+    struct ovl_fs *ofs = OVL_FS(dir.d_sb);
+    const struct ovl_layer *lower_layer = ovl_layer_lower(dir);
+    struct ovl_readdir_translate rdt = {
+    .ctx.actor = ovl_fill_real,
+    .ctx.count = ctx.count,
+    .orig_ctx = ctx,
+    .xinobits = ovl_xino_bits(ofs),
+    .xinowarn = ovl_xino_warn(ofs),
+    };
+    if (rdt.xinobits && lower_layer)
+    rdt.fsid = lower_layer.fsid;
+    if (OVL_TYPE_MERGE(ovl_path_type(dir.d_parent))) {
+    struct kstat stat;
+    let mut statpath: path = file.f_path;
+    statpath.dentry = dir.d_parent;
+    err = vfs_getattr(&statpath, &stat, STATX_INO, 0);
+    if (err)
+    return err;
+    WARN_ON_ONCE(dir.d_sb.s_dev != stat.dev);
+    rdt.parent_ino = stat.ino;
+    }
+    if (ovl_is_impure_dir(file)) {
+    rdt.cache = ovl_cache_get_impure(&file.f_path);
+    if (IS_ERR(rdt.cache))
+    return PTR_ERR(rdt.cache);
+    }
+    err = iterate_dir(od.realfile, &rdt.ctx);
+    ctx.pos = rdt.ctx.pos;
+    return err;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_iterate_merged(file: *mut file, ctx: *mut dir_context) -> c_int {
+    static int ovl_iterate_merged(struct file *file, struct dir_context *ctx)
+    {
+    struct ovl_dir_file *od = file.private_data;
+    struct dentry *dentry = file.f_path.dentry;
+    struct ovl_cache_entry *p;
+    int err;
+    if (!od.cache) {
+    struct ovl_dir_cache *cache;
+    cache = ovl_cache_get(dentry);
+    if (IS_ERR(cache))
+    return PTR_ERR(cache);
+    od.cache = cache;
+    ovl_seek_cursor(od, ctx.pos);
+    }
+    while (od.cursor != &od.cache.entries) {
+    p = list_entry(od.cursor, struct ovl_cache_entry, l_node);
+    if (!p.is_whiteout) {
+    if (!p.ino || p.check_xwhiteout) {
+    err = ovl_cache_update(&file.f_path, p, !p.ino);
+    if (err)
+    return err;
+    }
+    }
+// ovl_cache_update() sets is_whiteout on stale entry
+    if (!p.is_whiteout) {
+    if (!dir_emit(ctx, p.name, p.len, p.ino, p.type))
+    break;
+    }
+    od.cursor = p.l_node.next;
+    ctx.pos++;
+    }
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_need_adjust_d_ino(file: *mut file) -> bool {
+    static bool ovl_need_adjust_d_ino(struct file *file)
+    {
+    struct dentry *dentry = file.f_path.dentry;
+    struct ovl_fs *ofs = OVL_FS(dentry.d_sb);
+// If parent is merge, then need to adjust d_ino for '..'
+    if (ovl_xino_bits(ofs))
+    return true;
+// Can't do consistent inode numbering
+    if (!ovl_same_fs(ofs))
+    return false;
+// If dir is impure then need to adjust d_ino for copied up entries
+    if (ovl_is_impure_dir(file) ||
+    OVL_TYPE_MERGE(ovl_path_type(dentry.d_parent)))
+    return true;
+// Pure: no need to adjust d_ino
+    return false;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_iterate(file: *mut file, ctx: *mut dir_context) -> c_int {
+    static int ovl_iterate(struct file *file, struct dir_context *ctx)
+    {
+    struct ovl_dir_file *od = file.private_data;
+    if (!ctx.pos)
+    ovl_dir_reset(file);
+    with_ovl_creds(file_dentry(file).d_sb) {
+    if (!od.is_real)
+    return ovl_iterate_merged(file, ctx);
+    if (ovl_need_adjust_d_ino(file))
+    return ovl_iterate_real(file, ctx);
+    return iterate_dir(od.realfile, ctx);
+    }
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_dir_llseek(file: *mut file, offset: loff_t, origin: c_int) -> loff_t {
+    static loff_t ovl_dir_llseek(struct file *file, loff_t offset, int origin)
+    {
+    loff_t res;
+    struct ovl_dir_file *od = file.private_data;
+    inode_lock(file_inode(file));
+    if (!file.f_pos)
+    ovl_dir_reset(file);
+    if (od.is_real) {
+    res = vfs_llseek(od.realfile, offset, origin);
+    file.f_pos = od.realfile.f_pos;
+    } else {
+    res = -EINVAL;
+    switch (origin) {
+    case SEEK_CUR:
+    offset += file.f_pos;
+    break;
+    case SEEK_SET:
+    break;
+    default:
+    goto out_unlock;
+    }
+    if (offset < 0)
+    goto out_unlock;
+    if (offset != file.f_pos) {
+    file.f_pos = offset;
+    if (od.cache)
+    ovl_seek_cursor(od, offset);
+    }
+    res = offset;
+    }
+    out_unlock:
+    inode_unlock(file_inode(file));
+    return res;
+    }
+    static struct file *ovl_dir_open_realfile(const struct file *file,
+    const struct path *realpath)
+    {
+    with_ovl_creds(file_inode(file).i_sb)
+    return ovl_path_open(realpath, O_RDONLY | (file.f_flags & O_LARGEFILE));
+    }
+//
+// Like ovl_real_fdget(), returns upperfile if dir was copied up since open.
+// Unlike ovl_real_fdget(), this caches upperfile in file->private_data.
+//
+// TODO: use same abstract type for file->private_data of dir and file so
+// upperfile could also be cached for files as well.
+//
+    struct file *ovl_dir_real_file(const struct file *file, bool want_upper)
+    {
+    struct ovl_dir_file *od = file.private_data;
+    struct dentry *dentry = file.f_path.dentry;
+    struct file *old, *realfile = od.realfile;
+    if (!OVL_TYPE_UPPER(ovl_path_type(dentry)))
+    return want_upper ? core::ptr::null_mut() : realfile;
+//
+// Need to check if we started out being a lower dir, but got copied up
+//
+    if (!od.is_upper) {
+    realfile = READ_ONCE(od.upperfile);
+    if (!realfile) {
+    struct path upperpath;
+    ovl_path_upper(dentry, &upperpath);
+    realfile = ovl_dir_open_realfile(file, &upperpath);
+    if (IS_ERR(realfile))
+    return realfile;
+    old = cmpxchg_release(&od.upperfile, core::ptr::null_mut(), realfile);
+    if (old) {
+    fput(realfile);
+    realfile = old;
+    }
+    }
+    }
+    return realfile;
+    }
+    static int ovl_dir_fsync(struct file *file, loff_t start, loff_t end,
+    int datasync)
+    {
+    struct file *realfile;
+    int err;
+    err = ovl_sync_status(OVL_FS(file_inode(file).i_sb));
+    if (err <= 0)
+    return err;
+    realfile = ovl_dir_real_file(file, true);
+    err = PTR_ERR_OR_ZERO(realfile);
+// Nothing to sync for lower
+    if (!realfile || err)
+    return err;
+    return vfs_fsync_range(realfile, start, end, datasync);
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_dir_release(inode: *mut inode, file: *mut file) -> c_int {
+    static int ovl_dir_release(struct inode *inode, struct file *file)
+    {
+    struct ovl_dir_file *od = file.private_data;
+    if (od.cache) {
+    inode_lock(inode);
+    ovl_cache_put(od, inode);
+    inode_unlock(inode);
+    }
+    fput(od.realfile);
+    if (od.upperfile)
+    fput(od.upperfile);
+    kfree(od);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn ovl_dir_open(inode: *mut inode, file: *mut file) -> c_int {
+    static int ovl_dir_open(struct inode *inode, struct file *file)
+    {
+    struct path realpath;
+    struct file *realfile;
+    struct ovl_dir_file *od;
+    enum ovl_path_type type;
+    od = kzalloc_obj(struct ovl_dir_file);
+    if (!od)
+    return -ENOMEM;
+    type = ovl_path_real(file.f_path.dentry, &realpath);
+    realfile = ovl_dir_open_realfile(file, &realpath);
+    if (IS_ERR(realfile)) {
+    kfree(od);
+    return PTR_ERR(realfile);
+    }
+    od.realfile = realfile;
+    od.is_real = ovl_dir_is_real(inode);
+    od.is_upper = OVL_TYPE_UPPER(type);
+    file.private_data = od;
+    return 0;
+    }
+    WRAP_DIR_ITER(ovl_iterate) // FIXME!
+    const struct file_operations ovl_dir_operations = {
+    .read		= generic_read_dir,
+    .open		= ovl_dir_open,
+    .iterate_shared	= shared_ovl_iterate,
+    .llseek		= ovl_dir_llseek,
+    .fsync		= ovl_dir_fsync,
+    .release	= ovl_dir_release,
+    .setlease	= generic_setlease,
+    };
+#[no_mangle]
+pub unsafe extern "C" fn ovl_check_empty_dir(dentry: *mut dentry, list: *mut list_head) -> c_int {
+    int ovl_check_empty_dir(struct dentry *dentry, struct list_head *list)
+    {
+    int err;
+    struct ovl_cache_entry *p, *n;
+    let mut root: rb_root = RB_ROOT;
+    with_ovl_creds(dentry.d_sb)
+    err = ovl_dir_read_merged(dentry, list, &root);
+    if (err)
+    return err;
+    err = 0;
+    list_for_each_entry_safe(p, n, list, l_node) {
+//
+// Select whiteouts in upperdir, they should
+// be cleared when deleting this directory.
+//
+    if (p.is_whiteout) {
+    if (p.is_upper)
+    continue;
+    goto del_entry;
+    }
+    if (name_is_dot_dotdot(p.name, p.len))
+    goto del_entry;
+    err = -ENOTEMPTY;
+    break;
+    del_entry:
+    list_del(&p.l_node);
+    ovl_cache_entry_free(p);
+    }
+    return err;
+    }
+    void ovl_cleanup_whiteouts(struct ovl_fs *ofs, struct dentry *upper,
+    struct list_head *list)
+    {
+    struct ovl_cache_entry *p;
+    list_for_each_entry(p, list, l_node) {
+    struct dentry *dentry;
+    if (WARN_ON(!p.is_whiteout || !p.is_upper))
+    continue;
+    dentry = ovl_lookup_upper_unlocked(ofs, p.name, upper, p.len);
+    if (IS_ERR(dentry)) {
+    pr_err("lookup '%s/%.*s' failed (%i)\n",
+    upper.d_name.name, p.len, p.name,
+    (int) PTR_ERR(dentry));
+    continue;
+    }
+    if (dentry.d_inode)
+    ovl_cleanup(ofs, upper, dentry);
+    dput(dentry);
+    }
+    }
+    static bool ovl_check_d_type(struct dir_context *ctx, const char *name,
+    int namelen, loff_t offset, u64 ino,
+    unsigned int d_type)
+    {
+    struct ovl_readdir_data *rdd =
+    container_of(ctx, struct ovl_readdir_data, ctx);
+// Even if d_type is not supported, DT_DIR is returned for . and ..
+    if (name_is_dot_dotdot(name, namelen))
+    return true;
+    if (d_type != DT_UNKNOWN)
+    rdd.d_type_supported = true;
+    return true;
+    }
+//
+// Returns 1 if d_type is supported, 0 not supported/unknown. Negative values
+// if error is encountered.
+//
+#[no_mangle]
+pub unsafe extern "C" fn ovl_check_d_type_supported(realpath: *const path) -> c_int {
+    int ovl_check_d_type_supported(const struct path *realpath)
+    {
+    int err;
+    struct ovl_readdir_data rdd = {
+    .ctx.actor = ovl_check_d_type,
+    .ctx.count = INT_MAX,
+    .d_type_supported = false,
+    };
+    err = ovl_dir_read(realpath, &rdd);
+    if (err)
+    return err;
+    return rdd.d_type_supported;
+    }
+
+    static int ovl_workdir_cleanup_recurse(struct ovl_fs *ofs, const struct path *path,
+    int level)
+    {
+    int err;
+    LIST_HEAD(list);
+    struct ovl_cache_entry *p;
+    struct ovl_readdir_data rdd = {
+    .ctx.actor = ovl_fill_plain,
+    .ctx.count = INT_MAX,
+    .list = &list,
+    };
+    let mut incompat: bool = false;
+//
+// The "work/incompat" directory is treated specially - if it is not
+// empty, instead of printing a generic error and mounting read-only,
+// we will error about incompat features and fail the mount.
+//
+// When called from ovl_indexdir_cleanup(), path->dentry->d_name.name
+// starts with '#'.
+//
+    if (level == 2 &&
+    !strcmp(path.dentry.d_name.name, OVL_INCOMPATDIR_NAME))
+    incompat = true;
+    err = ovl_dir_read(path, &rdd);
+    if (err)
+    goto out;
+    list_for_each_entry(p, &list, l_node) {
+    struct dentry *dentry;
+    if (name_is_dot_dotdot(p.name, p.len)) {
+    continue;
+    } else if (incompat) {
+    pr_err("overlay with incompat feature '%s' cannot be mounted\n",
+    p.name);
+    err = -EINVAL;
+    break;
+    }
+    dentry = ovl_lookup_upper_unlocked(ofs, p.name, path.dentry, p.len);
+    if (IS_ERR(dentry))
+    continue;
+    if (dentry.d_inode)
+    err = ovl_workdir_cleanup(ofs, path.dentry, path.mnt,
+    dentry, level);
+    dput(dentry);
+    if (err)
+    break;
+    }
+    out:
+    ovl_cache_free(&list);
+    return err;
+    }
+    int ovl_workdir_cleanup(struct ovl_fs *ofs, struct dentry *parent,
+    struct vfsmount *mnt, struct dentry *dentry, int level)
+    {
+    int err;
+    if (!d_is_dir(dentry) || level > 1)
+    return ovl_cleanup(ofs, parent, dentry);
+    dentry = start_removing_dentry(parent, dentry);
+    if (IS_ERR(dentry))
+    return PTR_ERR(dentry);
+    err = ovl_do_rmdir(ofs, parent.d_inode, dentry);
+    end_removing(dentry);
+    if (err) {
+    let mut path: path = { .mnt = mnt, .dentry = dentry };
+    err = ovl_workdir_cleanup_recurse(ofs, &path, level + 1);
+    if (!err)
+    err = ovl_cleanup(ofs, parent, dentry);
+    }
+    return err;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ovl_indexdir_cleanup(ofs: *mut ovl_fs) -> c_int {
+    int ovl_indexdir_cleanup(struct ovl_fs *ofs)
+    {
+    int err;
+    struct dentry *indexdir = ofs.workdir;
+    struct dentry *index = core::ptr::null_mut();
+    let mut path: path = { .mnt = ovl_upper_mnt(ofs), .dentry = indexdir };
+    LIST_HEAD(list);
+    struct ovl_cache_entry *p;
+    struct ovl_readdir_data rdd = {
+    .ctx.actor = ovl_fill_plain,
+    .ctx.count = INT_MAX,
+    .list = &list,
+    };
+    err = ovl_dir_read(&path, &rdd);
+    if (err)
+    goto out;
+    list_for_each_entry(p, &list, l_node) {
+    if (name_is_dot_dotdot(p.name, p.len))
+    continue;
+    index = ovl_lookup_upper_unlocked(ofs, p.name, indexdir, p.len);
+    if (IS_ERR(index)) {
+    err = PTR_ERR(index);
+    index = core::ptr::null_mut();
+    break;
+    }
+// Cleanup leftover from index create/cleanup attempt
+    if (index.d_name.name[0] == '#') {
+    err = ovl_workdir_cleanup(ofs, indexdir, path.mnt, index, 1);
+    if (err)
+    break;
+    goto next;
+    }
+    err = ovl_verify_index(ofs, index);
+    if (!err) {
+    goto next;
+    } else if (err == -ESTALE) {
+// Cleanup stale index entries
+    err = ovl_cleanup(ofs, indexdir, index);
+    } else if (err != -ENOENT) {
+//
+// Abort mount to avoid corrupting the index if
+// an incompatible index entry was found or on out
+// of memory.
+//
+    break;
+    } else if (ofs.config.nfs_export) {
+//
+// Whiteout orphan index to block future open by
+// handle after overlay nlink dropped to zero.
+//
+    err = ovl_cleanup_and_whiteout(ofs, indexdir, index);
+    } else {
+// Cleanup orphan index entries
+    err = ovl_cleanup(ofs, indexdir, index);
+    }
+    if (err)
+    break;
+    next:
+    dput(index);
+    index = core::ptr::null_mut();
+    }
+    dput(index);
+    out:
+    ovl_cache_free(&list);
+    if (err)
+    pr_err("failed index dir cleanup (%i)\n", err);
+    return err;
+    }

@@ -1,0 +1,145 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/accel/habanalabs/include/gaudi2/asic_reg/pdma0_core_special_masks.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Copyright 2016-2020 HabanaLabs, Ltd.
+// All Rights Reserved.
+//
+// This is an auto-generated file
+// DO NOT EDIT BELOW
+//
+// PDMA0_CORE_SPECIAL
+// (Prototype: SPECIAL_REGS)
+//
+// PDMA0_CORE_SPECIAL_GLBL_PRIV
+pub const PDMA0_CORE_SPECIAL_GLBL_PRIV_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_GLBL_PRIV_VAL_MASK: c_uint = 0xFFFFFFFF;
+// PDMA0_CORE_SPECIAL_MEM_GW_DATA
+pub const PDMA0_CORE_SPECIAL_MEM_GW_DATA_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_DATA_VAL_MASK: c_uint = 0xFFFFFFFF;
+// PDMA0_CORE_SPECIAL_MEM_GW_REQ
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_ADDR_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_ADDR_MASK: c_uint = 0x3FFFFF;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_MID_SHIFT: c_int = 22;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_MID_MASK: c_uint = 0x3FC00000;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_WNR_SHIFT: c_int = 30;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_WNR_MASK: c_uint = 0x40000000;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_VLD_SHIFT: c_int = 31;
+pub const PDMA0_CORE_SPECIAL_MEM_GW_REQ_VLD_MASK: c_uint = 0x80000000;
+// PDMA0_CORE_SPECIAL_MEM_NUMOF
+pub const PDMA0_CORE_SPECIAL_MEM_NUMOF_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_NUMOF_VAL_MASK: c_uint = 0xFF;
+// PDMA0_CORE_SPECIAL_MEM_ECC_SEL
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_SEL_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_SEL_VAL_MASK: c_uint = 0xFF;
+// PDMA0_CORE_SPECIAL_MEM_ECC_CTL
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_SERR_INJ_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_SERR_INJ_MASK: c_uint = 0x1;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_DERR_INJ_SHIFT: c_int = 1;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_DERR_INJ_MASK: c_uint = 0x2;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_SERR_CLR_SHIFT: c_int = 2;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_SERR_CLR_MASK: c_uint = 0x4;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_DERR_CLR_SHIFT: c_int = 3;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_CTL_DERR_CLR_MASK: c_uint = 0x8;
+// PDMA0_CORE_SPECIAL_MEM_ECC_ERR_MASK
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_MASK_SERR_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_MASK_SERR_MASK: c_uint = 0x1;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_MASK_DERR_SHIFT: c_int = 1;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_MASK_DERR_MASK: c_uint = 0x2;
+// PDMA0_CORE_SPECIAL_MEM_ECC_GLBL_ERR_MASK
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_GLBL_ERR_MASK_SERR_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_GLBL_ERR_MASK_SERR_MASK: c_uint = 0x1;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_GLBL_ERR_MASK_DERR_SHIFT: c_int = 1;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_GLBL_ERR_MASK_DERR_MASK: c_uint = 0x2;
+// PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS_SYND_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS_SYND_MASK: c_uint = 0xFFFF;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS_SERR_SHIFT: c_int = 16;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS_SERR_MASK: c_uint = 0x10000;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS_DERR_SHIFT: c_int = 17;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_STS_DERR_MASK: c_uint = 0x20000;
+// PDMA0_CORE_SPECIAL_MEM_ECC_ERR_ADDR
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_ADDR_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_ECC_ERR_ADDR_VAL_MASK: c_uint = 0xFFFF;
+// PDMA0_CORE_SPECIAL_MEM_RM
+pub const PDMA0_CORE_SPECIAL_MEM_RM_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_MEM_RM_VAL_MASK: c_uint = 0x3FFFFFFF;
+// PDMA0_CORE_SPECIAL_GLBL_ERR_MASK
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_PRIV_RD_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_PRIV_RD_MASK: c_uint = 0x1;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_SEC_RD_SHIFT: c_int = 1;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_SEC_RD_MASK: c_uint = 0x2;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_UNMAPPED_RD_SHIFT: c_int = 2;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_UNMAPPED_RD_MASK: c_uint = 0x4;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_PRIV_WR_SHIFT: c_int = 3;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_PRIV_WR_MASK: c_uint = 0x8;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_SEC_WR_SHIFT: c_int = 4;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_SEC_WR_MASK: c_uint = 0x10;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_UNMAPPED_WR_SHIFT: c_int = 5;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_APB_UNMAPPED_WR_MASK: c_uint = 0x20;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_EXT_SEC_WR_SHIFT: c_int = 16;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_EXT_SEC_WR_MASK: c_uint = 0x10000;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_EXT_UNMAPPED_WR_SHIFT: c_int = 17;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_MASK_EXT_UNMAPPED_WR_MASK: c_uint = 0x20000;
+// PDMA0_CORE_SPECIAL_GLBL_ERR_ADDR
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_ADDR_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_ADDR_VAL_MASK: c_uint = 0xFFFFFFFF;
+// PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_PRIV_RD_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_PRIV_RD_MASK: c_uint = 0x1;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_SEC_RD_SHIFT: c_int = 1;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_SEC_RD_MASK: c_uint = 0x2;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_UNMAPPED_RD_SHIFT: c_int = 2;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_UNMAPPED_RD_MASK: c_uint = 0x4;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_PRIV_WR_SHIFT: c_int = 3;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_PRIV_WR_MASK: c_uint = 0x8;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_SEC_WR_SHIFT: c_int = 4;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_SEC_WR_MASK: c_uint = 0x10;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_UNMAPPED_WR_SHIFT: c_int = 5;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_APB_UNMAPPED_WR_MASK: c_uint = 0x20;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_EXT_SEC_WR_SHIFT: c_int = 16;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_EXT_SEC_WR_MASK: c_uint = 0x10000;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_EXT_UNMAPPED_WR_SHIFT: c_int = 17;
+pub const PDMA0_CORE_SPECIAL_GLBL_ERR_CAUSE_EXT_UNMAPPED_WR_MASK: c_uint = 0x20000;
+// PDMA0_CORE_SPECIAL_GLBL_SPARE
+pub const PDMA0_CORE_SPECIAL_GLBL_SPARE_R_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_GLBL_SPARE_R_MASK: c_uint = 0xFFFFFFFF;
+// PDMA0_CORE_SPECIAL_GLBL_SEC
+pub const PDMA0_CORE_SPECIAL_GLBL_SEC_VAL_SHIFT: c_int = 0;
+pub const PDMA0_CORE_SPECIAL_GLBL_SEC_VAL_MASK: c_uint = 0xFFFFFFFF;

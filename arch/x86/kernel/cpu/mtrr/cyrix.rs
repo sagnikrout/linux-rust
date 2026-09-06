@@ -1,0 +1,248 @@
+//! Automatically rewritten from C to Rust
+//! Source: arch/x86/kernel/cpu/mtrr/cyrix.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+
+    static void
+    cyrix_get_arr(unsigned int reg, unsigned long *base,
+    unsigned long *size, mtrr_type * type)
+    {
+    unsigned char arr, ccr3, rcr, shift;
+    unsigned long flags;
+    arr = CX86_ARR_BASE + (reg << 1) + reg;	/* avoid multiplication by 3 */
+    local_irq_save(flags);
+    ccr3 = getCx86(CX86_CCR3);
+    setCx86(CX86_CCR3, (ccr3 & 0x0f) | 0x10);	/* enable MAPEN */
+    ((unsigned char *)base)[3] = getCx86(arr);
+    ((unsigned char *)base)[2] = getCx86(arr + 1);
+    ((unsigned char *)base)[1] = getCx86(arr + 2);
+    rcr = getCx86(CX86_RCR_BASE + reg);
+    setCx86(CX86_CCR3, ccr3);			/* disable MAPEN */
+    local_irq_restore(flags);
+    shift = ((unsigned char *) base)[1] & 0x0f;
+// base >>= PAGE_SHIFT;
+//
+// Power of two, at least 4K on ARR0-ARR6, 256K on ARR7
+// Note: shift==0xf means 4G, this is unsupported.
+//
+    if (shift)
+// size = (reg < 7 ? 0x1UL : 0x40UL) << (shift - 1);
+    else
+// size = 0;
+// Bit 0 is Cache Enable on ARR7, Cache Disable on ARR0-ARR6
+    if (reg < 7) {
+    switch (rcr) {
+    case 1:
+// type = MTRR_TYPE_UNCACHABLE;
+    break;
+    case 8:
+// type = MTRR_TYPE_WRBACK;
+    break;
+    case 9:
+// type = MTRR_TYPE_WRCOMB;
+    break;
+    case 24:
+    default:
+// type = MTRR_TYPE_WRTHROUGH;
+    break;
+    }
+    } else {
+    switch (rcr) {
+    case 0:
+// type = MTRR_TYPE_UNCACHABLE;
+    break;
+    case 8:
+// type = MTRR_TYPE_WRCOMB;
+    break;
+    case 9:
+// type = MTRR_TYPE_WRBACK;
+    break;
+    case 25:
+    default:
+// type = MTRR_TYPE_WRTHROUGH;
+    break;
+    }
+    }
+    }
+//
+// cyrix_get_free_region - get a free ARR.
+//
+// @base: the starting (base) address of the region.
+// @size: the size (in bytes) of the region.
+//
+// Returns: the index of the region on success, else -1 on error.
+//
+    static int
+    cyrix_get_free_region(unsigned long base, unsigned long size, int replace_reg)
+    {
+    unsigned long lbase, lsize;
+    mtrr_type ltype;
+    int i;
+    switch (replace_reg) {
+    case 7:
+    if (size < 0x40)
+    break;
+    fallthrough;
+    case 6:
+    case 5:
+    case 4:
+    return replace_reg;
+    case 3:
+    case 2:
+    case 1:
+    case 0:
+    return replace_reg;
+    }
+// If we are to set up a region >32M then look at ARR7 immediately
+    if (size > 0x2000) {
+    cyrix_get_arr(7, &lbase, &lsize, &ltype);
+    if (lsize == 0)
+    return 7;
+// Else try ARR0-ARR6 first
+    } else {
+    for (i = 0; i < 7; i++) {
+    cyrix_get_arr(i, &lbase, &lsize, &ltype);
+    if (lsize == 0)
+    return i;
+    }
+//
+// ARR0-ARR6 isn't free
+// try ARR7 but its size must be at least 256K
+//
+    cyrix_get_arr(i, &lbase, &lsize, &ltype);
+    if ((lsize == 0) && (size >= 0x40))
+    return i;
+    }
+    return -ENOSPC;
+    }
+    static u32 cr4, ccr3;
+#[no_mangle]
+unsafe extern "C" fn prepare_set() {
+    static void prepare_set(void)
+    {
+    u32 cr0;
+// Save value of CR4 and clear Page Global Enable (bit 7)
+    if (boot_cpu_has(X86_FEATURE_PGE)) {
+    cr4 = __read_cr4();
+    __write_cr4(cr4 & ~X86_CR4_PGE);
+    }
+//
+// Disable and flush caches.
+// Note that wbinvd flushes the TLBs as a side-effect
+//
+    cr0 = read_cr0() | X86_CR0_CD;
+    wbinvd();
+    write_cr0(cr0);
+    wbinvd();
+// Cyrix ARRs - everything else was excluded at the top
+    ccr3 = getCx86(CX86_CCR3);
+// Cyrix ARRs - everything else was excluded at the top
+    setCx86(CX86_CCR3, (ccr3 & 0x0f) | 0x10);
+    }
+#[no_mangle]
+unsafe extern "C" fn post_set() {
+    static void post_set(void)
+    {
+// Flush caches and TLBs
+    wbinvd();
+// Cyrix ARRs - everything else was excluded at the top
+    setCx86(CX86_CCR3, ccr3);
+// Enable caches
+    write_cr0(read_cr0() & ~X86_CR0_CD);
+// Restore value of CR4
+    if (boot_cpu_has(X86_FEATURE_PGE))
+    __write_cr4(cr4);
+    }
+    static void cyrix_set_arr(unsigned int reg, unsigned long base,
+    unsigned long size, mtrr_type type)
+    {
+    unsigned char arr, arr_type, arr_size;
+    arr = CX86_ARR_BASE + (reg << 1) + reg;	/* avoid multiplication by 3 */
+// count down from 32M (ARR0-ARR6) or from 2G (ARR7)
+    if (reg >= 7)
+    size >>= 6;
+    size &= 0x7fff;		/* make sure arr_size <= 14 */
+    for (arr_size = 0; size; arr_size++, size >>= 1)
+    ;
+    if (reg < 7) {
+    switch (type) {
+    case MTRR_TYPE_UNCACHABLE:
+    arr_type = 1;
+    break;
+    case MTRR_TYPE_WRCOMB:
+    arr_type = 9;
+    break;
+    case MTRR_TYPE_WRTHROUGH:
+    arr_type = 24;
+    break;
+    default:
+    arr_type = 8;
+    break;
+    }
+    } else {
+    switch (type) {
+    case MTRR_TYPE_UNCACHABLE:
+    arr_type = 0;
+    break;
+    case MTRR_TYPE_WRCOMB:
+    arr_type = 8;
+    break;
+    case MTRR_TYPE_WRTHROUGH:
+    arr_type = 25;
+    break;
+    default:
+    arr_type = 9;
+    break;
+    }
+    }
+    prepare_set();
+    base <<= PAGE_SHIFT;
+    setCx86(arr + 0,  ((unsigned char *)&base)[3]);
+    setCx86(arr + 1,  ((unsigned char *)&base)[2]);
+    setCx86(arr + 2, (((unsigned char *)&base)[1]) | arr_size);
+    setCx86(CX86_RCR_BASE + reg, arr_type);
+    post_set();
+    }
+    const struct mtrr_ops cyrix_mtrr_ops = {
+    .var_regs          = 8,
+    .set               = cyrix_set_arr,
+    .get               = cyrix_get_arr,
+    .get_free_region   = cyrix_get_free_region,
+    .validate_add_page = generic_validate_add_page,
+    .have_wrcomb       = positive_have_wrcomb,
+    };

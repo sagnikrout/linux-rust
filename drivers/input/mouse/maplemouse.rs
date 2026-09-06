@@ -1,0 +1,175 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/input/mouse/maplemouse.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-only
+//
+// SEGA Dreamcast mouse driver
+// Based on drivers/usb/usbmouse.c
+//
+// Copyright (c) Yaegashi Takeshi, 2001
+// Copyright (c) Adrian McMenamin, 2008 - 2009
+//
+
+    MODULE_AUTHOR("Adrian McMenamin <adrian@mcmen.demon.co.uk>");
+    MODULE_DESCRIPTION("SEGA Dreamcast mouse driver");
+    MODULE_LICENSE("GPL");
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct dc_mouse {
+    pub dev: *mut input_dev,
+    pub mdev: *mut maple_device,
+}
+
+#[no_mangle]
+unsafe extern "C" fn dc_mouse_callback(mq: *mut mapleq) {
+    static void dc_mouse_callback(struct mapleq *mq)
+    {
+    int buttons, relx, rely, relz;
+    struct maple_device *mapledev = mq.dev;
+    struct dc_mouse *mse = maple_get_drvdata(mapledev);
+    struct input_dev *dev = mse.dev;
+    unsigned char *res = mq.recvbuf.buf;
+    buttons = ~res[8];
+    relx = *(unsigned short *)(res + 12) - 512;
+    rely = *(unsigned short *)(res + 14) - 512;
+    relz = *(unsigned short *)(res + 16) - 512;
+    input_report_key(dev, BTN_LEFT,   buttons & 4);
+    input_report_key(dev, BTN_MIDDLE, buttons & 9);
+    input_report_key(dev, BTN_RIGHT,  buttons & 2);
+    input_report_rel(dev, REL_X,      relx);
+    input_report_rel(dev, REL_Y,      rely);
+    input_report_rel(dev, REL_WHEEL,  relz);
+    input_sync(dev);
+    }
+#[no_mangle]
+unsafe extern "C" fn dc_mouse_open(dev: *mut input_dev) -> c_int {
+    static int dc_mouse_open(struct input_dev *dev)
+    {
+    struct dc_mouse *mse = input_get_drvdata(dev);
+    maple_getcond_callback(mse.mdev, dc_mouse_callback, HZ/50,
+    MAPLE_FUNC_MOUSE);
+    return 0;
+    }
+#[no_mangle]
+unsafe extern "C" fn dc_mouse_close(dev: *mut input_dev) {
+    static void dc_mouse_close(struct input_dev *dev)
+    {
+    struct dc_mouse *mse = input_get_drvdata(dev);
+    maple_getcond_callback(mse.mdev, dc_mouse_callback, 0,
+    MAPLE_FUNC_MOUSE);
+    }
+// allow the mouse to be used
+#[no_mangle]
+unsafe extern "C" fn probe_maple_mouse(dev: *mut device) -> c_int {
+    static int probe_maple_mouse(struct device *dev)
+    {
+    struct maple_device *mdev = to_maple_dev(dev);
+    struct maple_driver *mdrv = to_maple_driver(dev.driver);
+    int error;
+    struct input_dev *input_dev;
+    struct dc_mouse *mse;
+    mse = kzalloc_obj(*mse);
+    if (!mse) {
+    error = -ENOMEM;
+    goto fail;
+    }
+    input_dev = input_allocate_device();
+    if (!input_dev) {
+    error = -ENOMEM;
+    goto fail_nomem;
+    }
+    mse.dev = input_dev;
+    mse.mdev = mdev;
+    maple_set_drvdata(mdev, mse);
+    input_set_drvdata(input_dev, mse);
+    input_dev.evbit[0] = BIT_MASK(EV_KEY) | BIT_MASK(EV_REL);
+    input_dev.keybit[BIT_WORD(BTN_MOUSE)] = BIT_MASK(BTN_LEFT) |
+    BIT_MASK(BTN_RIGHT) | BIT_MASK(BTN_MIDDLE);
+    input_dev.relbit[0] = BIT_MASK(REL_X) | BIT_MASK(REL_Y) |
+    BIT_MASK(REL_WHEEL);
+    input_dev.open = dc_mouse_open;
+    input_dev.close = dc_mouse_close;
+    input_dev.name = mdev.product_name;
+    input_dev.id.bustype = BUS_HOST;
+    error =	input_register_device(input_dev);
+    if (error)
+    goto fail_register;
+    mdev.driver = mdrv;
+    return error;
+    fail_register:
+    input_free_device(input_dev);
+    maple_set_drvdata(mdev, core::ptr::null_mut());
+    fail_nomem:
+    kfree(mse);
+    fail:
+    return error;
+    }
+#[no_mangle]
+unsafe extern "C" fn remove_maple_mouse(dev: *mut device) -> c_int {
+    static int remove_maple_mouse(struct device *dev)
+    {
+    struct maple_device *mdev = to_maple_dev(dev);
+    struct dc_mouse *mse = maple_get_drvdata(mdev);
+    mdev.callback = core::ptr::null_mut();
+    input_unregister_device(mse.dev);
+    maple_set_drvdata(mdev, core::ptr::null_mut());
+    kfree(mse);
+    return 0;
+    }
+    static struct maple_driver dc_mouse_driver = {
+    .function =	MAPLE_FUNC_MOUSE,
+    .drv = {
+    .name = "Dreamcast_mouse",
+    .probe = probe_maple_mouse,
+    .remove = remove_maple_mouse,
+    },
+    };
+#[no_mangle]
+unsafe extern "C" fn dc_mouse_init() -> int __init {
+    static int __init dc_mouse_init(void)
+    {
+    return maple_driver_register(&dc_mouse_driver);
+    }
+#[no_mangle]
+unsafe extern "C" fn dc_mouse_exit() -> void __exit {
+    static void __exit dc_mouse_exit(void)
+    {
+    maple_driver_unregister(&dc_mouse_driver);
+    }
+    module_init(dc_mouse_init);
+    module_exit(dc_mouse_exit);

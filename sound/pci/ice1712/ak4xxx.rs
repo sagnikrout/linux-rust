@@ -1,0 +1,191 @@
+//! Automatically rewritten from C to Rust
+//! Source: sound/pci/ice1712/ak4xxx.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// ALSA driver for ICEnsemble ICE1712 (Envy24)
+//
+// AK4524 / AK4528 / AK4529 / AK4355 / AK4381 interface
+//
+// Copyright (c) 2000 Jaroslav Kysela <perex@perex.cz>
+//
+
+    MODULE_AUTHOR("Jaroslav Kysela <perex@perex.cz>");
+    MODULE_DESCRIPTION("ICEnsemble ICE17xx <. AK4xxx AD/DA chip interface");
+    MODULE_LICENSE("GPL");
+#[no_mangle]
+unsafe extern "C" fn snd_ice1712_akm4xxx_lock(ak: *mut snd_akm4xxx, chip: c_int) {
+    static void snd_ice1712_akm4xxx_lock(struct snd_akm4xxx *ak, int chip)
+    {
+    struct snd_ice1712 *ice = ak.private_data[0];
+    snd_ice1712_save_gpio_status(ice);
+    }
+#[no_mangle]
+unsafe extern "C" fn snd_ice1712_akm4xxx_unlock(ak: *mut snd_akm4xxx, chip: c_int) {
+    static void snd_ice1712_akm4xxx_unlock(struct snd_akm4xxx *ak, int chip)
+    {
+    struct snd_ice1712 *ice = ak.private_data[0];
+    snd_ice1712_restore_gpio_status(ice);
+    }
+//
+// write AK4xxx register
+//
+    static void snd_ice1712_akm4xxx_write(struct snd_akm4xxx *ak, int chip,
+    unsigned char addr, unsigned char data)
+    {
+    unsigned int tmp;
+    int idx;
+    unsigned int addrdata;
+    struct snd_ak4xxx_private *priv = (void *)ak.private_value[0];
+    struct snd_ice1712 *ice = ak.private_data[0];
+    if (snd_BUG_ON(chip < 0 || chip >= 4))
+    return;
+    tmp = snd_ice1712_gpio_read(ice);
+    tmp |= priv.add_flags;
+    tmp &= ~priv.mask_flags;
+    if (priv.cs_mask == priv.cs_addr) {
+    if (priv.cif) {
+    tmp |= priv.cs_mask; /* start without chip select */
+    }  else {
+    tmp &= ~priv.cs_mask; /* chip select low */
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+    }
+    } else {
+// doesn't handle cf=1 yet
+    tmp &= ~priv.cs_mask;
+    tmp |= priv.cs_addr;
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+    }
+// build I2C address + data byte
+    addrdata = (priv.caddr << 6) | 0x20 | (addr & 0x1f);
+    addrdata = (addrdata << 8) | data;
+    for (idx = 15; idx >= 0; idx--) {
+// drop clock
+    tmp &= ~priv.clk_mask;
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+// set data
+    if (addrdata & (1 << idx))
+    tmp |= priv.data_mask;
+    else
+    tmp &= ~priv.data_mask;
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+// raise clock
+    tmp |= priv.clk_mask;
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+    }
+    if (priv.cs_mask == priv.cs_addr) {
+    if (priv.cif) {
+// assert a cs pulse to trigger
+    tmp &= ~priv.cs_mask;
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+    }
+    tmp |= priv.cs_mask; /* chip select high to trigger */
+    } else {
+    tmp &= ~priv.cs_mask;
+    tmp |= priv.cs_none; /* deselect address */
+    }
+    snd_ice1712_gpio_write(ice, tmp);
+    udelay(1);
+    }
+//
+// initialize the struct snd_akm4xxx record with the template
+//
+    int snd_ice1712_akm4xxx_init(struct snd_akm4xxx *ak, const struct snd_akm4xxx *temp,
+    const struct snd_ak4xxx_private *_priv, struct snd_ice1712 *ice)
+    {
+    struct snd_ak4xxx_private *priv;
+    if (_priv != core::ptr::null_mut()) {
+    priv = kmalloc_obj(*priv);
+    if (priv == core::ptr::null_mut())
+    return -ENOMEM;
+// priv = *_priv;
+    } else {
+    priv = core::ptr::null_mut();
+    }
+// ak = *temp;
+    ak.card = ice.card;
+    ak.private_value[0] = (unsigned long)priv;
+    ak.private_data[0] = ice;
+    if (ak.ops.lock == core::ptr::null_mut())
+    ak.ops.lock = snd_ice1712_akm4xxx_lock;
+    if (ak.ops.unlock == core::ptr::null_mut())
+    ak.ops.unlock = snd_ice1712_akm4xxx_unlock;
+    if (ak.ops.write == core::ptr::null_mut())
+    ak.ops.write = snd_ice1712_akm4xxx_write;
+    snd_akm4xxx_init(ak);
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn snd_ice1712_akm4xxx_free(ice: *mut snd_ice1712) {
+    void snd_ice1712_akm4xxx_free(struct snd_ice1712 *ice)
+    {
+    unsigned int akidx;
+    if (ice.akm == core::ptr::null_mut())
+    return;
+    for (akidx = 0; akidx < ice.akm_codecs; akidx++) {
+    struct snd_akm4xxx *ak = &ice.akm[akidx];
+    kfree((void*)ak.private_value[0]);
+    }
+    kfree(ice.akm);
+    }
+//
+// build AK4xxx controls
+//
+#[no_mangle]
+pub unsafe extern "C" fn snd_ice1712_akm4xxx_build_controls(ice: *mut snd_ice1712) -> c_int {
+    int snd_ice1712_akm4xxx_build_controls(struct snd_ice1712 *ice)
+    {
+    unsigned int akidx;
+    int err;
+    for (akidx = 0; akidx < ice.akm_codecs; akidx++) {
+    struct snd_akm4xxx *ak = &ice.akm[akidx];
+    err = snd_akm4xxx_build_controls(ak);
+    if (err < 0)
+    return err;
+    }
+    return 0;
+    }
+    EXPORT_SYMBOL(snd_ice1712_akm4xxx_init);
+    EXPORT_SYMBOL(snd_ice1712_akm4xxx_free);
+    EXPORT_SYMBOL(snd_ice1712_akm4xxx_build_controls);

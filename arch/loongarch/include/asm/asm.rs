@@ -1,0 +1,105 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: arch/loongarch/include/asm/asm.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+//
+// Some useful macros for LoongArch assembler code
+//
+// Copyright (C) 2020-2022 Loongson Technology Corporation Limited
+//
+// Derived from MIPS:
+// Copyright (C) 1995, 1996, 1997, 1999, 2001 by Ralf Baechle
+// Copyright (C) 1999 by Silicon Graphics, Inc.
+// Copyright (C) 2001 MIPS Technologies, Inc.
+// Copyright (C) 2002  Maciej W. Rozycki
+//
+// LoongArch pref instruction.
+
+//
+// Stack alignment
+//
+
+//
+// Macros to handle different pointer/register sizes for 32/64-bit code
+//
+// Size of a register
+//
+
+pub const SZREG: c_int = 4;
+
+pub const SZREG: c_int = 8;
+
+//
+// Use the following macros in assemblercode to load/store registers,
+// pointers etc.
+//
+
+//
+// How to add/sub/load/store/shift C int variables.
+//
+
+//
+// How to add/sub/load/store/shift C long variables.
+//
+
+pub const LONGSIZE: c_int = 4;
+pub const LONGMASK: c_int = 3;
+pub const LONGLOG: c_int = 2;
+
+pub const LONGSIZE: c_int = 8;
+pub const LONGMASK: c_int = 7;
+pub const LONGLOG: c_int = 3;
+
+//
+// How to add/sub/load/store/shift pointers.
+//
+
+pub const PTR_SCALESHIFT: c_int = 2;
+
+pub const PTRSIZE: c_int = 4;
+pub const PTRLOG: c_int = 2;
+
+pub const PTR_SCALESHIFT: c_int = 3;
+
+pub const PTRSIZE: c_int = 8;
+pub const PTRLOG: c_int = 3;
+
+// Annotate a function as being unsuitable for kprobes.
+
+// Macro flag: #define _ASM_NOKPROBE(name)
+

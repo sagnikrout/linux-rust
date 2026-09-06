@@ -1,0 +1,965 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/infiniband/hw/hfi1/chip_registers.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+//
+// Copyright(c) 2015, 2016 Intel Corporation.
+//
+
+// Macro flag: #define DEF_CHIP_REG
+pub const CORE: c_uint = 0x000000000000;
+
+pub const PCIE: c_int = 0;
+pub const ASIC_NUM_SCRATCH: c_int = 4;
+pub const CCE_ERR_INT_CNT: c_int = 0;
+pub const CCE_MISC_INT_CNT: c_int = 2;
+pub const CCE_NUM_32_BIT_COUNTERS: c_int = 3;
+pub const CCE_NUM_32_BIT_INT_COUNTERS: c_int = 6;
+pub const CCE_NUM_INT_CSRS: c_int = 12;
+pub const CCE_NUM_INT_MAP_CSRS: c_int = 96;
+pub const CCE_NUM_MSIX_PBAS: c_int = 4;
+pub const CCE_NUM_MSIX_VECTORS: c_int = 256;
+pub const CCE_NUM_SCRATCH: c_int = 4;
+pub const CCE_PCIE_POSTED_CRDT_STALL_CNT: c_int = 2;
+pub const CCE_PCIE_TRGT_STALL_CNT: c_int = 0;
+pub const CCE_PIO_WR_STALL_CNT: c_int = 1;
+pub const CCE_RCV_AVAIL_INT_CNT: c_int = 3;
+pub const CCE_RCV_URGENT_INT_CNT: c_int = 4;
+pub const CCE_SDMA_INT_CNT: c_int = 1;
+pub const CCE_SEND_CREDIT_INT_CNT: c_int = 5;
+
+pub const DCC_CFG_LED_CNTRL_LED_CNTRL_SMASK: c_uint = 0x10ull;
+pub const DCC_CFG_LED_CNTRL_LED_SW_BLINK_RATE_SHIFT: c_int = 0;
+pub const DCC_CFG_LED_CNTRL_LED_SW_BLINK_RATE_SMASK: c_uint = 0xFull;
+
+pub const DCC_CFG_PORT_CONFIG1_DLID_MASK_MASK: c_uint = 0xFFFFull;
+pub const DCC_CFG_PORT_CONFIG1_DLID_MASK_SHIFT: c_int = 16;
+pub const DCC_CFG_PORT_CONFIG1_DLID_MASK_SMASK: c_uint = 0xFFFF0000ull;
+pub const DCC_CFG_PORT_CONFIG1_TARGET_DLID_MASK: c_uint = 0xFFFFull;
+pub const DCC_CFG_PORT_CONFIG1_TARGET_DLID_SHIFT: c_int = 0;
+pub const DCC_CFG_PORT_CONFIG1_TARGET_DLID_SMASK: c_uint = 0xFFFFull;
+pub const DCC_CFG_PORT_CONFIG_LINK_STATE_MASK: c_uint = 0x7ull;
+pub const DCC_CFG_PORT_CONFIG_LINK_STATE_SHIFT: c_int = 48;
+pub const DCC_CFG_PORT_CONFIG_LINK_STATE_SMASK: c_uint = 0x7000000000000ull;
+pub const DCC_CFG_PORT_CONFIG_MTU_CAP_MASK: c_uint = 0x7ull;
+pub const DCC_CFG_PORT_CONFIG_MTU_CAP_SHIFT: c_int = 32;
+pub const DCC_CFG_PORT_CONFIG_MTU_CAP_SMASK: c_uint = 0x700000000ull;
+
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY0_SHIFT: c_int = 0;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY10_SHIFT: c_int = 40;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY11_SHIFT: c_int = 44;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY12_SHIFT: c_int = 48;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY13_SHIFT: c_int = 52;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY14_SHIFT: c_int = 56;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY15_SHIFT: c_int = 60;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY1_SHIFT: c_int = 4;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY2_SHIFT: c_int = 8;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY3_SHIFT: c_int = 12;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY4_SHIFT: c_int = 16;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY5_SHIFT: c_int = 20;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY6_SHIFT: c_int = 24;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY7_SHIFT: c_int = 28;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY8_SHIFT: c_int = 32;
+pub const DCC_CFG_SC_VL_TABLE_15_0_ENTRY9_SHIFT: c_int = 36;
+
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY16_SHIFT: c_int = 0;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY17_SHIFT: c_int = 4;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY18_SHIFT: c_int = 8;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY19_SHIFT: c_int = 12;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY20_SHIFT: c_int = 16;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY21_SHIFT: c_int = 20;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY22_SHIFT: c_int = 24;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY23_SHIFT: c_int = 28;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY24_SHIFT: c_int = 32;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY25_SHIFT: c_int = 36;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY26_SHIFT: c_int = 40;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY27_SHIFT: c_int = 44;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY28_SHIFT: c_int = 48;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY29_SHIFT: c_int = 52;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY30_SHIFT: c_int = 56;
+pub const DCC_CFG_SC_VL_TABLE_31_16_ENTRY31_SHIFT: c_int = 60;
+
+pub const DCC_ERR_FLG_BAD_CRDT_ACK_ERR_SMASK: c_uint = 0x4000ull;
+pub const DCC_ERR_FLG_BAD_CTRL_DIST_ERR_SMASK: c_uint = 0x200000ull;
+pub const DCC_ERR_FLG_BAD_CTRL_FLIT_ERR_SMASK: c_uint = 0x10000ull;
+pub const DCC_ERR_FLG_BAD_DLID_TARGET_ERR_SMASK: c_uint = 0x200ull;
+pub const DCC_ERR_FLG_BAD_HEAD_DIST_ERR_SMASK: c_uint = 0x800000ull;
+pub const DCC_ERR_FLG_BAD_L2_ERR_SMASK: c_uint = 0x2ull;
+pub const DCC_ERR_FLG_BAD_LVER_ERR_SMASK: c_uint = 0x400ull;
+pub const DCC_ERR_FLG_BAD_MID_TAIL_ERR_SMASK: c_uint = 0x8ull;
+pub const DCC_ERR_FLG_BAD_PKT_LENGTH_ERR_SMASK: c_uint = 0x4000000ull;
+pub const DCC_ERR_FLG_BAD_PREEMPTION_ERR_SMASK: c_uint = 0x10ull;
+pub const DCC_ERR_FLG_BAD_SC_ERR_SMASK: c_uint = 0x4ull;
+pub const DCC_ERR_FLG_BAD_TAIL_DIST_ERR_SMASK: c_uint = 0x400000ull;
+pub const DCC_ERR_FLG_BAD_VL_MARKER_ERR_SMASK: c_uint = 0x80ull;
+
+pub const DCC_ERR_FLG_CSR_ACCESS_BLOCKED_HOST_SMASK: c_uint = 0x8000000000ull;
+pub const DCC_ERR_FLG_CSR_ACCESS_BLOCKED_UC_SMASK: c_uint = 0x10000000000ull;
+pub const DCC_ERR_FLG_CSR_INVAL_ADDR_SMASK: c_uint = 0x400000000000ull;
+pub const DCC_ERR_FLG_CSR_PARITY_ERR_SMASK: c_uint = 0x200000000000ull;
+pub const DCC_ERR_FLG_DLID_ZERO_ERR_SMASK: c_uint = 0x40000000ull;
+
+pub const DCC_ERR_FLG_EN_CSR_ACCESS_BLOCKED_HOST_SMASK: c_uint = 0x8000000000ull;
+pub const DCC_ERR_FLG_EN_CSR_ACCESS_BLOCKED_UC_SMASK: c_uint = 0x10000000000ull;
+pub const DCC_ERR_FLG_EVENT_CNTR_PARITY_ERR_SMASK: c_uint = 0x20000ull;
+pub const DCC_ERR_FLG_EVENT_CNTR_ROLLOVER_ERR_SMASK: c_uint = 0x40000ull;
+pub const DCC_ERR_FLG_FMCONFIG_ERR_SMASK: c_uint = 0x40000000000000ull;
+pub const DCC_ERR_FLG_FPE_TX_FIFO_OVFLW_ERR_SMASK: c_uint = 0x2000000000ull;
+pub const DCC_ERR_FLG_FPE_TX_FIFO_UNFLW_ERR_SMASK: c_uint = 0x4000000000ull;
+pub const DCC_ERR_FLG_LATE_EBP_ERR_SMASK: c_uint = 0x1000000000ull;
+pub const DCC_ERR_FLG_LATE_LONG_ERR_SMASK: c_uint = 0x800000000ull;
+pub const DCC_ERR_FLG_LATE_SHORT_ERR_SMASK: c_uint = 0x400000000ull;
+pub const DCC_ERR_FLG_LENGTH_MTU_ERR_SMASK: c_uint = 0x80000000ull;
+pub const DCC_ERR_FLG_LINK_ERR_SMASK: c_uint = 0x80000ull;
+pub const DCC_ERR_FLG_MISC_CNTR_ROLLOVER_ERR_SMASK: c_uint = 0x100000ull;
+pub const DCC_ERR_FLG_NONVL15_STATE_ERR_SMASK: c_uint = 0x1000000ull;
+pub const DCC_ERR_FLG_PERM_NVL15_ERR_SMASK: c_uint = 0x10000000ull;
+pub const DCC_ERR_FLG_PREEMPTION_ERR_SMASK: c_uint = 0x20ull;
+pub const DCC_ERR_FLG_PREEMPTIONVL15_ERR_SMASK: c_uint = 0x40ull;
+pub const DCC_ERR_FLG_RCVPORT_ERR_SMASK: c_uint = 0x80000000000000ull;
+pub const DCC_ERR_FLG_RX_BYTE_SHFT_PARITY_ERR_SMASK: c_uint = 0x1000000000000ull;
+pub const DCC_ERR_FLG_RX_CTRL_PARITY_MBE_ERR_SMASK: c_uint = 0x100000000000ull;
+pub const DCC_ERR_FLG_RX_EARLY_DROP_ERR_SMASK: c_uint = 0x200000000ull;
+pub const DCC_ERR_FLG_SLID_ZERO_ERR_SMASK: c_uint = 0x20000000ull;
+pub const DCC_ERR_FLG_TX_BYTE_SHFT_PARITY_ERR_SMASK: c_uint = 0x800000000000ull;
+pub const DCC_ERR_FLG_TX_CTRL_PARITY_ERR_SMASK: c_uint = 0x20000000000ull;
+pub const DCC_ERR_FLG_TX_CTRL_PARITY_MBE_ERR_SMASK: c_uint = 0x40000000000ull;
+pub const DCC_ERR_FLG_TX_SC_PARITY_ERR_SMASK: c_uint = 0x80000000000ull;
+pub const DCC_ERR_FLG_UNCORRECTABLE_ERR_SMASK: c_uint = 0x2000ull;
+pub const DCC_ERR_FLG_UNSUP_PKT_TYPE_SMASK: c_uint = 0x8000ull;
+pub const DCC_ERR_FLG_UNSUP_VL_ERR_SMASK: c_uint = 0x8000000ull;
+pub const DCC_ERR_FLG_VL15_MULTI_ERR_SMASK: c_uint = 0x2000000ull;
+
+pub const DC_DC8051_CFG_CSR_ACCESS_SEL_DCC_SMASK: c_uint = 0x2ull;
+pub const DC_DC8051_CFG_CSR_ACCESS_SEL_LCB_SMASK: c_uint = 0x1ull;
+
+pub const DC_DC8051_CFG_EXT_DEV_0_COMPLETED_SMASK: c_uint = 0x1ull;
+pub const DC_DC8051_CFG_EXT_DEV_0_RETURN_CODE_SHIFT: c_int = 8;
+pub const DC_DC8051_CFG_EXT_DEV_0_RSP_DATA_SHIFT: c_int = 16;
+
+pub const DC_DC8051_CFG_EXT_DEV_1_REQ_DATA_MASK: c_uint = 0xFFFFull;
+pub const DC_DC8051_CFG_EXT_DEV_1_REQ_DATA_SHIFT: c_int = 16;
+pub const DC_DC8051_CFG_EXT_DEV_1_REQ_DATA_SMASK: c_uint = 0xFFFF0000ull;
+pub const DC_DC8051_CFG_EXT_DEV_1_REQ_NEW_SMASK: c_uint = 0x1ull;
+pub const DC_DC8051_CFG_EXT_DEV_1_REQ_TYPE_MASK: c_uint = 0xFFull;
+pub const DC_DC8051_CFG_EXT_DEV_1_REQ_TYPE_SHIFT: c_int = 8;
+
+pub const DC_DC8051_CFG_HOST_CMD_0_REQ_DATA_MASK: c_uint = 0xFFFFFFFFFFFFull;
+pub const DC_DC8051_CFG_HOST_CMD_0_REQ_DATA_SHIFT: c_int = 16;
+pub const DC_DC8051_CFG_HOST_CMD_0_REQ_NEW_SMASK: c_uint = 0x1ull;
+pub const DC_DC8051_CFG_HOST_CMD_0_REQ_TYPE_MASK: c_uint = 0xFFull;
+pub const DC_DC8051_CFG_HOST_CMD_0_REQ_TYPE_SHIFT: c_int = 8;
+
+pub const DC_DC8051_CFG_HOST_CMD_1_COMPLETED_SMASK: c_uint = 0x1ull;
+pub const DC_DC8051_CFG_HOST_CMD_1_RETURN_CODE_MASK: c_uint = 0xFFull;
+pub const DC_DC8051_CFG_HOST_CMD_1_RETURN_CODE_SHIFT: c_int = 8;
+pub const DC_DC8051_CFG_HOST_CMD_1_RSP_DATA_MASK: c_uint = 0xFFFFFFFFFFFFull;
+pub const DC_DC8051_CFG_HOST_CMD_1_RSP_DATA_SHIFT: c_int = 16;
+
+pub const DC_DC8051_CFG_RAM_ACCESS_CTRL_ADDRESS_MASK: c_uint = 0x7FFFull;
+pub const DC_DC8051_CFG_RAM_ACCESS_CTRL_ADDRESS_SHIFT: c_int = 0;
+pub const DC_DC8051_CFG_RAM_ACCESS_CTRL_WRITE_ENA_SMASK: c_uint = 0x1000000ull;
+pub const DC_DC8051_CFG_RAM_ACCESS_CTRL_READ_ENA_SMASK: c_uint = 0x10000ull;
+
+pub const DC_DC8051_CFG_RAM_ACCESS_SETUP_AUTO_INCR_ADDR_SMASK: c_uint = 0x100ull;
+pub const DC_DC8051_CFG_RAM_ACCESS_SETUP_RAM_SEL_SMASK: c_uint = 0x1ull;
+
+pub const DC_DC8051_CFG_RAM_ACCESS_STATUS_ACCESS_COMPLETED_SMASK: c_uint = 0x10000ull;
+
+pub const DC_DC8051_CFG_RST_CRAM_SMASK: c_uint = 0x2ull;
+pub const DC_DC8051_CFG_RST_DRAM_SMASK: c_uint = 0x4ull;
+pub const DC_DC8051_CFG_RST_IRAM_SMASK: c_uint = 0x8ull;
+pub const DC_DC8051_CFG_RST_M8051W_SMASK: c_uint = 0x1ull;
+pub const DC_DC8051_CFG_RST_SFR_SMASK: c_uint = 0x10ull;
+
+pub const DC_DC8051_DBG_ERR_INFO_SET_BY_8051_ERROR_MASK: c_uint = 0xFFFFFFFFull;
+pub const DC_DC8051_DBG_ERR_INFO_SET_BY_8051_ERROR_SHIFT: c_int = 16;
+pub const DC_DC8051_DBG_ERR_INFO_SET_BY_8051_HOST_MSG_MASK: c_uint = 0xFFFFull;
+pub const DC_DC8051_DBG_ERR_INFO_SET_BY_8051_HOST_MSG_SHIFT: c_int = 0;
+
+pub const DC_DC8051_ERR_EN_LOST_8051_HEART_BEAT_SMASK: c_uint = 0x2ull;
+
+pub const DC_DC8051_ERR_FLG_CRAM_MBE_SMASK: c_uint = 0x4ull;
+pub const DC_DC8051_ERR_FLG_CRAM_SBE_SMASK: c_uint = 0x8ull;
+pub const DC_DC8051_ERR_FLG_DRAM_MBE_SMASK: c_uint = 0x10ull;
+pub const DC_DC8051_ERR_FLG_DRAM_SBE_SMASK: c_uint = 0x20ull;
+pub const DC_DC8051_ERR_FLG_INVALID_CSR_ADDR_SMASK: c_uint = 0x400ull;
+pub const DC_DC8051_ERR_FLG_IRAM_MBE_SMASK: c_uint = 0x40ull;
+pub const DC_DC8051_ERR_FLG_IRAM_SBE_SMASK: c_uint = 0x80ull;
+pub const DC_DC8051_ERR_FLG_LOST_8051_HEART_BEAT_SMASK: c_uint = 0x2ull;
+pub const DC_DC8051_ERR_FLG_SET_BY_8051_SMASK: c_uint = 0x1ull;
+pub const DC_DC8051_ERR_FLG_UNMATCHED_SECURE_MSG_ACROSS_BCC_LANES_SMASK: c_uint = 0x100ull;
+
+pub const DC_DC8051_STS_CUR_STATE_FIRMWARE_MASK: c_uint = 0xFFull;
+pub const DC_DC8051_STS_CUR_STATE_FIRMWARE_SHIFT: c_int = 16;
+pub const DC_DC8051_STS_CUR_STATE_PORT_MASK: c_uint = 0xFFull;
+pub const DC_DC8051_STS_CUR_STATE_PORT_SHIFT: c_int = 0;
+
+pub const DC_DC8051_STS_LOCAL_FM_SECURITY_DISABLED_MASK: c_uint = 0x1ull;
+
+pub const DC_DC8051_STS_REMOTE_NODE_TYPE_VAL_MASK: c_uint = 0x3ull;
+
+pub const DC_DC8051_STS_REMOTE_PORT_NO_VAL_SMASK: c_uint = 0xFFull;
+
+pub const DC_LCB_CFG_ALLOW_LINK_UP_VAL_SHIFT: c_int = 0;
+
+pub const DC_LCB_CFG_CRC_MODE_TX_VAL_SHIFT: c_int = 0;
+
+pub const DC_LCB_CFG_IGNORE_LOST_RCLK_EN_SMASK: c_uint = 0x1ull;
+
+pub const DC_LCB_CFG_LINK_KILL_EN_FLIT_INPUT_BUF_MBE_SMASK: c_uint = 0x100000ull;
+pub const DC_LCB_CFG_LINK_KILL_EN_REPLAY_BUF_MBE_SMASK: c_uint = 0x400000ull;
+
+pub const DC_LCB_CFG_LOOPBACK_VAL_SHIFT: c_int = 0;
+
+pub const DC_LCB_CFG_RUN_EN_SHIFT: c_int = 0;
+
+pub const DC_LCB_CFG_RX_FIFOS_RADR_DO_NOT_JUMP_VAL_SHIFT: c_int = 8;
+pub const DC_LCB_CFG_RX_FIFOS_RADR_OK_TO_JUMP_VAL_SHIFT: c_int = 4;
+pub const DC_LCB_CFG_RX_FIFOS_RADR_RST_VAL_SHIFT: c_int = 0;
+
+pub const DC_LCB_CFG_TX_FIFOS_RADR_RST_VAL_SHIFT: c_int = 0;
+
+pub const DC_LCB_CFG_TX_FIFOS_RESET_VAL_SHIFT: c_int = 0;
+
+pub const DC_LCB_ERR_FLG_REDUNDANT_FLIT_PARITY_ERR_SMASK: c_uint = 0x20000000ull;
+pub const DC_LCB_ERR_FLG_NEG_EDGE_LINK_TRANSFER_ACTIVE_SMASK: c_uint = 0x10000000ull;
+pub const DC_LCB_ERR_FLG_HOLD_REINIT_SMASK: c_uint = 0x8000000ull;
+pub const DC_LCB_ERR_FLG_RST_FOR_INCOMPLT_RND_TRIP_SMASK: c_uint = 0x4000000ull;
+pub const DC_LCB_ERR_FLG_RST_FOR_LINK_TIMEOUT_SMASK: c_uint = 0x2000000ull;
+pub const DC_LCB_ERR_FLG_CREDIT_RETURN_FLIT_MBE_SMASK: c_uint = 0x1000000ull;
+pub const DC_LCB_ERR_FLG_REPLAY_BUF_SBE_SMASK: c_uint = 0x800000ull;
+pub const DC_LCB_ERR_FLG_REPLAY_BUF_MBE_SMASK: c_uint = 0x400000ull;
+pub const DC_LCB_ERR_FLG_FLIT_INPUT_BUF_SBE_SMASK: c_uint = 0x200000ull;
+pub const DC_LCB_ERR_FLG_FLIT_INPUT_BUF_MBE_SMASK: c_uint = 0x100000ull;
+pub const DC_LCB_ERR_FLG_VL_ACK_INPUT_WRONG_CRC_MODE_SMASK: c_uint = 0x80000ull;
+pub const DC_LCB_ERR_FLG_VL_ACK_INPUT_PARITY_ERR_SMASK: c_uint = 0x40000ull;
+pub const DC_LCB_ERR_FLG_VL_ACK_INPUT_BUF_OFLW_SMASK: c_uint = 0x20000ull;
+pub const DC_LCB_ERR_FLG_FLIT_INPUT_BUF_OFLW_SMASK: c_uint = 0x10000ull;
+pub const DC_LCB_ERR_FLG_ILLEGAL_FLIT_ENCODING_SMASK: c_uint = 0x8000ull;
+pub const DC_LCB_ERR_FLG_ILLEGAL_NULL_LTP_SMASK: c_uint = 0x4000ull;
+pub const DC_LCB_ERR_FLG_UNEXPECTED_ROUND_TRIP_MARKER_SMASK: c_uint = 0x2000ull;
+pub const DC_LCB_ERR_FLG_UNEXPECTED_REPLAY_MARKER_SMASK: c_uint = 0x1000ull;
+pub const DC_LCB_ERR_FLG_RCLK_STOPPED_SMASK: c_uint = 0x800ull;
+pub const DC_LCB_ERR_FLG_CRC_ERR_CNT_HIT_LIMIT_SMASK: c_uint = 0x400ull;
+pub const DC_LCB_ERR_FLG_REINIT_FOR_LN_DEGRADE_SMASK: c_uint = 0x200ull;
+pub const DC_LCB_ERR_FLG_REINIT_FROM_PEER_SMASK: c_uint = 0x100ull;
+pub const DC_LCB_ERR_FLG_SEQ_CRC_ERR_SMASK: c_uint = 0x80ull;
+pub const DC_LCB_ERR_FLG_RX_LESS_THAN_FOUR_LNS_SMASK: c_uint = 0x40ull;
+pub const DC_LCB_ERR_FLG_TX_LESS_THAN_FOUR_LNS_SMASK: c_uint = 0x20ull;
+pub const DC_LCB_ERR_FLG_LOST_REINIT_STALL_OR_TOS_SMASK: c_uint = 0x10ull;
+pub const DC_LCB_ERR_FLG_ALL_LNS_FAILED_REINIT_TEST_SMASK: c_uint = 0x8ull;
+pub const DC_LCB_ERR_FLG_RST_FOR_FAILED_DESKEW_SMASK: c_uint = 0x4ull;
+pub const DC_LCB_ERR_FLG_INVALID_CSR_ADDR_SMASK: c_uint = 0x2ull;
+pub const DC_LCB_ERR_FLG_CSR_PARITY_ERR_SMASK: c_uint = 0x1ull;
+
+pub const RCV_LENGTH_ERR_CNT: c_int = 0;
+pub const RCV_SHORT_ERR_CNT: c_int = 2;
+pub const RCV_ICRC_ERR_CNT: c_int = 6;
+pub const RCV_EBP_CNT: c_int = 9;
+pub const RCV_BUF_OVFL_CNT: c_int = 10;
+pub const RCV_CONTEXT_EGR_STALL: c_int = 22;
+pub const RCV_DATA_PKT_CNT: c_int = 0;
+pub const RCV_DWORD_CNT: c_int = 1;
+pub const RCV_TID_FLOW_GEN_MISMATCH_CNT: c_int = 20;
+pub const RCV_TID_FLOW_SEQ_MISMATCH_CNT: c_int = 23;
+pub const RCV_TID_FULL_ERR_CNT: c_int = 18;
+pub const RCV_TID_VALID_ERR_CNT: c_int = 19;
+pub const RXE_NUM_32_BIT_COUNTERS: c_int = 24;
+pub const RXE_NUM_64_BIT_COUNTERS: c_int = 2;
+pub const RXE_NUM_RSM_INSTANCES: c_int = 4;
+pub const RXE_NUM_TID_FLOWS: c_int = 32;
+pub const RXE_PER_CONTEXT_OFFSET: c_uint = 0x0300000;
+pub const SEND_DATA_PKT_CNT: c_int = 0;
+pub const SEND_DATA_PKT_VL0_CNT: c_int = 12;
+pub const SEND_DATA_VL0_CNT: c_int = 3;
+pub const SEND_DROPPED_PKT_CNT: c_int = 5;
+pub const SEND_DWORD_CNT: c_int = 1;
+pub const SEND_FLOW_STALL_CNT: c_int = 4;
+pub const SEND_HEADERS_ERR_CNT: c_int = 6;
+pub const SEND_LEN_ERR_CNT: c_int = 1;
+pub const SEND_MAX_MIN_LEN_ERR_CNT: c_int = 2;
+pub const SEND_UNDERRUN_CNT: c_int = 3;
+pub const SEND_UNSUP_VL_ERR_CNT: c_int = 0;
+pub const SEND_WAIT_CNT: c_int = 2;
+pub const SEND_WAIT_VL0_CNT: c_int = 21;
+pub const TXE_PIO_SEND_OFFSET: c_uint = 0x0800000;
+
+pub const ASIC_CFG_SBUS_EXECUTE_EXECUTE_SMASK: c_uint = 0x1ull;
+pub const ASIC_CFG_SBUS_EXECUTE_FAST_MODE_SMASK: c_uint = 0x2ull;
+
+pub const ASIC_CFG_SBUS_REQUEST_COMMAND_SHIFT: c_int = 16;
+pub const ASIC_CFG_SBUS_REQUEST_DATA_ADDR_SHIFT: c_int = 8;
+pub const ASIC_CFG_SBUS_REQUEST_DATA_IN_SHIFT: c_int = 32;
+pub const ASIC_CFG_SBUS_REQUEST_RECEIVER_ADDR_SHIFT: c_int = 0;
+
+pub const ASIC_EEP_ADDR_CMD_EP_ADDR_MASK: c_uint = 0xFFFFFFull;
+
+pub const ASIC_EEP_CTL_STAT_EP_RESET_SMASK: c_uint = 0x4ull;
+pub const ASIC_EEP_CTL_STAT_RATE_SPI_SHIFT: c_int = 8;
+pub const ASIC_EEP_CTL_STAT_RESETCSR: c_uint = 0x0000000083818000ull;
+
+pub const ASIC_PCIE_SD_HOST_CMD_INTRPT_CMD_SHIFT: c_int = 0;
+pub const ASIC_PCIE_SD_HOST_CMD_SBR_MODE_SMASK: c_uint = 0x400ull;
+pub const ASIC_PCIE_SD_HOST_CMD_SBUS_RCVR_ADDR_SHIFT: c_int = 2;
+pub const ASIC_PCIE_SD_HOST_CMD_TIMER_MASK: c_uint = 0xFFFFFull;
+pub const ASIC_PCIE_SD_HOST_CMD_TIMER_SHIFT: c_int = 12;
+
+pub const ASIC_PCIE_SD_HOST_STATUS_FW_DNLD_ERR_MASK: c_uint = 0x7ull;
+pub const ASIC_PCIE_SD_HOST_STATUS_FW_DNLD_ERR_SHIFT: c_int = 2;
+pub const ASIC_PCIE_SD_HOST_STATUS_FW_DNLD_STS_MASK: c_uint = 0x3ull;
+pub const ASIC_PCIE_SD_HOST_STATUS_FW_DNLD_STS_SHIFT: c_int = 0;
+
+pub const ASIC_PCIE_SD_INTRPT_LIST_INTRPT_CODE_SHIFT: c_int = 16;
+pub const ASIC_PCIE_SD_INTRPT_LIST_INTRPT_DATA_SHIFT: c_int = 0;
+
+pub const ASIC_STS_SBUS_COUNTERS_EXECUTE_CNT_MASK: c_uint = 0xFFFFull;
+pub const ASIC_STS_SBUS_COUNTERS_EXECUTE_CNT_SHIFT: c_int = 0;
+pub const ASIC_STS_SBUS_COUNTERS_RCV_DATA_VALID_CNT_MASK: c_uint = 0xFFFFull;
+pub const ASIC_STS_SBUS_COUNTERS_RCV_DATA_VALID_CNT_SHIFT: c_int = 16;
+
+pub const ASIC_STS_SBUS_RESULT_DONE_SMASK: c_uint = 0x1ull;
+pub const ASIC_STS_SBUS_RESULT_RCV_DATA_VALID_SMASK: c_uint = 0x2ull;
+pub const ASIC_STS_SBUS_RESULT_RESULT_CODE_SHIFT: c_int = 2;
+pub const ASIC_STS_SBUS_RESULT_RESULT_CODE_MASK: c_uint = 0x7ull;
+pub const ASIC_STS_SBUS_RESULT_DATA_OUT_SHIFT: c_int = 32;
+pub const ASIC_STS_SBUS_RESULT_DATA_OUT_MASK: c_uint = 0xFFFFFFFFull;
+
+pub const ASIC_STS_THERM_CRIT_TEMP_MASK: c_uint = 0x7FFull;
+pub const ASIC_STS_THERM_CRIT_TEMP_SHIFT: c_int = 18;
+pub const ASIC_STS_THERM_CURR_TEMP_MASK: c_uint = 0x7FFull;
+pub const ASIC_STS_THERM_CURR_TEMP_SHIFT: c_int = 2;
+pub const ASIC_STS_THERM_HI_TEMP_MASK: c_uint = 0x7FFull;
+pub const ASIC_STS_THERM_HI_TEMP_SHIFT: c_int = 50;
+pub const ASIC_STS_THERM_LO_TEMP_MASK: c_uint = 0x7FFull;
+pub const ASIC_STS_THERM_LO_TEMP_SHIFT: c_int = 34;
+pub const ASIC_STS_THERM_LOW_SHIFT: c_int = 13;
+
+pub const CCE_CTRL_RXE_RESUME_SMASK: c_uint = 0x800ull;
+pub const CCE_CTRL_SPC_FREEZE_SMASK: c_uint = 0x100ull;
+pub const CCE_CTRL_SPC_UNFREEZE_SMASK: c_uint = 0x200ull;
+pub const CCE_CTRL_TXE_RESUME_SMASK: c_uint = 0x2000ull;
+
+pub const CCE_DC_CTRL_DC_RESET_SMASK: c_uint = 0x1ull;
+pub const CCE_DC_CTRL_RESETCSR: c_uint = 0x0000000000000001ull;
+
+pub const CCE_ERR_STATUS_CCE_CLI0_ASYNC_FIFO_PARITY_ERR_SMASK: c_uint = 0x40ull;
+pub const CCE_ERR_STATUS_CCE_CLI1_ASYNC_FIFO_DBG_PARITY_ERROR_SMASK: c_uint = 0x1000ull;
+
+pub const CCE_ERR_STATUS_CCE_CLI2_ASYNC_FIFO_PARITY_ERR_SMASK: c_uint = 0x100ull;
+pub const CCE_ERR_STATUS_CCE_CSR_CFG_BUS_PARITY_ERR_SMASK: c_uint = 0x80ull;
+pub const CCE_ERR_STATUS_CCE_CSR_PARITY_ERR_SMASK: c_uint = 0x1ull;
+pub const CCE_ERR_STATUS_CCE_CSR_READ_BAD_ADDR_ERR_SMASK: c_uint = 0x2ull;
+pub const CCE_ERR_STATUS_CCE_CSR_WRITE_BAD_ADDR_ERR_SMASK: c_uint = 0x4ull;
+pub const CCE_ERR_STATUS_CCE_INT_MAP_COR_ERR_SMASK: c_uint = 0x4000000000ull;
+pub const CCE_ERR_STATUS_CCE_INT_MAP_UNC_ERR_SMASK: c_uint = 0x8000000000ull;
+pub const CCE_ERR_STATUS_CCE_MSIX_CSR_PARITY_ERR_SMASK: c_uint = 0x10000000000ull;
+pub const CCE_ERR_STATUS_CCE_MSIX_TABLE_COR_ERR_SMASK: c_uint = 0x1000000000ull;
+pub const CCE_ERR_STATUS_CCE_MSIX_TABLE_UNC_ERR_SMASK: c_uint = 0x2000000000ull;
+pub const CCE_ERR_STATUS_CCE_RCPL_ASYNC_FIFO_PARITY_ERR_SMASK: c_uint = 0x400000000ull;
+pub const CCE_ERR_STATUS_CCE_RSPD_DATA_PARITY_ERR_SMASK: c_uint = 0x20ull;
+pub const CCE_ERR_STATUS_CCE_RXDMA_CONV_FIFO_PARITY_ERR_SMASK: c_uint = 0x800000000ull;
+pub const CCE_ERR_STATUS_CCE_SEG_READ_BAD_ADDR_ERR_SMASK: c_uint = 0x100000000ull;
+pub const CCE_ERR_STATUS_CCE_SEG_WRITE_BAD_ADDR_ERR_SMASK: c_uint = 0x200000000ull;
+pub const CCE_ERR_STATUS_CCE_TRGT_ACCESS_ERR_SMASK: c_uint = 0x10ull;
+pub const CCE_ERR_STATUS_CCE_TRGT_ASYNC_FIFO_PARITY_ERR_SMASK: c_uint = 0x8ull;
+pub const CCE_ERR_STATUS_CCE_TRGT_CPL_TIMEOUT_ERR_SMASK: c_uint = 0x40000000ull;
+pub const CCE_ERR_STATUS_LA_TRIGGERED_SMASK: c_uint = 0x80000000ull;
+pub const CCE_ERR_STATUS_PCIC_CPL_DAT_QCOR_ERR_SMASK: c_uint = 0x40000ull;
+pub const CCE_ERR_STATUS_PCIC_CPL_DAT_QUNC_ERR_SMASK: c_uint = 0x4000000ull;
+pub const CCE_ERR_STATUS_PCIC_CPL_HD_QCOR_ERR_SMASK: c_uint = 0x20000ull;
+pub const CCE_ERR_STATUS_PCIC_CPL_HD_QUNC_ERR_SMASK: c_uint = 0x2000000ull;
+pub const CCE_ERR_STATUS_PCIC_NPOST_DAT_QPARITY_ERR_SMASK: c_uint = 0x100000ull;
+pub const CCE_ERR_STATUS_PCIC_NPOST_HQ_PARITY_ERR_SMASK: c_uint = 0x80000ull;
+pub const CCE_ERR_STATUS_PCIC_POST_DAT_QCOR_ERR_SMASK: c_uint = 0x10000ull;
+pub const CCE_ERR_STATUS_PCIC_POST_DAT_QUNC_ERR_SMASK: c_uint = 0x1000000ull;
+pub const CCE_ERR_STATUS_PCIC_POST_HD_QCOR_ERR_SMASK: c_uint = 0x8000ull;
+pub const CCE_ERR_STATUS_PCIC_POST_HD_QUNC_ERR_SMASK: c_uint = 0x800000ull;
+pub const CCE_ERR_STATUS_PCIC_RECEIVE_PARITY_ERR_SMASK: c_uint = 0x20000000ull;
+pub const CCE_ERR_STATUS_PCIC_RETRY_MEM_COR_ERR_SMASK: c_uint = 0x2000ull;
+pub const CCE_ERR_STATUS_PCIC_RETRY_MEM_UNC_ERR_SMASK: c_uint = 0x200000ull;
+pub const CCE_ERR_STATUS_PCIC_RETRY_SOT_MEM_COR_ERR_SMASK: c_uint = 0x4000ull;
+pub const CCE_ERR_STATUS_PCIC_RETRY_SOT_MEM_UNC_ERR_SMASK: c_uint = 0x400000ull;
+pub const CCE_ERR_STATUS_PCIC_TRANSMIT_BACK_PARITY_ERR_SMASK: c_uint = 0x10000000ull;
+pub const CCE_ERR_STATUS_PCIC_TRANSMIT_FRONT_PARITY_ERR_SMASK: c_uint = 0x8000000ull;
+
+pub const CCE_MSIX_TABLE_UPPER_RESETCSR: c_uint = 0x0000000100000000ull;
+
+pub const CCE_PCIE_CTRL_PCIE_LANE_BUNDLE_MASK: c_uint = 0x3ull;
+pub const CCE_PCIE_CTRL_PCIE_LANE_BUNDLE_SHIFT: c_int = 0;
+pub const CCE_PCIE_CTRL_PCIE_LANE_DELAY_MASK: c_uint = 0xFull;
+pub const CCE_PCIE_CTRL_PCIE_LANE_DELAY_SHIFT: c_int = 2;
+pub const CCE_PCIE_CTRL_XMT_MARGIN_OVERWRITE_ENABLE_SHIFT: c_int = 8;
+pub const CCE_PCIE_CTRL_XMT_MARGIN_SHIFT: c_int = 9;
+pub const CCE_PCIE_CTRL_XMT_MARGIN_GEN1_GEN2_OVERWRITE_ENABLE_MASK: c_uint = 0x1ull;
+pub const CCE_PCIE_CTRL_XMT_MARGIN_GEN1_GEN2_OVERWRITE_ENABLE_SHIFT: c_int = 12;
+pub const CCE_PCIE_CTRL_XMT_MARGIN_GEN1_GEN2_MASK: c_uint = 0x7ull;
+pub const CCE_PCIE_CTRL_XMT_MARGIN_GEN1_GEN2_SHIFT: c_int = 13;
+
+pub const CCE_REVISION2_HFI_ID_MASK: c_uint = 0x1ull;
+pub const CCE_REVISION2_HFI_ID_SHIFT: c_int = 0;
+pub const CCE_REVISION2_IMPL_CODE_SHIFT: c_int = 8;
+pub const CCE_REVISION2_IMPL_REVISION_SHIFT: c_int = 16;
+pub const CCE_REVISION_BOARD_ID_LOWER_NIBBLE_MASK: c_uint = 0xFull;
+pub const CCE_REVISION_BOARD_ID_LOWER_NIBBLE_SHIFT: c_int = 32;
+pub const CCE_REVISION_CHIP_REV_MAJOR_MASK: c_uint = 0xFFull;
+pub const CCE_REVISION_CHIP_REV_MAJOR_SHIFT: c_int = 8;
+pub const CCE_REVISION_CHIP_REV_MINOR_MASK: c_uint = 0xFFull;
+pub const CCE_REVISION_CHIP_REV_MINOR_SHIFT: c_int = 0;
+pub const CCE_REVISION_SW_MASK: c_uint = 0xFFull;
+pub const CCE_REVISION_SW_SHIFT: c_int = 24;
+
+pub const CCE_STATUS_RXE_FROZE_SMASK: c_uint = 0x2ull;
+pub const CCE_STATUS_RXE_PAUSED_SMASK: c_uint = 0x20ull;
+pub const CCE_STATUS_SDMA_FROZE_SMASK: c_uint = 0x1ull;
+pub const CCE_STATUS_SDMA_PAUSED_SMASK: c_uint = 0x10ull;
+pub const CCE_STATUS_TXE_FROZE_SMASK: c_uint = 0x4ull;
+pub const CCE_STATUS_TXE_PAUSED_SMASK: c_uint = 0x40ull;
+pub const CCE_STATUS_TXE_PIO_FROZE_SMASK: c_uint = 0x8ull;
+pub const CCE_STATUS_TXE_PIO_PAUSED_SMASK: c_uint = 0x80ull;
+
+pub const MISC_CFG_FW_CTRL_FW_8051_LOADED_SMASK: c_uint = 0x2ull;
+pub const MISC_CFG_FW_CTRL_RSA_STATUS_SHIFT: c_int = 2;
+pub const MISC_CFG_FW_CTRL_RSA_STATUS_SMASK: c_uint = 0xCull;
+
+pub const MISC_ERR_STATUS_MISC_PLL_LOCK_FAIL_ERR_SMASK: c_uint = 0x1000ull;
+pub const MISC_ERR_STATUS_MISC_MBIST_FAIL_ERR_SMASK: c_uint = 0x800ull;
+pub const MISC_ERR_STATUS_MISC_INVALID_EEP_CMD_ERR_SMASK: c_uint = 0x400ull;
+pub const MISC_ERR_STATUS_MISC_EFUSE_DONE_PARITY_ERR_SMASK: c_uint = 0x200ull;
+pub const MISC_ERR_STATUS_MISC_EFUSE_WRITE_ERR_SMASK: c_uint = 0x100ull;
+pub const MISC_ERR_STATUS_MISC_EFUSE_READ_BAD_ADDR_ERR_SMASK: c_uint = 0x80ull;
+pub const MISC_ERR_STATUS_MISC_EFUSE_CSR_PARITY_ERR_SMASK: c_uint = 0x40ull;
+pub const MISC_ERR_STATUS_MISC_FW_AUTH_FAILED_ERR_SMASK: c_uint = 0x20ull;
+pub const MISC_ERR_STATUS_MISC_KEY_MISMATCH_ERR_SMASK: c_uint = 0x10ull;
+pub const MISC_ERR_STATUS_MISC_SBUS_WRITE_FAILED_ERR_SMASK: c_uint = 0x8ull;
+pub const MISC_ERR_STATUS_MISC_CSR_WRITE_BAD_ADDR_ERR_SMASK: c_uint = 0x4ull;
+pub const MISC_ERR_STATUS_MISC_CSR_READ_BAD_ADDR_ERR_SMASK: c_uint = 0x2ull;
+pub const MISC_ERR_STATUS_MISC_CSR_PARITY_ERR_SMASK: c_uint = 0x1ull;
+
+pub const RCV_ARRAY_RT_ADDR_MASK: c_uint = 0xFFFFFFFFFull;
+pub const RCV_ARRAY_RT_ADDR_SHIFT: c_int = 0;
+pub const RCV_ARRAY_RT_BUF_SIZE_SHIFT: c_int = 36;
+pub const RCV_ARRAY_RT_WRITE_ENABLE_SMASK: c_uint = 0x8000000000000000ull;
+
+pub const RCV_AVAIL_TIME_OUT_TIME_OUT_RELOAD_MASK: c_uint = 0xFFull;
+pub const RCV_AVAIL_TIME_OUT_TIME_OUT_RELOAD_SHIFT: c_int = 0;
+
+pub const RCV_BTH_QP_KDETH_QP_MASK: c_uint = 0xFFull;
+pub const RCV_BTH_QP_KDETH_QP_SHIFT: c_int = 16;
+
+pub const RCV_BYPASS_HDR_SIZE_SHIFT: c_int = 16;
+pub const RCV_BYPASS_HDR_SIZE_MASK: c_uint = 0x1Full;
+pub const RCV_BYPASS_HDR_SIZE_SMASK: c_uint = 0x1F0000ull;
+pub const RCV_BYPASS_BYPASS_CONTEXT_SHIFT: c_int = 0;
+pub const RCV_BYPASS_BYPASS_CONTEXT_MASK: c_uint = 0xFFull;
+pub const RCV_BYPASS_BYPASS_CONTEXT_SMASK: c_uint = 0xFFull;
+
+pub const RCV_CTRL_RCV_BYPASS_ENABLE_SMASK: c_uint = 0x10ull;
+pub const RCV_CTRL_RCV_EXTENDED_PSN_ENABLE_SMASK: c_uint = 0x40ull;
+pub const RCV_CTRL_RCV_PARTITION_KEY_ENABLE_SMASK: c_uint = 0x4ull;
+pub const RCV_CTRL_RCV_PORT_ENABLE_SMASK: c_uint = 0x1ull;
+pub const RCV_CTRL_RCV_QP_MAP_ENABLE_SMASK: c_uint = 0x2ull;
+pub const RCV_CTRL_RCV_RSM_ENABLE_SMASK: c_uint = 0x20ull;
+pub const RCV_CTRL_RX_RBUF_INIT_SMASK: c_uint = 0x200ull;
+
+pub const RCV_CTXT_CTRL_DONT_DROP_EGR_FULL_SMASK: c_uint = 0x4ull;
+pub const RCV_CTXT_CTRL_DONT_DROP_RHQ_FULL_SMASK: c_uint = 0x8ull;
+pub const RCV_CTXT_CTRL_EGR_BUF_SIZE_MASK: c_uint = 0x7ull;
+pub const RCV_CTXT_CTRL_EGR_BUF_SIZE_SHIFT: c_int = 8;
+pub const RCV_CTXT_CTRL_EGR_BUF_SIZE_SMASK: c_uint = 0x700ull;
+pub const RCV_CTXT_CTRL_ENABLE_SMASK: c_uint = 0x1ull;
+pub const RCV_CTXT_CTRL_INTR_AVAIL_SMASK: c_uint = 0x20ull;
+pub const RCV_CTXT_CTRL_ONE_PACKET_PER_EGR_BUFFER_SMASK: c_uint = 0x2ull;
+pub const RCV_CTXT_CTRL_TAIL_UPD_SMASK: c_uint = 0x40ull;
+pub const RCV_CTXT_CTRL_TID_FLOW_ENABLE_SMASK: c_uint = 0x10ull;
+
+pub const RCV_EGR_CTRL_EGR_BASE_INDEX_MASK: c_uint = 0x1FFFull;
+pub const RCV_EGR_CTRL_EGR_BASE_INDEX_SHIFT: c_int = 0;
+pub const RCV_EGR_CTRL_EGR_CNT_MASK: c_uint = 0x1FFull;
+pub const RCV_EGR_CTRL_EGR_CNT_SHIFT: c_int = 32;
+
+pub const RCV_EGR_INDEX_HEAD_HEAD_MASK: c_uint = 0x7FFull;
+pub const RCV_EGR_INDEX_HEAD_HEAD_SHIFT: c_int = 0;
+
+pub const RCV_ERR_INFO_RCV_EXCESS_BUFFER_OVERRUN_SC_SMASK: c_uint = 0x1Full;
+pub const RCV_ERR_INFO_RCV_EXCESS_BUFFER_OVERRUN_SMASK: c_uint = 0x20ull;
+
+pub const RCV_ERR_STATUS_RX_CSR_PARITY_ERR_SMASK: c_uint = 0x8000000000000000ull;
+pub const RCV_ERR_STATUS_RX_CSR_READ_BAD_ADDR_ERR_SMASK: c_uint = 0x2000000000000000ull;
+
+pub const RCV_ERR_STATUS_RX_DC_INTF_PARITY_ERR_SMASK: c_uint = 0x2ull;
+pub const RCV_ERR_STATUS_RX_DC_SOP_EOP_PARITY_ERR_SMASK: c_uint = 0x200ull;
+pub const RCV_ERR_STATUS_RX_DMA_CSR_COR_ERR_SMASK: c_uint = 0x1ull;
+pub const RCV_ERR_STATUS_RX_DMA_CSR_PARITY_ERR_SMASK: c_uint = 0x200000000000000ull;
+pub const RCV_ERR_STATUS_RX_DMA_CSR_UNC_ERR_SMASK: c_uint = 0x1000000000000000ull;
+
+pub const RCV_ERR_STATUS_RX_DMA_FLAG_COR_ERR_SMASK: c_uint = 0x800ull;
+pub const RCV_ERR_STATUS_RX_DMA_FLAG_UNC_ERR_SMASK: c_uint = 0x400ull;
+pub const RCV_ERR_STATUS_RX_DMA_HDR_FIFO_RD_COR_ERR_SMASK: c_uint = 0x10000000000000ull;
+pub const RCV_ERR_STATUS_RX_DMA_HDR_FIFO_RD_UNC_ERR_SMASK: c_uint = 0x8000000000000ull;
+pub const RCV_ERR_STATUS_RX_HQ_INTR_CSR_PARITY_ERR_SMASK: c_uint = 0x200000000000ull;
+pub const RCV_ERR_STATUS_RX_HQ_INTR_FSM_ERR_SMASK: c_uint = 0x400000000000ull;
+pub const RCV_ERR_STATUS_RX_LOOKUP_CSR_PARITY_ERR_SMASK: c_uint = 0x100000000000ull;
+
+pub const RCV_ERR_STATUS_RX_LOOKUP_DES_PART1_UNC_ERR_SMASK: c_uint = 0x8000000000ull;
+
+pub const RCV_ERR_STATUS_RX_LOOKUP_RCV_ARRAY_COR_ERR_SMASK: c_uint = 0x80000000000ull;
+pub const RCV_ERR_STATUS_RX_LOOKUP_RCV_ARRAY_UNC_ERR_SMASK: c_uint = 0x40000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_BAD_LOOKUP_ERR_SMASK: c_uint = 0x40000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_BLOCK_LIST_READ_COR_ERR_SMASK: c_uint = 0x100000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_BLOCK_LIST_READ_UNC_ERR_SMASK: c_uint = 0x80000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_CSR_QENT_CNT_PARITY_ERR_SMASK: c_uint = 0x400000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_CSR_QEOPDW_PARITY_ERR_SMASK: c_uint = 0x10000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_CSR_QHD_PTR_PARITY_ERR_SMASK: c_uint = 0x2000000ull;
+
+pub const RCV_ERR_STATUS_RX_RBUF_CSR_QNEXT_BUF_PARITY_ERR_SMASK: c_uint = 0x800000ull;
+
+pub const RCV_ERR_STATUS_RX_RBUF_CSR_QTL_PTR_PARITY_ERR_SMASK: c_uint = 0x4000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_CSR_QVLD_BIT_PARITY_ERR_SMASK: c_uint = 0x1000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_CTX_ID_PARITY_ERR_SMASK: c_uint = 0x20000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_DATA_COR_ERR_SMASK: c_uint = 0x100000000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_DATA_UNC_ERR_SMASK: c_uint = 0x80000000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_DESC_PART1_COR_ERR_SMASK: c_uint = 0x1000000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_DESC_PART1_UNC_ERR_SMASK: c_uint = 0x800000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_DESC_PART2_COR_ERR_SMASK: c_uint = 0x4000000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_DESC_PART2_UNC_ERR_SMASK: c_uint = 0x2000000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_EMPTY_ERR_SMASK: c_uint = 0x100000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_FL_INITDONE_PARITY_ERR_SMASK: c_uint = 0x800000000ull;
+
+pub const RCV_ERR_STATUS_RX_RBUF_FL_RD_ADDR_PARITY_ERR_SMASK: c_uint = 0x200000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_FL_WR_ADDR_PARITY_ERR_SMASK: c_uint = 0x400000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_FREE_LIST_COR_ERR_SMASK: c_uint = 0x4000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_FREE_LIST_UNC_ERR_SMASK: c_uint = 0x2000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_FULL_ERR_SMASK: c_uint = 0x80000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_LOOKUP_DES_COR_ERR_SMASK: c_uint = 0x40000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_LOOKUP_DES_REG_UNC_COR_ERR_SMASK: c_uint = 0x10000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_LOOKUP_DES_REG_UNC_ERR_SMASK: c_uint = 0x8000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_LOOKUP_DES_UNC_ERR_SMASK: c_uint = 0x20000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_NEXT_FREE_BUF_COR_ERR_SMASK: c_uint = 0x4000000000ull;
+pub const RCV_ERR_STATUS_RX_RBUF_NEXT_FREE_BUF_UNC_ERR_SMASK: c_uint = 0x2000000000ull;
+pub const RCV_ERR_STATUS_RX_RCV_CSR_PARITY_ERR_SMASK: c_uint = 0x100ull;
+pub const RCV_ERR_STATUS_RX_RCV_DATA_COR_ERR_SMASK: c_uint = 0x20ull;
+pub const RCV_ERR_STATUS_RX_RCV_DATA_UNC_ERR_SMASK: c_uint = 0x10ull;
+pub const RCV_ERR_STATUS_RX_RCV_FSM_ENCODING_ERR_SMASK: c_uint = 0x1000ull;
+pub const RCV_ERR_STATUS_RX_RCV_HDR_COR_ERR_SMASK: c_uint = 0x8ull;
+pub const RCV_ERR_STATUS_RX_RCV_HDR_UNC_ERR_SMASK: c_uint = 0x4ull;
+pub const RCV_ERR_STATUS_RX_RCV_QP_MAP_TABLE_COR_ERR_SMASK: c_uint = 0x80ull;
+pub const RCV_ERR_STATUS_RX_RCV_QP_MAP_TABLE_UNC_ERR_SMASK: c_uint = 0x40ull;
+
+pub const RCV_HDR_CNT_CNT_MASK: c_uint = 0x1FFull;
+pub const RCV_HDR_CNT_CNT_SHIFT: c_int = 0;
+
+pub const RCV_HDR_ENT_SIZE_ENT_SIZE_MASK: c_uint = 0x7ull;
+pub const RCV_HDR_ENT_SIZE_ENT_SIZE_SHIFT: c_int = 0;
+
+pub const RCV_HDR_HEAD_COUNTER_MASK: c_uint = 0xFFull;
+pub const RCV_HDR_HEAD_COUNTER_SHIFT: c_int = 32;
+pub const RCV_HDR_HEAD_HEAD_MASK: c_uint = 0x7FFFFull;
+pub const RCV_HDR_HEAD_HEAD_SHIFT: c_int = 0;
+pub const RCV_HDR_HEAD_HEAD_SMASK: c_uint = 0x7FFFFull;
+
+pub const RCV_HDR_SIZE_HDR_SIZE_MASK: c_uint = 0x1Full;
+pub const RCV_HDR_SIZE_HDR_SIZE_SHIFT: c_int = 0;
+
+pub const RCV_KEY_CTRL_JOB_KEY_ENABLE_SMASK: c_uint = 0x200000000ull;
+pub const RCV_KEY_CTRL_JOB_KEY_VALUE_MASK: c_uint = 0xFFFFull;
+pub const RCV_KEY_CTRL_JOB_KEY_VALUE_SHIFT: c_int = 0;
+
+pub const RCV_PARTITION_KEY_PARTITION_KEY_A_MASK: c_uint = 0xFFFFull;
+pub const RCV_PARTITION_KEY_PARTITION_KEY_B_SHIFT: c_int = 16;
+
+pub const RCV_RSM_CFG_ENABLE_OR_CHAIN_RSM0_MASK: c_uint = 0x1ull;
+pub const RCV_RSM_CFG_ENABLE_OR_CHAIN_RSM0_SHIFT: c_int = 0;
+pub const RCV_RSM_CFG_PACKET_TYPE_SHIFT: c_int = 60;
+pub const RCV_RSM_CFG_OFFSET_SHIFT: c_int = 32;
+
+pub const RCV_RSM_MAP_TABLE_RCV_CONTEXT_A_MASK: c_uint = 0xFFull;
+
+pub const RCV_RSM_MATCH_MASK1_SHIFT: c_int = 0;
+pub const RCV_RSM_MATCH_MASK2_SHIFT: c_int = 16;
+pub const RCV_RSM_MATCH_VALUE1_SHIFT: c_int = 8;
+pub const RCV_RSM_MATCH_VALUE2_SHIFT: c_int = 24;
+
+pub const RCV_RSM_SELECT_FIELD1_OFFSET_SHIFT: c_int = 0;
+pub const RCV_RSM_SELECT_FIELD2_OFFSET_SHIFT: c_int = 16;
+pub const RCV_RSM_SELECT_INDEX1_OFFSET_SHIFT: c_int = 32;
+pub const RCV_RSM_SELECT_INDEX1_WIDTH_SHIFT: c_int = 44;
+pub const RCV_RSM_SELECT_INDEX2_OFFSET_SHIFT: c_int = 48;
+pub const RCV_RSM_SELECT_INDEX2_WIDTH_SHIFT: c_int = 60;
+
+pub const RCV_STATUS_RX_PKT_IN_PROGRESS_SMASK: c_uint = 0x1ull;
+pub const RCV_STATUS_RX_RBUF_INIT_DONE_SMASK: c_uint = 0x200ull;
+pub const RCV_STATUS_RX_RBUF_PKT_PENDING_SMASK: c_uint = 0x40ull;
+
+pub const RCV_TID_CTRL_TID_BASE_INDEX_MASK: c_uint = 0x1FFFull;
+pub const RCV_TID_CTRL_TID_BASE_INDEX_SHIFT: c_int = 0;
+pub const RCV_TID_CTRL_TID_PAIR_CNT_MASK: c_uint = 0x1FFull;
+pub const RCV_TID_CTRL_TID_PAIR_CNT_SHIFT: c_int = 32;
+
+pub const SEND_BTH_QP_KDETH_QP_MASK: c_uint = 0xFFull;
+pub const SEND_BTH_QP_KDETH_QP_SHIFT: c_int = 16;
+
+pub const SEND_CM_CREDIT_VL15_DEDICATED_LIMIT_VL_SHIFT: c_int = 0;
+pub const SEND_CM_CREDIT_VL_DEDICATED_LIMIT_VL_MASK: c_uint = 0xFFFFull;
+pub const SEND_CM_CREDIT_VL_DEDICATED_LIMIT_VL_SHIFT: c_int = 0;
+pub const SEND_CM_CREDIT_VL_DEDICATED_LIMIT_VL_SMASK: c_uint = 0xFFFFull;
+pub const SEND_CM_CREDIT_VL_SHARED_LIMIT_VL_MASK: c_uint = 0xFFFFull;
+pub const SEND_CM_CREDIT_VL_SHARED_LIMIT_VL_SHIFT: c_int = 16;
+pub const SEND_CM_CREDIT_VL_SHARED_LIMIT_VL_SMASK: c_uint = 0xFFFF0000ull;
+
+pub const SEND_CM_CTRL_FORCE_CREDIT_MODE_SMASK: c_uint = 0x8ull;
+pub const SEND_CM_CTRL_RESETCSR: c_uint = 0x0000000000000020ull;
+
+pub const SEND_CM_GLOBAL_CREDIT_AU_MASK: c_uint = 0x7ull;
+pub const SEND_CM_GLOBAL_CREDIT_AU_SHIFT: c_int = 16;
+pub const SEND_CM_GLOBAL_CREDIT_AU_SMASK: c_uint = 0x70000ull;
+pub const SEND_CM_GLOBAL_CREDIT_RESETCSR: c_uint = 0x0000094000030000ull;
+pub const SEND_CM_GLOBAL_CREDIT_SHARED_LIMIT_MASK: c_uint = 0xFFFFull;
+pub const SEND_CM_GLOBAL_CREDIT_SHARED_LIMIT_SHIFT: c_int = 0;
+pub const SEND_CM_GLOBAL_CREDIT_SHARED_LIMIT_SMASK: c_uint = 0xFFFFull;
+pub const SEND_CM_GLOBAL_CREDIT_TOTAL_CREDIT_LIMIT_MASK: c_uint = 0xFFFFull;
+pub const SEND_CM_GLOBAL_CREDIT_TOTAL_CREDIT_LIMIT_SHIFT: c_int = 32;
+pub const SEND_CM_GLOBAL_CREDIT_TOTAL_CREDIT_LIMIT_SMASK: c_uint = 0xFFFF00000000ull;
+
+pub const SEND_CM_LOCAL_AU_TABLE0_TO3_LOCAL_AU_TABLE0_SHIFT: c_int = 0;
+pub const SEND_CM_LOCAL_AU_TABLE0_TO3_LOCAL_AU_TABLE1_SHIFT: c_int = 16;
+pub const SEND_CM_LOCAL_AU_TABLE0_TO3_LOCAL_AU_TABLE2_SHIFT: c_int = 32;
+pub const SEND_CM_LOCAL_AU_TABLE0_TO3_LOCAL_AU_TABLE3_SHIFT: c_int = 48;
+
+pub const SEND_CM_LOCAL_AU_TABLE4_TO7_LOCAL_AU_TABLE4_SHIFT: c_int = 0;
+pub const SEND_CM_LOCAL_AU_TABLE4_TO7_LOCAL_AU_TABLE5_SHIFT: c_int = 16;
+pub const SEND_CM_LOCAL_AU_TABLE4_TO7_LOCAL_AU_TABLE6_SHIFT: c_int = 32;
+pub const SEND_CM_LOCAL_AU_TABLE4_TO7_LOCAL_AU_TABLE7_SHIFT: c_int = 48;
+
+pub const SEND_CTRL_CM_RESET_SMASK: c_uint = 0x4ull;
+pub const SEND_CTRL_SEND_ENABLE_SMASK: c_uint = 0x1ull;
+pub const SEND_CTRL_UNSUPPORTED_VL_SHIFT: c_int = 3;
+pub const SEND_CTRL_UNSUPPORTED_VL_MASK: c_uint = 0xFFull;
+
+pub const SEND_CTRL_VL_ARBITER_ENABLE_SMASK: c_uint = 0x2ull;
+
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_BYPASS_VL_MAPPING_SMASK: c_uint = 0x80ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_ENABLE_SMASK: c_uint = 0x1ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_JOB_KEY_SMASK: c_uint = 0x4ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_OPCODE_SMASK: c_uint = 0x20ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_PARTITION_KEY_SMASK: c_uint = 0x8ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_SLID_SMASK: c_uint = 0x10ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_VL_MAPPING_SMASK: c_uint = 0x40ull;
+pub const SEND_CTXT_CHECK_ENABLE_CHECK_VL_SMASK: c_uint = 0x2ull;
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_BAD_PKT_LEN_SMASK: c_uint = 0x20000ull;
+
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_BYPASS_SMASK: c_uint = 0x800ull;
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_GRH_SMASK: c_uint = 0x400ull;
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_KDETH_PACKETS_SMASK: c_uint = 0x1000ull;
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_NON_KDETH_PACKETS_SMASK: c_uint = 0x2000ull;
+
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_PBC_TEST_SMASK: c_uint = 0x10000ull;
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_RAW_IPV6_SMASK: c_uint = 0x200ull;
+pub const SEND_CTXT_CHECK_ENABLE_DISALLOW_RAW_SMASK: c_uint = 0x100ull;
+
+pub const SEND_CTXT_CHECK_JOB_KEY_ALLOW_PERMISSIVE_SMASK: c_uint = 0x100000000ull;
+pub const SEND_CTXT_CHECK_JOB_KEY_MASK_SMASK: c_uint = 0xFFFF0000ull;
+pub const SEND_CTXT_CHECK_JOB_KEY_VALUE_MASK: c_uint = 0xFFFFull;
+pub const SEND_CTXT_CHECK_JOB_KEY_VALUE_SHIFT: c_int = 0;
+
+pub const SEND_CTXT_CHECK_OPCODE_MASK_SHIFT: c_int = 8;
+pub const SEND_CTXT_CHECK_OPCODE_VALUE_SHIFT: c_int = 0;
+
+pub const SEND_CTXT_CHECK_PARTITION_KEY_VALUE_MASK: c_uint = 0xFFFFull;
+pub const SEND_CTXT_CHECK_PARTITION_KEY_VALUE_SHIFT: c_int = 0;
+
+pub const SEND_CTXT_CHECK_SLID_MASK_MASK: c_uint = 0xFFFFull;
+pub const SEND_CTXT_CHECK_SLID_MASK_SHIFT: c_int = 16;
+pub const SEND_CTXT_CHECK_SLID_VALUE_MASK: c_uint = 0xFFFFull;
+pub const SEND_CTXT_CHECK_SLID_VALUE_SHIFT: c_int = 0;
+
+pub const SEND_CTXT_CREDIT_CTRL_CREDIT_INTR_SMASK: c_uint = 0x20000ull;
+pub const SEND_CTXT_CREDIT_CTRL_EARLY_RETURN_SMASK: c_uint = 0x10000ull;
+pub const SEND_CTXT_CREDIT_CTRL_THRESHOLD_MASK: c_uint = 0x7FFull;
+pub const SEND_CTXT_CREDIT_CTRL_THRESHOLD_SHIFT: c_int = 0;
+pub const SEND_CTXT_CREDIT_CTRL_THRESHOLD_SMASK: c_uint = 0x7FFull;
+
+pub const SEND_CTXT_CREDIT_STATUS_CURRENT_FREE_COUNTER_MASK: c_uint = 0x7FFull;
+pub const SEND_CTXT_CREDIT_STATUS_CURRENT_FREE_COUNTER_SHIFT: c_int = 32;
+pub const SEND_CTXT_CREDIT_STATUS_LAST_RETURNED_COUNTER_SMASK: c_uint = 0x7FFull;
+
+pub const SEND_CTXT_CREDIT_FORCE_FORCE_RETURN_SMASK: c_uint = 0x1ull;
+
+pub const SEND_CTXT_CREDIT_RETURN_ADDR_ADDRESS_SMASK: c_uint = 0xFFFFFFFFFFC0ull;
+
+pub const SEND_CTXT_CTRL_CTXT_BASE_MASK: c_uint = 0x3FFFull;
+pub const SEND_CTXT_CTRL_CTXT_BASE_SHIFT: c_int = 32;
+pub const SEND_CTXT_CTRL_CTXT_DEPTH_MASK: c_uint = 0x7FFull;
+pub const SEND_CTXT_CTRL_CTXT_DEPTH_SHIFT: c_int = 48;
+pub const SEND_CTXT_CTRL_CTXT_ENABLE_SMASK: c_uint = 0x1ull;
+
+pub const SEND_CTXT_ERR_STATUS_PIO_DISALLOWED_PACKET_ERR_SMASK: c_uint = 0x2ull;
+pub const SEND_CTXT_ERR_STATUS_PIO_INCONSISTENT_SOP_ERR_SMASK: c_uint = 0x1ull;
+pub const SEND_CTXT_ERR_STATUS_PIO_WRITE_CROSSES_BOUNDARY_ERR_SMASK: c_uint = 0x4ull;
+pub const SEND_CTXT_ERR_STATUS_PIO_WRITE_OUT_OF_BOUNDS_ERR_SMASK: c_uint = 0x10ull;
+pub const SEND_CTXT_ERR_STATUS_PIO_WRITE_OVERFLOW_ERR_SMASK: c_uint = 0x8ull;
+
+pub const SEND_CTXT_STATUS_CTXT_HALTED_SMASK: c_uint = 0x1ull;
+
+pub const SEND_DMA_CHECK_ENABLE_CHECK_BYPASS_VL_MAPPING_SMASK: c_uint = 0x80ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_ENABLE_SMASK: c_uint = 0x1ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_JOB_KEY_SMASK: c_uint = 0x4ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_OPCODE_SMASK: c_uint = 0x20ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_PARTITION_KEY_SMASK: c_uint = 0x8ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_SLID_SMASK: c_uint = 0x10ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_VL_MAPPING_SMASK: c_uint = 0x40ull;
+pub const SEND_DMA_CHECK_ENABLE_CHECK_VL_SMASK: c_uint = 0x2ull;
+pub const SEND_DMA_CHECK_ENABLE_DISALLOW_BAD_PKT_LEN_SMASK: c_uint = 0x20000ull;
+pub const SEND_DMA_CHECK_ENABLE_DISALLOW_BYPASS_BAD_PKT_LEN_SMASK: c_uint = 0x200000ull;
+
+pub const SEND_DMA_CHECK_ENABLE_DISALLOW_RAW_IPV6_SMASK: c_uint = 0x200ull;
+pub const SEND_DMA_CHECK_ENABLE_DISALLOW_RAW_SMASK: c_uint = 0x100ull;
+
+pub const SEND_DMA_CHECK_ENABLE_DISALLOW_TOO_LONG_IB_PACKETS_SMASK: c_uint = 0x40000ull;
+
+pub const SEND_DMA_CHECK_ENABLE_DISALLOW_TOO_SMALL_IB_PACKETS_SMASK: c_uint = 0x4000ull;
+
+pub const SEND_DMA_CHECK_SLID_MASK_MASK: c_uint = 0xFFFFull;
+pub const SEND_DMA_CHECK_SLID_MASK_SHIFT: c_int = 16;
+pub const SEND_DMA_CHECK_SLID_VALUE_MASK: c_uint = 0xFFFFull;
+pub const SEND_DMA_CHECK_SLID_VALUE_SHIFT: c_int = 0;
+
+pub const SEND_DMA_CTRL_SDMA_CLEANUP_SMASK: c_uint = 0x4ull;
+pub const SEND_DMA_CTRL_SDMA_ENABLE_SMASK: c_uint = 0x1ull;
+pub const SEND_DMA_CTRL_SDMA_HALT_SMASK: c_uint = 0x2ull;
+pub const SEND_DMA_CTRL_SDMA_INT_ENABLE_SMASK: c_uint = 0x8ull;
+
+pub const SEND_DMA_DESC_CNT_CNT_MASK: c_uint = 0xFFFFull;
+pub const SEND_DMA_DESC_CNT_CNT_SHIFT: c_int = 0;
+
+pub const SEND_DMA_ENG_ERR_CLEAR_SDMA_HEADER_REQUEST_FIFO_UNC_ERR_MASK: c_uint = 0x1ull;
+pub const SEND_DMA_ENG_ERR_CLEAR_SDMA_HEADER_REQUEST_FIFO_UNC_ERR_SHIFT: c_int = 18;
+
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_ASSEMBLY_UNC_ERR_SMASK: c_uint = 0x8000ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_DESC_TABLE_UNC_ERR_SMASK: c_uint = 0x4000ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_FIRST_DESC_ERR_SMASK: c_uint = 0x10ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_GEN_MISMATCH_ERR_SMASK: c_uint = 0x2ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_HALT_ERR_SMASK: c_uint = 0x40ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_HEADER_ADDRESS_ERR_SMASK: c_uint = 0x800ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_HEADER_LENGTH_ERR_SMASK: c_uint = 0x1000ull;
+
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_HEADER_SELECT_ERR_SMASK: c_uint = 0x400ull;
+
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_LENGTH_MISMATCH_ERR_SMASK: c_uint = 0x80ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_MEM_READ_ERR_SMASK: c_uint = 0x20ull;
+
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_TAIL_OUT_OF_BOUNDS_ERR_SMASK: c_uint = 0x8ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_TIMEOUT_ERR_SMASK: c_uint = 0x2000ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_TOO_LONG_ERR_SMASK: c_uint = 0x4ull;
+pub const SEND_DMA_ENG_ERR_STATUS_SDMA_WRONG_DW_ERR_SMASK: c_uint = 0x1ull;
+
+pub const SEND_DMA_ERR_STATUS_SDMA_CSR_PARITY_ERR_SMASK: c_uint = 0x2ull;
+pub const SEND_DMA_ERR_STATUS_SDMA_PCIE_REQ_TRACKING_COR_ERR_SMASK: c_uint = 0x8ull;
+pub const SEND_DMA_ERR_STATUS_SDMA_PCIE_REQ_TRACKING_UNC_ERR_SMASK: c_uint = 0x4ull;
+pub const SEND_DMA_ERR_STATUS_SDMA_RPY_TAG_ERR_SMASK: c_uint = 0x1ull;
+
+pub const SEND_DMA_LEN_GEN_GENERATION_SHIFT: c_int = 16;
+pub const SEND_DMA_LEN_GEN_LENGTH_SHIFT: c_int = 6;
+
+pub const SEND_DMA_MEMORY_SDMA_MEMORY_CNT_SHIFT: c_int = 16;
+pub const SEND_DMA_MEMORY_SDMA_MEMORY_INDEX_SHIFT: c_int = 0;
+
+pub const SEND_DMA_STATUS_ENG_CLEANED_UP_SMASK: c_uint = 0x200000000000000ull;
+pub const SEND_DMA_STATUS_ENG_HALTED_SMASK: c_uint = 0x100000000000000ull;
+
+pub const SEND_EGRESS_CTXT_STATUS_CTXT_EGRESS_HALT_STATUS_SMASK: c_uint = 0x10000ull;
+pub const SEND_EGRESS_CTXT_STATUS_CTXT_EGRESS_PACKET_OCCUPANCY_SHIFT: c_int = 0;
+
+pub const SEND_EGRESS_ERR_INFO_BAD_PKT_LEN_ERR_SMASK: c_uint = 0x20000ull;
+pub const SEND_EGRESS_ERR_INFO_BYPASS_ERR_SMASK: c_uint = 0x800ull;
+pub const SEND_EGRESS_ERR_INFO_GRH_ERR_SMASK: c_uint = 0x400ull;
+pub const SEND_EGRESS_ERR_INFO_JOB_KEY_ERR_SMASK: c_uint = 0x4ull;
+pub const SEND_EGRESS_ERR_INFO_KDETH_PACKETS_ERR_SMASK: c_uint = 0x1000ull;
+pub const SEND_EGRESS_ERR_INFO_NON_KDETH_PACKETS_ERR_SMASK: c_uint = 0x2000ull;
+pub const SEND_EGRESS_ERR_INFO_OPCODE_ERR_SMASK: c_uint = 0x20ull;
+pub const SEND_EGRESS_ERR_INFO_PARTITION_KEY_ERR_SMASK: c_uint = 0x8ull;
+pub const SEND_EGRESS_ERR_INFO_PBC_STATIC_RATE_CONTROL_ERR_SMASK: c_uint = 0x100000ull;
+pub const SEND_EGRESS_ERR_INFO_PBC_TEST_ERR_SMASK: c_uint = 0x10000ull;
+pub const SEND_EGRESS_ERR_INFO_RAW_ERR_SMASK: c_uint = 0x100ull;
+pub const SEND_EGRESS_ERR_INFO_RAW_IPV6_ERR_SMASK: c_uint = 0x200ull;
+pub const SEND_EGRESS_ERR_INFO_SLID_ERR_SMASK: c_uint = 0x10ull;
+pub const SEND_EGRESS_ERR_INFO_TOO_LONG_BYPASS_PACKETS_ERR_SMASK: c_uint = 0x80000ull;
+pub const SEND_EGRESS_ERR_INFO_TOO_LONG_IB_PACKET_ERR_SMASK: c_uint = 0x40000ull;
+pub const SEND_EGRESS_ERR_INFO_TOO_SMALL_BYPASS_PACKETS_ERR_SMASK: c_uint = 0x8000ull;
+pub const SEND_EGRESS_ERR_INFO_TOO_SMALL_IB_PACKETS_ERR_SMASK: c_uint = 0x4000ull;
+pub const SEND_EGRESS_ERR_INFO_VL_ERR_SMASK: c_uint = 0x2ull;
+pub const SEND_EGRESS_ERR_INFO_VL_MAPPING_ERR_SMASK: c_uint = 0x40ull;
+
+pub const SEND_EGRESS_ERR_STATUS_TX_CONFIG_PARITY_ERR_SMASK: c_uint = 0x8000ull;
+
+pub const SEND_EGRESS_ERR_STATUS_TX_ILLEGAL_VL_ERR_SMASK: c_uint = 0x1000ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_INCORRECT_LINK_STATE_ERR_SMASK: c_uint = 0x20ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_LAUNCH_CSR_PARITY_ERR_SMASK: c_uint = 0x2000ull;
+
+pub const SEND_EGRESS_ERR_STATUS_TX_LINKDOWN_ERR_SMASK: c_uint = 0x10ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_PIO_LAUNCH_INTF_PARITY_ERR_SMASK: c_uint = 0x80ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_PKT_INTEGRITY_MEM_COR_ERR_SMASK: c_uint = 0x1ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_PKT_INTEGRITY_MEM_UNC_ERR_SMASK: c_uint = 0x2ull;
+
+pub const SEND_EGRESS_ERR_STATUS_TX_SB_HDR_COR_ERR_SMASK: c_uint = 0x400000000000000ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_SB_HDR_UNC_ERR_SMASK: c_uint = 0x40000000000ull;
+pub const SEND_EGRESS_ERR_STATUS_TX_SBRD_CTL_CSR_PARITY_ERR_SMASK: c_uint = 0x4000ull;
+
+pub const SEND_EGRESS_SEND_DMA_STATUS_SDMA_EGRESS_PACKET_OCCUPANCY_SHIFT: c_int = 0;
+
+pub const SEND_ERR_STATUS_SEND_CSR_PARITY_ERR_SMASK: c_uint = 0x1ull;
+pub const SEND_ERR_STATUS_SEND_CSR_READ_BAD_ADDR_ERR_SMASK: c_uint = 0x2ull;
+pub const SEND_ERR_STATUS_SEND_CSR_WRITE_BAD_ADDR_ERR_SMASK: c_uint = 0x4ull;
+
+pub const SEND_HIGH_PRIORITY_LIMIT_LIMIT_MASK: c_uint = 0x3FFFull;
+pub const SEND_HIGH_PRIORITY_LIMIT_LIMIT_SHIFT: c_int = 0;
+
+pub const SEND_LEN_CHECK0_LEN_VL0_MASK: c_uint = 0xFFFull;
+pub const SEND_LEN_CHECK0_LEN_VL1_SHIFT: c_int = 12;
+
+pub const SEND_LEN_CHECK1_LEN_VL15_MASK: c_uint = 0xFFFull;
+pub const SEND_LEN_CHECK1_LEN_VL15_SHIFT: c_int = 48;
+pub const SEND_LEN_CHECK1_LEN_VL4_MASK: c_uint = 0xFFFull;
+pub const SEND_LEN_CHECK1_LEN_VL5_SHIFT: c_int = 12;
+
+pub const SEND_LOW_PRIORITY_LIST_VL_MASK: c_uint = 0x7ull;
+pub const SEND_LOW_PRIORITY_LIST_VL_SHIFT: c_int = 16;
+pub const SEND_LOW_PRIORITY_LIST_WEIGHT_MASK: c_uint = 0xFFull;
+pub const SEND_LOW_PRIORITY_LIST_WEIGHT_SHIFT: c_int = 0;
+
+pub const SEND_PIO_ERR_CLEAR_PIO_INIT_SM_IN_ERR_SMASK: c_uint = 0x20000ull;
+
+pub const SEND_PIO_ERR_STATUS_PIO_CREDIT_RET_FIFO_PARITY_ERR_SMASK: c_uint = 0x8000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_CSR_PARITY_ERR_SMASK: c_uint = 0x4ull;
+
+pub const SEND_PIO_ERR_STATUS_PIO_HOST_ADDR_MEM_COR_ERR_SMASK: c_uint = 0x100000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_HOST_ADDR_MEM_UNC_ERR_SMASK: c_uint = 0x80000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_INIT_SM_IN_ERR_SMASK: c_uint = 0x20000ull;
+
+pub const SEND_PIO_ERR_STATUS_PIO_PCC_FIFO_PARITY_ERR_SMASK: c_uint = 0x20ull;
+
+pub const SEND_PIO_ERR_STATUS_PIO_PEC_FIFO_PARITY_ERR_SMASK: c_uint = 0x40ull;
+
+pub const SEND_PIO_ERR_STATUS_PIO_PKT_EVICT_FIFO_PARITY_ERR_SMASK: c_uint = 0x200ull;
+pub const SEND_PIO_ERR_STATUS_PIO_PKT_EVICT_SM_OR_ARB_SM_ERR_SMASK: c_uint = 0x40000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_PPMC_BQC_MEM_PARITY_ERR_SMASK: c_uint = 0x10000000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_PPMC_PBL_FIFO_ERR_SMASK: c_uint = 0x10000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_PPMC_SOP_LEN_ERR_SMASK: c_uint = 0x20000000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_SB_MEM_FIFO0_ERR_SMASK: c_uint = 0x8ull;
+pub const SEND_PIO_ERR_STATUS_PIO_SB_MEM_FIFO1_ERR_SMASK: c_uint = 0x10ull;
+pub const SEND_PIO_ERR_STATUS_PIO_SBRDCTL_CRREL_PARITY_ERR_SMASK: c_uint = 0x80ull;
+
+pub const SEND_PIO_ERR_STATUS_PIO_SM_PKT_RESET_PARITY_ERR_SMASK: c_uint = 0x400ull;
+pub const SEND_PIO_ERR_STATUS_PIO_STATE_MACHINE_ERR_SMASK: c_uint = 0x400000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VL_FIFO_PARITY_ERR_SMASK: c_uint = 0x8000000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VLF_SOP_PARITY_ERR_SMASK: c_uint = 0x4000000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VLF_VL_LEN_PARITY_ERR_SMASK: c_uint = 0x2000000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VL_LEN_MEM_BANK0_COR_ERR_SMASK: c_uint = 0x2000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VL_LEN_MEM_BANK0_UNC_ERR_SMASK: c_uint = 0x800ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VL_LEN_MEM_BANK1_COR_ERR_SMASK: c_uint = 0x4000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_VL_LEN_MEM_BANK1_UNC_ERR_SMASK: c_uint = 0x1000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_WRITE_ADDR_PARITY_ERR_SMASK: c_uint = 0x2ull;
+pub const SEND_PIO_ERR_STATUS_PIO_WRITE_BAD_CTXT_ERR_SMASK: c_uint = 0x1ull;
+pub const SEND_PIO_ERR_STATUS_PIO_WRITE_DATA_PARITY_ERR_SMASK: c_uint = 0x200000ull;
+pub const SEND_PIO_ERR_STATUS_PIO_WRITE_QW_VALID_PARITY_ERR_SMASK: c_uint = 0x800000ull;
+
+pub const SEND_PIO_INIT_CTXT_PIO_ALL_CTXT_INIT_SMASK: c_uint = 0x1ull;
+pub const SEND_PIO_INIT_CTXT_PIO_CTXT_NUM_MASK: c_uint = 0xFFull;
+pub const SEND_PIO_INIT_CTXT_PIO_CTXT_NUM_SHIFT: c_int = 8;
+pub const SEND_PIO_INIT_CTXT_PIO_INIT_ERR_SMASK: c_uint = 0x8ull;
+pub const SEND_PIO_INIT_CTXT_PIO_INIT_IN_PROGRESS_SMASK: c_uint = 0x4ull;
+pub const SEND_PIO_INIT_CTXT_PIO_SINGLE_CTXT_INIT_SMASK: c_uint = 0x2ull;
+
+pub const SEND_SC2VLT0_SC0_SHIFT: c_int = 0;
+pub const SEND_SC2VLT0_SC1_SHIFT: c_int = 8;
+pub const SEND_SC2VLT0_SC2_SHIFT: c_int = 16;
+pub const SEND_SC2VLT0_SC3_SHIFT: c_int = 24;
+pub const SEND_SC2VLT0_SC4_SHIFT: c_int = 32;
+pub const SEND_SC2VLT0_SC5_SHIFT: c_int = 40;
+pub const SEND_SC2VLT0_SC6_SHIFT: c_int = 48;
+pub const SEND_SC2VLT0_SC7_SHIFT: c_int = 56;
+
+pub const SEND_SC2VLT1_SC10_SHIFT: c_int = 16;
+pub const SEND_SC2VLT1_SC11_SHIFT: c_int = 24;
+pub const SEND_SC2VLT1_SC12_SHIFT: c_int = 32;
+pub const SEND_SC2VLT1_SC13_SHIFT: c_int = 40;
+pub const SEND_SC2VLT1_SC14_SHIFT: c_int = 48;
+pub const SEND_SC2VLT1_SC15_SHIFT: c_int = 56;
+pub const SEND_SC2VLT1_SC8_SHIFT: c_int = 0;
+pub const SEND_SC2VLT1_SC9_SHIFT: c_int = 8;
+
+pub const SEND_SC2VLT2_SC16_SHIFT: c_int = 0;
+pub const SEND_SC2VLT2_SC17_SHIFT: c_int = 8;
+pub const SEND_SC2VLT2_SC18_SHIFT: c_int = 16;
+pub const SEND_SC2VLT2_SC19_SHIFT: c_int = 24;
+pub const SEND_SC2VLT2_SC20_SHIFT: c_int = 32;
+pub const SEND_SC2VLT2_SC21_SHIFT: c_int = 40;
+pub const SEND_SC2VLT2_SC22_SHIFT: c_int = 48;
+pub const SEND_SC2VLT2_SC23_SHIFT: c_int = 56;
+
+pub const SEND_SC2VLT3_SC24_SHIFT: c_int = 0;
+pub const SEND_SC2VLT3_SC25_SHIFT: c_int = 8;
+pub const SEND_SC2VLT3_SC26_SHIFT: c_int = 16;
+pub const SEND_SC2VLT3_SC27_SHIFT: c_int = 24;
+pub const SEND_SC2VLT3_SC28_SHIFT: c_int = 32;
+pub const SEND_SC2VLT3_SC29_SHIFT: c_int = 40;
+pub const SEND_SC2VLT3_SC30_SHIFT: c_int = 48;
+pub const SEND_SC2VLT3_SC31_SHIFT: c_int = 56;
+
+pub const SEND_STATIC_RATE_CONTROL_CSR_SRC_RELOAD_SHIFT: c_int = 0;
+pub const SEND_STATIC_RATE_CONTROL_CSR_SRC_RELOAD_SMASK: c_uint = 0xFFFFull;
+
+pub const PCIE_CFG_REG_PL3_L1_ENT_LATENCY_SHIFT: c_int = 27;
+pub const PCIE_CFG_REG_PL3_L1_ENT_LATENCY_SMASK: c_uint = 0x38000000;
+
+pub const PCIE_CFG_REG_PL102_GEN3_EQ_POST_CURSOR_PSET_SHIFT: c_int = 12;
+pub const PCIE_CFG_REG_PL102_GEN3_EQ_CURSOR_PSET_SHIFT: c_int = 6;
+pub const PCIE_CFG_REG_PL102_GEN3_EQ_PRE_CURSOR_PSET_SHIFT: c_int = 0;
+
+pub const PCIE_CFG_REG_PL105_GEN3_EQ_VIOLATE_COEF_RULES_SMASK: c_uint = 0x1ull;
+pub const PCIE_CFG_REG_PL2_LOW_PWR_ENT_CNT_SHIFT: c_int = 24;
+
+pub const PCIE_CFG_REG_PL100_EQ_EIEOS_CNT_SMASK: c_uint = 0x400ull;
+
+pub const PCIE_CFG_REG_PL101_GEN3_EQ_LOCAL_FS_SHIFT: c_int = 6;
+pub const PCIE_CFG_REG_PL101_GEN3_EQ_LOCAL_LF_SHIFT: c_int = 0;
+
+pub const PCIE_CFG_REG_PL106_GEN3_EQ_PSET_REQ_VEC_SHIFT: c_int = 8;
+pub const PCIE_CFG_REG_PL106_GEN3_EQ_EVAL2MS_DISABLE_SMASK: c_uint = 0x20ull;
+pub const PCIE_CFG_REG_PL106_GEN3_EQ_PHASE23_EXIT_MODE_SMASK: c_uint = 0x10ull;
+

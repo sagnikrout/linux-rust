@@ -1,0 +1,278 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/dt-bindings/clock/rk3188-cru-common.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Copyright (c) 2014 MundoReader S.L.
+// Author: Heiko Stuebner <heiko@sntech.de>
+//
+// core clocks from
+pub const PLL_APLL: c_int = 1;
+pub const PLL_DPLL: c_int = 2;
+pub const PLL_CPLL: c_int = 3;
+pub const PLL_GPLL: c_int = 4;
+pub const CORE_PERI: c_int = 5;
+pub const CORE_L2C: c_int = 6;
+pub const ARMCLK: c_int = 7;
+// sclk gates (special clocks)
+pub const SCLK_UART0: c_int = 64;
+pub const SCLK_UART1: c_int = 65;
+pub const SCLK_UART2: c_int = 66;
+pub const SCLK_UART3: c_int = 67;
+pub const SCLK_MAC: c_int = 68;
+pub const SCLK_SPI0: c_int = 69;
+pub const SCLK_SPI1: c_int = 70;
+pub const SCLK_SARADC: c_int = 71;
+pub const SCLK_SDMMC: c_int = 72;
+pub const SCLK_SDIO: c_int = 73;
+pub const SCLK_EMMC: c_int = 74;
+pub const SCLK_I2S0: c_int = 75;
+pub const SCLK_I2S1: c_int = 76;
+pub const SCLK_I2S2: c_int = 77;
+pub const SCLK_SPDIF: c_int = 78;
+pub const SCLK_CIF0: c_int = 79;
+pub const SCLK_CIF1: c_int = 80;
+pub const SCLK_OTGPHY0: c_int = 81;
+pub const SCLK_OTGPHY1: c_int = 82;
+pub const SCLK_HSADC: c_int = 83;
+pub const SCLK_TIMER0: c_int = 84;
+pub const SCLK_TIMER1: c_int = 85;
+pub const SCLK_TIMER2: c_int = 86;
+pub const SCLK_TIMER3: c_int = 87;
+pub const SCLK_TIMER4: c_int = 88;
+pub const SCLK_TIMER5: c_int = 89;
+pub const SCLK_TIMER6: c_int = 90;
+pub const SCLK_JTAG: c_int = 91;
+pub const SCLK_SMC: c_int = 92;
+pub const SCLK_TSADC: c_int = 93;
+pub const DCLK_LCDC0: c_int = 190;
+pub const DCLK_LCDC1: c_int = 191;
+// aclk gates
+pub const ACLK_DMA1: c_int = 192;
+pub const ACLK_DMA2: c_int = 193;
+pub const ACLK_GPS: c_int = 194;
+pub const ACLK_LCDC0: c_int = 195;
+pub const ACLK_LCDC1: c_int = 196;
+pub const ACLK_GPU: c_int = 197;
+pub const ACLK_SMC: c_int = 198;
+pub const ACLK_CIF1: c_int = 199;
+pub const ACLK_IPP: c_int = 200;
+pub const ACLK_RGA: c_int = 201;
+pub const ACLK_CIF0: c_int = 202;
+pub const ACLK_CPU: c_int = 203;
+pub const ACLK_PERI: c_int = 204;
+pub const ACLK_VEPU: c_int = 205;
+pub const ACLK_VDPU: c_int = 206;
+// pclk gates
+pub const PCLK_GRF: c_int = 320;
+pub const PCLK_PMU: c_int = 321;
+pub const PCLK_TIMER0: c_int = 322;
+pub const PCLK_TIMER1: c_int = 323;
+pub const PCLK_TIMER2: c_int = 324;
+pub const PCLK_TIMER3: c_int = 325;
+pub const PCLK_PWM01: c_int = 326;
+pub const PCLK_PWM23: c_int = 327;
+pub const PCLK_SPI0: c_int = 328;
+pub const PCLK_SPI1: c_int = 329;
+pub const PCLK_SARADC: c_int = 330;
+pub const PCLK_WDT: c_int = 331;
+pub const PCLK_UART0: c_int = 332;
+pub const PCLK_UART1: c_int = 333;
+pub const PCLK_UART2: c_int = 334;
+pub const PCLK_UART3: c_int = 335;
+pub const PCLK_I2C0: c_int = 336;
+pub const PCLK_I2C1: c_int = 337;
+pub const PCLK_I2C2: c_int = 338;
+pub const PCLK_I2C3: c_int = 339;
+pub const PCLK_I2C4: c_int = 340;
+pub const PCLK_GPIO0: c_int = 341;
+pub const PCLK_GPIO1: c_int = 342;
+pub const PCLK_GPIO2: c_int = 343;
+pub const PCLK_GPIO3: c_int = 344;
+pub const PCLK_GPIO4: c_int = 345;
+pub const PCLK_GPIO6: c_int = 346;
+pub const PCLK_EFUSE: c_int = 347;
+pub const PCLK_TZPC: c_int = 348;
+pub const PCLK_TSADC: c_int = 349;
+pub const PCLK_CPU: c_int = 350;
+pub const PCLK_PERI: c_int = 351;
+pub const PCLK_DDRUPCTL: c_int = 352;
+pub const PCLK_PUBL: c_int = 353;
+pub const PCLK_CIF0: c_int = 354;
+pub const PCLK_CIF1: c_int = 355;
+// hclk gates
+pub const HCLK_SDMMC: c_int = 448;
+pub const HCLK_SDIO: c_int = 449;
+pub const HCLK_EMMC: c_int = 450;
+pub const HCLK_OTG0: c_int = 451;
+pub const HCLK_EMAC: c_int = 452;
+pub const HCLK_SPDIF: c_int = 453;
+pub const HCLK_I2S0: c_int = 454;
+pub const HCLK_I2S1: c_int = 455;
+pub const HCLK_I2S2: c_int = 456;
+pub const HCLK_OTG1: c_int = 457;
+pub const HCLK_HSIC: c_int = 458;
+pub const HCLK_HSADC: c_int = 459;
+pub const HCLK_PIDF: c_int = 460;
+pub const HCLK_LCDC0: c_int = 461;
+pub const HCLK_LCDC1: c_int = 462;
+pub const HCLK_ROM: c_int = 463;
+pub const HCLK_CIF0: c_int = 464;
+pub const HCLK_IPP: c_int = 465;
+pub const HCLK_RGA: c_int = 466;
+pub const HCLK_NANDC0: c_int = 467;
+pub const HCLK_CPU: c_int = 468;
+pub const HCLK_PERI: c_int = 469;
+pub const HCLK_CIF1: c_int = 470;
+pub const HCLK_VEPU: c_int = 471;
+pub const HCLK_VDPU: c_int = 472;
+pub const HCLK_HDMI: c_int = 473;
+// soft-reset indices
+pub const SRST_MCORE: c_int = 2;
+pub const SRST_CORE0: c_int = 3;
+pub const SRST_CORE1: c_int = 4;
+pub const SRST_MCORE_DBG: c_int = 7;
+pub const SRST_CORE0_DBG: c_int = 8;
+pub const SRST_CORE1_DBG: c_int = 9;
+pub const SRST_CORE0_WDT: c_int = 12;
+pub const SRST_CORE1_WDT: c_int = 13;
+pub const SRST_STRC_SYS: c_int = 14;
+pub const SRST_L2C: c_int = 15;
+pub const SRST_CPU_AHB: c_int = 17;
+pub const SRST_AHB2APB: c_int = 19;
+pub const SRST_DMA1: c_int = 20;
+pub const SRST_INTMEM: c_int = 21;
+pub const SRST_ROM: c_int = 22;
+pub const SRST_SPDIF: c_int = 26;
+pub const SRST_TIMER0: c_int = 27;
+pub const SRST_TIMER1: c_int = 28;
+pub const SRST_EFUSE: c_int = 30;
+pub const SRST_GPIO0: c_int = 32;
+pub const SRST_GPIO1: c_int = 33;
+pub const SRST_GPIO2: c_int = 34;
+pub const SRST_GPIO3: c_int = 35;
+pub const SRST_UART0: c_int = 39;
+pub const SRST_UART1: c_int = 40;
+pub const SRST_UART2: c_int = 41;
+pub const SRST_UART3: c_int = 42;
+pub const SRST_I2C0: c_int = 43;
+pub const SRST_I2C1: c_int = 44;
+pub const SRST_I2C2: c_int = 45;
+pub const SRST_I2C3: c_int = 46;
+pub const SRST_I2C4: c_int = 47;
+pub const SRST_PWM0: c_int = 48;
+pub const SRST_PWM1: c_int = 49;
+pub const SRST_DAP_PO: c_int = 50;
+pub const SRST_DAP: c_int = 51;
+pub const SRST_DAP_SYS: c_int = 52;
+pub const SRST_TPIU_ATB: c_int = 53;
+pub const SRST_PMU_APB: c_int = 54;
+pub const SRST_GRF: c_int = 55;
+pub const SRST_PMU: c_int = 56;
+pub const SRST_PERI_AXI: c_int = 57;
+pub const SRST_PERI_AHB: c_int = 58;
+pub const SRST_PERI_APB: c_int = 59;
+pub const SRST_PERI_NIU: c_int = 60;
+pub const SRST_CPU_PERI: c_int = 61;
+pub const SRST_EMEM_PERI: c_int = 62;
+pub const SRST_USB_PERI: c_int = 63;
+pub const SRST_DMA2: c_int = 64;
+pub const SRST_SMC: c_int = 65;
+pub const SRST_MAC: c_int = 66;
+pub const SRST_NANC0: c_int = 68;
+pub const SRST_USBOTG0: c_int = 69;
+pub const SRST_USBPHY0: c_int = 70;
+pub const SRST_OTGC0: c_int = 71;
+pub const SRST_USBOTG1: c_int = 72;
+pub const SRST_USBPHY1: c_int = 73;
+pub const SRST_OTGC1: c_int = 74;
+pub const SRST_HSADC: c_int = 76;
+pub const SRST_PIDFILTER: c_int = 77;
+pub const SRST_DDR_MSCH: c_int = 79;
+pub const SRST_TZPC: c_int = 80;
+pub const SRST_SDMMC: c_int = 81;
+pub const SRST_SDIO: c_int = 82;
+pub const SRST_EMMC: c_int = 83;
+pub const SRST_SPI0: c_int = 84;
+pub const SRST_SPI1: c_int = 85;
+pub const SRST_WDT: c_int = 86;
+pub const SRST_SARADC: c_int = 87;
+pub const SRST_DDRPHY: c_int = 88;
+pub const SRST_DDRPHY_APB: c_int = 89;
+pub const SRST_DDRCTL: c_int = 90;
+pub const SRST_DDRCTL_APB: c_int = 91;
+pub const SRST_DDRPUB: c_int = 93;
+pub const SRST_VIO0_AXI: c_int = 98;
+pub const SRST_VIO0_AHB: c_int = 99;
+pub const SRST_LCDC0_AXI: c_int = 100;
+pub const SRST_LCDC0_AHB: c_int = 101;
+pub const SRST_LCDC0_DCLK: c_int = 102;
+pub const SRST_LCDC1_AXI: c_int = 103;
+pub const SRST_LCDC1_AHB: c_int = 104;
+pub const SRST_LCDC1_DCLK: c_int = 105;
+pub const SRST_IPP_AXI: c_int = 106;
+pub const SRST_IPP_AHB: c_int = 107;
+pub const SRST_RGA_AXI: c_int = 108;
+pub const SRST_RGA_AHB: c_int = 109;
+pub const SRST_CIF0: c_int = 110;
+pub const SRST_VCODEC_AXI: c_int = 112;
+pub const SRST_VCODEC_AHB: c_int = 113;
+pub const SRST_VIO1_AXI: c_int = 114;
+pub const SRST_VCODEC_CPU: c_int = 115;
+pub const SRST_VCODEC_NIU: c_int = 116;
+pub const SRST_GPU: c_int = 120;
+pub const SRST_GPU_NIU: c_int = 122;
+pub const SRST_TFUN_ATB: c_int = 125;
+pub const SRST_TFUN_APB: c_int = 126;
+pub const SRST_CTI4_APB: c_int = 127;
+pub const SRST_TPIU_APB: c_int = 128;
+pub const SRST_TRACE: c_int = 129;
+pub const SRST_CORE_DBG: c_int = 130;
+pub const SRST_DBG_APB: c_int = 131;
+pub const SRST_CTI0: c_int = 132;
+pub const SRST_CTI0_APB: c_int = 133;
+pub const SRST_CTI1: c_int = 134;
+pub const SRST_CTI1_APB: c_int = 135;
+pub const SRST_PTM_CORE0: c_int = 136;
+pub const SRST_PTM_CORE1: c_int = 137;
+pub const SRST_PTM0: c_int = 138;
+pub const SRST_PTM0_ATB: c_int = 139;
+pub const SRST_PTM1: c_int = 140;
+pub const SRST_PTM1_ATB: c_int = 141;
+pub const SRST_CTM: c_int = 142;
+pub const SRST_TS: c_int = 143;

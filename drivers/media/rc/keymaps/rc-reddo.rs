@@ -1,0 +1,107 @@
+//! Automatically rewritten from C to Rust
+//! Source: drivers/media/rc/keymaps/rc-reddo.c
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// MSI DIGIVOX mini III remote controller keytable
+//
+// Copyright (C) 2013 Antti Palosaari <crope@iki.fi>
+//
+
+//
+// Derived from MSI DIGIVOX mini III remote (rc-msi-digivox-iii.c)
+//
+// Differences between these remotes are:
+//
+// 1) scancode 0x61d601 is mapped to different button:
+// MSI DIGIVOX mini III   "Source" = KEY_VIDEO
+// Reddo                     "EPG" = KEY_EPG
+//
+// 2) Reddo remote has less buttons. Missing buttons are: colored buttons,
+// navigation buttons and main power button.
+//
+    static struct rc_map_table reddo[] = {
+    { 0x61d601, KEY_EPG },             /* EPG */
+    { 0x61d602, KEY_NUMERIC_3 },
+    { 0x61d604, KEY_NUMERIC_1 },
+    { 0x61d605, KEY_NUMERIC_5 },
+    { 0x61d606, KEY_NUMERIC_6 },
+    { 0x61d607, KEY_CHANNELDOWN },     /* CH- */
+    { 0x61d608, KEY_NUMERIC_2 },
+    { 0x61d609, KEY_CHANNELUP },       /* CH+ */
+    { 0x61d60a, KEY_NUMERIC_9 },
+    { 0x61d60b, KEY_ZOOM },            /* Zoom */
+    { 0x61d60c, KEY_NUMERIC_7 },
+    { 0x61d60d, KEY_NUMERIC_8 },
+    { 0x61d60e, KEY_VOLUMEUP },        /* Vol+ */
+    { 0x61d60f, KEY_NUMERIC_4 },
+    { 0x61d610, KEY_ESC },             /* [back up arrow] */
+    { 0x61d611, KEY_NUMERIC_0 },
+    { 0x61d612, KEY_OK },              /* [enter arrow] */
+    { 0x61d613, KEY_VOLUMEDOWN },      /* Vol- */
+    { 0x61d614, KEY_RECORD },          /* Rec */
+    { 0x61d615, KEY_STOP },            /* Stop */
+    { 0x61d616, KEY_PLAY },            /* Play */
+    { 0x61d617, KEY_MUTE },            /* Mute */
+    { 0x61d643, KEY_POWER2 },          /* [red power button] */
+    };
+    static struct rc_map_list reddo_map = {
+    .map = {
+    .scan     = reddo,
+    .size     = ARRAY_SIZE(reddo),
+    .rc_proto = RC_PROTO_NECX,
+    .name     = RC_MAP_REDDO,
+    }
+    };
+#[no_mangle]
+unsafe extern "C" fn init_rc_map_reddo() -> int __init {
+    static int __init init_rc_map_reddo(void)
+    {
+    return rc_map_register(&reddo_map);
+    }
+#[no_mangle]
+unsafe extern "C" fn exit_rc_map_reddo() -> void __exit {
+    static void __exit exit_rc_map_reddo(void)
+    {
+    rc_map_unregister(&reddo_map);
+    }
+    module_init(init_rc_map_reddo)
+    module_exit(exit_rc_map_reddo)
+    MODULE_LICENSE("GPL");
+    MODULE_AUTHOR("Antti Palosaari <crope@iki.fi>");
+    MODULE_DESCRIPTION("reddo remote controller keytable");

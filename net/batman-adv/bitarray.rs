@@ -1,0 +1,60 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: net/batman-adv/bitarray.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0
+// Copyright (C) B.A.T.M.A.N. contributors:
+//
+// Simon Wunderlich, Marek Lindner
+//
+
+//
+// batadv_test_bit() - check if bit is set in the current window
+//
+// @seq_bits: pointer to the sequence number bitmap of received packets
+// @last_seqno: latest sequence number in seq_bits
+// @curr_seqno: sequence number to test for
+//
+// Return: true if the corresponding bit in the given seq_bits indicates true
+// and curr_seqno is within range of last_seqno. Otherwise returns false.
+//
+// batadv_set_bit() - Turn corresponding bit on, so we can remember that we got
+// the packet
+// @seq_bits: bitmap of the packet receive window
+// @n: relative sequence number of newly received packet
+//
+// if too old, just drop it

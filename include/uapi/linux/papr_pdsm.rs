@@ -1,0 +1,182 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: include/uapi/linux/papr_pdsm.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note
+//
+// PAPR nvDimm Specific Methods (PDSM) and structs for libndctl
+//
+// (C) Copyright IBM 2020
+//
+// Author: Vaibhav Jain <vaibhav at linux.ibm.com>
+//
+
+//
+// PDSM Envelope:
+//
+// The ioctl ND_CMD_CALL exchange data between user-space and kernel via
+// envelope which consists of 2 headers sections and payload sections as
+// illustrated below:
+// +-----------------+---------------+---------------------------+
+// |   64-Bytes      |   8-Bytes     |       Max 184-Bytes       |
+// +-----------------+---------------+---------------------------+
+// | ND-HEADER       |  PDSM-HEADER  |      PDSM-PAYLOAD         |
+// +-----------------+---------------+---------------------------+
+// | nd_family       |               |                           |
+// | nd_size_out     | cmd_status    |                           |
+// | nd_size_in      | reserved      |     nd_pdsm_payload       |
+// | nd_command      | payload   --> |                           |
+// | nd_fw_size      |               |                           |
+// | nd_payload ---> |               |                           |
+// +---------------+-----------------+---------------------------+
+//
+// ND Header:
+// This is the generic libnvdimm header described as 'struct nd_cmd_pkg'
+// which is interpreted by libnvdimm before passed on to papr_scm. Important
+// member fields used are:
+// 'nd_family'		: (In) NVDIMM_FAMILY_PAPR_SCM
+// 'nd_size_in'		: (In) PDSM-HEADER + PDSM-IN-PAYLOAD (usually 0)
+// 'nd_size_out'        : (In) PDSM-HEADER + PDSM-RETURN-PAYLOAD
+// 'nd_command'         : (In) One of PAPR_PDSM_XXX
+// 'nd_fw_size'         : (Out) PDSM-HEADER + size of actual payload returned
+//
+// PDSM Header:
+// This is papr-scm specific header that precedes the payload. This is defined
+// as nd_cmd_pdsm_pkg.  Following fields aare available in this header:
+//
+// 'cmd_status'		: (Out) Errors if any encountered while servicing PDSM.
+// 'reserved'		: Not used, reserved for future and should be set to 0.
+// 'payload'            : A union of all the possible payload structs
+//
+// PDSM Payload:
+//
+// The layout of the PDSM Payload is defined by various structs shared between
+// papr_scm and libndctl so that contents of payload can be interpreted. As such
+// its defined as a union of all possible payload structs as
+// 'union nd_pdsm_payload'. Based on the value of 'nd_cmd_pkg.nd_command'
+// appropriate member of the union is accessed.
+//
+// Max payload size that we can handle
+pub const ND_PDSM_PAYLOAD_MAX_SIZE: c_int = 184;
+// Max payload size that we can handle
+
+// Various nvdimm health indicators
+pub const PAPR_PDSM_DIMM_HEALTHY: c_int = 0;
+pub const PAPR_PDSM_DIMM_UNHEALTHY: c_int = 1;
+pub const PAPR_PDSM_DIMM_CRITICAL: c_int = 2;
+pub const PAPR_PDSM_DIMM_FATAL: c_int = 3;
+// struct nd_papr_pdsm_health.extension_flags field flags
+// Indicate that the 'dimm_fuel_gauge' field is valid
+pub const PDSM_DIMM_HEALTH_RUN_GAUGE_VALID: c_int = 1;
+// Indicate that the 'dimm_dsc' field is valid
+pub const PDSM_DIMM_DSC_VALID: c_int = 2;
+//
+// Struct exchanged between kernel & ndctl in for PAPR_PDSM_HEALTH
+// Various flags indicate the health status of the dimm.
+//
+// extension_flags	: Any extension fields present in the struct.
+// dimm_unarmed		: Dimm not armed. So contents wont persist.
+// dimm_bad_shutdown	: Previous shutdown did not persist contents.
+// dimm_bad_restore	: Contents from previous shutdown werent restored.
+// dimm_scrubbed	: Contents of the dimm have been scrubbed.
+// dimm_locked		: Contents of the dimm cant be modified until CEC reboot
+// dimm_encrypted	: Contents of dimm are encrypted.
+// dimm_health		: Dimm health indicator. One of PAPR_PDSM_DIMM_XXXX
+// dimm_fuel_gauge	: Life remaining of DIMM as a percentage from 0-100
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nd_papr_pdsm_health {
+    pub extension_flags: __u32,
+    pub dimm_unarmed: __u8,
+    pub dimm_bad_shutdown: __u8,
+    pub dimm_bad_restore: __u8,
+    pub dimm_scrubbed: __u8,
+    pub dimm_locked: __u8,
+    pub dimm_encrypted: __u8,
+    pub dimm_health: __u16,
+// Extension flag PDSM_DIMM_HEALTH_RUN_GAUGE_VALID
+    pub dimm_fuel_gauge: __u16,
+// Extension flag PDSM_DIMM_DSC_VALID
+    pub dimm_dsc: __u64,
+}
+
+// Flags for injecting specific smart errors
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nd_papr_pdsm_smart_inject {
+// One or more of PDSM_SMART_INJECT_
+    pub flags: __u32,
+    pub fatal_enable: __u8,
+    pub unsafe_shutdown_enable: __u8,
+}
+
+//
+// Methods to be embedded in ND_CMD_CALL request. These are sent to the kernel
+// via 'nd_cmd_pkg.nd_command' member of the ioctl struct
+//
+#[repr(C)]
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum papr_pdsm {
+    PAPR_PDSM_MIN = 0x0,
+    PAPR_PDSM_HEALTH,
+    PAPR_PDSM_SMART_INJECT,
+    PAPR_PDSM_MAX,
+}
+
+// Maximal union that can hold all possible payload types
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union nd_pdsm_payload {
+    pub health: nd_papr_pdsm_health,
+    pub smart_inject: nd_papr_pdsm_smart_inject,
+    pub buf: [__u8; ND_PDSM_PAYLOAD_MAX_SIZE],
+    pub __packed: },
+//
+// PDSM-header + payload expected with ND_CMD_CALL ioctl from libnvdimm
+// Valid member of union 'payload' is identified via 'nd_cmd_pkg.nd_command'
+// that should always precede this struct when sent to papr_scm via CMD_CALL
+// interface.
+//
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct nd_pkg_pdsm {
+    pub /: *mut *mut __s32 cmd_status; / Out: Sub-cmd status returned back,
+    pub /: *mut *mut __u16 reserved[2]; / Ignored and to be set as '0',
+    pub payload: nd_pdsm_payload,
+    pub __packed: },

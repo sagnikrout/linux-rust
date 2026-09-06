@@ -1,0 +1,59 @@
+//! Automatically rewritten from C Header to Rust Module
+//! Source: drivers/gpu/drm/meson/meson_vpp.h
+#![no_std]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+
+use core::ffi::*;
+
+// --- Linux Kernel Primitives Prelude ---
+pub type uid_t = u32;
+pub type gid_t = u32;
+pub type uid16_t = u16;
+pub type gid16_t = u16;
+pub type pid_t = i32;
+pub type mode_t = u32;
+pub type umode_t = u16;
+pub type nlink_t = u32;
+pub type off_t = i64;
+pub type loff_t = i64;
+pub type dev_t = u32;
+pub type ino_t = u64;
+pub type size_t = usize;
+pub type ssize_t = isize;
+pub type uintptr_t = usize;
+pub type intptr_t = isize;
+pub type ptrdiff_t = isize;
+pub type clockid_t = i32;
+pub type timer_t = i32;
+pub type time64_t = i64;
+pub type atomic_t = core::sync::atomic::AtomicI32;
+pub type atomic64_t = core::sync::atomic::AtomicI64;
+// ---------------------------------------
+
+
+// SPDX-License-Identifier: GPL-2.0-or-later
+//
+// Copyright (C) 2016 BayLibre, SAS
+// Author: Neil Armstrong <narmstrong@baylibre.com>
+//
+// Video Post Process
+// Mux VIU/VPP to ENCL
+pub const MESON_VIU_VPP_MUX_ENCL: c_uint = 0x0;
+// Mux VIU/VPP to ENCI
+pub const MESON_VIU_VPP_MUX_ENCI: c_uint = 0x5;
+// Mux VIU/VPP to ENCP
+pub const MESON_VIU_VPP_MUX_ENCP: c_uint = 0xA;
+extern "C" {
+    pub fn meson_vpp_setup_mux(priv: *mut meson_drm, mux: c_uint);
+}
+extern "C" {
+    pub fn meson_vpp_disable_interlace_vscaler_osd1(priv: *mut meson_drm);
+}
+extern "C" {
+    pub fn meson_vpp_init(priv: *mut meson_drm);
+}
