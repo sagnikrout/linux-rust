@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -63,8 +160,8 @@ pub const MIN_THREADS: c_int = 20;
 //
 // Protected counters by write_lock_irq(&tasklist_lock)
 //
-    unsigned long total_forks;	/* Handle normal Linux uptimes. */
-    int nr_threads;			/* The idle threads do not count.. */
+    let mut total_forks = 0;	/* Handle normal Linux uptimes. */
+    let mut nr_threads = 0;			/* The idle threads do not count.. */
     static int max_threads __read_mostly;		/* tunable limit on nr_threads */
 
     static const char * const resident_page_types[] = {
@@ -78,36 +175,28 @@ pub const MIN_THREADS: c_int = 20;
 
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_tasklist_lock_is_held() -> c_int {
-    int lockdep_tasklist_lock_is_held(void)
-    {
     return lockdep_is_held(&tasklist_lock);
     }
-    EXPORT_SYMBOL_GPL(lockdep_tasklist_lock_is_held);
+// EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
 pub unsafe extern "C" fn nr_processes() -> c_int {
-    int nr_processes(void)
-    {
-    int cpu;
-    let mut total: c_int = 0;
+    let mut cpu = 0;
+pub static mut total: c_int = 0;
     for_each_possible_cpu(cpu)
     total += per_cpu(process_counts, cpu);
     return total;
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_release_task_struct(tsk: *mut task_struct) -> void __weak {
-    void __weak arch_release_task_struct(struct task_struct *tsk)
-    {
     }
     static struct kmem_cache *task_struct_cachep;
-    static inline struct task_struct *alloc_task_struct_node(int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_task_struct_node() {
     return kmem_cache_alloc_node(task_struct_cachep, GFP_KERNEL, node);
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_task_struct(tsk: *mut task_struct) {
-    static inline void free_task_struct(struct task_struct *tsk)
-    {
     kmem_cache_free(task_struct_cachep, tsk);
     }
 
@@ -116,7 +205,7 @@ pub unsafe extern "C" fn free_task_struct(tsk: *mut task_struct) {
 // flush.  Try to minimize the number of calls by caching stacks.
 //
 pub const NR_CACHED_STACKS: c_int = 2;
-    static DEFINE_PER_CPU(struct vm_struct *, cached_stacks[NR_CACHED_STACKS]);
+// static DEFINE_PER_CPU(struct vm_struct *, cached_stacks[NR_CACHED_STACKS]);
 //
 // Allocated stacks are cached and later reused by new threads, so memcg
 // accounting is performed by the code assigning/releasing stacks to tasks.
@@ -130,10 +219,10 @@ pub struct vm_stack {
     pub stack_vm_area: *mut vm_struct,
 }
 
-    static struct vm_struct *alloc_thread_stack_node_from_cache(struct task_struct *tsk, int node)
-    {
-    struct vm_struct *vm_area;
-    unsigned int i;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_thread_stack_node_from_cache() {
+    let mut vm_area = core::ptr::null_mut();
+    let mut i = 0;
 //
 // If the node has memory, we are guaranteed the stacks are backed by local pages.
 // Otherwise the pages are arbitrary.
@@ -143,22 +232,22 @@ pub struct vm_stack {
 // arbitrary callers.
 //
     scoped_guard(preempt) {
-    if (node != NUMA_NO_NODE && numa_node_id() != node)
+    if (node != NUMA_NO_NODE && numa_node_id() != node) {
     return core::ptr::null_mut();
+    }
     for (i = 0; i < NR_CACHED_STACKS; i++) {
     vm_area = this_cpu_xchg(cached_stacks[i], core::ptr::null_mut());
-    if (vm_area)
+    if (vm_area) {
     return vm_area;
+    }
     }
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn try_release_thread_stack_to_cache(vm_area: *mut vm_struct) -> bool {
-    static bool try_release_thread_stack_to_cache(struct vm_struct *vm_area)
-    {
-    unsigned int i;
-    int nid;
+    let mut i = 0;
+    let mut nid = 0;
 //
 // Don't cache stacks if any of the pages don't match the local domain, unless
 // there is no local memory to begin with.
@@ -172,46 +261,44 @@ unsafe extern "C" fn try_release_thread_stack_to_cache(vm_area: *mut vm_struct) 
     if (node_state(nid, N_MEMORY)) {
     for (i = 0; i < vm_area.nr_pages; i++) {
     struct page *page = vm_area.pages[i];
-    if (page_to_nid(page) != nid)
+    if (page_to_nid(page) != nid) {
     return false;
+    }
     }
     }
     for (i = 0; i < NR_CACHED_STACKS; i++) {
     struct vm_struct *tmp = core::ptr::null_mut();
-    if (this_cpu_try_cmpxchg(cached_stacks[i], &tmp, vm_area))
+    if (this_cpu_try_cmpxchg(cached_stacks[i], &tmp, vm_area)) {
     return true;
+    }
     }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn thread_stack_free_rcu(rh: *mut rcu_head) {
-    static void thread_stack_free_rcu(struct rcu_head *rh)
-    {
     struct vm_stack *vm_stack = container_of(rh, struct vm_stack, rcu);
     struct vm_struct *vm_area = vm_stack.stack_vm_area;
-    if (try_release_thread_stack_to_cache(vm_stack.stack_vm_area))
+    if (try_release_thread_stack_to_cache(vm_stack.stack_vm_area)) {
     return;
+    }
     vfree(vm_area.addr);
     }
 #[no_mangle]
 unsafe extern "C" fn thread_stack_delayed_free(tsk: *mut task_struct) {
-    static void thread_stack_delayed_free(struct task_struct *tsk)
-    {
     struct vm_stack *vm_stack = tsk.stack;
     vm_stack.stack_vm_area = tsk.stack_vm_area;
     call_rcu(&vm_stack.rcu, thread_stack_free_rcu);
     }
 #[no_mangle]
 unsafe extern "C" fn free_vm_stack_cache(cpu: c_uint) -> c_int {
-    static int free_vm_stack_cache(unsigned int cpu)
-    {
     struct vm_struct **cached_vm_stack_areas = per_cpu_ptr(cached_stacks, cpu);
-    int i;
+    let mut i = 0;
     for (i = 0; i < NR_CACHED_STACKS; i++) {
     struct vm_struct *vm_area = cached_vm_stack_areas[i];
-    if (!vm_area)
+    if (!vm_area) {
     continue;
+    }
     vfree(vm_area.addr);
     cached_vm_stack_areas[i] = core::ptr::null_mut();
     }
@@ -219,16 +306,15 @@ unsafe extern "C" fn free_vm_stack_cache(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_charge_kernel_stack(vm_area: *mut vm_struct) -> c_int {
-    static int memcg_charge_kernel_stack(struct vm_struct *vm_area)
-    {
-    int i;
-    int ret;
-    let mut nr_charged: c_int = 0;
-    BUG_ON(vm_area.nr_pages != THREAD_SIZE / PAGE_SIZE);
+    let mut i = 0;
+    let mut ret = 0;
+pub static mut nr_charged: c_int = 0;
+// BUG_ON;
     for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++) {
     ret = memcg_kmem_charge_page(vm_area.pages[i], GFP_KERNEL, 0);
-    if (ret)
+    if (ret) {
     goto err;
+    }
     nr_charged++;
     }
     return 0;
@@ -239,10 +325,8 @@ unsafe extern "C" fn memcg_charge_kernel_stack(vm_area: *mut vm_struct) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int) -> c_int {
-    static int alloc_thread_stack_node(struct task_struct *tsk, int node)
-    {
-    struct vm_struct *vm_area;
-    void *stack;
+    let mut vm_area = core::ptr::null_mut();
+    let mut stack = core::ptr::null_mut();
     vm_area = alloc_thread_stack_node_from_cache(tsk, node);
     if (vm_area) {
     if (memcg_charge_kernel_stack(vm_area)) {
@@ -250,8 +334,9 @@ unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int)
     return -ENOMEM;
     }
 // Reset stack metadata.
-    if (!kasan_hw_tags_enabled())
+    if (!kasan_hw_tags_enabled()) {
     kasan_unpoison_range(vm_area.addr, THREAD_SIZE);
+    }
     stack = kasan_reset_tag(vm_area.addr);
 // Clear stale pointers from reused stack.
     clear_pages(vm_area.addr, vm_area.nr_pages);
@@ -262,8 +347,9 @@ unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int)
     stack = __vmalloc_node(THREAD_SIZE, THREAD_ALIGN,
     GFP_VMAP_STACK,
     node, __builtin_return_address(0));
-    if (!stack)
+    if (!stack) {
     return -ENOMEM;
+    }
     vm_area = find_vm_area(stack);
     if (memcg_charge_kernel_stack(vm_area)) {
     vfree(stack);
@@ -281,10 +367,9 @@ unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int)
     }
 #[no_mangle]
 unsafe extern "C" fn free_thread_stack(tsk: *mut task_struct) {
-    static void free_thread_stack(struct task_struct *tsk)
-    {
-    if (!try_release_thread_stack_to_cache(tsk.stack_vm_area))
+    if (!try_release_thread_stack_to_cache(tsk.stack_vm_area)) {
     thread_stack_delayed_free(tsk);
+    }
     tsk.stack = core::ptr::null_mut();
     tsk.stack_vm_area = core::ptr::null_mut();
     }
@@ -296,21 +381,15 @@ unsafe extern "C" fn free_thread_stack(tsk: *mut task_struct) {
 
 #[no_mangle]
 unsafe extern "C" fn thread_stack_free_rcu(rh: *mut rcu_head) {
-    static void thread_stack_free_rcu(struct rcu_head *rh)
-    {
     __free_pages(virt_to_page(rh), THREAD_SIZE_ORDER);
     }
 #[no_mangle]
 unsafe extern "C" fn thread_stack_delayed_free(tsk: *mut task_struct) {
-    static void thread_stack_delayed_free(struct task_struct *tsk)
-    {
     struct rcu_head *rh = tsk.stack;
     call_rcu(rh, thread_stack_free_rcu);
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int) -> c_int {
-    static int alloc_thread_stack_node(struct task_struct *tsk, int node)
-    {
     struct page *page = alloc_pages_node(node, THREADINFO_GFP,
     THREAD_SIZE_ORDER);
     if (likely(page)) {
@@ -321,8 +400,6 @@ unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int)
     }
 #[no_mangle]
 unsafe extern "C" fn free_thread_stack(tsk: *mut task_struct) {
-    static void free_thread_stack(struct task_struct *tsk)
-    {
     thread_stack_delayed_free(tsk);
     tsk.stack = core::ptr::null_mut();
     }
@@ -330,21 +407,15 @@ unsafe extern "C" fn free_thread_stack(tsk: *mut task_struct) {
     static struct kmem_cache *thread_stack_cache;
 #[no_mangle]
 unsafe extern "C" fn thread_stack_free_rcu(rh: *mut rcu_head) {
-    static void thread_stack_free_rcu(struct rcu_head *rh)
-    {
     kmem_cache_free(thread_stack_cache, rh);
     }
 #[no_mangle]
 unsafe extern "C" fn thread_stack_delayed_free(tsk: *mut task_struct) {
-    static void thread_stack_delayed_free(struct task_struct *tsk)
-    {
     struct rcu_head *rh = tsk.stack;
     call_rcu(rh, thread_stack_free_rcu);
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int) -> c_int {
-    static int alloc_thread_stack_node(struct task_struct *tsk, int node)
-    {
     unsigned long *stack;
     stack = kmem_cache_alloc_node(thread_stack_cache, THREADINFO_GFP, node);
     stack = kasan_reset_tag(stack);
@@ -353,38 +424,32 @@ unsafe extern "C" fn alloc_thread_stack_node(tsk: *mut task_struct, node: c_int)
     }
 #[no_mangle]
 unsafe extern "C" fn free_thread_stack(tsk: *mut task_struct) {
-    static void free_thread_stack(struct task_struct *tsk)
-    {
     thread_stack_delayed_free(tsk);
     tsk.stack = core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn thread_stack_cache_init() {
-    void thread_stack_cache_init(void)
-    {
     thread_stack_cache = kmem_cache_create_usercopy("thread_stack",
     THREAD_SIZE, THREAD_SIZE, 0, 0,
     THREAD_SIZE, core::ptr::null_mut());
-    BUG_ON(thread_stack_cache == core::ptr::null_mut());
+// BUG_ON;
     }
 
 // SLAB cache for signal_struct structures (tsk->signal)
     static struct kmem_cache *signal_cachep;
 // SLAB cache for sighand_struct structures (tsk->sighand)
-    struct kmem_cache *sighand_cachep;
+    let mut sighand_cachep = core::ptr::null_mut();
 // SLAB cache for files_struct structures (tsk->files)
-    struct kmem_cache *files_cachep;
+    let mut files_cachep = core::ptr::null_mut();
 // SLAB cache for fs_struct structures (tsk->fs)
-    struct kmem_cache *fs_cachep;
+    let mut fs_cachep = core::ptr::null_mut();
 // SLAB cache for mm_struct structures (tsk->mm)
     static struct kmem_cache *mm_cachep;
 #[no_mangle]
 unsafe extern "C" fn account_kernel_stack(tsk: *mut task_struct, account: c_int) {
-    static void account_kernel_stack(struct task_struct *tsk, int account)
-    {
     if (IS_ENABLED(CONFIG_VMAP_STACK)) {
     struct vm_struct *vm_area = task_stack_vm_area(tsk);
-    int i;
+    let mut i = 0;
     for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++)
     mod_lruvec_page_state(vm_area.pages[i], NR_KERNEL_STACK_KB,
     account * (PAGE_SIZE / 1024));
@@ -397,12 +462,10 @@ unsafe extern "C" fn account_kernel_stack(tsk: *mut task_struct, account: c_int)
     }
 #[no_mangle]
 pub unsafe extern "C" fn exit_task_stack_account(tsk: *mut task_struct) {
-    void exit_task_stack_account(struct task_struct *tsk)
-    {
     account_kernel_stack(tsk, -1);
     if (IS_ENABLED(CONFIG_VMAP_STACK)) {
-    struct vm_struct *vm_area;
-    int i;
+    let mut vm_area = core::ptr::null_mut();
+    let mut i = 0;
     vm_area = task_stack_vm_area(tsk);
     for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++)
     memcg_kmem_uncharge_page(vm_area.pages[i], 0);
@@ -410,27 +473,23 @@ pub unsafe extern "C" fn exit_task_stack_account(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn release_task_stack(tsk: *mut task_struct) {
-    static void release_task_stack(struct task_struct *tsk)
-    {
-    if (WARN_ON(READ_ONCE(tsk.__state) != TASK_DEAD))
+    if (WARN_ON(READ_ONCE(tsk.__state) != TASK_DEAD)) {
     return;  /* Better to leak the stack than to free prematurely */
+    }
     free_thread_stack(tsk);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn put_task_stack(tsk: *mut task_struct) {
-    void put_task_stack(struct task_struct *tsk)
-    {
-    if (refcount_dec_and_test(&tsk.stack_refcount))
+    if (refcount_dec_and_test(&tsk.stack_refcount)) {
     release_task_stack(tsk);
+    }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn free_task(tsk: *mut task_struct) {
-    void free_task(struct task_struct *tsk)
-    {
 
-    WARN_ON_ONCE(tsk.seccomp.filter);
+// WARN_ON_ONCE;
 
     release_user_cpus_ptr(tsk);
     scs_release(tsk);
@@ -446,88 +505,83 @@ pub unsafe extern "C" fn free_task(tsk: *mut task_struct) {
 // If the task had a separate stack allocation, it should be gone
 // by now.
 //
-    WARN_ON_ONCE(refcount_read(&tsk.stack_refcount) != 0);
+// WARN_ON_ONCE;
 
     rt_mutex_debug_task_free(tsk);
     ftrace_graph_exit_task(tsk);
     arch_release_task_struct(tsk);
-    if (tsk.flags & PF_KTHREAD)
+    if (tsk.flags & PF_KTHREAD) {
     free_kthread_struct(tsk);
+    }
     bpf_task_storage_free(tsk);
     put_task_exec_state(rcu_access_pointer(tsk.exec_state));
     free_task_struct(tsk);
     }
-    EXPORT_SYMBOL(free_task);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn dup_mm_exe_file(mm: *mut mm_struct, oldmm: *mut mm_struct) {
-    void dup_mm_exe_file(struct mm_struct *mm, struct mm_struct *oldmm)
-    {
-    struct file *exe_file;
+    let mut exe_file = core::ptr::null_mut();
     exe_file = get_mm_exe_file(oldmm);
-    RCU_INIT_POINTER(mm.exe_file, exe_file);
+// RCU_INIT_POINTER;
 //
 // We depend on the oldmm having properly denied write access to the
 // exe_file already.
 //
-    if (exe_file && exe_file_deny_write_access(exe_file))
+    if (exe_file && exe_file_deny_write_access(exe_file)) {
     pr_warn_once("exe_file_deny_write_access() failed in %s\n", __func__);
+    }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn mm_alloc_pgd(mm: *mut mm_struct) -> c_int {
-    static inline int mm_alloc_pgd(struct mm_struct *mm)
-    {
     mm.pgd = pgd_alloc(mm);
-    if (unlikely(!mm.pgd))
+    if (unlikely(!mm.pgd)) {
     return -ENOMEM;
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn mm_free_pgd(mm: *mut mm_struct) {
-    static inline void mm_free_pgd(struct mm_struct *mm)
-    {
     pgd_free(mm, mm.pgd);
     }
 
 // Macro flag: #define mm_free_pgd(mm)
-
-    static DEFINE_IDA(mm_ida);
+// static DEFINE_IDA(mm_ida);
 #[no_mangle]
 pub unsafe extern "C" fn mm_alloc_id(mm: *mut mm_struct) -> c_int {
-    static inline int mm_alloc_id(struct mm_struct *mm)
-    {
-    int ret;
+    let mut ret = 0;
     ret = ida_alloc_range(&mm_ida, MM_ID_MIN, MM_ID_MAX, GFP_KERNEL);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     mm.mm_id = ret;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn mm_free_id(mm: *mut mm_struct) {
-    static inline void mm_free_id(struct mm_struct *mm)
-    {
-    let mut id: mm_id_t = mm.mm_id;
+pub static mut id: mm_id_t = mm.mm_id;
     mm.mm_id = MM_ID_DUMMY;
-    if (id == MM_ID_DUMMY)
+    if (id == MM_ID_DUMMY) {
     return;
-    if (WARN_ON_ONCE(id < MM_ID_MIN || id > MM_ID_MAX))
+    }
+    if (WARN_ON_ONCE(id < MM_ID_MIN || id > MM_ID_MAX)) {
     return;
+    }
     ida_free(&mm_ida, id);
     }
 
-    static inline int mm_alloc_id(struct mm_struct *mm) { return 0; }
-    static inline void mm_free_id(struct mm_struct *mm) {}
+#[no_mangle]
+pub unsafe extern "C" fn mm_alloc_id() { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn mm_free_id() {}
 
 #[no_mangle]
 unsafe extern "C" fn check_mm(mm: *mut mm_struct) {
-    static void check_mm(struct mm_struct *mm)
-    {
-    int i;
+    let mut i = 0;
     BUILD_BUG_ON_MSG(ARRAY_SIZE(resident_page_types) != NR_MM_COUNTERS,
     "Please make sure 'struct resident_page_types[]' is updated as well");
     for (i = 0; i < NR_MM_COUNTERS; i++) {
-    let mut x: c_long = percpu_counter_sum(&mm.rss_stat[i]);
+pub static mut x: c_long = percpu_counter_sum(&mm.rss_stat[i]);
     if (unlikely(x)) {
     pr_alert("BUG: Bad rss-counter state mm:%p type:%s val:%ld Comm:%s Pid:%d\n",
     mm, resident_page_types[i], x,
@@ -535,36 +589,31 @@ unsafe extern "C" fn check_mm(mm: *mut mm_struct) {
     task_pid_nr(current));
     }
     }
-    if (mm_pgtables_bytes(mm))
+    if (mm_pgtables_bytes(mm)) {
     pr_alert("BUG: non-zero pgtables_bytes on freeing mm: %ld\n",
     mm_pgtables_bytes(mm));
+    }
 
-    VM_BUG_ON_MM(mm.pmd_huge_pte, mm);
+// VM_BUG_ON_MM;
 
     }
 
 #[no_mangle]
 unsafe extern "C" fn do_check_lazy_tlb(arg: *mut c_void) {
-    static void do_check_lazy_tlb(void *arg)
-    {
     struct mm_struct *mm = arg;
-    WARN_ON_ONCE(current.active_mm == mm);
+// WARN_ON_ONCE;
     }
 #[no_mangle]
 unsafe extern "C" fn do_shoot_lazy_tlb(arg: *mut c_void) {
-    static void do_shoot_lazy_tlb(void *arg)
-    {
     struct mm_struct *mm = arg;
     if (current.active_mm == mm) {
-    WARN_ON_ONCE(current.mm);
+// WARN_ON_ONCE;
     current.active_mm = &init_mm;
     switch_mm(mm, &init_mm, current);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn cleanup_lazy_tlbs(mm: *mut mm_struct) {
-    static void cleanup_lazy_tlbs(struct mm_struct *mm)
-    {
     if (!IS_ENABLED(CONFIG_MMU_LAZY_TLB_SHOOTDOWN)) {
 //
 // In this case, lazy tlb mms are refounted and would not reach
@@ -600,9 +649,10 @@ unsafe extern "C" fn cleanup_lazy_tlbs(mm: *mut mm_struct) {
 // - A delayed freeing and RCU-like quiescing sequence based on mm
 // switching to avoid IPIs completely.
 //
-    on_each_cpu_mask(mm_cpumask(mm), do_shoot_lazy_tlb, (void *)mm, 1);
-    if (IS_ENABLED(CONFIG_DEBUG_VM_SHOOT_LAZIES))
-    on_each_cpu(do_check_lazy_tlb, (void *)mm, 1);
+    on_each_cpu_mask(mm_cpumask(mm), do_shoot_lazy_tlb, mm, 1);
+    if (IS_ENABLED(CONFIG_DEBUG_VM_SHOOT_LAZIES)) {
+    on_each_cpu(do_check_lazy_tlb, mm, 1);
+    }
     }
 //
 // Called when the last reference to the mm
@@ -611,13 +661,11 @@ unsafe extern "C" fn cleanup_lazy_tlbs(mm: *mut mm_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __mmdrop(mm: *mut mm_struct) {
-    void __mmdrop(struct mm_struct *mm)
-    {
-    BUG_ON(mm == &init_mm);
-    WARN_ON_ONCE(mm == current.mm);
+// BUG_ON;
+// WARN_ON_ONCE;
 // Ensure no CPUs are using this as their lazy tlb mm
     cleanup_lazy_tlbs(mm);
-    WARN_ON_ONCE(mm == current.active_mm);
+// WARN_ON_ONCE;
     mm_destroy_sched(mm);
     mm_free_pgd(mm);
     mm_free_id(mm);
@@ -629,52 +677,44 @@ pub unsafe extern "C" fn __mmdrop(mm: *mut mm_struct) {
     percpu_counter_destroy_many(mm.rss_stat, NR_MM_COUNTERS);
     free_mm(mm);
     }
-    EXPORT_SYMBOL_GPL(__mmdrop);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 unsafe extern "C" fn mmdrop_async_fn(work: *mut work_struct) {
-    static void mmdrop_async_fn(struct work_struct *work)
-    {
-    struct mm_struct *mm;
+    let mut mm = core::ptr::null_mut();
     mm = container_of(work, struct mm_struct, async_put_work);
     __mmdrop(mm);
     }
 #[no_mangle]
 unsafe extern "C" fn mmdrop_async(mm: *mut mm_struct) {
-    static void mmdrop_async(struct mm_struct *mm)
-    {
     if (unlikely(atomic_dec_and_test(&mm.mm_count))) {
-    INIT_WORK(&mm.async_put_work, mmdrop_async_fn);
+// INIT_WORK;
     schedule_work(&mm.async_put_work);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_signal_struct(sig: *mut signal_struct) {
-    static inline void free_signal_struct(struct signal_struct *sig)
-    {
     taskstats_tgid_free(sig);
     sched_autogroup_exit(sig);
 //
 // __mmdrop is not safe to call from softirq context on x86 due to
 // pgd_dtor so postpone it to the async context
 //
-    if (sig.oom_mm)
+    if (sig.oom_mm) {
     mmdrop_async(sig.oom_mm);
+    }
     kmem_cache_free(signal_cachep, sig);
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_signal_struct(sig: *mut signal_struct) {
-    static inline void put_signal_struct(struct signal_struct *sig)
-    {
-    if (refcount_dec_and_test(&sig.sigcnt))
+    if (refcount_dec_and_test(&sig.sigcnt)) {
     free_signal_struct(sig);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __put_task_struct(tsk: *mut task_struct) {
-    void __put_task_struct(struct task_struct *tsk)
-    {
-    WARN_ON(!tsk.exit_state);
-    WARN_ON(refcount_read(&tsk.usage));
-    WARN_ON(tsk == current);
+// WARN_ON;
+// WARN_ON;
+// WARN_ON;
     unwind_task_free(tsk);
     io_uring_free(tsk);
     cgroup_task_free(tsk);
@@ -686,36 +726,35 @@ pub unsafe extern "C" fn __put_task_struct(tsk: *mut task_struct) {
     sched_core_free(tsk);
     free_task(tsk);
     }
-    EXPORT_SYMBOL_GPL(__put_task_struct);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn __put_task_struct_rcu_cb(rhp: *mut rcu_head) {
-    void __put_task_struct_rcu_cb(struct rcu_head *rhp)
-    {
     struct task_struct *task = container_of(rhp, struct task_struct, rcu);
     __put_task_struct(task);
     }
-    EXPORT_SYMBOL_GPL(__put_task_struct_rcu_cb);
+// EXPORT_SYMBOL_GPL;
     void __init __weak arch_task_cache_init(void) { }
 //
 // set_max_threads
 //
 #[no_mangle]
-unsafe extern "C" fn set_max_threads(max_threads_suggested: c_uint) -> void __init {
-    static void __init set_max_threads(unsigned int max_threads_suggested)
-    {
-    u64 threads;
-    let mut nr_pages: c_ulong = memblock_estimated_nr_free_pages();
+unsafe extern "C" fn set_max_threads(max_threads_suggested: c_uint) -> c_int {
+    let mut threads = 0;
+pub static mut nr_pages: c_ulong = memblock_estimated_nr_free_pages();
 //
 // The number of threads shall be limited such that the thread
 // structures may only consume a small part of the available memory.
 //
-    if (fls64(nr_pages) + fls64(PAGE_SIZE) > 64)
+    if (fls64(nr_pages) + fls64(PAGE_SIZE) > 64) {
     threads = MAX_THREADS;
-    else
+    }
+    else {
     threads = div64_u64((u64) nr_pages * (u64) PAGE_SIZE,
     (u64) THREAD_SIZE * 8UL);
-    if (threads > max_threads_suggested)
+    }
+    if (threads > max_threads_suggested) {
     threads = max_threads_suggested;
+    }
     max_threads = clamp_t(u64, threads, MIN_THREADS, MAX_THREADS);
     }
 
@@ -723,29 +762,27 @@ unsafe extern "C" fn set_max_threads(max_threads_suggested: c_uint) -> void __in
     int arch_task_struct_size __read_mostly;
 
 #[no_mangle]
-unsafe extern "C" fn task_struct_whitelist(offset: *mut c_ulong, size: *mut c_ulong) -> void __init {
-    static void __init task_struct_whitelist(unsigned long *offset, unsigned long *size)
-    {
+unsafe extern "C" fn task_struct_whitelist(offset: *mut c_ulong, size: *mut c_ulong) -> c_int {
 // Fetch thread_struct whitelist for the architecture.
     arch_thread_struct_whitelist(offset, size);
 //
 // Handle zero-sized whitelist or empty thread_struct, otherwise
 // adjust offset to position of thread_struct in task_struct.
 //
-    if (unlikely(*size == 0))
+    if (unlikely(*size == 0)) {
 // offset = 0;
-    else
+    }
+    else {
 // offset += offsetof(struct task_struct, thread);
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn fork_init() -> void __init {
-    void __init fork_init(void)
-    {
-    int i;
+pub unsafe extern "C" fn fork_init() -> c_int {
+    let mut i = 0;
 
 pub const ARCH_MIN_TASKALIGN: c_int = 0;
 
-    let mut align: c_int = max_t(int, L1_CACHE_BYTES, ARCH_MIN_TASKALIGN);
+pub static mut align: c_int = max_t(int, L1_CACHE_BYTES, ARCH_MIN_TASKALIGN);
     unsigned long useroffset, usersize;
 // create a slab on which task_structs can be allocated
     task_struct_whitelist(&useroffset, &usersize);
@@ -782,37 +819,41 @@ pub const ARCH_MIN_TASKALIGN: c_int = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_task_stack_end_magic(tsk: *mut task_struct) {
-    void set_task_stack_end_magic(struct task_struct *tsk)
-    {
     unsigned long *stackend;
     stackend = end_of_stack(tsk);
-// stackend = STACK_END_MAGIC;	/* for overflow detection
+// stackend = STACK_END_MAGIC;	// for overflow detection
     }
-    static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
-    {
-    struct task_struct *tsk;
-    int err;
-    if (node == NUMA_NO_NODE)
+#[no_mangle]
+pub unsafe extern "C" fn dup_task_struct() {
+    let mut tsk = core::ptr::null_mut();
+    let mut err = 0;
+    if (node == NUMA_NO_NODE) {
     node = tsk_fork_get_node(orig);
+    }
     tsk = alloc_task_struct_node(node);
-    if (!tsk)
+    if (!tsk) {
     return core::ptr::null_mut();
+    }
     err = arch_dup_task_struct(tsk, orig);
-    if (err)
+    if (err) {
     goto free_tsk;
+    }
     err = alloc_thread_stack_node(tsk, node);
-    if (err)
+    if (err) {
     goto free_tsk;
+    }
 
     refcount_set(&tsk.stack_refcount, 1);
 
     account_kernel_stack(tsk, 1);
     err = smp_task_ipi_mask_alloc(tsk);
-    if (err)
+    if (err) {
     goto free_stack;
+    }
     err = scs_prepare(tsk, node);
-    if (err)
+    if (err) {
     goto free_ipi_mask;
+    }
 
 //
 // We must handle setting up seccomp filters once we're under
@@ -822,7 +863,7 @@ pub unsafe extern "C" fn set_task_stack_end_magic(tsk: *mut task_struct) {
 //
     tsk.seccomp.filter = core::ptr::null_mut();
 
-    RCU_INIT_POINTER(tsk.exec_state, core::ptr::null_mut());
+// RCU_INIT_POINTER;
     setup_thread_stack(tsk, orig);
     clear_user_return_notifier(tsk);
     clear_tsk_need_resched(tsk);
@@ -831,8 +872,9 @@ pub unsafe extern "C" fn set_task_stack_end_magic(tsk: *mut task_struct) {
 
     tsk.stack_canary = get_random_canary();
 
-    if (orig.cpus_ptr == &orig.cpus_mask)
+    if (orig.cpus_ptr == &orig.cpus_mask) {
     tsk.cpus_ptr = &tsk.cpus_mask;
+    }
     dup_user_cpus_ptr(tsk, orig, node);
 //
 // One for the user space visible state that goes away when reaped.
@@ -865,9 +907,9 @@ pub unsafe extern "C" fn set_task_stack_end_magic(tsk: *mut task_struct) {
 
     tsk.mm_cid.cid = MM_CID_UNSET;
     tsk.mm_cid.active = 0;
-    INIT_HLIST_NODE(&tsk.mm_cid.node);
+// INIT_HLIST_NODE;
 
-    RCU_INIT_POINTER(tsk.bpf_storage, core::ptr::null_mut());
+// RCU_INIT_POINTER;
     tsk.bpf_ctx = core::ptr::null_mut();
 
     return tsk;
@@ -881,23 +923,20 @@ pub unsafe extern "C" fn set_task_stack_end_magic(tsk: *mut task_struct) {
     return core::ptr::null_mut();
     }
     __cacheline_aligned_in_smp DEFINE_SPINLOCK(mmlist_lock);
-    let mut coredump_filter: static unsigned long = MMF_DUMP_FILTER_DEFAULT;
+pub static mut coredump_filter: unsigned long = MMF_DUMP_FILTER_DEFAULT;
 #[no_mangle]
-unsafe extern "C" fn coredump_filter_setup(s: *mut c_char) -> int __init {
-    static int __init coredump_filter_setup(char *s)
-    {
-    if (kstrtoul(s, 0, &coredump_filter))
+unsafe extern "C" fn coredump_filter_setup(s: *mut c_char) -> c_int {
+    if (kstrtoul(s, 0, &coredump_filter)) {
     return 0;
+    }
     coredump_filter <<= MMF_DUMP_FILTER_SHIFT;
     coredump_filter &= MMF_DUMP_FILTER_MASK;
     return 1;
     }
-    __setup("coredump_filter=", coredump_filter_setup);
+// __setup;
 
 #[no_mangle]
 unsafe extern "C" fn mm_init_aio(mm: *mut mm_struct) {
-    static void mm_init_aio(struct mm_struct *mm)
-    {
 
     spin_lock_init(&mm.ioctx_lock);
     mm.ioctx_table = core::ptr::null_mut();
@@ -907,45 +946,40 @@ unsafe extern "C" fn mm_init_aio(mm: *mut mm_struct) {
     struct task_struct *p)
     {
 
-    if (mm.owner == p)
-    WRITE_ONCE(mm.owner, core::ptr::null_mut());
+    if (mm.owner == p) {
+// WRITE_ONCE;
+    }
 
     }
 #[no_mangle]
 unsafe extern "C" fn mm_init_owner(mm: *mut mm_struct, p: *mut task_struct) {
-    static void mm_init_owner(struct mm_struct *mm, struct task_struct *p)
-    {
 
     mm.owner = p;
 
     }
 #[no_mangle]
 unsafe extern "C" fn mm_init_uprobes_state(mm: *mut mm_struct) {
-    static void mm_init_uprobes_state(struct mm_struct *mm)
-    {
 
     mm.uprobes_state.xol_area = core::ptr::null_mut();
 
     }
 #[no_mangle]
 unsafe extern "C" fn mmap_init_lock(mm: *mut mm_struct) {
-    static void mmap_init_lock(struct mm_struct *mm)
-    {
     init_rwsem(&mm.mmap_lock);
     mm_lock_seqcount_init(mm);
 
     rcuwait_init(&mm.vma_writer_wait);
 
     }
-    static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mm_init() {
     mt_init_flags(&mm.mm_mt, MM_MT_FLAGS);
     mt_set_external_lock(&mm.mm_mt, &mm.mmap_lock);
     atomic_set(&mm.mm_users, 1);
     atomic_set(&mm.mm_count, 1);
     seqcount_init(&mm.write_protect_seq);
     mmap_init_lock(mm);
-    INIT_LIST_HEAD(&mm.mmlist);
+// INIT_LIST_HEAD;
     mm_pgtables_bytes_init(mm);
     mm.map_count = 0;
     mm.locked_vm = 0;
@@ -957,7 +991,7 @@ unsafe extern "C" fn mmap_init_lock(mm: *mut mm_struct) {
     mm_init_aio(mm);
     mm_init_owner(mm, p);
     mm_pasid_init(mm);
-    RCU_INIT_POINTER(mm.exe_file, core::ptr::null_mut());
+// RCU_INIT_POINTER;
     mmu_notifier_subscriptions_init(mm);
     init_tlb_flush_pending(mm);
 
@@ -968,23 +1002,28 @@ unsafe extern "C" fn mmap_init_lock(mm: *mut mm_struct) {
     futex_mm_init(mm);
     mm_flags_clear_all(mm);
     if (current.mm) {
-    let mut flags: c_ulong = __mm_flags_get_word(current.mm);
+pub static mut flags: c_ulong = __mm_flags_get_word(current.mm);
     __mm_flags_overwrite_word(mm, mmf_init_legacy_flags(flags));
     mm.def_flags = current.mm.def_flags & VM_INIT_DEF_MASK;
     } else {
     __mm_flags_overwrite_word(mm, coredump_filter);
     mm.def_flags = 0;
     }
-    if (mm_alloc_pgd(mm))
+    if (mm_alloc_pgd(mm)) {
     goto fail_mm_init;
-    if (mm_alloc_id(mm))
+    }
+    if (mm_alloc_id(mm)) {
     goto fail_noid;
-    if (init_new_context(p, mm))
+    }
+    if (init_new_context(p, mm)) {
     goto fail_nocontext;
-    if (mm_alloc_cid(mm, p))
+    }
+    if (mm_alloc_cid(mm, p)) {
     goto fail_cid;
-    if (mm_alloc_sched(mm))
+    }
+    if (mm_alloc_sched(mm)) {
     goto fail_sched;
+    }
     if (percpu_counter_init_many(mm.rss_stat, 0, GFP_KERNEL_ACCOUNT,
     NR_MM_COUNTERS))
     goto fail_pcpu;
@@ -1007,21 +1046,20 @@ unsafe extern "C" fn mmap_init_lock(mm: *mut mm_struct) {
 //
 // Allocate and initialize an mm_struct.
 //
-    struct mm_struct *mm_alloc(void)
-    {
-    struct mm_struct *mm;
+#[no_mangle]
+pub unsafe extern "C" fn mm_alloc() {
+    let mut mm = core::ptr::null_mut();
     mm = allocate_mm();
-    if (!mm)
+    if (!mm) {
     return core::ptr::null_mut();
+    }
     memset(mm, 0, sizeof(*mm));
     return mm_init(mm, current);
     }
-    EXPORT_SYMBOL_IF_KUNIT(mm_alloc);
+// EXPORT_SYMBOL_IF_KUNIT;
 #[no_mangle]
 pub unsafe extern "C" fn __mmput(mm: *mut mm_struct) {
-    static inline void __mmput(struct mm_struct *mm)
-    {
-    VM_BUG_ON(atomic_read(&mm.mm_users));
+// VM_BUG_ON;
     uprobe_clear_state(mm);
     exit_aio(mm);
     ksm_exit(mm);
@@ -1034,8 +1072,9 @@ pub unsafe extern "C" fn __mmput(mm: *mut mm_struct) {
     list_del(&mm.mmlist);
     spin_unlock(&mmlist_lock);
     }
-    if (mm.binfmt)
-    module_put(mm.binfmt.module);
+    if (mm.binfmt) {
+// module_put;
+    }
     lru_gen_del_mm(mm);
     futex_hash_free(mm);
     mmdrop(mm);
@@ -1045,32 +1084,27 @@ pub unsafe extern "C" fn __mmput(mm: *mut mm_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mmput(mm: *mut mm_struct) {
-    void mmput(struct mm_struct *mm)
-    {
     might_sleep();
-    if (atomic_dec_and_test(&mm.mm_users))
+    if (atomic_dec_and_test(&mm.mm_users)) {
     __mmput(mm);
     }
-    EXPORT_SYMBOL_GPL(mmput);
+    }
+// EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
 unsafe extern "C" fn mmput_async_fn(work: *mut work_struct) {
-    static void mmput_async_fn(struct work_struct *work)
-    {
     struct mm_struct *mm = container_of(work, struct mm_struct,
     async_put_work);
     __mmput(mm);
     }
 #[no_mangle]
 pub unsafe extern "C" fn mmput_async(mm: *mut mm_struct) {
-    void mmput_async(struct mm_struct *mm)
-    {
     if (atomic_dec_and_test(&mm.mm_users)) {
-    INIT_WORK(&mm.async_put_work, mmput_async_fn);
+// INIT_WORK;
     schedule_work(&mm.async_put_work);
     }
     }
-    EXPORT_SYMBOL_GPL(mmput_async);
+// EXPORT_SYMBOL_GPL;
 
 //
 // set_mm_exe_file - change a reference to the mm's executable file
@@ -1087,9 +1121,7 @@ pub unsafe extern "C" fn mmput_async(mm: *mut mm_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_mm_exe_file(mm: *mut mm_struct, new_exe_file: *mut file) -> c_int {
-    int set_mm_exe_file(struct mm_struct *mm, struct file *new_exe_file)
-    {
-    struct file *old_exe_file;
+    let mut old_exe_file = core::ptr::null_mut();
 //
 // It is safe to dereference the exe_file without RCU as
 // this function is only called if nobody else can access
@@ -1101,8 +1133,9 @@ pub unsafe extern "C" fn set_mm_exe_file(mm: *mut mm_struct, new_exe_file: *mut 
 // We expect the caller (i.e., sys_execve) to already denied
 // write access, so this is unlikely to fail.
 //
-    if (unlikely(exe_file_deny_write_access(new_exe_file)))
+    if (unlikely(exe_file_deny_write_access(new_exe_file))) {
     return -EACCES;
+    }
     get_file(new_exe_file);
     }
     rcu_assign_pointer(mm.exe_file, new_exe_file);
@@ -1123,19 +1156,18 @@ pub unsafe extern "C" fn set_mm_exe_file(mm: *mut mm_struct, new_exe_file: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn replace_mm_exe_file(mm: *mut mm_struct, new_exe_file: *mut file) -> c_int {
-    int replace_mm_exe_file(struct mm_struct *mm, struct file *new_exe_file)
-    {
-    struct vm_area_struct *vma;
-    struct file *old_exe_file;
-    let mut ret: c_int = 0;
+    let mut vma = core::ptr::null_mut();
+    let mut old_exe_file = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // Forbid mm->exe_file change if old file still mapped.
     old_exe_file = get_mm_exe_file(mm);
     if (old_exe_file) {
-    VMA_ITERATOR(vmi, mm, 0);
+// VMA_ITERATOR;
     mmap_read_lock(mm);
     for_each_vma(vmi, vma) {
-    if (!vma.vm_file)
+    if (!vma.vm_file) {
     continue;
+    }
     if (path_equal(&vma.vm_file.f_path,
     &old_exe_file.f_path)) {
     ret = -EBUSY;
@@ -1144,12 +1176,14 @@ pub unsafe extern "C" fn replace_mm_exe_file(mm: *mut mm_struct, new_exe_file: *
     }
     mmap_read_unlock(mm);
     fput(old_exe_file);
-    if (ret)
+    if (ret) {
     return ret;
     }
+    }
     ret = exe_file_deny_write_access(new_exe_file);
-    if (ret)
+    if (ret) {
     return -EACCES;
+    }
     get_file(new_exe_file);
 // set the new file
     mmap_write_lock(mm);
@@ -1169,9 +1203,9 @@ pub unsafe extern "C" fn replace_mm_exe_file(mm: *mut mm_struct, new_exe_file: *
 // Returns %NULL if mm has no associated executable file.
 // User must release file via fput().
 //
-    struct file *get_mm_exe_file(struct mm_struct *mm)
-    {
-    struct file *exe_file;
+#[no_mangle]
+pub unsafe extern "C" fn get_mm_exe_file() {
+    let mut exe_file = core::ptr::null_mut();
     rcu_read_lock();
     exe_file = get_file_rcu(&mm.exe_file);
     rcu_read_unlock();
@@ -1185,16 +1219,18 @@ pub unsafe extern "C" fn replace_mm_exe_file(mm: *mut mm_struct, new_exe_file: *
 // this is a kernel thread with borrowed mm (see the comment above get_task_mm).
 // User must release file via fput().
 //
-    struct file *get_task_exe_file(struct task_struct *task)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_task_exe_file() {
     struct file *exe_file = core::ptr::null_mut();
-    struct mm_struct *mm;
-    if (task.flags & PF_KTHREAD)
+    let mut mm = core::ptr::null_mut();
+    if (task.flags & PF_KTHREAD) {
     return core::ptr::null_mut();
+    }
     task_lock(task);
     mm = task.mm;
-    if (mm)
+    if (mm) {
     exe_file = get_mm_exe_file(mm);
+    }
     task_unlock(task);
     return exe_file;
     }
@@ -1208,38 +1244,42 @@ pub unsafe extern "C" fn replace_mm_exe_file(mm: *mut mm_struct, new_exe_file: *
 // bumping up the use count.  User must release the mm via mmput()
 // after use.  Typically used by /proc and ptrace.
 //
-    struct mm_struct *get_task_mm(struct task_struct *task)
-    {
-    struct mm_struct *mm;
-    if (task.flags & PF_KTHREAD)
+#[no_mangle]
+pub unsafe extern "C" fn get_task_mm() {
+    let mut mm = core::ptr::null_mut();
+    if (task.flags & PF_KTHREAD) {
     return core::ptr::null_mut();
+    }
     task_lock(task);
     mm = task.mm;
-    if (mm)
+    if (mm) {
     mmget(mm);
+    }
     task_unlock(task);
     return mm;
     }
-    EXPORT_SYMBOL_GPL(get_task_mm);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 unsafe extern "C" fn may_access_mm(mm: *mut mm_struct, task: *mut task_struct, mode: c_uint) -> bool {
-    static bool may_access_mm(struct mm_struct *mm, struct task_struct *task, unsigned int mode)
-    {
-    if (mm == current.mm)
+    if (mm == current.mm) {
     return true;
-    if (ptrace_may_access(task, mode))
+    }
+    if (ptrace_may_access(task, mode)) {
     return true;
-    if ((mode & PTRACE_MODE_READ) && perfmon_capable())
+    }
+    if ((mode & PTRACE_MODE_READ) && perfmon_capable()) {
     return true;
+    }
     return false;
     }
-    struct mm_struct *mm_access(struct task_struct *task, unsigned int mode)
-    {
-    struct mm_struct *mm;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn mm_access() {
+    let mut mm = core::ptr::null_mut();
+    let mut err = 0;
     err =  down_read_killable(&task.signal.exec_update_lock);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     mm = get_task_mm(task);
     if (!mm) {
     mm = ERR_PTR(-ESRCH);
@@ -1252,9 +1292,7 @@ unsafe extern "C" fn may_access_mm(mm: *mut mm_struct, task: *mut task_struct, m
     }
 #[no_mangle]
 unsafe extern "C" fn complete_vfork_done(tsk: *mut task_struct) {
-    static void complete_vfork_done(struct task_struct *tsk)
-    {
-    struct completion *vfork;
+    let mut vfork = core::ptr::null_mut();
     task_lock(tsk);
     vfork = tsk.vfork_done;
     if (likely(vfork)) {
@@ -1263,11 +1301,10 @@ unsafe extern "C" fn complete_vfork_done(tsk: *mut task_struct) {
     }
     task_unlock(tsk);
     }
-    static int wait_for_vfork_done(struct task_struct *child,
-    struct completion *vfork)
-    {
-    let mut state: c_uint = TASK_KILLABLE|TASK_FREEZABLE;
-    int killed;
+#[no_mangle]
+pub unsafe extern "C" fn wait_for_vfork_done() {
+pub static mut state: c_uint = TASK_KILLABLE|TASK_FREEZABLE;
+    let mut killed = 0;
     cgroup_enter_frozen();
     killed = wait_for_completion_state(vfork, state);
     cgroup_leave_frozen(false);
@@ -1294,8 +1331,6 @@ unsafe extern "C" fn complete_vfork_done(tsk: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn mm_release(tsk: *mut task_struct, mm: *mut mm_struct) {
-    static void mm_release(struct task_struct *tsk, struct mm_struct *mm)
-    {
     uprobe_free_utask(tsk);
 // Get rid of any cached register state
     deactivate_mm(tsk, mm);
@@ -1320,13 +1355,12 @@ unsafe extern "C" fn mm_release(tsk: *mut task_struct, mm: *mut mm_struct) {
 // All done, finally we can wake up parent and return this mm to him.
 // Also kthread_stop() uses this completion for synchronization.
 //
-    if (tsk.vfork_done)
+    if (tsk.vfork_done) {
     complete_vfork_done(tsk);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn mm_exit_exec_release(tsk: *mut task_struct, mm: *mut mm_struct) {
-    void mm_exit_exec_release(struct task_struct *tsk, struct mm_struct *mm)
-    {
     futex_exit_exec_release(tsk);
     mm_release(tsk, mm);
     }
@@ -1340,41 +1374,43 @@ pub unsafe extern "C" fn mm_exit_exec_release(tsk: *mut task_struct, mm: *mut mm
 //
 // Return: the duplicated mm or NULL on failure.
 //
-    static struct mm_struct *dup_mm(struct task_struct *tsk,
-    struct mm_struct *oldmm)
-    {
-    struct mm_struct *mm;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn dup_mm() {
+    let mut mm = core::ptr::null_mut();
+    let mut err = 0;
     mm = allocate_mm();
-    if (!mm)
+    if (!mm) {
     goto fail_nomem;
+    }
     memcpy(mm, oldmm, sizeof(*mm));
-    if (!mm_init(mm, tsk))
+    if (!mm_init(mm, tsk)) {
     goto fail_nomem;
+    }
     uprobe_start_dup_mmap();
     err = dup_mmap(mm, oldmm);
-    if (err)
+    if (err) {
     goto free_pt;
+    }
     uprobe_end_dup_mmap();
     mm.hiwater_rss = get_mm_rss(mm);
     mm.hiwater_vm = mm.total_vm;
-    if (mm.binfmt && !try_module_get(mm.binfmt.module))
+    if (mm.binfmt && !try_module_get(mm.binfmt.module)) {
     goto free_pt;
+    }
     return mm;
     free_pt:
 // don't put binfmt in mmput, we haven't got module yet
     mm.binfmt = core::ptr::null_mut();
     mm_init_owner(mm, core::ptr::null_mut());
     mmput(mm);
-    if (err)
+    if (err) {
     uprobe_end_dup_mmap();
+    }
     fail_nomem:
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn copy_mm(clone_flags: u64, tsk: *mut task_struct) -> c_int {
-    static int copy_mm(u64 clone_flags, struct task_struct *tsk)
-    {
     struct mm_struct *mm, *oldmm;
     tsk.min_flt = tsk.maj_flt = 0;
     tsk.nvcsw = tsk.nivcsw = 0;
@@ -1390,15 +1426,17 @@ unsafe extern "C" fn copy_mm(clone_flags: u64, tsk: *mut task_struct) -> c_int {
 // We need to steal a active VM for that..
 //
     oldmm = current.mm;
-    if (!oldmm)
+    if (!oldmm) {
     return 0;
+    }
     if (clone_flags & CLONE_VM) {
     mmget(oldmm);
     mm = oldmm;
     } else {
     mm = dup_mm(tsk, current.mm);
-    if (!mm)
+    if (!mm) {
     return -ENOMEM;
+    }
     }
     tsk.mm = mm;
     tsk.active_mm = mm;
@@ -1406,9 +1444,7 @@ unsafe extern "C" fn copy_mm(clone_flags: u64, tsk: *mut task_struct) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn copy_exec_state(clone_flags: u64, tsk: *mut task_struct) -> c_int {
-    static int copy_exec_state(u64 clone_flags, struct task_struct *tsk)
-    {
-    struct task_exec_state *exec_state;
+    let mut exec_state = core::ptr::null_mut();
 // CLONE_VM siblings refcount-share the parent's exec_state.
     if (clone_flags & CLONE_VM) {
     exec_state = rcu_dereference_protected(current.exec_state, true);
@@ -1421,9 +1457,7 @@ unsafe extern "C" fn copy_exec_state(clone_flags: u64, tsk: *mut task_struct) ->
     }
 #[no_mangle]
 unsafe extern "C" fn copy_fs(clone_flags: u64, tsk: *mut task_struct, umh: bool) -> c_int {
-    static int copy_fs(u64 clone_flags, struct task_struct *tsk, bool umh)
-    {
-    struct fs_struct *fs;
+    let mut fs = core::ptr::null_mut();
 //
 // Usermodehelper may copy userspace_init_fs filesystem state but
 // they don't get to create mount namespaces, share the
@@ -1431,14 +1465,16 @@ unsafe extern "C" fn copy_fs(clone_flags: u64, tsk: *mut task_struct, umh: bool)
 // namespace.
 //
     if (umh) {
-    if (clone_flags & (CLONE_NEWNS | CLONE_FS))
+    if (clone_flags & (CLONE_NEWNS | CLONE_FS)) {
     return -EINVAL;
-    if (current.nsproxy.mnt_ns != &init_mnt_ns)
+    }
+    if (current.nsproxy.mnt_ns != &init_mnt_ns) {
     return -EINVAL;
+    }
     fs = userspace_init_fs;
     } else {
     fs = current.fs;
-    VFS_WARN_ON_ONCE(current.fs != current.real_fs);
+// VFS_WARN_ON_ONCE;
     }
     if (clone_flags & CLONE_FS) {
 // tsk->fs is already what we want
@@ -1453,20 +1489,21 @@ unsafe extern "C" fn copy_fs(clone_flags: u64, tsk: *mut task_struct, umh: bool)
     return 0;
     }
     tsk.real_fs = tsk.fs = copy_fs_struct(fs);
-    if (!tsk.fs)
+    if (!tsk.fs) {
     return -ENOMEM;
+    }
     return 0;
     }
-    static int copy_files(u64 clone_flags, struct task_struct *tsk,
-    int no_files)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn copy_files() {
     struct files_struct *oldf, *newf;
 //
 // A background process may not have any files ...
 //
     oldf = current.files;
-    if (!oldf)
+    if (!oldf) {
     return 0;
+    }
     if (no_files) {
     tsk.files = core::ptr::null_mut();
     return 0;
@@ -1476,37 +1513,36 @@ unsafe extern "C" fn copy_fs(clone_flags: u64, tsk: *mut task_struct, umh: bool)
     return 0;
     }
     newf = dup_fd(oldf, core::ptr::null_mut());
-    if (IS_ERR(newf))
+    if (IS_ERR(newf)) {
     return PTR_ERR(newf);
+    }
     tsk.files = newf;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn copy_sighand(clone_flags: u64, tsk: *mut task_struct) -> c_int {
-    static int copy_sighand(u64 clone_flags, struct task_struct *tsk)
-    {
-    struct sighand_struct *sig;
+    let mut sig = core::ptr::null_mut();
     if (clone_flags & CLONE_SIGHAND) {
     refcount_inc(&current.sighand.count);
     return 0;
     }
     sig = kmem_cache_alloc(sighand_cachep, GFP_KERNEL);
-    RCU_INIT_POINTER(tsk.sighand, sig);
-    if (!sig)
+// RCU_INIT_POINTER;
+    if (!sig) {
     return -ENOMEM;
+    }
     refcount_set(&sig.count, 1);
     spin_lock_irq(&current.sighand.siglock);
     memcpy(sig.action, current.sighand.action, sizeof(sig.action));
     spin_unlock_irq(&current.sighand.siglock);
 // Reset all signal handler not set to SIG_IGN to SIG_DFL.
-    if (clone_flags & CLONE_CLEAR_SIGHAND)
+    if (clone_flags & CLONE_CLEAR_SIGHAND) {
     flush_signal_handlers(tsk, 0);
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __cleanup_sighand(sighand: *mut sighand_struct) {
-    void __cleanup_sighand(struct sighand_struct *sighand)
-    {
     if (refcount_dec_and_test(&sighand.count)) {
     signalfd_cleanup(sighand);
 //
@@ -1521,24 +1557,22 @@ pub unsafe extern "C" fn __cleanup_sighand(sighand: *mut sighand_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timers_init_group(sig: *mut signal_struct) {
-    static void posix_cpu_timers_init_group(struct signal_struct *sig)
-    {
     struct posix_cputimers *pct = &sig.posix_cputimers;
-    unsigned long cpu_limit;
+    let mut cpu_limit = 0;
     cpu_limit = READ_ONCE(sig.rlim[RLIMIT_CPU].rlim_cur);
     posix_cputimers_group_init(pct, cpu_limit);
     }
 #[no_mangle]
 unsafe extern "C" fn copy_signal(clone_flags: u64, tsk: *mut task_struct) -> c_int {
-    static int copy_signal(u64 clone_flags, struct task_struct *tsk)
-    {
-    struct signal_struct *sig;
-    if (clone_flags & CLONE_THREAD)
+    let mut sig = core::ptr::null_mut();
+    if (clone_flags & CLONE_THREAD) {
     return 0;
+    }
     sig = kmem_cache_zalloc(signal_cachep, GFP_KERNEL);
     tsk.signal = sig;
-    if (!sig)
+    if (!sig) {
     return -ENOMEM;
+    }
     sig.nr_threads = 1;
     sig.quick_threads = 1;
     atomic_set(&sig.live, 1);
@@ -1549,12 +1583,12 @@ unsafe extern "C" fn copy_signal(clone_flags: u64, tsk: *mut task_struct) -> c_i
     init_waitqueue_head(&sig.wait_chldexit);
     sig.curr_target = tsk;
     init_sigpending(&sig.shared_pending);
-    INIT_HLIST_HEAD(&sig.multiprocess);
+// INIT_HLIST_HEAD;
     seqlock_init(&sig.stats_lock);
     prev_cputime_init(&sig.prev_cputime);
 
-    INIT_HLIST_HEAD(&sig.posix_timers);
-    INIT_HLIST_HEAD(&sig.ignored_posix_timers);
+// INIT_HLIST_HEAD;
+// INIT_HLIST_HEAD;
     hrtimer_setup(&sig.real_timer, it_real_fn, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
 
     task_lock(current.group_leader);
@@ -1574,8 +1608,6 @@ unsafe extern "C" fn copy_signal(clone_flags: u64, tsk: *mut task_struct) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn copy_seccomp(p: *mut task_struct) {
-    static void copy_seccomp(struct task_struct *p)
-    {
 
 //
 // Must be called with sighand->lock held, which is common to
@@ -1592,26 +1624,26 @@ unsafe extern "C" fn copy_seccomp(p: *mut task_struct) {
 // between the task_struct being duplicated and holding the
 // sighand lock. The seccomp state and nnp must be in sync.
 //
-    if (task_no_new_privs(current))
+    if (task_no_new_privs(current)) {
     task_set_no_new_privs(p);
+    }
 //
 // If the parent gained a seccomp mode after copying thread
 // flags and between before we held the sighand lock, we have
 // to manually enable the seccomp thread flag here.
 //
-    if (p.seccomp.mode != SECCOMP_MODE_DISABLED)
+    if (p.seccomp.mode != SECCOMP_MODE_DISABLED) {
     set_task_syscall_work(p, SECCOMP);
+    }
 
     }
-    SYSCALL_DEFINE1(set_tid_address, int __user *, tidptr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_set_tid_address() {
     current.clear_child_tid = tidptr;
     return task_pid_vnr(current);
     }
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_init_task(p: *mut task_struct) {
-    static void rt_mutex_init_task(struct task_struct *p)
-    {
     raw_spin_lock_init(&p.pi_lock);
 
     p.pi_waiters = RB_ROOT_CACHED;
@@ -1621,34 +1653,31 @@ unsafe extern "C" fn rt_mutex_init_task(p: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_task_pid_links(task: *mut task_struct) {
-    static inline void init_task_pid_links(struct task_struct *task)
-    {
     enum pid_type type;
     for (type = PIDTYPE_PID; type < PIDTYPE_MAX; ++type)
-    INIT_HLIST_NODE(&task.pid_links[type]);
+// INIT_HLIST_NODE;
     }
-    static inline void
-    init_task_pid(struct task_struct *task, enum pid_type type, struct pid *pid)
-    {
-    if (type == PIDTYPE_PID)
+#[no_mangle]
+pub unsafe extern "C" fn init_task_pid() {
+    if (type == PIDTYPE_PID) {
     task.thread_pid = pid;
-    else
+    }
+    else {
     task.signal.pids[type] = pid;
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn rcu_copy_process(p: *mut task_struct) {
-    static inline void rcu_copy_process(struct task_struct *p)
-    {
 
     p.rcu_read_lock_nesting = 0;
     p.rcu_read_unlock_special.s = 0;
     p.rcu_blocked_node = core::ptr::null_mut();
-    INIT_LIST_HEAD(&p.rcu_node_entry);
+// INIT_LIST_HEAD;
 
     p.rcu_tasks_holdout = false;
-    INIT_LIST_HEAD(&p.rcu_tasks_holdout_list);
+// INIT_LIST_HEAD;
     p.rcu_tasks_idle_cpu = -1;
-    INIT_LIST_HEAD(&p.rcu_tasks_exit_list);
+// INIT_LIST_HEAD;
 
     p.trc_reader_nesting = 0;
 
@@ -1682,9 +1711,7 @@ pub unsafe extern "C" fn rcu_copy_process(p: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pidfd_prepare(pid: *mut pid, flags: c_uint, ret_file: *mut file) -> c_int {
-    int pidfd_prepare(struct pid *pid, unsigned int flags, struct file **ret_file)
-    {
-    struct file *pidfs_file;
+    let mut pidfs_file = core::ptr::null_mut();
 //
 // PIDFD_STALE is only allowed to be passed if the caller knows
 // that @pid is already registered in pidfs and thus
@@ -1701,51 +1728,53 @@ pub unsafe extern "C" fn pidfd_prepare(pid: *mut pid, flags: c_uint, ret_file: *
 //
     guard(spinlock_irq)(&pid.wait_pidfd.lock);
 // Task has already been reaped.
-    if (!pid_has_task(pid, PIDTYPE_PID))
+    if (!pid_has_task(pid, PIDTYPE_PID)) {
     return -ESRCH;
+    }
 //
 // If this struct pid isn't used as a thread-group
 // leader but the caller requested to create a
 // thread-group leader pidfd then report ENOENT.
 //
-    if (!(flags & PIDFD_THREAD) && !pid_has_task(pid, PIDTYPE_TGID))
+    if (!(flags & PIDFD_THREAD) && !pid_has_task(pid, PIDTYPE_TGID)) {
     return -ENOENT;
     }
-    CLASS(get_unused_fd, pidfd)(O_CLOEXEC);
-    if (pidfd < 0)
+    }
+// CLASS;
+    if (pidfd < 0) {
     return pidfd;
+    }
     pidfs_file = pidfs_alloc_file(pid, flags | O_RDWR);
-    if (IS_ERR(pidfs_file))
+    if (IS_ERR(pidfs_file)) {
     return PTR_ERR(pidfs_file);
+    }
 // ret_file = pidfs_file;
     return take_fd(pidfd);
     }
 #[no_mangle]
 unsafe extern "C" fn __delayed_free_task(rhp: *mut rcu_head) {
-    static void __delayed_free_task(struct rcu_head *rhp)
-    {
     struct task_struct *tsk = container_of(rhp, struct task_struct, rcu);
     free_task(tsk);
     }
 #[no_mangle]
 unsafe extern "C" fn delayed_free_task(tsk: *mut task_struct) -> __always_inline void {
-    static __always_inline void delayed_free_task(struct task_struct *tsk)
-    {
-    if (IS_ENABLED(CONFIG_MEMCG))
+    if (IS_ENABLED(CONFIG_MEMCG)) {
     call_rcu(&tsk.rcu, __delayed_free_task);
-    else
+    }
+    else {
     free_task(tsk);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn copy_oom_score_adj(clone_flags: u64, tsk: *mut task_struct) {
-    static void copy_oom_score_adj(u64 clone_flags, struct task_struct *tsk)
-    {
 // Skip if kernel thread
-    if (!tsk.mm)
+    if (!tsk.mm) {
     return;
+    }
 // Skip if spawning a thread or using vfork
-    if ((clone_flags & (CLONE_VM | CLONE_THREAD | CLONE_VFORK)) != CLONE_VM)
+    if ((clone_flags & (CLONE_VM | CLONE_THREAD | CLONE_VFORK)) != CLONE_VM) {
     return;
+    }
 // We need to synchronize with __set_oom_adj
     mutex_lock(&oom_adj_mutex);
     mm_flags_set(MMF_MULTIPROCESS, tsk.mm);
@@ -1757,15 +1786,11 @@ unsafe extern "C" fn copy_oom_score_adj(clone_flags: u64, tsk: *mut task_struct)
 
 #[no_mangle]
 unsafe extern "C" fn rv_task_fork(p: *mut task_struct) {
-    static void rv_task_fork(struct task_struct *p)
-    {
     memset(&p.rv, 0, sizeof(p.rv));
     }
 
 #[no_mangle]
 unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool {
-    static bool need_futex_hash_allocate_default(u64 clone_flags)
-    {
 //
 // Allocate a default futex hash for any sibling that will
 // share the parent's mm, except vfork.
@@ -1786,33 +1811,37 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     int node,
     struct kernel_clone_args *args)
     {
-    let mut pidfd: c_int = -1, retval;
-    struct task_struct *p;
-    struct multiprocess_signals delayed;
+pub static mut pidfd: c_int = -1, retval;
+    let mut p = core::ptr::null_mut();
+    let mut delayed;
     struct file *pidfile = core::ptr::null_mut();
-    let mut clone_flags: u64 = args.flags;
+pub static mut clone_flags: u64 = args.flags;
     struct nsproxy *nsp = current.nsproxy;
 //
 // Don't allow sharing the root directory with processes in a different
 // namespace
 //
-    if ((clone_flags & (CLONE_NEWNS|CLONE_FS)) == (CLONE_NEWNS|CLONE_FS))
+    if ((clone_flags & (CLONE_NEWNS|CLONE_FS)) == (CLONE_NEWNS|CLONE_FS)) {
     return ERR_PTR(-EINVAL);
-    if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS))
+    }
+    if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS)) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Thread groups must share signals as well, and detached threads
 // can only be started up within the thread group.
 //
-    if ((clone_flags & CLONE_THREAD) && !(clone_flags & CLONE_SIGHAND))
+    if ((clone_flags & CLONE_THREAD) && !(clone_flags & CLONE_SIGHAND)) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Shared signal handlers imply shared VM. By way of the above,
 // thread groups also imply shared VM. Blocking this case allows
 // for various simplifications in other code.
 //
-    if ((clone_flags & CLONE_SIGHAND) && !(clone_flags & CLONE_VM))
+    if ((clone_flags & CLONE_SIGHAND) && !(clone_flags & CLONE_VM)) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Siblings of global init remain as zombies on exit since they are
 // not reaped by their parent (swapper). To solve this and to avoid
@@ -1836,30 +1865,39 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // - CLONE_DETACHED is blocked so that we can potentially
 // reuse it later for CLONE_PIDFD.
 //
-    if (clone_flags & CLONE_DETACHED)
+    if (clone_flags & CLONE_DETACHED) {
     return ERR_PTR(-EINVAL);
+    }
     }
     if (clone_flags & CLONE_AUTOREAP) {
-    if (clone_flags & CLONE_THREAD)
-    return ERR_PTR(-EINVAL);
-    if (clone_flags & CLONE_PARENT)
-    return ERR_PTR(-EINVAL);
-    if (args.exit_signal)
+    if (clone_flags & CLONE_THREAD) {
     return ERR_PTR(-EINVAL);
     }
-    if ((clone_flags & CLONE_PARENT) && current.signal.autoreap)
+    if (clone_flags & CLONE_PARENT) {
     return ERR_PTR(-EINVAL);
+    }
+    if (args.exit_signal) {
+    return ERR_PTR(-EINVAL);
+    }
+    }
+    if ((clone_flags & CLONE_PARENT) && current.signal.autoreap) {
+    return ERR_PTR(-EINVAL);
+    }
     if (clone_flags & CLONE_NNP) {
-    if (clone_flags & CLONE_THREAD)
+    if (clone_flags & CLONE_THREAD) {
     return ERR_PTR(-EINVAL);
+    }
     }
     if (clone_flags & CLONE_PIDFD_AUTOKILL) {
-    if (!(clone_flags & CLONE_PIDFD))
+    if (!(clone_flags & CLONE_PIDFD)) {
     return ERR_PTR(-EINVAL);
-    if (!(clone_flags & CLONE_AUTOREAP))
+    }
+    if (!(clone_flags & CLONE_AUTOREAP)) {
     return ERR_PTR(-EINVAL);
-    if (clone_flags & CLONE_THREAD)
+    }
+    if (clone_flags & CLONE_THREAD) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Without CLONE_NNP the child could escalate privileges
 // after being spawned, so require CAP_SYS_ADMIN.
@@ -1877,25 +1915,30 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // they appear to happen after the fork.
 //
     sigemptyset(&delayed.signal);
-    INIT_HLIST_NODE(&delayed.node);
+// INIT_HLIST_NODE;
     spin_lock_irq(&current.sighand.siglock);
-    if (!(clone_flags & CLONE_THREAD))
+    if (!(clone_flags & CLONE_THREAD)) {
     hlist_add_head(&delayed.node, &current.signal.multiprocess);
+    }
     recalc_sigpending();
     spin_unlock_irq(&current.sighand.siglock);
     retval = -ERESTARTNOINTR;
-    if (task_sigpending(current))
+    if (task_sigpending(current)) {
     goto fork_out;
+    }
     retval = -ENOMEM;
     p = dup_task_struct(current, node);
-    if (!p)
+    if (!p) {
     goto fork_out;
+    }
     retval = copy_exec_state(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_free;
+    }
     p.flags &= ~PF_KTHREAD;
-    if (args.kthread)
+    if (args.kthread) {
     p.flags |= PF_KTHREAD;
+    }
     if (args.user_worker) {
 //
 // Mark us a user worker, and block any signal that isn't
@@ -1904,10 +1947,12 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     p.flags |= PF_USER_WORKER;
     siginitsetinv(&p.blocked, sigmask(SIGKILL)|sigmask(SIGSTOP));
     }
-    if (args.io_thread)
+    if (args.io_thread) {
     p.flags |= PF_IO_WORKER;
-    if (args.name)
+    }
+    if (args.name) {
     strscpy_pad(p.comm, args.name, sizeof(p.comm));
+    }
     p.set_child_tid = (clone_flags & CLONE_CHILD_SETTID) ? args.child_tid : core::ptr::null_mut();
 //
 // TID is cleared in mm_release() when the task exits
@@ -1918,11 +1963,12 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     raw_spin_lock_init(&p.blocked_lock);
     lockdep_assert_irqs_enabled();
 
-    DEBUG_LOCKS_WARN_ON(!p.softirqs_enabled);
+// DEBUG_LOCKS_WARN_ON;
 
     retval = copy_creds(p, clone_flags);
-    if (retval < 0)
+    if (retval < 0) {
     goto bad_fork_free;
+    }
     retval = -EAGAIN;
     if (is_rlimit_overlimit(task_ucounts(p), UCOUNT_RLIMIT_NPROC, rlimit(RLIMIT_NPROC))) {
     if (p.real_cred.user != INIT_USER &&
@@ -1936,13 +1982,14 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // to stop root fork bombs.
 //
     retval = -EAGAIN;
-    if (data_race(nr_threads >= max_threads))
+    if (data_race(nr_threads >= max_threads)) {
     goto bad_fork_cleanup_count;
+    }
     delayacct_tsk_init(p);	/* Must remain after dup_task_struct() */
     p.flags &= ~(PF_SUPERPRIV | PF_WQ_WORKER | PF_IDLE | PF_NO_SETAFFINITY);
     p.flags |= PF_FORKNOEXEC;
-    INIT_LIST_HEAD(&p.children);
-    INIT_LIST_HEAD(&p.sibling);
+// INIT_LIST_HEAD;
+// INIT_LIST_HEAD;
     rcu_copy_process(p);
     p.vfork_done = core::ptr::null_mut();
     spin_lock_init(&p.alloc_lock);
@@ -1959,8 +2006,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 
     p.io_uring = core::ptr::null_mut();
     retval = io_uring_fork(p);
-    if (unlikely(retval))
+    if (unlikely(retval)) {
     goto bad_fork_cleanup_delayacct;
+    }
     retval = -EAGAIN;
 
     p.default_timer_slack_ns = current.timer_slack_ns;
@@ -1975,8 +2023,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     audit_set_context(p, core::ptr::null_mut());
     cgroup_fork(p);
     if (args.kthread) {
-    if (!set_kthread_struct(p))
+    if (!set_kthread_struct(p)) {
     goto bad_fork_cleanup_delayacct;
+    }
     }
 
     p.mempolicy = mpol_dup(p.mempolicy);
@@ -2006,46 +2055,59 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     unwind_task_init(p);
 // Perform scheduler related setup. Assign this task to a CPU.
     retval = sched_fork(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_policy;
+    }
     retval = perf_event_init_task(p, clone_flags);
-    if (retval)
+    if (retval) {
     goto bad_fork_sched_cancel_fork;
+    }
     retval = audit_alloc(p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_perf;
+    }
 // copy all the process information
     shm_init_task(p);
     retval = security_task_alloc(p, clone_flags);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_audit;
+    }
     retval = copy_semundo(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_security;
+    }
     retval = copy_files(clone_flags, p, args.no_files);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_semundo;
+    }
     retval = copy_fs(clone_flags, p, args.umh);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_files;
+    }
     retval = copy_sighand(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_fs;
+    }
     retval = copy_signal(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_sighand;
+    }
     retval = copy_mm(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_signal;
+    }
     retval = copy_namespaces(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_mm;
+    }
     retval = copy_io(clone_flags, p);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_namespaces;
+    }
     retval = copy_thread(p, args);
-    if (retval)
+    if (retval) {
     goto bad_fork_cleanup_io;
+    }
     stackleak_task_init(p);
     if (pid != &init_struct_pid) {
     pid = alloc_pid(p.nsproxy.pid_ns_for_children, args.set_tid,
@@ -2061,22 +2123,26 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // if the fd table isn't shared).
 //
     if (clone_flags & CLONE_PIDFD) {
-    let mut flags: unsigned = PIDFD_STALE;
-    if (clone_flags & CLONE_THREAD)
+pub static mut flags: unsigned = PIDFD_STALE;
+    if (clone_flags & CLONE_THREAD) {
     flags |= PIDFD_THREAD;
-    if (clone_flags & CLONE_PIDFD_AUTOKILL)
+    }
+    if (clone_flags & CLONE_PIDFD_AUTOKILL) {
     flags |= PIDFD_AUTOKILL;
+    }
 //
 // Note that no task has been attached to @pid yet indicate
 // that via CLONE_PIDFD.
 //
     retval = pidfd_prepare(pid, flags, &pidfile);
-    if (retval < 0)
+    if (retval < 0) {
     goto bad_fork_free_pid;
+    }
     pidfd = retval;
     retval = put_user(pidfd, args.pidfd);
-    if (retval)
+    if (retval) {
     goto bad_fork_put_pidfd;
+    }
     }
 
     p.plug = core::ptr::null_mut();
@@ -2086,8 +2152,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 //
 // sigaltstack should be cleared when sharing the same VM
 //
-    if ((clone_flags & (CLONE_VM|CLONE_VFORK)) == CLONE_VM)
+    if ((clone_flags & (CLONE_VM|CLONE_VFORK)) == CLONE_VM) {
     sas_ss_reset(p);
+    }
 //
 // Syscall tracing and stepping should be turned off in the
 // child regardless of CLONE_PTRACE.
@@ -2125,8 +2192,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // progress.
 //
     retval = cgroup_can_fork(p, args);
-    if (retval)
+    if (retval) {
     goto bad_fork_put_pidfd;
+    }
 //
 // Now that the cgroups are pinned, re-clone the parent cgroup and put
 // the new task on the correct runqueue. All this *before* the task
@@ -2137,12 +2205,14 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // runqueue.
 //
     retval = sched_cgroup_fork(p, args);
-    if (retval)
+    if (retval) {
     goto bad_fork_cancel_cgroup;
+    }
     if (need_futex_hash_allocate_default(clone_flags)) {
     retval = futex_hash_allocate_default();
-    if (retval)
+    if (retval) {
     goto bad_fork_cancel_cgroup;
+    }
 //
 // If we fail beyond this point we don't free the allocated
 // futex hash map. We assume that another thread will be created
@@ -2168,10 +2238,12 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     if (clone_flags & (CLONE_PARENT|CLONE_THREAD)) {
     p.real_parent = current.real_parent;
     p.parent_exec_id = current.parent_exec_id;
-    if (clone_flags & CLONE_THREAD)
+    if (clone_flags & CLONE_THREAD) {
     p.exit_signal = -1;
-    else
+    }
+    else {
     p.exit_signal = current.group_leader.exit_signal;
+    }
     } else {
     p.real_parent = current;
     p.parent_exec_id = current.self_exec_id;
@@ -2202,8 +2274,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 // before holding sighand lock.
 //
     copy_seccomp(p);
-    if (clone_flags & CLONE_NNP)
+    if (clone_flags & CLONE_NNP) {
     task_set_no_new_privs(p);
+    }
     init_task_pid_links(p);
     if (likely(p.pid)) {
     ptrace_init_task(p, (clone_flags & CLONE_PTRACE) || trace);
@@ -2214,8 +2287,8 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     init_task_pid(p, PIDTYPE_SID, task_session(current));
     if (is_child_reaper(pid)) {
     struct pid_namespace *ns = ns_of_pid(pid);
-    ASSERT_EXCLUSIVE_WRITER(ns.child_reaper);
-    WRITE_ONCE(ns.child_reaper, p);
+// ASSERT_EXCLUSIVE_WRITER;
+// WRITE_ONCE;
     p.signal.flags |= SIGNAL_UNKILLABLE;
     }
     p.signal.shared_pending.signal = delayed.signal;
@@ -2227,8 +2300,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
 //
     p.signal.has_child_subreaper = p.real_parent.signal.has_child_subreaper ||
     p.real_parent.signal.is_child_subreaper;
-    if (clone_flags & CLONE_AUTOREAP)
+    if (clone_flags & CLONE_AUTOREAP) {
     p.signal.autoreap = 1;
+    }
     list_add_tail(&p.sibling, &p.real_parent.children);
     list_add_tail_rcu(&p.tasks, &init_task.tasks);
     attach_pid(p, PIDTYPE_TGID);
@@ -2252,8 +2326,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     spin_unlock(&current.sighand.siglock);
     syscall_tracepoint_update(p);
     write_unlock_irq(&tasklist_lock);
-    if (pidfile)
+    if (pidfile) {
     fd_install(pidfd, pidfile);
+    }
     proc_fork_connector(p);
 //
 // sched_ext needs @p to be associated with its cgroup in its post_fork
@@ -2279,13 +2354,15 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     put_unused_fd(pidfd);
     }
     bad_fork_free_pid:
-    if (pid != &init_struct_pid)
+    if (pid != &init_struct_pid) {
     free_pid(pid);
+    }
     bad_fork_cleanup_thread:
     exit_thread(p);
     bad_fork_cleanup_io:
-    if (p.io_context)
+    if (p.io_context) {
     exit_io_context(p);
+    }
     bad_fork_cleanup_namespaces:
     exit_nsproxy_namespaces(p);
     bad_fork_cleanup_mm:
@@ -2294,8 +2371,9 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     mmput(p.mm);
     }
     bad_fork_cleanup_signal:
-    if (!(clone_flags & CLONE_THREAD))
+    if (!(clone_flags & CLONE_THREAD)) {
     free_signal_struct(p.signal);
+    }
     bad_fork_cleanup_sighand:
     __cleanup_sighand(p.sighand);
     bad_fork_cleanup_fs:
@@ -2325,7 +2403,7 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     exit_cred_namespaces(p);
     exit_creds(p);
     bad_fork_free:
-    WRITE_ONCE(p.__state, TASK_DEAD);
+// WRITE_ONCE;
     exit_task_stack_account(p);
     put_task_stack(p);
     delayed_free_task(p);
@@ -2337,26 +2415,20 @@ unsafe extern "C" fn need_futex_hash_allocate_default(clone_flags: u64) -> bool 
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_idle_pids(idle: *mut task_struct) {
-    static inline void init_idle_pids(struct task_struct *idle)
-    {
     enum pid_type type;
     for (type = PIDTYPE_PID; type < PIDTYPE_MAX; ++type) {
-    INIT_HLIST_NODE(&idle.pid_links[type]); /* not really needed */
+// INIT_HLIST_NODE; /* not really needed */
     init_task_pid(idle, type, &init_struct_pid);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn idle_dummy(dummy: *mut c_void) -> c_int {
-    static int idle_dummy(void *dummy)
-    {
 // This function is never called
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn fork_idle(cpu: c_int) -> *mut task_ __init {
-    struct task_struct * __init fork_idle(int cpu)
-    {
-    struct task_struct *task;
+    let mut task = core::ptr::null_mut();
     struct kernel_clone_args args = {
     .flags		= CLONE_VM,
     .fn		= &idle_dummy,
@@ -2377,8 +2449,8 @@ pub unsafe extern "C" fn fork_idle(cpu: c_int) -> *mut task_ __init {
 // The returned task is inactive, and the caller must fire it up through
 // wake_up_new_task(p). All signals are blocked in the created task.
 //
-    struct task_struct *create_io_thread(int (*fn)(void *), void *arg, int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn create_io_thread() {
     unsigned long flags = CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|
     CLONE_IO|CLONE_VM|CLONE_UNTRACED;
     struct kernel_clone_args args = {
@@ -2398,14 +2470,12 @@ pub unsafe extern "C" fn fork_idle(cpu: c_int) -> *mut task_ __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kernel_clone(args: *mut kernel_clone_args) -> pid_t {
-    pid_t kernel_clone(struct kernel_clone_args *args)
-    {
-    let mut clone_flags: u64 = args.flags;
-    struct completion vfork;
-    struct pid *pid;
-    struct task_struct *p;
-    let mut trace: c_int = 0;
-    pid_t nr;
+pub static mut clone_flags: u64 = args.flags;
+    let mut vfork;
+    let mut pid = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut trace: c_int = 0;
+    let mut nr = 0;
 //
 // Creating an empty mount namespace implies creating a new mount
 // namespace.  Set this before copy_process() so that the
@@ -2428,8 +2498,9 @@ pub unsafe extern "C" fn kernel_clone(args: *mut kernel_clone_args) -> pid_t {
     (clone_flags & CLONE_PARENT_SETTID) &&
     (args.pidfd == args.parent_tid))
     return -EINVAL;
-    if (!valid_signal(args.exit_signal))
+    if (!valid_signal(args.exit_signal)) {
     return -EINVAL;
+    }
 //
 // Determine whether and which event to report to ptracer.  When
 // called from kernel_thread or CLONE_UNTRACED is explicitly
@@ -2437,21 +2508,25 @@ pub unsafe extern "C" fn kernel_clone(args: *mut kernel_clone_args) -> pid_t {
 // for the type of forking is enabled.
 //
     if (!(clone_flags & CLONE_UNTRACED)) {
-    if (clone_flags & CLONE_VFORK)
+    if (clone_flags & CLONE_VFORK) {
     trace = PTRACE_EVENT_VFORK;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(SIGCHLD: args->exit_signal !=) -> else {
     else if (args.exit_signal != SIGCHLD)
     trace = PTRACE_EVENT_CLONE;
-    else
+    else {
     trace = PTRACE_EVENT_FORK;
-    if (likely(!ptrace_event_enabled(current, trace)))
+    }
+    if (likely(!ptrace_event_enabled(current, trace))) {
     trace = 0;
+    }
     }
     p = copy_process(core::ptr::null_mut(), trace, NUMA_NO_NODE, args);
     add_latent_entropy();
-    if (IS_ERR(p))
+    if (IS_ERR(p)) {
     return PTR_ERR(p);
+    }
 //
 // Do this prior waking up the new thread - the thread pointer
 // might get invalid after that point, if the thread exits quickly.
@@ -2459,8 +2534,9 @@ pub unsafe extern "C" fn if(SIGCHLD: args->exit_signal !=) -> else {
     trace_sched_process_fork(current, p);
     pid = get_task_pid(p, PIDTYPE_PID);
     nr = pid_vnr(pid);
-    if (clone_flags & CLONE_PARENT_SETTID)
+    if (clone_flags & CLONE_PARENT_SETTID) {
     put_user(nr, args.parent_tid);
+    }
     if (clone_flags & CLONE_VFORK) {
     p.vfork_done = &vfork;
     init_completion(&vfork);
@@ -2474,11 +2550,13 @@ pub unsafe extern "C" fn if(SIGCHLD: args->exit_signal !=) -> else {
     }
     wake_up_new_task(p);
 // forking complete and child started to run, tell ptracer
-    if (unlikely(trace))
+    if (unlikely(trace)) {
     ptrace_event_pid(trace, pid);
+    }
     if (clone_flags & CLONE_VFORK) {
-    if (!wait_for_vfork_done(p, &vfork))
+    if (!wait_for_vfork_done(p, &vfork)) {
     ptrace_event_pid(PTRACE_EVENT_VFORK_DONE, pid);
+    }
     }
     put_pid(pid);
     return nr;
@@ -2486,9 +2564,8 @@ pub unsafe extern "C" fn if(SIGCHLD: args->exit_signal !=) -> else {
 //
 // Create a kernel thread.
 //
-    pid_t kernel_thread(int (*fn)(void *), void *arg, const char *name,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kernel_thread() {
     struct kernel_clone_args args = {
     .flags		= ((flags | CLONE_VM | CLONE_UNTRACED) & ~CSIGNAL),
     .exit_signal	= (flags & CSIGNAL),
@@ -2504,8 +2581,8 @@ pub unsafe extern "C" fn if(SIGCHLD: args->exit_signal !=) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut c_void, flags: c_ulong) -> pid_t {
-    pid_t user_mode_thread(int (*fn)(void *), void *arg, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn user_mode_thread() {
     struct kernel_clone_args args = {
     .flags		= ((flags | CLONE_VM | CLONE_UNTRACED) & ~CSIGNAL),
     .exit_signal	= (flags & CSIGNAL),
@@ -2516,8 +2593,8 @@ pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut 
     return kernel_clone(&args);
     }
 
-    SYSCALL_DEFINE0(fork)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_fork() {
 
     struct kernel_clone_args args = {
     .exit_signal = SIGCHLD,
@@ -2529,8 +2606,8 @@ pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut 
 
     }
 
-    SYSCALL_DEFINE0(vfork)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_vfork() {
     struct kernel_clone_args args = {
     .flags		= CLONE_VFORK | CLONE_VM,
     .exit_signal	= SIGCHLD,
@@ -2554,12 +2631,8 @@ pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut 
     int __user *, child_tidptr,
     unsigned long, tls)
 
-    SYSCALL_DEFINE5(clone, unsigned long, clone_flags, unsigned long, newsp,
-    int __user *, parent_tidptr,
-    int __user *, child_tidptr,
-    unsigned long, tls)
-
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_clone() {
     struct kernel_clone_args args = {
     .flags		= (lower_32_bits(clone_flags) & ~CSIGNAL),
     .pidfd		= parent_tidptr,
@@ -2576,8 +2649,8 @@ pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut 
     struct clone_args __user *uargs,
     size_t usize)
     {
-    int err;
-    struct clone_args args;
+    let mut err = 0;
+    let mut args;
     pid_t *kset_tid = kargs.set_tid;
     BUILD_BUG_ON(offsetofend(struct clone_args, tls) !=
     CLONE_ARGS_SIZE_VER0);
@@ -2585,25 +2658,32 @@ pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut 
     CLONE_ARGS_SIZE_VER1);
     BUILD_BUG_ON(offsetofend(struct clone_args, cgroup) !=
     CLONE_ARGS_SIZE_VER2);
-    BUILD_BUG_ON(sizeof(struct clone_args) != CLONE_ARGS_SIZE_VER2);
-    if (unlikely(usize > PAGE_SIZE))
+// BUILD_BUG_ON;
+    if (unlikely(usize > PAGE_SIZE)) {
     return -E2BIG;
-    if (unlikely(usize < CLONE_ARGS_SIZE_VER0))
+    }
+    if (unlikely(usize < CLONE_ARGS_SIZE_VER0)) {
     return -EINVAL;
+    }
     err = copy_struct_from_user(&args, sizeof(args), uargs, usize);
-    if (err)
+    if (err) {
     return err;
-    if (unlikely(args.set_tid_size > MAX_PID_NS_LEVEL))
+    }
+    if (unlikely(args.set_tid_size > MAX_PID_NS_LEVEL)) {
     return -EINVAL;
-    if (unlikely(!args.set_tid && args.set_tid_size > 0))
+    }
+    if (unlikely(!args.set_tid && args.set_tid_size > 0)) {
     return -EINVAL;
-    if (unlikely(args.set_tid && args.set_tid_size == 0))
+    }
+    if (unlikely(args.set_tid && args.set_tid_size == 0)) {
     return -EINVAL;
+    }
 //
 // Verify that higher 32bits of exit_signal are unset
 //
-    if (unlikely(args.exit_signal & ~((u64)CSIGNAL)))
+    if (unlikely(args.exit_signal & ~((u64)CSIGNAL))) {
     return -EINVAL;
+    }
     if ((args.flags & CLONE_INTO_CGROUP) &&
     (args.cgroup > INT_MAX || usize < CLONE_ARGS_SIZE_VER2))
     return -EINVAL;
@@ -2636,16 +2716,17 @@ pub unsafe extern "C" fn user_mode_thread(): *mut *mut int (fn)(void, arg: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn clone3_stack_valid(kargs: *mut kernel_clone_args) -> bool {
-    static inline bool clone3_stack_valid(struct kernel_clone_args *kargs)
-    {
     if (kargs.stack == 0) {
-    if (kargs.stack_size > 0)
+    if (kargs.stack_size > 0) {
     return false;
+    }
     } else {
-    if (kargs.stack_size == 0)
+    if (kargs.stack_size == 0) {
     return false;
-    if (!access_ok((void __user *)kargs.stack, kargs.stack_size))
+    }
+    if (!access_ok((void __user *)kargs.stack, kargs.stack_size)) {
     return false;
+    }
 
     kargs.stack += kargs.stack_size;
 
@@ -2654,8 +2735,6 @@ pub unsafe extern "C" fn clone3_stack_valid(kargs: *mut kernel_clone_args) -> bo
     }
 #[no_mangle]
 unsafe extern "C" fn clone3_args_valid(kargs: *mut kernel_clone_args) -> bool {
-    static bool clone3_args_valid(struct kernel_clone_args *kargs)
-    {
 // Verify that no unknown flags are passed along.
     if (kargs.flags &
     ~(CLONE_LEGACY_FLAGS | CLONE_CLEAR_SIGHAND |
@@ -2666,16 +2745,18 @@ unsafe extern "C" fn clone3_args_valid(kargs: *mut kernel_clone_args) -> bool {
 // - make the CLONE_DETACHED bit reusable for clone3
 // - make the CSIGNAL bits reusable for clone3
 //
-    if (kargs.flags & (CLONE_DETACHED | (CSIGNAL & (~CLONE_NEWTIME))))
+    if (kargs.flags & (CLONE_DETACHED | (CSIGNAL & (~CLONE_NEWTIME)))) {
     return false;
+    }
     if ((kargs.flags & (CLONE_SIGHAND | CLONE_CLEAR_SIGHAND)) ==
     (CLONE_SIGHAND | CLONE_CLEAR_SIGHAND))
     return false;
     if ((kargs.flags & (CLONE_THREAD | CLONE_PARENT)) &&
     kargs.exit_signal)
     return false;
-    if (!clone3_stack_valid(kargs))
+    if (!clone3_stack_valid(kargs)) {
     return false;
+    }
     return true;
     }
 //
@@ -2689,28 +2770,28 @@ unsafe extern "C" fn clone3_args_valid(kargs: *mut kernel_clone_args) -> bool {
 // Return: On success, a positive PID for the child process.
 // On error, a negative errno number.
 //
-    SYSCALL_DEFINE2(clone3, struct clone_args __user *, uargs, size_t, size)
-    {
-    int err;
-    struct kernel_clone_args kargs;
+#[no_mangle]
+pub unsafe extern "C" fn sys_clone3() {
+    let mut err = 0;
+    let mut kargs;
     pid_t set_tid[MAX_PID_NS_LEVEL];
 
     return -ENOSYS;
 
     kargs.set_tid = set_tid;
     err = copy_clone_args_from_user(&kargs, uargs, size);
-    if (err)
+    if (err) {
     return err;
-    if (!clone3_args_valid(&kargs))
+    }
+    if (!clone3_args_valid(&kargs)) {
     return -EINVAL;
+    }
     return kernel_clone(&kargs);
     }
 #[no_mangle]
 pub unsafe extern "C" fn walk_process_tree(top: *mut task_struct, visitor: proc_visitor, data: *mut c_void) {
-    void walk_process_tree(struct task_struct *top, proc_visitor visitor, void *data)
-    {
     struct task_struct *leader, *parent, *child;
-    int res;
+    let mut res = 0;
     read_lock(&tasklist_lock);
     leader = top = top.group_leader;
     down:
@@ -2718,8 +2799,9 @@ pub unsafe extern "C" fn walk_process_tree(top: *mut task_struct, visitor: proc_
     list_for_each_entry(child, &parent.children, sibling) {
     res = visitor(child, data);
     if (res) {
-    if (res < 0)
+    if (res < 0) {
     goto out;
+    }
     leader = child;
     goto down;
     }
@@ -2741,17 +2823,13 @@ pub const ARCH_MIN_MMSTRUCT_ALIGN: c_int = 0;
 
 #[no_mangle]
 unsafe extern "C" fn sighand_ctor(data: *mut c_void) {
-    static void sighand_ctor(void *data)
-    {
     struct sighand_struct *sighand = data;
     spin_lock_init(&sighand.siglock);
     init_waitqueue_head(&sighand.signalfd_wqh);
     }
 #[no_mangle]
-pub unsafe extern "C" fn mm_cache_init() -> void __init {
-    void __init mm_cache_init(void)
-    {
-    unsigned int mm_size;
+pub unsafe extern "C" fn mm_cache_init() -> c_int {
+    let mut mm_size = 0;
 //
 // The mm_cpumask is located at the end of mm_struct, and is
 // dynamically sized based on the maximum CPU number this system
@@ -2766,9 +2844,7 @@ pub unsafe extern "C" fn mm_cache_init() -> void __init {
     core::ptr::null_mut());
     }
 #[no_mangle]
-pub unsafe extern "C" fn proc_caches_init() -> void __init {
-    void __init proc_caches_init(void)
-    {
+pub unsafe extern "C" fn proc_caches_init() -> c_int {
     sighand_cachep = kmem_cache_create("sighand_cache",
     sizeof(struct sighand_struct), 0,
     SLAB_HWCACHE_ALIGN|SLAB_PANIC|SLAB_TYPESAFE_BY_RCU|
@@ -2794,8 +2870,6 @@ pub unsafe extern "C" fn proc_caches_init() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn check_unshare_flags(unshare_flags: c_ulong) -> c_int {
-    static int check_unshare_flags(unsigned long unshare_flags)
-    {
     if (unshare_flags & ~(CLONE_THREAD|CLONE_FS|CLONE_SIGHAND|
     CLONE_VM|CLONE_FILES|CLONE_SYSVSEM|
     CLONE_NS_ALL | UNSHARE_EMPTY_MNTNS))
@@ -2807,16 +2881,19 @@ unsafe extern "C" fn check_unshare_flags(unshare_flags: c_ulong) -> c_int {
 // CLONE_THREAD).
 //
     if (unshare_flags & (CLONE_THREAD | CLONE_SIGHAND | CLONE_VM)) {
-    if (!thread_group_empty(current))
+    if (!thread_group_empty(current)) {
     return -EINVAL;
+    }
     }
     if (unshare_flags & (CLONE_SIGHAND | CLONE_VM)) {
-    if (refcount_read(&current.sighand.count) > 1)
+    if (refcount_read(&current.sighand.count) > 1) {
     return -EINVAL;
     }
+    }
     if (unshare_flags & CLONE_VM) {
-    if (!current_is_single_threaded())
+    if (!current_is_single_threaded()) {
     return -EINVAL;
+    }
     }
     return 0;
     }
@@ -2825,17 +2902,18 @@ unsafe extern "C" fn check_unshare_flags(unshare_flags: c_ulong) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn unshare_fs(unshare_flags: c_ulong, new_fsp: *mut fs_struct) -> c_int {
-    static int unshare_fs(unsigned long unshare_flags, struct fs_struct **new_fsp)
-    {
     struct fs_struct *fs = current.fs;
-    if (!(unshare_flags & CLONE_FS) || !fs)
+    if (!(unshare_flags & CLONE_FS) || !fs) {
     return 0;
+    }
 // don't need lock here; in the worst case we'll do useless copy
-    if (!(unshare_flags & CLONE_NEWNS) && fs.users == 1)
+    if (!(unshare_flags & CLONE_NEWNS) && fs.users == 1) {
     return 0;
+    }
 // new_fsp = copy_fs_struct(fs);
-    if (!*new_fsp)
+    if (!*new_fsp) {
     return -ENOMEM;
+    }
     return 0;
     }
 //
@@ -2843,14 +2921,13 @@ unsafe extern "C" fn unshare_fs(unshare_flags: c_ulong, new_fsp: *mut fs_struct)
 //
 #[no_mangle]
 unsafe extern "C" fn unshare_fd(unshare_flags: c_ulong, new_fdp: *mut files_struct) -> c_int {
-    static int unshare_fd(unsigned long unshare_flags, struct files_struct **new_fdp)
-    {
     struct files_struct *fd = current.files;
     if ((unshare_flags & CLONE_FILES) &&
     (fd && atomic_read(&fd.count) > 1)) {
     fd = dup_fd(fd, core::ptr::null_mut());
-    if (IS_ERR(fd))
+    if (IS_ERR(fd)) {
     return PTR_ERR(fd);
+    }
 // new_fdp = fd;
     }
     return 0;
@@ -2865,67 +2942,77 @@ unsafe extern "C" fn unshare_fd(unshare_flags: c_ulong, new_fdp: *mut files_stru
 //
 #[no_mangle]
 pub unsafe extern "C" fn ksys_unshare(unshare_flags: c_ulong) -> c_int {
-    int ksys_unshare(unsigned long unshare_flags)
-    {
     struct fs_struct *new_fs = core::ptr::null_mut();
     struct files_struct *new_fd = core::ptr::null_mut();
     struct cred *new_cred = core::ptr::null_mut();
     struct nsproxy *new_nsproxy = core::ptr::null_mut();
-    let mut do_sysvsem: c_int = 0;
-    int err;
+pub static mut do_sysvsem: c_int = 0;
+    let mut err = 0;
 //
 // If unsharing a user namespace must also unshare the thread group
 // and unshare the filesystem root and working directories.
 //
-    if (unshare_flags & CLONE_NEWUSER)
+    if (unshare_flags & CLONE_NEWUSER) {
     unshare_flags |= CLONE_THREAD | CLONE_FS;
+    }
 //
 // If unsharing vm, must also unshare signal handlers.
 //
-    if (unshare_flags & CLONE_VM)
+    if (unshare_flags & CLONE_VM) {
     unshare_flags |= CLONE_SIGHAND;
+    }
 //
 // If unsharing a signal handlers, must also unshare the signal queues.
 //
-    if (unshare_flags & CLONE_SIGHAND)
+    if (unshare_flags & CLONE_SIGHAND) {
     unshare_flags |= CLONE_THREAD;
+    }
 //
 // If unsharing namespace, must also unshare filesystem information.
 //
-    if (unshare_flags & UNSHARE_EMPTY_MNTNS)
+    if (unshare_flags & UNSHARE_EMPTY_MNTNS) {
     unshare_flags |= CLONE_NEWNS;
-    if (unshare_flags & CLONE_NEWNS)
+    }
+    if (unshare_flags & CLONE_NEWNS) {
     unshare_flags |= CLONE_FS;
+    }
 // No unsharing with overriden fs state
     VFS_WARN_ON_ONCE(unshare_flags & (CLONE_NEWNS | CLONE_FS) &&
     current.fs != current.real_fs);
     err = check_unshare_flags(unshare_flags);
-    if (err)
+    if (err) {
     goto bad_unshare_out;
+    }
 //
 // CLONE_NEWIPC must also detach from the undolist: after switching
 // to a new ipc namespace, the semaphore arrays from the old
 // namespace are unreachable.
 //
-    if (unshare_flags & (CLONE_NEWIPC|CLONE_SYSVSEM))
+    if (unshare_flags & (CLONE_NEWIPC|CLONE_SYSVSEM)) {
     do_sysvsem = 1;
+    }
     err = unshare_fs(unshare_flags, &new_fs);
-    if (err)
+    if (err) {
     goto bad_unshare_out;
+    }
     err = unshare_fd(unshare_flags, &new_fd);
-    if (err)
+    if (err) {
     goto bad_unshare_cleanup_fs;
+    }
     err = unshare_userns(unshare_flags, &new_cred);
-    if (err)
+    if (err) {
     goto bad_unshare_cleanup_fd;
+    }
     err = unshare_nsproxy_namespaces(unshare_flags, &new_nsproxy,
     new_cred, new_fs);
-    if (err)
+    if (err) {
     goto bad_unshare_cleanup_cred;
+    }
     if (new_cred) {
     err = set_cred_ucounts(new_cred);
-    if (err)
+    if (err) {
     goto bad_unshare_cleanup_nsproxy;
+    }
     }
     if (new_fs || new_fd || do_sysvsem || new_cred || new_nsproxy) {
     if (do_sysvsem) {
@@ -2943,8 +3030,9 @@ pub unsafe extern "C" fn ksys_unshare(unshare_flags: c_ulong) -> c_int {
     switch_task_namespaces(current, new_nsproxy);
     new_nsproxy = core::ptr::null_mut();
     }
-    if (new_fs)
+    if (new_fs) {
     new_fs = switch_fs_struct(new_fs);
+    }
     if (new_fd) {
     guard(task_lock)(current);
     swap(current.files, new_fd);
@@ -2957,22 +3045,26 @@ pub unsafe extern "C" fn ksys_unshare(unshare_flags: c_ulong) -> c_int {
     }
     perf_event_namespaces(current);
     bad_unshare_cleanup_nsproxy:
-    if (new_nsproxy)
+    if (new_nsproxy) {
     put_nsproxy(new_nsproxy);
+    }
     bad_unshare_cleanup_cred:
-    if (new_cred)
+    if (new_cred) {
     put_cred(new_cred);
+    }
     bad_unshare_cleanup_fd:
-    if (new_fd)
+    if (new_fd) {
     put_files_struct(new_fd);
+    }
     bad_unshare_cleanup_fs:
-    if (new_fs)
+    if (new_fs) {
     free_fs_struct(new_fs);
+    }
     bad_unshare_out:
     return err;
     }
-    SYSCALL_DEFINE1(unshare, unsigned long, unshare_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_unshare() {
     return ksys_unshare(unshare_flags);
     }
 //
@@ -2982,14 +3074,13 @@ pub unsafe extern "C" fn ksys_unshare(unshare_flags: c_ulong) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unshare_files() -> c_int {
-    int unshare_files(void)
-    {
     struct task_struct *task = current;
     struct files_struct *old, *copy = core::ptr::null_mut();
-    int error;
+    let mut error = 0;
     error = unshare_fd(CLONE_FILES, &copy);
-    if (error || !copy)
+    if (error || !copy) {
     return error;
+    }
     old = task.files;
     task_lock(task);
     task.files = copy;
@@ -2997,38 +3088,31 @@ pub unsafe extern "C" fn unshare_files() -> c_int {
     put_files_struct(old);
     return 0;
     }
-    static int sysctl_max_threads(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    struct ctl_table t;
-    int ret;
-    let mut threads: c_int = max_threads;
-    let mut min: c_int = 1;
-    let mut max: c_int = MAX_THREADS;
+#[no_mangle]
+pub unsafe extern "C" fn sysctl_max_threads() {
+    let mut t;
+    let mut ret = 0;
+pub static mut threads: c_int = max_threads;
+pub static mut min: c_int = 1;
+pub static mut max: c_int = MAX_THREADS;
     t = *table;
     t.data = &threads;
     t.extra1 = &min;
     t.extra2 = &max;
     ret = proc_dointvec_minmax(&t, write, buffer, lenp, ppos);
-    if (ret || !write)
+    if (ret || !write) {
     return ret;
+    }
     max_threads = threads;
     return 0;
     }
-    static const struct ctl_table fork_sysctl_table[] = {
-    {
-    .procname	= "threads-max",
-    .data		= core::ptr::null_mut(),
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= sysctl_max_threads,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn init_fork_sysctl() -> int __init {
-    static int __init init_fork_sysctl(void)
-    {
+unsafe extern "C" fn init_fork_sysctl() -> c_int {
     register_sysctl_init("kernel", fork_sysctl_table);
     return 0;
     }
-    subsys_initcall(init_fork_sysctl);
+// subsys_initcall;
+
+}
+}

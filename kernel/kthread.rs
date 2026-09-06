@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 // Kernel thread helper functions.
@@ -45,12 +68,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // even if we're invoked from userspace (think modprobe, hotplug cpu,
 // etc.).
 //
-
-    static DEFINE_SPINLOCK(kthread_create_lock);
-    static LIST_HEAD(kthread_create_list);
+// static DEFINE_SPINLOCK(kthread_create_lock);
+// static LIST_HEAD(kthread_create_list);
     struct task_struct *kthreadd_task;
-    static LIST_HEAD(kthread_affinity_list);
-    static DEFINE_MUTEX(kthread_affinity_lock);
+// static LIST_HEAD(kthread_affinity_list);
+// static DEFINE_MUTEX(kthread_affinity_lock);
     struct kthread_create_info
     {
 // Information passed to kthread() from kthreadd.
@@ -97,8 +119,6 @@ pub struct kthread {
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_kthread_comm(buf: *mut c_char, buf_size: usize, tsk: *mut task_struct) {
-    void get_kthread_comm(char *buf, size_t buf_size, struct task_struct *tsk)
-    {
     struct kthread *kthread = to_kthread(tsk);
     if (!kthread || !kthread.full_name) {
     strscpy(buf, tsk.comm, buf_size);
@@ -108,8 +128,6 @@ pub unsafe extern "C" fn get_kthread_comm(buf: *mut c_char, buf_size: usize, tsk
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_kthread_struct(p: *mut task_struct) -> bool {
-    bool set_kthread_struct(struct task_struct *p)
-    {
     struct kthread *kthread;
     if (WARN_ON_ONCE(to_kthread(p)))
     return false;
@@ -127,8 +145,6 @@ pub unsafe extern "C" fn set_kthread_struct(p: *mut task_struct) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_kthread_struct(k: *mut task_struct) {
-    void free_kthread_struct(struct task_struct *k)
-    {
     struct kthread *kthread;
 //
 // Can be NULL if kmalloc() in set_kthread_struct() failed.
@@ -152,15 +168,11 @@ pub unsafe extern "C" fn free_kthread_struct(k: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_should_stop() -> bool {
-    bool kthread_should_stop(void)
-    {
     return test_bit(KTHREAD_SHOULD_STOP, &to_kthread(current).flags);
     }
     EXPORT_SYMBOL(kthread_should_stop);
 #[no_mangle]
 unsafe extern "C" fn __kthread_should_park(k: *mut task_struct) -> bool {
-    static bool __kthread_should_park(struct task_struct *k)
-    {
     return test_bit(KTHREAD_SHOULD_PARK, &to_kthread(k).flags);
     }
 //
@@ -176,15 +188,11 @@ unsafe extern "C" fn __kthread_should_park(k: *mut task_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_should_park() -> bool {
-    bool kthread_should_park(void)
-    {
     return __kthread_should_park(current);
     }
     EXPORT_SYMBOL_GPL(kthread_should_park);
 #[no_mangle]
 pub unsafe extern "C" fn kthread_should_stop_or_park() -> bool {
-    bool kthread_should_stop_or_park(void)
-    {
     struct kthread *kthread = tsk_is_kthread(current);
     if (!kthread)
     return false;
@@ -201,8 +209,6 @@ pub unsafe extern "C" fn kthread_should_stop_or_park() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_freezable_should_stop(was_frozen: *mut bool) -> bool {
-    bool kthread_freezable_should_stop(bool *was_frozen)
-    {
     let mut frozen: bool = false;
     might_sleep();
     if (unlikely(freezing(current)))
@@ -258,8 +264,6 @@ pub unsafe extern "C" fn kthread_freezable_should_stop(was_frozen: *mut bool) ->
     }
 #[no_mangle]
 unsafe extern "C" fn __kthread_parkme(self: *mut kthread) {
-    static void __kthread_parkme(struct kthread *self)
-    {
     for (;;) {
 //
 // TASK_PARKED is a special state; we must serialize against
@@ -287,15 +291,11 @@ unsafe extern "C" fn __kthread_parkme(self: *mut kthread) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kthread_parkme() {
-    void kthread_parkme(void)
-    {
     __kthread_parkme(to_kthread(current));
     }
     EXPORT_SYMBOL_GPL(kthread_parkme);
 #[no_mangle]
 pub unsafe extern "C" fn kthread_do_exit(kthread: *mut kthread, result: c_long) {
-    void kthread_do_exit(struct kthread *kthread, long result)
-    {
     kthread.result = result;
     if (!list_empty(&kthread.affinity_node)) {
     mutex_lock(&kthread_affinity_lock);
@@ -321,8 +321,6 @@ pub unsafe extern "C" fn kthread_do_exit(kthread: *mut kthread, result: c_long) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_complete_and_exit(comp: *mut completion, code: c_long) -> void __noreturn {
-    void __noreturn kthread_complete_and_exit(struct completion *comp, long code)
-    {
     if (comp)
     complete(comp);
     kthread_exit(code);
@@ -330,8 +328,6 @@ pub unsafe extern "C" fn kthread_complete_and_exit(comp: *mut completion, code: 
     EXPORT_SYMBOL(kthread_complete_and_exit);
 #[no_mangle]
 unsafe extern "C" fn kthread_fetch_affinity(kthread: *mut kthread, cpumask: *mut cpumask) {
-    static void kthread_fetch_affinity(struct kthread *kthread, struct cpumask *cpumask)
-    {
     const struct cpumask *pref;
     guard(rcu)();
     if (kthread.preferred_affinity) {
@@ -348,8 +344,6 @@ unsafe extern "C" fn kthread_fetch_affinity(kthread: *mut kthread, cpumask: *mut
     }
 #[no_mangle]
 unsafe extern "C" fn kthread_affine_node() {
-    static void kthread_affine_node(void)
-    {
     struct kthread *kthread = to_kthread(current);
     cpumask_var_t affinity;
     if (WARN_ON_ONCE(kthread_is_per_cpu(current)))
@@ -375,8 +369,6 @@ unsafe extern "C" fn kthread_affine_node() {
     }
 #[no_mangle]
 unsafe extern "C" fn kthread(_create: *mut c_void) -> c_int {
-    static int kthread(void *_create)
-    {
     let mut param: static struct sched_param = { .sched_priority = 0 };
 // Copy data: it's on kthread's stack
     struct kthread_create_info *create = _create;
@@ -430,8 +422,6 @@ unsafe extern "C" fn kthread(_create: *mut c_void) -> c_int {
 // called from kernel_clone() to get node information for about to be created task
 #[no_mangle]
 pub unsafe extern "C" fn tsk_fork_get_node(tsk: *mut task_struct) -> c_int {
-    int tsk_fork_get_node(struct task_struct *tsk)
-    {
 
     if (tsk == kthreadd_task)
     return tsk.pref_node_fork;
@@ -440,8 +430,6 @@ pub unsafe extern "C" fn tsk_fork_get_node(tsk: *mut task_struct) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn create_kthread(create: *mut kthread_create_info) {
-    static void create_kthread(struct kthread_create_info *create)
-    {
     int pid;
 
     current.pref_node_fork = create.node;
@@ -463,12 +451,6 @@ unsafe extern "C" fn create_kthread(create: *mut kthread_create_info) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __printf(_arg: 4, _arg: 0) -> static {
-    static __printf(4, 0)
-    struct task_struct *__kthread_create_on_node(int (*threadfn)(void *data),
-    void *data, int node,
-    const char namefmt[],
-    va_list args)
-    {
     DECLARE_COMPLETION_ONSTACK(done);
     struct task_struct *task;
     struct kthread_create_info *create = kmalloc_obj(*create);
@@ -549,8 +531,6 @@ pub unsafe extern "C" fn __printf(_arg: 4, _arg: 0) -> static {
     EXPORT_SYMBOL(kthread_create_on_node);
 #[no_mangle]
 unsafe extern "C" fn __kthread_bind_mask(p: *mut task_struct, mask: *const cpumask, state: c_uint) {
-    static void __kthread_bind_mask(struct task_struct *p, const struct cpumask *mask, unsigned int state)
-    {
     if (!wait_task_inactive(p, state)) {
     WARN_ON(1);
     return;
@@ -562,14 +542,10 @@ unsafe extern "C" fn __kthread_bind_mask(p: *mut task_struct, mask: *const cpuma
     }
 #[no_mangle]
 unsafe extern "C" fn __kthread_bind(p: *mut task_struct, cpu: c_uint, state: c_uint) {
-    static void __kthread_bind(struct task_struct *p, unsigned int cpu, unsigned int state)
-    {
     __kthread_bind_mask(p, cpumask_of(cpu), state);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kthread_bind_mask(p: *mut task_struct, mask: *const cpumask) {
-    void kthread_bind_mask(struct task_struct *p, const struct cpumask *mask)
-    {
     struct kthread *kthread = to_kthread(p);
     __kthread_bind_mask(p, mask, TASK_UNINTERRUPTIBLE);
     WARN_ON_ONCE(kthread.started);
@@ -585,8 +561,6 @@ pub unsafe extern "C" fn kthread_bind_mask(p: *mut task_struct, mask: *const cpu
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_bind(p: *mut task_struct, cpu: c_uint) {
-    void kthread_bind(struct task_struct *p, unsigned int cpu)
-    {
     struct kthread *kthread = to_kthread(p);
     __kthread_bind(p, cpu, TASK_UNINTERRUPTIBLE);
     WARN_ON_ONCE(kthread.started);
@@ -619,8 +593,6 @@ pub unsafe extern "C" fn kthread_bind(p: *mut task_struct, cpu: c_uint) {
     EXPORT_SYMBOL(kthread_create_on_cpu);
 #[no_mangle]
 pub unsafe extern "C" fn kthread_set_per_cpu(k: *mut task_struct, cpu: c_int) {
-    void kthread_set_per_cpu(struct task_struct *k, int cpu)
-    {
     struct kthread *kthread = to_kthread(k);
     if (!kthread)
     return;
@@ -634,8 +606,6 @@ pub unsafe extern "C" fn kthread_set_per_cpu(k: *mut task_struct, cpu: c_int) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kthread_is_per_cpu(p: *mut task_struct) -> bool {
-    bool kthread_is_per_cpu(struct task_struct *p)
-    {
     struct kthread *kthread = tsk_is_kthread(p);
     if (!kthread)
     return false;
@@ -651,8 +621,6 @@ pub unsafe extern "C" fn kthread_is_per_cpu(p: *mut task_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_unpark(k: *mut task_struct) {
-    void kthread_unpark(struct task_struct *k)
-    {
     struct kthread *kthread = to_kthread(k);
     if (!test_bit(KTHREAD_SHOULD_PARK, &kthread.flags))
     return;
@@ -683,8 +651,6 @@ pub unsafe extern "C" fn kthread_unpark(k: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_park(k: *mut task_struct) -> c_int {
-    int kthread_park(struct task_struct *k)
-    {
     struct kthread *kthread = to_kthread(k);
     if (WARN_ON(k.flags & PF_EXITING))
     return -ENOSYS;
@@ -724,8 +690,6 @@ pub unsafe extern "C" fn kthread_park(k: *mut task_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_stop(k: *mut task_struct) -> c_int {
-    int kthread_stop(struct task_struct *k)
-    {
     struct kthread *kthread;
     int ret;
     trace_sched_kthread_stop(k);
@@ -752,8 +716,6 @@ pub unsafe extern "C" fn kthread_stop(k: *mut task_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_stop_put(k: *mut task_struct) -> c_int {
-    int kthread_stop_put(struct task_struct *k)
-    {
     int ret;
     ret = kthread_stop(k);
     put_task_struct(k);
@@ -762,8 +724,6 @@ pub unsafe extern "C" fn kthread_stop_put(k: *mut task_struct) -> c_int {
     EXPORT_SYMBOL(kthread_stop_put);
 #[no_mangle]
 pub unsafe extern "C" fn kthreadd(unused: *mut c_void) -> c_int {
-    int kthreadd(void *unused)
-    {
     static const char comm[TASK_COMM_LEN] = "kthreadd";
     struct task_struct *tsk = current;
 // Setup a clean context for our children to inherit.
@@ -806,8 +766,6 @@ pub unsafe extern "C" fn kthreadd(unused: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_affine_preferred(p: *mut task_struct, mask: *const cpumask) -> c_int {
-    int kthread_affine_preferred(struct task_struct *p, const struct cpumask *mask)
-    {
     struct kthread *kthread = to_kthread(p);
     cpumask_var_t affinity;
     let mut ret: c_int = 0;
@@ -838,8 +796,6 @@ pub unsafe extern "C" fn kthread_affine_preferred(p: *mut task_struct, mask: *co
     EXPORT_SYMBOL_GPL(kthread_affine_preferred);
 #[no_mangle]
 unsafe extern "C" fn kthreads_update_affinity(force: bool) -> c_int {
-    static int kthreads_update_affinity(bool force)
-    {
     cpumask_var_t affinity;
     struct kthread *k;
     int ret;
@@ -887,8 +843,6 @@ unsafe extern "C" fn kthreads_update_affinity(force: bool) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthreads_update_housekeeping() -> c_int {
-    int kthreads_update_housekeeping(void)
-    {
     return kthreads_update_affinity(true);
     }
 //
@@ -900,14 +854,10 @@ pub unsafe extern "C" fn kthreads_update_housekeeping() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kthreads_online_cpu(cpu: c_uint) -> c_int {
-    static int kthreads_online_cpu(unsigned int cpu)
-    {
     return kthreads_update_affinity(false);
     }
 #[no_mangle]
 unsafe extern "C" fn kthreads_init() -> c_int {
-    static int kthreads_init(void)
-    {
     return cpuhp_setup_state(CPUHP_AP_KTHREADS_ONLINE, "kthreads:online",
     kthreads_online_cpu, core::ptr::null_mut());
     }
@@ -940,8 +890,6 @@ unsafe extern "C" fn kthreads_init() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_worker_fn(worker_ptr: *mut c_void) -> c_int {
-    int kthread_worker_fn(void *worker_ptr)
-    {
     struct kthread_worker *worker = worker_ptr;
     struct kthread_work *work;
 //
@@ -1151,8 +1099,6 @@ pub unsafe extern "C" fn kthread_worker_fn(worker_ptr: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_delayed_work_timer_fn(t: *mut timer_list) {
-    void kthread_delayed_work_timer_fn(struct timer_list *t)
-    {
     struct kthread_delayed_work *dwork = timer_container_of(dwork, t,
     timer);
     struct kthread_work *work = &dwork.work;
@@ -1239,8 +1185,6 @@ pub struct kthread_flush_work {
 
 #[no_mangle]
 unsafe extern "C" fn kthread_flush_work_fn(work: *mut kthread_work) {
-    static void kthread_flush_work_fn(struct kthread_work *work)
-    {
     struct kthread_flush_work *fwork =
     container_of(work, struct kthread_flush_work, work);
     complete(&fwork.done);
@@ -1253,8 +1197,6 @@ unsafe extern "C" fn kthread_flush_work_fn(work: *mut kthread_work) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_flush_work(work: *mut kthread_work) {
-    void kthread_flush_work(struct kthread_work *work)
-    {
     struct kthread_flush_work fwork = {
     KTHREAD_WORK_INIT(fwork.work, kthread_flush_work_fn),
     COMPLETION_INITIALIZER_ONSTACK(fwork.done),
@@ -1321,8 +1263,6 @@ pub unsafe extern "C" fn if(work: worker->current_work ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn __kthread_cancel_work(work: *mut kthread_work) -> bool {
-    static bool __kthread_cancel_work(struct kthread_work *work)
-    {
 //
 // Try to remove the work from a worker list. It might either
 // be from worker->work_list or from worker->delayed_work_list.
@@ -1399,8 +1339,6 @@ unsafe extern "C" fn __kthread_cancel_work(work: *mut kthread_work) -> bool {
     EXPORT_SYMBOL_GPL(kthread_mod_delayed_work);
 #[no_mangle]
 unsafe extern "C" fn __kthread_cancel_work_sync(work: *mut kthread_work, is_dwork: bool) -> bool {
-    static bool __kthread_cancel_work_sync(struct kthread_work *work, bool is_dwork)
-    {
     struct kthread_worker *worker = work.worker;
     unsigned long flags;
     let mut ret: c_int = false;
@@ -1446,8 +1384,6 @@ unsafe extern "C" fn __kthread_cancel_work_sync(work: *mut kthread_work, is_dwor
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_cancel_work_sync(work: *mut kthread_work) -> bool {
-    bool kthread_cancel_work_sync(struct kthread_work *work)
-    {
     return __kthread_cancel_work_sync(work, false);
     }
     EXPORT_SYMBOL_GPL(kthread_cancel_work_sync);
@@ -1462,8 +1398,6 @@ pub unsafe extern "C" fn kthread_cancel_work_sync(work: *mut kthread_work) -> bo
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_cancel_delayed_work_sync(dwork: *mut kthread_delayed_work) -> bool {
-    bool kthread_cancel_delayed_work_sync(struct kthread_delayed_work *dwork)
-    {
     return __kthread_cancel_work_sync(&dwork.work, true);
     }
     EXPORT_SYMBOL_GPL(kthread_cancel_delayed_work_sync);
@@ -1476,8 +1410,6 @@ pub unsafe extern "C" fn kthread_cancel_delayed_work_sync(dwork: *mut kthread_de
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_flush_worker(worker: *mut kthread_worker) {
-    void kthread_flush_worker(struct kthread_worker *worker)
-    {
     struct kthread_flush_work fwork = {
     KTHREAD_WORK_INIT(fwork.work, kthread_flush_work_fn),
     COMPLETION_INITIALIZER_ONSTACK(fwork.done),
@@ -1500,8 +1432,6 @@ pub unsafe extern "C" fn kthread_flush_worker(worker: *mut kthread_worker) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_destroy_worker(worker: *mut kthread_worker) {
-    void kthread_destroy_worker(struct kthread_worker *worker)
-    {
     struct task_struct *task;
     task = worker.task;
     if (WARN_ON(!task))
@@ -1519,8 +1449,6 @@ pub unsafe extern "C" fn kthread_destroy_worker(worker: *mut kthread_worker) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_use_mm(mm: *mut mm_struct) {
-    void kthread_use_mm(struct mm_struct *mm)
-    {
     struct mm_struct *active_mm;
     struct task_struct *tsk = current;
     WARN_ON_ONCE(!(tsk.flags & PF_KTHREAD));
@@ -1562,8 +1490,6 @@ pub unsafe extern "C" fn kthread_use_mm(mm: *mut mm_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_unuse_mm(mm: *mut mm_struct) {
-    void kthread_unuse_mm(struct mm_struct *mm)
-    {
     struct task_struct *tsk = current;
     WARN_ON_ONCE(!(tsk.flags & PF_KTHREAD));
     WARN_ON_ONCE(!tsk.mm);
@@ -1600,8 +1526,6 @@ pub unsafe extern "C" fn kthread_unuse_mm(mm: *mut mm_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kthread_associate_blkcg(css: *mut cgroup_subsys_state) {
-    void kthread_associate_blkcg(struct cgroup_subsys_state *css)
-    {
     struct kthread *kthread;
     if (!(current.flags & PF_KTHREAD))
     return;
@@ -1633,3 +1557,5 @@ pub unsafe extern "C" fn kthread_associate_blkcg(css: *mut cgroup_subsys_state) 
     }
     return core::ptr::null_mut();
     }
+
+}

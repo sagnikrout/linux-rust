@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -96,7 +119,7 @@ pub struct sys_off_handler {
 // at shutdown. This is used to stop any idling DMA operations
 // and the like.
 //
-    static BLOCKING_NOTIFIER_HEAD(reboot_notifier_list);
+// static BLOCKING_NOTIFIER_HEAD(reboot_notifier_list);
 //
 // emergency_restart - reboot the system
 //
@@ -107,8 +130,6 @@ pub struct sys_off_handler {
 //
 #[no_mangle]
 pub unsafe extern "C" fn emergency_restart() {
-    void emergency_restart(void)
-    {
     kmsg_dump(KMSG_DUMP_EMERG);
     system_state = SYSTEM_RESTART;
     machine_emergency_restart();
@@ -116,8 +137,6 @@ pub unsafe extern "C" fn emergency_restart() {
     EXPORT_SYMBOL_GPL(emergency_restart);
 #[no_mangle]
 pub unsafe extern "C" fn kernel_restart_prepare(cmd: *mut c_char) {
-    void kernel_restart_prepare(char *cmd)
-    {
     blocking_notifier_call_chain(&reboot_notifier_list, SYS_RESTART, cmd);
     system_state = SYSTEM_RESTART;
     usermodehelper_disable();
@@ -135,8 +154,6 @@ pub unsafe extern "C" fn kernel_restart_prepare(cmd: *mut c_char) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_reboot_notifier(nb: *mut notifier_block) -> c_int {
-    int register_reboot_notifier(struct notifier_block *nb)
-    {
     return blocking_notifier_chain_register(&reboot_notifier_list, nb);
     }
     EXPORT_SYMBOL(register_reboot_notifier);
@@ -151,21 +168,15 @@ pub unsafe extern "C" fn register_reboot_notifier(nb: *mut notifier_block) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_reboot_notifier(nb: *mut notifier_block) -> c_int {
-    int unregister_reboot_notifier(struct notifier_block *nb)
-    {
     return blocking_notifier_chain_unregister(&reboot_notifier_list, nb);
     }
     EXPORT_SYMBOL(unregister_reboot_notifier);
 #[no_mangle]
 unsafe extern "C" fn devm_unregister_reboot_notifier(dev: *mut device, res: *mut c_void) {
-    static void devm_unregister_reboot_notifier(struct device *dev, void *res)
-    {
     WARN_ON(unregister_reboot_notifier(*(struct notifier_block **)res));
     }
 #[no_mangle]
 pub unsafe extern "C" fn devm_register_reboot_notifier(dev: *mut device, nb: *mut notifier_block) -> c_int {
-    int devm_register_reboot_notifier(struct device *dev, struct notifier_block *nb)
-    {
     struct notifier_block **rcnb;
     int ret;
     rcnb = devres_alloc(devm_unregister_reboot_notifier,
@@ -186,7 +197,7 @@ pub unsafe extern "C" fn devm_register_reboot_notifier(dev: *mut device, nb: *mu
 // Notifier list for kernel code which wants to be called
 // to restart the system.
 //
-    static ATOMIC_NOTIFIER_HEAD(restart_handler_list);
+// static ATOMIC_NOTIFIER_HEAD(restart_handler_list);
 //
 // register_restart_handler - Register function to be called to reset
 // the system
@@ -227,8 +238,6 @@ pub unsafe extern "C" fn devm_register_reboot_notifier(dev: *mut device, nb: *mu
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_restart_handler(nb: *mut notifier_block) -> c_int {
-    int register_restart_handler(struct notifier_block *nb)
-    {
     return atomic_notifier_chain_register(&restart_handler_list, nb);
     }
     EXPORT_SYMBOL(register_restart_handler);
@@ -243,8 +252,6 @@ pub unsafe extern "C" fn register_restart_handler(nb: *mut notifier_block) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_restart_handler(nb: *mut notifier_block) -> c_int {
-    int unregister_restart_handler(struct notifier_block *nb)
-    {
     return atomic_notifier_chain_unregister(&restart_handler_list, nb);
     }
     EXPORT_SYMBOL(unregister_restart_handler);
@@ -264,14 +271,10 @@ pub unsafe extern "C" fn unregister_restart_handler(nb: *mut notifier_block) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_kernel_restart(cmd: *mut c_char) {
-    void do_kernel_restart(char *cmd)
-    {
     atomic_notifier_call_chain(&restart_handler_list, reboot_mode, cmd);
     }
 #[no_mangle]
 pub unsafe extern "C" fn migrate_to_reboot_cpu() {
-    void migrate_to_reboot_cpu(void)
-    {
 // The boot cpu is always logical cpu 0
     let mut cpu: c_int = reboot_cpu;
     cpu_hotplug_disable();
@@ -287,11 +290,9 @@ pub unsafe extern "C" fn migrate_to_reboot_cpu() {
 // Notifier list for kernel code which wants to be called
 // to prepare system for restart.
 //
-    static BLOCKING_NOTIFIER_HEAD(restart_prep_handler_list);
+// static BLOCKING_NOTIFIER_HEAD(restart_prep_handler_list);
 #[no_mangle]
 unsafe extern "C" fn do_kernel_restart_prepare() {
-    static void do_kernel_restart_prepare(void)
-    {
     blocking_notifier_call_chain(&restart_prep_handler_list, 0, core::ptr::null_mut());
     }
 //
@@ -304,8 +305,6 @@ unsafe extern "C" fn do_kernel_restart_prepare() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kernel_restart(cmd: *mut c_char) {
-    void kernel_restart(char *cmd)
-    {
     kernel_restart_prepare(cmd);
     do_kernel_restart_prepare();
     migrate_to_reboot_cpu();
@@ -320,8 +319,6 @@ pub unsafe extern "C" fn kernel_restart(cmd: *mut c_char) {
     EXPORT_SYMBOL_GPL(kernel_restart);
 #[no_mangle]
 unsafe extern "C" fn kernel_shutdown_prepare(state: enum system_states) {
-    static void kernel_shutdown_prepare(enum system_states state)
-    {
     blocking_notifier_call_chain(&reboot_notifier_list,
     (state == SYSTEM_HALT) ? SYS_HALT : SYS_POWER_OFF, core::ptr::null_mut());
     system_state = state;
@@ -335,8 +332,6 @@ unsafe extern "C" fn kernel_shutdown_prepare(state: enum system_states) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kernel_halt() {
-    void kernel_halt(void)
-    {
     kernel_shutdown_prepare(SYSTEM_HALT);
     migrate_to_reboot_cpu();
     syscore_shutdown();
@@ -352,12 +347,12 @@ pub unsafe extern "C" fn kernel_halt() {
 // Notifier list for kernel code which wants to be called
 // to prepare system for power off.
 //
-    static BLOCKING_NOTIFIER_HEAD(power_off_prep_handler_list);
+// static BLOCKING_NOTIFIER_HEAD(power_off_prep_handler_list);
 //
 // Notifier list for kernel code which wants to be called
 // to power off system.
 //
-    static ATOMIC_NOTIFIER_HEAD(power_off_handler_list);
+// static ATOMIC_NOTIFIER_HEAD(power_off_handler_list);
     static int sys_off_notify(struct notifier_block *nb,
     unsigned long mode, void *cmd)
     {
@@ -396,8 +391,6 @@ pub unsafe extern "C" fn kernel_halt() {
     }
 #[no_mangle]
 unsafe extern "C" fn free_sys_off_handler(handler: *mut sys_off_handler) {
-    static void free_sys_off_handler(struct sys_off_handler *handler)
-    {
     if (handler == &platform_sys_off_handler)
     memset(handler, 0, sizeof(*handler));
     else
@@ -489,8 +482,6 @@ unsafe extern "C" fn free_sys_off_handler(handler: *mut sys_off_handler) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_sys_off_handler(handler: *mut sys_off_handler) {
-    void unregister_sys_off_handler(struct sys_off_handler *handler)
-    {
     int err;
     if (IS_ERR_OR_NULL(handler))
     return;
@@ -507,8 +498,6 @@ pub unsafe extern "C" fn unregister_sys_off_handler(handler: *mut sys_off_handle
     EXPORT_SYMBOL_GPL(unregister_sys_off_handler);
 #[no_mangle]
 unsafe extern "C" fn devm_unregister_sys_off_handler(data: *mut c_void) {
-    static void devm_unregister_sys_off_handler(void *data)
-    {
     struct sys_off_handler *handler = data;
     unregister_sys_off_handler(handler);
     }
@@ -584,8 +573,6 @@ unsafe extern "C" fn devm_unregister_sys_off_handler(data: *mut c_void) {
     static struct sys_off_handler *platform_power_off_handler;
 #[no_mangle]
 unsafe extern "C" fn platform_power_off_notify(data: *mut sys_off_data) -> c_int {
-    static int platform_power_off_notify(struct sys_off_data *data)
-    {
     void (*platform_power_power_off_cb)(void) = data.cb_data;
     platform_power_power_off_cb();
     return NOTIFY_DONE;
@@ -635,16 +622,12 @@ pub unsafe extern "C" fn unregister_platform_power_off((*power_off)(void): *mut 
     EXPORT_SYMBOL_GPL(unregister_platform_power_off);
 #[no_mangle]
 unsafe extern "C" fn legacy_pm_power_off(data: *mut sys_off_data) -> c_int {
-    static int legacy_pm_power_off(struct sys_off_data *data)
-    {
     if (pm_power_off)
     pm_power_off();
     return NOTIFY_DONE;
     }
 #[no_mangle]
 unsafe extern "C" fn do_kernel_power_off_prepare() {
-    static void do_kernel_power_off_prepare(void)
-    {
     blocking_notifier_call_chain(&power_off_prep_handler_list, 0, core::ptr::null_mut());
     }
 //
@@ -657,8 +640,6 @@ unsafe extern "C" fn do_kernel_power_off_prepare() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_kernel_power_off() {
-    void do_kernel_power_off(void)
-    {
     struct sys_off_handler *sys_off = core::ptr::null_mut();
 //
 // Register sys-off handlers for legacy PM callback. This allows
@@ -682,8 +663,6 @@ pub unsafe extern "C" fn do_kernel_power_off() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kernel_can_power_off() -> bool {
-    bool kernel_can_power_off(void)
-    {
     return !atomic_notifier_call_chain_is_empty(&power_off_handler_list) ||
     pm_power_off;
     }
@@ -695,8 +674,6 @@ pub unsafe extern "C" fn kernel_can_power_off() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kernel_power_off() {
-    void kernel_power_off(void)
-    {
     kernel_shutdown_prepare(SYSTEM_POWER_OFF);
     do_kernel_power_off_prepare();
     migrate_to_reboot_cpu();
@@ -792,8 +769,6 @@ pub unsafe extern "C" fn kernel_power_off() {
     }
 #[no_mangle]
 unsafe extern "C" fn deferred_cad(dummy: *mut work_struct) {
-    static void deferred_cad(struct work_struct *dummy)
-    {
     kernel_restart(core::ptr::null_mut());
     }
 //
@@ -803,9 +778,7 @@ unsafe extern "C" fn deferred_cad(dummy: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ctrl_alt_del() {
-    void ctrl_alt_del(void)
-    {
-    static DECLARE_WORK(cad_work, deferred_cad);
+// static DECLARE_WORK(cad_work, deferred_cad);
     if (C_A_D)
     schedule_work(&cad_work);
     else
@@ -816,8 +789,6 @@ pub const POWEROFF_CMD_PATH_LEN: c_int = 256;
     static const char reboot_cmd[] = "/sbin/reboot";
 #[no_mangle]
 unsafe extern "C" fn run_cmd(cmd: *const c_char) -> c_int {
-    static int run_cmd(const char *cmd)
-    {
     char **argv;
     static char *envp[] = {
     "HOME=/",
@@ -836,8 +807,6 @@ unsafe extern "C" fn run_cmd(cmd: *const c_char) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn __orderly_reboot() -> c_int {
-    static int __orderly_reboot(void)
-    {
     int ret;
     ret = run_cmd(reboot_cmd);
     if (ret) {
@@ -849,8 +818,6 @@ unsafe extern "C" fn __orderly_reboot() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn __orderly_poweroff(force: bool) -> c_int {
-    static int __orderly_poweroff(bool force)
-    {
     int ret;
     ret = run_cmd(poweroff_cmd);
     if (ret && force) {
@@ -868,11 +835,9 @@ unsafe extern "C" fn __orderly_poweroff(force: bool) -> c_int {
     static bool poweroff_force;
 #[no_mangle]
 unsafe extern "C" fn poweroff_work_func(work: *mut work_struct) {
-    static void poweroff_work_func(struct work_struct *work)
-    {
     __orderly_poweroff(poweroff_force);
     }
-    static DECLARE_WORK(poweroff_work, poweroff_work_func);
+// static DECLARE_WORK(poweroff_work, poweroff_work_func);
 //
 // orderly_poweroff - Trigger an orderly system poweroff
 // @force: force poweroff if command execution fails
@@ -882,8 +847,6 @@ unsafe extern "C" fn poweroff_work_func(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn orderly_poweroff(force: bool) {
-    void orderly_poweroff(bool force)
-    {
     if (force) /* do not override the pending "true" */
     poweroff_force = true;
     schedule_work(&poweroff_work);
@@ -891,11 +854,9 @@ pub unsafe extern "C" fn orderly_poweroff(force: bool) {
     EXPORT_SYMBOL_GPL(orderly_poweroff);
 #[no_mangle]
 unsafe extern "C" fn reboot_work_func(work: *mut work_struct) {
-    static void reboot_work_func(struct work_struct *work)
-    {
     __orderly_reboot();
     }
-    static DECLARE_WORK(reboot_work, reboot_work_func);
+// static DECLARE_WORK(reboot_work, reboot_work_func);
 //
 // orderly_reboot - Trigger an orderly system reboot
 //
@@ -904,8 +865,6 @@ unsafe extern "C" fn reboot_work_func(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn orderly_reboot() {
-    void orderly_reboot(void)
-    {
     schedule_work(&reboot_work);
     }
     EXPORT_SYMBOL_GPL(orderly_reboot);
@@ -930,8 +889,6 @@ pub unsafe extern "C" fn orderly_reboot() {
 //
 #[no_mangle]
 unsafe extern "C" fn hw_failure_emergency_action_func(work: *mut work_struct) {
-    static void hw_failure_emergency_action_func(struct work_struct *work)
-    {
     const char *action_str = hw_protection_action_str(hw_failure_emergency_action);
     pr_emerg("Hardware protection timed-out. Trying forced %s\n",
     action_str);
@@ -1025,9 +982,7 @@ pub unsafe extern "C" fn if(_arg: sysfs_streq(str, _arg: "reboot")) -> else {
     return true;
     }
 #[no_mangle]
-unsafe extern "C" fn hw_protection_setup(str: *mut c_char) -> int __init {
-    static int __init hw_protection_setup(char *str)
-    {
+unsafe extern "C" fn hw_protection_setup(str: *mut c_char) -> c_int {
     hw_protection_action_parse(str, &hw_protection_action);
     return 1;
     }
@@ -1052,9 +1007,7 @@ unsafe extern "C" fn hw_protection_setup(str: *mut c_char) -> int __init {
     let mut hw_protection_attr: static struct kobj_attribute = __ATTR_RW(hw_protection);
 
 #[no_mangle]
-unsafe extern "C" fn reboot_setup(str: *mut c_char) -> int __init {
-    static int __init reboot_setup(char *str)
-    {
+unsafe extern "C" fn reboot_setup(str: *mut c_char) -> c_int {
     for (;;) {
     enum reboot_mode *mode;
 //
@@ -1124,8 +1077,6 @@ unsafe extern "C" fn reboot_setup(str: *mut c_char) -> int __init {
 
 #[no_mangle]
 unsafe extern "C" fn mode_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> isize {
-    static ssize_t mode_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
-    {
     const char *val;
     switch (reboot_mode) {
     case REBOOT_COLD:
@@ -1180,8 +1131,6 @@ pub unsafe extern "C" fn if(_arg: !strncmp(buf, _arg: REBOOT_GPIO_STR, _arg: str
 
 #[no_mangle]
 unsafe extern "C" fn force_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> isize {
-    static ssize_t force_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
-    {
     return sysfs_emit(buf, "%d\n", reboot_force);
     }
     static ssize_t force_store(struct kobject *kobj, struct kobj_attribute *attr,
@@ -1199,8 +1148,6 @@ unsafe extern "C" fn force_show(kobj: *mut kobject, attr: *mut kobj_attribute, b
     let mut reboot_force_attr: static struct kobj_attribute = __ATTR_RW(force);
 #[no_mangle]
 unsafe extern "C" fn type_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> isize {
-    static ssize_t type_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
-    {
     const char *val;
     switch (reboot_type) {
     case BOOT_TRIPLE:
@@ -1262,8 +1209,6 @@ pub unsafe extern "C" fn if(_arg: !strncmp(buf, _arg: BOOT_PCI_STR, _arg: strlen
 
 #[no_mangle]
 unsafe extern "C" fn cpu_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> isize {
-    static ssize_t cpu_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
-    {
     return sysfs_emit(buf, "%d\n", reboot_cpu);
     }
     static ssize_t cpu_store(struct kobject *kobj, struct kobj_attribute *attr,
@@ -1337,9 +1282,7 @@ unsafe extern "C" fn cpu_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf
     },
     };
 #[no_mangle]
-unsafe extern "C" fn kernel_reboot_sysctls_init() -> void __init {
-    static void __init kernel_reboot_sysctls_init(void)
-    {
+unsafe extern "C" fn kernel_reboot_sysctls_init() -> c_int {
     register_sysctl_init("kernel", kern_reboot_table);
     }
 
@@ -1347,9 +1290,7 @@ unsafe extern "C" fn kernel_reboot_sysctls_init() -> void __init {
     .attrs = reboot_attrs,
     };
 #[no_mangle]
-unsafe extern "C" fn reboot_ksysfs_init() -> int __init {
-    static int __init reboot_ksysfs_init(void)
-    {
+unsafe extern "C" fn reboot_ksysfs_init() -> c_int {
     struct kobject *reboot_kobj;
     int ret;
     reboot_kobj = kobject_create_and_add("reboot", kernel_kobj);
@@ -1364,3 +1305,16 @@ unsafe extern "C" fn reboot_ksysfs_init() -> int __init {
     return 0;
     }
     late_initcall(reboot_ksysfs_init);
+
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

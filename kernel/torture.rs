@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0+
 //
@@ -64,15 +87,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Mediate rmmod and system shutdown.  Concurrent rmmod & shutdown illegal!
 
     let mut fullstop: static int = FULLSTOP_RMMOD;
-    static DEFINE_MUTEX(fullstop_mutex);
+// static DEFINE_MUTEX(fullstop_mutex);
     static atomic_t verbose_sleep_counter;
 //
 // Sleep if needed from VERBOSE_TOROUT*().
 //
 #[no_mangle]
 pub unsafe extern "C" fn verbose_torout_sleep() {
-    void verbose_torout_sleep(void)
-    {
     if (verbose_sleep_frequency > 0 &&
     verbose_sleep_duration > 0 &&
     !(atomic_inc_return(&verbose_sleep_counter) % verbose_sleep_frequency))
@@ -100,8 +121,6 @@ pub unsafe extern "C" fn verbose_torout_sleep() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_hrtimeout_us(baset_us: u32, fuzzt_ns: u32, trsp: *mut torture_random_state) -> c_int {
-    int torture_hrtimeout_us(u32 baset_us, u32 fuzzt_ns, struct torture_random_state *trsp)
-    {
     let mut baset_ns: ktime_t = baset_us * NSEC_PER_USEC;
     return torture_hrtimeout_ns(baset_ns, fuzzt_ns, HRTIMER_MODE_REL, trsp);
     }
@@ -112,8 +131,6 @@ pub unsafe extern "C" fn torture_hrtimeout_us(baset_us: u32, fuzzt_ns: u32, trsp
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_hrtimeout_ms(baset_ms: u32, fuzzt_us: u32, trsp: *mut torture_random_state) -> c_int {
-    int torture_hrtimeout_ms(u32 baset_ms, u32 fuzzt_us, struct torture_random_state *trsp)
-    {
     let mut baset_ns: ktime_t = baset_ms * NSEC_PER_MSEC;
     u32 fuzzt_ns;
     if ((u32)~0U / NSEC_PER_USEC < fuzzt_us)
@@ -130,8 +147,6 @@ pub unsafe extern "C" fn torture_hrtimeout_ms(baset_ms: u32, fuzzt_us: u32, trsp
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_hrtimeout_jiffies(baset_j: u32, trsp: *mut torture_random_state) -> c_int {
-    int torture_hrtimeout_jiffies(u32 baset_j, struct torture_random_state *trsp)
-    {
     let mut baset_ns: ktime_t = jiffies_to_nsecs(baset_j);
     return torture_hrtimeout_ns(baset_ns, jiffies_to_nsecs(1), HRTIMER_MODE_REL, trsp);
     }
@@ -142,8 +157,6 @@ pub unsafe extern "C" fn torture_hrtimeout_jiffies(baset_j: u32, trsp: *mut tort
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_hrtimeout_s(baset_s: u32, fuzzt_ms: u32, trsp: *mut torture_random_state) -> c_int {
-    int torture_hrtimeout_s(u32 baset_s, u32 fuzzt_ms, struct torture_random_state *trsp)
-    {
     let mut baset_ns: ktime_t = baset_s * NSEC_PER_SEC;
     u32 fuzzt_ns;
     if ((u32)~0U / NSEC_PER_MSEC < fuzzt_ms)
@@ -180,8 +193,6 @@ pub unsafe extern "C" fn torture_hrtimeout_s(baset_s: u32, fuzzt_ms: u32, trsp: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_num_online_cpus() -> c_int {
-    int torture_num_online_cpus(void)
-    {
     return READ_ONCE(torture_online_cpus);
     }
     EXPORT_SYMBOL_GPL(torture_num_online_cpus);
@@ -301,8 +312,6 @@ pub unsafe extern "C" fn torture_num_online_cpus() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_online_all(phase: *mut c_char) {
-    static void torture_online_all(char *phase)
-    {
     int cpu;
     int ret;
     for_each_possible_cpu(cpu) {
@@ -367,8 +376,6 @@ unsafe extern "C" fn torture_online_all(phase: *mut c_char) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_onoff_init(ooholdoff: c_long, oointerval: c_long, f: *mut torture_ofl_func) -> c_int {
-    int torture_onoff_init(long ooholdoff, long oointerval, torture_ofl_func *f)
-    {
 
     onoff_holdoff = ooholdoff;
     onoff_interval = oointerval;
@@ -386,8 +393,6 @@ pub unsafe extern "C" fn torture_onoff_init(ooholdoff: c_long, oointerval: c_lon
 //
 #[no_mangle]
 unsafe extern "C" fn torture_onoff_cleanup() {
-    static void torture_onoff_cleanup(void)
-    {
 
     if (onoff_task == core::ptr::null_mut())
     return;
@@ -401,8 +406,6 @@ unsafe extern "C" fn torture_onoff_cleanup() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_onoff_stats() {
-    void torture_onoff_stats(void)
-    {
 
     pr_cont("onoff: %ld/%ld:%ld/%ld %d,%d:%d,%d %lu:%lu (HZ=%d) ",
     n_online_successes, n_online_attempts,
@@ -418,8 +421,6 @@ pub unsafe extern "C" fn torture_onoff_stats() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_onoff_failures() -> bool {
-    bool torture_onoff_failures(void)
-    {
 
     return n_online_successes != n_online_attempts ||
     n_offline_successes != n_offline_attempts;
@@ -463,15 +464,13 @@ pub struct shuffle_task {
     static cpumask_var_t shuffle_tmp_mask;
     static int shuffle_idle_cpu;	/* Force all torture tasks off this CPU */
     let mut shuffle_task_list: static struct list_head = LIST_HEAD_INIT(shuffle_task_list);
-    static DEFINE_MUTEX(shuffle_task_mutex);
+// static DEFINE_MUTEX(shuffle_task_mutex);
 //
 // Register a task to be shuffled.  If there is no memory, just splat
 // and don't bother registering.
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_shuffle_task_register(tp: *mut task_struct) {
-    void torture_shuffle_task_register(struct task_struct *tp)
-    {
     struct shuffle_task *stp;
     if (WARN_ON_ONCE(tp == core::ptr::null_mut()))
     return;
@@ -489,8 +488,6 @@ pub unsafe extern "C" fn torture_shuffle_task_register(tp: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_shuffle_task_unregister_all() {
-    static void torture_shuffle_task_unregister_all(void)
-    {
     struct shuffle_task *stp;
     struct shuffle_task *p;
     mutex_lock(&shuffle_task_mutex);
@@ -506,8 +503,6 @@ unsafe extern "C" fn torture_shuffle_task_unregister_all() {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_shuffle_tasks(trp: *mut torture_random_state) {
-    static void torture_shuffle_tasks(struct torture_random_state *trp)
-    {
     struct shuffle_task *stp;
     cpumask_setall(shuffle_tmp_mask);
     cpus_read_lock();
@@ -536,8 +531,6 @@ unsafe extern "C" fn torture_shuffle_tasks(trp: *mut torture_random_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_shuffle(arg: *mut c_void) -> c_int {
-    static int torture_shuffle(void *arg)
-    {
     DEFINE_TORTURE_RANDOM(rand);
     VERBOSE_TOROUT_STRING("torture_shuffle task started");
     do {
@@ -553,8 +546,6 @@ unsafe extern "C" fn torture_shuffle(arg: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_shuffle_init(shuffint: c_long) -> c_int {
-    int torture_shuffle_init(long shuffint)
-    {
     int ret;
     shuffle_interval = shuffint;
     shuffle_idle_cpu = -1;
@@ -574,8 +565,6 @@ pub unsafe extern "C" fn torture_shuffle_init(shuffint: c_long) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_shuffle_cleanup() {
-    static void torture_shuffle_cleanup(void)
-    {
     torture_shuffle_task_unregister_all();
     if (shuffler_task) {
     VERBOSE_TOROUT_STRING("Stopping torture_shuffle task");
@@ -597,8 +586,6 @@ unsafe extern "C" fn torture_shuffle_cleanup() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_shutdown_absorb(title: *const c_char) {
-    void torture_shutdown_absorb(const char *title)
-    {
     while (READ_ONCE(fullstop) == FULLSTOP_SHUTDOWN) {
     pr_notice("torture thread %s parking due to system shutdown\n",
     title);
@@ -612,8 +599,6 @@ pub unsafe extern "C" fn torture_shutdown_absorb(title: *const c_char) {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_shutdown(arg: *mut c_void) -> c_int {
-    static int torture_shutdown(void *arg)
-    {
     ktime_t ktime_snap;
     VERBOSE_TOROUT_STRING("torture_shutdown task started");
     ktime_snap = ktime_get();
@@ -685,8 +670,6 @@ pub unsafe extern "C" fn torture_shutdown_init(ssecs: c_int, (*cleanup)(void): *
 //
 #[no_mangle]
 unsafe extern "C" fn torture_shutdown_cleanup() {
-    static void torture_shutdown_cleanup(void)
-    {
     unregister_reboot_notifier(&torture_shutdown_nb);
     if (shutdown_task != core::ptr::null_mut()) {
     VERBOSE_TOROUT_STRING("Stopping torture_shutdown task");
@@ -709,8 +692,6 @@ unsafe extern "C" fn torture_shutdown_cleanup() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn stutter_wait(title: *const c_char) -> bool {
-    bool stutter_wait(const char *title)
-    {
     let mut ret: bool = false;
     ktime_t till_ns;
     cond_resched_tasks_rcu_qs();
@@ -729,8 +710,6 @@ pub unsafe extern "C" fn stutter_wait(title: *const c_char) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_stutter(arg: *mut c_void) -> c_int {
-    static int torture_stutter(void *arg)
-    {
     ktime_t till_ns;
     VERBOSE_TOROUT_STRING("torture_stutter task started");
     do {
@@ -752,8 +731,6 @@ unsafe extern "C" fn torture_stutter(arg: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_stutter_init(s: c_int, sgap: c_int) -> c_int {
-    int torture_stutter_init(const int s, const int sgap)
-    {
     stutter = s;
     stutter_gap = sgap;
     return torture_create_kthread(torture_stutter, core::ptr::null_mut(), stutter_task);
@@ -764,8 +741,6 @@ pub unsafe extern "C" fn torture_stutter_init(s: c_int, sgap: c_int) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn torture_stutter_cleanup() {
-    static void torture_stutter_cleanup(void)
-    {
     if (!stutter_task)
     return;
     VERBOSE_TOROUT_STRING("Stopping torture_stutter task");
@@ -791,8 +766,6 @@ unsafe extern "C" fn torture_stutter_cleanup() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_init_begin(ttype: *mut c_char, v: c_int) -> bool {
-    bool torture_init_begin(char *ttype, int v)
-    {
     mutex_lock(&fullstop_mutex);
     if (torture_type != core::ptr::null_mut()) {
     pr_alert("%s: Refusing %s init: %s running.\n",
@@ -814,8 +787,6 @@ pub unsafe extern "C" fn torture_init_begin(ttype: *mut c_char, v: c_int) -> boo
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_init_end() {
-    void torture_init_end(void)
-    {
     mutex_unlock(&fullstop_mutex);
     register_reboot_notifier(&torture_shutdown_nb);
     }
@@ -825,8 +796,6 @@ pub unsafe extern "C" fn torture_init_end() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_torture_init_jiffies() -> c_ulong {
-    unsigned long get_torture_init_jiffies(void)
-    {
     return READ_ONCE(torture_init_jiffies);
     }
     EXPORT_SYMBOL_GPL(get_torture_init_jiffies);
@@ -847,8 +816,6 @@ pub unsafe extern "C" fn get_torture_init_jiffies() -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_cleanup_begin() -> bool {
-    bool torture_cleanup_begin(void)
-    {
     mutex_lock(&fullstop_mutex);
     if (READ_ONCE(fullstop) == FULLSTOP_SHUTDOWN) {
     pr_warn("Concurrent rmmod and shutdown illegal!\n");
@@ -867,8 +834,6 @@ pub unsafe extern "C" fn torture_cleanup_begin() -> bool {
     EXPORT_SYMBOL_GPL(torture_cleanup_begin);
 #[no_mangle]
 pub unsafe extern "C" fn torture_cleanup_end() {
-    void torture_cleanup_end(void)
-    {
     mutex_lock(&fullstop_mutex);
     torture_type = core::ptr::null_mut();
     mutex_unlock(&fullstop_mutex);
@@ -879,8 +844,6 @@ pub unsafe extern "C" fn torture_cleanup_end() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_must_stop() -> bool {
-    bool torture_must_stop(void)
-    {
     return torture_must_stop_irq() || kthread_should_stop();
     }
     EXPORT_SYMBOL_GPL(torture_must_stop);
@@ -890,8 +853,6 @@ pub unsafe extern "C" fn torture_must_stop() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_must_stop_irq() -> bool {
-    bool torture_must_stop_irq(void)
-    {
     return READ_ONCE(fullstop) != FULLSTOP_DONTSTOP;
     }
     EXPORT_SYMBOL_GPL(torture_must_stop_irq);
@@ -904,8 +865,6 @@ pub unsafe extern "C" fn torture_must_stop_irq() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_kthread_stopping(title: *mut c_char) {
-    void torture_kthread_stopping(char *title)
-    {
     char buf[128];
     snprintf(buf, sizeof(buf), "%s is stopping", title);
     VERBOSE_TOROUT_STRING(buf);
@@ -944,8 +903,6 @@ pub unsafe extern "C" fn torture_kthread_stopping(title: *mut c_char) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn _torture_stop_kthread(m: *mut c_char, tp: *mut task_struct) {
-    void _torture_stop_kthread(char *m, struct task_struct **tp)
-    {
     if (*tp == core::ptr::null_mut())
     return;
     VERBOSE_TOROUT_STRING(m);
@@ -959,8 +916,6 @@ pub unsafe extern "C" fn _torture_stop_kthread(m: *mut c_char, tp: *mut task_str
 //
 #[no_mangle]
 pub unsafe extern "C" fn torture_sched_set_normal(t: *mut task_struct, nice: c_int) {
-    void torture_sched_set_normal(struct task_struct *t, int nice)
-    {
     let mut realnice: c_int = nice;
     if (WARN_ON_ONCE(realnice > MAX_NICE))
     realnice = MAX_NICE;
@@ -969,3 +924,5 @@ pub unsafe extern "C" fn torture_sched_set_normal(t: *mut task_struct, nice: c_i
     sched_set_normal(t, realnice);
     }
     EXPORT_SYMBOL_GPL(torture_sched_set_normal);
+
+}

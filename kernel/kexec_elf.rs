@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -53,16 +150,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 pub unsafe extern "C" fn elf_is_elf_file(ehdr: *const elfhdr) -> bool {
-    static inline bool elf_is_elf_file(const struct elfhdr *ehdr)
-    {
     return memcmp(ehdr.e_ident, ELFMAG, SELFMAG) == 0;
     }
 #[no_mangle]
 unsafe extern "C" fn elf64_to_cpu(ehdr: *const elfhdr, value: u64) -> u64 {
-    static uint64_t elf64_to_cpu(const struct elfhdr *ehdr, uint64_t value)
-    {
-    if (ehdr.e_ident[EI_DATA] == ELFDATA2LSB)
+    if (ehdr.e_ident[EI_DATA] == ELFDATA2LSB) {
     value = le64_to_cpu(value);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(ELFDATA2MSB: ehdr->e_ident[EI_DATA] ==) -> else {
     else if (ehdr.e_ident[EI_DATA] == ELFDATA2MSB)
@@ -71,10 +165,9 @@ pub unsafe extern "C" fn if(ELFDATA2MSB: ehdr->e_ident[EI_DATA] ==) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn elf32_to_cpu(ehdr: *const elfhdr, value: u32) -> u32 {
-    static uint32_t elf32_to_cpu(const struct elfhdr *ehdr, uint32_t value)
-    {
-    if (ehdr.e_ident[EI_DATA] == ELFDATA2LSB)
+    if (ehdr.e_ident[EI_DATA] == ELFDATA2LSB) {
     value = le32_to_cpu(value);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(ELFDATA2MSB: ehdr->e_ident[EI_DATA] ==) -> else {
     else if (ehdr.e_ident[EI_DATA] == ELFDATA2MSB)
@@ -83,10 +176,9 @@ pub unsafe extern "C" fn if(ELFDATA2MSB: ehdr->e_ident[EI_DATA] ==) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn elf16_to_cpu(ehdr: *const elfhdr, value: u16) -> u16 {
-    static uint16_t elf16_to_cpu(const struct elfhdr *ehdr, uint16_t value)
-    {
-    if (ehdr.e_ident[EI_DATA] == ELFDATA2LSB)
+    if (ehdr.e_ident[EI_DATA] == ELFDATA2LSB) {
     value = le16_to_cpu(value);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(ELFDATA2MSB: ehdr->e_ident[EI_DATA] ==) -> else {
     else if (ehdr.e_ident[EI_DATA] == ELFDATA2MSB)
@@ -99,8 +191,6 @@ pub unsafe extern "C" fn if(ELFDATA2MSB: ehdr->e_ident[EI_DATA] ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn elf_is_ehdr_sane(ehdr: *const elfhdr, buf_len: usize) -> bool {
-    static bool elf_is_ehdr_sane(const struct elfhdr *ehdr, size_t buf_len)
-    {
     if (ehdr.e_phnum > 0 && ehdr.e_phentsize != sizeof(struct elf_phdr)) {
     pr_debug("Bad program header size.\n");
     return false;
@@ -114,7 +204,7 @@ unsafe extern "C" fn elf_is_ehdr_sane(ehdr: *const elfhdr, buf_len: usize) -> bo
     return false;
     }
     if (ehdr.e_phoff > 0 && ehdr.e_phnum > 0) {
-    size_t phdr_size;
+    let mut phdr_size = 0;
 //
 // e_phnum is at most 65535 so calculating the size of the
 // program header cannot overflow.
@@ -130,7 +220,7 @@ unsafe extern "C" fn elf_is_ehdr_sane(ehdr: *const elfhdr, buf_len: usize) -> bo
     }
     }
     if (ehdr.e_shoff > 0 && ehdr.e_shnum > 0) {
-    size_t shdr_size;
+    let mut shdr_size = 0;
 //
 // e_shnum is at most 65536 so calculating
 // the size of the section header cannot overflow.
@@ -149,9 +239,7 @@ unsafe extern "C" fn elf_is_ehdr_sane(ehdr: *const elfhdr, buf_len: usize) -> bo
     }
 #[no_mangle]
 unsafe extern "C" fn elf_read_ehdr(buf: *const c_char, len: usize, ehdr: *mut elfhdr) -> c_int {
-    static int elf_read_ehdr(const char *buf, size_t len, struct elfhdr *ehdr)
-    {
-    struct elfhdr *buf_ehdr;
+    let mut buf_ehdr = core::ptr::null_mut();
     if (len < sizeof(*buf_ehdr)) {
     pr_debug("Buffer is too small to hold ELF header.\n");
     return -ENOEXEC;
@@ -170,7 +258,7 @@ unsafe extern "C" fn elf_read_ehdr(buf: *const c_char, len: usize, ehdr: *mut el
     pr_debug("Not a supported ELF data format.\n");
     return -ENOEXEC;
     }
-    buf_ehdr = (struct elfhdr *) buf;
+    buf_ehdr =  buf;
     if (elf16_to_cpu(ehdr, buf_ehdr.e_ehsize) != sizeof(*buf_ehdr)) {
     pr_debug("Bad ELF header size.\n");
     return -ENOEXEC;
@@ -184,18 +272,18 @@ unsafe extern "C" fn elf_read_ehdr(buf: *const c_char, len: usize, ehdr: *mut el
     ehdr.e_shentsize = elf16_to_cpu(ehdr, buf_ehdr.e_shentsize);
     ehdr.e_shnum     = elf16_to_cpu(ehdr, buf_ehdr.e_shnum);
     ehdr.e_shstrndx  = elf16_to_cpu(ehdr, buf_ehdr.e_shstrndx);
-    switch (ehdr.e_ident[EI_CLASS]) {
-    case ELFCLASS64:
+    match (ehdr.e_ident[EI_CLASS]) {
+    ELFCLASS64 => {
     ehdr.e_entry = elf64_to_cpu(ehdr, buf_ehdr.e_entry);
     ehdr.e_phoff = elf64_to_cpu(ehdr, buf_ehdr.e_phoff);
     ehdr.e_shoff = elf64_to_cpu(ehdr, buf_ehdr.e_shoff);
     break;
-    case ELFCLASS32:
+    ELFCLASS32 => {
     ehdr.e_entry = elf32_to_cpu(ehdr, buf_ehdr.e_entry);
     ehdr.e_phoff = elf32_to_cpu(ehdr, buf_ehdr.e_phoff);
     ehdr.e_shoff = elf32_to_cpu(ehdr, buf_ehdr.e_shoff);
     break;
-    default:
+    _ => {
     pr_debug("Unknown ELF class.\n");
     return -EINVAL;
     }
@@ -207,8 +295,6 @@ unsafe extern "C" fn elf_read_ehdr(buf: *const c_char, len: usize, ehdr: *mut el
 //
 #[no_mangle]
 unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> bool {
-    static bool elf_is_phdr_sane(const struct elf_phdr *phdr, size_t buf_len)
-    {
     if (phdr.p_offset + phdr.p_filesz < phdr.p_offset) {
     pr_debug("ELF segment location wraps around.\n");
     return false;
@@ -221,21 +307,19 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
     }
     return true;
     }
-    static int elf_read_phdr(const char *buf, size_t len,
-    struct kexec_elf_info *elf_info,
-    int idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn elf_read_phdr() {
 // Override the const in proghdrs, we are the ones doing the loading.
-    struct elf_phdr *phdr = (struct elf_phdr *) &elf_info.proghdrs[idx];
+    struct elf_phdr *phdr =  &elf_info.proghdrs[idx];
     const struct elfhdr *ehdr = elf_info.ehdr;
-    const char *pbuf;
-    struct elf_phdr *buf_phdr;
+    let mut pbuf = core::ptr::null_mut();
+    let mut buf_phdr = core::ptr::null_mut();
     pbuf = buf + elf_info.ehdr.e_phoff + (idx * sizeof(*buf_phdr));
-    buf_phdr = (struct elf_phdr *) pbuf;
+    buf_phdr =  pbuf;
     phdr.p_type   = elf32_to_cpu(elf_info.ehdr, buf_phdr.p_type);
     phdr.p_flags  = elf32_to_cpu(elf_info.ehdr, buf_phdr.p_flags);
-    switch (ehdr.e_ident[EI_CLASS]) {
-    case ELFCLASS64:
+    match (ehdr.e_ident[EI_CLASS]) {
+    ELFCLASS64 => {
     phdr.p_offset = elf64_to_cpu(ehdr, buf_phdr.p_offset);
     phdr.p_paddr  = elf64_to_cpu(ehdr, buf_phdr.p_paddr);
     phdr.p_vaddr  = elf64_to_cpu(ehdr, buf_phdr.p_vaddr);
@@ -243,7 +327,7 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
     phdr.p_memsz  = elf64_to_cpu(ehdr, buf_phdr.p_memsz);
     phdr.p_align  = elf64_to_cpu(ehdr, buf_phdr.p_align);
     break;
-    case ELFCLASS32:
+    ELFCLASS32 => {
     phdr.p_offset = elf32_to_cpu(ehdr, buf_phdr.p_offset);
     phdr.p_paddr  = elf32_to_cpu(ehdr, buf_phdr.p_paddr);
     phdr.p_vaddr  = elf32_to_cpu(ehdr, buf_phdr.p_vaddr);
@@ -251,7 +335,7 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
     phdr.p_memsz  = elf32_to_cpu(ehdr, buf_phdr.p_memsz);
     phdr.p_align  = elf32_to_cpu(ehdr, buf_phdr.p_align);
     break;
-    default:
+    _ => {
     pr_debug("Unknown ELF class.\n");
     return -EINVAL;
     }
@@ -263,9 +347,8 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
 // This function assumes that the program header table was checked for sanity.
 // Use elf_is_ehdr_sane() if it wasn't.
 //
-    static int elf_read_phdrs(const char *buf, size_t len,
-    struct kexec_elf_info *elf_info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn elf_read_phdrs() {
     size_t phdr_size, i;
     const struct elfhdr *ehdr = elf_info.ehdr;
 //
@@ -274,10 +357,11 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
 //
     phdr_size = sizeof(struct elf_phdr) * ehdr.e_phnum;
     elf_info.proghdrs = kzalloc(phdr_size, GFP_KERNEL);
-    if (!elf_info.proghdrs)
+    if (!elf_info.proghdrs) {
     return -ENOMEM;
+    }
     for (i = 0; i < ehdr.e_phnum; i++) {
-    int ret;
+    let mut ret = 0;
     ret = elf_read_phdr(buf, len, elf_info, i);
     if (ret) {
     kfree(elf_info.proghdrs);
@@ -302,20 +386,20 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
 // kexec_free_elf_info(elf_info) to free the memory allocated for the section
 // and program headers.
 //
-    static int elf_read_from_buffer(const char *buf, size_t len,
-    struct elfhdr *ehdr,
-    struct kexec_elf_info *elf_info)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn elf_read_from_buffer() {
+    let mut ret = 0;
     ret = elf_read_ehdr(buf, len, ehdr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     elf_info.buffer = buf;
     elf_info.ehdr = ehdr;
     if (ehdr.e_phoff > 0 && ehdr.e_phnum > 0) {
     ret = elf_read_phdrs(buf, len, elf_info);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return 0;
     }
@@ -324,22 +408,20 @@ unsafe extern "C" fn elf_is_phdr_sane(phdr: *const elf_phdr, buf_len: usize) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kexec_free_elf_info(elf_info: *mut kexec_elf_info) {
-    void kexec_free_elf_info(struct kexec_elf_info *elf_info)
-    {
     kfree(elf_info.proghdrs);
     memset(elf_info, 0, sizeof(*elf_info));
     }
 //
 // kexec_build_elf_info - read ELF executable and check that we can use it
 //
-    int kexec_build_elf_info(const char *buf, size_t len, struct elfhdr *ehdr,
-    struct kexec_elf_info *elf_info)
-    {
-    int i;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn kexec_build_elf_info() {
+    let mut i = 0;
+    let mut ret = 0;
     ret = elf_read_from_buffer(buf, len, ehdr, elf_info);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // Big endian vmlinux has type ET_DYN.
     if (ehdr.e_type != ET_EXEC && ehdr.e_type != ET_DYN) {
     pr_err("Not an ELF executable.\n");
@@ -366,14 +448,13 @@ pub unsafe extern "C" fn kexec_free_elf_info(elf_info: *mut kexec_elf_info) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kexec_elf_probe(buf: *const c_char, len: c_ulong) -> c_int {
-    int kexec_elf_probe(const char *buf, unsigned long len)
-    {
-    struct elfhdr ehdr;
-    struct kexec_elf_info elf_info;
-    int ret;
+    let mut ehdr;
+    let mut elf_info;
+    let mut ret = 0;
     ret = kexec_build_elf_info(buf, len, &ehdr, &elf_info);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     kexec_free_elf_info(&elf_info);
     return elf_check_arch(&ehdr) ? 0 : -ENOEXEC;
     }
@@ -385,40 +466,51 @@ pub unsafe extern "C" fn kexec_elf_probe(buf: *const c_char, len: c_ulong) -> c_
 // Return:
 // 0 on success, negative value on failure.
 //
-    int kexec_elf_load(struct kimage *image, struct elfhdr *ehdr,
-    struct kexec_elf_info *elf_info,
-    struct kexec_buf *kbuf,
-    unsigned long *lowest_load_addr)
-    {
-    let mut lowest_addr: c_ulong = ULONG_MAX;
-    int ret;
-    size_t i;
+#[no_mangle]
+pub unsafe extern "C" fn kexec_elf_load() {
+pub static mut lowest_addr: c_ulong = ULONG_MAX;
+    let mut ret = 0;
+    let mut i = 0;
 // Read in the PT_LOAD segments.
     for (i = 0; i < ehdr.e_phnum; i++) {
-    unsigned long load_addr;
-    size_t size;
-    const struct elf_phdr *phdr;
+    let mut load_addr = 0;
+    let mut size = 0;
+    let mut phdr = core::ptr::null_mut();
     phdr = &elf_info.proghdrs[i];
-    if (phdr.p_type != PT_LOAD)
+    if (phdr.p_type != PT_LOAD) {
     continue;
+    }
     size = phdr.p_filesz;
-    if (size > phdr.p_memsz)
+    if (size > phdr.p_memsz) {
     size = phdr.p_memsz;
-    kbuf.buffer = (void *) elf_info.buffer + phdr.p_offset;
+    }
+    kbuf.buffer =  elf_info.buffer + phdr.p_offset;
     kbuf.bufsz = size;
     kbuf.memsz = phdr.p_memsz;
     kbuf.buf_align = phdr.p_align;
     kbuf.buf_min = phdr.p_paddr;
     kbuf.mem = KEXEC_BUF_MEM_UNKNOWN;
     ret = kexec_add_buffer(kbuf);
-    if (ret)
+    if (ret) {
     goto out;
+    }
     load_addr = kbuf.mem;
-    if (load_addr < lowest_addr)
+    if (load_addr < lowest_addr) {
     lowest_addr = load_addr;
+    }
     }
 // lowest_load_addr = lowest_addr;
     ret = 0;
     out:
     return ret;
     }
+
+}
+}
+}
+}
+}
+}
+}
+}
+}

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -75,8 +98,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 pub unsafe extern "C" fn nsproxy_free(ns: *mut nsproxy) {
-    static inline void nsproxy_free(struct nsproxy *ns)
-    {
     put_mnt_ns(ns.mnt_ns);
     put_uts_ns(ns.uts_ns);
     put_ipc_ns(ns.ipc_ns);
@@ -89,8 +110,6 @@ pub unsafe extern "C" fn nsproxy_free(ns: *mut nsproxy) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn deactivate_nsproxy(ns: *mut nsproxy) {
-    void deactivate_nsproxy(struct nsproxy *ns)
-    {
     nsproxy_ns_active_put(ns);
     nsproxy_free(ns);
     }
@@ -171,8 +190,6 @@ pub unsafe extern "C" fn deactivate_nsproxy(ns: *mut nsproxy) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn copy_namespaces(flags: u64, tsk: *mut task_struct) -> c_int {
-    int copy_namespaces(u64 flags, struct task_struct *tsk)
-    {
     struct nsproxy *old_ns = tsk.nsproxy;
     struct user_namespace *user_ns = task_cred_xxx(tsk, user_ns);
     struct nsproxy *new_ns;
@@ -237,8 +254,6 @@ pub unsafe extern "C" fn copy_namespaces(flags: u64, tsk: *mut task_struct) -> c
     }
 #[no_mangle]
 pub unsafe extern "C" fn switch_task_namespaces(p: *mut task_struct, new: *mut nsproxy) {
-    void switch_task_namespaces(struct task_struct *p, struct nsproxy *new)
-    {
     struct nsproxy *ns;
     might_sleep();
     if (new)
@@ -252,33 +267,23 @@ pub unsafe extern "C" fn switch_task_namespaces(p: *mut task_struct, new: *mut n
     }
 #[no_mangle]
 pub unsafe extern "C" fn exit_nsproxy_namespaces(p: *mut task_struct) {
-    void exit_nsproxy_namespaces(struct task_struct *p)
-    {
     switch_task_namespaces(p, core::ptr::null_mut());
     }
 #[no_mangle]
 pub unsafe extern "C" fn switch_cred_namespaces(old: *const cred, new: *const cred) {
-    void switch_cred_namespaces(const struct cred *old, const struct cred *new)
-    {
     ns_ref_active_get(new.user_ns);
     ns_ref_active_put(old.user_ns);
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_cred_namespaces(tsk: *mut task_struct) {
-    void get_cred_namespaces(struct task_struct *tsk)
-    {
     ns_ref_active_get(tsk.real_cred.user_ns);
     }
 #[no_mangle]
 pub unsafe extern "C" fn exit_cred_namespaces(tsk: *mut task_struct) {
-    void exit_cred_namespaces(struct task_struct *tsk)
-    {
     ns_ref_active_put(tsk.real_cred.user_ns);
     }
 #[no_mangle]
 pub unsafe extern "C" fn exec_task_namespaces() -> c_int {
-    int exec_task_namespaces(void)
-    {
     struct task_struct *tsk = current;
     struct nsproxy *new;
     if (tsk.nsproxy.time_ns_for_children == tsk.nsproxy.time_ns)
@@ -292,8 +297,6 @@ pub unsafe extern "C" fn exec_task_namespaces() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn check_setns_flags(flags: c_ulong) -> c_int {
-    static int check_setns_flags(unsigned long flags)
-    {
     if (!flags || (flags & ~CLONE_NS_ALL))
     return -EINVAL;
 
@@ -322,8 +325,6 @@ unsafe extern "C" fn check_setns_flags(flags: c_ulong) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn put_nsset(nsset: *mut nsset) {
-    static void put_nsset(struct nsset *nsset)
-    {
     let mut flags: unsigned = nsset.flags;
     if (flags & CLONE_NEWUSER)
     put_cred(nsset_cred(nsset));
@@ -338,8 +339,6 @@ unsafe extern "C" fn put_nsset(nsset: *mut nsset) {
     }
 #[no_mangle]
 unsafe extern "C" fn prepare_nsset(flags: unsigned, nsset: *mut nsset) -> c_int {
-    static int prepare_nsset(unsigned flags, struct nsset *nsset)
-    {
     struct task_struct *me = current;
     nsset.nsproxy = create_new_namespaces(0, me, current_user_ns(), me.fs);
     if (IS_ERR(nsset.nsproxy))
@@ -366,8 +365,6 @@ unsafe extern "C" fn prepare_nsset(flags: unsigned, nsset: *mut nsset) -> c_int 
     }
 #[no_mangle]
 pub unsafe extern "C" fn validate_ns(nsset: *mut nsset, ns: *mut ns_common) -> c_int {
-    static inline int validate_ns(struct nsset *nsset, struct ns_common *ns)
-    {
     return ns.ops.install(nsset, ns);
     }
 //
@@ -379,8 +376,6 @@ pub unsafe extern "C" fn validate_ns(nsset: *mut nsset, ns: *mut ns_common) -> c
 //
 #[no_mangle]
 unsafe extern "C" fn validate_nsset(nsset: *mut nsset, pid: *mut pid) -> c_int {
-    static int validate_nsset(struct nsset *nsset, struct pid *pid)
-    {
     let mut ret: c_int = 0;
     let mut flags: unsigned = nsset.flags;
     struct user_namespace *user_ns = core::ptr::null_mut();
@@ -496,8 +491,6 @@ unsafe extern "C" fn validate_nsset(nsset: *mut nsset, pid: *mut pid) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn commit_nsset(nsset: *mut nsset) {
-    static void commit_nsset(struct nsset *nsset)
-    {
     let mut flags: unsigned = nsset.flags;
     struct task_struct *me = current;
 
@@ -559,9 +552,7 @@ unsafe extern "C" fn commit_nsset(nsset: *mut nsset) {
     return err;
     }
 #[no_mangle]
-pub unsafe extern "C" fn nsproxy_cache_init() -> int __init {
-    int __init nsproxy_cache_init(void)
-    {
+pub unsafe extern "C" fn nsproxy_cache_init() -> c_int {
     nsproxy_cachep = KMEM_CACHE(nsproxy, SLAB_PANIC|SLAB_ACCOUNT);
     return 0;
     }

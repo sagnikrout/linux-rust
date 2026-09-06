@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 
@@ -67,7 +164,7 @@ pub struct kcov {
     pub refcount: refcount_t,
 // The lock protects mode, size, area and t.
     pub lock: spinlock_t,
-    pub __guarded_by(&lock): enum kcov_mode mode,
+    pub __guarded_by(&lock): kcov_mode mode,
 // Size of arena (in long's).
     pub __guarded_by(&lock): unsigned int size,
 // Coverage buffer shared with user space.
@@ -99,12 +196,9 @@ pub struct kcov_remote {
     pub kcov: *mut kcov,
     pub hnode: hlist_node,
 }
-
-    static DEFINE_SPINLOCK(kcov_remote_lock);
-    static DEFINE_HASHTABLE(kcov_remote_map, 4);
-    static struct list_head kcov_remote_areas[2] = {
-    LIST_HEAD_INIT(kcov_remote_areas[0]), LIST_HEAD_INIT(kcov_remote_areas[1])
-    };
+// static DEFINE_SPINLOCK(kcov_remote_lock);
+// static DEFINE_HASHTABLE(kcov_remote_map, 4);
+pub static mut list_head: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct kcov_percpu_data {
@@ -115,34 +209,37 @@ pub struct kcov_percpu_data {
     .lock = INIT_LOCAL_LOCK(lock),
     };
 // Must be called with kcov_remote_lock locked.
-    static struct kcov_remote *kcov_remote_find(u64 handle)
-    {
-    struct kcov_remote *remote;
+#[no_mangle]
+pub unsafe extern "C" fn kcov_remote_find() {
+    let mut remote = core::ptr::null_mut();
     hash_for_each_possible(kcov_remote_map, remote, hnode, handle) {
-    if (remote.handle == handle)
+    if (remote.handle == handle) {
     return remote;
+    }
     }
     return core::ptr::null_mut();
     }
 // Must be called with kcov_remote_lock locked.
-    static struct kcov_remote *kcov_remote_add(struct kcov *kcov, u64 handle)
-    {
-    struct kcov_remote *remote;
-    if (kcov_remote_find(handle))
+#[no_mangle]
+pub unsafe extern "C" fn kcov_remote_add() {
+    let mut remote = core::ptr::null_mut();
+    if (kcov_remote_find(handle)) {
     return ERR_PTR(-EEXIST);
+    }
     remote = kmalloc_obj(*remote, GFP_ATOMIC);
-    if (!remote)
+    if (!remote) {
     return ERR_PTR(-ENOMEM);
+    }
     remote.handle = handle;
     remote.kcov = kcov;
     hash_add(kcov_remote_map, &remote.hnode, handle);
     return remote;
     }
 // Must be called with kcov_remote_lock locked.
-    static struct kcov_remote_area *kcov_remote_area_get(unsigned int size, bool irq)
-    {
-    struct kcov_remote_area *area;
-    struct list_head *pos;
+#[no_mangle]
+pub unsafe extern "C" fn kcov_remote_area_get() {
+    let mut area = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
     struct list_head *list = &kcov_remote_areas[irq];
     list_for_each(pos, list) {
     area = list_entry(pos, struct kcov_remote_area, list);
@@ -154,10 +251,9 @@ pub struct kcov_percpu_data {
     return core::ptr::null_mut();
     }
 // Must be called with kcov_remote_lock locked.
-    static void kcov_remote_area_put(struct kcov_remote_area *area,
-    unsigned int size, bool irq)
-    {
-    INIT_LIST_HEAD(&area.list);
+#[no_mangle]
+pub unsafe extern "C" fn kcov_remote_area_put() {
+// INIT_LIST_HEAD;
     area.size = size;
     list_add(&area.list, &kcov_remote_areas[irq]);
 //
@@ -173,22 +269,19 @@ pub struct kcov_percpu_data {
 //
 #[no_mangle]
 unsafe extern "C" fn in_softirq_really() -> __always_inline bool {
-    static __always_inline bool in_softirq_really(void)
-    {
     return in_serving_softirq() && !in_hardirq() && !in_nmi();
     }
 #[no_mangle]
-unsafe extern "C" fn check_kcov_mode(needed_mode: enum kcov_mode, t: *mut task_struct) -> notrace bool {
-    static notrace bool check_kcov_mode(enum kcov_mode needed_mode, struct task_struct *t)
-    {
-    unsigned int mode;
+unsafe extern "C" fn check_kcov_mode(needed_mode: kcov_mode, t: *mut task_struct) -> notrace bool {
+    let mut mode = 0;
 //
 // We are interested in code coverage as a function of a syscall inputs,
 // so we ignore code executed in interrupts, unless we are in a remote
 // coverage collection section in a softirq.
 //
-    if (!in_task() && !(in_softirq_really() && t.kcov_softirq))
+    if (!in_task() && !(in_softirq_really() && t.kcov_softirq)) {
     return false;
+    }
     mode = READ_ONCE(t.kcov_mode);
 //
 // There is some code that runs in interrupts but for which
@@ -198,12 +291,10 @@ unsafe extern "C" fn check_kcov_mode(needed_mode: enum kcov_mode, t: *mut task_s
 // kcov_start().
 //
     barrier();
-    let mut mode: return = = needed_mode;
+pub static mut mode: return = = needed_mode;
     }
 #[no_mangle]
 unsafe extern "C" fn canonicalize_ip(ip: c_ulong) -> notrace unsigned long {
-    static notrace unsigned long canonicalize_ip(unsigned long ip)
-    {
 
     ip -= kaslr_offset();
 
@@ -215,15 +306,14 @@ unsafe extern "C" fn canonicalize_ip(ip: c_ulong) -> notrace unsigned long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_pc() -> void notrace {
-    void notrace __sanitizer_cov_trace_pc(void)
-    {
-    struct task_struct *t;
+    let mut t = core::ptr::null_mut();
     unsigned long *area;
-    let mut ip: c_ulong = canonicalize_ip(_RET_IP_);
-    unsigned long pos;
+pub static mut ip: c_ulong = canonicalize_ip(_RET_IP_);
+    let mut pos = 0;
     t = current;
-    if (!check_kcov_mode(KCOV_MODE_TRACE_PC, t))
+    if (!check_kcov_mode(KCOV_MODE_TRACE_PC, t)) {
     return;
+    }
     area = t.kcov_area;
 // The first 64-bit word is the number of subsequent PCs.
     pos = READ_ONCE(area[0]) + 1;
@@ -235,29 +325,28 @@ pub unsafe extern "C" fn __sanitizer_cov_trace_pc() -> void notrace {
 // overitten by the recursive __sanitizer_cov_trace_pc().
 // Update pos before writing pc to avoid such interleaving.
 //
-    WRITE_ONCE(area[0], pos);
+// WRITE_ONCE;
     barrier();
     area[pos] = ip;
     }
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_pc);
+// EXPORT_SYMBOL;
 
 #[no_mangle]
 unsafe extern "C" fn write_comp_data(type: u64, arg1: u64, arg2: u64, ip: u64) -> void notrace {
-    static void notrace write_comp_data(u64 type, u64 arg1, u64 arg2, u64 ip)
-    {
-    struct task_struct *t;
-    u64 *area;
+    let mut t = core::ptr::null_mut();
+    let mut area = core::ptr::null_mut();
     u64 count, start_index, end_pos, max_pos;
     t = current;
-    if (!check_kcov_mode(KCOV_MODE_TRACE_CMP, t))
+    if (!check_kcov_mode(KCOV_MODE_TRACE_CMP, t)) {
     return;
+    }
     ip = canonicalize_ip(ip);
 //
 // We write all comparison arguments and types as u64.
 // The buffer was allocated for t->kcov_size unsigned longs.
 //
-    area = (u64 *)t.kcov_area;
+    area = t.kcov_area;
     max_pos = t.kcov_size * sizeof(unsigned long);
     count = READ_ONCE(area[0]);
 // Every record is KCOV_WORDS_PER_CMP 64-bit words.
@@ -265,7 +354,7 @@ unsafe extern "C" fn write_comp_data(type: u64, arg1: u64, arg2: u64, ip: u64) -
     end_pos = (start_index + KCOV_WORDS_PER_CMP) * sizeof(u64);
     if (likely(end_pos <= max_pos)) {
 // See comment in __sanitizer_cov_trace_pc().
-    WRITE_ONCE(area[0], count + 1);
+// WRITE_ONCE;
     barrier();
     area[start_index] = type;
     area[start_index + 1] = arg1;
@@ -275,98 +364,78 @@ unsafe extern "C" fn write_comp_data(type: u64, arg1: u64, arg2: u64, ip: u64) -
     }
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_cmp1(arg1: u8, arg2: u8) -> void notrace {
-    void notrace __sanitizer_cov_trace_cmp1(u8 arg1, u8 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(0), arg1, arg2, _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_cmp1);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_cmp2(arg1: u16, arg2: u16) -> void notrace {
-    void notrace __sanitizer_cov_trace_cmp2(u16 arg1, u16 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(1), arg1, arg2, _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_cmp2);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_cmp4(arg1: u32, arg2: u32) -> void notrace {
-    void notrace __sanitizer_cov_trace_cmp4(u32 arg1, u32 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(2), arg1, arg2, _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_cmp4);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_cmp8(arg1: kcov_u64, arg2: kcov_u64) -> void notrace {
-    void notrace __sanitizer_cov_trace_cmp8(kcov_u64 arg1, kcov_u64 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(3), arg1, arg2, _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_cmp8);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_const_cmp1(arg1: u8, arg2: u8) -> void notrace {
-    void notrace __sanitizer_cov_trace_const_cmp1(u8 arg1, u8 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(0) | KCOV_CMP_CONST, arg1, arg2,
     _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_const_cmp1);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_const_cmp2(arg1: u16, arg2: u16) -> void notrace {
-    void notrace __sanitizer_cov_trace_const_cmp2(u16 arg1, u16 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(1) | KCOV_CMP_CONST, arg1, arg2,
     _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_const_cmp2);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_const_cmp4(arg1: u32, arg2: u32) -> void notrace {
-    void notrace __sanitizer_cov_trace_const_cmp4(u32 arg1, u32 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(2) | KCOV_CMP_CONST, arg1, arg2,
     _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_const_cmp4);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_const_cmp8(arg1: kcov_u64, arg2: kcov_u64) -> void notrace {
-    void notrace __sanitizer_cov_trace_const_cmp8(kcov_u64 arg1, kcov_u64 arg2)
-    {
     write_comp_data(KCOV_CMP_SIZE(3) | KCOV_CMP_CONST, arg1, arg2,
     _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_const_cmp8);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_switch(val: kcov_u64, arg: *mut c_void) -> void notrace {
-    void notrace __sanitizer_cov_trace_switch(kcov_u64 val, void *arg)
-    {
-    u64 i;
+    let mut i = 0;
     u64 *cases = arg;
-    let mut count: u64 = cases[0];
-    let mut size: u64 = cases[1];
-    let mut type: u64 = KCOV_CMP_CONST;
-    switch (size) {
-    case 8:
+pub static mut count: u64 = cases[0];
+pub static mut size: u64 = cases[1];
+pub static mut type: u64 = KCOV_CMP_CONST;
+    match (size) {
+    8 => {
     type |= KCOV_CMP_SIZE(0);
     break;
-    case 16:
+    16 => {
     type |= KCOV_CMP_SIZE(1);
     break;
-    case 32:
+    32 => {
     type |= KCOV_CMP_SIZE(2);
     break;
-    case 64:
+    64 => {
     type |= KCOV_CMP_SIZE(3);
     break;
-    default:
+    _ => {
     return;
     }
     for (i = 0; i < count; i++)
     write_comp_data(type, cases[i + 2], val, _RET_IP_);
     }
-    EXPORT_SYMBOL(__sanitizer_cov_trace_switch);
+// EXPORT_SYMBOL;
 
-    static void kcov_start(struct task_struct *t, struct kcov *kcov,
-    unsigned int size, void *area, enum kcov_mode mode,
-    int sequence)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kcov_start() {
     kcov_debug("t = %px, size = %u, area = %px\n", t, size, area);
     t.kcov = kcov;
 // Cache in task struct for performance.
@@ -375,14 +444,12 @@ pub unsafe extern "C" fn __sanitizer_cov_trace_switch(val: kcov_u64, arg: *mut c
     t.kcov_sequence = sequence;
 // See comment in check_kcov_mode().
     barrier();
-    WRITE_ONCE(t.kcov_mode, mode);
+// WRITE_ONCE;
     }
 // operates on coverage-generator-owned fields
 #[no_mangle]
 unsafe extern "C" fn kcov_stop(t: *mut task_struct) {
-    static void kcov_stop(struct task_struct *t)
-    {
-    WRITE_ONCE(t.kcov_mode, KCOV_MODE_DISABLED);
+// WRITE_ONCE;
     barrier();
     t.kcov = core::ptr::null_mut();
     t.kcov_size = 0;
@@ -391,15 +458,11 @@ unsafe extern "C" fn kcov_stop(t: *mut task_struct) {
 // operates on coverage-generator-owned fields
 #[no_mangle]
 unsafe extern "C" fn kcov_task_reset(t: *mut task_struct) {
-    static void kcov_task_reset(struct task_struct *t)
-    {
     kcov_stop(t);
     t.kcov_sequence = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcov_task_init(t: *mut task_struct) {
-    void kcov_task_init(struct task_struct *t)
-    {
     kcov_task_reset(t);
     t.kcov_remote = core::ptr::null_mut();
     t.kcov_handle = current.kcov_handle;
@@ -412,9 +475,6 @@ pub unsafe extern "C" fn kcov_task_init(t: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_reset(kcov: *mut kcov) {
-    static void kcov_reset(struct kcov *kcov)
-    __must_hold(&kcov.lock)
-    {
     kcov.t = core::ptr::null_mut();
     kcov.mode = KCOV_MODE_INIT;
     kcov.remote = false;
@@ -423,17 +483,15 @@ unsafe extern "C" fn kcov_reset(kcov: *mut kcov) {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_remote_reset(kcov: *mut kcov) {
-    static void kcov_remote_reset(struct kcov *kcov)
-    __must_hold(&kcov.lock)
-    {
-    int bkt;
-    struct kcov_remote *remote;
-    struct hlist_node *tmp;
-    unsigned long flags;
+    let mut bkt = 0;
+    let mut remote = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut flags = 0;
     spin_lock_irqsave(&kcov_remote_lock, flags);
     hash_for_each_safe(kcov_remote_map, bkt, tmp, remote, hnode) {
-    if (remote.kcov != kcov)
+    if (remote.kcov != kcov) {
     continue;
+    }
     hash_del(&remote.hnode);
     kfree(remote);
     }
@@ -443,9 +501,6 @@ unsafe extern "C" fn kcov_remote_reset(kcov: *mut kcov) {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_disable(t: *mut task_struct, kcov: *mut kcov) {
-    static void kcov_disable(struct task_struct *t, struct kcov *kcov)
-    __must_hold(&kcov.lock)
-    {
     if (kcov.remote) {
     t.kcov_handle = 0;
     t.kcov_remote = core::ptr::null_mut();
@@ -457,14 +512,10 @@ unsafe extern "C" fn kcov_disable(t: *mut task_struct, kcov: *mut kcov) {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_get(kcov: *mut kcov) {
-    static void kcov_get(struct kcov *kcov)
-    {
     refcount_inc(&kcov.refcount);
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_put(kcov: *mut kcov) {
-    static void kcov_put(struct kcov *kcov)
-    {
     if (refcount_dec_and_test(&kcov.refcount)) {
 // Context-safety: no references left, object being destroyed.
     context_unsafe(
@@ -476,10 +527,8 @@ unsafe extern "C" fn kcov_put(kcov: *mut kcov) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcov_task_exit(t: *mut task_struct) {
-    void kcov_task_exit(struct task_struct *t)
-    {
-    struct kcov *kcov;
-    unsigned long flags;
+    let mut kcov = core::ptr::null_mut();
+    let mut flags = 0;
     kcov = t.kcov;
     if (kcov) {
     spin_lock_irqsave(&kcov.lock, flags);
@@ -525,14 +574,12 @@ pub unsafe extern "C" fn kcov_task_exit(t: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_mmap(filep: *mut file, vma: *mut vm_area_struct) -> c_int {
-    static int kcov_mmap(struct file *filep, struct vm_area_struct *vma)
-    {
-    let mut res: c_int = 0;
+pub static mut res: c_int = 0;
     struct kcov *kcov = vma.vm_file.private_data;
     unsigned long size, off;
-    struct page *page;
-    unsigned long flags;
-    void *area;
+    let mut page = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut area = core::ptr::null_mut();
     spin_lock_irqsave(&kcov.lock, flags);
     size = kcov.size * sizeof(unsigned long);
     if (kcov.area == core::ptr::null_mut() || vma_start_pgoff(vma) ||
@@ -558,12 +605,11 @@ unsafe extern "C" fn kcov_mmap(filep: *mut file, vma: *mut vm_area_struct) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_open(inode: *mut inode, filep: *mut file) -> c_int {
-    static int kcov_open(struct inode *inode, struct file *filep)
-    {
-    struct kcov *kcov;
+    let mut kcov = core::ptr::null_mut();
     kcov = kzalloc_obj(*kcov);
-    if (!kcov)
+    if (!kcov) {
     return -ENOMEM;
+    }
     guard(spinlock_init)(&kcov.lock);
     kcov.mode = KCOV_MODE_DISABLED;
     kcov.sequence = 1;
@@ -573,17 +619,14 @@ unsafe extern "C" fn kcov_open(inode: *mut inode, filep: *mut file) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_close(inode: *mut inode, filep: *mut file) -> c_int {
-    static int kcov_close(struct inode *inode, struct file *filep)
-    {
     kcov_put(filep.private_data);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_get_mode(arg: c_ulong) -> c_int {
-    static int kcov_get_mode(unsigned long arg)
-    {
-    if (arg == KCOV_TRACE_PC)
+    if (arg == KCOV_TRACE_PC) {
     return KCOV_MODE_TRACE_PC;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(KCOV_TRACE_CMP: arg ==) -> else {
     else if (arg == KCOV_TRACE_CMP)
@@ -592,8 +635,9 @@ pub unsafe extern "C" fn if(KCOV_TRACE_CMP: arg ==) -> else {
 
     return -ENOTSUPP;
 
-    else
+    else {
     return -EINVAL;
+    }
     }
 //
 // Fault in a lazily-faulted vmalloc area before it can be used by
@@ -602,42 +646,37 @@ pub unsafe extern "C" fn if(KCOV_TRACE_CMP: arg ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn kcov_fault_in_area(kcov: *mut kcov) {
-    static void kcov_fault_in_area(struct kcov *kcov)
-    __must_hold(&kcov.lock)
-    {
-    let mut stride: c_ulong = PAGE_SIZE / sizeof(unsigned long);
+pub static mut stride: c_ulong = PAGE_SIZE / sizeof(unsigned long);
     unsigned long *area = kcov.area;
-    unsigned long offset;
+    let mut offset = 0;
     for (offset = 0; offset < kcov.size; offset += stride)
-    READ_ONCE(area[offset]);
+// READ_ONCE;
     }
-    static inline bool kcov_check_handle(u64 handle, bool common_valid,
-    bool uncommon_valid, bool zero_valid)
-    {
-    if (handle & ~(KCOV_SUBSYSTEM_MASK | KCOV_INSTANCE_MASK))
+#[no_mangle]
+pub unsafe extern "C" fn kcov_check_handle() {
+    if (handle & ~(KCOV_SUBSYSTEM_MASK | KCOV_INSTANCE_MASK)) {
     return false;
-    switch (handle & KCOV_SUBSYSTEM_MASK) {
-    case KCOV_SUBSYSTEM_COMMON:
+    }
+    match (handle & KCOV_SUBSYSTEM_MASK) {
+    KCOV_SUBSYSTEM_COMMON => {
     return (handle & KCOV_INSTANCE_MASK) ?
     common_valid : zero_valid;
-    case KCOV_SUBSYSTEM_USB:
+    KCOV_SUBSYSTEM_USB => {
     return uncommon_valid;
-    default:
+    _ => {
     return false;
     }
     return false;
     }
-    static int kcov_ioctl_locked(struct kcov *kcov, unsigned int cmd,
-    unsigned long arg)
-    __must_hold(&kcov.lock)
-    {
-    struct task_struct *t;
+#[no_mangle]
+pub unsafe extern "C" fn kcov_ioctl_locked() {
+    let mut t = core::ptr::null_mut();
     unsigned long flags, unused;
     int mode, i;
-    struct kcov_remote_arg *remote_arg;
-    struct kcov_remote *remote;
-    switch (cmd) {
-    case KCOV_ENABLE:
+    let mut remote_arg = core::ptr::null_mut();
+    let mut remote = core::ptr::null_mut();
+    match (cmd) {
+    KCOV_ENABLE => {
 //
 // Enable coverage for the current task.
 // At this point user must have been enabled trace mode,
@@ -645,14 +684,17 @@ unsafe extern "C" fn kcov_fault_in_area(kcov: *mut kcov) {
 // at task exit or voluntary by KCOV_DISABLE. After that it can
 // be enabled for another task.
 //
-    if (kcov.mode != KCOV_MODE_INIT || !kcov.area)
+    if (kcov.mode != KCOV_MODE_INIT || !kcov.area) {
     return -EINVAL;
+    }
     t = current;
-    if (kcov.t != core::ptr::null_mut() || t.kcov != core::ptr::null_mut())
+    if (kcov.t != core::ptr::null_mut() || t.kcov != core::ptr::null_mut()) {
     return -EBUSY;
+    }
     mode = kcov_get_mode(arg);
-    if (mode < 0)
+    if (mode < 0) {
     return mode;
+    }
     kcov_fault_in_area(kcov);
     kcov.mode = mode;
     kcov_start(t, kcov, kcov.size, kcov.area, kcov.mode,
@@ -661,27 +703,32 @@ unsafe extern "C" fn kcov_fault_in_area(kcov: *mut kcov) {
 // Put either in kcov_task_exit() or in KCOV_DISABLE.
     kcov_get(kcov);
     return 0;
-    case KCOV_DISABLE:
+    KCOV_DISABLE => {
 // Disable coverage for the current task.
     unused = arg;
     t = current;
-    if (unused != 0 || (kcov != t.kcov && kcov != t.kcov_remote))
+    if (unused != 0 || (kcov != t.kcov && kcov != t.kcov_remote)) {
     return -EINVAL;
-    if (WARN_ON(kcov.t != t))
+    }
+    if (WARN_ON(kcov.t != t)) {
     return -EINVAL;
+    }
     kcov_disable(t, kcov);
     kcov_put(kcov);
     return 0;
-    case KCOV_REMOTE_ENABLE:
-    if (kcov.mode != KCOV_MODE_INIT || !kcov.area)
+    KCOV_REMOTE_ENABLE => {
+    if (kcov.mode != KCOV_MODE_INIT || !kcov.area) {
     return -EINVAL;
+    }
     t = current;
-    if (kcov.t != core::ptr::null_mut() || t.kcov_remote != core::ptr::null_mut())
+    if (kcov.t != core::ptr::null_mut() || t.kcov_remote != core::ptr::null_mut()) {
     return -EBUSY;
-    remote_arg = (struct kcov_remote_arg *)arg;
+    }
+    remote_arg = arg;
     mode = kcov_get_mode(remote_arg.trace_mode);
-    if (mode < 0)
+    if (mode < 0) {
     return mode;
+    }
     if ((unsigned long)remote_arg.area_size >
     LONG_MAX / sizeof(unsigned long))
     return -EINVAL;
@@ -729,24 +776,22 @@ unsafe extern "C" fn kcov_fault_in_area(kcov: *mut kcov) {
 // Put either in kcov_task_exit() or in KCOV_DISABLE.
     kcov_get(kcov);
     return 0;
-    default:
+    _ => {
     return -ENOTTY;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
-    static long kcov_ioctl(struct file *filep, unsigned int cmd, unsigned long arg)
-    {
-    struct kcov *kcov;
-    int res;
+    let mut kcov = core::ptr::null_mut();
+    let mut res = 0;
     struct kcov_remote_arg *remote_arg = core::ptr::null_mut();
-    unsigned int remote_num_handles;
-    unsigned long remote_arg_size;
+    let mut remote_num_handles = 0;
+    let mut remote_arg_size = 0;
     unsigned long size, flags;
-    void *area;
+    let mut area = core::ptr::null_mut();
     kcov = filep.private_data;
-    switch (cmd) {
-    case KCOV_INIT_TRACE:
+    match (cmd) {
+    KCOV_INIT_TRACE => {
 //
 // Enable kcov in trace mode and setup buffer size.
 // Must happen before anything else.
@@ -755,11 +800,13 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
 // to hold the current position and one PC.
 //
     size = arg;
-    if (size < 2 || size > INT_MAX / sizeof(unsigned long))
+    if (size < 2 || size > INT_MAX / sizeof(unsigned long)) {
     return -EINVAL;
+    }
     area = vmalloc_user(size * sizeof(unsigned long));
-    if (area == core::ptr::null_mut())
+    if (area == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     spin_lock_irqsave(&kcov.lock, flags);
     if (kcov.mode != KCOV_MODE_DISABLED) {
     spin_unlock_irqrestore(&kcov.lock, flags);
@@ -771,24 +818,26 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
     kcov.mode = KCOV_MODE_INIT;
     spin_unlock_irqrestore(&kcov.lock, flags);
     return 0;
-    case KCOV_REMOTE_ENABLE:
-    if (get_user(remote_num_handles, (unsigned __user *)(arg +
+    KCOV_REMOTE_ENABLE => {
+    if (get_user(remote_num_handles, (arg +
     offsetof(struct kcov_remote_arg, num_handles))))
     return -EFAULT;
-    if (remote_num_handles > KCOV_REMOTE_MAX_HANDLES)
+    if (remote_num_handles > KCOV_REMOTE_MAX_HANDLES) {
     return -EINVAL;
+    }
     remote_arg_size = struct_size(remote_arg, handles,
     remote_num_handles);
     remote_arg = memdup_user((void __user *)arg, remote_arg_size);
-    if (IS_ERR(remote_arg))
+    if (IS_ERR(remote_arg)) {
     return PTR_ERR(remote_arg);
+    }
     if (remote_arg.num_handles != remote_num_handles) {
     kfree(remote_arg);
     return -EINVAL;
     }
     arg = (unsigned long)remote_arg;
     fallthrough;
-    default:
+    _ => {
 //
 // All other commands can be normally executed under a spin lock, so we
 // obtain and release it here in order to simplify kcov_ioctl_locked().
@@ -800,13 +849,7 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
     return res;
     }
     }
-    static const struct file_operations kcov_fops = {
-    .open		= kcov_open,
-    .unlocked_ioctl	= kcov_ioctl,
-    .compat_ioctl	= kcov_ioctl,
-    .mmap		= kcov_mmap,
-    .release        = kcov_close,
-    };
+pub static mut file_operations: usize = 0;
 //
 // kcov_remote_start() and kcov_remote_stop() can be used to annotate a section
 // of code in a kernel background thread or in a softirq to allow kcov to be
@@ -851,16 +894,11 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kcov_mode_enabled(mode: c_uint) -> bool {
-    static inline bool kcov_mode_enabled(unsigned int mode)
-    {
     return (mode & ~KCOV_IN_CTXSW) != KCOV_MODE_DISABLED;
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_remote_softirq_start(t: *mut task_struct) {
-    static void kcov_remote_softirq_start(struct task_struct *t)
-    __must_hold(&kcov_percpu_data.lock)
-    {
-    unsigned int mode;
+    let mut mode = 0;
     mode = READ_ONCE(t.kcov_mode);
     barrier();
     if (kcov_mode_enabled(mode)) {
@@ -874,9 +912,6 @@ unsafe extern "C" fn kcov_remote_softirq_start(t: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_remote_softirq_stop(t: *mut task_struct) {
-    static void kcov_remote_softirq_stop(struct task_struct *t)
-    __must_hold(&kcov_percpu_data.lock)
-    {
     if (t.kcov_saved_kcov) {
     kcov_start(t, t.kcov_saved_kcov, t.kcov_saved_size,
     t.kcov_saved_area, t.kcov_saved_mode,
@@ -890,20 +925,20 @@ unsafe extern "C" fn kcov_remote_softirq_stop(t: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
-    void kcov_remote_start(u64 handle)
-    {
     struct task_struct *t = current;
-    struct kcov_remote *remote;
-    struct kcov *kcov;
-    unsigned int mode;
-    void *area;
-    unsigned int size;
-    int sequence;
-    unsigned long flags;
-    if (WARN_ON(!kcov_check_handle(handle, true, true, true)))
+    let mut remote = core::ptr::null_mut();
+    let mut kcov = core::ptr::null_mut();
+    let mut mode = 0;
+    let mut area = core::ptr::null_mut();
+    let mut size = 0;
+    let mut sequence = 0;
+    let mut flags = 0;
+    if (WARN_ON(!kcov_check_handle(handle, true, true, true))) {
     return;
-    if (!in_task() && !in_softirq_really())
+    }
+    if (!in_task() && !in_softirq_really()) {
     return;
+    }
     local_lock_irqsave(&kcov_percpu_data.lock, flags);
 //
 // Check that kcov_remote_start() is not called twice in background
@@ -962,7 +997,7 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
     local_lock_irqsave(&kcov_percpu_data.lock, flags);
     }
 // Reset coverage size.
-// (u64 *)area = 0;
+// area = 0;
     if (in_serving_softirq()) {
     kcov_remote_softirq_start(t);
     t.kcov_softirq = 1;
@@ -970,33 +1005,32 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
     kcov_start(t, kcov, size, area, mode, sequence);
     local_unlock_irqrestore(&kcov_percpu_data.lock, flags);
     }
-    EXPORT_SYMBOL(kcov_remote_start);
-    static void kcov_move_area(enum kcov_mode mode, void *dst_area,
-    unsigned int dst_area_size, void *src_area)
-    {
-    let mut word_size: u64 = sizeof(unsigned long);
+// EXPORT_SYMBOL;
+#[no_mangle]
+pub unsafe extern "C" fn kcov_move_area() {
+pub static mut word_size: u64 = sizeof(unsigned long);
     u64 count_size, entry_size_log;
     u64 dst_len, src_len;
     void *dst_entries, *src_entries;
     u64 dst_occupied, dst_free, bytes_to_move, entries_moved;
     kcov_debug("%px %u <= %px %lu\n",
-    dst_area, dst_area_size, src_area, *(unsigned long *)src_area);
-    switch (mode) {
-    case KCOV_MODE_TRACE_PC:
-    dst_len = READ_ONCE(*(unsigned long *)dst_area);
-    src_len = *(unsigned long *)src_area;
+    dst_area, dst_area_size, src_area, *src_area);
+    match (mode) {
+    KCOV_MODE_TRACE_PC => {
+    dst_len = READ_ONCE(*dst_area);
+    src_len = *src_area;
     count_size = sizeof(unsigned long);
     entry_size_log = __ilog2_u64(sizeof(unsigned long));
     break;
-    case KCOV_MODE_TRACE_CMP:
-    dst_len = READ_ONCE(*(u64 *)dst_area);
-    src_len = *(u64 *)src_area;
+    KCOV_MODE_TRACE_CMP => {
+    dst_len = READ_ONCE(*dst_area);
+    src_len = *src_area;
     count_size = sizeof(u64);
-    BUILD_BUG_ON(!is_power_of_2(KCOV_WORDS_PER_CMP));
+// BUILD_BUG_ON;
     entry_size_log = __ilog2_u64(sizeof(u64) * KCOV_WORDS_PER_CMP);
     break;
-    default:
-    WARN_ON(1);
+    _ => {
+// WARN_ON;
     return;
     }
 // As arm can't divide u64 integers use log of entry size.
@@ -1018,31 +1052,30 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
 // coverage data.
 //
     smp_wmb();
-    switch (mode) {
-    case KCOV_MODE_TRACE_PC:
-    WRITE_ONCE(*(unsigned long *)dst_area, dst_len + entries_moved);
+    match (mode) {
+    KCOV_MODE_TRACE_PC => {
+// WRITE_ONCE;
     break;
-    case KCOV_MODE_TRACE_CMP:
-    WRITE_ONCE(*(u64 *)dst_area, dst_len + entries_moved);
+    KCOV_MODE_TRACE_CMP => {
+// WRITE_ONCE;
     break;
-    default:
+    _ => {
     break;
     }
     }
 // See the comment before kcov_remote_start() for usage details.
 #[no_mangle]
 pub unsafe extern "C" fn kcov_remote_stop() {
-    void kcov_remote_stop(void)
-    {
     struct task_struct *t = current;
-    struct kcov *kcov;
-    unsigned int mode;
-    void *area;
-    unsigned int size;
-    int sequence;
-    unsigned long flags;
-    if (!in_task() && !in_softirq_really())
+    let mut kcov = core::ptr::null_mut();
+    let mut mode = 0;
+    let mut area = core::ptr::null_mut();
+    let mut size = 0;
+    let mut sequence = 0;
+    let mut flags = 0;
+    if (!in_task() && !in_softirq_really()) {
     return;
+    }
     local_lock_irqsave(&kcov_percpu_data.lock, flags);
     mode = READ_ONCE(t.kcov_mode);
     barrier();
@@ -1077,8 +1110,9 @@ pub unsafe extern "C" fn kcov_remote_stop() {
 // KCOV_DISABLE could have been called between kcov_remote_start()
 // and kcov_remote_stop(), hence the sequence check.
 //
-    if (sequence == kcov.sequence && kcov.remote)
+    if (sequence == kcov.sequence && kcov.remote) {
     kcov_move_area(kcov.mode, kcov.area, kcov.size, area);
+    }
     spin_unlock(&kcov.lock);
     spin_lock(&kcov_remote_lock);
     kcov_remote_area_put(area, size, !in_task());
@@ -1087,23 +1121,20 @@ pub unsafe extern "C" fn kcov_remote_stop() {
 // Get in kcov_remote_start().
     kcov_put(kcov);
     }
-    EXPORT_SYMBOL(kcov_remote_stop);
+// EXPORT_SYMBOL;
 // See the comment before kcov_remote_start() for usage details.
 #[no_mangle]
 pub unsafe extern "C" fn kcov_common_handle() -> kcov_common_handle_id {
-    struct kcov_common_handle_id kcov_common_handle(void)
-    {
-    if (!in_task())
+    if (!in_task()) {
     return (struct kcov_common_handle_id){ .val = 0 };
+    }
     return (struct kcov_common_handle_id){ .val = current.kcov_handle };
     }
-    EXPORT_SYMBOL(kcov_common_handle);
+// EXPORT_SYMBOL;
 
 #[no_mangle]
-unsafe extern "C" fn selftest() -> void __init {
-    static void __init selftest(void)
-    {
-    unsigned long start;
+unsafe extern "C" fn selftest() -> c_int {
+    let mut start = 0;
     pr_err("running self test\n");
 //
 // Test that interrupts don't produce spurious coverage.
@@ -1117,27 +1148,26 @@ unsafe extern "C" fn selftest() -> void __init {
 // potentially traced functions in this region.
 //
     start = jiffies;
-    WRITE_ONCE(current.kcov_mode, KCOV_MODE_TRACE_PC);
+// WRITE_ONCE;
     while ((jiffies - start) * MSEC_PER_SEC / HZ < 300)
     ;
-    WRITE_ONCE(current.kcov_mode, 0);
+// WRITE_ONCE;
     pr_err("done running self test\n");
     }
 
 #[no_mangle]
-unsafe extern "C" fn kcov_init() -> int __init {
-    static int __init kcov_init(void)
-    {
-    let mut cpu: c_int = num_possible_cpus();
+unsafe extern "C" fn kcov_init() -> c_int {
+pub static mut cpu: c_int = num_possible_cpus();
 
 // Allocate some extra buffers in order to prepare for softirq preemption.
     cpu = cpu >= 4 ? cpu * 2 : cpu + 4;
 
     while (cpu--) {
     void *area = vmalloc(CONFIG_KCOV_IRQ_AREA_SIZE * sizeof(unsigned long));
-    unsigned long flags;
-    if (!area)
+    let mut flags = 0;
+    if (!area) {
     return -ENOMEM;
+    }
     spin_lock_irqsave(&kcov_remote_lock, flags);
     kcov_remote_area_put(area, CONFIG_KCOV_IRQ_AREA_SIZE, true);
     spin_unlock_irqrestore(&kcov_remote_lock, flags);
@@ -1153,4 +1183,27 @@ unsafe extern "C" fn kcov_init() -> int __init {
 
     return 0;
     }
-    device_initcall(kcov_init);
+// device_initcall;
+
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

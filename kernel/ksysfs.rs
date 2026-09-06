@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -99,7 +122,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     const char *buf, size_t count)
     {
     int ret;
-    static DEFINE_MUTEX(lock);
+// static DEFINE_MUTEX(lock);
 //
 // We need serialization, for profile_setup() initializes prof_on
 // value and profile_init() must not reallocate prof_buffer after
@@ -202,9 +225,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     .attrs = kernel_attrs,
     };
 #[no_mangle]
-pub unsafe extern "C" fn ksysfs_init() -> void __init {
-    void __init ksysfs_init(void)
-    {
+pub unsafe extern "C" fn ksysfs_init() -> c_int {
     int error;
     kernel_kobj = kobject_create_and_add("kernel", core::ptr::null_mut());
     if (!kernel_kobj) {

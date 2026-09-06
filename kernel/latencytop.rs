@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -78,8 +101,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // (note: the average latency is the accumulated latency divided by the number
 // of times)
 //
-
-    static DEFINE_RAW_SPINLOCK(latency_lock);
+// static DEFINE_RAW_SPINLOCK(latency_lock);
 pub const MAXLR: c_int = 128;
     static struct latency_record latency_record[MAXLR];
     int latencytop_enabled;
@@ -105,8 +127,6 @@ pub const MAXLR: c_int = 128;
 
 #[no_mangle]
 pub unsafe extern "C" fn clear_tsk_latency_tracing(p: *mut task_struct) {
-    void clear_tsk_latency_tracing(struct task_struct *p)
-    {
     unsigned long flags;
     raw_spin_lock_irqsave(&latency_lock, flags);
     memset(&p.latency_record, 0, sizeof(p.latency_record));
@@ -115,8 +135,6 @@ pub unsafe extern "C" fn clear_tsk_latency_tracing(p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn clear_global_latency_tracing() {
-    static void clear_global_latency_tracing(void)
-    {
     unsigned long flags;
     raw_spin_lock_irqsave(&latency_lock, flags);
     memset(&latency_record, 0, sizeof(latency_record));
@@ -234,8 +252,6 @@ unsafe extern "C" fn clear_global_latency_tracing() {
     }
 #[no_mangle]
 unsafe extern "C" fn lstats_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int lstats_show(struct seq_file *m, void *v)
-    {
     int i;
     seq_puts(m, "Latency Top version : v0.1\n");
     for (i = 0; i < MAXLR; i++) {
@@ -264,8 +280,6 @@ unsafe extern "C" fn lstats_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn lstats_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int lstats_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, lstats_show, core::ptr::null_mut());
     }
     static const struct proc_ops lstats_proc_ops = {
@@ -276,9 +290,7 @@ unsafe extern "C" fn lstats_open(inode: *mut inode, filp: *mut file) -> c_int {
     .proc_release	= single_release,
     };
 #[no_mangle]
-unsafe extern "C" fn init_lstats_procfs() -> int __init {
-    static int __init init_lstats_procfs(void)
-    {
+unsafe extern "C" fn init_lstats_procfs() -> c_int {
     proc_create("latency_stats", 0644, core::ptr::null_mut(), &lstats_proc_ops);
 
     register_sysctl_init("kernel", latencytop_sysctl);

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 
@@ -48,24 +71,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn static_call_force_reinit() {
-    void static_call_force_reinit(void)
-    {
     if (WARN_ON_ONCE(!static_call_initialized))
     return;
     static_call_initialized++;
     }
 // mutex to protect key modules/sites
-    static DEFINE_MUTEX(static_call_mutex);
+// static DEFINE_MUTEX(static_call_mutex);
 #[no_mangle]
 unsafe extern "C" fn static_call_lock() {
-    static void static_call_lock(void)
-    {
     mutex_lock(&static_call_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn static_call_unlock() {
-    static void static_call_unlock(void)
-    {
     mutex_unlock(&static_call_mutex);
     }
     static inline void *static_call_addr(struct static_call_site *site)
@@ -74,8 +91,6 @@ unsafe extern "C" fn static_call_unlock() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __static_call_key(site: *const static_call_site) -> c_ulong {
-    static inline unsigned long __static_call_key(const struct static_call_site *site)
-    {
     return (long)site.key + (long)&site.key;
     }
     static inline struct static_call_key *static_call_key(const struct static_call_site *site)
@@ -85,27 +100,19 @@ pub unsafe extern "C" fn __static_call_key(site: *const static_call_site) -> c_u
 // These assume the key is word-aligned.
 #[no_mangle]
 pub unsafe extern "C" fn static_call_is_init(site: *mut static_call_site) -> bool {
-    static inline bool static_call_is_init(struct static_call_site *site)
-    {
     return __static_call_key(site) & STATIC_CALL_SITE_INIT;
     }
 #[no_mangle]
 pub unsafe extern "C" fn static_call_is_tail(site: *mut static_call_site) -> bool {
-    static inline bool static_call_is_tail(struct static_call_site *site)
-    {
     return __static_call_key(site) & STATIC_CALL_SITE_TAIL;
     }
 #[no_mangle]
 pub unsafe extern "C" fn static_call_set_init(site: *mut static_call_site) {
-    static inline void static_call_set_init(struct static_call_site *site)
-    {
     site.key = (__static_call_key(site) | STATIC_CALL_SITE_INIT) -
     (long)&site.key;
     }
 #[no_mangle]
 unsafe extern "C" fn static_call_site_cmp(_a: *const c_void, _b: *const c_void) -> c_int {
-    static int static_call_site_cmp(const void *_a, const void *_b)
-    {
     const struct static_call_site *a = _a;
     const struct static_call_site *b = _b;
     const struct static_call_key *key_a = static_call_key(a);
@@ -118,8 +125,6 @@ unsafe extern "C" fn static_call_site_cmp(_a: *const c_void, _b: *const c_void) 
     }
 #[no_mangle]
 unsafe extern "C" fn static_call_site_swap(_a: *mut c_void, _b: *mut c_void, size: c_int) {
-    static void static_call_site_swap(void *_a, void *_b, int size)
-    {
     let mut delta: c_long = (unsigned long)_a - (unsigned long)_b;
     struct static_call_site *a = _a;
     struct static_call_site *b = _b;
@@ -137,8 +142,6 @@ unsafe extern "C" fn static_call_site_swap(_a: *mut c_void, _b: *mut c_void, siz
     }
 #[no_mangle]
 pub unsafe extern "C" fn static_call_key_has_mods(key: *mut static_call_key) -> bool {
-    static inline bool static_call_key_has_mods(struct static_call_key *key)
-    {
     return !(key.type & 1);
     }
     static inline struct static_call_mod *static_call_key_next(struct static_call_key *key)
@@ -155,8 +158,6 @@ pub unsafe extern "C" fn static_call_key_has_mods(key: *mut static_call_key) -> 
     }
 #[no_mangle]
 pub unsafe extern "C" fn __static_call_update(key: *mut static_call_key, tramp: *mut c_void, func: *mut c_void) {
-    void __static_call_update(struct static_call_key *key, void *tramp, void *func)
-    {
     struct static_call_site *site, *stop;
     struct static_call_mod *site_mod, first;
     cpus_read_lock();
@@ -286,8 +287,6 @@ pub unsafe extern "C" fn __static_call_update(key: *mut static_call_key, tramp: 
     }
 #[no_mangle]
 unsafe extern "C" fn addr_conflict(site: *mut static_call_site, start: *mut c_void, end: *mut c_void) -> c_int {
-    static int addr_conflict(struct static_call_site *site, void *start, void *end)
-    {
     let mut addr: c_ulong = (unsigned long)static_call_addr(site);
     if (addr <= (unsigned long)end &&
     addr + CALL_INSN_SIZE > (unsigned long)start)
@@ -311,8 +310,6 @@ unsafe extern "C" fn addr_conflict(site: *mut static_call_site, start: *mut c_vo
 
 #[no_mangle]
 unsafe extern "C" fn __static_call_mod_text_reserved(start: *mut c_void, end: *mut c_void) -> c_int {
-    static int __static_call_mod_text_reserved(void *start, void *end)
-    {
     struct module *mod;
     int ret;
     scoped_guard(rcu) {
@@ -331,8 +328,6 @@ unsafe extern "C" fn __static_call_mod_text_reserved(start: *mut c_void, end: *m
     }
 #[no_mangle]
 unsafe extern "C" fn tramp_key_lookup(addr: c_ulong) -> c_ulong {
-    static unsigned long tramp_key_lookup(unsigned long addr)
-    {
     struct static_call_tramp_key *start = __start_static_call_tramp_key;
     struct static_call_tramp_key *stop = __stop_static_call_tramp_key;
     struct static_call_tramp_key *tramp_key;
@@ -346,8 +341,6 @@ unsafe extern "C" fn tramp_key_lookup(addr: c_ulong) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn static_call_add_module(mod: *mut module) -> c_int {
-    static int static_call_add_module(struct module *mod)
-    {
     struct static_call_site *start = mod.static_call_sites;
     struct static_call_site *stop = start + mod.num_static_call_sites;
     struct static_call_site *site;
@@ -381,8 +374,6 @@ unsafe extern "C" fn static_call_add_module(mod: *mut module) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn static_call_del_module(mod: *mut module) {
-    static void static_call_del_module(struct module *mod)
-    {
     struct static_call_site *start = mod.static_call_sites;
     struct static_call_site *stop = mod.static_call_sites +
     mod.num_static_call_sites;
@@ -442,15 +433,11 @@ unsafe extern "C" fn static_call_del_module(mod: *mut module) {
 
 #[no_mangle]
 pub unsafe extern "C" fn __static_call_mod_text_reserved(start: *mut c_void, end: *mut c_void) -> c_int {
-    static inline int __static_call_mod_text_reserved(void *start, void *end)
-    {
     return 0;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn static_call_text_reserved(start: *mut c_void, end: *mut c_void) -> c_int {
-    int static_call_text_reserved(void *start, void *end)
-    {
     let mut init: bool = system_state < SYSTEM_RUNNING;
     int ret = __static_call_text_reserved(__start_static_call_sites,
     __stop_static_call_sites, start, end, init);
@@ -459,9 +446,7 @@ pub unsafe extern "C" fn static_call_text_reserved(start: *mut c_void, end: *mut
     return __static_call_mod_text_reserved(start, end);
     }
 #[no_mangle]
-pub unsafe extern "C" fn static_call_init() -> int __init {
-    int __init static_call_init(void)
-    {
+pub unsafe extern "C" fn static_call_init() -> c_int {
     int ret;
 // See static_call_force_reinit().
     if (static_call_initialized == 1)
@@ -487,14 +472,10 @@ pub unsafe extern "C" fn static_call_init() -> int __init {
 
 #[no_mangle]
 unsafe extern "C" fn func_a(x: c_int) -> c_int {
-    static int func_a(int x)
-    {
     return x+1;
     }
 #[no_mangle]
 unsafe extern "C" fn func_b(x: c_int) -> c_int {
-    static int func_b(int x)
-    {
     return x+2;
     }
     DEFINE_STATIC_CALL(sc_selftest, func_a);
@@ -508,9 +489,7 @@ unsafe extern "C" fn func_b(x: c_int) -> c_int {
     { func_a, 2, 3 }
     };
 #[no_mangle]
-unsafe extern "C" fn test_static_call_init() -> int __init {
-    static int __init test_static_call_init(void)
-    {
+unsafe extern "C" fn test_static_call_init() -> c_int {
     int i;
     for (i = 0; i < ARRAY_SIZE(static_call_data); i++ ) {
     struct static_call_data *scd = &static_call_data[i];

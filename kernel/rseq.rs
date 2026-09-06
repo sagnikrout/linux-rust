@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0+
 //
@@ -110,17 +133,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     DEFINE_STATIC_KEY_MAYBE(CONFIG_RSEQ_DEBUG_DEFAULT_ENABLE, rseq_debug_enabled);
 #[no_mangle]
 pub unsafe extern "C" fn rseq_control_debug(on: bool) {
-    static inline void rseq_control_debug(bool on)
-    {
     if (on)
     static_branch_enable(&rseq_debug_enabled);
     else
     static_branch_disable(&rseq_debug_enabled);
     }
 #[no_mangle]
-unsafe extern "C" fn rseq_setup_debug(str: *mut c_char) -> int __init {
-    static int __init rseq_setup_debug(char *str)
-    {
+unsafe extern "C" fn rseq_setup_debug(str: *mut c_char) -> c_int {
     bool on;
     if (kstrtobool(str, &on))
     return -EINVAL;
@@ -135,8 +154,6 @@ unsafe extern "C" fn rseq_setup_debug(str: *mut c_char) -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __rseq_trace_update(t: *mut task_struct) {
-    void __rseq_trace_update(struct task_struct *t)
-    {
     trace_rseq_update(t);
     }
     void __rseq_trace_ip_fixup(unsigned long ip, unsigned long start_ip,
@@ -148,8 +165,6 @@ pub unsafe extern "C" fn __rseq_trace_update(t: *mut task_struct) {
     DEFINE_PER_CPU(struct rseq_stats, rseq_stats);
 #[no_mangle]
 unsafe extern "C" fn rseq_stats_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int rseq_stats_show(struct seq_file *m, void *p)
-    {
     let mut stats: rseq_stats = { };
     unsigned int cpu;
     for_each_possible_cpu(cpu) {
@@ -188,8 +203,6 @@ unsafe extern "C" fn rseq_stats_show(m: *mut seq_file, p: *mut c_void) -> c_int 
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_stats_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int rseq_stats_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, rseq_stats_show, inode.i_private);
     }
     static const struct file_operations stat_ops = {
@@ -199,9 +212,7 @@ unsafe extern "C" fn rseq_stats_open(inode: *mut inode, file: *mut file) -> c_in
     .release	= single_release,
     };
 #[no_mangle]
-unsafe extern "C" fn rseq_stats_init(root_dir: *mut dentry) -> int __init {
-    static int __init rseq_stats_init(struct dentry *root_dir)
-    {
+unsafe extern "C" fn rseq_stats_init(root_dir: *mut dentry) -> c_int {
     debugfs_create_file("stats", 0444, root_dir, core::ptr::null_mut(), &stat_ops);
     return 0;
     }
@@ -210,8 +221,6 @@ unsafe extern "C" fn rseq_stats_init(root_dir: *mut dentry) -> int __init {
 
 #[no_mangle]
 unsafe extern "C" fn rseq_debug_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int rseq_debug_show(struct seq_file *m, void *p)
-    {
     let mut on: bool = static_branch_unlikely(&rseq_debug_enabled);
     seq_printf(m, "%d\n", on);
     return 0;
@@ -227,8 +236,6 @@ unsafe extern "C" fn rseq_debug_show(m: *mut seq_file, p: *mut c_void) -> c_int 
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_debug_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int rseq_debug_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, rseq_debug_show, inode.i_private);
     }
     static const struct file_operations debug_ops = {
@@ -240,9 +247,7 @@ unsafe extern "C" fn rseq_debug_open(inode: *mut inode, file: *mut file) -> c_in
     };
     static void rseq_slice_ext_init(struct dentry *root_dir);
 #[no_mangle]
-unsafe extern "C" fn rseq_debugfs_init() -> int __init {
-    static int __init rseq_debugfs_init(void)
-    {
+unsafe extern "C" fn rseq_debugfs_init() -> c_int {
     struct dentry *root_dir = debugfs_create_dir("rseq", core::ptr::null_mut());
     debugfs_create_file("debug", 0644, root_dir, core::ptr::null_mut(), &debug_ops);
     rseq_stats_init(root_dir);
@@ -253,8 +258,6 @@ unsafe extern "C" fn rseq_debugfs_init() -> int __init {
     __initcall(rseq_debugfs_init);
 #[no_mangle]
 unsafe extern "C" fn rseq_handle_cs(t: *mut task_struct, regs: *mut pt_regs) -> bool {
-    static bool rseq_handle_cs(struct task_struct *t, struct pt_regs *regs)
-    {
     struct rseq __user *urseq = t.rseq.usrptr;
     u64 csaddr;
     scoped_user_read_access(urseq, efault)
@@ -267,8 +270,6 @@ unsafe extern "C" fn rseq_handle_cs(t: *mut task_struct, regs: *mut pt_regs) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_slowpath_update_usr(regs: *mut pt_regs) {
-    static void rseq_slowpath_update_usr(struct pt_regs *regs)
-    {
 //
 // Preserve has_rseq and user_irq state. The generic entry code clears
 // user_irq on the way out, the non-generic entry architectures are not
@@ -322,8 +323,6 @@ unsafe extern "C" fn rseq_slowpath_update_usr(regs: *mut pt_regs) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __rseq_handle_slowpath(regs: *mut pt_regs) {
-    void __rseq_handle_slowpath(struct pt_regs *regs)
-    {
 //
 // If invoked from hypervisors before entering the guest via
 // resume_user_mode_work(), then @regs is a NULL pointer.
@@ -341,8 +340,6 @@ pub unsafe extern "C" fn __rseq_handle_slowpath(regs: *mut pt_regs) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __rseq_signal_deliver(sig: c_int, regs: *mut pt_regs) {
-    void __rseq_signal_deliver(int sig, struct pt_regs *regs)
-    {
     rseq_stat_inc(rseq_stats.signal);
 //
 // Don't update IDs yet, they are handled on exit to user if
@@ -371,8 +368,6 @@ pub unsafe extern "C" fn __rseq_signal_deliver(sig: c_int, regs: *mut pt_regs) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __rseq_debug_syscall_return(regs: *mut pt_regs) {
-    void __rseq_debug_syscall_return(struct pt_regs *regs)
-    {
     struct task_struct *t = current;
     u64 csaddr;
     if (!t.rseq.event.has_rseq)
@@ -392,15 +387,11 @@ pub unsafe extern "C" fn __rseq_debug_syscall_return(regs: *mut pt_regs) {
 // Kept around to keep GENERIC_ENTRY=n architectures supported.
 #[no_mangle]
 pub unsafe extern "C" fn rseq_syscall(regs: *mut pt_regs) {
-    void rseq_syscall(struct pt_regs *regs)
-    {
     __rseq_debug_syscall_return(regs);
     }
 
 #[no_mangle]
 unsafe extern "C" fn rseq_reset_ids() -> bool {
-    static bool rseq_reset_ids(void)
-    {
     struct rseq __user *rseq = current.rseq.usrptr;
 //
 // If this fails, terminate it because this leaves the kernel in
@@ -422,8 +413,6 @@ unsafe extern "C" fn rseq_reset_ids() -> bool {
 pub const ORIG_RSEQ_SIZE: c_int = 32;
 #[no_mangle]
 unsafe extern "C" fn rseq_register(rseq: *mut *mut rseq __user, rseq_len: u32, flags: c_int, sig: u32) -> c_long {
-    static long rseq_register(struct rseq __user * rseq, u32 rseq_len, int flags, u32 sig)
-    {
     let mut rseqfl: u32 = 0;
     let mut version: u8 = 1;
     if (!access_ok(rseq, rseq_len))
@@ -489,8 +478,6 @@ unsafe extern "C" fn rseq_register(rseq: *mut *mut rseq __user, rseq_len: u32, f
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_unregister(rseq: *mut *mut rseq __user, rseq_len: u32, flags: c_int, sig: u32) -> c_long {
-    static long rseq_unregister(struct rseq __user * rseq, u32 rseq_len, int flags, u32 sig)
-    {
     if (flags & ~RSEQ_FLAG_UNREGISTER)
     return -EINVAL;
     if (current.rseq.usrptr != rseq || !current.rseq.usrptr)
@@ -506,8 +493,6 @@ unsafe extern "C" fn rseq_unregister(rseq: *mut *mut rseq __user, rseq_len: u32,
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_reregister(rseq: *mut *mut rseq __user, rseq_len: u32, sig: u32) -> c_long {
-    static long rseq_reregister(struct rseq __user * rseq, u32 rseq_len, u32 sig)
-    {
 //
 // If rseq is already registered, check whether the provided address
 // differs from the prior one.
@@ -521,8 +506,6 @@ unsafe extern "C" fn rseq_reregister(rseq: *mut *mut rseq __user, rseq_len: u32,
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_length_valid(rseq: *mut rseq __user, rseq_len: c_uint) -> bool {
-    static bool rseq_length_valid(struct rseq __user *rseq, unsigned int rseq_len)
-    {
 //
 // Ensure the provided rseq is properly aligned, as communicated to
 // user-space through the ELF auxiliary vector AT_RSEQ_ALIGN. If
@@ -567,7 +550,7 @@ pub struct slice_timer {
     let mut rseq_slice_ext_nsecs_min: static unsigned int = 5 * NSEC_PER_USEC;
     let mut rseq_slice_ext_nsecs_max: static unsigned int = 50 * NSEC_PER_USEC;
     let mut __read_mostly: unsigned int rseq_slice_ext_nsecs = rseq_slice_ext_nsecs_min;
-    static DEFINE_PER_CPU(struct slice_timer, slice_timer);
+// static DEFINE_PER_CPU(struct slice_timer, slice_timer);
     DEFINE_STATIC_KEY_TRUE(rseq_slice_extension_key);
 //
 // When the timer expires and the task is still in user space, the return
@@ -579,8 +562,6 @@ pub struct slice_timer {
 //
 #[no_mangle]
 unsafe extern "C" fn rseq_slice_expired(tmr: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart rseq_slice_expired(struct hrtimer *tmr)
-    {
     struct slice_timer *st = container_of(tmr, struct slice_timer, timer);
 //
 // Validate that the task which armed the timer is still on the
@@ -595,8 +576,6 @@ unsafe extern "C" fn rseq_slice_expired(tmr: *mut hrtimer) -> enum hrtimer_resta
     }
 #[no_mangle]
 pub unsafe extern "C" fn __rseq_arm_slice_extension_timer() -> bool {
-    bool __rseq_arm_slice_extension_timer(void)
-    {
     struct slice_timer *st = this_cpu_ptr(&slice_timer);
     struct task_struct *curr = current;
     lockdep_assert_irqs_disabled();
@@ -624,8 +603,6 @@ pub unsafe extern "C" fn __rseq_arm_slice_extension_timer() -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_cancel_slice_extension_timer() {
-    static void rseq_cancel_slice_extension_timer(void)
-    {
     struct slice_timer *st = this_cpu_ptr(&slice_timer);
 //
 // st->cookie can be safely read as preemption is disabled and the
@@ -645,8 +622,6 @@ unsafe extern "C" fn rseq_cancel_slice_extension_timer() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn rseq_slice_set_need_resched(curr: *mut task_struct) {
-    static inline void rseq_slice_set_need_resched(struct task_struct *curr)
-    {
 //
 // The interrupt guard is required to prevent inconsistent state in
 // this case:
@@ -670,8 +645,6 @@ pub unsafe extern "C" fn rseq_slice_set_need_resched(curr: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_slice_validate_ctrl(expected: u32) {
-    static void rseq_slice_validate_ctrl(u32 expected)
-    {
     u32 __user *sctrl = &current.rseq.usrptr.slice_ctrl.all;
     u32 uval;
     if (get_user(uval, sctrl) || uval != expected)
@@ -689,8 +662,6 @@ unsafe extern "C" fn rseq_slice_validate_ctrl(expected: u32) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rseq_syscall_enter_work(syscall: c_long) {
-    void rseq_syscall_enter_work(long syscall)
-    {
     struct task_struct *curr = current;
     let mut ctrl: rseq_slice_ctrl = { .granted = curr.rseq.slice.state.granted };
     clear_task_syscall_work(curr, SYSCALL_RSEQ_SLICE);
@@ -735,8 +706,6 @@ pub unsafe extern "C" fn rseq_syscall_enter_work(syscall: c_long) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn rseq_slice_extension_prctl(arg2: c_ulong, arg3: c_ulong) -> c_int {
-    int rseq_slice_extension_prctl(unsigned long arg2, unsigned long arg3)
-    {
     switch (arg2) {
     case PR_RSEQ_SLICE_EXTENSION_GET:
     if (arg3)
@@ -799,8 +768,6 @@ pub unsafe extern "C" fn rseq_slice_extension_prctl(arg2: c_ulong, arg3: c_ulong
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_slice_ext_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int rseq_slice_ext_show(struct seq_file *m, void *p)
-    {
     seq_printf(m, "%d\n", rseq_slice_ext_nsecs);
     return 0;
     }
@@ -819,8 +786,6 @@ unsafe extern "C" fn rseq_slice_ext_show(m: *mut seq_file, p: *mut c_void) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn rseq_slice_ext_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int rseq_slice_ext_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, rseq_slice_ext_show, inode.i_private);
     }
     static const struct file_operations slice_ext_ops = {
@@ -832,14 +797,10 @@ unsafe extern "C" fn rseq_slice_ext_open(inode: *mut inode, file: *mut file) -> 
     };
 #[no_mangle]
 unsafe extern "C" fn rseq_slice_ext_init(root_dir: *mut dentry) {
-    static void rseq_slice_ext_init(struct dentry *root_dir)
-    {
     debugfs_create_file("slice_ext_nsec", 0644, root_dir, core::ptr::null_mut(), &slice_ext_ops);
     }
 #[no_mangle]
-unsafe extern "C" fn rseq_slice_cmdline(str: *mut c_char) -> int __init {
-    static int __init rseq_slice_cmdline(char *str)
-    {
+unsafe extern "C" fn rseq_slice_cmdline(str: *mut c_char) -> c_int {
     bool on;
     if (kstrtobool(str, &on))
     return 0;
@@ -849,9 +810,7 @@ unsafe extern "C" fn rseq_slice_cmdline(str: *mut c_char) -> int __init {
     }
     __setup("rseq_slice_ext=", rseq_slice_cmdline);
 #[no_mangle]
-unsafe extern "C" fn rseq_slice_init() -> int __init {
-    static int __init rseq_slice_init(void)
-    {
+unsafe extern "C" fn rseq_slice_init() -> c_int {
     unsigned int cpu;
     for_each_possible_cpu(cpu) {
     hrtimer_setup(per_cpu_ptr(&slice_timer.timer, cpu), rseq_slice_expired,

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -52,15 +75,12 @@ pub struct call_function_data {
     pub cpumask: cpumask_var_t,
     pub cpumask_ipi: cpumask_var_t,
 }
-
-    static DEFINE_PER_CPU_ALIGNED(struct call_function_data, cfd_data);
-    static DEFINE_PER_CPU_SHARED_ALIGNED(struct llist_head, call_single_queue);
-    static DEFINE_PER_CPU(atomic_t, trigger_backtrace) = ATOMIC_INIT(1);
+// static DEFINE_PER_CPU_ALIGNED(struct call_function_data, cfd_data);
+// static DEFINE_PER_CPU_SHARED_ALIGNED(struct llist_head, call_single_queue);
+// static DEFINE_PER_CPU(atomic_t, trigger_backtrace) = ATOMIC_INIT(1);
     static void __flush_smp_call_function_queue(bool warn_cpu_offline);
 #[no_mangle]
 pub unsafe extern "C" fn smpcfd_prepare_cpu(cpu: c_uint) -> c_int {
-    int smpcfd_prepare_cpu(unsigned int cpu)
-    {
     struct call_function_data *cfd = &per_cpu(cfd_data, cpu);
     if (!zalloc_cpumask_var_node(&cfd.cpumask, GFP_KERNEL,
     cpu_to_node(cpu)))
@@ -86,8 +106,6 @@ pub unsafe extern "C" fn smpcfd_prepare_cpu(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn smpcfd_dead_cpu(cpu: c_uint) -> c_int {
-    int smpcfd_dead_cpu(unsigned int cpu)
-    {
     struct call_function_data *cfd = &per_cpu(cfd_data, cpu);
     free_cpumask_var(cfd.cpumask);
     free_cpumask_var(cfd.cpumask_ipi);
@@ -95,8 +113,6 @@ pub unsafe extern "C" fn smpcfd_dead_cpu(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn smpcfd_dying_cpu(cpu: c_uint) -> c_int {
-    int smpcfd_dying_cpu(unsigned int cpu)
-    {
 //
 // The IPIs for the smp-call-function callbacks queued by other CPUs
 // might arrive late, either due to hardware latencies or because this
@@ -113,9 +129,7 @@ pub unsafe extern "C" fn smpcfd_dying_cpu(cpu: c_uint) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn call_function_init() -> void __init {
-    void __init call_function_init(void)
-    {
+pub unsafe extern "C" fn call_function_init() -> c_int {
     int i;
     for_each_possible_cpu(i)
     init_llist_head(&per_cpu(call_single_queue, i));
@@ -144,7 +158,7 @@ pub unsafe extern "C" fn call_function_init() -> void __init {
     func(info);
     trace_csd_function_exit(func, csd);
     }
-    static DEFINE_STATIC_KEY_MAYBE(CONFIG_CSD_LOCK_WAIT_DEBUG_DEFAULT, csdlock_debug_enabled);
+// static DEFINE_STATIC_KEY_MAYBE(CONFIG_CSD_LOCK_WAIT_DEBUG_DEFAULT, csdlock_debug_enabled);
 
 //
 // Parse the csdlock_debug= kernel boot parameter.
@@ -156,9 +170,7 @@ pub unsafe extern "C" fn call_function_init() -> void __init {
 // a5aabace5fb8 ("locking/csd_lock: Add more data to CSD lock debugging")
 //
 #[no_mangle]
-unsafe extern "C" fn csdlock_debug(str: *mut c_char) -> int __init {
-    static int __init csdlock_debug(char *str)
-    {
+unsafe extern "C" fn csdlock_debug(str: *mut c_char) -> c_int {
     int ret;
     let mut val: c_uint = 0;
     ret = get_option(&str, &val);
@@ -171,9 +183,9 @@ unsafe extern "C" fn csdlock_debug(str: *mut c_char) -> int __init {
     return 1;
     }
     __setup("csdlock_debug=", csdlock_debug);
-    static DEFINE_PER_CPU(call_single_data_t *, cur_csd);
-    static DEFINE_PER_CPU(smp_call_func_t, cur_csd_func);
-    static DEFINE_PER_CPU(void *, cur_csd_info);
+// static DEFINE_PER_CPU(call_single_data_t *, cur_csd);
+// static DEFINE_PER_CPU(smp_call_func_t, cur_csd_func);
+// static DEFINE_PER_CPU(void *, cur_csd_info);
     static ulong csd_lock_timeout = 5000;  /* CSD lock timeout in milliseconds. */
     module_param(csd_lock_timeout, ulong, 0644);
     static int panic_on_ipistall;  /* CSD panic timeout in milliseconds, 300000 for five minutes. */
@@ -182,8 +194,6 @@ unsafe extern "C" fn csdlock_debug(str: *mut c_char) -> int __init {
 // Record current CSD work for current CPU, NULL to erase.
 #[no_mangle]
 unsafe extern "C" fn __csd_lock_record(csd: *mut call_single_data_t) {
-    static void __csd_lock_record(call_single_data_t *csd)
-    {
     if (!csd) {
 //
 // Pairs with smp_load_acquire() of cur_csd in
@@ -204,15 +214,11 @@ unsafe extern "C" fn __csd_lock_record(csd: *mut call_single_data_t) {
     }
 #[no_mangle]
 unsafe extern "C" fn csd_lock_record(csd: *mut call_single_data_t) -> __always_inline void {
-    static __always_inline void csd_lock_record(call_single_data_t *csd)
-    {
     if (static_branch_unlikely(&csdlock_debug_enabled))
     __csd_lock_record(csd);
     }
 #[no_mangle]
 unsafe extern "C" fn csd_lock_wait_getcpu(csd: *mut call_single_data_t) -> c_int {
-    static int csd_lock_wait_getcpu(call_single_data_t *csd)
-    {
     unsigned int csd_type;
     csd_type = CSD_TYPE(csd);
     if (csd_type == CSD_TYPE_ASYNC || csd_type == CSD_TYPE_SYNC)
@@ -228,8 +234,6 @@ unsafe extern "C" fn csd_lock_wait_getcpu(csd: *mut call_single_data_t) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn csd_lock_is_stuck() -> bool {
-    bool csd_lock_is_stuck(void)
-    {
     return !!atomic_read(&n_csd_lock_stuck);
     }
 //
@@ -239,8 +243,6 @@ pub unsafe extern "C" fn csd_lock_is_stuck() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn csd_lock_wait_toolong(csd: *mut call_single_data_t, ts0: u64, ts1: *mut u64, bug_id: *mut c_int, nmessages: *mut c_ulong) -> bool {
-    static bool csd_lock_wait_toolong(call_single_data_t *csd, u64 ts0, u64 *ts1, int *bug_id, unsigned long *nmessages)
-    {
     let mut cpu: c_int = -1;
     int cpux;
     bool firsttime;
@@ -330,8 +332,6 @@ unsafe extern "C" fn csd_lock_wait_toolong(csd: *mut call_single_data_t, ts0: u6
 //
 #[no_mangle]
 unsafe extern "C" fn __csd_lock_wait(csd: *mut call_single_data_t) {
-    static void __csd_lock_wait(call_single_data_t *csd)
-    {
     let mut nmessages: c_ulong = 0;
     let mut bug_id: c_int = 0;
     u64 ts0, ts1;
@@ -346,8 +346,6 @@ unsafe extern "C" fn __csd_lock_wait(csd: *mut call_single_data_t) {
     }
 #[no_mangle]
 unsafe extern "C" fn csd_lock_wait(csd: *mut call_single_data_t) -> __always_inline void {
-    static __always_inline void csd_lock_wait(call_single_data_t *csd)
-    {
     if (static_branch_unlikely(&csdlock_debug_enabled)) {
     __csd_lock_wait(csd);
     return;
@@ -357,25 +355,17 @@ unsafe extern "C" fn csd_lock_wait(csd: *mut call_single_data_t) -> __always_inl
 
 #[no_mangle]
 unsafe extern "C" fn __csd_lock_wait(csd: *mut call_single_data_t) -> __always_inline void {
-    static __always_inline void __csd_lock_wait(call_single_data_t *csd)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn csd_lock_record(csd: *mut call_single_data_t) {
-    static void csd_lock_record(call_single_data_t *csd)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn csd_lock_wait(csd: *mut call_single_data_t) -> __always_inline void {
-    static __always_inline void csd_lock_wait(call_single_data_t *csd)
-    {
     smp_cond_load_acquire(&csd.node.u_flags, !(VAL & CSD_FLAG_LOCK));
     }
 
 #[no_mangle]
 unsafe extern "C" fn csd_lock(csd: *mut call_single_data_t) -> __always_inline void {
-    static __always_inline void csd_lock(call_single_data_t *csd)
-    {
     if (IS_ENABLED(CONFIG_CSD_LOCK_WAIT_DEBUG) &&
     static_branch_unlikely(&csdlock_debug_enabled)) {
     for (;;) {
@@ -399,15 +389,13 @@ unsafe extern "C" fn csd_lock(csd: *mut call_single_data_t) -> __always_inline v
     }
 #[no_mangle]
 unsafe extern "C" fn csd_unlock(csd: *mut call_single_data_t) -> __always_inline void {
-    static __always_inline void csd_unlock(call_single_data_t *csd)
-    {
     WARN_ON(!(csd.node.u_flags & CSD_FLAG_LOCK));
 //
 // ensure we're all done before releasing data:
 //
     smp_store_release(&csd.node.u_flags, 0);
     }
-    static DEFINE_PER_CPU_SHARED_ALIGNED(call_single_data_t, csd_data);
+// static DEFINE_PER_CPU_SHARED_ALIGNED(call_single_data_t, csd_data);
 
     static call_single_data_t *get_single_csd_data(int cpu)
     {
@@ -424,8 +412,6 @@ unsafe extern "C" fn csd_unlock(csd: *mut call_single_data_t) -> __always_inline
 
 #[no_mangle]
 pub unsafe extern "C" fn __smp_call_single_queue(cpu: c_int, node: *mut llist_node) {
-    void __smp_call_single_queue(int cpu, struct llist_node *node)
-    {
 //
 // We have to check the type of the CSD before queueing it, because
 // once queued it can have its flags cleared by
@@ -463,8 +449,6 @@ pub unsafe extern "C" fn __smp_call_single_queue(cpu: c_int, node: *mut llist_no
 //
 #[no_mangle]
 unsafe extern "C" fn generic_exec_single(cpu: c_int, csd: *mut call_single_data_t) -> c_int {
-    static int generic_exec_single(int cpu, call_single_data_t *csd)
-    {
 //
 // Preemption already disabled here so stopper cannot run on this CPU,
 // ensuring mutually exclusive CPU offlining and last IPI flush.
@@ -500,8 +484,6 @@ unsafe extern "C" fn generic_exec_single(cpu: c_int, csd: *mut call_single_data_
 //
 #[no_mangle]
 pub unsafe extern "C" fn generic_smp_call_function_single_interrupt() {
-    void generic_smp_call_function_single_interrupt(void)
-    {
     __flush_smp_call_function_queue(true);
     }
 //
@@ -520,8 +502,6 @@ pub unsafe extern "C" fn generic_smp_call_function_single_interrupt() {
 //
 #[no_mangle]
 unsafe extern "C" fn __flush_smp_call_function_queue(warn_cpu_offline: bool) {
-    static void __flush_smp_call_function_queue(bool warn_cpu_offline)
-    {
     call_single_data_t *csd, *csd_next;
     struct llist_node *entry, *prev;
     struct llist_head *head;
@@ -633,8 +613,6 @@ unsafe extern "C" fn __flush_smp_call_function_queue(warn_cpu_offline: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn flush_smp_call_function_queue() {
-    void flush_smp_call_function_queue(void)
-    {
     unsigned int was_pending;
     unsigned long flags;
     if (llist_empty(this_cpu_ptr(&call_single_queue)))
@@ -719,8 +697,6 @@ pub unsafe extern "C" fn flush_smp_call_function_queue() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn smp_call_function_single(cpu: c_int, func: smp_call_func_t, info: *mut c_void, wait: bool) -> c_int {
-    int smp_call_function_single(int cpu, smp_call_func_t func, void *info, bool wait)
-    {
     return __smp_call_function_single(cpu, func, info, core::ptr::null_mut(), wait);
     }
     EXPORT_SYMBOL(smp_call_function_single);
@@ -749,8 +725,6 @@ pub unsafe extern "C" fn smp_call_function_single(cpu: c_int, func: smp_call_fun
 //
 #[no_mangle]
 pub unsafe extern "C" fn smp_call_function_single_async(cpu: c_int, csd: *mut call_single_data_t) -> c_int {
-    int smp_call_function_single_async(int cpu, call_single_data_t *csd)
-    {
     let mut err: c_int = 0;
     preempt_disable();
     if (csd.node.u_flags & CSD_FLAG_LOCK) {
@@ -784,12 +758,10 @@ pub unsafe extern "C" fn smp_call_function_single_async(cpu: c_int, csd: *mut ca
     return __smp_call_function_single(-1, func, info, mask, wait);
     }
     EXPORT_SYMBOL_GPL(smp_call_function_any);
-    static DEFINE_STATIC_KEY_FALSE(ipi_mask_inlined);
+// static DEFINE_STATIC_KEY_FALSE(ipi_mask_inlined);
 
 #[no_mangle]
 pub unsafe extern "C" fn smp_task_ipi_mask_alloc(task: *mut task_struct) -> c_int {
-    int smp_task_ipi_mask_alloc(struct task_struct *task)
-    {
     if (static_branch_unlikely(&ipi_mask_inlined))
     return 0;
     ACCESS_PRIVATE(task, ipi_mask).ipi_mask_ptr =
@@ -800,8 +772,6 @@ pub unsafe extern "C" fn smp_task_ipi_mask_alloc(task: *mut task_struct) -> c_in
     }
 #[no_mangle]
 pub unsafe extern "C" fn smp_task_ipi_mask_free(task: *mut task_struct) {
-    void smp_task_ipi_mask_free(struct task_struct *task)
-    {
     if (static_branch_unlikely(&ipi_mask_inlined))
     return;
     kfree(ACCESS_PRIVATE(task, ipi_mask).ipi_mask_ptr);
@@ -969,8 +939,6 @@ pub unsafe extern "C" fn if(1): likely(nr_cpus >) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn smp_call_function(func: smp_call_func_t, info: *mut c_void, wait: c_int) {
-    void smp_call_function(smp_call_func_t func, void *info, int wait)
-    {
     smp_call_function_many_cond(cpu_online_mask, func, info,
     wait ? SCF_WAIT : 0, core::ptr::null_mut());
     }
@@ -990,9 +958,7 @@ pub unsafe extern "C" fn smp_call_function(func: smp_call_func_t, info: *mut c_v
 //
     void __weak __init arch_disable_smp_support(void) { }
 #[no_mangle]
-unsafe extern "C" fn nosmp(str: *mut c_char) -> int __init {
-    static int __init nosmp(char *str)
-    {
+unsafe extern "C" fn nosmp(str: *mut c_char) -> c_int {
     setup_max_cpus = 0;
     arch_disable_smp_support();
     return 0;
@@ -1000,9 +966,7 @@ unsafe extern "C" fn nosmp(str: *mut c_char) -> int __init {
     early_param("nosmp", nosmp);
 // this is hard limit
 #[no_mangle]
-unsafe extern "C" fn nrcpus(str: *mut c_char) -> int __init {
-    static int __init nrcpus(char *str)
-    {
+unsafe extern "C" fn nrcpus(str: *mut c_char) -> c_int {
     int nr_cpus;
     if (get_option(&str, &nr_cpus) && nr_cpus > 0 && nr_cpus < nr_cpu_ids)
     set_nr_cpu_ids(nr_cpus);
@@ -1010,9 +974,7 @@ unsafe extern "C" fn nrcpus(str: *mut c_char) -> int __init {
     }
     early_param("nr_cpus", nrcpus);
 #[no_mangle]
-unsafe extern "C" fn maxcpus(str: *mut c_char) -> int __init {
-    static int __init maxcpus(char *str)
-    {
+unsafe extern "C" fn maxcpus(str: *mut c_char) -> c_int {
     get_option(&str, &setup_max_cpus);
     if (setup_max_cpus == 0)
     arch_disable_smp_support();
@@ -1026,18 +988,14 @@ unsafe extern "C" fn maxcpus(str: *mut c_char) -> int __init {
 
 // An arch may set nr_cpu_ids earlier if needed, so this would be redundant
 #[no_mangle]
-pub unsafe extern "C" fn setup_nr_cpu_ids() -> void __init {
-    void __init setup_nr_cpu_ids(void)
-    {
+pub unsafe extern "C" fn setup_nr_cpu_ids() -> c_int {
     set_nr_cpu_ids(find_last_bit(cpumask_bits(cpu_possible_mask), NR_CPUS) + 1);
     if (IS_ENABLED(CONFIG_PREEMPTION) && cpumask_size() <= sizeof(unsigned long))
     static_branch_enable(&ipi_mask_inlined);
     }
 // Called by boot processor to activate the rest.
 #[no_mangle]
-pub unsafe extern "C" fn smp_init() -> void __init {
-    void __init smp_init(void)
-    {
+pub unsafe extern "C" fn smp_init() -> c_int {
     int num_nodes, num_cpus;
     idle_threads_init();
     cpuhp_threads_init();
@@ -1086,8 +1044,6 @@ pub unsafe extern "C" fn smp_init() -> void __init {
     EXPORT_SYMBOL(on_each_cpu_cond_mask);
 #[no_mangle]
 unsafe extern "C" fn do_nothing(unused: *mut c_void) {
-    static void do_nothing(void *unused)
-    {
     }
 //
 // kick_all_cpus_sync - Force all cpus out of idle
@@ -1102,8 +1058,6 @@ unsafe extern "C" fn do_nothing(unused: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kick_all_cpus_sync() {
-    void kick_all_cpus_sync(void)
-    {
 // Make sure the change is visible before we kick the cpus
     smp_mb();
     smp_call_function(do_nothing, core::ptr::null_mut(), 1);
@@ -1117,8 +1071,6 @@ pub unsafe extern "C" fn kick_all_cpus_sync() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wake_up_all_idle_cpus() {
-    void wake_up_all_idle_cpus(void)
-    {
     int cpu;
     for_each_possible_cpu(cpu) {
     preempt_disable();
@@ -1140,8 +1092,6 @@ pub unsafe extern "C" fn wake_up_all_idle_cpus() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpus_peek_for_pending_ipi(mask: *const cpumask) -> bool {
-    bool cpus_peek_for_pending_ipi(const struct cpumask *mask)
-    {
     unsigned int cpu;
     for_each_cpu(cpu, mask) {
     if (!llist_empty(per_cpu_ptr(&call_single_queue, cpu)))
@@ -1175,8 +1125,6 @@ pub struct smp_call_on_cpu_struct {
 
 #[no_mangle]
 unsafe extern "C" fn smp_call_on_cpu_callback(work: *mut work_struct) {
-    static void smp_call_on_cpu_callback(struct work_struct *work)
-    {
     struct smp_call_on_cpu_struct *sscs;
     sscs = container_of(work, struct smp_call_on_cpu_struct, work);
     if (sscs.cpu >= 0)
@@ -1217,3 +1165,6 @@ pub unsafe extern "C" fn smp_call_on_cpu(cpu: c_uint, ): *mut *mut int (func)(vo
     return sscs.ret;
     }
     EXPORT_SYMBOL_GPL(smp_call_on_cpu);
+
+}
+}

@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 
@@ -48,27 +145,25 @@ pub struct dm_crypt_key {
 }
 
     static struct keys_header {
-    unsigned int total_keys;
+    let mut total_keys = 0;
     struct dm_crypt_key keys[] __counted_by(total_keys);
     } *keys_header;
 #[no_mangle]
 unsafe extern "C" fn get_keys_header_size(total_keys: usize) -> usize {
-    static size_t get_keys_header_size(size_t total_keys)
-    {
     return struct_size(keys_header, keys, total_keys);
     }
     unsigned long long dm_crypt_keys_addr;
-    EXPORT_SYMBOL_GPL(dm_crypt_keys_addr);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
-unsafe extern "C" fn setup_dmcryptkeys(arg: *mut c_char) -> int __init {
-    static int __init setup_dmcryptkeys(char *arg)
-    {
-    char *end;
-    if (!arg)
+unsafe extern "C" fn setup_dmcryptkeys(arg: *mut c_char) -> c_int {
+    let mut end = core::ptr::null_mut();
+    if (!arg) {
     return -EINVAL;
+    }
     dm_crypt_keys_addr = memparse(arg, &end);
-    if (end > arg)
+    if (end > arg) {
     return 0;
+    }
     dm_crypt_keys_addr = 0;
     return -EINVAL;
     }
@@ -78,18 +173,15 @@ unsafe extern "C" fn setup_dmcryptkeys(arg: *mut c_char) -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn dm_crypt_keys_read(buf: *mut c_char, count: usize, ppos: *mut u64) -> ssize_t __weak {
-    ssize_t __weak dm_crypt_keys_read(char *buf, size_t count, u64 *ppos)
-    {
-    let mut kvec: kvec = { .iov_base = buf, .iov_len = count };
-    struct iov_iter iter;
+pub static mut kvec: kvec = { .iov_base = buf, .iov_len = count };
+    let mut iter;
     iov_iter_kvec(&iter, READ, &kvec, 1, count);
     return read_from_oldmem(&iter, count, ppos, cc_platform_has(CC_ATTR_MEM_ENCRYPT));
     }
-    static int add_key_to_keyring(struct dm_crypt_key *dm_key,
-    key_ref_t keyring_ref)
-    {
-    key_ref_t key_ref;
-    int r;
+#[no_mangle]
+pub unsafe extern "C" fn add_key_to_keyring() {
+    let mut key_ref;
+    let mut r = 0;
 // create or update the requested key and add it to the target keyring
     key_ref = key_create_or_update(keyring_ref, "user", dm_key.key_desc,
     dm_key.data, dm_key.key_size,
@@ -106,9 +198,7 @@ pub unsafe extern "C" fn dm_crypt_keys_read(buf: *mut c_char, count: usize, ppos
     }
 #[no_mangle]
 unsafe extern "C" fn get_keys_from_kdump_reserved_memory() {
-    static void get_keys_from_kdump_reserved_memory(void)
-    {
-    struct keys_header *keys_header_loaded;
+    let mut keys_header_loaded = core::ptr::null_mut();
     arch_kexec_unprotect_crashkres();
     keys_header_loaded = kmap_local_page(pfn_to_page(
     kexec_crash_image.dm_crypt_keys_addr >> PAGE_SHIFT));
@@ -118,13 +208,11 @@ unsafe extern "C" fn get_keys_from_kdump_reserved_memory() {
     }
 #[no_mangle]
 unsafe extern "C" fn restore_dm_crypt_keys_to_thread_keyring() -> c_int {
-    static int restore_dm_crypt_keys_to_thread_keyring(void)
-    {
-    struct dm_crypt_key *key;
-    size_t keys_header_size;
-    key_ref_t keyring_ref;
-    let mut ret: c_int = 0;
-    u64 addr;
+    let mut key = core::ptr::null_mut();
+    let mut keys_header_size = 0;
+    let mut keyring_ref;
+pub static mut ret: c_int = 0;
+    let mut addr = 0;
 // find the target keyring (which must be writable)
     keyring_ref =
     lookup_user_key(KEY_SPEC_USER_KEYRING, 0x01, KEY_NEED_WRITE);
@@ -133,7 +221,7 @@ unsafe extern "C" fn restore_dm_crypt_keys_to_thread_keyring() -> c_int {
     return PTR_ERR(keyring_ref);
     }
     addr = dm_crypt_keys_addr;
-    dm_crypt_keys_read((char *)&key_count, sizeof(key_count), &addr);
+    dm_crypt_keys_read(&key_count, sizeof(key_count), &addr);
     if (key_count > KEY_NUM_MAX) {
     kexec_dprintk("Failed to read the number of dm-crypt keys\n");
     ret = -1;
@@ -147,7 +235,7 @@ unsafe extern "C" fn restore_dm_crypt_keys_to_thread_keyring() -> c_int {
     ret = -ENOMEM;
     goto out;
     }
-    dm_crypt_keys_read((char *)keys_header, keys_header_size, &addr);
+    dm_crypt_keys_read(keys_header, keys_header_size, &addr);
     for (int i = 0; i < keys_header.total_keys; i++) {
     key = &keys_header.keys[i];
     kexec_dprintk("Get key (size=%u)\n", key.key_size);
@@ -159,11 +247,9 @@ unsafe extern "C" fn restore_dm_crypt_keys_to_thread_keyring() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn read_key_from_user_keyring(dm_key: *mut dm_crypt_key) -> c_int {
-    static int read_key_from_user_keyring(struct dm_crypt_key *dm_key)
-    {
-    const struct user_key_payload *ukp;
-    struct key *key;
-    let mut ret: c_int = 0;
+    let mut ukp = core::ptr::null_mut();
+    let mut key = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     kexec_dprintk("Requesting logon key %s", dm_key.key_desc);
     key = request_key(&key_type_logon, dm_key.key_desc, core::ptr::null_mut());
     if (IS_ERR(key)) {
@@ -197,101 +283,89 @@ pub struct config_key {
     pub description: *const c_char,
 }
 
-    static inline struct config_key *to_config_key(struct config_item *item)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn to_config_key() {
     return container_of(item, struct config_key, item);
     }
 #[no_mangle]
 unsafe extern "C" fn config_key_description_show(item: *mut config_item, page: *mut c_char) -> isize {
-    static ssize_t config_key_description_show(struct config_item *item, char *page)
-    {
     return sysfs_emit(page, "%s\n", to_config_key(item).description);
     }
-    static ssize_t config_key_description_store(struct config_item *item,
-    const char *page, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn config_key_description_store() {
     struct config_key *config_key = to_config_key(item);
-    size_t len;
-    int ret;
+    let mut len = 0;
+    let mut ret = 0;
     ret = -EINVAL;
     len = strcspn(page, "\n");
     if (len > KEY_DESC_MAX_LEN) {
     pr_err("The key description shouldn't exceed %u characters", KEY_DESC_MAX_LEN);
     return ret;
     }
-    if (!len)
+    if (!len) {
     return ret;
+    }
     kfree(config_key.description);
     ret = -ENOMEM;
     config_key.description = kmemdup_nul(page, len, GFP_KERNEL);
-    if (!config_key.description)
+    if (!config_key.description) {
     return ret;
+    }
     return count;
     }
-    CONFIGFS_ATTR(config_key_, description);
+// CONFIGFS_ATTR;
     static struct configfs_attribute *config_key_attrs[] = {
     &config_key_attr_description,
     core::ptr::null_mut(),
     };
 #[no_mangle]
 unsafe extern "C" fn config_key_release(item: *mut config_item) {
-    static void config_key_release(struct config_item *item)
-    {
     kfree(to_config_key(item));
     key_count--;
     }
-    static const struct configfs_item_operations config_key_item_ops = {
-    .release = config_key_release,
-    };
-    static const struct config_item_type config_key_type = {
-    .ct_item_ops = &config_key_item_ops,
-    .ct_attrs = config_key_attrs,
-    .ct_owner = THIS_MODULE,
-    };
-    static struct config_item *config_keys_make_item(struct config_group *group,
-    const char *name)
-    {
-    struct config_key *config_key;
+pub static mut configfs_item_operations: usize = 0;
+pub static mut config_item_type: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn config_keys_make_item() {
+    let mut config_key = core::ptr::null_mut();
     if (key_count > KEY_NUM_MAX) {
     pr_err("Only %u keys at maximum to be created\n", KEY_NUM_MAX);
     return ERR_PTR(-EINVAL);
     }
     config_key = kzalloc_obj(struct config_key);
-    if (!config_key)
+    if (!config_key) {
     return ERR_PTR(-ENOMEM);
+    }
     config_item_init_type_name(&config_key.item, name, &config_key_type);
     key_count++;
     return &config_key.item;
     }
 #[no_mangle]
 unsafe extern "C" fn config_keys_count_show(item: *mut config_item, page: *mut c_char) -> isize {
-    static ssize_t config_keys_count_show(struct config_item *item, char *page)
-    {
     return sysfs_emit(page, "%d\n", key_count);
     }
-    CONFIGFS_ATTR_RO(config_keys_, count);
+// CONFIGFS_ATTR_RO;
     static bool is_dm_key_reused;
 #[no_mangle]
 unsafe extern "C" fn config_keys_reuse_show(item: *mut config_item, page: *mut c_char) -> isize {
-    static ssize_t config_keys_reuse_show(struct config_item *item, char *page)
-    {
     return sysfs_emit(page, "%d\n", is_dm_key_reused);
     }
-    static ssize_t config_keys_reuse_store(struct config_item *item,
-    const char *page, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn config_keys_reuse_store() {
     if (!kexec_crash_image || !kexec_crash_image.dm_crypt_keys_addr) {
     kexec_dprintk(
     "dm-crypt keys haven't be saved to crash-reserved memory\n");
     return -EINVAL;
     }
-    if (kstrtobool(page, &is_dm_key_reused))
+    if (kstrtobool(page, &is_dm_key_reused)) {
     return -EINVAL;
-    if (is_dm_key_reused)
+    }
+    if (is_dm_key_reused) {
     get_keys_from_kdump_reserved_memory();
+    }
     return count;
     }
-    CONFIGFS_ATTR(config_keys_, reuse);
+// CONFIGFS_ATTR;
     static struct configfs_attribute *config_keys_attrs[] = {
     &config_keys_attr_count,
     &config_keys_attr_reuse,
@@ -301,65 +375,49 @@ unsafe extern "C" fn config_keys_reuse_show(item: *mut config_item, page: *mut c
 // Note that, since no extra work is required on ->drop_item(),
 // no ->drop_item() is provided.
 //
-    static const struct configfs_group_operations config_keys_group_ops = {
-    .make_item = config_keys_make_item,
-    };
-    static const struct config_item_type config_keys_type = {
-    .ct_group_ops = &config_keys_group_ops,
-    .ct_attrs = config_keys_attrs,
-    .ct_owner = THIS_MODULE,
-    };
+pub static mut configfs_group_operations: usize = 0;
+pub static mut config_item_type: usize = 0;
     static bool restore;
 #[no_mangle]
 unsafe extern "C" fn config_keys_restore_show(item: *mut config_item, page: *mut c_char) -> isize {
-    static ssize_t config_keys_restore_show(struct config_item *item, char *page)
-    {
     return sysfs_emit(page, "%d\n", restore);
     }
-    static ssize_t config_keys_restore_store(struct config_item *item,
-    const char *page, size_t count)
-    {
-    if (!restore)
+#[no_mangle]
+pub unsafe extern "C" fn config_keys_restore_store() {
+    if (!restore) {
     restore_dm_crypt_keys_to_thread_keyring();
-    if (kstrtobool(page, &restore))
+    }
+    if (kstrtobool(page, &restore)) {
     return -EINVAL;
+    }
     return count;
     }
-    CONFIGFS_ATTR(config_keys_, restore);
+// CONFIGFS_ATTR;
     static struct configfs_attribute *kdump_config_keys_attrs[] = {
     &config_keys_attr_restore,
     core::ptr::null_mut(),
     };
-    static const struct config_item_type kdump_config_keys_type = {
-    .ct_attrs = kdump_config_keys_attrs,
-    .ct_owner = THIS_MODULE,
-    };
-    static struct configfs_subsystem config_keys_subsys = {
-    .su_group = {
-    .cg_item = {
-    .ci_namebuf = "crash_dm_crypt_keys",
-    .ci_type = &config_keys_type,
-    },
-    },
-    };
+pub static mut config_item_type: usize = 0;
+pub static mut configfs_subsystem: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn build_keys_header() -> c_int {
-    static int build_keys_header(void)
-    {
     struct config_item *item = core::ptr::null_mut();
-    struct config_key *key;
+    let mut key = core::ptr::null_mut();
     int i, r;
-    if (keys_header != core::ptr::null_mut())
+    if (keys_header != core::ptr::null_mut()) {
     kvfree(keys_header);
+    }
     keys_header = kzalloc(get_keys_header_size(key_count), GFP_KERNEL);
-    if (!keys_header)
+    if (!keys_header) {
     return -ENOMEM;
+    }
     keys_header.total_keys = key_count;
     i = 0;
     list_for_each_entry(item, &config_keys_subsys.su_group.cg_children,
     ci_entry) {
-    if (item.ci_type != &config_key_type)
+    if (item.ci_type != &config_key_type) {
     continue;
+    }
     key = to_config_key(item);
     if (!key.description) {
     pr_warn("No key description for key %s\n", item.ci_name);
@@ -380,8 +438,6 @@ unsafe extern "C" fn build_keys_header() -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
-    int crash_load_dm_crypt_keys(struct kimage *image)
-    {
     struct kexec_buf kbuf = {
     .image = image,
     .buf_min = 0,
@@ -389,7 +445,7 @@ pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
     .top_down = false,
     .random = true,
     };
-    int r;
+    let mut r = 0;
     if (key_count <= 0) {
     kexec_dprintk("No dm-crypt keys\n");
     return 0;
@@ -410,7 +466,7 @@ pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
     r = kexec_add_buffer(&kbuf);
     if (r) {
     pr_err("Failed to call kexec_add_buffer, ret=%d\n", r);
-    kvfree((void *)kbuf.buffer);
+    kvfree(kbuf.buffer);
     return r;
     }
     image.dm_crypt_keys_addr = kbuf.mem;
@@ -421,10 +477,8 @@ pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
     return r;
     }
 #[no_mangle]
-unsafe extern "C" fn configfs_dmcrypt_keys_init() -> int __init {
-    static int __init configfs_dmcrypt_keys_init(void)
-    {
-    int ret;
+unsafe extern "C" fn configfs_dmcrypt_keys_init() -> c_int {
+    let mut ret = 0;
     if (is_kdump_kernel()) {
     config_keys_subsys.su_group.cg_item.ci_type =
     &kdump_config_keys_type;
@@ -442,4 +496,4 @@ unsafe extern "C" fn configfs_dmcrypt_keys_init() -> int __init {
     configfs_unregister_subsystem(&config_keys_subsys);
     return ret;
     }
-    module_init(configfs_dmcrypt_keys_init);
+// module_init;

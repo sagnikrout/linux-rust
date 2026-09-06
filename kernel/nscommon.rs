@@ -35,14 +35,35 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 // Copyright (c) 2025 Christian Brauner <brauner@kernel.org>
 
 #[no_mangle]
 unsafe extern "C" fn ns_debug(ns: *mut ns_common, ops: *const proc_ns_operations) {
-    static void ns_debug(struct ns_common *ns, const struct proc_ns_operations *ops)
-    {
     switch (ns.ns_type) {
 
     case CLONE_NEWCGROUP:
@@ -82,8 +103,6 @@ unsafe extern "C" fn ns_debug(ns: *mut ns_common, ops: *const proc_ns_operations
 
 #[no_mangle]
 pub unsafe extern "C" fn __ns_common_init(ns: *mut ns_common, ns_type: u32, ops: *const proc_ns_operations, inum: c_int) -> c_int {
-    int __ns_common_init(struct ns_common *ns, u32 ns_type, const struct proc_ns_operations *ops, int inum)
-    {
     let mut ret: c_int = 0;
     refcount_set(&ns.__ns_ref, 1);
     ns.stashed = core::ptr::null_mut();
@@ -116,14 +135,10 @@ pub unsafe extern "C" fn __ns_common_init(ns: *mut ns_common, ns_type: u32, ops:
     }
 #[no_mangle]
 pub unsafe extern "C" fn __ns_common_free(ns: *mut ns_common) {
-    void __ns_common_free(struct ns_common *ns)
-    {
     proc_free_inum(ns.inum);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ns_owner(ns: *mut ns_common) -> *mut ns_common __must_check {
-    struct ns_common *__must_check ns_owner(struct ns_common *ns)
-    {
     struct user_namespace *owner;
     if (unlikely(!ns.ops))
     return core::ptr::null_mut();
@@ -188,8 +203,6 @@ pub unsafe extern "C" fn ns_owner(ns: *mut ns_common) -> *mut ns_common __must_c
 //
 #[no_mangle]
 pub unsafe extern "C" fn __ns_ref_active_put(ns: *mut ns_common) {
-    void __ns_ref_active_put(struct ns_common *ns)
-    {
 // Initial namespaces are always active.
     if (is_ns_init_id(ns))
     return;
@@ -303,8 +316,6 @@ pub unsafe extern "C" fn __ns_ref_active_put(ns: *mut ns_common) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __ns_ref_active_get(ns: *mut ns_common) {
-    void __ns_ref_active_get(struct ns_common *ns)
-    {
     int prev;
 // Initial namespaces are always active.
     if (is_ns_init_id(ns))
@@ -331,8 +342,6 @@ pub unsafe extern "C" fn __ns_ref_active_get(ns: *mut ns_common) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn may_see_all_namespaces() -> bool {
-    bool may_see_all_namespaces(void)
-    {
     return (task_active_pid_ns(current) == &init_pid_ns) &&
     ns_capable_noaudit(init_pid_ns.user_ns, CAP_SYS_ADMIN);
     }

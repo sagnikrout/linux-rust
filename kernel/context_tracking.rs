@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -62,24 +159,20 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     .state = ATOMIC_INIT(CT_RCU_WATCHING),
     };
-    EXPORT_SYMBOL_GPL(context_tracking);
+// EXPORT_SYMBOL_GPL;
 
 // Record the current task on exiting RCU-tasks (dyntick-idle entry).
 #[no_mangle]
 unsafe extern "C" fn rcu_task_exit() -> __always_inline void {
-    static __always_inline void rcu_task_exit(void)
-    {
 
-    WRITE_ONCE(current.rcu_tasks_idle_cpu, smp_processor_id());
+// WRITE_ONCE;
 
     }
 // Record no current task on entering RCU-tasks (dyntick-idle exit).
 #[no_mangle]
 unsafe extern "C" fn rcu_task_enter() -> __always_inline void {
-    static __always_inline void rcu_task_enter(void)
-    {
 
-    WRITE_ONCE(current.rcu_tasks_idle_cpu, -1);
+// WRITE_ONCE;
 
     }
 //
@@ -90,15 +183,13 @@ unsafe extern "C" fn rcu_task_enter() -> __always_inline void {
 //
 #[no_mangle]
 unsafe extern "C" fn ct_kernel_exit_state(offset: c_int) -> noinstr void {
-    static noinstr void ct_kernel_exit_state(int offset)
-    {
 //
 // CPUs seeing atomic_add_return() must see prior RCU read-side
 // critical sections, and we also must force ordering with the
 // next idle sojourn.
 //
 // RCU is still watching.  Better not be in extended quiescent state!
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !rcu_is_watching_curr_cpu());
+// WARN_ON_ONCE;
     (void)ct_state_inc(offset);
 // RCU is no longer watching.
     }
@@ -109,9 +200,7 @@ unsafe extern "C" fn ct_kernel_exit_state(offset: c_int) -> noinstr void {
 //
 #[no_mangle]
 unsafe extern "C" fn ct_kernel_enter_state(offset: c_int) -> noinstr void {
-    static noinstr void ct_kernel_enter_state(int offset)
-    {
-    int seq;
+    let mut seq = 0;
 //
 // CPUs seeing atomic_add_return() must see prior idle sojourns,
 // and we also must force ordering with the next RCU read-side
@@ -119,7 +208,7 @@ unsafe extern "C" fn ct_kernel_enter_state(offset: c_int) -> noinstr void {
 //
     seq = ct_state_inc(offset);
 // RCU is now watching.  Better not be in an extended quiescent state!
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !(seq & CT_RCU_WATCHING));
+// WARN_ON_ONCE;
     }
 //
 // Enter an RCU extended quiescent state, which can be either the
@@ -131,11 +220,9 @@ unsafe extern "C" fn ct_kernel_enter_state(offset: c_int) -> noinstr void {
 //
 #[no_mangle]
 unsafe extern "C" fn ct_kernel_exit(user: bool, offset: c_int) -> void noinstr {
-    static void noinstr ct_kernel_exit(bool user, int offset)
-    {
     struct context_tracking *ct = this_cpu_ptr(&context_tracking);
-    WARN_ON_ONCE(ct_nmi_nesting() != CT_NESTING_IRQ_NONIDLE);
-    WRITE_ONCE(ct.nmi_nesting, 0);
+// WARN_ON_ONCE;
+// WRITE_ONCE;
     WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) &&
     ct_nesting() == 0);
     if (ct_nesting() != 1) {
@@ -146,12 +233,12 @@ unsafe extern "C" fn ct_kernel_exit(user: bool, offset: c_int) -> void noinstr {
     instrumentation_begin();
     lockdep_assert_irqs_disabled();
     trace_rcu_watching(TPS("End"), ct_nesting(), 0, ct_rcu_watching());
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !user && !is_idle_task(current));
+// WARN_ON_ONCE;
     rcu_preempt_deferred_qs(current);
 // instrumentation for the noinstr ct_kernel_exit_state()
     instrument_atomic_write(&ct.state, sizeof(ct.state));
     instrumentation_end();
-    WRITE_ONCE(ct.nesting, 0); /* Avoid irq-access tearing. */
+// WRITE_ONCE; /* Avoid irq-access tearing. */
 // RCU is watching here ...
     ct_kernel_exit_state(offset);
 // ... but is no longer watching here.
@@ -167,13 +254,11 @@ unsafe extern "C" fn ct_kernel_exit(user: bool, offset: c_int) -> void noinstr {
 //
 #[no_mangle]
 unsafe extern "C" fn ct_kernel_enter(user: bool, offset: c_int) -> void noinstr {
-    static void noinstr ct_kernel_enter(bool user, int offset)
-    {
     struct context_tracking *ct = this_cpu_ptr(&context_tracking);
-    long oldval;
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !raw_irqs_disabled());
+    let mut oldval = 0;
+// WARN_ON_ONCE;
     oldval = ct_nesting();
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && oldval < 0);
+// WARN_ON_ONCE;
     if (oldval) {
 // RCU was already watching, so just do accounting and leave.
     ct.nesting++;
@@ -187,10 +272,10 @@ unsafe extern "C" fn ct_kernel_enter(user: bool, offset: c_int) -> void noinstr 
 // instrumentation for the noinstr ct_kernel_enter_state()
     instrument_atomic_write(&ct.state, sizeof(ct.state));
     trace_rcu_watching(TPS("Start"), ct_nesting(), 1, ct_rcu_watching());
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !user && !is_idle_task(current));
-    WRITE_ONCE(ct.nesting, 1);
-    WARN_ON_ONCE(ct_nmi_nesting());
-    WRITE_ONCE(ct.nmi_nesting, CT_NESTING_IRQ_NONIDLE);
+// WARN_ON_ONCE;
+// WRITE_ONCE;
+// WARN_ON_ONCE;
+// WRITE_ONCE;
     instrumentation_end();
     }
 //
@@ -206,8 +291,6 @@ unsafe extern "C" fn ct_kernel_enter(user: bool, offset: c_int) -> void noinstr 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_nmi_exit() -> void noinstr {
-    void noinstr ct_nmi_exit(void)
-    {
     struct context_tracking *ct = this_cpu_ptr(&context_tracking);
     instrumentation_begin();
 //
@@ -215,8 +298,8 @@ pub unsafe extern "C" fn ct_nmi_exit() -> void noinstr {
 // (We are exiting an NMI handler, so RCU better be paying attention
 // to us!)
 //
-    WARN_ON_ONCE(ct_nmi_nesting() <= 0);
-    WARN_ON_ONCE(!rcu_is_watching_curr_cpu());
+// WARN_ON_ONCE;
+// WARN_ON_ONCE;
 //
 // If the nesting level is not 1, the CPU wasn't RCU-idle, so
 // leave it in non-RCU-idle state.
@@ -231,15 +314,16 @@ pub unsafe extern "C" fn ct_nmi_exit() -> void noinstr {
     }
 // This NMI interrupted an RCU-idle CPU, restore RCU-idleness.
     trace_rcu_watching(TPS("Endirq"), ct_nmi_nesting(), 0, ct_rcu_watching());
-    WRITE_ONCE(ct.nmi_nesting, 0); /* Avoid store tearing. */
+// WRITE_ONCE; /* Avoid store tearing. */
 // instrumentation for the noinstr ct_kernel_exit_state()
     instrument_atomic_write(&ct.state, sizeof(ct.state));
     instrumentation_end();
 // RCU is watching here ...
     ct_kernel_exit_state(CT_RCU_WATCHING);
 // ... but is no longer watching here.
-    if (!in_nmi())
+    if (!in_nmi()) {
     rcu_task_exit();
+    }
     }
 //
 // ct_nmi_enter - inform RCU of entry to NMI context
@@ -255,12 +339,10 @@ pub unsafe extern "C" fn ct_nmi_exit() -> void noinstr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_nmi_enter() -> void noinstr {
-    void noinstr ct_nmi_enter(void)
-    {
-    let mut incby: c_long = 2;
+pub static mut incby: c_long = 2;
     struct context_tracking *ct = this_cpu_ptr(&context_tracking);
 // Complain about underflow.
-    WARN_ON_ONCE(ct_nmi_nesting() < 0);
+// WARN_ON_ONCE;
 //
 // If idle from RCU viewpoint, atomically increment CT state
 // to mark non-idle and increment ->nmi_nesting by one.
@@ -270,8 +352,9 @@ pub unsafe extern "C" fn ct_nmi_enter() -> void noinstr {
 // period (observation due to Andy Lutomirski).
 //
     if (!rcu_is_watching_curr_cpu()) {
-    if (!in_nmi())
+    if (!in_nmi()) {
     rcu_task_enter();
+    }
 // RCU is not watching here ...
     ct_kernel_enter_state(CT_RCU_WATCHING);
 // ... but is watching here.
@@ -308,12 +391,10 @@ pub unsafe extern "C" fn ct_nmi_enter() -> void noinstr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_idle_enter() -> void noinstr {
-    void noinstr ct_idle_enter(void)
-    {
-    WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !raw_irqs_disabled());
+// WARN_ON_ONCE;
     ct_kernel_exit(false, CT_RCU_WATCHING + CT_STATE_IDLE);
     }
-    EXPORT_SYMBOL_GPL(ct_idle_enter);
+// EXPORT_SYMBOL_GPL;
 //
 // ct_idle_exit - inform RCU that current CPU is leaving idle
 //
@@ -325,14 +406,12 @@ pub unsafe extern "C" fn ct_idle_enter() -> void noinstr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_idle_exit() -> void noinstr {
-    void noinstr ct_idle_exit(void)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     raw_local_irq_save(flags);
     ct_kernel_enter(false, CT_RCU_WATCHING - CT_STATE_IDLE);
     raw_local_irq_restore(flags);
     }
-    EXPORT_SYMBOL_GPL(ct_idle_exit);
+// EXPORT_SYMBOL_GPL;
 //
 // ct_irq_enter - inform RCU that current CPU is entering irq away from idle
 //
@@ -357,8 +436,6 @@ pub unsafe extern "C" fn ct_idle_exit() -> void noinstr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_irq_enter() -> noinstr void {
-    noinstr void ct_irq_enter(void)
-    {
     lockdep_assert_irqs_disabled();
     ct_nmi_enter();
     }
@@ -383,8 +460,6 @@ pub unsafe extern "C" fn ct_irq_enter() -> noinstr void {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_irq_exit() -> noinstr void {
-    noinstr void ct_irq_exit(void)
-    {
     lockdep_assert_irqs_disabled();
     ct_nmi_exit();
     }
@@ -396,9 +471,7 @@ pub unsafe extern "C" fn ct_irq_exit() -> noinstr void {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_irq_enter_irqson() {
-    void ct_irq_enter_irqson(void)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     local_irq_save(flags);
     ct_irq_enter();
     local_irq_restore(flags);
@@ -411,9 +484,7 @@ pub unsafe extern "C" fn ct_irq_enter_irqson() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ct_irq_exit_irqson() {
-    void ct_irq_exit_irqson(void)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     local_irq_save(flags);
     ct_irq_exit();
     local_irq_restore(flags);
@@ -424,24 +495,21 @@ pub unsafe extern "C" fn ct_irq_exit_irqson() {
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    DEFINE_STATIC_KEY_FALSE_RO(context_tracking_key);
-    EXPORT_SYMBOL_GPL(context_tracking_key);
+// DEFINE_STATIC_KEY_FALSE_RO;
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 unsafe extern "C" fn context_tracking_recursion_enter() -> noinstr bool {
-    static noinstr bool context_tracking_recursion_enter(void)
-    {
-    int recursion;
+    let mut recursion = 0;
     recursion = __this_cpu_inc_return(context_tracking.recursion);
-    if (recursion == 1)
+    if (recursion == 1) {
     return true;
-    WARN_ONCE((recursion < 1), "Invalid context tracking recursion value %d\n", recursion);
+    }
+// WARN_ONCE;
     __this_cpu_dec(context_tracking.recursion);
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn context_tracking_recursion_exit() -> __always_inline void {
-    static __always_inline void context_tracking_recursion_exit(void)
-    {
     __this_cpu_dec(context_tracking.recursion);
     }
 //
@@ -456,15 +524,14 @@ unsafe extern "C" fn context_tracking_recursion_exit() -> __always_inline void {
 // because this function sets RCU in extended quiescent state.
 //
 #[no_mangle]
-pub unsafe extern "C" fn __ct_user_enter(state: enum ctx_state) -> void noinstr {
-    void noinstr __ct_user_enter(enum ctx_state state)
-    {
+pub unsafe extern "C" fn __ct_user_enter(state: ctx_state) -> void noinstr {
     struct context_tracking *ct = this_cpu_ptr(&context_tracking);
     lockdep_assert_irqs_disabled();
 // Kernel threads aren't supposed to go to userspace
-    WARN_ON_ONCE(!current.mm);
-    if (!context_tracking_recursion_enter())
+// WARN_ON_ONCE;
+    if (!context_tracking_recursion_enter()) {
     return;
+    }
     if (__ct_state() != state) {
     if (ct.active) {
 //
@@ -498,8 +565,9 @@ pub unsafe extern "C" fn __ct_user_enter(state: enum ctx_state) -> void noinstr 
 // cputime accounting but we don't support RCU extended quiescent state.
 // In this we case we don't care about any concurrency/ordering.
 //
-    if (!IS_ENABLED(CONFIG_CONTEXT_TRACKING_IDLE))
+    if (!IS_ENABLED(CONFIG_CONTEXT_TRACKING_IDLE)) {
     raw_atomic_set(&ct.state, state);
+    }
     } else {
 //
 // Even if context tracking is disabled on this CPU, because it's outside
@@ -530,7 +598,7 @@ pub unsafe extern "C" fn __ct_user_enter(state: enum ctx_state) -> void noinstr 
     }
     context_tracking_recursion_exit();
     }
-    EXPORT_SYMBOL_GPL(__ct_user_enter);
+// EXPORT_SYMBOL_GPL;
 //
 // OBSOLETE:
 // This function should be noinstr but the below local_irq_restore() is
@@ -541,10 +609,8 @@ pub unsafe extern "C" fn __ct_user_enter(state: enum ctx_state) -> void noinstr 
 // responsibility to call into context tracking with IRQs disabled.
 //
 #[no_mangle]
-pub unsafe extern "C" fn ct_user_enter(state: enum ctx_state) {
-    void ct_user_enter(enum ctx_state state)
-    {
-    unsigned long flags;
+pub unsafe extern "C" fn ct_user_enter(state: ctx_state) {
+    let mut flags = 0;
 //
 // Some contexts may involve an exception occuring in an irq,
 // leading to that nesting:
@@ -553,14 +619,15 @@ pub unsafe extern "C" fn ct_user_enter(state: enum ctx_state) {
 // helpers are enough to protect RCU uses inside the exception. So
 // just return immediately if we detect we are in an IRQ.
 //
-    if (in_interrupt())
+    if (in_interrupt()) {
     return;
+    }
     local_irq_save(flags);
     __ct_user_enter(state);
     local_irq_restore(flags);
     }
-    NOKPROBE_SYMBOL(ct_user_enter);
-    EXPORT_SYMBOL_GPL(ct_user_enter);
+// NOKPROBE_SYMBOL;
+// EXPORT_SYMBOL_GPL;
 //
 // user_enter_callable() - Unfortunate ASM callable version of user_enter() for
 // archs that didn't manage to check the context tracking
@@ -574,11 +641,9 @@ pub unsafe extern "C" fn ct_user_enter(state: enum ctx_state) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn user_enter_callable() {
-    void user_enter_callable(void)
-    {
     user_enter();
     }
-    NOKPROBE_SYMBOL(user_enter_callable);
+// NOKPROBE_SYMBOL;
 //
 // __ct_user_exit - Inform the context tracking that the CPU is
 // exiting user or guest mode and entering the kernel.
@@ -594,12 +659,11 @@ pub unsafe extern "C" fn user_enter_callable() {
 // handler without needing to know if we came from userspace or not.
 //
 #[no_mangle]
-pub unsafe extern "C" fn __ct_user_exit(state: enum ctx_state) -> void noinstr {
-    void noinstr __ct_user_exit(enum ctx_state state)
-    {
+pub unsafe extern "C" fn __ct_user_exit(state: ctx_state) -> void noinstr {
     struct context_tracking *ct = this_cpu_ptr(&context_tracking);
-    if (!context_tracking_recursion_enter())
+    if (!context_tracking_recursion_enter()) {
     return;
+    }
     if (__ct_state() == state) {
     if (ct.active) {
 //
@@ -618,8 +682,9 @@ pub unsafe extern "C" fn __ct_user_exit(state: enum ctx_state) -> void noinstr {
 // cputime accounting but we don't support RCU extended quiescent state.
 // In this we case we don't care about any concurrency/ordering.
 //
-    if (!IS_ENABLED(CONFIG_CONTEXT_TRACKING_IDLE))
+    if (!IS_ENABLED(CONFIG_CONTEXT_TRACKING_IDLE)) {
     raw_atomic_set(&ct.state, CT_STATE_KERNEL);
+    }
     } else {
     if (!IS_ENABLED(CONFIG_CONTEXT_TRACKING_IDLE)) {
 // Tracking for vtime only, no concurrent RCU EQS accounting
@@ -637,7 +702,7 @@ pub unsafe extern "C" fn __ct_user_exit(state: enum ctx_state) -> void noinstr {
     }
     context_tracking_recursion_exit();
     }
-    EXPORT_SYMBOL_GPL(__ct_user_exit);
+// EXPORT_SYMBOL_GPL;
 //
 // OBSOLETE:
 // This function should be noinstr but the below local_irq_save() is
@@ -648,18 +713,17 @@ pub unsafe extern "C" fn __ct_user_exit(state: enum ctx_state) -> void noinstr {
 // responsibility to call into context tracking with IRQs disabled.
 //
 #[no_mangle]
-pub unsafe extern "C" fn ct_user_exit(state: enum ctx_state) {
-    void ct_user_exit(enum ctx_state state)
-    {
-    unsigned long flags;
-    if (in_interrupt())
+pub unsafe extern "C" fn ct_user_exit(state: ctx_state) {
+    let mut flags = 0;
+    if (in_interrupt()) {
     return;
+    }
     local_irq_save(flags);
     __ct_user_exit(state);
     local_irq_restore(flags);
     }
-    NOKPROBE_SYMBOL(ct_user_exit);
-    EXPORT_SYMBOL_GPL(ct_user_exit);
+// NOKPROBE_SYMBOL;
+// EXPORT_SYMBOL_GPL;
 //
 // user_exit_callable() - Unfortunate ASM callable version of user_exit() for
 // archs that didn't manage to check the context tracking
@@ -673,22 +737,19 @@ pub unsafe extern "C" fn ct_user_exit(state: enum ctx_state) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn user_exit_callable() {
-    void user_exit_callable(void)
-    {
     user_exit();
     }
-    NOKPROBE_SYMBOL(user_exit_callable);
+// NOKPROBE_SYMBOL;
 #[no_mangle]
-pub unsafe extern "C" fn ct_cpu_track_user(cpu: c_int) -> void __init {
-    void __init ct_cpu_track_user(int cpu)
-    {
-    let mut initialized: static __initdata bool = false;
+pub unsafe extern "C" fn ct_cpu_track_user(cpu: c_int) -> c_int {
+pub static mut initialized: __initdata bool = false;
     if (!per_cpu(context_tracking.active, cpu)) {
     per_cpu(context_tracking.active, cpu) = true;
     static_branch_inc(&context_tracking_key);
     }
-    if (initialized)
+    if (initialized) {
     return;
+    }
 
 //
 // Set TIF_NOHZ to init/0 and let it propagate to all tasks through fork
@@ -696,16 +757,13 @@ pub unsafe extern "C" fn ct_cpu_track_user(cpu: c_int) -> void __init {
 //
     set_tsk_thread_flag(&init_task, TIF_NOHZ);
 
-    WARN_ON_ONCE(!tasklist_empty());
+// WARN_ON_ONCE;
     initialized = true;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn context_tracking_init() -> void __init {
-    void __init context_tracking_init(void)
-    {
-    int cpu;
+pub unsafe extern "C" fn context_tracking_init() -> c_int {
+    let mut cpu = 0;
     for_each_possible_cpu(cpu)
     ct_cpu_track_user(cpu);
     }
-

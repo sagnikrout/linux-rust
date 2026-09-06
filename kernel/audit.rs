@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 // audit -- definition of audit_context structure and supporting types
@@ -52,16 +149,16 @@ pub const AUDIT_NAMES: c_int = 5;
 #[repr(C)]
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub enum audit_state {
-    AUDIT_STATE_DISABLED,	/* Do not create per-task audit_context.
+    AUDIT_STATE_DISABLED,	// Do not create per-task audit_context.
 // No syscall-specific audit records can
 // be generated.
-    AUDIT_STATE_BUILD,	/* Create the per-task audit_context,
+    AUDIT_STATE_BUILD,	// Create the per-task audit_context,
 // and fill it in at syscall
 // entry time.  This makes a full
 // syscall record available if some
 // other part of the kernel decides it
 // should be recorded.
-    AUDIT_STATE_RECORD	/* Create the per-task audit_context,
+    AUDIT_STATE_RECORD	// Create the per-task audit_context,
 // always fill it in at syscall entry
 // time, and always write out the audit
 // record at syscall exit time.
@@ -81,8 +178,8 @@ pub struct audit_entry {
 pub struct audit_cap_data {
     pub permitted: kernel_cap_t,
     pub inheritable: kernel_cap_t,
-    pub /: *mut *mut unsigned int fE; / effective bit of file cap,
-    pub /: *mut *mut kernel_cap_t effective; / effective set of process,
+//     pub /: *mut *mut unsigned int fE; / effective bit of file cap,
+//     pub /: *mut *mut kernel_cap_t effective; / effective set of process,
 }
 
 // When fs/namei.c:getname() is called, we store the pointer in name and bump
@@ -93,10 +190,10 @@ pub struct audit_cap_data {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_names {
-    pub /: *mut *mut list_head list; / audit_context->names_list,
+//     pub /: *mut *mut list_head list; / audit_context->names_list,
     pub name: *mut filename,
-    pub /: *mut *mut int name_len; / number of chars to log,
-    pub /: *mut *mut bool hidden; / don't log this record,
+//     pub /: *mut *mut int name_len; / number of chars to log,
+//     pub /: *mut *mut bool hidden; / don't log this record,
     pub ino: u64,
     pub dev: dev_t,
     pub mode: umode_t,
@@ -106,7 +203,7 @@ pub struct audit_names {
     pub oprop: lsm_prop,
     pub fcap: audit_cap_data,
     pub fcap_ver: c_uint,
-    pub /: *mut *mut unsigned char type; / record type,
+//     pub /: *mut *mut unsigned char type; / record type,
 //
 // This was an allocated audit_names and not from the array of
 // names allocated in the task audit context.  Thus this name
@@ -118,32 +215,32 @@ pub struct audit_names {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_proctitle {
-    pub /: *mut *mut int len; / length of the cmdline field.,
-    pub /: *mut *mut *mut char value; / the cmdline field,
+//     pub /: *mut *mut int len; / length of the cmdline field.,
+//     pub /: *mut *mut *mut char value; / the cmdline field,
 }
 
 // A timestamp/serial pair to identify an event
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_stamp {
-    pub /: *mut *mut timespec64 ctime; / time of syscall entry,
-    pub /: *mut *mut unsigned int serial; / serial number for record,
+//     pub /: *mut *mut timespec64 ctime; / time of syscall entry,
+//     pub /: *mut *mut unsigned int serial; / serial number for record,
 }
 
 // The per-task audit context.
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_context {
-    pub /: *mut *mut int dummy; / must be the first element,
+//     pub /: *mut *mut int dummy; / must be the first element,
     pub context: },
     pub current_state: audit_state state,,
-    pub /: *mut *mut audit_stamp stamp; / event identifier,
-    pub /: *mut *mut int major; / syscall number,
-    pub /: *mut *mut int uring_op; / uring operation,
-    pub /: *mut *mut unsigned long argv[4]; / syscall arguments,
-    pub /: *mut *mut long return_code;/ syscall return code,
+//     pub /: *mut *mut audit_stamp stamp; / event identifier,
+//     pub /: *mut *mut int major; / syscall number,
+//     pub /: *mut *mut int uring_op; / uring operation,
+//     pub /: *mut *mut unsigned long argv[4]; / syscall arguments,
+//     pub /: *mut *mut long return_code;/ syscall return code,
     pub prio: u64,
-    pub /: *mut *mut int return_valid; / return code is valid,
+//     pub /: *mut *mut int return_valid; / return code is valid,
 //
 // The names_list is the list of all audit_names collected during this
 // syscall.  The first AUDIT_NAMES entries in the names_list will
@@ -153,9 +250,9 @@ pub struct audit_context {
 // by running the names_list.
 //
     pub preallocated_names: [audit_names; AUDIT_NAMES],
-    pub /: *mut *mut int name_count; / total records in names_list,
-    pub /: *mut *mut list_head names_list; / audit_names->list anchor,
-    pub /: *mut *mut *mut char filterkey; / key for rule that triggered record,
+//     pub /: *mut *mut int name_count; / total records in names_list,
+//     pub /: *mut *mut list_head names_list; / audit_names->list anchor,
+//     pub /: *mut *mut *mut char filterkey; / key for rule that triggered record,
     pub pwd: path,
     pub aux: *mut audit_aux_data,
     pub aux_pids: *mut audit_aux_data,

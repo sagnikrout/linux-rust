@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -48,8 +71,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Maximum length of a cpumask that can be specified in
 // the TASKSTATS_CMD_ATTR_REGISTER/DEREGISTER_CPUMASK attribute
 //
-
-    static DEFINE_PER_CPU(__u32, taskstats_seqnum);
+// static DEFINE_PER_CPU(__u32, taskstats_seqnum);
     static int family_registered;
     struct kmem_cache *taskstats_cache;
     static struct genl_family family;
@@ -75,8 +97,7 @@ pub struct listener_list {
     pub sem: rw_semaphore,
     pub list: list_head,
 }
-
-    static DEFINE_PER_CPU(struct listener_list, listener_array);
+// static DEFINE_PER_CPU(struct listener_list, listener_array);
     enum actions {
     REGISTER,
     DEREGISTER,
@@ -110,8 +131,6 @@ pub struct listener_list {
 //
 #[no_mangle]
 unsafe extern "C" fn send_reply(skb: *mut sk_buff, info: *mut genl_info) -> c_int {
-    static int send_reply(struct sk_buff *skb, struct genl_info *info)
-    {
     struct genlmsghdr *genlhdr = nlmsg_data(nlmsg_hdr(skb));
     void *reply = genlmsg_data(genlhdr);
     genlmsg_end(skb, reply);
@@ -162,8 +181,6 @@ unsafe extern "C" fn send_reply(skb: *mut sk_buff, info: *mut genl_info) -> c_in
     }
 #[no_mangle]
 unsafe extern "C" fn exe_add_tsk(stats: *mut taskstats, tsk: *mut task_struct) {
-    static void exe_add_tsk(struct taskstats *stats, struct task_struct *tsk)
-    {
 // No idea if I'm allowed to access that here, now.
     struct file *exe_file = get_task_exe_file(tsk);
     if (exe_file) {
@@ -201,8 +218,6 @@ unsafe extern "C" fn exe_add_tsk(stats: *mut taskstats, tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn fill_stats_for_pid(pid: pid_t, stats: *mut taskstats) -> c_int {
-    static int fill_stats_for_pid(pid_t pid, struct taskstats *stats)
-    {
     struct task_struct *tsk;
     tsk = find_get_task_by_vpid(pid);
     if (!tsk)
@@ -235,8 +250,6 @@ unsafe extern "C" fn fill_stats_for_pid(pid: pid_t, stats: *mut taskstats) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn fill_stats_for_tgid(tgid: pid_t, stats: *mut taskstats) -> c_int {
-    static int fill_stats_for_tgid(pid_t tgid, struct taskstats *stats)
-    {
     struct task_struct *tsk, *first;
     unsigned long flags;
     let mut rc: c_int = -ESRCH;
@@ -272,8 +285,6 @@ unsafe extern "C" fn fill_stats_for_tgid(tgid: pid_t, stats: *mut taskstats) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn fill_tgid_exit(tsk: *mut task_struct) {
-    static void fill_tgid_exit(struct task_struct *tsk)
-    {
     unsigned long flags;
     u64 now_ns;
     spin_lock_irqsave(&tsk.sighand.siglock, flags);
@@ -287,8 +298,6 @@ unsafe extern "C" fn fill_tgid_exit(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn add_del_listener(pid: pid_t, mask: *const cpumask, isadd: c_int) -> c_int {
-    static int add_del_listener(pid_t pid, const struct cpumask *mask, int isadd)
-    {
     struct listener_list *listeners;
     struct listener *s, *tmp, *s2;
     unsigned int cpu;
@@ -341,8 +350,6 @@ unsafe extern "C" fn add_del_listener(pid: pid_t, mask: *const cpumask, isadd: c
     }
 #[no_mangle]
 unsafe extern "C" fn parse(na: *mut nlattr, mask: *mut cpumask) -> c_int {
-    static int parse(struct nlattr *na, struct cpumask *mask)
-    {
     char *data;
     int len;
     int ret;
@@ -385,8 +392,6 @@ unsafe extern "C" fn parse(na: *mut nlattr, mask: *mut cpumask) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroupstats_user_cmd(skb: *mut sk_buff, info: *mut genl_info) -> c_int {
-    static int cgroupstats_user_cmd(struct sk_buff *skb, struct genl_info *info)
-    {
     let mut rc: c_int = 0;
     struct sk_buff *rep_skb;
     struct cgroupstats *stats;
@@ -434,8 +439,6 @@ unsafe extern "C" fn cgroupstats_user_cmd(skb: *mut sk_buff, info: *mut genl_inf
     }
 #[no_mangle]
 unsafe extern "C" fn taskstats_packet_size() -> usize {
-    static size_t taskstats_packet_size(void)
-    {
     size_t size;
     size = nla_total_size(sizeof(u32)) +
     nla_total_size_64bit(sizeof(struct taskstats)) +
@@ -444,8 +447,6 @@ unsafe extern "C" fn taskstats_packet_size() -> usize {
     }
 #[no_mangle]
 unsafe extern "C" fn cmd_attr_pid(info: *mut genl_info) -> c_int {
-    static int cmd_attr_pid(struct genl_info *info)
-    {
     struct taskstats *stats;
     struct sk_buff *rep_skb;
     size_t size;
@@ -470,8 +471,6 @@ unsafe extern "C" fn cmd_attr_pid(info: *mut genl_info) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn cmd_attr_tgid(info: *mut genl_info) -> c_int {
-    static int cmd_attr_tgid(struct genl_info *info)
-    {
     struct taskstats *stats;
     struct sk_buff *rep_skb;
     size_t size;
@@ -496,8 +495,6 @@ unsafe extern "C" fn cmd_attr_tgid(info: *mut genl_info) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn taskstats_user_cmd(skb: *mut sk_buff, info: *mut genl_info) -> c_int {
-    static int taskstats_user_cmd(struct sk_buff *skb, struct genl_info *info)
-    {
     if (info.attrs[TASKSTATS_CMD_ATTR_REGISTER_CPUMASK])
     return cmd_attr_cpumask(info,
     TASKSTATS_CMD_ATTR_REGISTER_CPUMASK,
@@ -548,8 +545,6 @@ pub unsafe extern "C" fn if(_arg: info->attrs[TASKSTATS_CMD_ATTR_TGID]) -> else 
 // Send pid data out on exit
 #[no_mangle]
 pub unsafe extern "C" fn taskstats_exit(tsk: *mut task_struct, group_dead: c_int) {
-    void taskstats_exit(struct task_struct *tsk, int group_dead)
-    {
     int rc;
     struct listener_list *listeners;
     struct taskstats *stats;
@@ -627,9 +622,7 @@ pub unsafe extern "C" fn taskstats_exit(tsk: *mut task_struct, group_dead: c_int
     };
 // Needed early in initialization
 #[no_mangle]
-pub unsafe extern "C" fn taskstats_init_early() -> void __init {
-    void __init taskstats_init_early(void)
-    {
+pub unsafe extern "C" fn taskstats_init_early() -> c_int {
     unsigned int i;
     taskstats_cache = KMEM_CACHE(taskstats, SLAB_PANIC);
     for_each_possible_cpu(i) {
@@ -638,9 +631,7 @@ pub unsafe extern "C" fn taskstats_init_early() -> void __init {
     }
     }
 #[no_mangle]
-unsafe extern "C" fn taskstats_init() -> int __init {
-    static int __init taskstats_init(void)
-    {
+unsafe extern "C" fn taskstats_init() -> c_int {
     int rc;
     rc = genl_register_family(&family);
     if (rc)
@@ -654,3 +645,7 @@ unsafe extern "C" fn taskstats_init() -> int __init {
 // mechanisms precedes initialization of the taskstats interface
 //
     late_initcall(taskstats_init);
+
+}
+}
+}

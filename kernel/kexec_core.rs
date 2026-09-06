@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -42,10 +139,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2002-2004 Eric Biederman  <ebiederm@xmission.com>
 //
 
-    let mut __kexec_lock: core::sync::atomic::AtomicI32 = ATOMIC_INIT(0);
+pub static mut __kexec_lock: core::sync::atomic::AtomicI32 = ATOMIC_INIT(0);
 // Flag to indicate we are going to kexec a new kernel
-    let mut kexec_in_progress: bool = false;
-    bool kexec_file_dbg_print;
+pub static mut kexec_in_progress: bool = false;
+    let mut kexec_file_dbg_print = 0;
 //
 // When kexec transitions to the new kernel there is a one-to-one
 // mapping between physical and virtual addresses.  On processors
@@ -94,12 +191,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     unsigned long dest);
 #[no_mangle]
 pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int {
-    int sanity_check_segment_list(struct kimage *image)
-    {
-    int i;
-    let mut nr_segments: c_ulong = image.nr_segments;
-    let mut total_pages: c_ulong = 0;
-    let mut nr_pages: c_ulong = totalram_pages();
+    let mut i = 0;
+pub static mut nr_segments: c_ulong = image.nr_segments;
+pub static mut total_pages: c_ulong = 0;
+pub static mut nr_pages: c_ulong = totalram_pages();
 //
 // Verify we have good destination addresses.  The caller is
 // responsible for making certain we don't attempt to load
@@ -117,12 +212,15 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
     unsigned long mstart, mend;
     mstart = image.segment[i].mem;
     mend   = mstart + image.segment[i].memsz;
-    if (mstart > mend)
+    if (mstart > mend) {
     return -EADDRNOTAVAIL;
-    if ((mstart & ~PAGE_MASK) || (mend & ~PAGE_MASK))
+    }
+    if ((mstart & ~PAGE_MASK) || (mend & ~PAGE_MASK)) {
     return -EADDRNOTAVAIL;
-    if (mend >= KEXEC_DESTINATION_MEMORY_LIMIT)
+    }
+    if (mend >= KEXEC_DESTINATION_MEMORY_LIMIT) {
     return -EADDRNOTAVAIL;
+    }
     }
 // Verify our destination addresses do not overlap.
 // If we alloed overlapping destination addresses
@@ -131,7 +229,7 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
 //
     for (i = 0; i < nr_segments; i++) {
     unsigned long mstart, mend;
-    unsigned long j;
+    let mut j = 0;
     mstart = image.segment[i].mem;
     mend   = mstart + image.segment[i].memsz;
     for (j = 0; j < i; j++) {
@@ -139,8 +237,9 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
     pstart = image.segment[j].mem;
     pend   = pstart + image.segment[j].memsz;
 // Do the segments overlap ?
-    if ((mend > pstart) && (mstart < pend))
+    if ((mend > pstart) && (mstart < pend)) {
     return -EINVAL;
+    }
     }
     }
 // Ensure our buffer sizes are strictly less than
@@ -149,8 +248,9 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
 // later on.
 //
     for (i = 0; i < nr_segments; i++) {
-    if (image.segment[i].bufsz > image.segment[i].memsz)
+    if (image.segment[i].bufsz > image.segment[i].memsz) {
     return -EINVAL;
+    }
     }
 //
 // Verify that no more than half of memory will be consumed. If the
@@ -158,12 +258,14 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
 // wasted allocating pages, which can cause a soft lockup.
 //
     for (i = 0; i < nr_segments; i++) {
-    if (PAGE_COUNT(image.segment[i].memsz) > nr_pages / 2)
+    if (PAGE_COUNT(image.segment[i].memsz) > nr_pages / 2) {
     return -EINVAL;
+    }
     total_pages += PAGE_COUNT(image.segment[i].memsz);
     }
-    if (total_pages > nr_pages / 2)
+    if (total_pages > nr_pages / 2) {
     return -EINVAL;
+    }
 
 //
 // Verify we have good destination addresses.  Normally
@@ -197,23 +299,24 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
     accept_memory(image.segment[i].mem, image.segment[i].memsz);
     return 0;
     }
-    struct kimage *do_kimage_alloc_init(void)
-    {
-    struct kimage *image;
+#[no_mangle]
+pub unsafe extern "C" fn do_kimage_alloc_init() {
+    let mut image = core::ptr::null_mut();
 // Allocate a controlling structure
     image = kzalloc_obj(*image);
-    if (!image)
+    if (!image) {
     return core::ptr::null_mut();
+    }
     image.entry = &image.head;
     image.last_entry = &image.head;
     image.control_page = ~0; /* By default this does not apply */
     image.type = KEXEC_TYPE_DEFAULT;
 // Initialize the list of control pages
-    INIT_LIST_HEAD(&image.control_pages);
+// INIT_LIST_HEAD;
 // Initialize the list of destination pages
-    INIT_LIST_HEAD(&image.dest_pages);
+// INIT_LIST_HEAD;
 // Initialize the list of unusable pages
-    INIT_LIST_HEAD(&image.unusable_pages);
+// INIT_LIST_HEAD;
 
     image.hp_action = KEXEC_CRASH_HP_NONE;
     image.elfcorehdr_index = -1;
@@ -221,25 +324,25 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
 
     return image;
     }
-    int kimage_is_destination_range(struct kimage *image,
-    unsigned long start,
-    unsigned long end)
-    {
-    unsigned long i;
+#[no_mangle]
+pub unsafe extern "C" fn kimage_is_destination_range() {
+    let mut i = 0;
     for (i = 0; i < image.nr_segments; i++) {
     unsigned long mstart, mend;
     mstart = image.segment[i].mem;
     mend = mstart + image.segment[i].memsz - 1;
-    if ((end >= mstart) && (start <= mend))
+    if ((end >= mstart) && (start <= mend)) {
     return 1;
+    }
     }
     return 0;
     }
-    static struct page *kimage_alloc_pages(gfp_t gfp_mask, unsigned int order)
-    {
-    struct page *pages;
-    if (fatal_signal_pending(current))
+#[no_mangle]
+pub unsafe extern "C" fn kimage_alloc_pages() {
+    let mut pages = core::ptr::null_mut();
+    if (fatal_signal_pending(current)) {
     return core::ptr::null_mut();
+    }
     pages = alloc_pages(gfp_mask & ~__GFP_ZERO, order);
     if (pages) {
     unsigned int count, i;
@@ -250,16 +353,15 @@ pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int 
     SetPageReserved(pages + i);
     arch_kexec_post_alloc_pages(page_address(pages), count,
     gfp_mask);
-    if (gfp_mask & __GFP_ZERO)
+    if (gfp_mask & __GFP_ZERO) {
     for (i = 0; i < count; i++)
+    }
     clear_highpage(pages + i);
     }
     return pages;
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_free_pages(page: *mut page) {
-    static void kimage_free_pages(struct page *page)
-    {
     unsigned int order, count, i;
     order = page_private(page);
     count = 1 << order;
@@ -270,17 +372,14 @@ unsafe extern "C" fn kimage_free_pages(page: *mut page) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
-    void kimage_free_page_list(struct list_head *list)
-    {
     struct page *page, *next;
     list_for_each_entry_safe(page, next, list, lru) {
     list_del(&page.lru);
     kimage_free_pages(page);
     }
     }
-    static struct page *kimage_alloc_normal_control_pages(struct kimage *image,
-    unsigned int order)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_alloc_normal_control_pages() {
 // Control pages are special, they are the intermediaries
 // that are needed while we copy the rest of the pages
 // to their final resting place.  As such they must
@@ -294,19 +393,20 @@ pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
 //
 // At worst this runs in O(N) of the image size.
 //
-    struct list_head extra_pages;
-    struct page *pages;
-    unsigned int count;
+    let mut extra_pages;
+    let mut pages = core::ptr::null_mut();
+    let mut count = 0;
     count = 1 << order;
-    INIT_LIST_HEAD(&extra_pages);
+// INIT_LIST_HEAD;
 // Loop while I can allocate a page and the page allocated
 // is a destination page.
 //
     do {
     unsigned long pfn, epfn, addr, eaddr;
     pages = kimage_alloc_pages(KEXEC_CONTROL_MEMORY_GFP, order);
-    if (!pages)
+    if (!pages) {
     break;
+    }
     pfn   = page_to_boot_pfn(pages);
     epfn  = pfn + count;
     addr  = pfn << PAGE_SHIFT;
@@ -338,9 +438,8 @@ pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
     return pages;
     }
 
-    static struct page *kimage_alloc_crash_control_pages(struct kimage *image,
-    unsigned int order)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_alloc_crash_control_pages() {
 // Control pages are special, they are the intermediaries
 // that are needed while we copy the rest of the pages
 // to their final resting place.  As such they must
@@ -363,16 +462,17 @@ pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
 // of the memory up to and including the hole.
 //
     unsigned long hole_start, hole_end, size;
-    struct page *pages;
+    let mut pages = core::ptr::null_mut();
     pages = core::ptr::null_mut();
     size = (1 << order) << PAGE_SHIFT;
     hole_start = ALIGN(image.control_page, size);
     hole_end   = hole_start + size - 1;
     while (hole_end <= crashk_res.end) {
-    unsigned long i;
+    let mut i = 0;
     cond_resched();
-    if (hole_end > KEXEC_CRASH_CONTROL_MEMORY_LIMIT)
+    if (hole_end > KEXEC_CRASH_CONTROL_MEMORY_LIMIT) {
     break;
+    }
 // See if I overlap any of the segments
     for (i = 0; i < image.nr_segments; i++) {
     unsigned long mstart, mend;
@@ -393,21 +493,21 @@ pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
     }
     }
 // Ensure that these pages are decrypted if SME is enabled.
-    if (pages)
+    if (pages) {
     arch_kexec_post_alloc_pages(page_address(pages), 1 << order, 0);
+    }
     return pages;
     }
 
-    struct page *kimage_alloc_control_pages(struct kimage *image,
-    unsigned int order)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_alloc_control_pages() {
     struct page *pages = core::ptr::null_mut();
-    switch (image.type) {
-    case KEXEC_TYPE_DEFAULT:
+    match (image.type) {
+    KEXEC_TYPE_DEFAULT => {
     pages = kimage_alloc_normal_control_pages(image, order);
     break;
 
-    case KEXEC_TYPE_CRASH:
+    KEXEC_TYPE_CRASH => {
     pages = kimage_alloc_crash_control_pages(image, order);
     break;
 
@@ -416,16 +516,16 @@ pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_add_entry(image: *mut kimage, entry: kimage_entry_t) -> c_int {
-    static int kimage_add_entry(struct kimage *image, kimage_entry_t entry)
-    {
-    if (*image.entry != 0)
+    if (*image.entry != 0) {
     image.entry++;
+    }
     if (image.entry == image.last_entry) {
-    kimage_entry_t *ind_page;
-    struct page *page;
+    let mut ind_page = core::ptr::null_mut();
+    let mut page = core::ptr::null_mut();
     page = kimage_alloc_page(image, GFP_KERNEL, KIMAGE_NO_DEST);
-    if (!page)
+    if (!page) {
     return -ENOMEM;
+    }
     ind_page = page_address(page);
 // image->entry = virt_to_boot_phys(ind_page) | IND_INDIRECTION;
     image.entry = ind_page;
@@ -437,23 +537,18 @@ unsafe extern "C" fn kimage_add_entry(image: *mut kimage, entry: kimage_entry_t)
 // image->entry = 0;
     return 0;
     }
-    static int kimage_set_destination(struct kimage *image,
-    unsigned long destination)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_set_destination() {
     destination &= PAGE_MASK;
     return kimage_add_entry(image, destination | IND_DESTINATION);
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_add_page(image: *mut kimage, page: c_ulong) -> c_int {
-    static int kimage_add_page(struct kimage *image, unsigned long page)
-    {
     page &= PAGE_MASK;
     return kimage_add_entry(image, page | IND_SOURCE);
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_free_extra_pages(image: *mut kimage) {
-    static void kimage_free_extra_pages(struct kimage *image)
-    {
 // Walk through and free any extra destination pages I may have
     kimage_free_page_list(&image.dest_pages);
 // Walk through and free any unusable pages I have cached
@@ -461,34 +556,30 @@ unsafe extern "C" fn kimage_free_extra_pages(image: *mut kimage) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kimage_terminate(image: *mut kimage) {
-    void kimage_terminate(struct kimage *image)
-    {
-    if (*image.entry != 0)
+    if (*image.entry != 0) {
     image.entry++;
+    }
 // image->entry = IND_DONE;
     }
 
-    for (ptr = &image.head; (entry = *ptr) && !(entry & IND_DONE); \
-    ptr = (entry & IND_INDIRECTION) ? \
+    for (ptr = &image.head; (entry = *ptr) && !(entry & IND_DONE); 
+    ptr = (entry & IND_INDIRECTION) ? 
     boot_phys_to_virt((entry & PAGE_MASK)) : ptr + 1)
 #[no_mangle]
 unsafe extern "C" fn kimage_free_entry(entry: kimage_entry_t) {
-    static void kimage_free_entry(kimage_entry_t entry)
-    {
-    struct page *page;
+    let mut page = core::ptr::null_mut();
     page = boot_pfn_to_page(entry >> PAGE_SHIFT);
     kimage_free_pages(page);
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_free_cma(image: *mut kimage) {
-    static void kimage_free_cma(struct kimage *image)
-    {
-    unsigned long i;
+    let mut i = 0;
     for (i = 0; i < image.nr_segments; i++) {
     struct page *cma = image.segment_cma[i];
-    let mut nr_pages: u32 = image.segment[i].memsz >> PAGE_SHIFT;
-    if (!cma)
+pub static mut nr_pages: u32 = image.segment[i].memsz >> PAGE_SHIFT;
+    if (!cma) {
     continue;
+    }
     arch_kexec_pre_free_pages(page_address(cma), nr_pages);
     dma_release_from_contiguous(core::ptr::null_mut(), cma, nr_pages);
     image.segment_cma[i] = core::ptr::null_mut();
@@ -496,12 +587,11 @@ unsafe extern "C" fn kimage_free_cma(image: *mut kimage) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kimage_free(image: *mut kimage) {
-    void kimage_free(struct kimage *image)
-    {
     kimage_entry_t *ptr, entry;
-    let mut ind: kimage_entry_t = 0;
-    if (!image)
+pub static mut ind: kimage_entry_t = 0;
+    if (!image) {
     return;
+    }
 
     if (image.vmcoreinfo_data_copy) {
     crash_update_vmcoreinfo_safecopy(core::ptr::null_mut());
@@ -512,8 +602,9 @@ pub unsafe extern "C" fn kimage_free(image: *mut kimage) {
     for_each_kimage_entry(image, ptr, entry) {
     if (entry & IND_INDIRECTION) {
 // Free the previous indirection page
-    if (ind & IND_INDIRECTION)
+    if (ind & IND_INDIRECTION) {
     kimage_free_entry(ind);
+    }
 // Save this indirection page until we are
 // done with it.
 //
@@ -522,8 +613,9 @@ pub unsafe extern "C" fn kimage_free(image: *mut kimage) {
     kimage_free_entry(entry);
     }
 // Free the final indirection page
-    if (ind & IND_INDIRECTION)
+    if (ind & IND_INDIRECTION) {
     kimage_free_entry(ind);
+    }
 // Handle any machine specific cleanup
     machine_kexec_cleanup(image);
 // Free the kexec control pages...
@@ -534,31 +626,31 @@ pub unsafe extern "C" fn kimage_free(image: *mut kimage) {
 // Free up any temporary buffers allocated. This might hit if
 // error occurred much later after buffer allocation.
 //
-    if (image.file_mode)
+    if (image.file_mode) {
     kimage_file_post_load_cleanup(image);
+    }
     kfree(image);
     }
-    static kimage_entry_t *kimage_dst_used(struct kimage *image,
-    unsigned long page)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_dst_used() {
     kimage_entry_t *ptr, entry;
-    let mut destination: c_ulong = 0;
+pub static mut destination: c_ulong = 0;
     for_each_kimage_entry(image, ptr, entry) {
-    if (entry & IND_DESTINATION)
+    if (entry & IND_DESTINATION) {
     destination = entry & PAGE_MASK;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
-    if (page == destination)
+    if (page == destination) {
     return ptr;
+    }
     destination += PAGE_SIZE;
     }
     }
     return core::ptr::null_mut();
     }
-    static struct page *kimage_alloc_page(struct kimage *image,
-    gfp_t gfp_mask,
-    unsigned long destination)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_alloc_page() {
 //
 // Here we implement safeguards to ensure that a source page
 // is not copied to its destination page before the data on
@@ -577,8 +669,8 @@ pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
 // time.   If the runtime is a problem the data structures can
 // be fixed.
 //
-    struct page *page;
-    unsigned long addr;
+    let mut page = core::ptr::null_mut();
+    let mut addr = 0;
 //
 // Walk through the list of destination pages, and see if I
 // have a match.
@@ -592,11 +684,12 @@ pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
     }
     page = core::ptr::null_mut();
     while (1) {
-    kimage_entry_t *old;
+    let mut old = core::ptr::null_mut();
 // Allocate a page, if we run out of memory give up
     page = kimage_alloc_pages(gfp_mask, 0);
-    if (!page)
+    if (!page) {
     return core::ptr::null_mut();
+    }
 // If the page cannot be used file it away
     if (page_to_boot_pfn(page) >
     (KEXEC_SOURCE_MEMORY_LIMIT >> PAGE_SHIFT)) {
@@ -605,8 +698,9 @@ pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
     }
     addr = page_to_boot_pfn(page) << PAGE_SHIFT;
 // If it is the destination page we want use it
-    if (addr == destination)
+    if (addr == destination) {
     break;
+    }
 // If the page is not a destination page use it
     if (!kimage_is_destination_range(image, addr,
     addr + PAGE_SIZE - 1))
@@ -619,8 +713,8 @@ pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
     old = kimage_dst_used(image, addr);
     if (old) {
 // If so move it
-    unsigned long old_addr;
-    struct page *old_page;
+    let mut old_addr = 0;
+    let mut old_page = core::ptr::null_mut();
     old_addr = *old & PAGE_MASK;
     old_page = boot_pfn_to_page(old_addr >> PAGE_SHIFT);
     copy_highpage(page, old_page);
@@ -644,19 +738,19 @@ pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_load_cma_segment(image: *mut kimage, idx: c_int) -> c_int {
-    static int kimage_load_cma_segment(struct kimage *image, int idx)
-    {
     struct kexec_segment *segment = &image.segment[idx];
     struct page *cma = image.segment_cma[idx];
     char *ptr = page_address(cma);
     size_t ubytes, mbytes;
-    let mut result: c_int = 0;
+pub static mut result: c_int = 0;
     unsigned char __user *buf = core::ptr::null_mut();
     unsigned char *kbuf = core::ptr::null_mut();
-    if (image.file_mode)
+    if (image.file_mode) {
     kbuf = segment.kbuf;
-    else
+    }
+    else {
     buf = segment.buf;
+    }
     ubytes = segment.bufsz;
     mbytes = segment.memsz;
 // Then copy from source buffer to the CMA one
@@ -666,15 +760,19 @@ unsafe extern "C" fn kimage_load_cma_segment(image: *mut kimage, idx: c_int) -> 
     uchunk = min(ubytes, mchunk);
     if (uchunk) {
 // For file based kexec, source pages are in kernel memory
-    if (image.file_mode)
+    if (image.file_mode) {
     memcpy(ptr, kbuf, uchunk);
-    else
+    }
+    else {
     result = copy_from_user(ptr, buf, uchunk);
+    }
     ubytes -= uchunk;
-    if (image.file_mode)
+    if (image.file_mode) {
     kbuf += uchunk;
-    else
+    }
+    else {
     buf += uchunk;
+    }
     }
     if (result) {
     result = -EFAULT;
@@ -691,29 +789,31 @@ unsafe extern "C" fn kimage_load_cma_segment(image: *mut kimage, idx: c_int) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) -> c_int {
-    static int kimage_load_normal_segment(struct kimage *image, int idx)
-    {
     struct kexec_segment *segment = &image.segment[idx];
-    unsigned long maddr;
+    let mut maddr = 0;
     size_t ubytes, mbytes;
-    int result;
+    let mut result = 0;
     unsigned char __user *buf = core::ptr::null_mut();
     unsigned char *kbuf = core::ptr::null_mut();
-    if (image.file_mode)
+    if (image.file_mode) {
     kbuf = segment.kbuf;
-    else
+    }
+    else {
     buf = segment.buf;
+    }
     ubytes = segment.bufsz;
     mbytes = segment.memsz;
     maddr = segment.mem;
-    if (image.segment_cma[idx])
+    if (image.segment_cma[idx]) {
     return kimage_load_cma_segment(image, idx);
+    }
     result = kimage_set_destination(image, maddr);
-    if (result < 0)
+    if (result < 0) {
     goto out;
+    }
     while (mbytes) {
-    struct page *page;
-    char *ptr;
+    let mut page = core::ptr::null_mut();
+    let mut ptr = core::ptr::null_mut();
     size_t uchunk, mchunk;
     page = kimage_alloc_page(image, GFP_HIGHUSER, maddr);
     if (!page) {
@@ -722,8 +822,9 @@ unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) 
     }
     result = kimage_add_page(image, page_to_boot_pfn(page)
     << PAGE_SHIFT);
-    if (result < 0)
+    if (result < 0) {
     goto out;
+    }
     ptr = kmap_local_page(page);
 // Start with a clear page
     clear_page(ptr);
@@ -731,15 +832,19 @@ unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) 
     uchunk = min(ubytes, mchunk);
     if (uchunk) {
 // For file based kexec, source pages are in kernel memory
-    if (image.file_mode)
+    if (image.file_mode) {
     memcpy(ptr, kbuf, uchunk);
-    else
+    }
+    else {
     result = copy_from_user(ptr, buf, uchunk);
+    }
     ubytes -= uchunk;
-    if (image.file_mode)
+    if (image.file_mode) {
     kbuf += uchunk;
-    else
+    }
+    else {
     buf += uchunk;
+    }
     }
     kunmap_local(ptr);
     if (result) {
@@ -756,29 +861,29 @@ unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) 
 
 #[no_mangle]
 unsafe extern "C" fn kimage_load_crash_segment(image: *mut kimage, idx: c_int) -> c_int {
-    static int kimage_load_crash_segment(struct kimage *image, int idx)
-    {
 // For crash dumps kernels we simply copy the data from
 // user space to it's destination.
 // We do things a page at a time for the sake of kmap.
 //
     struct kexec_segment *segment = &image.segment[idx];
-    unsigned long maddr;
+    let mut maddr = 0;
     size_t ubytes, mbytes;
-    int result;
+    let mut result = 0;
     unsigned char __user *buf = core::ptr::null_mut();
     unsigned char *kbuf = core::ptr::null_mut();
     result = 0;
-    if (image.file_mode)
+    if (image.file_mode) {
     kbuf = segment.kbuf;
-    else
+    }
+    else {
     buf = segment.buf;
+    }
     ubytes = segment.bufsz;
     mbytes = segment.memsz;
     maddr = segment.mem;
     while (mbytes) {
-    struct page *page;
-    char *ptr;
+    let mut page = core::ptr::null_mut();
+    let mut ptr = core::ptr::null_mut();
     size_t uchunk, mchunk;
     page = boot_pfn_to_page(maddr >> PAGE_SHIFT);
     if (!page) {
@@ -795,15 +900,19 @@ unsafe extern "C" fn kimage_load_crash_segment(image: *mut kimage, idx: c_int) -
     }
     if (uchunk) {
 // For file based kexec, source pages are in kernel memory
-    if (image.file_mode)
+    if (image.file_mode) {
     memcpy(ptr, kbuf, uchunk);
-    else
+    }
+    else {
     result = copy_from_user(ptr, buf, uchunk);
+    }
     ubytes -= uchunk;
-    if (image.file_mode)
+    if (image.file_mode) {
     kbuf += uchunk;
-    else
+    }
+    else {
     buf += uchunk;
+    }
     }
     kexec_flush_icache_page(page);
     kunmap_local(ptr);
@@ -822,34 +931,33 @@ unsafe extern "C" fn kimage_load_crash_segment(image: *mut kimage, idx: c_int) -
 
 #[no_mangle]
 pub unsafe extern "C" fn kimage_load_segment(image: *mut kimage, idx: c_int) -> c_int {
-    int kimage_load_segment(struct kimage *image, int idx)
-    {
-    let mut result: c_int = -ENOMEM;
-    switch (image.type) {
-    case KEXEC_TYPE_DEFAULT:
+pub static mut result: c_int = -ENOMEM;
+    match (image.type) {
+    KEXEC_TYPE_DEFAULT => {
     result = kimage_load_normal_segment(image, idx);
     break;
 
-    case KEXEC_TYPE_CRASH:
+    KEXEC_TYPE_CRASH => {
     result = kimage_load_crash_segment(image, idx);
     break;
 
     }
     return result;
     }
-    void *kimage_map_segment(struct kimage *image, int idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kimage_map_segment() {
     unsigned long addr, size, eaddr;
     unsigned long src_page_addr, dest_page_addr = 0;
     kimage_entry_t *ptr, entry;
-    struct page **src_pages;
-    unsigned int npages;
-    struct page *cma;
+    let mut src_pages = core::ptr::null_mut();
+    let mut npages = 0;
+    let mut cma = core::ptr::null_mut();
     void *vaddr = core::ptr::null_mut();
-    int i;
+    let mut i = 0;
     cma = image.segment_cma[idx];
-    if (cma)
+    if (cma) {
     return page_address(cma);
+    }
     addr = image.segment[idx].mem;
     size = image.segment[idx].memsz;
     eaddr = addr + size;
@@ -871,26 +979,27 @@ pub unsafe extern "C" fn kimage_load_segment(image: *mut kimage, idx: c_int) -> 
     src_page_addr = entry & PAGE_MASK;
     src_pages[i++] =
     virt_to_page(__va(src_page_addr));
-    if (i == npages)
+    if (i == npages) {
     break;
+    }
     dest_page_addr += PAGE_SIZE;
     }
     }
     }
 // Sanity check.
-    WARN_ON(i < npages);
+// WARN_ON;
     vaddr = vmap(src_pages, npages, VM_MAP, PAGE_KERNEL);
     kfree(src_pages);
-    if (!vaddr)
+    if (!vaddr) {
     pr_err("Could not map ima buffer.\n");
+    }
     return vaddr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kimage_unmap_segment(segment_buffer: *mut c_void) {
-    void kimage_unmap_segment(void *segment_buffer)
-    {
-    if (is_vmalloc_addr(segment_buffer))
+    if (is_vmalloc_addr(segment_buffer)) {
     vunmap(segment_buffer);
+    }
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -900,40 +1009,37 @@ pub struct kexec_load_limit {
     pub limit: c_int,
 }
 
-    static struct kexec_load_limit load_limit_reboot = {
-    .mutex = __MUTEX_INITIALIZER(load_limit_reboot.mutex),
-    .limit = -1,
-    };
-    static struct kexec_load_limit load_limit_panic = {
-    .mutex = __MUTEX_INITIALIZER(load_limit_panic.mutex),
-    .limit = -1,
-    };
-    struct kimage *kexec_image;
-    struct kimage *kexec_crash_image;
+pub static mut kexec_load_limit: usize = 0;
+pub static mut kexec_load_limit: usize = 0;
+    let mut kexec_image = core::ptr::null_mut();
+    let mut kexec_crash_image = core::ptr::null_mut();
     static int kexec_load_disabled;
 
-    static int kexec_limit_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kexec_limit_handler() {
     struct kexec_load_limit *limit = table.data;
-    int val;
+    let mut val = 0;
     struct ctl_table tmp = {
     .data = &val,
     .maxlen = sizeof(val),
     .mode = table.mode,
     };
-    int ret;
+    let mut ret = 0;
     if (write) {
     ret = proc_dointvec(&tmp, write, buffer, lenp, ppos);
-    if (ret)
+    if (ret) {
     return ret;
-    if (val < 0)
+    }
+    if (val < 0) {
     return -EINVAL;
+    }
     mutex_lock(&limit.mutex);
-    if (limit.limit != -1 && val >= limit.limit)
+    if (limit.limit != -1 && val >= limit.limit) {
     ret = -EINVAL;
-    else
+    }
+    else {
     limit.limit = val;
+    }
     mutex_unlock(&limit.mutex);
     return ret;
     }
@@ -942,50 +1048,24 @@ pub struct kexec_load_limit {
     mutex_unlock(&limit.mutex);
     return proc_dointvec(&tmp, write, buffer, lenp, ppos);
     }
-    static const struct ctl_table kexec_core_sysctls[] = {
-    {
-    .procname	= "kexec_load_disabled",
-    .data		= &kexec_load_disabled,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-// only handle a transition from default "0" to "1"
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ONE,
-    .extra2		= SYSCTL_ONE,
-    },
-    {
-    .procname	= "kexec_load_limit_panic",
-    .data		= &load_limit_panic,
-    .mode		= 0644,
-    .proc_handler	= kexec_limit_handler,
-    },
-    {
-    .procname	= "kexec_load_limit_reboot",
-    .data		= &load_limit_reboot,
-    .mode		= 0644,
-    .proc_handler	= kexec_limit_handler,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn kexec_core_sysctl_init() -> int __init {
-    static int __init kexec_core_sysctl_init(void)
-    {
+unsafe extern "C" fn kexec_core_sysctl_init() -> c_int {
     register_sysctl_init("kernel", kexec_core_sysctls);
     return 0;
     }
-    late_initcall(kexec_core_sysctl_init);
+// late_initcall;
 
 #[no_mangle]
 pub unsafe extern "C" fn kexec_load_permitted(kexec_image_type: c_int) -> bool {
-    bool kexec_load_permitted(int kexec_image_type)
-    {
-    struct kexec_load_limit *limit;
+    let mut limit = core::ptr::null_mut();
 //
 // Only the superuser can use the kexec syscall and if it has not
 // been disabled.
 //
-    if (!capable(CAP_SYS_BOOT) || kexec_load_disabled)
+    if (!capable(CAP_SYS_BOOT) || kexec_load_disabled) {
     return false;
+    }
 // Check limit counter and decrease it.
     limit = (kexec_image_type == KEXEC_TYPE_CRASH) ?
     &load_limit_panic : &load_limit_reboot;
@@ -994,8 +1074,9 @@ pub unsafe extern "C" fn kexec_load_permitted(kexec_image_type: c_int) -> bool {
     mutex_unlock(&limit.mutex);
     return false;
     }
-    if (limit.limit != -1)
+    if (limit.limit != -1) {
     limit.limit--;
+    }
     mutex_unlock(&limit.mutex);
     return true;
     }
@@ -1005,19 +1086,19 @@ pub unsafe extern "C" fn kexec_load_permitted(kexec_image_type: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kernel_kexec() -> c_int {
-    int kernel_kexec(void)
-    {
-    let mut error: c_int = 0;
-    if (!kexec_trylock())
+pub static mut error: c_int = 0;
+    if (!kexec_trylock()) {
     return -EBUSY;
+    }
     if (!kexec_image) {
     error = -EINVAL;
     goto Unlock;
     }
     if (!kexec_image.preserve_context) {
     error = liveupdate_reboot();
-    if (error)
+    if (error) {
     goto Unlock;
+    }
     }
 
     if (kexec_image.preserve_context) {
@@ -1035,26 +1116,31 @@ pub unsafe extern "C" fn kernel_kexec() -> c_int {
     }
     console_suspend_all();
     error = dpm_suspend_start(PMSG_FREEZE);
-    if (error)
+    if (error) {
     goto Resume_devices;
+    }
 //
 // dpm_suspend_end() must be called after dpm_suspend_start()
 // to complete the transition, like in the hibernation flows
 // mentioned above.
 //
     error = dpm_suspend_end(PMSG_FREEZE);
-    if (error)
+    if (error) {
     goto Resume_devices;
+    }
     error = suspend_disable_secondary_cpus();
-    if (error)
+    if (error) {
     goto Enable_cpus;
+    }
     local_irq_disable();
     error = syscore_suspend();
-    if (error)
+    if (error) {
     goto Enable_irqs;
-    } else
+    }
+    } else {
 
     {
+    }
     kexec_in_progress = true;
     kernel_restart_prepare("kexec reboot");
     migrate_to_reboot_cpu();
@@ -1098,25 +1184,22 @@ pub unsafe extern "C" fn kernel_kexec() -> c_int {
     kexec_unlock();
     return error;
     }
-    static ssize_t loaded_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn loaded_show() {
     return sysfs_emit(buf, "%d\n", !!kexec_image);
     }
-    let mut loaded_attr: static struct kobj_attribute = __ATTR_RO(loaded);
+pub static mut loaded_attr: kobj_attribute = __ATTR_RO(loaded);
 
-    static ssize_t crash_loaded_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn crash_loaded_show() {
     return sysfs_emit(buf, "%d\n", kexec_crash_loaded());
     }
-    let mut crash_loaded_attr: static struct kobj_attribute = __ATTR_RO(crash_loaded);
+pub static mut crash_loaded_attr: kobj_attribute = __ATTR_RO(crash_loaded);
 
-    static ssize_t crash_cma_ranges_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    let mut len: isize = 0;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn crash_cma_ranges_show() {
+pub static mut len: isize = 0;
+    let mut i = 0;
     for (i = 0; i < crashk_cma_cnt; ++i) {
     len += sysfs_emit_at(buf, len, "%08llx-%08llx\n",
     crashk_cma_ranges[i].start,
@@ -1124,36 +1207,34 @@ pub unsafe extern "C" fn kernel_kexec() -> c_int {
     }
     return len;
     }
-    let mut crash_cma_ranges_attr: static struct kobj_attribute = __ATTR_RO(crash_cma_ranges);
+pub static mut crash_cma_ranges_attr: kobj_attribute = __ATTR_RO(crash_cma_ranges);
 
-    static ssize_t crash_size_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    let mut size: isize = crash_get_memory_size();
-    if (size < 0)
+#[no_mangle]
+pub unsafe extern "C" fn crash_size_show() {
+pub static mut size: isize = crash_get_memory_size();
+    if (size < 0) {
     return size;
+    }
     return sysfs_emit(buf, "%zd\n", size);
     }
-    static ssize_t crash_size_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    unsigned long cnt;
-    int ret;
-    if (kstrtoul(buf, 0, &cnt))
+#[no_mangle]
+pub unsafe extern "C" fn crash_size_store() {
+    let mut cnt = 0;
+    let mut ret = 0;
+    if (kstrtoul(buf, 0, &cnt)) {
     return -EINVAL;
+    }
     ret = crash_shrink_memory(cnt);
     return ret < 0 ? ret : count;
     }
-    let mut crash_size_attr: static struct kobj_attribute = __ATTR_RW(crash_size);
+pub static mut crash_size_attr: kobj_attribute = __ATTR_RW(crash_size);
 
-    static ssize_t crash_elfcorehdr_size_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    let mut sz: c_uint = crash_get_elfcorehdr_size();
+#[no_mangle]
+pub unsafe extern "C" fn crash_elfcorehdr_size_show() {
+pub static mut sz: c_uint = crash_get_elfcorehdr_size();
     return sysfs_emit(buf, "%u\n", sz);
     }
-    let mut crash_elfcorehdr_size_attr: static struct kobj_attribute = __ATTR_RO(crash_elfcorehdr_size);
+pub static mut crash_elfcorehdr_size_attr: kobj_attribute = __ATTR_RO(crash_elfcorehdr_size);
 
     static struct attribute *kexec_attrs[] = {
     &loaded_attr.attr,
@@ -1174,43 +1255,37 @@ pub struct kexec_link_entry {
     pub name: *const c_char,
 }
 
-    static struct kexec_link_entry kexec_links[] = {
-    { "loaded", "kexec_loaded" },
-
-    { "crash_loaded", "kexec_crash_loaded" },
-    { "crash_size", "kexec_crash_size" },
-
-    {"crash_cma_ranges", "kexec_crash_cma_ranges"},
-
-    { "crash_elfcorehdr_size", "crash_elfcorehdr_size" },
-
-    };
+pub static mut kexec_link_entry: usize = 0;
     static struct kobject *kexec_kobj;
-    ATTRIBUTE_GROUPS(kexec);
+// ATTRIBUTE_GROUPS;
 #[no_mangle]
-unsafe extern "C" fn init_kexec_sysctl() -> int __init {
-    static int __init init_kexec_sysctl(void)
-    {
-    int error;
-    int i;
+unsafe extern "C" fn init_kexec_sysctl() -> c_int {
+    let mut error = 0;
+    let mut i = 0;
     kexec_kobj = kobject_create_and_add("kexec", kernel_kobj);
     if (!kexec_kobj) {
     pr_err("failed to create kexec kobject\n");
     return -ENOMEM;
     }
     error = sysfs_create_groups(kexec_kobj, kexec_groups);
-    if (error)
+    if (error) {
     goto kset_exit;
+    }
     for (i = 0; i < ARRAY_SIZE(kexec_links); i++) {
     error = compat_only_sysfs_link_entry_to_kobj(kernel_kobj, kexec_kobj,
     kexec_links[i].target,
     kexec_links[i].name);
-    if (error)
+    if (error) {
     pr_err("Unable to create %s symlink (%d)", kexec_links[i].name, error);
+    }
     }
     return 0;
     kset_exit:
     kobject_put(kexec_kobj);
     return error;
     }
-    subsys_initcall(init_kexec_sysctl);
+// subsys_initcall;
+}
+}
+}
+}

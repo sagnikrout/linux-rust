@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -46,15 +143,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // 30 May 2002:	Cleanup, Robert M. Love <rml@tech9.net>
 //
 
-    let mut file_caps_enabled: c_int = 1;
+pub static mut file_caps_enabled: c_int = 1;
 #[no_mangle]
-unsafe extern "C" fn file_caps_disable(str: *mut c_char) -> int __init {
-    static int __init file_caps_disable(char *str)
-    {
+unsafe extern "C" fn file_caps_disable(str: *mut c_char) -> c_int {
     file_caps_enabled = 0;
     return 1;
     }
-    __setup("no_file_caps", file_caps_disable);
+// __setup;
 
 //
 // More recent versions of libcap are available from:
@@ -63,8 +158,6 @@ unsafe extern "C" fn file_caps_disable(str: *mut c_char) -> int __init {
 //
 #[no_mangle]
 unsafe extern "C" fn warn_legacy_capability_use() {
-    static void warn_legacy_capability_use(void)
-    {
     pr_info_once("warning: `%s' uses 32-bit capabilities (legacy support in use)\n",
     current.comm);
     }
@@ -85,8 +178,6 @@ unsafe extern "C" fn warn_legacy_capability_use() {
 //
 #[no_mangle]
 unsafe extern "C" fn warn_deprecated_v2() {
-    static void warn_deprecated_v2(void)
-    {
     pr_info_once("warning: `%s' uses deprecated v2 capabilities in a way that may be insecure\n",
     current.comm);
     }
@@ -96,25 +187,25 @@ unsafe extern "C" fn warn_deprecated_v2() {
 //
 #[no_mangle]
 unsafe extern "C" fn cap_validate_magic(header: cap_user_header_t, tocopy: *mut unsigned) -> c_int {
-    static int cap_validate_magic(cap_user_header_t header, unsigned *tocopy)
-    {
-    __u32 version;
-    if (get_user(version, &header.version))
+    let mut version = 0;
+    if (get_user(version, &header.version)) {
     return -EFAULT;
-    switch (version) {
-    case _LINUX_CAPABILITY_VERSION_1:
+    }
+    match (version) {
+    _LINUX_CAPABILITY_VERSION_1 => {
     warn_legacy_capability_use();
 // tocopy = _LINUX_CAPABILITY_U32S_1;
     break;
-    case _LINUX_CAPABILITY_VERSION_2:
+    _LINUX_CAPABILITY_VERSION_2 => {
     warn_deprecated_v2();
     fallthrough;	/* v3 is otherwise equivalent to v2 */
-    case _LINUX_CAPABILITY_VERSION_3:
+    _LINUX_CAPABILITY_VERSION_3 => {
 // tocopy = _LINUX_CAPABILITY_U32S_3;
     break;
-    default:
-    if (put_user((u32)_KERNEL_CAPABILITY_VERSION, &header.version))
+    _ => {
+    if (put_user((u32)_KERNEL_CAPABILITY_VERSION, &header.version)) {
     return -EFAULT;
+    }
     return -EINVAL;
     }
     return 0;
@@ -126,21 +217,23 @@ unsafe extern "C" fn cap_validate_magic(header: cap_user_header_t, tocopy: *mut 
 // in this process. The net result is that we can limit our use of
 // locks to when we are reading the caps of another process.
 //
-    static inline int cap_get_target_pid(pid_t pid, kernel_cap_t *pEp,
-    kernel_cap_t *pIp, kernel_cap_t *pPp)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn cap_get_target_pid() {
+    let mut ret = 0;
     if (pid && (pid != task_pid_vnr(current))) {
-    const struct task_struct *target;
+    let mut target = core::ptr::null_mut();
     rcu_read_lock();
     target = find_task_by_vpid(pid);
-    if (!target)
+    if (!target) {
     ret = -ESRCH;
-    else
+    }
+    else {
     ret = security_capget(target, pEp, pIp, pPp);
+    }
     rcu_read_unlock();
-    } else
+    } else {
     ret = security_capget(current, pEp, pIp, pPp);
+    }
     return ret;
     }
 //
@@ -152,23 +245,27 @@ unsafe extern "C" fn cap_validate_magic(header: cap_user_header_t, tocopy: *mut 
 //
 // Returns 0 on success and < 0 on error.
 //
-    SYSCALL_DEFINE2(capget, cap_user_header_t, header, cap_user_data_t, dataptr)
-    {
-    let mut ret: c_int = 0;
-    pid_t pid;
-    unsigned tocopy;
+#[no_mangle]
+pub unsafe extern "C" fn sys_capget() {
+pub static mut ret: c_int = 0;
+    let mut pid = 0;
+pub static mut tocopy: c_uint = 0;
     kernel_cap_t pE, pI, pP;
     struct __user_cap_data_struct kdata[2];
     ret = cap_validate_magic(header, &tocopy);
-    if ((dataptr == core::ptr::null_mut()) || (ret != 0))
+    if ((dataptr == core::ptr::null_mut()) || (ret != 0)) {
     return ((dataptr == core::ptr::null_mut()) && (ret == -EINVAL)) ? 0 : ret;
-    if (get_user(pid, &header.pid))
+    }
+    if (get_user(pid, &header.pid)) {
     return -EFAULT;
-    if (pid < 0)
+    }
+    if (pid < 0) {
     return -EINVAL;
+    }
     ret = cap_get_target_pid(pid, &pE, &pI, &pP);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // Annoying legacy format with 64-bit capabilities exposed
 // as two sets of 32-bit fields, so we need to split the
@@ -196,14 +293,13 @@ unsafe extern "C" fn cap_validate_magic(header: cap_user_header_t, tocopy: *mut 
 // before modification is attempted and the application
 // fails.
 //
-    if (copy_to_user(dataptr, kdata, tocopy * sizeof(kdata[0])))
+    if (copy_to_user(dataptr, kdata, tocopy * sizeof(kdata[0]))) {
     return -EFAULT;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn mk_kernel_cap(low: u32, high: u32) -> kernel_cap_t {
-    static kernel_cap_t mk_kernel_cap(u32 low, u32 high)
-    {
     return (kernel_cap_t) { (low | ((u64)high << 32)) & CAP_VALID_MASK };
     }
 //
@@ -224,37 +320,44 @@ unsafe extern "C" fn mk_kernel_cap(low: u32, high: u32) -> kernel_cap_t {
 //
 // Returns 0 on success and < 0 on error.
 //
-    SYSCALL_DEFINE2(capset, cap_user_header_t, header, const cap_user_data_t, data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_capset() {
     struct __user_cap_data_struct kdata[2] = { { 0, }, };
     unsigned tocopy, copybytes;
     kernel_cap_t inheritable, permitted, effective;
-    struct cred *new;
-    int ret;
-    pid_t pid;
+    let mut new = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut pid = 0;
     ret = cap_validate_magic(header, &tocopy);
-    if (ret != 0)
+    if (ret != 0) {
     return ret;
-    if (get_user(pid, &header.pid))
+    }
+    if (get_user(pid, &header.pid)) {
     return -EFAULT;
+    }
 // may only affect current now
-    if (pid != 0 && pid != task_pid_vnr(current))
+    if (pid != 0 && pid != task_pid_vnr(current)) {
     return -EPERM;
+    }
     copybytes = tocopy * sizeof(struct __user_cap_data_struct);
-    if (copybytes > sizeof(kdata))
+    if (copybytes > sizeof(kdata)) {
     return -EFAULT;
-    if (copy_from_user(&kdata, data, copybytes))
+    }
+    if (copy_from_user(&kdata, data, copybytes)) {
     return -EFAULT;
+    }
     effective   = mk_kernel_cap(kdata[0].effective,   kdata[1].effective);
     permitted   = mk_kernel_cap(kdata[0].permitted,   kdata[1].permitted);
     inheritable = mk_kernel_cap(kdata[0].inheritable, kdata[1].inheritable);
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     ret = security_capset(new, current_cred(),
     &effective, &inheritable, &permitted);
-    if (ret < 0)
+    if (ret < 0) {
     goto error;
+    }
     audit_log_capset(new, current_cred());
     return commit_creds(new);
     error:
@@ -272,10 +375,9 @@ unsafe extern "C" fn mk_kernel_cap(low: u32, high: u32) -> kernel_cap_t {
 //
 // Note that this does not set PF_SUPERPRIV on the task.
 //
-    bool has_ns_capability(struct task_struct *t,
-    struct user_namespace *ns, int cap)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn has_ns_capability() {
+    let mut ret = 0;
     rcu_read_lock();
     ret = security_capable(__task_cred(t), ns, cap, CAP_OPT_NONE);
     rcu_read_unlock();
@@ -294,10 +396,9 @@ unsafe extern "C" fn mk_kernel_cap(low: u32, high: u32) -> kernel_cap_t {
 //
 // Note that this does not set PF_SUPERPRIV on the task.
 //
-    bool has_ns_capability_noaudit(struct task_struct *t,
-    struct user_namespace *ns, int cap)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn has_ns_capability_noaudit() {
+    let mut ret = 0;
     rcu_read_lock();
     ret = security_capable(__task_cred(t), ns, cap, CAP_OPT_NOAUDIT);
     rcu_read_unlock();
@@ -317,18 +418,14 @@ unsafe extern "C" fn mk_kernel_cap(low: u32, high: u32) -> kernel_cap_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn has_capability_noaudit(t: *mut task_struct, cap: c_int) -> bool {
-    bool has_capability_noaudit(struct task_struct *t, int cap)
-    {
     return has_ns_capability_noaudit(t, &init_user_ns, cap);
     }
-    static bool ns_capable_common(struct user_namespace *ns,
-    int cap,
-    unsigned int opts)
-    {
-    int capable;
+#[no_mangle]
+pub unsafe extern "C" fn ns_capable_common() {
+    let mut capable = 0;
     if (unlikely(!cap_valid(cap))) {
     pr_crit("capable() called with invalid cap=%u\n", cap);
-    BUG();
+// BUG;
     }
     capable = security_capable(current_cred(), ns, cap, opts);
     if (capable == 0) {
@@ -350,11 +447,9 @@ pub unsafe extern "C" fn has_capability_noaudit(t: *mut task_struct, cap: c_int)
 //
 #[no_mangle]
 pub unsafe extern "C" fn ns_capable(ns: *mut user_namespace, cap: c_int) -> bool {
-    bool ns_capable(struct user_namespace *ns, int cap)
-    {
     return ns_capable_common(ns, cap, CAP_OPT_NONE);
     }
-    EXPORT_SYMBOL(ns_capable);
+// EXPORT_SYMBOL;
 //
 // ns_capable_noaudit - Determine if the current task has a superior capability
 // (unaudited) in effect
@@ -369,11 +464,9 @@ pub unsafe extern "C" fn ns_capable(ns: *mut user_namespace, cap: c_int) -> bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn ns_capable_noaudit(ns: *mut user_namespace, cap: c_int) -> bool {
-    bool ns_capable_noaudit(struct user_namespace *ns, int cap)
-    {
     return ns_capable_common(ns, cap, CAP_OPT_NOAUDIT);
     }
-    EXPORT_SYMBOL(ns_capable_noaudit);
+// EXPORT_SYMBOL;
 //
 // ns_capable_setid - Determine if the current task has a superior capability
 // in effect, while signalling that this check is being done from within a
@@ -389,11 +482,9 @@ pub unsafe extern "C" fn ns_capable_noaudit(ns: *mut user_namespace, cap: c_int)
 //
 #[no_mangle]
 pub unsafe extern "C" fn ns_capable_setid(ns: *mut user_namespace, cap: c_int) -> bool {
-    bool ns_capable_setid(struct user_namespace *ns, int cap)
-    {
     return ns_capable_common(ns, cap, CAP_OPT_INSETID);
     }
-    EXPORT_SYMBOL(ns_capable_setid);
+// EXPORT_SYMBOL;
 //
 // capable - Determine if the current task has a superior capability in effect
 // @cap: The capability to be tested for
@@ -406,11 +497,9 @@ pub unsafe extern "C" fn ns_capable_setid(ns: *mut user_namespace, cap: c_int) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn capable(cap: c_int) -> bool {
-    bool capable(int cap)
-    {
     return ns_capable(&init_user_ns, cap);
     }
-    EXPORT_SYMBOL(capable);
+// EXPORT_SYMBOL;
 //
 // capable_noaudit - Determine if the current task has a superior
 // capability in effect by checking the process's effective
@@ -425,11 +514,9 @@ pub unsafe extern "C" fn capable(cap: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn capable_noaudit(cap: c_int) -> bool {
-    bool capable_noaudit(int cap)
-    {
     return ns_capable_noaudit(&init_user_ns, cap);
     }
-    EXPORT_SYMBOL(capable_noaudit);
+// EXPORT_SYMBOL;
 
 //
 // file_ns_capable - Determine if the file's opener had a capability in effect
@@ -443,16 +530,17 @@ pub unsafe extern "C" fn capable_noaudit(cap: c_int) -> bool {
 // This does not set PF_SUPERPRIV because the caller may not
 // actually be privileged.
 //
-    bool file_ns_capable(const struct file *file, struct user_namespace *ns,
-    int cap)
-    {
-    if (WARN_ON_ONCE(!cap_valid(cap)))
-    return false;
-    if (security_capable(file.f_cred, ns, cap, CAP_OPT_NONE) == 0)
-    return true;
+#[no_mangle]
+pub unsafe extern "C" fn file_ns_capable() {
+    if (WARN_ON_ONCE(!cap_valid(cap))) {
     return false;
     }
-    EXPORT_SYMBOL(file_ns_capable);
+    if (security_capable(file.f_cred, ns, cap, CAP_OPT_NONE) == 0) {
+    return true;
+    }
+    return false;
+    }
+// EXPORT_SYMBOL;
 //
 // privileged_wrt_inode_uidgid - Do capabilities in the namespace work over the inode?
 // @ns: The user namespace in question
@@ -461,10 +549,8 @@ pub unsafe extern "C" fn capable_noaudit(cap: c_int) -> bool {
 //
 // Return true if the inode uid and gid are within the namespace.
 //
-    bool privileged_wrt_inode_uidgid(struct user_namespace *ns,
-    struct mnt_idmap *idmap,
-    const struct inode *inode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn privileged_wrt_inode_uidgid() {
     return vfsuid_has_mapping(ns, i_uid_into_vfsuid(idmap, inode)) &&
     vfsgid_has_mapping(ns, i_gid_into_vfsgid(idmap, inode));
     }
@@ -478,14 +564,13 @@ pub unsafe extern "C" fn capable_noaudit(cap: c_int) -> bool {
 // its own user namespace and that the given inode's uid and gid are
 // mapped into the current user namespace.
 //
-    bool capable_wrt_inode_uidgid(struct mnt_idmap *idmap,
-    const struct inode *inode, int cap)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn capable_wrt_inode_uidgid() {
     struct user_namespace *ns = current_user_ns();
     return ns_capable(ns, cap) &&
     privileged_wrt_inode_uidgid(ns, idmap, inode);
     }
-    EXPORT_SYMBOL(capable_wrt_inode_uidgid);
+// EXPORT_SYMBOL;
 //
 // ptracer_capable - Determine if the ptracer holds CAP_SYS_PTRACE in the namespace
 // @tsk: The task that may be ptraced
@@ -496,15 +581,18 @@ pub unsafe extern "C" fn capable_noaudit(cap: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ptracer_capable(tsk: *mut task_struct, ns: *mut user_namespace) -> bool {
-    bool ptracer_capable(struct task_struct *tsk, struct user_namespace *ns)
-    {
     int ret = 0;  /* An absent tracer adds no restrictions */
-    const struct cred *cred;
+    let mut cred = core::ptr::null_mut();
     rcu_read_lock();
     cred = rcu_dereference(tsk.ptracer_cred);
-    if (cred)
+    if (cred) {
     ret = security_capable(cred, ns, CAP_SYS_PTRACE,
     CAP_OPT_NOAUDIT);
+    }
     rcu_read_unlock();
     return (ret == 0);
     }
+}
+}
+}
+}

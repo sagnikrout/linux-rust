@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -56,10 +79,9 @@ pub struct padata_work {
     pub /: *mut *mut list_head pw_list; / padata_free_works linkage,
     pub pw_data: *mut c_void,
 }
-
-    static DEFINE_SPINLOCK(padata_works_lock);
+// static DEFINE_SPINLOCK(padata_works_lock);
     static struct padata_work *padata_works;
-    static LIST_HEAD(padata_free_works);
+// static LIST_HEAD(padata_free_works);
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct padata_mt_job_state {
@@ -75,27 +97,19 @@ pub struct padata_mt_job_state {
     static void __init padata_mt_helper(struct work_struct *work);
 #[no_mangle]
 pub unsafe extern "C" fn padata_get_pd(pd: *mut parallel_data) {
-    static inline void padata_get_pd(struct parallel_data *pd)
-    {
     refcount_inc(&pd.refcnt);
     }
 #[no_mangle]
 pub unsafe extern "C" fn padata_put_pd_cnt(pd: *mut parallel_data, cnt: c_int) {
-    static inline void padata_put_pd_cnt(struct parallel_data *pd, int cnt)
-    {
     if (refcount_sub_and_test(cnt, &pd.refcnt))
     padata_free_pd(pd);
     }
 #[no_mangle]
 pub unsafe extern "C" fn padata_put_pd(pd: *mut parallel_data) {
-    static inline void padata_put_pd(struct parallel_data *pd)
-    {
     padata_put_pd_cnt(pd, 1);
     }
 #[no_mangle]
 unsafe extern "C" fn padata_cpu_hash(pd: *mut parallel_data, seq_nr: c_uint) -> c_int {
-    static int padata_cpu_hash(struct parallel_data *pd, unsigned int seq_nr)
-    {
 //
 // Hash the sequence numbers to the cpus by taking
 // seq_nr mod. number of cpus in use.
@@ -148,15 +162,11 @@ unsafe extern "C" fn padata_cpu_hash(pd: *mut parallel_data, seq_nr: c_uint) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn padata_work_free(pw: *mut padata_work) {
-    static void padata_work_free(struct padata_work *pw)
-    {
     lockdep_assert_held(&padata_works_lock);
     list_add(&pw.pw_list, &padata_free_works);
     }
 #[no_mangle]
-unsafe extern "C" fn padata_works_free(works: *mut list_head) -> void __init {
-    static void __init padata_works_free(struct list_head *works)
-    {
+unsafe extern "C" fn padata_works_free(works: *mut list_head) -> c_int {
     struct padata_work *cur, *next;
     if (list_empty(works))
     return;
@@ -169,8 +179,6 @@ unsafe extern "C" fn padata_works_free(works: *mut list_head) -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
-    static void padata_parallel_worker(struct work_struct *parallel_work)
-    {
     struct padata_work *pw = container_of(parallel_work, struct padata_work,
     pw_work);
     struct padata_priv *padata = pw.pw_data;
@@ -278,8 +286,6 @@ unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_reorder(padata: *mut padata_priv) {
-    static void padata_reorder(struct padata_priv *padata)
-    {
     struct parallel_data *pd = padata.pd;
     struct padata_instance *pinst = pd.ps.pinst;
     unsigned int processed;
@@ -311,8 +317,6 @@ unsafe extern "C" fn padata_reorder(padata: *mut padata_priv) {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_serial_worker(serial_work: *mut work_struct) {
-    static void padata_serial_worker(struct work_struct *serial_work)
-    {
     struct padata_serial_queue *squeue;
     struct parallel_data *pd;
     LIST_HEAD(local_list);
@@ -345,8 +349,6 @@ unsafe extern "C" fn padata_serial_worker(serial_work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn padata_do_serial(padata: *mut padata_priv) {
-    void padata_do_serial(struct padata_priv *padata)
-    {
     struct parallel_data *pd = padata.pd;
     let mut hashed_cpu: c_int = padata_cpu_hash(pd, padata.seq_nr);
     struct padata_list *reorder = per_cpu_ptr(pd.reorder_list, hashed_cpu);
@@ -372,8 +374,6 @@ pub unsafe extern "C" fn padata_do_serial(padata: *mut padata_priv) {
     EXPORT_SYMBOL(padata_do_serial);
 #[no_mangle]
 unsafe extern "C" fn padata_setup_cpumasks(pinst: *mut padata_instance) -> c_int {
-    static int padata_setup_cpumasks(struct padata_instance *pinst)
-    {
     struct workqueue_attrs *attrs;
     int err;
     attrs = alloc_workqueue_attrs();
@@ -386,9 +386,7 @@ unsafe extern "C" fn padata_setup_cpumasks(pinst: *mut padata_instance) -> c_int
     return err;
     }
 #[no_mangle]
-unsafe extern "C" fn padata_mt_helper(w: *mut work_struct) -> void __init {
-    static void __init padata_mt_helper(struct work_struct *w)
-    {
+unsafe extern "C" fn padata_mt_helper(w: *mut work_struct) -> c_int {
     struct padata_work *pw = container_of(w, struct padata_work, pw_work);
     struct padata_mt_job_state *ps = pw.pw_data;
     struct padata_mt_job *job = ps.job;
@@ -420,9 +418,7 @@ unsafe extern "C" fn padata_mt_helper(w: *mut work_struct) -> void __init {
 // See the definition of struct padata_mt_job for more details.
 //
 #[no_mangle]
-pub unsafe extern "C" fn padata_do_multithreaded(job: *mut padata_mt_job) -> void __init {
-    void __init padata_do_multithreaded(struct padata_mt_job *job)
-    {
+pub unsafe extern "C" fn padata_do_multithreaded(job: *mut padata_mt_job) -> c_int {
 // In case threads finish at different times.
     let mut load_balance_factor: static unsigned long = 4;
     struct padata_work my_work, *pw;
@@ -478,8 +474,6 @@ pub unsafe extern "C" fn padata_do_multithreaded(job: *mut padata_mt_job) -> voi
 // Initialize all percpu queues used by serial workers
 #[no_mangle]
 unsafe extern "C" fn padata_init_squeues(pd: *mut parallel_data) {
-    static void padata_init_squeues(struct parallel_data *pd)
-    {
     int cpu;
     struct padata_serial_queue *squeue;
     for_each_cpu(cpu, pd.cpumask.cbcpu) {
@@ -493,8 +487,6 @@ unsafe extern "C" fn padata_init_squeues(pd: *mut parallel_data) {
 // Initialize per-CPU reorder lists
 #[no_mangle]
 unsafe extern "C" fn padata_init_reorder_list(pd: *mut parallel_data) {
-    static void padata_init_reorder_list(struct parallel_data *pd)
-    {
     int cpu;
     struct padata_list *list;
     for_each_cpu(cpu, pd.cpumask.pcpu) {
@@ -548,8 +540,6 @@ unsafe extern "C" fn padata_init_reorder_list(pd: *mut parallel_data) {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_free_pd(pd: *mut parallel_data) {
-    static void padata_free_pd(struct parallel_data *pd)
-    {
     free_cpumask_var(pd.cpumask.pcpu);
     free_cpumask_var(pd.cpumask.cbcpu);
     free_percpu(pd.reorder_list);
@@ -558,14 +548,10 @@ unsafe extern "C" fn padata_free_pd(pd: *mut parallel_data) {
     }
 #[no_mangle]
 unsafe extern "C" fn __padata_start(pinst: *mut padata_instance) {
-    static void __padata_start(struct padata_instance *pinst)
-    {
     pinst.flags |= PADATA_INIT;
     }
 #[no_mangle]
 unsafe extern "C" fn __padata_stop(pinst: *mut padata_instance) {
-    static void __padata_stop(struct padata_instance *pinst)
-    {
     if (!(pinst.flags & PADATA_INIT))
     return;
     pinst.flags &= ~PADATA_INIT;
@@ -574,8 +560,6 @@ unsafe extern "C" fn __padata_stop(pinst: *mut padata_instance) {
 // Replace the internal control structure with a new one.
 #[no_mangle]
 unsafe extern "C" fn padata_replace_one(ps: *mut padata_shell, offlining_cpu: c_int) -> c_int {
-    static int padata_replace_one(struct padata_shell *ps, int offlining_cpu)
-    {
     struct parallel_data *pd_new;
     pd_new = padata_alloc_pd(ps, offlining_cpu);
     if (!pd_new)
@@ -586,8 +570,6 @@ unsafe extern "C" fn padata_replace_one(ps: *mut padata_shell, offlining_cpu: c_
     }
 #[no_mangle]
 unsafe extern "C" fn padata_replace(pinst: *mut padata_instance, offlining_cpu: c_int) -> c_int {
-    static int padata_replace(struct padata_instance *pinst, int offlining_cpu)
-    {
     struct padata_shell *ps;
     let mut err: c_int = 0;
     pinst.flags |= PADATA_RESET;
@@ -684,15 +666,11 @@ unsafe extern "C" fn padata_replace(pinst: *mut padata_instance, offlining_cpu: 
 
 #[no_mangle]
 pub unsafe extern "C" fn pinst_has_cpu(pinst: *mut padata_instance, cpu: c_int) -> c_int {
-    static inline int pinst_has_cpu(struct padata_instance *pinst, int cpu)
-    {
     return cpumask_test_cpu(cpu, pinst.cpumask.pcpu) ||
     cpumask_test_cpu(cpu, pinst.cpumask.cbcpu);
     }
 #[no_mangle]
 unsafe extern "C" fn padata_cpu_online(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    static int padata_cpu_online(unsigned int cpu, struct hlist_node *node)
-    {
     struct padata_instance *pinst;
     int ret;
     pinst = hlist_entry_safe(node, struct padata_instance, cpuhp_node);
@@ -708,8 +686,6 @@ unsafe extern "C" fn padata_cpu_online(cpu: c_uint, node: *mut hlist_node) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn padata_cpu_offline(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    static int padata_cpu_offline(unsigned int cpu, struct hlist_node *node)
-    {
     struct padata_instance *pinst;
     int ret;
     pinst = hlist_entry_safe(node, struct padata_instance, cpuhp_node);
@@ -727,8 +703,6 @@ unsafe extern "C" fn padata_cpu_offline(cpu: c_uint, node: *mut hlist_node) -> c
 
 #[no_mangle]
 unsafe extern "C" fn __padata_free(pinst: *mut padata_instance) {
-    static void __padata_free(struct padata_instance *pinst)
-    {
 
     cpuhp_state_remove_instance_nocalls(hp_online, &pinst.cpuhp_node);
 
@@ -746,8 +720,6 @@ unsafe extern "C" fn __padata_free(pinst: *mut padata_instance) {
     container_of_const(_attr, struct padata_sysfs_entry, attr)
 #[no_mangle]
 unsafe extern "C" fn padata_sysfs_release(kobj: *mut kobject) {
-    static void padata_sysfs_release(struct kobject *kobj)
-    {
     struct padata_instance *pinst = kobj2pinst(kobj);
     __padata_free(pinst);
     }
@@ -915,8 +887,6 @@ pub struct padata_sysfs_entry {
 //
 #[no_mangle]
 pub unsafe extern "C" fn padata_free(pinst: *mut padata_instance) {
-    void padata_free(struct padata_instance *pinst)
-    {
     kobject_put(&pinst.kobj);
     }
     EXPORT_SYMBOL(padata_free);
@@ -958,8 +928,6 @@ pub unsafe extern "C" fn padata_free(pinst: *mut padata_instance) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn padata_free_shell(ps: *mut padata_shell) {
-    void padata_free_shell(struct padata_shell *ps)
-    {
     struct parallel_data *pd;
     if (!ps)
     return;
@@ -972,9 +940,7 @@ pub unsafe extern "C" fn padata_free_shell(ps: *mut padata_shell) {
     }
     EXPORT_SYMBOL(padata_free_shell);
 #[no_mangle]
-pub unsafe extern "C" fn padata_init() -> void __init {
-    void __init padata_init(void)
-    {
+pub unsafe extern "C" fn padata_init() -> c_int {
     unsigned int i, possible_cpus;
 
     int ret;

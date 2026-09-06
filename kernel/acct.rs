@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -90,23 +187,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     static int acct_parm[3] = {4, 2, 30};
 
-    static const struct ctl_table kern_acct_table[] = {
-    {
-    .procname       = "acct",
-    .data           = &acct_parm,
-    .maxlen         = 3*sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = proc_dointvec,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn kernel_acct_sysctls_init() -> __init int {
-    static __init int kernel_acct_sysctls_init(void)
-    {
     register_sysctl_init("kernel", kern_acct_table);
     return 0;
     }
-    late_initcall(kernel_acct_sysctls_init);
+// late_initcall;
 
 //
 // External references and all of the globals.
@@ -135,23 +222,23 @@ pub struct bsd_acct_struct {
 //
 #[no_mangle]
 unsafe extern "C" fn check_free_space(acct: *mut bsd_acct_struct) -> bool {
-    static bool check_free_space(struct bsd_acct_struct *acct)
-    {
-    struct kstatfs sbuf;
-    if (!acct.check_space)
+    let mut sbuf;
+    if (!acct.check_space) {
     return acct.active;
+    }
 // May block
-    if (vfs_statfs(&acct.file.f_path, &sbuf))
+    if (vfs_statfs(&acct.file.f_path, &sbuf)) {
     return acct.active;
+    }
     if (acct.active) {
-    let mut suspend: u64 = sbuf.f_blocks * SUSPEND;
+pub static mut suspend: u64 = sbuf.f_blocks * SUSPEND;
     do_div(suspend, 100);
     if (sbuf.f_bavail <= suspend) {
     acct.active = false;
     pr_info("Process accounting paused\n");
     }
     } else {
-    let mut resume: u64 = sbuf.f_blocks * RESUME;
+pub static mut resume: u64 = sbuf.f_blocks * RESUME;
     do_div(resume, 100);
     if (sbuf.f_bavail >= resume) {
     acct.active = true;
@@ -163,18 +250,17 @@ unsafe extern "C" fn check_free_space(acct: *mut bsd_acct_struct) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn acct_put(p: *mut bsd_acct_struct) {
-    static void acct_put(struct bsd_acct_struct *p)
-    {
-    if (atomic_long_dec_and_test(&p.count))
+    if (atomic_long_dec_and_test(&p.count)) {
     kfree_rcu(p, rcu);
     }
-    static inline struct bsd_acct_struct *to_acct(struct fs_pin *p)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn to_acct() {
     return p ? container_of(p, struct bsd_acct_struct, pin) : core::ptr::null_mut();
     }
-    static struct bsd_acct_struct *acct_get(struct pid_namespace *ns)
-    {
-    struct bsd_acct_struct *res;
+#[no_mangle]
+pub unsafe extern "C" fn acct_get() {
+    let mut res = core::ptr::null_mut();
     again:
     smp_rmb();
     rcu_read_lock();
@@ -199,8 +285,6 @@ unsafe extern "C" fn acct_put(p: *mut bsd_acct_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn acct_pin_kill(pin: *mut fs_pin) {
-    static void acct_pin_kill(struct fs_pin *pin)
-    {
     struct bsd_acct_struct *acct = to_acct(pin);
     mutex_lock(&acct.lock);
 //
@@ -217,63 +301,68 @@ unsafe extern "C" fn acct_pin_kill(pin: *mut fs_pin) {
     }
 #[no_mangle]
 unsafe extern "C" fn close_work(work: *mut work_struct) {
-    static void close_work(struct work_struct *work)
-    {
     struct bsd_acct_struct *acct = container_of(work, struct bsd_acct_struct, work);
     struct file *file = acct.file;
 // We were fired by acct_pin_kill() which holds acct->lock.
     acct_write_process(acct);
-    if (file.f_op.flush)
+    if (file.f_op.flush) {
     file.f_op.flush(file, core::ptr::null_mut());
+    }
     __fput_sync(file);
     complete(&acct.done);
     }
     DEFINE_FREE(fput_sync, struct file *, if (!IS_ERR_OR_NULL(_T)) __fput_sync(_T))
 #[no_mangle]
 unsafe extern "C" fn acct_on(name: *const char __user) -> c_int {
-    static int acct_on(const char __user *name)
-    {
 // Difference from BSD - they don't do O_APPEND
-    let mut open_flags: c_int = O_WRONLY|O_APPEND|O_LARGEFILE;
+pub static mut open_flags: c_int = O_WRONLY|O_APPEND|O_LARGEFILE;
     struct pid_namespace *ns = task_active_pid_ns(current);
     struct file *original_file __free(fput) = core::ptr::null_mut();	// in that order
     struct path internal __free(path_put) = {};	// in that order
     struct file *file __free(fput_sync) = core::ptr::null_mut();	// in that order
-    struct bsd_acct_struct *acct;
-    struct vfsmount *mnt;
-    struct fs_pin *old;
-    CLASS(filename, pathname)(name);
+    let mut acct = core::ptr::null_mut();
+    let mut mnt = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
+// CLASS;
     original_file = file_open_name(pathname, open_flags, 0);
-    if (IS_ERR(original_file))
+    if (IS_ERR(original_file)) {
     return PTR_ERR(original_file);
+    }
     mnt = mnt_clone_internal(&original_file.f_path);
-    if (IS_ERR(mnt))
+    if (IS_ERR(mnt)) {
     return PTR_ERR(mnt);
+    }
     internal.mnt = mnt;
     internal.dentry = dget(mnt.mnt_root);
     file = dentry_open(&internal, open_flags, current_cred());
-    if (IS_ERR(file))
+    if (IS_ERR(file)) {
     return PTR_ERR(file);
-    if (!S_ISREG(file_inode(file).i_mode))
+    }
+    if (!S_ISREG(file_inode(file).i_mode)) {
     return -EACCES;
+    }
 // Exclude kernel internal filesystems.
-    if (file_inode(file).i_sb.s_flags & (SB_NOUSER | SB_KERNMOUNT))
+    if (file_inode(file).i_sb.s_flags & (SB_NOUSER | SB_KERNMOUNT)) {
     return -EINVAL;
+    }
 // Exclude procfs and sysfs.
-    if (file_inode(file).i_sb.s_type.fs_flags & FS_USERNS_MOUNT_RESTRICTED)
+    if (file_inode(file).i_sb.s_type.fs_flags & FS_USERNS_MOUNT_RESTRICTED) {
     return -EINVAL;
-    if (!(file.f_mode & FMODE_CAN_WRITE))
+    }
+    if (!(file.f_mode & FMODE_CAN_WRITE)) {
     return -EIO;
+    }
     acct = kzalloc_obj(struct bsd_acct_struct);
-    if (!acct)
+    if (!acct) {
     return -ENOMEM;
+    }
     atomic_long_set(&acct.count, 1);
     init_fs_pin(&acct.pin, acct_pin_kill);
     acct.file = no_free_ptr(file);
     acct.needcheck = jiffies;
     acct.ns = ns;
     mutex_init(&acct.lock);
-    INIT_WORK(&acct.work, close_work);
+// INIT_WORK;
     init_completion(&acct.done);
     mutex_lock_nested(&acct.lock, 1);	/* nobody has seen it yet */
     pin_insert(&acct.pin, original_file.f_path.mnt);
@@ -283,7 +372,7 @@ unsafe extern "C" fn acct_on(name: *const char __user) -> c_int {
     pin_kill(old);
     return 0;
     }
-    static DEFINE_MUTEX(acct_on_mutex);
+// static DEFINE_MUTEX(acct_on_mutex);
 //
 // sys_acct - enable/disable process accounting
 // @name: file name for accounting records or NULL to shutdown accounting
@@ -295,11 +384,12 @@ unsafe extern "C" fn acct_on(name: *const char __user) -> c_int {
 //
 // Returns: 0 for success or negative errno values for failure.
 //
-    SYSCALL_DEFINE1(acct, const char __user *, name)
-    {
-    let mut error: c_int = 0;
-    if (!capable(CAP_SYS_PACCT))
+#[no_mangle]
+pub unsafe extern "C" fn sys_acct() {
+pub static mut error: c_int = 0;
+    if (!capable(CAP_SYS_PACCT)) {
     return -EPERM;
+    }
     if (name) {
     mutex_lock(&acct_on_mutex);
     error = acct_on(name);
@@ -312,8 +402,6 @@ unsafe extern "C" fn acct_on(name: *const char __user) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn acct_exit_ns(ns: *mut pid_namespace) {
-    void acct_exit_ns(struct pid_namespace *ns)
-    {
     rcu_read_lock();
     pin_kill(ns.bacct);
     }
@@ -327,8 +415,6 @@ pub unsafe extern "C" fn acct_exit_ns(ns: *mut pid_namespace) {
 
 #[no_mangle]
 unsafe extern "C" fn encode_comp_t(value: u64) -> comp_t {
-    static comp_t encode_comp_t(u64 value)
-    {
     int exp, rnd;
     exp = rnd = 0;
     while (value > MAXFRACT) {
@@ -343,8 +429,9 @@ unsafe extern "C" fn encode_comp_t(value: u64) -> comp_t {
     value >>= EXPSIZE;
     exp++;
     }
-    if (exp > (((comp_t) ~0U) >> MANTSIZE))
+    if (exp > (((comp_t) ~0U) >> MANTSIZE)) {
     return (comp_t) ~0U;
+    }
 //
 // Clean it up and polish it off.
 //
@@ -364,8 +451,6 @@ unsafe extern "C" fn encode_comp_t(value: u64) -> comp_t {
 
 #[no_mangle]
 unsafe extern "C" fn encode_comp2_t(value: u64) -> comp2_t {
-    static comp2_t encode_comp2_t(u64 value)
-    {
     int exp, rnd;
     exp = (value > (MAXFRACT2>>1));
     rnd = 0;
@@ -394,12 +479,11 @@ unsafe extern "C" fn encode_comp2_t(value: u64) -> comp2_t {
 //
 #[no_mangle]
 unsafe extern "C" fn encode_float(value: u64) -> u32 {
-    static u32 encode_float(u64 value)
-    {
-    let mut exp: unsigned = 190;
-    unsigned u;
-    if (value == 0)
+pub static mut exp: unsigned = 190;
+pub static mut u: c_uint = 0;
+    if (value == 0) {
     return 0;
+    }
     while ((s64)value > 0) {
     value <<= 1;
     exp--;
@@ -418,20 +502,19 @@ unsafe extern "C" fn encode_float(value: u64) -> u32 {
 //
 #[no_mangle]
 unsafe extern "C" fn fill_ac(acct: *mut bsd_acct_struct) {
-    static void fill_ac(struct bsd_acct_struct *acct)
-    {
     struct pacct_struct *pacct = &current.signal.pacct;
     struct file *file = acct.file;
     acct_t *ac = &acct.ac;
     u64 elapsed, run_time;
-    time64_t btime;
-    struct tty_struct *tty;
+    let mut btime;
+    let mut tty = core::ptr::null_mut();
     lockdep_assert_held(&acct.lock);
     if (time_is_after_jiffies(acct.needcheck)) {
     acct.check_space = false;
 // Don't fill in @ac if nothing will be written.
-    if (!acct.active)
+    if (!acct.active) {
     return;
+    }
     } else {
     acct.check_space = true;
     }
@@ -455,7 +538,7 @@ unsafe extern "C" fn fill_ac(acct: *mut bsd_acct_struct) {
 
     {
 // new enlarged etime field
-    let mut etime: comp2_t = encode_comp2_t(elapsed);
+pub static mut etime: comp2_t = encode_comp2_t(elapsed);
     ac.ac_etime_hi = etime >> 16;
     ac.ac_etime_lo = (u16) etime;
     }
@@ -496,8 +579,6 @@ unsafe extern "C" fn fill_ac(acct: *mut bsd_acct_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn acct_write_process(acct: *mut bsd_acct_struct) {
-    static void acct_write_process(struct bsd_acct_struct *acct)
-    {
     struct file *file = acct.file;
     acct_t *ac = &acct.ac;
 // Perform file operations on behalf of whoever enabled accounting
@@ -510,7 +591,7 @@ unsafe extern "C" fn acct_write_process(acct: *mut bsd_acct_struct) {
 //
     if (check_free_space(acct) && file_start_write_trylock(file)) {
 // it's been opened O_APPEND, so position is irrelevant
-    let mut pos: loff_t = 0;
+pub static mut pos: loff_t = 0;
     __kernel_write(file, ac, sizeof(acct_t), &pos);
     file_end_write(file);
     }
@@ -518,9 +599,7 @@ unsafe extern "C" fn acct_write_process(acct: *mut bsd_acct_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn do_acct_process(acct: *mut bsd_acct_struct) {
-    static void do_acct_process(struct bsd_acct_struct *acct)
-    {
-    unsigned long flim;
+    let mut flim = 0;
 // Accounting records are not subject to resource limits.
     flim = rlimit(RLIMIT_FSIZE);
     current.signal.rlim[RLIMIT_FSIZE].rlim_cur = RLIM_INFINITY;
@@ -535,34 +614,37 @@ unsafe extern "C" fn do_acct_process(acct: *mut bsd_acct_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn acct_collect(exitcode: c_long, group_dead: c_int) {
-    void acct_collect(long exitcode, int group_dead)
-    {
     struct pacct_struct *pacct = &current.signal.pacct;
     u64 utime, stime;
-    let mut vsize: c_ulong = 0;
+pub static mut vsize: c_ulong = 0;
     if (group_dead && current.mm) {
     struct mm_struct *mm = current.mm;
-    VMA_ITERATOR(vmi, mm, 0);
-    struct vm_area_struct *vma;
+// VMA_ITERATOR;
+    let mut vma = core::ptr::null_mut();
     mmap_read_lock(mm);
     for_each_vma(vmi, vma)
     vsize += vma.vm_end - vma.vm_start;
     mmap_read_unlock(mm);
     }
     spin_lock_irq(&current.sighand.siglock);
-    if (group_dead)
+    if (group_dead) {
     pacct.ac_mem = vsize / 1024;
+    }
     if (thread_group_leader(current)) {
     pacct.ac_exitcode = exitcode;
-    if (current.flags & PF_FORKNOEXEC)
+    if (current.flags & PF_FORKNOEXEC) {
     pacct.ac_flag |= AFORK;
     }
-    if (current.flags & PF_SUPERPRIV)
+    }
+    if (current.flags & PF_SUPERPRIV) {
     pacct.ac_flag |= ASU;
-    if (current.flags & PF_DUMPCORE)
+    }
+    if (current.flags & PF_DUMPCORE) {
     pacct.ac_flag |= ACORE;
-    if (current.flags & PF_SIGNALED)
+    }
+    if (current.flags & PF_SIGNALED) {
     pacct.ac_flag |= AXSIG;
+    }
     task_cputime(current, &utime, &stime);
     pacct.ac_utime += utime;
     pacct.ac_stime += stime;
@@ -572,8 +654,6 @@ pub unsafe extern "C" fn acct_collect(exitcode: c_long, group_dead: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn slow_acct_process(ns: *mut pid_namespace) {
-    static void slow_acct_process(struct pid_namespace *ns)
-    {
     for ( ; ns; ns = ns.parent) {
     struct bsd_acct_struct *acct = acct_get(ns);
     if (acct) {
@@ -588,18 +668,18 @@ unsafe extern "C" fn slow_acct_process(ns: *mut pid_namespace) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn acct_process() {
-    void acct_process(void)
-    {
-    struct pid_namespace *ns;
+    let mut ns = core::ptr::null_mut();
 //
 // This loop is safe lockless, since current is still
 // alive and holds its namespace, which in turn holds
 // its parent.
 //
     for (ns = task_active_pid_ns(current); ns != core::ptr::null_mut(); ns = ns.parent) {
-    if (ns.bacct)
+    if (ns.bacct) {
     break;
     }
-    if (unlikely(ns))
+    }
+    if (unlikely(ns)) {
     slow_acct_process(ns);
+    }
     }

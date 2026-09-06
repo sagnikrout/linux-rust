@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -51,15 +74,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
 // list of open channels, for cpu hotplug
-    static DEFINE_MUTEX(relay_channels_mutex);
-    static LIST_HEAD(relay_channels);
+// static DEFINE_MUTEX(relay_channels_mutex);
+// static LIST_HEAD(relay_channels);
 //
 // fault() vm_op implementation for relay file mapping.
 //
 #[no_mangle]
 unsafe extern "C" fn relay_buf_fault(vmf: *mut vm_fault) -> vm_fault_t {
-    static vm_fault_t relay_buf_fault(struct vm_fault *vmf)
-    {
     struct page *page;
     struct rchan_buf *buf = vmf.vma.vm_private_data;
     let mut pgoff: pgoff_t = vmf.pgoff;
@@ -90,8 +111,6 @@ unsafe extern "C" fn relay_buf_fault(vmf: *mut vm_fault) -> vm_fault_t {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_free_page_array(array: *mut page) {
-    static void relay_free_page_array(struct page **array)
-    {
     kvfree(array);
     }
 //
@@ -186,8 +205,6 @@ unsafe extern "C" fn relay_free_page_array(array: *mut page) {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_destroy_channel(kref: *mut kref) {
-    static void relay_destroy_channel(struct kref *kref)
-    {
     struct rchan *chan = container_of(kref, struct rchan, kref);
     free_percpu(chan.buf);
     kfree(chan);
@@ -198,8 +215,6 @@ unsafe extern "C" fn relay_destroy_channel(kref: *mut kref) {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_destroy_buf(buf: *mut rchan_buf) {
-    static void relay_destroy_buf(struct rchan_buf *buf)
-    {
     struct rchan *chan = buf.chan;
     unsigned int i;
     if (likely(buf.start)) {
@@ -223,8 +238,6 @@ unsafe extern "C" fn relay_destroy_buf(buf: *mut rchan_buf) {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_remove_buf(kref: *mut kref) {
-    static void relay_remove_buf(struct kref *kref)
-    {
     struct rchan_buf *buf = container_of(kref, struct rchan_buf, kref);
     relay_destroy_buf(buf);
     }
@@ -236,8 +249,6 @@ unsafe extern "C" fn relay_remove_buf(kref: *mut kref) {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_buf_empty(buf: *mut rchan_buf) -> c_int {
-    static int relay_buf_empty(struct rchan_buf *buf)
-    {
     return (buf.subbufs_produced - buf.subbufs_consumed) ? 0 : 1;
     }
 //
@@ -248,8 +259,6 @@ unsafe extern "C" fn relay_buf_empty(buf: *mut rchan_buf) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn relay_buf_full(buf: *mut rchan_buf) -> c_int {
-    int relay_buf_full(struct rchan_buf *buf)
-    {
     let mut ready: usize = buf.subbufs_produced - buf.subbufs_consumed;
     return (ready >= buf.chan.n_subbufs) ? 1 : 0;
     }
@@ -276,8 +285,6 @@ pub unsafe extern "C" fn relay_buf_full(buf: *mut rchan_buf) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn wakeup_readers(work: *mut irq_work) {
-    static void wakeup_readers(struct irq_work *work)
-    {
     struct rchan_buf *buf;
     buf = container_of(work, struct rchan_buf, wakeup_work);
     wake_up_interruptible(&buf.read_wait);
@@ -291,8 +298,6 @@ unsafe extern "C" fn wakeup_readers(work: *mut irq_work) {
 //
 #[no_mangle]
 unsafe extern "C" fn __relay_reset(buf: *mut rchan_buf, init: c_uint) {
-    static void __relay_reset(struct rchan_buf *buf, unsigned int init)
-    {
     size_t i;
     if (init) {
     init_waitqueue_head(&buf.read_wait);
@@ -326,8 +331,6 @@ unsafe extern "C" fn __relay_reset(buf: *mut rchan_buf, init: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn relay_reset(chan: *mut rchan) {
-    void relay_reset(struct rchan *chan)
-    {
     struct rchan_buf *buf;
     unsigned int i;
     if (!chan)
@@ -415,8 +418,6 @@ pub unsafe extern "C" fn relay_reset(chan: *mut rchan) {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_close_buf(buf: *mut rchan_buf) {
-    static void relay_close_buf(struct rchan_buf *buf)
-    {
     buf.finalized = 1;
     irq_work_sync(&buf.wakeup_work);
     buf.chan.cb.remove_buf_file(buf.dentry);
@@ -424,8 +425,6 @@ unsafe extern "C" fn relay_close_buf(buf: *mut rchan_buf) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn relay_prepare_cpu(cpu: c_uint) -> c_int {
-    int relay_prepare_cpu(unsigned int cpu)
-    {
     struct rchan *chan;
     struct rchan_buf *buf;
     mutex_lock(&relay_channels_mutex);
@@ -534,8 +533,6 @@ pub struct rchan_percpu_buf_dispatcher {
 //
 #[no_mangle]
 pub unsafe extern "C" fn relay_switch_subbuf(buf: *mut rchan_buf, length: usize) -> usize {
-    size_t relay_switch_subbuf(struct rchan_buf *buf, size_t length)
-    {
     void *old, *new;
     size_t old_subbuf, new_subbuf;
     if (unlikely(length > buf.chan.subbuf_size))
@@ -619,8 +616,6 @@ pub unsafe extern "C" fn relay_switch_subbuf(buf: *mut rchan_buf, length: usize)
 //
 #[no_mangle]
 pub unsafe extern "C" fn relay_close(chan: *mut rchan) {
-    void relay_close(struct rchan *chan)
-    {
     struct rchan_buf *buf;
     unsigned int i;
     if (!chan)
@@ -645,8 +640,6 @@ pub unsafe extern "C" fn relay_close(chan: *mut rchan) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn relay_flush(chan: *mut rchan) {
-    void relay_flush(struct rchan *chan)
-    {
     struct rchan_buf *buf;
     unsigned int i;
     if (!chan)
@@ -671,8 +664,6 @@ pub unsafe extern "C" fn relay_flush(chan: *mut rchan) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn relay_stats(chan: *mut rchan, flags: c_int) -> usize {
-    size_t relay_stats(struct rchan *chan, int flags)
-    {
     unsigned int i, count = 0;
     struct rchan_buf *rbuf;
     if (!chan || flags > RELAY_STATS_LAST)
@@ -709,8 +700,6 @@ pub unsafe extern "C" fn if(RELAY_STATS_WRT_BIG: flags &) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_file_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int relay_file_open(struct inode *inode, struct file *filp)
-    {
     struct rchan_buf *buf = inode.i_private;
     kref_get(&buf.kref);
     filp.private_data = buf;
@@ -724,8 +713,6 @@ unsafe extern "C" fn relay_file_open(inode: *mut inode, filp: *mut file) -> c_in
 //
 #[no_mangle]
 unsafe extern "C" fn relay_file_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
-    static int relay_file_mmap_prepare(struct vm_area_desc *desc)
-    {
     struct rchan_buf *buf = desc.file.private_data;
     return relay_mmap_prepare_buf(buf, desc);
     }
@@ -738,8 +725,6 @@ unsafe extern "C" fn relay_file_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_file_poll(filp: *mut file, wait: *mut poll_table) -> __poll_t {
-    static __poll_t relay_file_poll(struct file *filp, poll_table *wait)
-    {
     let mut mask: __poll_t = 0;
     struct rchan_buf *buf = filp.private_data;
     if (buf.finalized)
@@ -761,8 +746,6 @@ unsafe extern "C" fn relay_file_poll(filp: *mut file, wait: *mut poll_table) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn relay_file_release(inode: *mut inode, filp: *mut file) -> c_int {
-    static int relay_file_release(struct inode *inode, struct file *filp)
-    {
     struct rchan_buf *buf = filp.private_data;
     kref_put(&buf.kref, relay_remove_buf);
     return 0;
@@ -802,8 +785,6 @@ unsafe extern "C" fn relay_file_release(inode: *mut inode, filp: *mut file) -> c
 //
 #[no_mangle]
 unsafe extern "C" fn relay_file_read_avail(buf: *mut rchan_buf) -> c_int {
-    static int relay_file_read_avail(struct rchan_buf *buf)
-    {
     let mut subbuf_size: usize = buf.chan.subbuf_size;
     let mut n_subbufs: usize = buf.chan.n_subbufs;
     let mut produced: usize = buf.subbufs_produced;
@@ -865,8 +846,6 @@ unsafe extern "C" fn relay_file_read_avail(buf: *mut rchan_buf) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn relay_file_read_start_pos(buf: *mut rchan_buf) -> usize {
-    static size_t relay_file_read_start_pos(struct rchan_buf *buf)
-    {
     size_t read_subbuf, padding, padding_start, padding_end;
     let mut subbuf_size: usize = buf.chan.subbuf_size;
     let mut n_subbufs: usize = buf.chan.n_subbufs;
@@ -948,3 +927,6 @@ unsafe extern "C" fn relay_file_read_start_pos(buf: *mut rchan_buf) -> usize {
     .release	= relay_file_release,
     };
     EXPORT_SYMBOL_GPL(relay_file_operations);
+
+}
+}

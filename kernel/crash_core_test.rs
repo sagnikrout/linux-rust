@@ -35,16 +35,111 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 
 // Helper to create and initialize crash_mem
-    static struct crash_mem *create_crash_mem(struct kunit *test, unsigned int max_ranges,
-    unsigned int nr_initial_ranges,
-    const struct range *initial_ranges)
-    {
-    struct crash_mem *mem;
-    size_t alloc_size;
+#[no_mangle]
+pub unsafe extern "C" fn create_crash_mem() {
+    let mut mem = core::ptr::null_mut();
+    let mut alloc_size = 0;
 // Check if max_ranges can even hold initial_ranges
     if (max_ranges < nr_initial_ranges) {
     kunit_err(test, "max_ranges (%u) < nr_initial_ranges (%u)\n",
@@ -66,14 +161,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     return mem;
     }
 // Helper to compare ranges for assertions
-    static void assert_ranges_equal(struct kunit *test,
-    const struct range *actual_ranges,
-    unsigned int actual_nr_ranges,
-    const struct range *expected_ranges,
-    unsigned int expected_nr_ranges,
-    const char *case_name)
-    {
-    unsigned int i;
+#[no_mangle]
+pub unsafe extern "C" fn assert_ranges_equal() {
+    let mut i = 0;
     KUNIT_ASSERT_EQ_MSG(test, expected_nr_ranges, actual_nr_ranges,
     "%s: Number of ranges mismatch.", case_name);
     for (i = 0; i < expected_nr_ranges; i++) {
@@ -100,15 +190,14 @@ pub struct exclude_test_param {
 
 #[no_mangle]
 unsafe extern "C" fn run_exclude_test_case(test: *mut kunit, params: *const exclude_test_param) {
-    static void run_exclude_test_case(struct kunit *test, const struct exclude_test_param *params)
-    {
-    struct crash_mem *mem;
-    int ret;
+    let mut mem = core::ptr::null_mut();
+    let mut ret = 0;
     kunit_info(test, "%s", params.description);
     mem = create_crash_mem(test, params.initial_max_ranges,
     params.initial_nr_ranges, params.initial_ranges);
-    if (!mem)
+    if (!mem) {
     return; // Error already logged by create_crash_mem or kunit_kzalloc
+    }
     ret = crash_exclude_mem_range(mem, params.exclude_start, params.exclude_end);
     KUNIT_ASSERT_EQ_MSG(test, params.expected_ret, ret,
     "%s: Return value mismatch.", params.description);
@@ -131,164 +220,11 @@ unsafe extern "C" fn run_exclude_test_case(test: *mut kunit, params: *const excl
 //
 // Exhaust all possibilities of the position of A regarding B.
 //
-    let mut single_range_b: static struct range = { .start = 100, .end = 199 };
-    static const struct exclude_test_param exclude_single_range_test_data[] = {
-    {
-    .description = "1.1: A is left of B, no overlap",
-    .exclude_start = 10, .exclude_end = 50,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = &single_range_b, .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.2: A's right boundary touches B's left boundary",
-    .exclude_start = 10, .exclude_end = 99,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = &single_range_b, .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.3: A overlaps B's left part",
-    .exclude_start = 50, .exclude_end = 149,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = (const struct range[]){{ .start = 150, .end = 199 }},
-    .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.4: A is completely inside B",
-    .exclude_start = 120, .exclude_end = 179,
-    .initial_max_ranges = 2, // Needs space for split
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = (const struct range[]){
-    { .start = 100, .end = 119 },
-    { .start = 180, .end = 199 }
-    },
-    .expected_nr_ranges = 2,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.5: A overlaps B's right part",
-    .exclude_start = 150, .exclude_end = 249,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = (const struct range[]){{ .start = 100, .end = 149 }},
-    .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.6: A's left boundary touches B's right boundary",
-    .exclude_start = 200, .exclude_end = 250,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = &single_range_b, .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.7: A is right of B, no overlap",
-    .exclude_start = 250, .exclude_end = 300,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = &single_range_b, .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.8: A completely covers B and extends beyond",
-    .exclude_start = 50, .exclude_end = 250,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = core::ptr::null_mut(), .expected_nr_ranges = 0,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.9: A covers B and extends to the left",
-    .exclude_start = 50, .exclude_end = 199, // A ends exactly where B ends
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = core::ptr::null_mut(), .expected_nr_ranges = 0,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.10: A covers B and extends to the right",
-    .exclude_start = 100, .exclude_end = 250, // A starts exactly where B starts
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = core::ptr::null_mut(), .expected_nr_ranges = 0,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.11: A is identical to B",
-    .exclude_start = 100, .exclude_end = 199,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = core::ptr::null_mut(), .expected_nr_ranges = 0,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.12: A is a point, left of B, no overlap",
-    .exclude_start = 10, .exclude_end = 10,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = &single_range_b, .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.13: A is a point, at start of B",
-    .exclude_start = 100, .exclude_end = 100,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = (const struct range[]){{ .start = 101, .end = 199 }},
-    .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.14: A is a point, in middle of B (causes split)",
-    .exclude_start = 150, .exclude_end = 150,
-    .initial_max_ranges = 2, // Needs space for split
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = (const struct range[]){
-    { .start = 100, .end = 149 },
-    { .start = 151, .end = 199 }
-    },
-    .expected_nr_ranges = 2,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.15: A is a point, at end of B",
-    .exclude_start = 199, .exclude_end = 199,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = (const struct range[]){{ .start = 100, .end = 198 }},
-    .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-    {
-    .description = "1.16: A is a point, right of B, no overlap",
-    .exclude_start = 250, .exclude_end = 250,
-    .initial_max_ranges = 1,
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = &single_range_b, .expected_nr_ranges = 1,
-    .expected_ret = 0,
-    },
-// ENOMEM case for single range split
-    {
-    .description = "1.17: A completely inside B (split), no space (ENOMEM)",
-    .exclude_start = 120, .exclude_end = 179,
-    .initial_max_ranges = 1, // Not enough for split
-    .initial_ranges = &single_range_b, .initial_nr_ranges = 1,
-    .expected_ranges = core::ptr::null_mut(), // Not checked on error by assert_ranges_equal for content
-    .expected_nr_ranges = 1, // Should remain unchanged
-    .expected_ret = -ENOMEM,
-    },
-    };
+pub static mut single_range_b: range = { .start = 100, .end = 199 };
+pub static mut exclude_test_param: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn exclude_single_range_test(test: *mut kunit) {
-    static void exclude_single_range_test(struct kunit *test)
-    {
-    size_t i;
+    let mut i = 0;
     for (i = 0; i < ARRAY_SIZE(exclude_single_range_test_data); i++) {
     kunit_log(KERN_INFO, test, "Running: %s", exclude_single_range_test_data[i].description);
     run_exclude_test_case(test, &exclude_single_range_test_data[i]);
@@ -298,42 +234,10 @@ unsafe extern "C" fn exclude_single_range_test(test: *mut kunit) {
 //
 // Test Strategy 2: Regression test.
 //
-    static const struct exclude_test_param exclude_range_regression_test_data[] = {
-// Test data from commit a2e9a95d2190
-    {
-    .description = "2.1: exclude low 1M",
-    .exclude_start = 0, .exclude_end = (1 << 20) - 1,
-    .initial_max_ranges = 3,
-    .initial_ranges = (const struct range[]){
-    { .start = 0, .end = 0x3efff },
-    { .start = 0x3f000, .end = 0x3ffff },
-    { .start = 0x40000, .end = 0x9ffff }
-    },
-    .initial_nr_ranges = 3,
-    .expected_nr_ranges = 0,
-    .expected_ret = 0,
-    },
-// Test data from https://lore.kernel.org/all/ZXrY7QbXAlxydsSC@MiWiFi-R3L-srv/T/#u
-    {
-    .description = "2.2: when range out of bound",
-    .exclude_start = 100, .exclude_end = 200,
-    .initial_max_ranges = 3,
-    .initial_ranges = (const struct range[]){
-    { .start = 1, .end = 299 },
-    { .start = 401, .end = 1000 },
-    { .start = 1001, .end = 2000 }
-    },
-    .initial_nr_ranges = 3,
-    .expected_ranges = core::ptr::null_mut(), // Not checked on error by assert_ranges_equal for content
-    .expected_nr_ranges = 3, // Should remain unchanged
-    .expected_ret = -ENOMEM
-    },
-    };
+pub static mut exclude_test_param: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn exclude_range_regression_test(test: *mut kunit) {
-    static void exclude_range_regression_test(struct kunit *test)
-    {
-    size_t i;
+    let mut i = 0;
     for (i = 0; i < ARRAY_SIZE(exclude_range_regression_test_data); i++) {
     kunit_log(KERN_INFO, test, "Running: %s", exclude_range_regression_test_data[i].description);
     run_exclude_test_case(test, &exclude_range_regression_test_data[i]);
@@ -343,16 +247,8 @@ unsafe extern "C" fn exclude_range_regression_test(test: *mut kunit) {
 //
 // KUnit Test Suite
 //
-    static struct kunit_case crash_exclude_mem_range_test_cases[] = {
-    KUNIT_CASE(exclude_single_range_test),
-    KUNIT_CASE(exclude_range_regression_test),
-    {}
-    };
-    static struct kunit_suite crash_exclude_mem_range_suite = {
-    .name = "crash_exclude_mem_range_tests",
-    .test_cases = crash_exclude_mem_range_test_cases,
-// .init and .exit can be NULL if not needed globally for the suite
-    };
+pub static mut kunit_case: usize = 0;
+pub static mut kunit_suite: usize = 0;
     kunit_test_suite(crash_exclude_mem_range_suite);
-    MODULE_DESCRIPTION("crash dump KUnit test suite");
-    MODULE_LICENSE("GPL");
+// MODULE_DESCRIPTION;
+// MODULE_LICENSE;

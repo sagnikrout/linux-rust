@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -43,20 +66,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
 // Protects all built-in parameters, modules use their own param_lock
-    static DEFINE_MUTEX(param_lock);
+// static DEFINE_MUTEX(param_lock);
 // Use the module's mutex, or if built-in use the built-in mutex
 
 #[no_mangle]
 pub unsafe extern "C" fn check_kparam_locked(mod: *mut module) {
-    static inline void check_kparam_locked(struct module *mod)
-    {
     BUG_ON(!mutex_is_locked(KPARAM_MUTEX(mod)));
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn check_kparam_locked(mod: *mut module) {
-    static inline void check_kparam_locked(struct module *mod)
-    {
     }
 
 // This just allows us to keep track of which parameters are kmalloced.
@@ -66,9 +85,8 @@ pub struct kmalloced_param {
     pub list: list_head,
     pub val: [c_char; ],
 }
-
-    static LIST_HEAD(kmalloced_params);
-    static DEFINE_SPINLOCK(kmalloced_params_lock);
+// static LIST_HEAD(kmalloced_params);
+// static DEFINE_SPINLOCK(kmalloced_params_lock);
     static void *kmalloc_parameter(unsigned int size)
     {
     struct kmalloced_param *p;
@@ -83,8 +101,6 @@ pub struct kmalloced_param {
 // Does nothing if parameter wasn't kmalloced above.
 #[no_mangle]
 unsafe extern "C" fn maybe_kfree_parameter(param: *mut c_void) {
-    static void maybe_kfree_parameter(void *param)
-    {
     struct kmalloced_param *p;
     spin_lock(&kmalloced_params_lock);
     list_for_each_entry(p, &kmalloced_params, list) {
@@ -98,16 +114,12 @@ unsafe extern "C" fn maybe_kfree_parameter(param: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn dash2underscore(c: c_char) -> c_char {
-    static char dash2underscore(char c)
-    {
     if (c == '-')
     return '_';
     return c;
     }
 #[no_mangle]
 pub unsafe extern "C" fn parameqn(a: *const c_char, b: *const c_char, n: usize) -> bool {
-    bool parameqn(const char *a, const char *b, size_t n)
-    {
     size_t i;
     for (i = 0; i < n; i++) {
     if (dash2underscore(a[i]) != dash2underscore(b[i]))
@@ -117,14 +129,10 @@ pub unsafe extern "C" fn parameqn(a: *const c_char, b: *const c_char, n: usize) 
     }
 #[no_mangle]
 pub unsafe extern "C" fn parameq(a: *const c_char, b: *const c_char) -> bool {
-    bool parameq(const char *a, const char *b)
-    {
     return parameqn(a, b, strlen(a)+1);
     }
 #[no_mangle]
 unsafe extern "C" fn param_check_unsafe(kp: *const kernel_param) -> bool {
-    static bool param_check_unsafe(const struct kernel_param *kp)
-    {
     if (kp.flags & KERNEL_PARAM_FL_HWPARAM &&
     security_locked_down(LOCKDOWN_MODULE_PARAMETERS))
     return false;
@@ -265,8 +273,6 @@ unsafe extern "C" fn param_check_unsafe(kp: *const kernel_param) -> bool {
     EXPORT_SYMBOL_GPL(param_set_uint_minmax);
 #[no_mangle]
 pub unsafe extern "C" fn param_set_charp(val: *const c_char, kp: *const kernel_param) -> c_int {
-    int param_set_charp(const char *val, const struct kernel_param *kp)
-    {
     char *tmp;
     size_t len, maxlen = 1024;
     len = strnlen(val, maxlen + 1);
@@ -292,15 +298,11 @@ pub unsafe extern "C" fn param_set_charp(val: *const c_char, kp: *const kernel_p
     EXPORT_SYMBOL(param_set_charp);
 #[no_mangle]
 pub unsafe extern "C" fn param_get_charp(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    int param_get_charp(char *buffer, const struct kernel_param *kp)
-    {
     return scnprintf(buffer, PAGE_SIZE, "%s\n", *((char **)kp.arg));
     }
     EXPORT_SYMBOL(param_get_charp);
 #[no_mangle]
 pub unsafe extern "C" fn param_free_charp(arg: *mut c_void) {
-    void param_free_charp(void *arg)
-    {
     maybe_kfree_parameter(*((char **)arg));
     }
     EXPORT_SYMBOL(param_free_charp);
@@ -313,8 +315,6 @@ pub unsafe extern "C" fn param_free_charp(arg: *mut c_void) {
 // Actually could be a bool or an int, for historical reasons.
 #[no_mangle]
 pub unsafe extern "C" fn param_set_bool(val: *const c_char, kp: *const kernel_param) -> c_int {
-    int param_set_bool(const char *val, const struct kernel_param *kp)
-    {
 // No equals means "set"...
     if (!val) val = "1";
 // One of =[yYnN01]
@@ -323,8 +323,6 @@ pub unsafe extern "C" fn param_set_bool(val: *const c_char, kp: *const kernel_pa
     EXPORT_SYMBOL(param_set_bool);
 #[no_mangle]
 pub unsafe extern "C" fn param_get_bool(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    int param_get_bool(char *buffer, const struct kernel_param *kp)
-    {
 // Y and N chosen as being relatively non-coder friendly
     return sprintf(buffer, "%c\n", *(bool *)kp.arg ? 'Y' : 'N');
     }
@@ -337,8 +335,6 @@ pub unsafe extern "C" fn param_get_bool(buffer: *mut c_char, kp: *const kernel_p
     EXPORT_SYMBOL(param_ops_bool);
 #[no_mangle]
 pub unsafe extern "C" fn param_set_bool_enable_only(val: *const c_char, kp: *const kernel_param) -> c_int {
-    int param_set_bool_enable_only(const char *val, const struct kernel_param *kp)
-    {
     int err;
     bool new_value;
     let mut orig_value: bool = *(bool *)kp.arg;
@@ -364,8 +360,6 @@ pub unsafe extern "C" fn param_set_bool_enable_only(val: *const c_char, kp: *con
 // This one must be bool.
 #[no_mangle]
 pub unsafe extern "C" fn param_set_invbool(val: *const c_char, kp: *const kernel_param) -> c_int {
-    int param_set_invbool(const char *val, const struct kernel_param *kp)
-    {
     int ret;
     bool boolval;
     struct kernel_param dummy;
@@ -378,8 +372,6 @@ pub unsafe extern "C" fn param_set_invbool(val: *const c_char, kp: *const kernel
     EXPORT_SYMBOL(param_set_invbool);
 #[no_mangle]
 pub unsafe extern "C" fn param_get_invbool(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    int param_get_invbool(char *buffer, const struct kernel_param *kp)
-    {
     return sprintf(buffer, "%c\n", (*(bool *)kp.arg) ? 'N' : 'Y');
     }
     EXPORT_SYMBOL(param_get_invbool);
@@ -390,8 +382,6 @@ pub unsafe extern "C" fn param_get_invbool(buffer: *mut c_char, kp: *const kerne
     EXPORT_SYMBOL(param_ops_invbool);
 #[no_mangle]
 pub unsafe extern "C" fn param_set_bint(val: *const c_char, kp: *const kernel_param) -> c_int {
-    int param_set_bint(const char *val, const struct kernel_param *kp)
-    {
 // Match bool exactly, by re-using it.
     let mut boolkp: kernel_param = *kp;
     bool v;
@@ -454,8 +444,6 @@ pub unsafe extern "C" fn param_set_bint(val: *const c_char, kp: *const kernel_pa
     }
 #[no_mangle]
 unsafe extern "C" fn param_array_set(val: *const c_char, kp: *const kernel_param) -> c_int {
-    static int param_array_set(const char *val, const struct kernel_param *kp)
-    {
     const struct kparam_array *arr = kp.arr;
     unsigned int temp_num;
     return param_array(kp.mod, kp.name, val, 1, arr.max, arr.elem,
@@ -464,8 +452,6 @@ unsafe extern "C" fn param_array_set(val: *const c_char, kp: *const kernel_param
     }
 #[no_mangle]
 unsafe extern "C" fn param_array_get(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    static int param_array_get(char *buffer, const struct kernel_param *kp)
-    {
     int i, off, ret;
     const struct kparam_array *arr = kp.arr;
     let mut p: kernel_param = *kp;
@@ -485,8 +471,6 @@ unsafe extern "C" fn param_array_get(buffer: *mut c_char, kp: *const kernel_para
     }
 #[no_mangle]
 unsafe extern "C" fn param_array_free(arg: *mut c_void) {
-    static void param_array_free(void *arg)
-    {
     unsigned int i;
     const struct kparam_array *arr = arg;
     if (arr.ops.free)
@@ -501,8 +485,6 @@ unsafe extern "C" fn param_array_free(arg: *mut c_void) {
     EXPORT_SYMBOL(param_array_ops);
 #[no_mangle]
 pub unsafe extern "C" fn param_set_copystring(val: *const c_char, kp: *const kernel_param) -> c_int {
-    int param_set_copystring(const char *val, const struct kernel_param *kp)
-    {
     const struct kparam_string *kps = kp.str;
     let mut len: usize = strnlen(val, kps.maxlen);
     if (len == kps.maxlen) {
@@ -516,8 +498,6 @@ pub unsafe extern "C" fn param_set_copystring(val: *const c_char, kp: *const ker
     EXPORT_SYMBOL(param_set_copystring);
 #[no_mangle]
 pub unsafe extern "C" fn param_get_string(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    int param_get_string(char *buffer, const struct kernel_param *kp)
-    {
     const struct kparam_string *kps = kp.str;
     return scnprintf(buffer, PAGE_SIZE, "%s\n", kps.string);
     }
@@ -575,14 +555,10 @@ pub unsafe extern "C" fn param_get_string(buffer: *mut c_char, kp: *const kernel
 
 #[no_mangle]
 pub unsafe extern "C" fn kernel_param_lock(mod: *mut module) {
-    void kernel_param_lock(struct module *mod)
-    {
     mutex_lock(KPARAM_MUTEX(mod));
     }
 #[no_mangle]
 pub unsafe extern "C" fn kernel_param_unlock(mod: *mut module) {
-    void kernel_param_unlock(struct module *mod)
-    {
     mutex_unlock(KPARAM_MUTEX(mod));
     }
     EXPORT_SYMBOL(kernel_param_lock);
@@ -652,8 +628,6 @@ pub unsafe extern "C" fn kernel_param_unlock(mod: *mut module) {
 
 #[no_mangle]
 unsafe extern "C" fn free_module_param_attrs(mk: *mut module_kobject) {
-    static void free_module_param_attrs(struct module_kobject *mk)
-    {
     if (mk.mp)
     kfree(mk.mp.grp.attrs);
     kfree(mk.mp);
@@ -701,8 +675,6 @@ unsafe extern "C" fn free_module_param_attrs(mk: *mut module_kobject) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn module_param_sysfs_remove(mod: *mut module) {
-    void module_param_sysfs_remove(struct module *mod)
-    {
     if (mod.mkobj.mp) {
     sysfs_remove_group(&mod.mkobj.kobj, &mod.mkobj.mp.grp);
 //
@@ -771,9 +743,7 @@ pub unsafe extern "C" fn module_param_sysfs_remove(mod: *mut module) {
 // and for all who have the same, call kernel_add_sysfs_param.
 //
 #[no_mangle]
-unsafe extern "C" fn param_sysfs_builtin() -> void __init {
-    static void __init param_sysfs_builtin(void)
-    {
+unsafe extern "C" fn param_sysfs_builtin() -> c_int {
     const struct kernel_param *kp;
     unsigned int name_len;
     char modname[MODULE_NAME_LEN];
@@ -803,9 +773,7 @@ unsafe extern "C" fn param_sysfs_builtin() -> void __init {
     extern const struct module_version_attribute __start___modver[];
     extern const struct module_version_attribute __stop___modver[];
 #[no_mangle]
-unsafe extern "C" fn version_sysfs_builtin() -> void __init {
-    static void __init version_sysfs_builtin(void)
-    {
+unsafe extern "C" fn version_sysfs_builtin() -> c_int {
     const struct module_version_attribute *vattr;
     struct module_kobject *mk;
     int err;
@@ -854,8 +822,6 @@ unsafe extern "C" fn version_sysfs_builtin() -> void __init {
     };
 #[no_mangle]
 unsafe extern "C" fn uevent_filter(kobj: *const kobject) -> c_int {
-    static int uevent_filter(const struct kobject *kobj)
-    {
     const struct kobj_type *ktype = get_ktype(kobj);
     if (ktype == &module_ktype)
     return 1;
@@ -867,8 +833,6 @@ unsafe extern "C" fn uevent_filter(kobj: *const kobject) -> c_int {
     struct kset *module_kset;
 #[no_mangle]
 unsafe extern "C" fn module_kobj_release(kobj: *mut kobject) {
-    static void module_kobj_release(struct kobject *kobj)
-    {
     struct module_kobject *mk = to_module_kobject(kobj);
     if (mk.kobj_completion)
     complete(mk.kobj_completion);
@@ -885,9 +849,7 @@ unsafe extern "C" fn module_kobj_release(kobj: *mut kobject) {
 // and create the associated driver symlinks.
 //
 #[no_mangle]
-unsafe extern "C" fn param_sysfs_init() -> int __init {
-    static int __init param_sysfs_init(void)
-    {
+unsafe extern "C" fn param_sysfs_init() -> c_int {
     module_kset = kset_create_and_add("module", &module_uevent_ops, core::ptr::null_mut());
     if (!module_kset) {
     printk(KERN_WARNING "%s (%d): error creating kset\n",
@@ -902,9 +864,7 @@ unsafe extern "C" fn param_sysfs_init() -> int __init {
 // attributes for built-in modules
 //
 #[no_mangle]
-unsafe extern "C" fn param_sysfs_builtin_init() -> int __init {
-    static int __init param_sysfs_builtin_init(void)
-    {
+unsafe extern "C" fn param_sysfs_builtin_init() -> c_int {
     if (!module_kset)
     return -ENOMEM;
     version_sysfs_builtin();
@@ -920,8 +880,6 @@ unsafe extern "C" fn param_sysfs_builtin_init() -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn module_destroy_params(params: *const kernel_param, num: c_uint) {
-    void module_destroy_params(const struct kernel_param *params, unsigned int num)
-    {
     unsigned int i;
     for (i = 0; i < num; i++)
     if (params[i].ops.free)

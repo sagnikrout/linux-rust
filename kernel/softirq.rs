@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -83,8 +106,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn wakeup_softirqd() {
-    static void wakeup_softirqd(void)
-    {
 // Interrupts are disabled: no need to stop preemption
     struct task_struct *tsk = __this_cpu_read(ksoftirqd);
     if (tsk)
@@ -99,15 +120,11 @@ unsafe extern "C" fn wakeup_softirqd() {
     DEFINE_PER_CPU(unsigned long, local_interrupt_disable_state);
 #[no_mangle]
 pub unsafe extern "C" fn _local_interrupt_disable() {
-    void _local_interrupt_disable(void)
-    {
     __local_interrupt_disable();
     }
     EXPORT_SYMBOL(_local_interrupt_disable);
 #[no_mangle]
 pub unsafe extern "C" fn _local_interrupt_enable() {
-    void _local_interrupt_enable(void)
-    {
     __local_interrupt_enable();
     }
     EXPORT_SYMBOL(_local_interrupt_enable);
@@ -179,14 +196,10 @@ pub struct softirq_ctrl {
 //
 #[no_mangle]
 pub unsafe extern "C" fn local_bh_blocked() -> bool {
-    bool local_bh_blocked(void)
-    {
     return __this_cpu_read(softirq_ctrl.cnt) != 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
-    void __local_bh_disable_ip(unsigned long ip, unsigned int cnt)
-    {
     unsigned long flags;
     int newcnt;
     WARN_ON_ONCE(in_hardirq());
@@ -237,8 +250,6 @@ pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
     EXPORT_SYMBOL(__local_bh_disable_ip);
 #[no_mangle]
 unsafe extern "C" fn __local_bh_enable(cnt: c_uint, unlock: bool) {
-    static void __local_bh_enable(unsigned int cnt, bool unlock)
-    {
     unsigned long flags;
     let mut sirq_en: bool = false;
     int newcnt;
@@ -276,8 +287,6 @@ unsafe extern "C" fn __local_bh_enable(cnt: c_uint, unlock: bool) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
-    void __local_bh_enable_ip(unsigned long ip, unsigned int cnt)
-    {
     let mut preempt_on: bool = preemptible();
     unsigned long flags;
     u32 pending;
@@ -325,16 +334,12 @@ pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ksoftirqd_run_begin() {
-    static inline void ksoftirqd_run_begin(void)
-    {
     __local_bh_disable_ip(_RET_IP_, SOFTIRQ_OFFSET);
     local_irq_disable();
     }
 // Counterpart to ksoftirqd_run_begin()
 #[no_mangle]
 pub unsafe extern "C" fn ksoftirqd_run_end() {
-    static inline void ksoftirqd_run_end(void)
-    {
 // pairs with the lock_map_acquire_read() in ksoftirqd_run_begin()
     lock_map_release(&bh_lock_map);
     __local_bh_enable(SOFTIRQ_OFFSET, true);
@@ -345,14 +350,10 @@ pub unsafe extern "C" fn ksoftirqd_run_end() {
     static inline void softirq_handle_end(void) { }
 #[no_mangle]
 pub unsafe extern "C" fn should_wake_ksoftirqd() -> bool {
-    static inline bool should_wake_ksoftirqd(void)
-    {
     return !this_cpu_read(softirq_ctrl.cnt);
     }
 #[no_mangle]
 pub unsafe extern "C" fn invoke_softirq() {
-    static inline void invoke_softirq(void)
-    {
     if (should_wake_ksoftirqd())
     wakeup_softirqd();
     }
@@ -367,8 +368,6 @@ pub unsafe extern "C" fn invoke_softirq() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_softirq_post_smp_call_flush(was_pending: c_uint) {
-    void do_softirq_post_smp_call_flush(unsigned int was_pending)
-    {
     let mut is_pending: c_uint = local_softirq_pending();
     if (unlikely(was_pending != is_pending)) {
     WARN_ON_ONCE(was_pending != (is_pending & ~SCHED_SOFTIRQ_MASK));
@@ -383,8 +382,6 @@ pub unsafe extern "C" fn do_softirq_post_smp_call_flush(was_pending: c_uint) {
 
 #[no_mangle]
 pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
-    void __local_bh_disable_ip(unsigned long ip, unsigned int cnt)
-    {
     unsigned long flags;
     WARN_ON_ONCE(in_hardirq());
     raw_local_irq_save(flags);
@@ -413,8 +410,6 @@ pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
 
 #[no_mangle]
 unsafe extern "C" fn __local_bh_enable(cnt: c_uint) {
-    static void __local_bh_enable(unsigned int cnt)
-    {
     lockdep_assert_irqs_disabled();
     if (preempt_count() == cnt)
     trace_preempt_on(CALLER_ADDR0, get_lock_parent_ip());
@@ -428,16 +423,12 @@ unsafe extern "C" fn __local_bh_enable(cnt: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn _local_bh_enable() {
-    void _local_bh_enable(void)
-    {
     WARN_ON_ONCE(in_hardirq());
     __local_bh_enable(SOFTIRQ_DISABLE_OFFSET);
     }
     EXPORT_SYMBOL(_local_bh_enable);
 #[no_mangle]
 pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
-    void __local_bh_enable_ip(unsigned long ip, unsigned int cnt)
-    {
     WARN_ON_ONCE(in_hardirq());
     lockdep_assert_irqs_enabled();
 
@@ -469,39 +460,27 @@ pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
     EXPORT_SYMBOL(__local_bh_enable_ip);
 #[no_mangle]
 pub unsafe extern "C" fn softirq_handle_begin() {
-    static inline void softirq_handle_begin(void)
-    {
     __local_bh_disable_ip(_RET_IP_, SOFTIRQ_OFFSET);
     }
 #[no_mangle]
 pub unsafe extern "C" fn softirq_handle_end() {
-    static inline void softirq_handle_end(void)
-    {
     __local_bh_enable(SOFTIRQ_OFFSET);
     WARN_ON_ONCE(in_interrupt());
     }
 #[no_mangle]
 pub unsafe extern "C" fn ksoftirqd_run_begin() {
-    static inline void ksoftirqd_run_begin(void)
-    {
     local_irq_disable();
     }
 #[no_mangle]
 pub unsafe extern "C" fn ksoftirqd_run_end() {
-    static inline void ksoftirqd_run_end(void)
-    {
     local_irq_enable();
     }
 #[no_mangle]
 pub unsafe extern "C" fn should_wake_ksoftirqd() -> bool {
-    static inline bool should_wake_ksoftirqd(void)
-    {
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn invoke_softirq() {
-    static inline void invoke_softirq(void)
-    {
     if (!force_irqthreads() || !__this_cpu_read(ksoftirqd)) {
 
 //
@@ -524,8 +503,6 @@ pub unsafe extern "C" fn invoke_softirq() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn do_softirq() -> asmlinkage __visible void {
-    asmlinkage __visible void do_softirq(void)
-    {
     __u32 pending;
     unsigned long flags;
     if (in_interrupt())
@@ -560,8 +537,6 @@ pub const MAX_SOFTIRQ_RESTART: c_int = 10;
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_softirq_start() -> bool {
-    static inline bool lockdep_softirq_start(void)
-    {
     let mut in_hardirq: bool = false;
     if (lockdep_hardirq_context()) {
     in_hardirq = true;
@@ -572,8 +547,6 @@ pub unsafe extern "C" fn lockdep_softirq_start() -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_softirq_end(in_hardirq: bool) {
-    static inline void lockdep_softirq_end(bool in_hardirq)
-    {
     lockdep_softirq_exit();
     if (in_hardirq)
     lockdep_hardirq_enter();
@@ -584,8 +557,6 @@ pub unsafe extern "C" fn lockdep_softirq_end(in_hardirq: bool) {
 
 #[no_mangle]
 unsafe extern "C" fn handle_softirqs(ksirqd: bool) {
-    static void handle_softirqs(bool ksirqd)
-    {
     let mut end: c_ulong = jiffies + MAX_SOFTIRQ_TIME;
     let mut old_flags: c_ulong = current.flags;
     let mut max_restart: c_int = MAX_SOFTIRQ_RESTART;
@@ -644,8 +615,6 @@ unsafe extern "C" fn handle_softirqs(ksirqd: bool) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __do_softirq() -> asmlinkage __visible void __softirq_entry {
-    asmlinkage __visible void __softirq_entry __do_softirq(void)
-    {
     handle_softirqs(false);
     }
 //
@@ -653,8 +622,6 @@ pub unsafe extern "C" fn __do_softirq() -> asmlinkage __visible void __softirq_e
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_enter_rcu() {
-    void irq_enter_rcu(void)
-    {
     __irq_enter_raw();
 //
 // If this is a nested interrupt that hits the exit_to_user_mode_loop
@@ -672,15 +639,11 @@ pub unsafe extern "C" fn irq_enter_rcu() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_enter() {
-    void irq_enter(void)
-    {
     ct_irq_enter();
     irq_enter_rcu();
     }
 #[no_mangle]
 pub unsafe extern "C" fn tick_irq_exit() {
-    static inline void tick_irq_exit(void)
-    {
 
     let mut cpu: c_int = smp_processor_id();
 // Make sure that timer wheel updates are propagated
@@ -695,8 +658,6 @@ pub unsafe extern "C" fn tick_irq_exit() {
     DEFINE_PER_CPU(unsigned long, pending_timer_softirq);
 #[no_mangle]
 unsafe extern "C" fn wake_timersd() {
-    static void wake_timersd(void)
-    {
     struct task_struct *tsk = __this_cpu_read(ktimerd);
     if (tsk)
     wake_up_process(tsk);
@@ -706,8 +667,6 @@ unsafe extern "C" fn wake_timersd() {
 
 #[no_mangle]
 pub unsafe extern "C" fn __irq_exit_rcu() {
-    static inline void __irq_exit_rcu(void)
-    {
 
     local_irq_disable();
 
@@ -744,8 +703,6 @@ pub unsafe extern "C" fn __irq_exit_rcu() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_exit_rcu() {
-    void irq_exit_rcu(void)
-    {
     __irq_exit_rcu();
 // must be last!
     lockdep_hardirq_exit();
@@ -757,8 +714,6 @@ pub unsafe extern "C" fn irq_exit_rcu() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_exit() {
-    void irq_exit(void)
-    {
     __irq_exit_rcu();
     ct_irq_exit();
 // must be last!
@@ -769,8 +724,6 @@ pub unsafe extern "C" fn irq_exit() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn raise_softirq_irqoff(nr: c_uint) {
-    inline void raise_softirq_irqoff(unsigned int nr)
-    {
     __raise_softirq_irqoff(nr);
 //
 // If we're in an interrupt or softirq, we're done
@@ -786,8 +739,6 @@ pub unsafe extern "C" fn raise_softirq_irqoff(nr: c_uint) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn raise_softirq(nr: c_uint) {
-    void raise_softirq(unsigned int nr)
-    {
     unsigned long flags;
     local_irq_save(flags);
     raise_softirq_irqoff(nr);
@@ -795,8 +746,6 @@ pub unsafe extern "C" fn raise_softirq(nr: c_uint) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __raise_softirq_irqoff(nr: c_uint) {
-    void __raise_softirq_irqoff(unsigned int nr)
-    {
     lockdep_assert_irqs_disabled();
     trace_softirq_raise(nr);
     or_softirq_pending(1UL << nr);
@@ -816,9 +765,8 @@ pub struct tasklet_head {
     pub head: *mut tasklet_struct,
     pub tail: *mut tasklet_struct,
 }
-
-    static DEFINE_PER_CPU(struct tasklet_head, tasklet_vec);
-    static DEFINE_PER_CPU(struct tasklet_head, tasklet_hi_vec);
+// static DEFINE_PER_CPU(struct tasklet_head, tasklet_vec);
+// static DEFINE_PER_CPU(struct tasklet_head, tasklet_hi_vec);
     static void __tasklet_schedule_common(struct tasklet_struct *t,
     struct tasklet_head __percpu *headp,
     unsigned int softirq_nr)
@@ -835,24 +783,18 @@ pub struct tasklet_head {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __tasklet_schedule(t: *mut tasklet_struct) {
-    void __tasklet_schedule(struct tasklet_struct *t)
-    {
     __tasklet_schedule_common(t, &tasklet_vec,
     TASKLET_SOFTIRQ);
     }
     EXPORT_SYMBOL(__tasklet_schedule);
 #[no_mangle]
 pub unsafe extern "C" fn __tasklet_hi_schedule(t: *mut tasklet_struct) {
-    void __tasklet_hi_schedule(struct tasklet_struct *t)
-    {
     __tasklet_schedule_common(t, &tasklet_hi_vec,
     HI_SOFTIRQ);
     }
     EXPORT_SYMBOL(__tasklet_hi_schedule);
 #[no_mangle]
 unsafe extern "C" fn tasklet_clear_sched(t: *mut tasklet_struct) -> bool {
-    static bool tasklet_clear_sched(struct tasklet_struct *t)
-    {
     if (test_and_clear_wake_up_bit(TASKLET_STATE_SCHED, &t.state))
     return true;
     WARN_ONCE(1, "tasklet SCHED state not set: %s %pS\n",
@@ -874,20 +816,14 @@ pub struct tasklet_sync_callback {
     };
 #[no_mangle]
 unsafe extern "C" fn tasklet_lock_callback() {
-    static void tasklet_lock_callback(void)
-    {
     spin_lock(this_cpu_ptr(&tasklet_sync_callback.cb_lock));
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_unlock_callback() {
-    static void tasklet_unlock_callback(void)
-    {
     spin_unlock(this_cpu_ptr(&tasklet_sync_callback.cb_lock));
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_callback_cancel_wait_running() {
-    static void tasklet_callback_cancel_wait_running(void)
-    {
     struct tasklet_sync_callback *sync_cb = this_cpu_ptr(&tasklet_sync_callback);
     atomic_inc(&sync_cb.cb_waiters);
     spin_lock(&sync_cb.cb_lock);
@@ -896,8 +832,6 @@ unsafe extern "C" fn tasklet_callback_cancel_wait_running() {
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_callback_sync_wait_running() {
-    static void tasklet_callback_sync_wait_running(void)
-    {
     struct tasklet_sync_callback *sync_cb = this_cpu_ptr(&tasklet_sync_callback);
     if (atomic_read(&sync_cb.cb_waiters)) {
     spin_unlock(&sync_cb.cb_lock);
@@ -954,15 +888,11 @@ unsafe extern "C" fn tasklet_callback_sync_wait_running() {
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_action() -> __latent_entropy void {
-    static __latent_entropy void tasklet_action(void)
-    {
     workqueue_softirq_action(false);
     tasklet_action_common(this_cpu_ptr(&tasklet_vec), TASKLET_SOFTIRQ);
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_hi_action() -> __latent_entropy void {
-    static __latent_entropy void tasklet_hi_action(void)
-    {
     workqueue_softirq_action(true);
     tasklet_action_common(this_cpu_ptr(&tasklet_hi_vec), HI_SOFTIRQ);
     }
@@ -995,8 +925,6 @@ unsafe extern "C" fn tasklet_hi_action() -> __latent_entropy void {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tasklet_unlock_spin_wait(t: *mut tasklet_struct) {
-    void tasklet_unlock_spin_wait(struct tasklet_struct *t)
-    {
     while (test_bit(TASKLET_STATE_RUN, &(t).state)) {
     if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
 //
@@ -1014,8 +942,6 @@ pub unsafe extern "C" fn tasklet_unlock_spin_wait(t: *mut tasklet_struct) {
 
 #[no_mangle]
 pub unsafe extern "C" fn tasklet_kill(t: *mut tasklet_struct) {
-    void tasklet_kill(struct tasklet_struct *t)
-    {
     if (in_interrupt())
     pr_notice("Attempt to kill tasklet from interrupt\n");
     wait_on_bit_lock(&t.state, TASKLET_STATE_SCHED, TASK_UNINTERRUPTIBLE);
@@ -1026,23 +952,17 @@ pub unsafe extern "C" fn tasklet_kill(t: *mut tasklet_struct) {
 
 #[no_mangle]
 pub unsafe extern "C" fn tasklet_unlock(t: *mut tasklet_struct) {
-    void tasklet_unlock(struct tasklet_struct *t)
-    {
     clear_and_wake_up_bit(TASKLET_STATE_RUN, &t.state);
     }
     EXPORT_SYMBOL_GPL(tasklet_unlock);
 #[no_mangle]
 pub unsafe extern "C" fn tasklet_unlock_wait(t: *mut tasklet_struct) {
-    void tasklet_unlock_wait(struct tasklet_struct *t)
-    {
     wait_on_bit(&t.state, TASKLET_STATE_RUN, TASK_UNINTERRUPTIBLE);
     }
     EXPORT_SYMBOL_GPL(tasklet_unlock_wait);
 
 #[no_mangle]
-pub unsafe extern "C" fn softirq_init() -> void __init {
-    void __init softirq_init(void)
-    {
+pub unsafe extern "C" fn softirq_init() -> c_int {
     int cpu;
     for_each_possible_cpu(cpu) {
     per_cpu(tasklet_vec, cpu).tail =
@@ -1055,14 +975,10 @@ pub unsafe extern "C" fn softirq_init() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn ksoftirqd_should_run(cpu: c_uint) -> c_int {
-    static int ksoftirqd_should_run(unsigned int cpu)
-    {
     return local_softirq_pending();
     }
 #[no_mangle]
 unsafe extern "C" fn run_ksoftirqd(cpu: c_uint) {
-    static void run_ksoftirqd(unsigned int cpu)
-    {
     ksoftirqd_run_begin();
     if (local_softirq_pending()) {
 //
@@ -1079,8 +995,6 @@ unsafe extern "C" fn run_ksoftirqd(cpu: c_uint) {
 
 #[no_mangle]
 unsafe extern "C" fn takeover_tasklets(cpu: c_uint) -> c_int {
-    static int takeover_tasklets(unsigned int cpu)
-    {
     workqueue_softirq_dead(cpu);
 // CPU is dead, so no lock needed.
     local_irq_disable();
@@ -1112,28 +1026,20 @@ unsafe extern "C" fn takeover_tasklets(cpu: c_uint) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn ktimerd_setup(cpu: c_uint) {
-    static void ktimerd_setup(unsigned int cpu)
-    {
 // Above SCHED_NORMAL to handle timers before regular tasks.
     sched_set_fifo_low(current);
     }
 #[no_mangle]
 unsafe extern "C" fn ktimerd_should_run(cpu: c_uint) -> c_int {
-    static int ktimerd_should_run(unsigned int cpu)
-    {
     return local_timers_pending_force_th();
     }
 #[no_mangle]
 pub unsafe extern "C" fn raise_ktimers_thread(nr: c_uint) {
-    void raise_ktimers_thread(unsigned int nr)
-    {
     trace_softirq_raise(nr);
     __this_cpu_or(pending_timer_softirq, BIT(nr));
     }
 #[no_mangle]
 unsafe extern "C" fn run_ktimerd(cpu: c_uint) {
-    static void run_ktimerd(unsigned int cpu)
-    {
     unsigned int timer_si;
     ksoftirqd_run_begin();
     timer_si = local_timers_pending_force_th();
@@ -1152,8 +1058,6 @@ unsafe extern "C" fn run_ktimerd(cpu: c_uint) {
 
 #[no_mangle]
 unsafe extern "C" fn spawn_ksoftirqd() -> __init int {
-    static __init int spawn_ksoftirqd(void)
-    {
     cpuhp_setup_state_nocalls(CPUHP_SOFTIRQ_DEAD, "softirq:dead", core::ptr::null_mut(),
     takeover_tasklets);
     BUG_ON(smpboot_register_percpu_thread(&softirq_threads));
@@ -1169,26 +1073,20 @@ unsafe extern "C" fn spawn_ksoftirqd() -> __init int {
 // GCC does not inline them incorrectly. ]
 //
 #[no_mangle]
-pub unsafe extern "C" fn early_irq_init() -> int __init __weak {
-    int __init __weak early_irq_init(void)
-    {
+pub unsafe extern "C" fn early_irq_init() -> c_int __weak {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn arch_probe_nr_irqs() -> int __init __weak {
-    int __init __weak arch_probe_nr_irqs(void)
-    {
+pub unsafe extern "C" fn arch_probe_nr_irqs() -> c_int __weak {
     return NR_IRQS_LEGACY;
     }
 #[no_mangle]
-pub unsafe extern "C" fn arch_early_irq_init() -> int __init __weak {
-    int __init __weak arch_early_irq_init(void)
-    {
+pub unsafe extern "C" fn arch_early_irq_init() -> c_int __weak {
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_dynirq_lower_bound(from: c_uint) -> unsigned int __weak {
-    unsigned int __weak arch_dynirq_lower_bound(unsigned int from)
-    {
     return from;
     }
+
+}

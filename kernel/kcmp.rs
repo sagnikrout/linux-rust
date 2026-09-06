@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 
@@ -56,8 +153,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static unsigned long cookies[KCMP_TYPES][2] __read_mostly;
 #[no_mangle]
 unsafe extern "C" fn kptr_obfuscate(v: c_long, type: c_int) -> c_long {
-    static long kptr_obfuscate(long v, int type)
-    {
     return (v ^ cookies[type][0]) * cookies[type][1];
     }
 //
@@ -67,91 +162,86 @@ unsafe extern "C" fn kptr_obfuscate(v: c_long, type: c_int) -> c_long {
 // 3 - not equal but ordering unavailable (reserved for future)
 //
 #[no_mangle]
-unsafe extern "C" fn kcmp_ptr(v1: *mut c_void, v2: *mut c_void, type: enum kcmp_type) -> c_int {
-    static int kcmp_ptr(void *v1, void *v2, enum kcmp_type type)
-    {
+unsafe extern "C" fn kcmp_ptr(v1: *mut c_void, v2: *mut c_void, type: kcmp_type) -> c_int {
     long t1, t2;
     t1 = kptr_obfuscate((long)v1, type);
     t2 = kptr_obfuscate((long)v2, type);
     return (t1 < t2) | ((t1 > t2) << 1);
     }
 // The caller must have pinned the task
-    static struct file *
-    get_file_raw_ptr(struct task_struct *task, unsigned int idx)
-    {
-    struct file *file;
+#[no_mangle]
+pub unsafe extern "C" fn get_file_raw_ptr() {
+    let mut file = core::ptr::null_mut();
     file = fget_task(task, idx);
-    if (file)
+    if (file) {
     fput(file);
+    }
     return file;
     }
 #[no_mangle]
 unsafe extern "C" fn kcmp_unlock(l1: *mut rw_semaphore, l2: *mut rw_semaphore) {
-    static void kcmp_unlock(struct rw_semaphore *l1, struct rw_semaphore *l2)
-    {
-    if (likely(l2 != l1))
+    if (likely(l2 != l1)) {
     up_read(l2);
+    }
     up_read(l1);
     }
 #[no_mangle]
 unsafe extern "C" fn kcmp_lock(l1: *mut rw_semaphore, l2: *mut rw_semaphore) -> c_int {
-    static int kcmp_lock(struct rw_semaphore *l1, struct rw_semaphore *l2)
-    {
-    int err;
-    if (l2 > l1)
+    let mut err = 0;
+    if (l2 > l1) {
     swap(l1, l2);
+    }
     err = down_read_killable(l1);
     if (!err && likely(l1 != l2)) {
     err = down_read_killable_nested(l2, SINGLE_DEPTH_NESTING);
-    if (err)
+    if (err) {
     up_read(l1);
+    }
     }
     return err;
     }
 
-    static int kcmp_epoll_target(struct task_struct *task1,
-    struct task_struct *task2,
-    unsigned long idx1,
-    struct kcmp_epoll_slot __user *uslot)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kcmp_epoll_target() {
     struct file *filp, *filp_epoll, *filp_tgt;
-    struct kcmp_epoll_slot slot;
-    if (copy_from_user(&slot, uslot, sizeof(slot)))
+    let mut slot;
+    if (copy_from_user(&slot, uslot, sizeof(slot))) {
     return -EFAULT;
+    }
     filp = get_file_raw_ptr(task1, idx1);
-    if (!filp)
+    if (!filp) {
     return -EBADF;
+    }
     filp_epoll = fget_task(task2, slot.efd);
-    if (!filp_epoll)
+    if (!filp_epoll) {
     return -EBADF;
+    }
     filp_tgt = get_epoll_tfile_raw_ptr(filp_epoll, slot.tfd, slot.toff);
     fput(filp_epoll);
-    if (IS_ERR(filp_tgt))
+    if (IS_ERR(filp_tgt)) {
     return PTR_ERR(filp_tgt);
+    }
     return kcmp_ptr(filp, filp_tgt, KCMP_FILE);
     }
 
-    static int kcmp_epoll_target(struct task_struct *task1,
-    struct task_struct *task2,
-    unsigned long idx1,
-    struct kcmp_epoll_slot __user *uslot)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kcmp_epoll_target() {
     return -EOPNOTSUPP;
     }
 
-    SYSCALL_DEFINE5(kcmp, pid_t, pid1, pid_t, pid2, int, type,
-    unsigned long, idx1, unsigned long, idx2)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_kcmp() {
     struct task_struct *task1, *task2;
-    int ret;
+    let mut ret = 0;
     rcu_read_lock();
 //
 // Tasks are looked up in caller's PID namespace only.
 //
     task1 = find_task_by_vpid(pid1);
     task2 = find_task_by_vpid(pid2);
-    if (unlikely(!task1 || !task2))
+    if (unlikely(!task1 || !task2)) {
     goto err_no_task;
+    }
     get_task_struct(task1);
     get_task_struct(task2);
     rcu_read_unlock();
@@ -160,40 +250,43 @@ unsafe extern "C" fn kcmp_lock(l1: *mut rw_semaphore, l2: *mut rw_semaphore) -> 
 //
     ret = kcmp_lock(&task1.signal.exec_update_lock,
     &task2.signal.exec_update_lock);
-    if (ret)
+    if (ret) {
     goto err;
+    }
     if (!ptrace_may_access(task1, PTRACE_MODE_READ_REALCREDS) ||
     !ptrace_may_access(task2, PTRACE_MODE_READ_REALCREDS)) {
     ret = -EPERM;
     goto err_unlock;
     }
-    switch (type) {
-    case KCMP_FILE: {
+    match (type) {
+    KCMP_FILE => { {
     struct file *filp1, *filp2;
     filp1 = get_file_raw_ptr(task1, idx1);
     filp2 = get_file_raw_ptr(task2, idx2);
-    if (filp1 && filp2)
+    if (filp1 && filp2) {
     ret = kcmp_ptr(filp1, filp2, KCMP_FILE);
-    else
+    }
+    else {
     ret = -EBADF;
+    }
     break;
     }
-    case KCMP_VM:
+    KCMP_VM => {
     ret = kcmp_ptr(task1.mm, task2.mm, KCMP_VM);
     break;
-    case KCMP_FILES:
+    KCMP_FILES => {
     ret = kcmp_ptr(task1.files, task2.files, KCMP_FILES);
     break;
-    case KCMP_FS:
+    KCMP_FS => {
     ret = kcmp_ptr(task1.real_fs, task2.real_fs, KCMP_FS);
     break;
-    case KCMP_SIGHAND:
+    KCMP_SIGHAND => {
     ret = kcmp_ptr(task1.sighand, task2.sighand, KCMP_SIGHAND);
     break;
-    case KCMP_IO:
+    KCMP_IO => {
     ret = kcmp_ptr(task1.io_context, task2.io_context, KCMP_IO);
     break;
-    case KCMP_SYSVSEM:
+    KCMP_SYSVSEM => {
 
     ret = kcmp_ptr(task1.sysvsem.undo_list,
     task2.sysvsem.undo_list,
@@ -202,10 +295,10 @@ unsafe extern "C" fn kcmp_lock(l1: *mut rw_semaphore, l2: *mut rw_semaphore) -> 
     ret = -EOPNOTSUPP;
 
     break;
-    case KCMP_EPOLL_TFD:
-    ret = kcmp_epoll_target(task1, task2, idx1, (void *)idx2);
+    KCMP_EPOLL_TFD => {
+    ret = kcmp_epoll_target(task1, task2, idx1, idx2);
     break;
-    default:
+    _ => {
     ret = -EINVAL;
     break;
     }
@@ -222,12 +315,19 @@ unsafe extern "C" fn kcmp_lock(l1: *mut rw_semaphore, l2: *mut rw_semaphore) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn kcmp_cookies_init() -> __init int {
-    static __init int kcmp_cookies_init(void)
-    {
-    int i;
+    let mut i = 0;
     get_random_bytes(cookies, sizeof(cookies));
     for (i = 0; i < KCMP_TYPES; i++)
     cookies[i][1] |= (~(~0UL >>  1) | 1);
     return 0;
     }
-    arch_initcall(kcmp_cookies_init);
+// arch_initcall;
+}
+}
+}
+}
+}
+}
+}
+}
+}

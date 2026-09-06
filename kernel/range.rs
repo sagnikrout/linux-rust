@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -43,8 +66,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 pub unsafe extern "C" fn add_range(range: *mut range, az: c_int, nr_range: c_int, start: u64, end: u64) -> c_int {
-    int add_range(struct range *range, int az, int nr_range, u64 start, u64 end)
-    {
     if (start >= end)
     return nr_range;
 // Out of slots:
@@ -85,8 +106,6 @@ pub unsafe extern "C" fn add_range(range: *mut range, az: c_int, nr_range: c_int
     }
 #[no_mangle]
 pub unsafe extern "C" fn subtract_range(range: *mut range, az: c_int, start: u64, end: u64) {
-    void subtract_range(struct range *range, int az, u64 start, u64 end)
-    {
     int i, j;
     if (start >= end)
     return;
@@ -128,8 +147,6 @@ pub unsafe extern "C" fn subtract_range(range: *mut range, az: c_int, start: u64
     }
 #[no_mangle]
 unsafe extern "C" fn cmp_range(x1: *const c_void, x2: *const c_void) -> c_int {
-    static int cmp_range(const void *x1, const void *x2)
-    {
     const struct range *r1 = x1;
     const struct range *r2 = x2;
     if (r1.start < r2.start)
@@ -140,8 +157,6 @@ unsafe extern "C" fn cmp_range(x1: *const c_void, x2: *const c_void) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn clean_sort_range(range: *mut range, az: c_int) -> c_int {
-    int clean_sort_range(struct range *range, int az)
-    {
     int i, j, k = az - 1, nr_range = az;
     for (i = 0; i < k; i++) {
     if (range[i].end)
@@ -173,8 +188,6 @@ pub unsafe extern "C" fn clean_sort_range(range: *mut range, az: c_int) -> c_int
     }
 #[no_mangle]
 pub unsafe extern "C" fn sort_range(range: *mut range, nr_range: c_int) {
-    void sort_range(struct range *range, int nr_range)
-    {
 // sort them
     sort(range, nr_range, sizeof(struct range), cmp_range, core::ptr::null_mut());
     }

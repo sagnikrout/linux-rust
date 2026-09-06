@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 // delayacct.c - per-task delay accounting
@@ -42,22 +139,20 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) Shailabh Nagar, IBM Corp. 2006
 //
 
-    do { \
-    d.type##_delay_max = tsk.delays.type##_delay_max; \
-    d.type##_delay_min = tsk.delays.type##_delay_min; \
-    d.type##_delay_max_ts.tv_sec = tsk.delays.type##_delay_max_ts.tv_sec; \
-    d.type##_delay_max_ts.tv_nsec = tsk.delays.type##_delay_max_ts.tv_nsec; \
-    tmp = d.type##_delay_total + tsk.delays.type##_delay; \
-    d.type##_delay_total = (tmp < d.type##_delay_total) ? 0 : tmp; \
-    d.type##_count += tsk.delays.type##_count; \
+    do { 
+    d.type##_delay_max = tsk.delays.type##_delay_max; 
+    d.type##_delay_min = tsk.delays.type##_delay_min; 
+    d.type##_delay_max_ts.tv_sec = tsk.delays.type##_delay_max_ts.tv_sec; 
+    d.type##_delay_max_ts.tv_nsec = tsk.delays.type##_delay_max_ts.tv_nsec; 
+    tmp = d.type##_delay_total + tsk.delays.type##_delay; 
+    d.type##_delay_total = (tmp < d.type##_delay_total) ? 0 : tmp; 
+    d.type##_count += tsk.delays.type##_count; 
     } while (0)
-    DEFINE_STATIC_KEY_FALSE(delayacct_key);
+// DEFINE_STATIC_KEY_FALSE;
     int delayacct_on __read_mostly;	/* Delay accounting turned on/off */
-    struct kmem_cache *delayacct_cache;
+    let mut delayacct_cache = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn set_delayacct(enabled: bool) {
-    static void set_delayacct(bool enabled)
-    {
     if (enabled) {
     static_branch_enable(&delayacct_key);
     delayacct_on = 1;
@@ -67,76 +162,60 @@ unsafe extern "C" fn set_delayacct(enabled: bool) {
     }
     }
 #[no_mangle]
-unsafe extern "C" fn delayacct_setup_enable(str: *mut c_char) -> int __init {
-    static int __init delayacct_setup_enable(char *str)
-    {
+unsafe extern "C" fn delayacct_setup_enable(str: *mut c_char) -> c_int {
     delayacct_on = 1;
     return 1;
     }
-    __setup("delayacct", delayacct_setup_enable);
+// __setup;
 #[no_mangle]
 pub unsafe extern "C" fn delayacct_init() {
-    void delayacct_init(void)
-    {
     delayacct_cache = KMEM_CACHE(task_delay_info, SLAB_PANIC|SLAB_ACCOUNT);
     delayacct_tsk_init(&init_task);
     set_delayacct(delayacct_on);
     }
 
-    static int sysctl_delayacct(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    let mut state: c_int = delayacct_on;
-    struct ctl_table t;
-    int err;
-    if (write && !capable(CAP_SYS_ADMIN))
+#[no_mangle]
+pub unsafe extern "C" fn sysctl_delayacct() {
+pub static mut state: c_int = delayacct_on;
+    let mut t;
+    let mut err = 0;
+    if (write && !capable(CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
     t = *table;
     t.data = &state;
     err = proc_dointvec_minmax(&t, write, buffer, lenp, ppos);
-    if (err < 0)
-    return err;
-    if (write)
-    set_delayacct(state);
+    if (err < 0) {
     return err;
     }
-    static const struct ctl_table kern_delayacct_table[] = {
-    {
-    .procname       = "task_delayacct",
-    .data           = core::ptr::null_mut(),
-    .maxlen         = sizeof(unsigned int),
-    .mode           = 0644,
-    .proc_handler   = sysctl_delayacct,
-    .extra1         = SYSCTL_ZERO,
-    .extra2         = SYSCTL_ONE,
-    },
-    };
+    if (write) {
+    set_delayacct(state);
+    }
+    return err;
+    }
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn kernel_delayacct_sysctls_init() -> __init int {
-    static __init int kernel_delayacct_sysctls_init(void)
-    {
     register_sysctl_init("kernel", kern_delayacct_table);
     return 0;
     }
-    late_initcall(kernel_delayacct_sysctls_init);
+// late_initcall;
 
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_tsk_init(tsk: *mut task_struct) {
-    void __delayacct_tsk_init(struct task_struct *tsk)
-    {
     tsk.delays = kmem_cache_zalloc(delayacct_cache, GFP_KERNEL);
-    if (tsk.delays)
+    if (tsk.delays) {
     raw_spin_lock_init(&tsk.delays.lock);
+    }
     }
 //
 // Finish delay accounting for a statistic using its timestamps (@start),
 // accumulator (@total) and @count
 //
-    static void delayacct_end(raw_spinlock_t *lock, u64 *start, u64 *total, u32 *count,
-    u64 *max, u64 *min, struct timespec64 *ts)
-    {
-    let mut ns: i64 = local_clock() - *start;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn delayacct_end() {
+pub static mut ns: i64 = local_clock() - *start;
+    let mut flags = 0;
     if (ns > 0) {
     raw_spin_lock_irqsave(lock, flags);
 // total += ns;
@@ -145,15 +224,14 @@ pub unsafe extern "C" fn __delayacct_tsk_init(tsk: *mut task_struct) {
 // max = ns;
     ktime_get_real_ts64(ts);
     }
-    if (*min == 0 || ns < *min)
+    if (*min == 0 || ns < *min) {
 // min = ns;
+    }
     raw_spin_unlock_irqrestore(lock, flags);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_blkio_start() {
-    void __delayacct_blkio_start(void)
-    {
     current.delays.blkio_start = local_clock();
     }
 //
@@ -162,8 +240,6 @@ pub unsafe extern "C" fn __delayacct_blkio_start() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_blkio_end(p: *mut task_struct) {
-    void __delayacct_blkio_end(struct task_struct *p)
-    {
     delayacct_end(&p.delays.lock,
     &p.delays.blkio_start,
     &p.delays.blkio_delay,
@@ -174,12 +250,10 @@ pub unsafe extern "C" fn __delayacct_blkio_end(p: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn delayacct_add_tsk(d: *mut taskstats, tsk: *mut task_struct) -> c_int {
-    int delayacct_add_tsk(struct taskstats *d, struct task_struct *tsk)
-    {
     u64 utime, stime, stimescaled, utimescaled;
     unsigned long long t2, t3;
     unsigned long flags, t1;
-    s64 tmp;
+    let mut tmp = 0;
     task_cputime(tsk, &utime, &stime);
     tmp = (s64)d.cpu_run_real_total;
     tmp += utime + stime;
@@ -206,26 +280,25 @@ pub unsafe extern "C" fn delayacct_add_tsk(d: *mut taskstats, tsk: *mut task_str
     tmp = (s64)d.cpu_run_virtual_total + t3;
     d.cpu_run_virtual_total =
     (tmp < (s64)d.cpu_run_virtual_total) ?	0 : tmp;
-    if (!tsk.delays)
+    if (!tsk.delays) {
     return 0;
+    }
 // zero XXX_total, non-zero XXX_count implies XXX stat overflowed
     raw_spin_lock_irqsave(&tsk.delays.lock, flags);
-    UPDATE_DELAY(blkio);
-    UPDATE_DELAY(swapin);
-    UPDATE_DELAY(freepages);
-    UPDATE_DELAY(thrashing);
-    UPDATE_DELAY(compact);
-    UPDATE_DELAY(wpcopy);
-    UPDATE_DELAY(irq);
+// UPDATE_DELAY;
+// UPDATE_DELAY;
+// UPDATE_DELAY;
+// UPDATE_DELAY;
+// UPDATE_DELAY;
+// UPDATE_DELAY;
+// UPDATE_DELAY;
     raw_spin_unlock_irqrestore(&tsk.delays.lock, flags);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_blkio_ticks(tsk: *mut task_struct) -> __u64 {
-    __u64 __delayacct_blkio_ticks(struct task_struct *tsk)
-    {
-    __u64 ret;
-    unsigned long flags;
+    let mut ret = 0;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&tsk.delays.lock, flags);
     ret = nsec_to_clock_t(tsk.delays.blkio_delay);
     raw_spin_unlock_irqrestore(&tsk.delays.lock, flags);
@@ -233,14 +306,10 @@ pub unsafe extern "C" fn __delayacct_blkio_ticks(tsk: *mut task_struct) -> __u64
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_freepages_start() {
-    void __delayacct_freepages_start(void)
-    {
     current.delays.freepages_start = local_clock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_freepages_end() {
-    void __delayacct_freepages_end(void)
-    {
     delayacct_end(&current.delays.lock,
     &current.delays.freepages_start,
     &current.delays.freepages_delay,
@@ -251,20 +320,18 @@ pub unsafe extern "C" fn __delayacct_freepages_end() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_thrashing_start(in_thrashing: *mut bool) {
-    void __delayacct_thrashing_start(bool *in_thrashing)
-    {
 // in_thrashing = !!current->in_thrashing;
-    if (*in_thrashing)
+    if (*in_thrashing) {
     return;
+    }
     current.in_thrashing = 1;
     current.delays.thrashing_start = local_clock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_thrashing_end(in_thrashing: *mut bool) {
-    void __delayacct_thrashing_end(bool *in_thrashing)
-    {
-    if (*in_thrashing)
+    if (*in_thrashing) {
     return;
+    }
     current.in_thrashing = 0;
     delayacct_end(&current.delays.lock,
     &current.delays.thrashing_start,
@@ -276,14 +343,10 @@ pub unsafe extern "C" fn __delayacct_thrashing_end(in_thrashing: *mut bool) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_swapin_start() {
-    void __delayacct_swapin_start(void)
-    {
     current.delays.swapin_start = local_clock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_swapin_end() {
-    void __delayacct_swapin_end(void)
-    {
     delayacct_end(&current.delays.lock,
     &current.delays.swapin_start,
     &current.delays.swapin_delay,
@@ -294,14 +357,10 @@ pub unsafe extern "C" fn __delayacct_swapin_end() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_compact_start() {
-    void __delayacct_compact_start(void)
-    {
     current.delays.compact_start = local_clock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_compact_end() {
-    void __delayacct_compact_end(void)
-    {
     delayacct_end(&current.delays.lock,
     &current.delays.compact_start,
     &current.delays.compact_delay,
@@ -312,14 +371,10 @@ pub unsafe extern "C" fn __delayacct_compact_end() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_wpcopy_start() {
-    void __delayacct_wpcopy_start(void)
-    {
     current.delays.wpcopy_start = local_clock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_wpcopy_end() {
-    void __delayacct_wpcopy_end(void)
-    {
     delayacct_end(&current.delays.lock,
     &current.delays.wpcopy_start,
     &current.delays.wpcopy_delay,
@@ -330,9 +385,7 @@ pub unsafe extern "C" fn __delayacct_wpcopy_end() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __delayacct_irq(task: *mut task_struct, delta: u32) {
-    void __delayacct_irq(struct task_struct *task, u32 delta)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&task.delays.lock, flags);
     task.delays.irq_delay += delta;
     task.delays.irq_count++;
@@ -340,7 +393,8 @@ pub unsafe extern "C" fn __delayacct_irq(task: *mut task_struct, delta: u32) {
     task.delays.irq_delay_max = delta;
     ktime_get_real_ts64(&task.delays.irq_delay_max_ts);
     }
-    if (delta && (!task.delays.irq_delay_min || delta < task.delays.irq_delay_min))
+    if (delta && (!task.delays.irq_delay_min || delta < task.delays.irq_delay_min)) {
     task.delays.irq_delay_min = delta;
+    }
     raw_spin_unlock_irqrestore(&task.delays.lock, flags);
     }

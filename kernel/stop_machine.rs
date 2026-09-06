@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -70,13 +93,10 @@ pub struct cpu_stopper {
     pub caller: c_ulong,
     pub fn: cpu_stop_fn_t,
 }
-
-    static DEFINE_PER_CPU(struct cpu_stopper, cpu_stopper);
+// static DEFINE_PER_CPU(struct cpu_stopper, cpu_stopper);
     let mut stop_machine_initialized: static bool = false;
 #[no_mangle]
 pub unsafe extern "C" fn print_stop_info(log_lvl: *const c_char, task: *mut task_struct) {
-    void print_stop_info(const char *log_lvl, struct task_struct *task)
-    {
 //
 // If @task is a stopper task, it cannot migrate and task_cpu() is
 // stable.
@@ -87,12 +107,10 @@ pub unsafe extern "C" fn print_stop_info(log_lvl: *const c_char, task: *mut task
     printk("%sStopper: %pS <- %pS\n", log_lvl, stopper.fn, (void *)stopper.caller);
     }
 // static data for stop_cpus
-    static DEFINE_MUTEX(stop_cpus_mutex);
+// static DEFINE_MUTEX(stop_cpus_mutex);
     static bool stop_cpus_in_progress;
 #[no_mangle]
 unsafe extern "C" fn cpu_stop_init_done(done: *mut cpu_stop_done, nr_todo: c_uint) {
-    static void cpu_stop_init_done(struct cpu_stop_done *done, unsigned int nr_todo)
-    {
     memset(done, 0, sizeof(*done));
     atomic_set(&done.nr_todo, nr_todo);
     init_completion(&done.completion);
@@ -100,8 +118,6 @@ unsafe extern "C" fn cpu_stop_init_done(done: *mut cpu_stop_done, nr_todo: c_uin
 // signal completion unless @done is NULL
 #[no_mangle]
 unsafe extern "C" fn cpu_stop_signal_done(done: *mut cpu_stop_done) {
-    static void cpu_stop_signal_done(struct cpu_stop_done *done)
-    {
     if (atomic_dec_and_test(&done.nr_todo))
     complete(&done.completion);
     }
@@ -113,8 +129,6 @@ unsafe extern "C" fn cpu_stop_signal_done(done: *mut cpu_stop_done) {
 // queue @work to @stopper.  if offline, @work is completed immediately
 #[no_mangle]
 unsafe extern "C" fn cpu_stop_queue_work(cpu: c_uint, work: *mut cpu_stop_work) -> bool {
-    static bool cpu_stop_queue_work(unsigned int cpu, struct cpu_stop_work *work)
-    {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
     unsigned long flags;
     bool enabled;
@@ -159,8 +173,6 @@ pub unsafe extern "C" fn if(_arg: work->done) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn stop_one_cpu(cpu: c_uint, fn: cpu_stop_fn_t, arg: *mut c_void) -> c_int {
-    int stop_one_cpu(unsigned int cpu, cpu_stop_fn_t fn, void *arg)
-    {
     struct cpu_stop_done done;
     let mut work: cpu_stop_work = { .fn = fn, .arg = arg, .done = &done, .caller = _RET_IP_ };
     cpu_stop_init_done(&done, 1);
@@ -210,22 +222,16 @@ pub struct multi_stop_data {
 // Last one to ack a state moves to the next state.
 #[no_mangle]
 unsafe extern "C" fn ack_state(msdata: *mut multi_stop_data) {
-    static void ack_state(struct multi_stop_data *msdata)
-    {
     if (atomic_dec_and_test(&msdata.thread_ack))
     set_state(msdata, msdata.state + 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn stop_machine_yield(cpumask: *const cpumask) -> notrace void __weak {
-    notrace void __weak stop_machine_yield(const struct cpumask *cpumask)
-    {
     cpu_relax();
     }
 // This is the cpu_stop function which stops the CPU.
 #[no_mangle]
 unsafe extern "C" fn multi_cpu_stop(data: *mut c_void) -> c_int {
-    static int multi_cpu_stop(void *data)
-    {
     struct multi_stop_data *msdata = data;
     enum multi_stop_state newstate, curstate = MULTI_STOP_NONE;
     let mut cpu: c_int = smp_processor_id(), err = 0;
@@ -345,8 +351,6 @@ unsafe extern "C" fn multi_cpu_stop(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn stop_two_cpus(cpu1: c_uint, cpu2: c_uint, fn: cpu_stop_fn_t, arg: *mut c_void) -> c_int {
-    int stop_two_cpus(unsigned int cpu1, unsigned int cpu2, cpu_stop_fn_t fn, void *arg)
-    {
     struct cpu_stop_done done;
     struct cpu_stop_work work1, work2;
     struct multi_stop_data msdata;
@@ -461,8 +465,6 @@ pub unsafe extern "C" fn stop_two_cpus(cpu1: c_uint, cpu2: c_uint, fn: cpu_stop_
 //
 #[no_mangle]
 unsafe extern "C" fn stop_cpus(cpumask: *const cpumask, fn: cpu_stop_fn_t, arg: *mut c_void) -> c_int {
-    static int stop_cpus(const struct cpumask *cpumask, cpu_stop_fn_t fn, void *arg)
-    {
     int ret;
 // static works are used, process one request at a time
     mutex_lock(&stop_cpus_mutex);
@@ -472,8 +474,6 @@ unsafe extern "C" fn stop_cpus(cpumask: *const cpumask, fn: cpu_stop_fn_t, arg: 
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_stop_should_run(cpu: c_uint) -> c_int {
-    static int cpu_stop_should_run(unsigned int cpu)
-    {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
     unsigned long flags;
     int run;
@@ -484,8 +484,6 @@ unsafe extern "C" fn cpu_stop_should_run(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_stopper_thread(cpu: c_uint) {
-    static void cpu_stopper_thread(unsigned int cpu)
-    {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
     struct cpu_stop_work *work;
     repeat:
@@ -522,8 +520,6 @@ unsafe extern "C" fn cpu_stopper_thread(cpu: c_uint) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn stop_machine_park(cpu: c_int) {
-    void stop_machine_park(int cpu)
-    {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
 //
 // Lockless. cpu_stopper_thread() will take stopper->lock and flush
@@ -535,21 +531,15 @@ pub unsafe extern "C" fn stop_machine_park(cpu: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_stop_create(cpu: c_uint) {
-    static void cpu_stop_create(unsigned int cpu)
-    {
     sched_set_stop_task(cpu, per_cpu(cpu_stopper.thread, cpu));
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_stop_park(cpu: c_uint) {
-    static void cpu_stop_park(unsigned int cpu)
-    {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
     WARN_ON(!list_empty(&stopper.works));
     }
 #[no_mangle]
 pub unsafe extern "C" fn stop_machine_unpark(cpu: c_int) {
-    void stop_machine_unpark(int cpu)
-    {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
     stopper.enabled = true;
     kthread_unpark(stopper.thread);
@@ -564,9 +554,7 @@ pub unsafe extern "C" fn stop_machine_unpark(cpu: c_int) {
     .selfparking		= true,
     };
 #[no_mangle]
-unsafe extern "C" fn cpu_stop_init() -> int __init {
-    static int __init cpu_stop_init(void)
-    {
+unsafe extern "C" fn cpu_stop_init() -> c_int {
     unsigned int cpu;
     for_each_possible_cpu(cpu) {
     struct cpu_stopper *stopper = &per_cpu(cpu_stopper, cpu);
@@ -610,8 +598,6 @@ unsafe extern "C" fn cpu_stop_init() -> int __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn stop_machine(fn: cpu_stop_fn_t, data: *mut c_void, cpus: *const cpumask) -> c_int {
-    int stop_machine(cpu_stop_fn_t fn, void *data, const struct cpumask *cpus)
-    {
     int ret;
 // No CPUs can come up or down during this.
     cpus_read_lock();
@@ -628,8 +614,6 @@ pub unsafe extern "C" fn stop_machine(fn: cpu_stop_fn_t, data: *mut c_void, cpus
 //
 #[no_mangle]
 pub unsafe extern "C" fn stop_core_cpuslocked(cpu: c_uint, fn: cpu_stop_fn_t, data: *mut c_void) -> c_int {
-    int stop_core_cpuslocked(unsigned int cpu, cpu_stop_fn_t fn, void *data)
-    {
     const struct cpumask *smt_mask = cpu_smt_mask(cpu);
     struct multi_stop_data msdata = {
     .fn = fn,
@@ -691,3 +675,5 @@ pub unsafe extern "C" fn stop_core_cpuslocked(cpu: c_uint, fn: cpu_stop_fn_t, da
     mutex_unlock(&stop_cpus_mutex);
     return ret ?: done.ret;
     }
+
+}

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -68,8 +91,6 @@ pub struct tp_transition_snapshot {
     static struct tp_transition_snapshot tp_transition_snapshot[_NR_TP_TRANSITION_SYNC];
 #[no_mangle]
 unsafe extern "C" fn tp_rcu_get_state(sync: enum tp_transition_sync) {
-    static void tp_rcu_get_state(enum tp_transition_sync sync)
-    {
     struct tp_transition_snapshot *snapshot = &tp_transition_snapshot[sync];
 // Keep the latest get_state snapshot.
     snapshot.rcu = get_state_synchronize_rcu();
@@ -78,8 +99,6 @@ unsafe extern "C" fn tp_rcu_get_state(sync: enum tp_transition_sync) {
     }
 #[no_mangle]
 unsafe extern "C" fn tp_rcu_cond_sync(sync: enum tp_transition_sync) {
-    static void tp_rcu_cond_sync(enum tp_transition_sync sync)
-    {
     struct tp_transition_snapshot *snapshot = &tp_transition_snapshot[sync];
     if (!snapshot.ongoing)
     return;
@@ -94,15 +113,15 @@ unsafe extern "C" fn tp_rcu_cond_sync(sync: enum tp_transition_sync) {
 //
 // Tracepoint module list mutex protects the local module list.
 //
-    static DEFINE_MUTEX(tracepoint_module_list_mutex);
+// static DEFINE_MUTEX(tracepoint_module_list_mutex);
 // Local list of struct tp_module
-    static LIST_HEAD(tracepoint_module_list);
+// static LIST_HEAD(tracepoint_module_list);
 
 //
 // tracepoints_mutex protects the builtin and module tracepoints.
 // tracepoints_mutex nests inside tracepoint_module_list_mutex.
 //
-    static DEFINE_MUTEX(tracepoints_mutex);
+// static DEFINE_MUTEX(tracepoints_mutex);
 //
 // Note about RCU :
 // It is used to delay the free of multiple probes array until a quiescent
@@ -118,8 +137,6 @@ pub struct tp_probes {
 // Called in removal of a func but failed to allocate a new tp_funcs
 #[no_mangle]
 unsafe extern "C" fn tp_stub_func() {
-    static void tp_stub_func(void)
-    {
     return;
     }
     static inline void *allocate_probes(int count)
@@ -129,14 +146,10 @@ unsafe extern "C" fn tp_stub_func() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_free_old_probes(head: *mut rcu_head) {
-    static void rcu_free_old_probes(struct rcu_head *head)
-    {
     kfree(container_of(head, struct tp_probes, rcu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn release_probes(tp: *mut tracepoint, old: *mut tracepoint_func) {
-    static inline void release_probes(struct tracepoint *tp, struct tracepoint_func *old)
-    {
     if (old) {
     struct tp_probes *tp_probes = container_of(old,
     struct tp_probes, probes[0]);
@@ -151,8 +164,6 @@ pub unsafe extern "C" fn release_probes(tp: *mut tracepoint, old: *mut tracepoin
     }
 #[no_mangle]
 unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
-    static void debug_print_probes(struct tracepoint_func *funcs)
-    {
     int i;
     if (!tracepoint_debug || !funcs)
     return;
@@ -271,8 +282,6 @@ unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
 //
 #[no_mangle]
 unsafe extern "C" fn nr_func_state(tp_funcs: *const tracepoint_func) -> enum tp_func_state {
-    static enum tp_func_state nr_func_state(const struct tracepoint_func *tp_funcs)
-    {
     if (!tp_funcs)
     return TP_FUNC_0;
     if (!tp_funcs[1].func)
@@ -283,8 +292,6 @@ unsafe extern "C" fn nr_func_state(tp_funcs: *const tracepoint_func) -> enum tp_
     }
 #[no_mangle]
 unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut tracepoint_func) {
-    static void tracepoint_update_call(struct tracepoint *tp, struct tracepoint_func *tp_funcs)
-    {
     void *func = tp.iterator;
 // Synthetic events do not have static call sites
     if (!tp.static_call_key)
@@ -492,8 +499,6 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracepoint_probe_register(tp: *mut tracepoint, probe: *mut c_void, data: *mut c_void) -> c_int {
-    int tracepoint_probe_register(struct tracepoint *tp, void *probe, void *data)
-    {
     return tracepoint_probe_register_prio(tp, probe, data, TRACEPOINT_DEFAULT_PRIO);
     }
     EXPORT_SYMBOL_GPL(tracepoint_probe_register);
@@ -507,8 +512,6 @@ pub unsafe extern "C" fn tracepoint_probe_register(tp: *mut tracepoint, probe: *
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracepoint_probe_unregister(tp: *mut tracepoint, probe: *mut c_void, data: *mut c_void) -> c_int {
-    int tracepoint_probe_unregister(struct tracepoint *tp, void *probe, void *data)
-    {
     struct tracepoint_func tp_func;
     int ret;
     mutex_lock(&tracepoints_mutex);
@@ -533,13 +536,11 @@ pub unsafe extern "C" fn tracepoint_probe_unregister(tp: *mut tracepoint, probe:
 
 #[no_mangle]
 pub unsafe extern "C" fn trace_module_has_bad_taint(mod: *mut module) -> bool {
-    bool trace_module_has_bad_taint(struct module *mod)
-    {
     return mod.taints & ~((1 << TAINT_OOT_MODULE) | (1 << TAINT_CRAP) |
     (1 << TAINT_UNSIGNED_MODULE) | (1 << TAINT_TEST) |
     (1 << TAINT_LIVEPATCH));
     }
-    static BLOCKING_NOTIFIER_HEAD(tracepoint_notify_list);
+// static BLOCKING_NOTIFIER_HEAD(tracepoint_notify_list);
 //
 // register_tracepoint_module_notifier - register tracepoint coming/going notifier
 // @nb: notifier block
@@ -551,8 +552,6 @@ pub unsafe extern "C" fn trace_module_has_bad_taint(mod: *mut module) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_tracepoint_module_notifier(nb: *mut notifier_block) -> c_int {
-    int register_tracepoint_module_notifier(struct notifier_block *nb)
-    {
     struct tp_module *tp_mod;
     int ret;
     mutex_lock(&tracepoint_module_list_mutex);
@@ -575,8 +574,6 @@ pub unsafe extern "C" fn register_tracepoint_module_notifier(nb: *mut notifier_b
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_tracepoint_module_notifier(nb: *mut notifier_block) -> c_int {
-    int unregister_tracepoint_module_notifier(struct notifier_block *nb)
-    {
     struct tp_module *tp_mod;
     int ret;
     mutex_lock(&tracepoint_module_list_mutex);
@@ -596,14 +593,10 @@ pub unsafe extern "C" fn unregister_tracepoint_module_notifier(nb: *mut notifier
 //
 #[no_mangle]
 unsafe extern "C" fn tp_module_going_check_quiescent(tp: *mut tracepoint, priv: *mut c_void) {
-    static void tp_module_going_check_quiescent(struct tracepoint *tp, void *priv)
-    {
     WARN_ON_ONCE(tp.funcs);
     }
 #[no_mangle]
 unsafe extern "C" fn tracepoint_module_coming(mod: *mut module) -> c_int {
-    static int tracepoint_module_coming(struct module *mod)
-    {
     struct tp_module *tp_mod;
     if (!mod.num_tracepoints)
     return 0;
@@ -627,8 +620,6 @@ unsafe extern "C" fn tracepoint_module_coming(mod: *mut module) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn tracepoint_module_going(mod: *mut module) {
-    static void tracepoint_module_going(struct module *mod)
-    {
     struct tp_module *tp_mod;
     if (!mod.num_tracepoints)
     return;
@@ -682,8 +673,6 @@ unsafe extern "C" fn tracepoint_module_going(mod: *mut module) {
     };
 #[no_mangle]
 unsafe extern "C" fn init_tracepoints() -> __init int {
-    static __init int init_tracepoints(void)
-    {
     int ret;
     ret = register_module_notifier(&tracepoint_module_nb);
     if (ret)
@@ -744,8 +733,6 @@ unsafe extern "C" fn init_tracepoints() -> __init int {
     static int sys_tracepoint_refcount;
 #[no_mangle]
 pub unsafe extern "C" fn syscall_regfunc() -> c_int {
-    int syscall_regfunc(void)
-    {
     struct task_struct *p, *t;
     if (!sys_tracepoint_refcount) {
     read_lock(&tasklist_lock);
@@ -759,8 +746,6 @@ pub unsafe extern "C" fn syscall_regfunc() -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn syscall_unregfunc() {
-    void syscall_unregfunc(void)
-    {
     struct task_struct *p, *t;
     sys_tracepoint_refcount--;
     if (!sys_tracepoint_refcount) {

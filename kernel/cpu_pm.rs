@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -49,29 +146,19 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Notifications for cpu_pm will be issued by the idle task itself, which can
 // never block, IOW it requires using a raw_spinlock_t.
 //
-    static struct {
-    struct raw_notifier_head chain;
-    raw_spinlock_t lock;
-    } cpu_pm_notifier = {
-    .chain = RAW_NOTIFIER_INIT(cpu_pm_notifier.chain),
-    .lock  = __RAW_SPIN_LOCK_UNLOCKED(cpu_pm_notifier.lock),
-    };
+pub static mut cpu_pm_notifier: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn cpu_pm_notify(event: enum cpu_pm_event) -> c_int {
-    static int cpu_pm_notify(enum cpu_pm_event event)
-    {
-    int ret;
+unsafe extern "C" fn cpu_pm_notify(event: cpu_pm_event) -> c_int {
+    let mut ret = 0;
     rcu_read_lock();
     ret = raw_notifier_call_chain(&cpu_pm_notifier.chain, event, core::ptr::null_mut());
     rcu_read_unlock();
     return notifier_to_errno(ret);
     }
 #[no_mangle]
-unsafe extern "C" fn cpu_pm_notify_robust(event_up: enum cpu_pm_event, event_down: enum cpu_pm_event) -> c_int {
-    static int cpu_pm_notify_robust(enum cpu_pm_event event_up, enum cpu_pm_event event_down)
-    {
-    unsigned long flags;
-    int ret;
+unsafe extern "C" fn cpu_pm_notify_robust(event_up: cpu_pm_event, event_down: cpu_pm_event) -> c_int {
+    let mut flags = 0;
+    let mut ret = 0;
     raw_spin_lock_irqsave(&cpu_pm_notifier.lock, flags);
     ret = raw_notifier_call_chain_robust(&cpu_pm_notifier.chain, event_up, event_down, core::ptr::null_mut());
     raw_spin_unlock_irqrestore(&cpu_pm_notifier.lock, flags);
@@ -88,16 +175,14 @@ unsafe extern "C" fn cpu_pm_notify_robust(event_up: enum cpu_pm_event, event_dow
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_pm_register_notifier(nb: *mut notifier_block) -> c_int {
-    int cpu_pm_register_notifier(struct notifier_block *nb)
-    {
-    unsigned long flags;
-    int ret;
+    let mut flags = 0;
+    let mut ret = 0;
     raw_spin_lock_irqsave(&cpu_pm_notifier.lock, flags);
     ret = raw_notifier_chain_register(&cpu_pm_notifier.chain, nb);
     raw_spin_unlock_irqrestore(&cpu_pm_notifier.lock, flags);
     return ret;
     }
-    EXPORT_SYMBOL_GPL(cpu_pm_register_notifier);
+// EXPORT_SYMBOL_GPL;
 //
 // cpu_pm_unregister_notifier - unregister a driver with cpu_pm
 // @nb: notifier block to be unregistered
@@ -108,16 +193,14 @@ pub unsafe extern "C" fn cpu_pm_register_notifier(nb: *mut notifier_block) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_pm_unregister_notifier(nb: *mut notifier_block) -> c_int {
-    int cpu_pm_unregister_notifier(struct notifier_block *nb)
-    {
-    unsigned long flags;
-    int ret;
+    let mut flags = 0;
+    let mut ret = 0;
     raw_spin_lock_irqsave(&cpu_pm_notifier.lock, flags);
     ret = raw_notifier_chain_unregister(&cpu_pm_notifier.chain, nb);
     raw_spin_unlock_irqrestore(&cpu_pm_notifier.lock, flags);
     return ret;
     }
-    EXPORT_SYMBOL_GPL(cpu_pm_unregister_notifier);
+// EXPORT_SYMBOL_GPL;
 //
 // cpu_pm_enter - CPU low power entry notifier
 //
@@ -135,11 +218,9 @@ pub unsafe extern "C" fn cpu_pm_unregister_notifier(nb: *mut notifier_block) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_pm_enter() -> c_int {
-    int cpu_pm_enter(void)
-    {
     return cpu_pm_notify_robust(CPU_PM_ENTER, CPU_PM_ENTER_FAILED);
     }
-    EXPORT_SYMBOL_GPL(cpu_pm_enter);
+// EXPORT_SYMBOL_GPL;
 //
 // cpu_pm_exit - CPU low power exit notifier
 //
@@ -154,11 +235,9 @@ pub unsafe extern "C" fn cpu_pm_enter() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_pm_exit() -> c_int {
-    int cpu_pm_exit(void)
-    {
     return cpu_pm_notify(CPU_PM_EXIT);
     }
-    EXPORT_SYMBOL_GPL(cpu_pm_exit);
+// EXPORT_SYMBOL_GPL;
 //
 // cpu_cluster_pm_enter - CPU cluster low power entry notifier
 //
@@ -177,11 +256,9 @@ pub unsafe extern "C" fn cpu_pm_exit() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_cluster_pm_enter() -> c_int {
-    int cpu_cluster_pm_enter(void)
-    {
     return cpu_pm_notify_robust(CPU_CLUSTER_PM_ENTER, CPU_CLUSTER_PM_ENTER_FAILED);
     }
-    EXPORT_SYMBOL_GPL(cpu_cluster_pm_enter);
+// EXPORT_SYMBOL_GPL;
 //
 // cpu_cluster_pm_exit - CPU cluster low power exit notifier
 //
@@ -199,42 +276,30 @@ pub unsafe extern "C" fn cpu_cluster_pm_enter() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_cluster_pm_exit() -> c_int {
-    int cpu_cluster_pm_exit(void)
-    {
     return cpu_pm_notify(CPU_CLUSTER_PM_EXIT);
     }
-    EXPORT_SYMBOL_GPL(cpu_cluster_pm_exit);
+// EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
 unsafe extern "C" fn cpu_pm_suspend(data: *mut c_void) -> c_int {
-    static int cpu_pm_suspend(void *data)
-    {
-    int ret;
+    let mut ret = 0;
     ret = cpu_pm_enter();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = cpu_cluster_pm_enter();
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_pm_resume(data: *mut c_void) {
-    static void cpu_pm_resume(void *data)
-    {
     cpu_cluster_pm_exit();
     cpu_pm_exit();
     }
-    static const struct syscore_ops cpu_pm_syscore_ops = {
-    .suspend = cpu_pm_suspend,
-    .resume = cpu_pm_resume,
-    };
-    static struct syscore cpu_pm_syscore = {
-    .ops = &cpu_pm_syscore_ops,
-    };
+pub static mut syscore_ops: usize = 0;
+pub static mut syscore: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn cpu_pm_init() -> c_int {
-    static int cpu_pm_init(void)
-    {
     register_syscore(&cpu_pm_syscore);
     return 0;
     }
-    core_initcall(cpu_pm_init);
+// core_initcall;

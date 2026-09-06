@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 
@@ -48,7 +71,7 @@ pub const UCOUNTS_HASHTABLE_BITS: c_int = 10;
     static struct hlist_nulls_head ucounts_hashtable[UCOUNTS_HASHTABLE_ENTRIES] = {
     [0 ... UCOUNTS_HASHTABLE_ENTRIES - 1] = HLIST_NULLS_HEAD_INIT(0)
     };
-    static DEFINE_SPINLOCK(ucounts_lock);
+// static DEFINE_SPINLOCK(ucounts_lock);
 
     hash_long((unsigned long)__kuid_val(uid) + (unsigned long)(ns), \
     UCOUNTS_HASHTABLE_BITS)
@@ -62,8 +85,6 @@ pub const UCOUNTS_HASHTABLE_BITS: c_int = 10;
     }
 #[no_mangle]
 unsafe extern "C" fn set_is_seen(set: *mut ctl_table_set) -> c_int {
-    static int set_is_seen(struct ctl_table_set *set)
-    {
     return &current_user_ns().set == set;
     }
     static int set_permissions(struct ctl_table_header *head,
@@ -117,8 +138,6 @@ unsafe extern "C" fn set_is_seen(set: *mut ctl_table_set) -> c_int {
 
 #[no_mangle]
 pub unsafe extern "C" fn setup_userns_sysctls(ns: *mut user_namespace) -> bool {
-    bool setup_userns_sysctls(struct user_namespace *ns)
-    {
 
     struct ctl_table *tbl;
     BUILD_BUG_ON(ARRAY_SIZE(user_table) != UCOUNT_COUNTS);
@@ -142,8 +161,6 @@ pub unsafe extern "C" fn setup_userns_sysctls(ns: *mut user_namespace) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn retire_userns_sysctls(ns: *mut user_namespace) {
-    void retire_userns_sysctls(struct user_namespace *ns)
-    {
 
     const struct ctl_table *tbl;
     tbl = ns.sysctls.ctl_table_arg;
@@ -168,8 +185,6 @@ pub unsafe extern "C" fn retire_userns_sysctls(ns: *mut user_namespace) {
     }
 #[no_mangle]
 unsafe extern "C" fn hlist_add_ucounts(ucounts: *mut ucounts) {
-    static void hlist_add_ucounts(struct ucounts *ucounts)
-    {
     struct hlist_nulls_head *hashent = ucounts_hashentry(ucounts.ns, ucounts.uid);
     spin_lock_irq(&ucounts_lock);
     hlist_nulls_add_head_rcu(&ucounts.node, hashent);
@@ -202,8 +217,6 @@ unsafe extern "C" fn hlist_add_ucounts(ucounts: *mut ucounts) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_ucounts(ucounts: *mut ucounts) {
-    void put_ucounts(struct ucounts *ucounts)
-    {
     unsigned long flags;
     if (rcuref_put(&ucounts.count)) {
     spin_lock_irqsave(&ucounts_lock, flags);
@@ -215,8 +228,6 @@ pub unsafe extern "C" fn put_ucounts(ucounts: *mut ucounts) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn atomic_long_inc_below(v: *mut atomic_long_t, u: c_long) -> bool {
-    static inline bool atomic_long_inc_below(atomic_long_t *v, long u)
-    {
     let mut c: c_long = atomic_long_read(v);
     do {
     if (unlikely(c >= u))
@@ -248,8 +259,6 @@ pub unsafe extern "C" fn atomic_long_inc_below(v: *mut atomic_long_t, u: c_long)
     EXPORT_SYMBOL_FOR_MODULES(inc_ucount, "binfmt_misc");
 #[no_mangle]
 pub unsafe extern "C" fn dec_ucount(ucounts: *mut ucounts, type: enum ucount_type) {
-    void dec_ucount(struct ucounts *ucounts, enum ucount_type type)
-    {
     struct ucounts *iter;
     for (iter = ucounts; iter; iter = iter.ns.ucounts) {
     let mut dec: c_long = atomic_long_dec_if_positive(&iter.ucount[type]);
@@ -260,8 +269,6 @@ pub unsafe extern "C" fn dec_ucount(ucounts: *mut ucounts, type: enum ucount_typ
     EXPORT_SYMBOL_FOR_MODULES(dec_ucount, "binfmt_misc");
 #[no_mangle]
 pub unsafe extern "C" fn inc_rlimit_ucounts(ucounts: *mut ucounts, type: enum rlimit_type, v: c_long) -> c_long {
-    long inc_rlimit_ucounts(struct ucounts *ucounts, enum rlimit_type type, long v)
-    {
     struct ucounts *iter;
     let mut max: c_long = LONG_MAX;
     let mut ret: c_long = 0;
@@ -279,8 +286,6 @@ pub unsafe extern "C" fn if(ucounts: iter ==) -> else {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dec_rlimit_ucounts(ucounts: *mut ucounts, type: enum rlimit_type, v: c_long) -> bool {
-    bool dec_rlimit_ucounts(struct ucounts *ucounts, enum rlimit_type type, long v)
-    {
     struct ucounts *iter;
     long new = -1; /* Silence compiler warning */
     for (iter = ucounts; iter; iter = iter.ns.ucounts) {
@@ -305,8 +310,6 @@ pub unsafe extern "C" fn dec_rlimit_ucounts(ucounts: *mut ucounts, type: enum rl
     }
 #[no_mangle]
 pub unsafe extern "C" fn dec_rlimit_put_ucounts(ucounts: *mut ucounts, type: enum rlimit_type) {
-    void dec_rlimit_put_ucounts(struct ucounts *ucounts, enum rlimit_type type)
-    {
     do_dec_rlimit_put_ucounts(ucounts, core::ptr::null_mut(), type);
     }
     long inc_rlimit_get_ucounts(struct ucounts *ucounts, enum rlimit_type type,
@@ -342,8 +345,6 @@ pub unsafe extern "C" fn dec_rlimit_put_ucounts(ucounts: *mut ucounts, type: enu
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_rlimit_overlimit(ucounts: *mut ucounts, type: enum rlimit_type, rlimit: c_ulong) -> bool {
-    bool is_rlimit_overlimit(struct ucounts *ucounts, enum rlimit_type type, unsigned long rlimit)
-    {
     struct ucounts *iter;
     let mut max: c_long = rlimit;
     if (rlimit > LONG_MAX)
@@ -358,8 +359,6 @@ pub unsafe extern "C" fn is_rlimit_overlimit(ucounts: *mut ucounts, type: enum r
     }
 #[no_mangle]
 unsafe extern "C" fn user_namespace_sysctl_init() -> __init int {
-    static __init int user_namespace_sysctl_init(void)
-    {
 
     static struct ctl_table_header *user_header;
     static struct ctl_table empty[1];
@@ -378,3 +377,5 @@ unsafe extern "C" fn user_namespace_sysctl_init() -> __init int {
     return 0;
     }
     subsys_initcall(user_namespace_sysctl_init);
+
+}

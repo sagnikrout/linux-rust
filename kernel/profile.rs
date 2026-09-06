@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -68,8 +91,6 @@ pub const PROFILE_GRPSHIFT: c_int = 3;
     EXPORT_SYMBOL_GPL(prof_on);
 #[no_mangle]
 pub unsafe extern "C" fn profile_setup(str: *mut c_char) -> c_int {
-    int profile_setup(char *str)
-    {
     static const char schedstr[] = "schedule";
     static const char kvmstr[] = "kvm";
     const char *select = core::ptr::null_mut();
@@ -99,8 +120,6 @@ pub unsafe extern "C" fn profile_setup(str: *mut c_char) -> c_int {
     __setup("profile=", profile_setup);
 #[no_mangle]
 pub unsafe extern "C" fn profile_init() -> int __ref {
-    int __ref profile_init(void)
-    {
     int buffer_bytes;
     if (!prof_on)
     return 0;
@@ -126,8 +145,6 @@ pub unsafe extern "C" fn profile_init() -> int __ref {
     }
 #[no_mangle]
 unsafe extern "C" fn do_profile_hits(type: c_int, __pc: *mut c_void, nr_hits: c_uint) {
-    static void do_profile_hits(int type, void *__pc, unsigned int nr_hits)
-    {
     unsigned long pc;
     pc = ((unsigned long)__pc - (unsigned long)_stext) >> prof_shift;
     if (pc < prof_len)
@@ -135,8 +152,6 @@ unsafe extern "C" fn do_profile_hits(type: c_int, __pc: *mut c_void, nr_hits: c_
     }
 #[no_mangle]
 pub unsafe extern "C" fn profile_hits(type: c_int, __pc: *mut c_void, nr_hits: c_uint) {
-    void profile_hits(int type, void *__pc, unsigned int nr_hits)
-    {
     if (prof_on != type || !prof_buffer)
     return;
     do_profile_hits(type, __pc, nr_hits);
@@ -144,8 +159,6 @@ pub unsafe extern "C" fn profile_hits(type: c_int, __pc: *mut c_void, nr_hits: c
     EXPORT_SYMBOL_GPL(profile_hits);
 #[no_mangle]
 pub unsafe extern "C" fn profile_tick(type: c_int) {
-    void profile_tick(int type)
-    {
     struct pt_regs *regs = get_irq_regs();
 // This is the old kernel-only legacy profiling
     if (!user_mode(regs))
@@ -185,8 +198,6 @@ pub unsafe extern "C" fn profile_tick(type: c_int) {
 // default is to not implement this call
 #[no_mangle]
 pub unsafe extern "C" fn setup_profiling_timer(mult: unsigned) -> int __weak {
-    int __weak setup_profiling_timer(unsigned mult)
-    {
     return -EINVAL;
     }
 //
@@ -217,8 +228,6 @@ pub unsafe extern "C" fn setup_profiling_timer(mult: unsigned) -> int __weak {
     };
 #[no_mangle]
 pub unsafe extern "C" fn create_proc_profile() -> int __ref {
-    int __ref create_proc_profile(void)
-    {
     struct proc_dir_entry *entry;
     let mut err: c_int = 0;
     if (!prof_on)

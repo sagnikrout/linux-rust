@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -138,8 +161,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn warn_sysctl_write(table: *const ctl_table) {
-    static void warn_sysctl_write(const struct ctl_table *table)
-    {
     pr_warn_once("%s wrote to %s when file position was not 0!\n"
     "This will not be supported in the future. To silence this\n"
     "warning, set kernel.sysctl_writes_strict = -1\n",
@@ -196,8 +217,6 @@ unsafe extern "C" fn warn_sysctl_write(table: *const ctl_table) {
     }
 #[no_mangle]
 unsafe extern "C" fn proc_skip_spaces(buf: *mut c_char, size: *mut usize) {
-    static void proc_skip_spaces(char **buf, size_t *size)
-    {
     while (*size) {
     if (!isspace(**buf))
     break;
@@ -207,8 +226,6 @@ unsafe extern "C" fn proc_skip_spaces(buf: *mut c_char, size: *mut usize) {
     }
 #[no_mangle]
 unsafe extern "C" fn proc_skip_char(buf: *mut c_char, size: *mut usize, v: c_char) {
-    static void proc_skip_char(char **buf, size_t *size, const char v)
-    {
     while (*size) {
     if (**buf != v)
     break;
@@ -317,8 +334,6 @@ pub const TMPBUFLEN: c_int = 22;
 //
 #[no_mangle]
 unsafe extern "C" fn proc_put_long(buf: *mut c_void, size: *mut usize, val: c_ulong, neg: bool) {
-    static void proc_put_long(void **buf, size_t *size, unsigned long val, bool neg)
-    {
     int len;
     char tmp[TMPBUFLEN], *p = tmp;
     sprintf(p, "%s%lu", neg ? "-" : "", val);
@@ -332,8 +347,6 @@ unsafe extern "C" fn proc_put_long(buf: *mut c_void, size: *mut usize, val: c_ul
 
 #[no_mangle]
 unsafe extern "C" fn proc_put_char(buf: *mut c_void, size: *mut usize, c: c_char) {
-    static void proc_put_char(void **buf, size_t *size, char c)
-    {
     if (*size) {
     char **buffer = (char **)buf;
 // buffer = c;
@@ -376,8 +389,6 @@ unsafe extern "C" fn proc_put_char(buf: *mut c_void, size: *mut usize, c: c_char
 //
 #[no_mangle]
 pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_uint) -> c_int {
-    int proc_uint_k2u_conv(ulong *u_ptr, const uint *k_ptr)
-    {
     let mut val: c_uint = READ_ONCE(*k_ptr);
 // u_ptr = (ulong)val;
     return 0;
@@ -425,8 +436,6 @@ pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c
     }
 #[no_mangle]
 unsafe extern "C" fn proc_uint_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_uint) -> c_int {
-    static int proc_uint_u2k_conv(const ulong *u_ptr, uint *k_ptr)
-    {
     return proc_uint_u2k_conv_uop(u_ptr, k_ptr, core::ptr::null_mut());
     }
     static int do_proc_uint_conv(bool *negp, ulong *u_ptr, uint *k_ptr, int dir,
@@ -540,8 +549,6 @@ unsafe extern "C" fn proc_uint_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_uin
     }
 #[no_mangle]
 unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *const c_int) -> c_int {
-    static int sysctl_kern_to_user_int_conv(bool *negp, ulong *u_ptr, const int *k_ptr)
-    {
     return proc_int_k2u_conv_kop(u_ptr, k_ptr, negp, core::ptr::null_mut());
     }
     static int do_proc_int_conv(bool *negp, unsigned long *u_ptr, int *k_ptr,
@@ -940,8 +947,6 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
     }
 #[no_mangle]
 unsafe extern "C" fn proc_ulong_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_ulong) -> c_int {
-    static int proc_ulong_u2k_conv(const ulong *u_ptr, ulong *k_ptr)
-    {
     return proc_ulong_u2k_conv_uop(u_ptr, k_ptr, core::ptr::null_mut());
     }
 //
@@ -965,8 +970,6 @@ unsafe extern "C" fn proc_ulong_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_ul
     }
 #[no_mangle]
 unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ulong) -> c_int {
-    static int proc_ulong_k2u_conv(ulong *u_ptr, const ulong *k_ptr)
-    {
     return proc_ulong_k2u_conv_kop(u_ptr, k_ptr, core::ptr::null_mut());
     }
     static int do_proc_ulong_conv(bool *negp, ulong *u_ptr, ulong *k_ptr, int dir,
@@ -1216,8 +1219,6 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
     }
 #[no_mangle]
 pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_uint) -> c_int {
-    int proc_uint_k2u_conv(ulong *u_ptr, const uint *k_ptr)
-    {
     return -ENOSYS;
     }
     int proc_uint_u2k_conv_uop(const ulong *u_ptr, uint *k_ptr,
@@ -1266,7 +1267,7 @@ pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c
     void *buffer, size_t *lenp, loff_t *ppos)
     {
     struct static_key *key = (struct static_key *)table.data;
-    static DEFINE_MUTEX(static_key_mutex);
+// static DEFINE_MUTEX(static_key_mutex);
     int val, ret;
     struct ctl_table tmp = {
     .data   = &val,
@@ -1334,9 +1335,7 @@ pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c
 
     };
 #[no_mangle]
-pub unsafe extern "C" fn sysctl_init_bases() -> int __init {
-    int __init sysctl_init_bases(void)
-    {
+pub unsafe extern "C" fn sysctl_init_bases() -> c_int {
     register_sysctl_init("kernel", sysctl_subsys_table);
     return 0;
     }

@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -74,7 +171,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     unsigned long long *crash_base)
     {
     char *cur = cmdline, *tmp;
-    let mut total_mem: c_ulonglong = system_ram;
+pub static mut total_mem: c_ulonglong = system_ram;
 //
 // Firmware sometimes reserves some memory regions for its own use,
 // so the system memory size is less than the actual physical memory
@@ -142,8 +239,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     return -EINVAL;
     }
     }
-    } else
+    } else {
     pr_info("crashkernel size resulted in zero bytes\n");
+    }
     return 0;
     }
 //
@@ -163,8 +261,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     pr_warn("crashkernel: memory value expected\n");
     return -EINVAL;
     }
-    if (*cur == '@')
+    if (*cur == '@') {
 // crash_base = memparse(cur+1, &cur);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if('\0': *mut *mut *mut cur != ' ' && cur !=) -> else {
     pr_warn("crashkernel: unrecognized char: %c\n", *cur);
@@ -211,20 +310,19 @@ pub const SUFFIX_NULL: c_int = 3;
     }
     return 0;
     }
-    static __init char *get_last_crashkernel(char *cmdline,
-    const char *name,
-    const char *suffix)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_last_crashkernel() {
     char *p = cmdline, *ck_cmdline = core::ptr::null_mut();
 // find crashkernel and use the last one if there are more
     p = strstr(p, name);
     while (p) {
     char *end_p = strchr(p, ' ');
-    char *q;
-    if (!end_p)
+    let mut q = core::ptr::null_mut();
+    if (!end_p) {
     end_p = p + strlen(p);
+    }
     if (!suffix) {
-    int i;
+    let mut i = 0;
 // skip the one with any known suffix
     for (i = 0; suffix_tbl[i]; i++) {
     q = end_p - strlen(suffix_tbl[i]);
@@ -235,8 +333,9 @@ pub const SUFFIX_NULL: c_int = 3;
     ck_cmdline = p;
     } else {
     q = end_p - strlen(suffix);
-    if (!strncmp(q, suffix, strlen(suffix)))
+    if (!strncmp(q, suffix, strlen(suffix))) {
     ck_cmdline = p;
+    }
     }
     next:
     p = strstr(p+1, name);
@@ -250,27 +349,30 @@ pub const SUFFIX_NULL: c_int = 3;
     const char *suffix)
     {
     char *first_colon, *first_space;
-    char *ck_cmdline;
+    let mut ck_cmdline = core::ptr::null_mut();
     char *name = "crashkernel=";
-    BUG_ON(!crash_size || !crash_base);
+// BUG_ON;
 // crash_size = 0;
 // crash_base = 0;
     ck_cmdline = get_last_crashkernel(cmdline, name, suffix);
-    if (!ck_cmdline)
+    if (!ck_cmdline) {
     return -ENOENT;
+    }
     ck_cmdline += strlen(name);
-    if (suffix)
+    if (suffix) {
     return parse_crashkernel_suffix(ck_cmdline, crash_size,
     suffix);
+    }
 //
 // if the commandline contains a ':', then that's the extended
 // syntax -- if not, it must be the classic syntax
 //
     first_colon = strchr(ck_cmdline, ':');
     first_space = strchr(ck_cmdline, ' ');
-    if (first_colon && (!first_space || first_colon < first_space))
+    if (first_colon && (!first_space || first_colon < first_space)) {
     return parse_crashkernel_mem(ck_cmdline, system_ram,
     crash_size, crash_base);
+    }
     return parse_crashkernel_simple(ck_cmdline, crash_size, crash_base);
     }
 //
@@ -288,7 +390,7 @@ pub const SUFFIX_NULL: c_int = 3;
     unsigned long long *cma_size,
     bool *high)
     {
-    int ret;
+    let mut ret = 0;
     unsigned long long __always_unused cma_base;
 // crashkernel=X[@offset]
     ret = __parse_crashkernel(cmdline, system_ram, crash_size,
@@ -301,8 +403,9 @@ pub const SUFFIX_NULL: c_int = 3;
     if (high && ret == -ENOENT) {
     ret = __parse_crashkernel(cmdline, 0, crash_size,
     crash_base, suffix_tbl[SUFFIX_HIGH]);
-    if (ret || !*crash_size)
+    if (ret || !*crash_size) {
     return -EINVAL;
+    }
 //
 // crashkernel=Y,low can be specified or not, but invalid value
 // is not allowed.
@@ -321,14 +424,17 @@ pub const SUFFIX_NULL: c_int = 3;
 // optional CMA reservation
 // cma_base is ignored
 //
-    if (cma_size)
+    if (cma_size) {
     __parse_crashkernel(cmdline, 0, cma_size,
     &cma_base, suffix_tbl[SUFFIX_CMA]);
+    }
 
-    if (!*crash_size)
+    if (!*crash_size) {
     ret = -EINVAL;
-    if (*crash_size >= system_ram)
+    }
+    if (*crash_size >= system_ram) {
     ret = -EINVAL;
+    }
     return ret;
     }
 //
@@ -336,17 +442,13 @@ pub const SUFFIX_NULL: c_int = 3;
 // parameter and suppress incorrect warnings in init/main.c.
 //
 #[no_mangle]
-unsafe extern "C" fn parse_crashkernel_dummy(arg: *mut c_char) -> int __init {
-    static int __init parse_crashkernel_dummy(char *arg)
-    {
+unsafe extern "C" fn parse_crashkernel_dummy(arg: *mut c_char) -> c_int {
     return 0;
     }
     early_param("crashkernel", parse_crashkernel_dummy);
 
 #[no_mangle]
-unsafe extern "C" fn reserve_crashkernel_low(low_size: c_ulonglong) -> int __init {
-    static int __init reserve_crashkernel_low(unsigned long long low_size)
-    {
+unsafe extern "C" fn reserve_crashkernel_low(low_size: c_ulonglong) -> c_int {
 
     unsigned long long low_base;
     low_base = memblock_phys_alloc_range(low_size, CRASH_ALIGN, 0, CRASH_ADDR_LOW_MAX);
@@ -368,8 +470,8 @@ unsafe extern "C" fn reserve_crashkernel_low(low_size: c_ulonglong) -> int __ini
     unsigned long long crash_low_size,
     bool high)
     {
-    let mut search_end: c_ulonglong = CRASH_ADDR_LOW_MAX, search_base = 0;
-    let mut fixed_base: bool = false;
+pub static mut search_end: c_ulonglong = CRASH_ADDR_LOW_MAX, search_base = 0;
+pub static mut fixed_base: bool = false;
 // User specifies base address explicitly.
     if (crash_base) {
     fixed_base = true;
@@ -409,8 +511,9 @@ unsafe extern "C" fn reserve_crashkernel_low(low_size: c_ulonglong) -> int __ini
     if (high && search_end == CRASH_ADDR_HIGH_MAX) {
     search_end = CRASH_ADDR_LOW_MAX;
     search_base = 0;
-    if (search_end != CRASH_ADDR_HIGH_MAX)
+    if (search_end != CRASH_ADDR_HIGH_MAX) {
     goto retry;
+    }
     }
     pr_warn("cannot allocate crashkernel (size:0x%llx)\n",
     crash_size);
@@ -428,8 +531,9 @@ unsafe extern "C" fn reserve_crashkernel_low(low_size: c_ulonglong) -> int __ini
 // map. Inform kmemleak so that it won't try to access it.
 //
     kmemleak_ignore_phys(crash_base);
-    if (crashk_low_res.end)
+    if (crashk_low_res.end) {
     kmemleak_ignore_phys(crashk_low_res.start);
+    }
     crashk_res.start = crash_base;
     crashk_res.end = crash_base + crash_size - 1;
 
@@ -438,23 +542,23 @@ unsafe extern "C" fn reserve_crashkernel_low(low_size: c_ulonglong) -> int __ini
     }
     struct range crashk_cma_ranges[CRASHKERNEL_CMA_RANGES_MAX];
 
-    int crashk_cma_cnt;
+    let mut crashk_cma_cnt = 0;
 #[no_mangle]
-pub unsafe extern "C" fn reserve_crashkernel_cma(cma_size: c_ulonglong) -> void __init {
-    void __init reserve_crashkernel_cma(unsigned long long cma_size)
-    {
-    let mut request_size: c_ulonglong = roundup(cma_size, PAGE_SIZE);
-    let mut reserved_size: c_ulonglong = 0;
-    if (!cma_size)
+pub unsafe extern "C" fn reserve_crashkernel_cma(cma_size: c_ulonglong) -> c_int {
+pub static mut request_size: c_ulonglong = roundup(cma_size, PAGE_SIZE);
+pub static mut reserved_size: c_ulonglong = 0;
+    if (!cma_size) {
     return;
+    }
     while (cma_size > reserved_size &&
     crashk_cma_cnt < CRASHKERNEL_CMA_RANGES_MAX) {
-    struct cma *res;
+    let mut res = core::ptr::null_mut();
     if (cma_declare_contiguous(0, request_size, 0, 0, 0, false,
     "crashkernel", &res)) {
 // reservation failed, try half-sized blocks
-    if (request_size <= PAGE_SIZE)
+    if (request_size <= PAGE_SIZE) {
     break;
+    }
     request_size = roundup(request_size / 2, PAGE_SIZE);
     continue;
     }
@@ -465,33 +569,34 @@ pub unsafe extern "C" fn reserve_crashkernel_cma(cma_size: c_ulonglong) -> void 
     ++crashk_cma_cnt;
     reserved_size += request_size;
     }
-    if (cma_size > reserved_size)
+    if (cma_size > reserved_size) {
     pr_warn("crashkernel CMA reservation failed: %lld MB requested, %lld MB reserved in %d ranges\n",
     cma_size >> 20, reserved_size >> 20, crashk_cma_cnt);
-    else
+    }
+    else {
     pr_info("crashkernel CMA reserved: %lld MB in %d ranges\n",
     reserved_size >> 20, crashk_cma_cnt);
     }
+    }
 
 #[no_mangle]
-pub unsafe extern "C" fn reserve_crashkernel_cma(cma_size: c_ulonglong) -> void __init {
-    void __init reserve_crashkernel_cma(unsigned long long cma_size)
-    {
-    if (cma_size)
+pub unsafe extern "C" fn reserve_crashkernel_cma(cma_size: c_ulonglong) -> c_int {
+    if (cma_size) {
     pr_warn("crashkernel CMA reservation not supported\n");
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn insert_crashkernel_resources() -> __init int {
-    static __init int insert_crashkernel_resources(void)
-    {
-    if (!arch_add_crash_res_to_iomem())
-    return 0;
-    if (crashk_res.start < crashk_res.end)
-    insert_resource(&iomem_resource, &crashk_res);
-    if (crashk_low_res.start < crashk_low_res.end)
-    insert_resource(&iomem_resource, &crashk_low_res);
+    if (!arch_add_crash_res_to_iomem()) {
     return 0;
     }
-    early_initcall(insert_crashkernel_resources);
-
+    if (crashk_res.start < crashk_res.end) {
+    insert_resource(&iomem_resource, &crashk_res);
+    }
+    if (crashk_low_res.start < crashk_low_res.end) {
+    insert_resource(&iomem_resource, &crashk_low_res);
+    }
+    return 0;
+    }
+// early_initcall;

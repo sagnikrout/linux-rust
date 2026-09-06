@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0+
 //
@@ -121,8 +144,6 @@ pub struct result {
     }
 #[no_mangle]
 unsafe extern "C" fn resource_do_union_test(test: *mut kunit, r: *mut result) {
-    static void resource_do_union_test(struct kunit *test, struct result *r)
-    {
     struct resource result;
     bool ret;
     memset(&result, 0, sizeof(result));
@@ -134,8 +155,6 @@ unsafe extern "C" fn resource_do_union_test(test: *mut kunit, r: *mut result) {
     }
 #[no_mangle]
 unsafe extern "C" fn resource_test_union(test: *mut kunit) {
-    static void resource_test_union(struct kunit *test)
-    {
     struct result *r = results_for_union;
     let mut i: c_uint = 0;
     do {
@@ -144,8 +163,6 @@ unsafe extern "C" fn resource_test_union(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn resource_do_intersection_test(test: *mut kunit, r: *mut result) {
-    static void resource_do_intersection_test(struct kunit *test, struct result *r)
-    {
     struct resource result;
     bool ret;
     memset(&result, 0, sizeof(result));
@@ -157,8 +174,6 @@ unsafe extern "C" fn resource_do_intersection_test(test: *mut kunit, r: *mut res
     }
 #[no_mangle]
 unsafe extern "C" fn resource_test_intersection(test: *mut kunit) {
-    static void resource_test_intersection(struct kunit *test)
-    {
     struct result *r = results_for_intersection;
     let mut i: c_uint = 0;
     do {
@@ -182,8 +197,6 @@ pub const RES_TEST_RAM0_OFFSET: c_int = 0;
     KUNIT_DEFINE_ACTION_WRAPPER(kfree_wrapper, kfree, const void *);
 #[no_mangle]
 unsafe extern "C" fn remove_free_resource(ctx: *mut c_void) {
-    static void remove_free_resource(void *ctx)
-    {
     struct resource *res = (struct resource *)ctx;
     remove_resource(res);
     kfree(res);
@@ -223,8 +236,6 @@ unsafe extern "C" fn remove_free_resource(ctx: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn resource_test_region_intersects(test: *mut kunit) {
-    static void resource_test_region_intersects(struct kunit *test)
-    {
     let mut flags: c_ulong = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
     struct resource *parent;
     resource_size_t start;

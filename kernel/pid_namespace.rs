@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -45,8 +68,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // (C) 2007 Sukadev Bhattiprolu <sukadev@us.ibm.com>, IBM
 // Many thanks to Oleg Nesterov for comments and help
 //
-
-    static DEFINE_MUTEX(pid_caches_mutex);
+// static DEFINE_MUTEX(pid_caches_mutex);
     static struct kmem_cache *pid_ns_cachep;
 // Write once array, filled from the beginning.
     static struct kmem_cache *pid_cache[MAX_PID_NS_LEVEL];
@@ -81,8 +103,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn dec_pid_namespaces(ucounts: *mut ucounts) {
-    static void dec_pid_namespaces(struct ucounts *ucounts)
-    {
     dec_ucount(ucounts, UCOUNT_PID_NAMESPACES);
     }
     static void destroy_pid_namespace_work(struct work_struct *work);
@@ -140,8 +160,6 @@ unsafe extern "C" fn dec_pid_namespaces(ucounts: *mut ucounts) {
     }
 #[no_mangle]
 unsafe extern "C" fn delayed_free_pidns(p: *mut rcu_head) {
-    static void delayed_free_pidns(struct rcu_head *p)
-    {
     struct pid_namespace *ns = container_of(p, struct pid_namespace, rcu);
     dec_pid_namespaces(ns.ucounts);
     put_user_ns(ns.user_ns);
@@ -149,8 +167,6 @@ unsafe extern "C" fn delayed_free_pidns(p: *mut rcu_head) {
     }
 #[no_mangle]
 unsafe extern "C" fn destroy_pid_namespace(ns: *mut pid_namespace) {
-    static void destroy_pid_namespace(struct pid_namespace *ns)
-    {
     ns_tree_remove(ns);
     unregister_pidns_sysctls(ns);
     ns_common_free(ns);
@@ -159,8 +175,6 @@ unsafe extern "C" fn destroy_pid_namespace(ns: *mut pid_namespace) {
     }
 #[no_mangle]
 unsafe extern "C" fn destroy_pid_namespace_work(work: *mut work_struct) {
-    static void destroy_pid_namespace_work(struct work_struct *work)
-    {
     struct pid_namespace *ns =
     container_of(work, struct pid_namespace, work);
     do {
@@ -181,16 +195,12 @@ unsafe extern "C" fn destroy_pid_namespace_work(work: *mut work_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_pid_ns(ns: *mut pid_namespace) {
-    void put_pid_ns(struct pid_namespace *ns)
-    {
     if (ns && ns_ref_put(ns))
     schedule_work(&ns.work);
     }
     EXPORT_SYMBOL_GPL(put_pid_ns);
 #[no_mangle]
 pub unsafe extern "C" fn zap_pid_ns_processes(pid_ns: *mut pid_namespace) {
-    void zap_pid_ns_processes(struct pid_namespace *pid_ns)
-    {
     int nr;
     int rc;
     struct task_struct *task, *me = current;
@@ -303,8 +313,6 @@ pub unsafe extern "C" fn zap_pid_ns_processes(pid_ns: *mut pid_namespace) {
 
 #[no_mangle]
 pub unsafe extern "C" fn reboot_pid_ns(pid_ns: *mut pid_namespace, cmd: c_int) -> c_int {
-    int reboot_pid_ns(struct pid_namespace *pid_ns, int cmd)
-    {
     if (pid_ns == &init_pid_ns)
     return 0;
     switch (cmd) {
@@ -349,8 +357,6 @@ pub unsafe extern "C" fn reboot_pid_ns(pid_ns: *mut pid_namespace, cmd: c_int) -
     }
 #[no_mangle]
 unsafe extern "C" fn pidns_put(ns: *mut ns_common) {
-    static void pidns_put(struct ns_common *ns)
-    {
     put_pid_ns(to_pid_ns(ns));
     }
     bool pidns_is_ancestor(struct pid_namespace *child,
@@ -365,8 +371,6 @@ unsafe extern "C" fn pidns_put(ns: *mut ns_common) {
     }
 #[no_mangle]
 unsafe extern "C" fn pidns_install(nsset: *mut nsset, ns: *mut ns_common) -> c_int {
-    static int pidns_install(struct nsset *nsset, struct ns_common *ns)
-    {
     struct nsproxy *nsproxy = nsset.nsproxy;
     struct pid_namespace *active = task_active_pid_ns(current);
     struct pid_namespace *new = to_pid_ns(ns);
@@ -425,8 +429,6 @@ unsafe extern "C" fn pidns_install(nsset: *mut nsset, ns: *mut ns_common) -> c_i
     };
 #[no_mangle]
 unsafe extern "C" fn pid_namespaces_init() -> __init int {
-    static __init int pid_namespaces_init(void)
-    {
     pid_ns_cachep = KMEM_CACHE(pid_namespace, SLAB_PANIC | SLAB_ACCOUNT);
 
     register_sysctl_init("kernel", pid_ns_ctl_table);

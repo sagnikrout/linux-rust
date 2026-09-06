@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 // auditsc.c -- System-call auditing support
@@ -77,9 +174,9 @@ pub const MAX_EXECVE_AUDIT_LEN: c_int = 7500;
 // max length to print of cmdline/proctitle value during audit
 pub const MAX_PROCTITLE_AUDIT_LEN: c_int = 128;
 // number of audit rules
-    int audit_n_rules;
+    let mut audit_n_rules = 0;
 // determines whether we collect data for signals sent
-    int audit_signals;
+    let mut audit_signals = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_aux_data {
@@ -122,44 +219,20 @@ pub struct audit_tree_refs {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_nfcfgop_tab {
-    pub op: enum audit_nfcfgop,
+    pub op: audit_nfcfgop,
     pub s: *const c_char,
 }
 
-    static const struct audit_nfcfgop_tab audit_nfcfgs[] = {
-    { AUDIT_XT_OP_REGISTER,			"xt_register"		   },
-    { AUDIT_XT_OP_REPLACE,			"xt_replace"		   },
-    { AUDIT_XT_OP_UNREGISTER,		"xt_unregister"		   },
-    { AUDIT_NFT_OP_TABLE_REGISTER,		"nft_register_table"	   },
-    { AUDIT_NFT_OP_TABLE_UNREGISTER,	"nft_unregister_table"	   },
-    { AUDIT_NFT_OP_CHAIN_REGISTER,		"nft_register_chain"	   },
-    { AUDIT_NFT_OP_CHAIN_UNREGISTER,	"nft_unregister_chain"	   },
-    { AUDIT_NFT_OP_RULE_REGISTER,		"nft_register_rule"	   },
-    { AUDIT_NFT_OP_RULE_UNREGISTER,		"nft_unregister_rule"	   },
-    { AUDIT_NFT_OP_SET_REGISTER,		"nft_register_set"	   },
-    { AUDIT_NFT_OP_SET_UNREGISTER,		"nft_unregister_set"	   },
-    { AUDIT_NFT_OP_SETELEM_REGISTER,	"nft_register_setelem"	   },
-    { AUDIT_NFT_OP_SETELEM_UNREGISTER,	"nft_unregister_setelem"   },
-    { AUDIT_NFT_OP_GEN_REGISTER,		"nft_register_gen"	   },
-    { AUDIT_NFT_OP_OBJ_REGISTER,		"nft_register_obj"	   },
-    { AUDIT_NFT_OP_OBJ_UNREGISTER,		"nft_unregister_obj"	   },
-    { AUDIT_NFT_OP_OBJ_RESET,		"nft_reset_obj"		   },
-    { AUDIT_NFT_OP_FLOWTABLE_REGISTER,	"nft_register_flowtable"   },
-    { AUDIT_NFT_OP_FLOWTABLE_UNREGISTER,	"nft_unregister_flowtable" },
-    { AUDIT_NFT_OP_SETELEM_RESET,		"nft_reset_setelem"        },
-    { AUDIT_NFT_OP_RULE_RESET,		"nft_reset_rule"           },
-    { AUDIT_NFT_OP_INVALID,			"nft_invalid"		   },
-    };
+pub static mut audit_nfcfgop_tab: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn audit_match_perm(ctx: *mut audit_context, mask: c_int) -> c_int {
-    static int audit_match_perm(struct audit_context *ctx, int mask)
-    {
-    unsigned int n;
-    if (unlikely(!ctx))
+    let mut n = 0;
+    if (unlikely(!ctx)) {
     return 0;
+    }
     n = ctx.major;
     switch (audit_classify_syscall(ctx.arch, n)) {
-    case AUDITSC_NATIVE:
+    AUDITSC_NATIVE => {
     if ((mask & AUDIT_PERM_WRITE) &&
     audit_match_class(AUDIT_CLASS_WRITE, n))
     return 1;
@@ -170,7 +243,7 @@ unsafe extern "C" fn audit_match_perm(ctx: *mut audit_context, mask: c_int) -> c
     audit_match_class(AUDIT_CLASS_CHATTR, n))
     return 1;
     return 0;
-    case AUDITSC_COMPAT: /* 32bit on biarch */
+    AUDITSC_COMPAT => { /* 32bit on biarch */
     if ((mask & AUDIT_PERM_WRITE) &&
     audit_match_class(AUDIT_CLASS_WRITE_32, n))
     return 1;
@@ -181,28 +254,27 @@ unsafe extern "C" fn audit_match_perm(ctx: *mut audit_context, mask: c_int) -> c
     audit_match_class(AUDIT_CLASS_CHATTR_32, n))
     return 1;
     return 0;
-    case AUDITSC_OPEN:
+    AUDITSC_OPEN => {
     return mask & ACC_MODE(ctx.argv[1]);
-    case AUDITSC_OPENAT:
+    AUDITSC_OPENAT => {
     return mask & ACC_MODE(ctx.argv[2]);
-    case AUDITSC_SOCKETCALL:
+    AUDITSC_SOCKETCALL => {
     return ((mask & AUDIT_PERM_WRITE) && ctx.argv[0] == SYS_BIND);
-    case AUDITSC_EXECVE:
+    AUDITSC_EXECVE => {
     return mask & AUDIT_PERM_EXEC;
-    case AUDITSC_OPENAT2:
+    AUDITSC_OPENAT2 => {
     return mask & ACC_MODE((u32)ctx.openat2.flags);
-    default:
+    _ => {
     return 0;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn audit_match_filetype(ctx: *mut audit_context, val: c_int) -> c_int {
-    static int audit_match_filetype(struct audit_context *ctx, int val)
-    {
-    struct audit_names *n;
-    let mut mode: umode_t = (umode_t)val;
-    if (unlikely(!ctx))
+    let mut n = core::ptr::null_mut();
+pub static mut mode: umode_t = (umode_t)val;
+    if (unlikely(!ctx)) {
     return 0;
+    }
     list_for_each_entry(n, &ctx.names_list, list) {
     if ((n.ino != AUDIT_INO_UNSET) &&
     ((n.mode & S_IFMT) == mode))
@@ -221,8 +293,6 @@ unsafe extern "C" fn audit_match_filetype(ctx: *mut audit_context, val: c_int) -
 //
 #[no_mangle]
 unsafe extern "C" fn audit_set_auditable(ctx: *mut audit_context) {
-    static void audit_set_auditable(struct audit_context *ctx)
-    {
     if (!ctx.prio) {
     ctx.prio = 1;
     ctx.current_state = AUDIT_STATE_RECORD;
@@ -230,17 +300,16 @@ unsafe extern "C" fn audit_set_auditable(ctx: *mut audit_context) {
     }
 #[no_mangle]
 unsafe extern "C" fn put_tree_ref(ctx: *mut audit_context, chunk: *mut audit_chunk) -> c_int {
-    static int put_tree_ref(struct audit_context *ctx, struct audit_chunk *chunk)
-    {
     struct audit_tree_refs *p = ctx.trees;
-    let mut left: c_int = ctx.tree_count;
+pub static mut left: c_int = ctx.tree_count;
     if (likely(left)) {
     p.c[--left] = chunk;
     ctx.tree_count = left;
     return 1;
     }
-    if (!p)
+    if (!p) {
     return 0;
+    }
     p = p.next;
     if (p) {
     p.c[30] = chunk;
@@ -252,33 +321,33 @@ unsafe extern "C" fn put_tree_ref(ctx: *mut audit_context, chunk: *mut audit_chu
     }
 #[no_mangle]
 unsafe extern "C" fn grow_tree_refs(ctx: *mut audit_context) -> c_int {
-    static int grow_tree_refs(struct audit_context *ctx)
-    {
     struct audit_tree_refs *p = ctx.trees;
     ctx.trees = kzalloc_obj(struct audit_tree_refs);
     if (!ctx.trees) {
     ctx.trees = p;
     return 0;
     }
-    if (p)
+    if (p) {
     p.next = ctx.trees;
-    else
+    }
+    else {
     ctx.first_trees = ctx.trees;
+    }
     ctx.tree_count = 31;
     return 1;
     }
-    static void unroll_tree_refs(struct audit_context *ctx,
-    struct audit_tree_refs *p, int count)
-    {
-    struct audit_tree_refs *q;
-    int n;
+#[no_mangle]
+pub unsafe extern "C" fn unroll_tree_refs() {
+    let mut q = core::ptr::null_mut();
+    let mut n = 0;
     if (!p) {
 // we started with empty chain
     p = ctx.first_trees;
     count = 31;
 // if the very first allocation has failed, nothing to do
-    if (!p)
+    if (!p) {
     return;
+    }
     }
     n = count;
     for (q = p; q != ctx.trees; q = q.next, n = 31) {
@@ -296,8 +365,6 @@ unsafe extern "C" fn grow_tree_refs(ctx: *mut audit_context) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn free_tree_refs(ctx: *mut audit_context) {
-    static void free_tree_refs(struct audit_context *ctx)
-    {
     struct audit_tree_refs *p, *q;
     for (p = ctx.first_trees; p; p = q) {
     q = p.next;
@@ -306,139 +373,134 @@ unsafe extern "C" fn free_tree_refs(ctx: *mut audit_context) {
     }
 #[no_mangle]
 unsafe extern "C" fn match_tree_refs(ctx: *mut audit_context, tree: *mut audit_tree) -> c_int {
-    static int match_tree_refs(struct audit_context *ctx, struct audit_tree *tree)
-    {
-    struct audit_tree_refs *p;
-    int n;
-    if (!tree)
+    let mut p = core::ptr::null_mut();
+    let mut n = 0;
+    if (!tree) {
     return 0;
+    }
 // full ones
     for (p = ctx.first_trees; p != ctx.trees; p = p.next) {
     for (n = 0; n < 31; n++)
-    if (audit_tree_match(p.c[n], tree))
+    if (audit_tree_match(p.c[n], tree)) {
     return 1;
+    }
     }
 // partial
     if (p) {
     for (n = ctx.tree_count; n < 31; n++)
-    if (audit_tree_match(p.c[n], tree))
+    if (audit_tree_match(p.c[n], tree)) {
     return 1;
+    }
     }
     return 0;
     }
-    static int audit_compare_uid(kuid_t uid,
-    struct audit_names *name,
-    struct audit_field *f,
-    struct audit_context *ctx)
-    {
-    struct audit_names *n;
-    int rc;
+#[no_mangle]
+pub unsafe extern "C" fn audit_compare_uid() {
+    let mut n = core::ptr::null_mut();
+    let mut rc = 0;
     if (name) {
     rc = audit_uid_comparator(uid, f.op, name.uid);
-    if (rc)
+    if (rc) {
     return rc;
+    }
     }
     if (ctx) {
     list_for_each_entry(n, &ctx.names_list, list) {
     rc = audit_uid_comparator(uid, f.op, n.uid);
-    if (rc)
+    if (rc) {
     return rc;
+    }
     }
     }
     return 0;
     }
-    static int audit_compare_gid(kgid_t gid,
-    struct audit_names *name,
-    struct audit_field *f,
-    struct audit_context *ctx)
-    {
-    struct audit_names *n;
-    int rc;
+#[no_mangle]
+pub unsafe extern "C" fn audit_compare_gid() {
+    let mut n = core::ptr::null_mut();
+    let mut rc = 0;
     if (name) {
     rc = audit_gid_comparator(gid, f.op, name.gid);
-    if (rc)
+    if (rc) {
     return rc;
+    }
     }
     if (ctx) {
     list_for_each_entry(n, &ctx.names_list, list) {
     rc = audit_gid_comparator(gid, f.op, n.gid);
-    if (rc)
+    if (rc) {
     return rc;
+    }
     }
     }
     return 0;
     }
-    static int audit_field_compare(struct task_struct *tsk,
-    const struct cred *cred,
-    struct audit_field *f,
-    struct audit_context *ctx,
-    struct audit_names *name)
-    {
-    switch (f.val) {
+#[no_mangle]
+pub unsafe extern "C" fn audit_field_compare() {
+    match (f.val) {
 // process to file object comparisons
-    case AUDIT_COMPARE_UID_TO_OBJ_UID:
+    AUDIT_COMPARE_UID_TO_OBJ_UID => {
     return audit_compare_uid(cred.uid, name, f, ctx);
-    case AUDIT_COMPARE_GID_TO_OBJ_GID:
+    AUDIT_COMPARE_GID_TO_OBJ_GID => {
     return audit_compare_gid(cred.gid, name, f, ctx);
-    case AUDIT_COMPARE_EUID_TO_OBJ_UID:
+    AUDIT_COMPARE_EUID_TO_OBJ_UID => {
     return audit_compare_uid(cred.euid, name, f, ctx);
-    case AUDIT_COMPARE_EGID_TO_OBJ_GID:
+    AUDIT_COMPARE_EGID_TO_OBJ_GID => {
     return audit_compare_gid(cred.egid, name, f, ctx);
-    case AUDIT_COMPARE_AUID_TO_OBJ_UID:
+    AUDIT_COMPARE_AUID_TO_OBJ_UID => {
     return audit_compare_uid(audit_get_loginuid(tsk), name, f, ctx);
-    case AUDIT_COMPARE_SUID_TO_OBJ_UID:
+    AUDIT_COMPARE_SUID_TO_OBJ_UID => {
     return audit_compare_uid(cred.suid, name, f, ctx);
-    case AUDIT_COMPARE_SGID_TO_OBJ_GID:
+    AUDIT_COMPARE_SGID_TO_OBJ_GID => {
     return audit_compare_gid(cred.sgid, name, f, ctx);
-    case AUDIT_COMPARE_FSUID_TO_OBJ_UID:
+    AUDIT_COMPARE_FSUID_TO_OBJ_UID => {
     return audit_compare_uid(cred.fsuid, name, f, ctx);
-    case AUDIT_COMPARE_FSGID_TO_OBJ_GID:
+    AUDIT_COMPARE_FSGID_TO_OBJ_GID => {
     return audit_compare_gid(cred.fsgid, name, f, ctx);
 // uid comparisons
-    case AUDIT_COMPARE_UID_TO_AUID:
+    AUDIT_COMPARE_UID_TO_AUID => {
     return audit_uid_comparator(cred.uid, f.op,
     audit_get_loginuid(tsk));
-    case AUDIT_COMPARE_UID_TO_EUID:
+    AUDIT_COMPARE_UID_TO_EUID => {
     return audit_uid_comparator(cred.uid, f.op, cred.euid);
-    case AUDIT_COMPARE_UID_TO_SUID:
+    AUDIT_COMPARE_UID_TO_SUID => {
     return audit_uid_comparator(cred.uid, f.op, cred.suid);
-    case AUDIT_COMPARE_UID_TO_FSUID:
+    AUDIT_COMPARE_UID_TO_FSUID => {
     return audit_uid_comparator(cred.uid, f.op, cred.fsuid);
 // auid comparisons
-    case AUDIT_COMPARE_AUID_TO_EUID:
+    AUDIT_COMPARE_AUID_TO_EUID => {
     return audit_uid_comparator(audit_get_loginuid(tsk), f.op,
     cred.euid);
-    case AUDIT_COMPARE_AUID_TO_SUID:
+    AUDIT_COMPARE_AUID_TO_SUID => {
     return audit_uid_comparator(audit_get_loginuid(tsk), f.op,
     cred.suid);
-    case AUDIT_COMPARE_AUID_TO_FSUID:
+    AUDIT_COMPARE_AUID_TO_FSUID => {
     return audit_uid_comparator(audit_get_loginuid(tsk), f.op,
     cred.fsuid);
 // euid comparisons
-    case AUDIT_COMPARE_EUID_TO_SUID:
+    AUDIT_COMPARE_EUID_TO_SUID => {
     return audit_uid_comparator(cred.euid, f.op, cred.suid);
-    case AUDIT_COMPARE_EUID_TO_FSUID:
+    AUDIT_COMPARE_EUID_TO_FSUID => {
     return audit_uid_comparator(cred.euid, f.op, cred.fsuid);
 // suid comparisons
-    case AUDIT_COMPARE_SUID_TO_FSUID:
+    AUDIT_COMPARE_SUID_TO_FSUID => {
     return audit_uid_comparator(cred.suid, f.op, cred.fsuid);
 // gid comparisons
-    case AUDIT_COMPARE_GID_TO_EGID:
+    AUDIT_COMPARE_GID_TO_EGID => {
     return audit_gid_comparator(cred.gid, f.op, cred.egid);
-    case AUDIT_COMPARE_GID_TO_SGID:
+    AUDIT_COMPARE_GID_TO_SGID => {
     return audit_gid_comparator(cred.gid, f.op, cred.sgid);
-    case AUDIT_COMPARE_GID_TO_FSGID:
+    AUDIT_COMPARE_GID_TO_FSGID => {
     return audit_gid_comparator(cred.gid, f.op, cred.fsgid);
 // egid comparisons
-    case AUDIT_COMPARE_EGID_TO_SGID:
+    AUDIT_COMPARE_EGID_TO_SGID => {
     return audit_gid_comparator(cred.egid, f.op, cred.sgid);
-    case AUDIT_COMPARE_EGID_TO_FSGID:
+    AUDIT_COMPARE_EGID_TO_FSGID => {
     return audit_gid_comparator(cred.egid, f.op, cred.fsgid);
 // sgid comparison
-    case AUDIT_COMPARE_SGID_TO_FSGID:
+    AUDIT_COMPARE_SGID_TO_FSGID => {
     return audit_gid_comparator(cred.sgid, f.op, cred.fsgid);
-    default:
-    WARN(1, "Missing AUDIT_COMPARE define.  Report as a bug\n");
+    _ => {
+// WARN;
     return 0;
     }
     return 0;
@@ -451,104 +513,110 @@ unsafe extern "C" fn match_tree_refs(ctx: *mut audit_context, tree: *mut audit_t
 // filtering a task rule at task creation time.  This and tsk == current are
 // the only situations where tsk->cred may be accessed without an rcu read lock.
 //
-    static int audit_filter_rules(struct task_struct *tsk,
-    struct audit_krule *rule,
-    struct audit_context *ctx,
-    struct audit_names *name,
-    enum audit_state *state,
-    bool task_creation)
-    {
-    const struct cred *cred;
+#[no_mangle]
+pub unsafe extern "C" fn audit_filter_rules() {
+    let mut cred = core::ptr::null_mut();
     int i, need_sid = 1;
-    let mut prop: lsm_prop = { };
-    unsigned int sessionid;
-    if (ctx && rule.prio <= ctx.prio)
+pub static mut prop: lsm_prop = { };
+    let mut sessionid = 0;
+    if (ctx && rule.prio <= ctx.prio) {
     return 0;
+    }
     cred = rcu_dereference_check(tsk.cred, tsk == current || task_creation);
     for (i = 0; i < rule.field_count; i++) {
     struct audit_field *f = &rule.fields[i];
-    struct audit_names *n;
-    let mut result: c_int = 0;
-    pid_t pid;
-    switch (f.type) {
-    case AUDIT_PID:
+    let mut n = core::ptr::null_mut();
+pub static mut result: c_int = 0;
+    let mut pid = 0;
+    match (f.type) {
+    AUDIT_PID => {
     pid = task_tgid_nr(tsk);
     result = audit_comparator(pid, f.op, f.val);
     break;
-    case AUDIT_PPID:
+    AUDIT_PPID => {
     if (ctx) {
-    if (!ctx.ppid)
+    if (!ctx.ppid) {
     ctx.ppid = task_ppid_nr(tsk);
+    }
     result = audit_comparator(ctx.ppid, f.op, f.val);
     }
     break;
-    case AUDIT_EXE:
+    AUDIT_EXE => {
     result = audit_exe_compare(tsk, rule.exe);
-    if (f.op == Audit_not_equal)
+    if (f.op == Audit_not_equal) {
     result = !result;
+    }
     break;
-    case AUDIT_UID:
+    AUDIT_UID => {
     result = audit_uid_comparator(cred.uid, f.op, f.uid);
     break;
-    case AUDIT_EUID:
+    AUDIT_EUID => {
     result = audit_uid_comparator(cred.euid, f.op, f.uid);
     break;
-    case AUDIT_SUID:
+    AUDIT_SUID => {
     result = audit_uid_comparator(cred.suid, f.op, f.uid);
     break;
-    case AUDIT_FSUID:
+    AUDIT_FSUID => {
     result = audit_uid_comparator(cred.fsuid, f.op, f.uid);
     break;
-    case AUDIT_GID:
+    AUDIT_GID => {
     result = audit_gid_comparator(cred.gid, f.op, f.gid);
     if (f.op == Audit_equal) {
-    if (!result)
+    if (!result) {
     result = groups_search(cred.group_info, f.gid);
+    }
     } else if (f.op == Audit_not_equal) {
-    if (result)
+    if (result) {
     result = !groups_search(cred.group_info, f.gid);
     }
+    }
     break;
-    case AUDIT_EGID:
+    AUDIT_EGID => {
     result = audit_gid_comparator(cred.egid, f.op, f.gid);
     if (f.op == Audit_equal) {
-    if (!result)
+    if (!result) {
     result = groups_search(cred.group_info, f.gid);
+    }
     } else if (f.op == Audit_not_equal) {
-    if (result)
+    if (result) {
     result = !groups_search(cred.group_info, f.gid);
     }
+    }
     break;
-    case AUDIT_SGID:
+    AUDIT_SGID => {
     result = audit_gid_comparator(cred.sgid, f.op, f.gid);
     break;
-    case AUDIT_FSGID:
+    AUDIT_FSGID => {
     result = audit_gid_comparator(cred.fsgid, f.op, f.gid);
     break;
-    case AUDIT_SESSIONID:
+    AUDIT_SESSIONID => {
     sessionid = audit_get_sessionid(tsk);
     result = audit_comparator(sessionid, f.op, f.val);
     break;
-    case AUDIT_PERS:
+    AUDIT_PERS => {
     result = audit_comparator(tsk.personality, f.op, f.val);
     break;
-    case AUDIT_ARCH:
-    if (ctx)
+    AUDIT_ARCH => {
+    if (ctx) {
     result = audit_comparator(ctx.arch, f.op, f.val);
-    break;
-    case AUDIT_EXIT:
-    if (ctx && ctx.return_valid != AUDITSC_INVALID)
-    result = audit_comparator(ctx.return_code, f.op, f.val);
-    break;
-    case AUDIT_SUCCESS:
-    if (ctx && ctx.return_valid != AUDITSC_INVALID) {
-    if (f.val)
-    result = audit_comparator(ctx.return_valid, f.op, AUDITSC_SUCCESS);
-    else
-    result = audit_comparator(ctx.return_valid, f.op, AUDITSC_FAILURE);
     }
     break;
-    case AUDIT_DEVMAJOR:
+    AUDIT_EXIT => {
+    if (ctx && ctx.return_valid != AUDITSC_INVALID) {
+    result = audit_comparator(ctx.return_code, f.op, f.val);
+    }
+    break;
+    AUDIT_SUCCESS => {
+    if (ctx && ctx.return_valid != AUDITSC_INVALID) {
+    if (f.val) {
+    result = audit_comparator(ctx.return_valid, f.op, AUDITSC_SUCCESS);
+    }
+    else {
+    result = audit_comparator(ctx.return_valid, f.op, AUDITSC_FAILURE);
+    }
+    }
+    break;
+    AUDIT_DEVMAJOR => {
     if (name) {
     if (audit_comparator(MAJOR(name.dev), f.op, f.val) ||
     audit_comparator(MAJOR(name.rdev), f.op, f.val))
@@ -563,7 +631,7 @@ unsafe extern "C" fn match_tree_refs(ctx: *mut audit_context, tree: *mut audit_t
     }
     }
     break;
-    case AUDIT_DEVMINOR:
+    AUDIT_DEVMINOR => {
     if (name) {
     if (audit_comparator(MINOR(name.dev), f.op, f.val) ||
     audit_comparator(MINOR(name.rdev), f.op, f.val))
@@ -578,9 +646,10 @@ unsafe extern "C" fn match_tree_refs(ctx: *mut audit_context, tree: *mut audit_t
     }
     }
     break;
-    case AUDIT_INODE:
-    if (name)
+    AUDIT_INODE => {
+    if (name) {
     result = audit_comparator(name.ino, f.op, f.val);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(_arg: ctx) -> else {
     list_for_each_entry(n, &ctx.names_list, list) {
@@ -591,7 +660,7 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
     }
     }
     break;
-    case AUDIT_OBJ_UID:
+    AUDIT_OBJ_UID => {
     if (name) {
     result = audit_uid_comparator(name.uid, f.op, f.uid);
     } else if (ctx) {
@@ -603,7 +672,7 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
     }
     }
     break;
-    case AUDIT_OBJ_GID:
+    AUDIT_OBJ_GID => {
     if (name) {
     result = audit_gid_comparator(name.gid, f.op, f.gid);
     } else if (ctx) {
@@ -615,39 +684,42 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
     }
     }
     break;
-    case AUDIT_WATCH:
+    AUDIT_WATCH => {
     if (name) {
     result = audit_watch_compare(rule.watch,
     name.ino,
     name.dev);
-    if (f.op == Audit_not_equal)
+    if (f.op == Audit_not_equal) {
     result = !result;
     }
+    }
     break;
-    case AUDIT_DIR:
+    AUDIT_DIR => {
     if (ctx) {
     result = match_tree_refs(ctx, rule.tree);
-    if (f.op == Audit_not_equal)
+    if (f.op == Audit_not_equal) {
     result = !result;
     }
+    }
     break;
-    case AUDIT_LOGINUID:
+    AUDIT_LOGINUID => {
     result = audit_uid_comparator(audit_get_loginuid(tsk),
     f.op, f.uid);
     break;
-    case AUDIT_LOGINUID_SET:
+    AUDIT_LOGINUID_SET => {
     result = audit_comparator(audit_loginuid_set(tsk), f.op, f.val);
     break;
-    case AUDIT_SADDR_FAM:
-    if (ctx && ctx.sockaddr)
+    AUDIT_SADDR_FAM => {
+    if (ctx && ctx.sockaddr) {
     result = audit_comparator(ctx.sockaddr.ss_family,
     f.op, f.val);
+    }
     break;
-    case AUDIT_SUBJ_USER:
-    case AUDIT_SUBJ_ROLE:
-    case AUDIT_SUBJ_TYPE:
-    case AUDIT_SUBJ_SEN:
-    case AUDIT_SUBJ_CLR:
+    AUDIT_SUBJ_USER => {
+    AUDIT_SUBJ_ROLE => {
+    AUDIT_SUBJ_TYPE => {
+    AUDIT_SUBJ_SEN => {
+    AUDIT_SUBJ_CLR => {
 // NOTE: this may return negative values indicating
     a temporary error.  We simply treat this as a
     match for now to avoid losing information that
@@ -674,11 +746,11 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
     f.lsm_rule);
     }
     break;
-    case AUDIT_OBJ_USER:
-    case AUDIT_OBJ_ROLE:
-    case AUDIT_OBJ_TYPE:
-    case AUDIT_OBJ_LEV_LOW:
-    case AUDIT_OBJ_LEV_HIGH:
+    AUDIT_OBJ_USER => {
+    AUDIT_OBJ_ROLE => {
+    AUDIT_OBJ_TYPE => {
+    AUDIT_OBJ_LEV_LOW => {
+    AUDIT_OBJ_LEV_HIGH => {
 // The above note for AUDIT_SUBJ_USER...AUDIT_SUBJ_CLR
     also applies here */
     if (f.lsm_rule) {
@@ -702,41 +774,46 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
     }
     }
 // Find ipc objects that match
-    if (!ctx || ctx.type != AUDIT_IPC)
+    if (!ctx || ctx.type != AUDIT_IPC) {
     break;
+    }
     if (security_audit_rule_match(&ctx.ipc.oprop,
     f.type, f.op,
     f.lsm_rule))
     ++result;
     }
     break;
-    case AUDIT_ARG0:
-    case AUDIT_ARG1:
-    case AUDIT_ARG2:
-    case AUDIT_ARG3:
-    if (ctx)
+    AUDIT_ARG0 => {
+    AUDIT_ARG1 => {
+    AUDIT_ARG2 => {
+    AUDIT_ARG3 => {
+    if (ctx) {
     result = audit_comparator(ctx.argv[f.type-AUDIT_ARG0], f.op, f.val);
+    }
     break;
-    case AUDIT_FILTERKEY:
+    AUDIT_FILTERKEY => {
 // ignore this field for filtering
     result = 1;
     break;
-    case AUDIT_PERM:
+    AUDIT_PERM => {
     result = audit_match_perm(ctx, f.val);
-    if (f.op == Audit_not_equal)
+    if (f.op == Audit_not_equal) {
     result = !result;
+    }
     break;
-    case AUDIT_FILETYPE:
+    AUDIT_FILETYPE => {
     result = audit_match_filetype(ctx, f.val);
-    if (f.op == Audit_not_equal)
+    if (f.op == Audit_not_equal) {
     result = !result;
+    }
     break;
-    case AUDIT_FIELD_COMPARE:
+    AUDIT_FIELD_COMPARE => {
     result = audit_field_compare(tsk, cred, f, ctx, name);
     break;
     }
-    if (!result)
+    if (!result) {
     return 0;
+    }
     }
     if (ctx) {
     if (rule.filterkey) {
@@ -745,11 +822,11 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
     }
     ctx.prio = rule.prio;
     }
-    switch (rule.action) {
-    case AUDIT_NEVER:
+    match (rule.action) {
+    AUDIT_NEVER => {
 // state = AUDIT_STATE_DISABLED;
     break;
-    case AUDIT_ALWAYS:
+    AUDIT_ALWAYS => {
 // state = AUDIT_STATE_RECORD;
     break;
     }
@@ -761,16 +838,15 @@ pub unsafe extern "C" fn if(_arg: ctx) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn audit_filter_task(tsk: *mut task_struct, key: *mut c_char) -> enum audit_state {
-    static enum audit_state audit_filter_task(struct task_struct *tsk, char **key)
-    {
-    struct audit_entry *e;
+    let mut e = core::ptr::null_mut();
     enum audit_state   state;
     rcu_read_lock();
     list_for_each_entry_rcu(e, &audit_filter_list[AUDIT_FILTER_TASK], list) {
     if (audit_filter_rules(tsk, &e.rule, core::ptr::null_mut(), core::ptr::null_mut(),
     &state, true)) {
-    if (state == AUDIT_STATE_RECORD)
+    if (state == AUDIT_STATE_RECORD) {
 // key = kstrdup(e->rule.filterkey, GFP_ATOMIC);
+    }
     rcu_read_unlock();
     return state;
     }
@@ -780,14 +856,14 @@ unsafe extern "C" fn audit_filter_task(tsk: *mut task_struct, key: *mut c_char) 
     }
 #[no_mangle]
 unsafe extern "C" fn audit_in_mask(rule: *const audit_krule, val: c_ulong) -> c_int {
-    static int audit_in_mask(const struct audit_krule *rule, unsigned long val)
-    {
     int word, bit;
-    if (val > 0xffffffff)
+    if (val > 0xffffffff) {
     return false;
+    }
     word = AUDIT_WORD(val);
-    if (word >= AUDIT_BITMASK_SIZE)
+    if (word >= AUDIT_BITMASK_SIZE) {
     return false;
+    }
     bit = AUDIT_BIT(val);
     return rule.mask[word] & bit;
     }
@@ -805,13 +881,9 @@ unsafe extern "C" fn audit_in_mask(rule: *const audit_krule, val: c_ulong) -> c_
 // parameter can be NULL, but all others must be specified.
 // Returns 1/true if the filter finds a match, 0/false if none are found.
 //
-    static int __audit_filter_op(struct task_struct *tsk,
-    struct audit_context *ctx,
-    struct list_head *list,
-    struct audit_names *name,
-    unsigned long op)
-    {
-    struct audit_entry *e;
+#[no_mangle]
+pub unsafe extern "C" fn __audit_filter_op() {
+    let mut e = core::ptr::null_mut();
     enum audit_state state;
     list_for_each_entry_rcu(e, list, list) {
     if (audit_in_mask(&e.rule, op) &&
@@ -828,11 +900,11 @@ unsafe extern "C" fn audit_in_mask(rule: *const audit_krule, val: c_ulong) -> c_
 // @tsk: associated task
 // @ctx: audit context
 //
-    static void audit_filter_uring(struct task_struct *tsk,
-    struct audit_context *ctx)
-    {
-    if (auditd_test_task(tsk))
+#[no_mangle]
+pub unsafe extern "C" fn audit_filter_uring() {
+    if (auditd_test_task(tsk)) {
     return;
+    }
     rcu_read_lock();
     __audit_filter_op(tsk, ctx, &audit_filter_list[AUDIT_FILTER_URING_EXIT],
     core::ptr::null_mut(), ctx.uring_op);
@@ -843,11 +915,11 @@ unsafe extern "C" fn audit_in_mask(rule: *const audit_krule, val: c_ulong) -> c_
 // high enough that we already know we have to write an audit record
 // (i.e., the state is AUDIT_STATE_BUILD).
 //
-    static void audit_filter_syscall(struct task_struct *tsk,
-    struct audit_context *ctx)
-    {
-    if (auditd_test_task(tsk))
+#[no_mangle]
+pub unsafe extern "C" fn audit_filter_syscall() {
+    if (auditd_test_task(tsk)) {
     return;
+    }
     rcu_read_lock();
     __audit_filter_op(tsk, ctx, &audit_filter_list[AUDIT_FILTER_EXIT],
     core::ptr::null_mut(), ctx.major);
@@ -857,11 +929,9 @@ unsafe extern "C" fn audit_in_mask(rule: *const audit_krule, val: c_ulong) -> c_
 // Given an audit_name check the inode hash table to see if they match.
 // Called holding the rcu read lock to protect the use of audit_inode_hash
 //
-    static int audit_filter_inode_name(struct task_struct *tsk,
-    struct audit_names *n,
-    struct audit_context *ctx)
-    {
-    let mut h: c_int = audit_hash_ino(n.ino);
+#[no_mangle]
+pub unsafe extern "C" fn audit_filter_inode_name() {
+pub static mut h: c_int = audit_hash_ino(n.ino);
     struct list_head *list = &audit_inode_hash[h];
     return __audit_filter_op(tsk, ctx, list, n, ctx.major);
     }
@@ -872,30 +942,26 @@ unsafe extern "C" fn audit_in_mask(rule: *const audit_krule, val: c_ulong) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_filter_inodes(tsk: *mut task_struct, ctx: *mut audit_context) {
-    void audit_filter_inodes(struct task_struct *tsk, struct audit_context *ctx)
-    {
-    struct audit_names *n;
-    if (auditd_test_task(tsk))
+    let mut n = core::ptr::null_mut();
+    if (auditd_test_task(tsk)) {
     return;
+    }
     rcu_read_lock();
     list_for_each_entry(n, &ctx.names_list, list) {
-    if (audit_filter_inode_name(tsk, n, ctx))
+    if (audit_filter_inode_name(tsk, n, ctx)) {
     break;
+    }
     }
     rcu_read_unlock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_proctitle_free(context: *mut audit_context) {
-    static inline void audit_proctitle_free(struct audit_context *context)
-    {
     kfree(context.proctitle.value);
     context.proctitle.value = core::ptr::null_mut();
     context.proctitle.len = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_free_module(context: *mut audit_context) {
-    static inline void audit_free_module(struct audit_context *context)
-    {
     if (context.type == AUDIT_KERN_MODULE) {
     kfree(context.module.name);
     context.module.name = core::ptr::null_mut();
@@ -903,15 +969,15 @@ pub unsafe extern "C" fn audit_free_module(context: *mut audit_context) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_free_names(context: *mut audit_context) {
-    static inline void audit_free_names(struct audit_context *context)
-    {
     struct audit_names *n, *next;
     list_for_each_entry_safe(n, next, &context.names_list, list) {
     list_del(&n.list);
-    if (n.name)
+    if (n.name) {
     putname(n.name);
-    if (n.should_free)
+    }
+    if (n.should_free) {
     kfree(n);
+    }
     }
     context.name_count = 0;
     path_put(&context.pwd);
@@ -920,9 +986,7 @@ pub unsafe extern "C" fn audit_free_names(context: *mut audit_context) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_free_aux(context: *mut audit_context) {
-    static inline void audit_free_aux(struct audit_context *context)
-    {
-    struct audit_aux_data *aux;
+    let mut aux = core::ptr::null_mut();
     while ((aux = context.aux)) {
     context.aux = aux.next;
     kfree(aux);
@@ -945,14 +1009,14 @@ pub unsafe extern "C" fn audit_free_aux(context: *mut audit_context) {
 //
 #[no_mangle]
 unsafe extern "C" fn audit_reset_context(ctx: *mut audit_context) {
-    static void audit_reset_context(struct audit_context *ctx)
-    {
-    if (!ctx)
+    if (!ctx) {
     return;
+    }
 // if ctx is non-null, reset the "ctx->context" regardless
     ctx.context = AUDIT_CTX_UNUSED;
-    if (ctx.dummy)
+    if (ctx.dummy) {
     return;
+    }
 //
 // NOTE: It shouldn't matter in what order we release the fields, so
 // release them in the order in which they appear in the struct;
@@ -995,22 +1059,23 @@ unsafe extern "C" fn audit_reset_context(ctx: *mut audit_context) {
     lsmprop_init(&ctx.target_ref);
     ctx.target_comm[0] = '\0';
     unroll_tree_refs(ctx, core::ptr::null_mut(), 0);
-    WARN_ON(!list_empty(&ctx.killed_trees));
+// WARN_ON;
     audit_free_module(ctx);
     ctx.fds[0] = -1;
     ctx.type = 0; /* reset last for audit_free_*() */
     }
-    static inline struct audit_context *audit_alloc_context(enum audit_state state)
-    {
-    struct audit_context *context;
+#[no_mangle]
+pub unsafe extern "C" fn audit_alloc_context() {
+    let mut context = core::ptr::null_mut();
     context = kzalloc_obj(*context);
-    if (!context)
+    if (!context) {
     return core::ptr::null_mut();
+    }
     context.context = AUDIT_CTX_UNUSED;
     context.state = state;
     context.prio = state == AUDIT_STATE_RECORD ? ~0ULL : 0;
-    INIT_LIST_HEAD(&context.killed_trees);
-    INIT_LIST_HEAD(&context.names_list);
+// INIT_LIST_HEAD;
+// INIT_LIST_HEAD;
     context.fds[0] = -1;
     context.return_valid = AUDITSC_INVALID;
     return context;
@@ -1026,13 +1091,12 @@ unsafe extern "C" fn audit_reset_context(ctx: *mut audit_context) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_alloc(tsk: *mut task_struct) -> c_int {
-    int audit_alloc(struct task_struct *tsk)
-    {
-    struct audit_context *context;
+    let mut context = core::ptr::null_mut();
     enum audit_state     state;
     char *key = core::ptr::null_mut();
-    if (likely(!audit_ever_enabled))
+    if (likely(!audit_ever_enabled)) {
     return 0;
+    }
     state = audit_filter_task(tsk, &key);
     if (state == AUDIT_STATE_DISABLED) {
     clear_task_syscall_work(tsk, SYSCALL_AUDIT);
@@ -1051,8 +1115,6 @@ pub unsafe extern "C" fn audit_alloc(tsk: *mut task_struct) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
-    static inline void audit_free_context(struct audit_context *context)
-    {
 // resetting is extra work, but it is likely just noise
     audit_reset_context(context);
     audit_proctitle_free(context);
@@ -1060,41 +1122,39 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
     kfree(context.filterkey);
     kfree(context);
     }
-    static int audit_log_pid_context(struct audit_context *context, pid_t pid,
-    kuid_t auid, kuid_t uid,
-    unsigned int sessionid, struct lsm_prop *prop,
-    char *comm)
-    {
-    struct audit_buffer *ab;
-    let mut rc: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn audit_log_pid_context() {
+    let mut ab = core::ptr::null_mut();
+pub static mut rc: c_int = 0;
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_OBJ_PID);
-    if (!ab)
+    if (!ab) {
     return rc;
+    }
     audit_log_format(ab, "opid=%d oauid=%d ouid=%d oses=%d", pid,
     from_kuid(&init_user_ns, auid),
     from_kuid(&init_user_ns, uid), sessionid);
-    if (lsmprop_is_set(prop) && audit_log_obj_ctx(ab, prop))
+    if (lsmprop_is_set(prop) && audit_log_obj_ctx(ab, prop)) {
     rc = 1;
+    }
     audit_log_format(ab, " ocomm=");
     audit_log_untrustedstring(ab, comm);
     audit_log_end(ab);
     return rc;
     }
-    static void audit_log_execve_info(struct audit_context *context,
-    struct audit_buffer **ab)
-    {
-    long len_max;
-    long len_rem;
-    long len_full;
-    long len_buf;
-    let mut len_abuf: c_long = 0;
-    long len_tmp;
-    bool require_data;
-    bool encode;
-    unsigned int iter;
-    unsigned int arg;
-    char *buf_head;
-    char *buf;
+#[no_mangle]
+pub unsafe extern "C" fn audit_log_execve_info() {
+    let mut len_max = 0;
+    let mut len_rem = 0;
+    let mut len_full = 0;
+    let mut len_buf = 0;
+pub static mut len_abuf: c_long = 0;
+    let mut len_tmp = 0;
+    let mut require_data = 0;
+    let mut encode = 0;
+    let mut iter = 0;
+    let mut arg = 0;
+    let mut buf_head = core::ptr::null_mut();
+    let mut buf = core::ptr::null_mut();
     const char __user *p = (const char __user *)current.mm.arg_start;
 // NOTE: this buffer needs to be large enough to hold all the non-arg
 // data we put in the audit record for this argument (see the
@@ -1104,7 +1164,7 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
 // current value of 7500 is not as important as the fact that it
 // is less than 8k, a setting of 7500 gives us plenty of wiggle
 // room if we go over a little bit in the logging below
-    WARN_ON_ONCE(MAX_EXECVE_AUDIT_LEN > 7500);
+// WARN_ON_ONCE;
     len_max = MAX_EXECVE_AUDIT_LEN;
 // scratch buffer to hold the userspace args
     buf_head = kmalloc(MAX_EXECVE_AUDIT_LEN + 1, GFP_KERNEL);
@@ -1129,8 +1189,9 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
 // to use strncpy_from_user() to obtain this value for
 // recording in the log, although we don't use it
 // anywhere here to avoid a double-fetch problem
-    if (len_full == 0)
+    if (len_full == 0) {
     len_full = strnlen_user(p, MAX_ARG_STRLEN) - 1;
+    }
 // read more data from userspace
     if (require_data) {
 // can we make more room in the buffer?
@@ -1157,13 +1218,15 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
     p += len_tmp;
     } else {
     require_data = false;
-    if (!encode)
+    if (!encode) {
     encode = audit_string_contains_control(
     buf, len_tmp);
+    }
 // try to use a trusted value for len_full
-    if (len_full < len_max)
+    if (len_full < len_max) {
     len_full = (encode ?
     len_tmp * 2 : len_tmp);
+    }
     p += len_tmp + 1;
     }
     len_buf += len_tmp;
@@ -1182,8 +1245,9 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
     audit_log_end(*ab);
 // ab = audit_log_start(context,
     GFP_KERNEL, AUDIT_EXECVE);
-    if (!*ab)
+    if (!*ab) {
     goto out;
+    }
     }
 // create the non-arg portion of the arg record
     len_tmp = 0;
@@ -1198,25 +1262,28 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
     len_tmp += snprintf(&abuf[len_tmp],
     sizeof(abuf) - len_tmp,
     " a%d[%d]=", arg, iter++);
-    } else
+    } else {
     len_tmp += snprintf(&abuf[len_tmp],
     sizeof(abuf) - len_tmp,
     " a%d=", arg);
-    WARN_ON(len_tmp >= sizeof(abuf));
+    }
+// WARN_ON;
     abuf[sizeof(abuf) - 1] = '\0';
 // log the arg in the audit record
     audit_log_format(*ab, "%s", abuf);
     len_rem -= len_tmp;
     len_tmp = len_buf;
     if (encode) {
-    if (len_abuf > len_rem)
+    if (len_abuf > len_rem) {
     len_tmp = len_rem / 2; /* encoding */
+    }
     audit_log_n_hex(*ab, buf, len_tmp);
     len_rem -= len_tmp * 2;
     len_abuf -= len_tmp * 2;
     } else {
-    if (len_abuf > len_rem)
+    if (len_abuf > len_rem) {
     len_tmp = len_rem - 2; /* quotes */
+    }
     audit_log_n_string(*ab, buf, len_tmp);
     len_rem -= len_tmp + 2;
 // don't subtract the "2" because we still need
@@ -1239,9 +1306,8 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
     out:
     kfree(buf_head);
     }
-    static void audit_log_cap(struct audit_buffer *ab, char *prefix,
-    kernel_cap_t *cap)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_log_cap() {
     if (cap_isclear(*cap)) {
     audit_log_format(ab, " %s=0", prefix);
     return;
@@ -1250,8 +1316,6 @@ pub unsafe extern "C" fn audit_free_context(context: *mut audit_context) {
     }
 #[no_mangle]
 unsafe extern "C" fn audit_log_fcaps(ab: *mut audit_buffer, name: *mut audit_names) {
-    static void audit_log_fcaps(struct audit_buffer *ab, struct audit_names *name)
-    {
     if (name.fcap_ver == -1) {
     audit_log_format(ab, " cap_fe=? cap_fver=? cap_fp=? cap_fi=?");
     return;
@@ -1264,8 +1328,6 @@ unsafe extern "C" fn audit_log_fcaps(ab: *mut audit_buffer, name: *mut audit_nam
     }
 #[no_mangle]
 unsafe extern "C" fn audit_log_time(context: *mut audit_context, ab: *mut audit_buffer) {
-    static void audit_log_time(struct audit_context *context, struct audit_buffer **ab)
-    {
     const struct audit_ntp_data *ntp = &context.time.ntp_data;
     const struct timespec64 *tk = &context.time.tk_injoffset;
     static const char * const ntp_name[] = {
@@ -1276,7 +1338,7 @@ unsafe extern "C" fn audit_log_time(context: *mut audit_context, ab: *mut audit_
     "tick",
     "adjust",
     };
-    int type;
+    let mut type = 0;
     if (context.type == AUDIT_TIME_ADJNTPVAL) {
     for (type = 0; type < AUDIT_NTP_NVALS; type++) {
     if (ntp.vals[type].newval != ntp.vals[type].oldval) {
@@ -1284,8 +1346,9 @@ unsafe extern "C" fn audit_log_time(context: *mut audit_context, ab: *mut audit_
 // ab = audit_log_start(context,
     GFP_KERNEL,
     AUDIT_TIME_ADJNTPVAL);
-    if (!*ab)
+    if (!*ab) {
     return;
+    }
     }
     audit_log_format(*ab, "op=%s old=%lli new=%lli",
     ntp_name[type],
@@ -1300,8 +1363,9 @@ unsafe extern "C" fn audit_log_time(context: *mut audit_context, ab: *mut audit_
     if (!*ab) {
 // ab = audit_log_start(context, GFP_KERNEL,
     AUDIT_TIME_INJOFFSET);
-    if (!*ab)
+    if (!*ab) {
     return;
+    }
     }
     audit_log_format(*ab, "sec=%lli nsec=%li",
     (long long)tk.tv_sec, tk.tv_nsec);
@@ -1311,36 +1375,37 @@ unsafe extern "C" fn audit_log_time(context: *mut audit_context, ab: *mut audit_
     }
 #[no_mangle]
 unsafe extern "C" fn show_special(context: *mut audit_context, call_panic: *mut c_int) {
-    static void show_special(struct audit_context *context, int *call_panic)
-    {
-    struct audit_buffer *ab;
-    int i;
+    let mut ab = core::ptr::null_mut();
+    let mut i = 0;
     ab = audit_log_start(context, GFP_KERNEL, context.type);
-    if (!ab)
+    if (!ab) {
     return;
-    switch (context.type) {
-    case AUDIT_SOCKETCALL: {
-    let mut nargs: c_int = context.socketcall.nargs;
+    }
+    match (context.type) {
+    AUDIT_SOCKETCALL => { {
+pub static mut nargs: c_int = context.socketcall.nargs;
     audit_log_format(ab, "nargs=%d", nargs);
     for (i = 0; i < nargs; i++)
     audit_log_format(ab, " a%d=%lx", i,
     context.socketcall.args[i]);
     break; }
-    case AUDIT_IPC:
+    AUDIT_IPC => {
     audit_log_format(ab, "ouid=%u ogid=%u mode=%#ho",
     from_kuid(&init_user_ns, context.ipc.uid),
     from_kgid(&init_user_ns, context.ipc.gid),
     context.ipc.mode);
     if (lsmprop_is_set(&context.ipc.oprop)) {
-    if (audit_log_obj_ctx(ab, &context.ipc.oprop))
+    if (audit_log_obj_ctx(ab, &context.ipc.oprop)) {
 // call_panic = 1;
+    }
     }
     if (context.ipc.has_perm) {
     audit_log_end(ab);
     ab = audit_log_start(context, GFP_KERNEL,
     AUDIT_IPC_SET_PERM);
-    if (unlikely(!ab))
+    if (unlikely(!ab)) {
     return;
+    }
     audit_log_format(ab,
     "qbytes=%lx ouid=%u ogid=%u mode=%#ho",
     context.ipc.qbytes,
@@ -1349,7 +1414,7 @@ unsafe extern "C" fn show_special(context: *mut audit_context, call_panic: *mut 
     context.ipc.perm_mode);
     }
     break;
-    case AUDIT_MQ_OPEN:
+    AUDIT_MQ_OPEN => {
     audit_log_format(ab,
     "oflag=0x%x mode=%#ho mq_flags=0x%lx mq_maxmsg=%ld "
     "mq_msgsize=%ld mq_curmsgs=%ld",
@@ -1359,7 +1424,7 @@ unsafe extern "C" fn show_special(context: *mut audit_context, call_panic: *mut 
     context.mq_open.attr.mq_msgsize,
     context.mq_open.attr.mq_curmsgs);
     break;
-    case AUDIT_MQ_SENDRECV:
+    AUDIT_MQ_SENDRECV => {
     audit_log_format(ab,
     "mqdes=%d msg_len=%zd msg_prio=%u "
     "abs_timeout_sec=%lld abs_timeout_nsec=%ld",
@@ -1369,12 +1434,12 @@ unsafe extern "C" fn show_special(context: *mut audit_context, call_panic: *mut 
     (long long) context.mq_sendrecv.abs_timeout.tv_sec,
     context.mq_sendrecv.abs_timeout.tv_nsec);
     break;
-    case AUDIT_MQ_NOTIFY:
+    AUDIT_MQ_NOTIFY => {
     audit_log_format(ab, "mqdes=%d sigev_signo=%d",
     context.mq_notify.mqdes,
     context.mq_notify.sigev_signo);
     break;
-    case AUDIT_MQ_GETSETATTR: {
+    AUDIT_MQ_GETSETATTR => { {
     struct mq_attr *attr = &context.mq_getsetattr.mqstat;
     audit_log_format(ab,
     "mqdes=%d mq_flags=0x%lx mq_maxmsg=%ld mq_msgsize=%ld "
@@ -1383,35 +1448,36 @@ unsafe extern "C" fn show_special(context: *mut audit_context, call_panic: *mut 
     attr.mq_flags, attr.mq_maxmsg,
     attr.mq_msgsize, attr.mq_curmsgs);
     break; }
-    case AUDIT_CAPSET:
+    AUDIT_CAPSET => {
     audit_log_format(ab, "pid=%d", context.capset.pid);
     audit_log_cap(ab, "cap_pi", &context.capset.cap.inheritable);
     audit_log_cap(ab, "cap_pp", &context.capset.cap.permitted);
     audit_log_cap(ab, "cap_pe", &context.capset.cap.effective);
     audit_log_cap(ab, "cap_pa", &context.capset.cap.ambient);
     break;
-    case AUDIT_MMAP:
+    AUDIT_MMAP => {
     audit_log_format(ab, "fd=%d flags=0x%x", context.mmap.fd,
     context.mmap.flags);
     break;
-    case AUDIT_OPENAT2:
+    AUDIT_OPENAT2 => {
     audit_log_format(ab, "oflag=0%llo mode=0%llo resolve=0x%llx",
     context.openat2.flags,
     context.openat2.mode,
     context.openat2.resolve);
     break;
-    case AUDIT_EXECVE:
+    AUDIT_EXECVE => {
     audit_log_execve_info(context, &ab);
     break;
-    case AUDIT_KERN_MODULE:
+    AUDIT_KERN_MODULE => {
     audit_log_format(ab, "name=");
     if (context.module.name) {
     audit_log_untrustedstring(ab, context.module.name);
-    } else
+    } else {
     audit_log_format(ab, "(null)");
+    }
     break;
-    case AUDIT_TIME_ADJNTPVAL:
-    case AUDIT_TIME_INJOFFSET:
+    AUDIT_TIME_ADJNTPVAL => {
+    AUDIT_TIME_INJOFFSET => {
 // this call deviates from the rest, eating the buffer
     audit_log_time(context, &ab);
     break;
@@ -1420,8 +1486,6 @@ unsafe extern "C" fn show_special(context: *mut audit_context, call_panic: *mut 
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_proctitle_rtrim(proctitle: *mut c_char, len: c_int) -> c_int {
-    static inline int audit_proctitle_rtrim(char *proctitle, int len)
-    {
     char *end = proctitle + len - 1;
     while (end > proctitle && !isprint(*end))
     end--;
@@ -1438,42 +1502,46 @@ pub unsafe extern "C" fn audit_proctitle_rtrim(proctitle: *mut c_char, len: c_in
 // @record_num: record number to report when handling a list of names
 // @call_panic: optional pointer to int that will be updated if secid fails
 //
-    static void audit_log_name(struct audit_context *context, struct audit_names *n,
-    const struct path *path, int record_num, int *call_panic)
-    {
-    struct audit_buffer *ab;
+#[no_mangle]
+pub unsafe extern "C" fn audit_log_name() {
+    let mut ab = core::ptr::null_mut();
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_PATH);
-    if (!ab)
+    if (!ab) {
     return;
+    }
     audit_log_format(ab, "item=%d", record_num);
-    if (path)
+    if (path) {
     audit_log_d_path(ab, " name=", path);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(_arg: n->name) -> else {
-    switch (n.name_len) {
-    case AUDIT_NAME_FULL:
+    match (n.name_len) {
+    AUDIT_NAME_FULL => {
 // log the full path
     audit_log_format(ab, " name=");
     audit_log_untrustedstring(ab, n.name.name);
     break;
-    case 0:
+    0 => {
 // name was specified as a relative path and the
 // directory component is the cwd
 //
-    if (context.pwd.dentry && context.pwd.mnt)
+    if (context.pwd.dentry && context.pwd.mnt) {
     audit_log_d_path(ab, " name=", &context.pwd);
-    else
+    }
+    else {
     audit_log_format(ab, " name=(null)");
+    }
     break;
-    default:
+    _ => {
 // log the name's directory component
     audit_log_format(ab, " name=");
     audit_log_n_untrustedstring(ab, n.name.name,
     n.name_len);
     }
-    } else
+    } else {
     audit_log_format(ab, " name=(null)");
-    if (n.ino != AUDIT_INO_UNSET)
+    }
+    if (n.ino != AUDIT_INO_UNSET) {
     audit_log_format(ab, " inode=%llu dev=%02x:%02x mode=%#ho ouid=%u ogid=%u rdev=%02x:%02x",
     n.ino,
     MAJOR(n.dev),
@@ -1482,25 +1550,26 @@ pub unsafe extern "C" fn if(_arg: n->name) -> else {
     from_kuid(&init_user_ns, n.uid),
     from_kgid(&init_user_ns, n.gid),
     MAJOR(n.rdev),
-    MINOR(n.rdev));
+// MINOR;
+    }
     if (lsmprop_is_set(&n.oprop) &&
     audit_log_obj_ctx(ab, &n.oprop))
 // call_panic = 2;
 // log the audit_names record type
-    switch (n.type) {
-    case AUDIT_TYPE_NORMAL:
+    match (n.type) {
+    AUDIT_TYPE_NORMAL => {
     audit_log_format(ab, " nametype=NORMAL");
     break;
-    case AUDIT_TYPE_PARENT:
+    AUDIT_TYPE_PARENT => {
     audit_log_format(ab, " nametype=PARENT");
     break;
-    case AUDIT_TYPE_CHILD_DELETE:
+    AUDIT_TYPE_CHILD_DELETE => {
     audit_log_format(ab, " nametype=DELETE");
     break;
-    case AUDIT_TYPE_CHILD_CREATE:
+    AUDIT_TYPE_CHILD_CREATE => {
     audit_log_format(ab, " nametype=CREATE");
     break;
-    default:
+    _ => {
     audit_log_format(ab, " nametype=UNKNOWN");
     break;
     }
@@ -1509,23 +1578,23 @@ pub unsafe extern "C" fn if(_arg: n->name) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn audit_log_proctitle() {
-    static void audit_log_proctitle(void)
-    {
-    int res;
-    char *buf;
+    let mut res = 0;
+    let mut buf = core::ptr::null_mut();
     char *msg = "(null)";
-    let mut len: c_int = strlen(msg);
+pub static mut len: c_int = strlen(msg);
     struct audit_context *context = audit_context();
-    struct audit_buffer *ab;
+    let mut ab = core::ptr::null_mut();
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_PROCTITLE);
-    if (!ab)
+    if (!ab) {
     return;	/* audit_panic or being filtered */
+    }
     audit_log_format(ab, "proctitle=");
 // Not  cached
     if (!context.proctitle.value) {
     buf = kmalloc(MAX_PROCTITLE_AUDIT_LEN, GFP_KERNEL);
-    if (!buf)
+    if (!buf) {
     goto out;
+    }
 // Historically called this from procfs naming
     res = get_cmdline(current, buf, MAX_PROCTITLE_AUDIT_LEN);
     if (res == 0) {
@@ -1552,20 +1621,20 @@ unsafe extern "C" fn audit_log_proctitle() {
 //
 #[no_mangle]
 unsafe extern "C" fn audit_log_uring(ctx: *mut audit_context) {
-    static void audit_log_uring(struct audit_context *ctx)
-    {
-    struct audit_buffer *ab;
-    const struct cred *cred;
+    let mut ab = core::ptr::null_mut();
+    let mut cred = core::ptr::null_mut();
     ab = audit_log_start(ctx, GFP_ATOMIC, AUDIT_URINGOP);
-    if (!ab)
+    if (!ab) {
     return;
+    }
     cred = current_cred();
     audit_log_format(ab, "uring_op=%d", ctx.uring_op);
-    if (ctx.return_valid != AUDITSC_INVALID)
+    if (ctx.return_valid != AUDITSC_INVALID) {
     audit_log_format(ab, " success=%s exit=%ld",
     str_yes_no(ctx.return_valid ==
     AUDITSC_SUCCESS),
     ctx.return_code);
+    }
     audit_log_format(ab,
     " items=%d"
     " ppid=%d pid=%d uid=%u gid=%u euid=%u suid=%u"
@@ -1586,28 +1655,29 @@ unsafe extern "C" fn audit_log_uring(ctx: *mut audit_context) {
     }
 #[no_mangle]
 unsafe extern "C" fn audit_log_exit() {
-    static void audit_log_exit(void)
-    {
     int i, call_panic = 0;
     struct audit_context *context = audit_context();
-    struct audit_buffer *ab;
-    struct audit_aux_data *aux;
-    struct audit_names *n;
+    let mut ab = core::ptr::null_mut();
+    let mut aux = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     context.personality = current.personality;
-    switch (context.context) {
-    case AUDIT_CTX_SYSCALL:
+    match (context.context) {
+    AUDIT_CTX_SYSCALL => {
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_SYSCALL);
-    if (!ab)
+    if (!ab) {
     return;
+    }
     audit_log_format(ab, "arch=%x syscall=%d",
     context.arch, context.major);
-    if (context.personality != PER_LINUX)
+    if (context.personality != PER_LINUX) {
     audit_log_format(ab, " per=%lx", context.personality);
-    if (context.return_valid != AUDITSC_INVALID)
+    }
+    if (context.return_valid != AUDITSC_INVALID) {
     audit_log_format(ab, " success=%s exit=%ld",
     str_yes_no(context.return_valid ==
     AUDITSC_SUCCESS),
     context.return_code);
+    }
     audit_log_format(ab,
     " a0=%lx a1=%lx a2=%lx a3=%lx items=%d",
     context.argv[0],
@@ -1619,20 +1689,21 @@ unsafe extern "C" fn audit_log_exit() {
     audit_log_key(ab, context.filterkey);
     audit_log_end(ab);
     break;
-    case AUDIT_CTX_URING:
+    AUDIT_CTX_URING => {
     audit_log_uring(context);
     break;
-    default:
-    BUG();
+    _ => {
+// BUG;
     break;
     }
     for (aux = context.aux; aux; aux = aux.next) {
     ab = audit_log_start(context, GFP_KERNEL, aux.type);
-    if (!ab)
+    if (!ab) {
     continue; /* audit_panic has been called */
-    switch (aux.type) {
-    case AUDIT_BPRM_FCAPS: {
-    struct audit_aux_data_bprm_fcaps *axs = (void *)aux;
+    }
+    match (aux.type) {
+    AUDIT_BPRM_FCAPS => { {
+    struct audit_aux_data_bprm_fcaps *axs = aux;
     audit_log_format(ab, "fver=%x", axs.fcap_ver);
     audit_log_cap(ab, "fp", &axs.fcap.permitted);
     audit_log_cap(ab, "fi", &axs.fcap.inheritable);
@@ -1652,8 +1723,9 @@ unsafe extern "C" fn audit_log_exit() {
     }
     audit_log_end(ab);
     }
-    if (context.type)
+    if (context.type) {
     show_special(context, &call_panic);
+    }
     if (context.fds[0] >= 0) {
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_FD_PAIR);
     if (ab) {
@@ -1666,13 +1738,13 @@ unsafe extern "C" fn audit_log_exit() {
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_SOCKADDR);
     if (ab) {
     audit_log_format(ab, "saddr=");
-    audit_log_n_hex(ab, (void *)context.sockaddr,
+    audit_log_n_hex(ab, context.sockaddr,
     context.sockaddr_len);
     audit_log_end(ab);
     }
     }
     for (aux = context.aux_pids; aux; aux = aux.next) {
-    struct audit_aux_data_pids *axs = (void *)aux;
+    struct audit_aux_data_pids *axs = aux;
     for (i = 0; i < axs.pid_count; i++)
     if (audit_log_pid_context(context, axs.target_pid[i],
     axs.target_auid[i],
@@ -1698,18 +1770,22 @@ unsafe extern "C" fn audit_log_exit() {
     }
     i = 0;
     list_for_each_entry(n, &context.names_list, list) {
-    if (n.hidden)
+    if (n.hidden) {
     continue;
+    }
     audit_log_name(context, n, core::ptr::null_mut(), i++, &call_panic);
     }
-    if (context.context == AUDIT_CTX_SYSCALL)
+    if (context.context == AUDIT_CTX_SYSCALL) {
     audit_log_proctitle();
+    }
 // Send end of event record to help user space know we are finished
     ab = audit_log_start(context, GFP_KERNEL, AUDIT_EOE);
-    if (ab)
+    if (ab) {
     audit_log_end(ab);
-    if (call_panic)
+    }
+    if (call_panic) {
     audit_panic("error in audit_log_exit()");
+    }
     }
 //
 // __audit_free - free a per-task audit context
@@ -1719,14 +1795,14 @@ unsafe extern "C" fn audit_log_exit() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_free(tsk: *mut task_struct) {
-    void __audit_free(struct task_struct *tsk)
-    {
     struct audit_context *context = tsk.audit_context;
-    if (!context)
+    if (!context) {
     return;
+    }
 // this may generate CONFIG_CHANGE records
-    if (!list_empty(&context.killed_trees))
+    if (!list_empty(&context.killed_trees)) {
     audit_kill_trees(context);
+    }
 // We are called either by do_exit() or the fork() error handling code;
 // in the former case tsk == current and in the latter tsk is a
 // random task_struct that doesn't have any meaningful data we
@@ -1738,14 +1814,16 @@ pub unsafe extern "C" fn __audit_free(tsk: *mut task_struct) {
     if (context.context == AUDIT_CTX_SYSCALL) {
     audit_filter_syscall(tsk, context);
     audit_filter_inodes(tsk, context);
-    if (context.current_state == AUDIT_STATE_RECORD)
+    if (context.current_state == AUDIT_STATE_RECORD) {
     audit_log_exit();
+    }
     } else if (context.context == AUDIT_CTX_URING) {
 // TODO: verify this case is real and valid
     audit_filter_uring(tsk, context);
     audit_filter_inodes(tsk, context);
-    if (context.current_state == AUDIT_STATE_RECORD)
+    if (context.current_state == AUDIT_STATE_RECORD) {
     audit_log_uring(context);
+    }
     }
     }
     audit_set_context(tsk, core::ptr::null_mut());
@@ -1760,9 +1838,8 @@ pub unsafe extern "C" fn __audit_free(tsk: *mut task_struct) {
 // We need to fixup the return code in the audit logs if the actual return
 // codes are later going to be fixed by the arch specific signal handlers.
 //
-    static void audit_return_fixup(struct audit_context *ctx,
-    int success, long code)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_return_fixup() {
 //
 // This is actually a test for:
 // (rc == ERESTARTSYS ) || (rc == ERESTARTNOINTR) ||
@@ -1774,8 +1851,9 @@ pub unsafe extern "C" fn __audit_free(tsk: *mut task_struct) {
     (code >= -ERESTART_RESTARTBLOCK) &&
     (code != -ENOIOCTLCMD))
     ctx.return_code = -EINTR;
-    else
+    else {
     ctx.return_code  = code;
+    }
     ctx.return_valid = (success ? AUDITSC_SUCCESS : AUDITSC_FAILURE);
     }
 //
@@ -1789,11 +1867,10 @@ pub unsafe extern "C" fn __audit_free(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_uring_entry(op: u8) {
-    void __audit_uring_entry(u8 op)
-    {
     struct audit_context *ctx = audit_context();
-    if (ctx.state == AUDIT_STATE_DISABLED)
+    if (ctx.state == AUDIT_STATE_DISABLED) {
     return;
+    }
 //
 // NOTE: It's possible that we can be called from the process' context
 // before it returns to userspace, and before audit_syscall_exit()
@@ -1801,11 +1878,13 @@ pub unsafe extern "C" fn __audit_uring_entry(op: u8) {
 // the io_uring details and return.
 //
     ctx.uring_op = op;
-    if (ctx.context == AUDIT_CTX_SYSCALL)
+    if (ctx.context == AUDIT_CTX_SYSCALL) {
     return;
+    }
     ctx.dummy = !audit_n_rules;
-    if (!ctx.dummy && ctx.state == AUDIT_STATE_BUILD)
+    if (!ctx.dummy && ctx.state == AUDIT_STATE_BUILD) {
     ctx.prio = 0;
+    }
     ctx.context = AUDIT_CTX_URING;
     ctx.current_state = ctx.state;
     ktime_get_coarse_real_ts64(&ctx.stamp.ctime);
@@ -1822,12 +1901,11 @@ pub unsafe extern "C" fn __audit_uring_entry(op: u8) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_uring_exit(success: c_int, code: c_long) {
-    void __audit_uring_exit(int success, long code)
-    {
     struct audit_context *ctx = audit_context();
     if (ctx.dummy) {
-    if (ctx.context != AUDIT_CTX_URING)
+    if (ctx.context != AUDIT_CTX_URING) {
     return;
+    }
     goto out;
     }
     audit_return_fixup(ctx, success, code);
@@ -1851,22 +1929,26 @@ pub unsafe extern "C" fn __audit_uring_exit(success: c_int, code: c_long) {
 // the behavior here.
 //
     audit_filter_syscall(current, ctx);
-    if (ctx.current_state != AUDIT_STATE_RECORD)
+    if (ctx.current_state != AUDIT_STATE_RECORD) {
     audit_filter_uring(current, ctx);
+    }
     audit_filter_inodes(current, ctx);
-    if (ctx.current_state != AUDIT_STATE_RECORD)
+    if (ctx.current_state != AUDIT_STATE_RECORD) {
     return;
+    }
     audit_log_uring(ctx);
     return;
     }
 // this may generate CONFIG_CHANGE records
-    if (!list_empty(&ctx.killed_trees))
+    if (!list_empty(&ctx.killed_trees)) {
     audit_kill_trees(ctx);
+    }
 // run through both filters to ensure we set the filterkey properly
     audit_filter_uring(current, ctx);
     audit_filter_inodes(current, ctx);
-    if (ctx.current_state != AUDIT_STATE_RECORD)
+    if (ctx.current_state != AUDIT_STATE_RECORD) {
     goto out;
+    }
     audit_log_exit();
     out:
     audit_reset_context(ctx);
@@ -1887,27 +1969,29 @@ pub unsafe extern "C" fn __audit_uring_exit(success: c_int, code: c_long) {
 // will only be written if another part of the kernel requests that it
 // be written).
 //
-    void __audit_syscall_entry(int major, unsigned long a1, unsigned long a2,
-    unsigned long a3, unsigned long a4)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __audit_syscall_entry() {
     struct audit_context *context = audit_context();
     enum audit_state     state;
-    if (!audit_enabled || !context)
+    if (!audit_enabled || !context) {
     return;
-    WARN_ON(context.context != AUDIT_CTX_UNUSED);
-    WARN_ON(context.name_count);
+    }
+// WARN_ON;
+// WARN_ON;
     if (context.context != AUDIT_CTX_UNUSED || context.name_count) {
     audit_panic("unrecoverable error in audit_syscall_entry()");
     return;
     }
     state = context.state;
-    if (state == AUDIT_STATE_DISABLED)
+    if (state == AUDIT_STATE_DISABLED) {
     return;
+    }
     context.dummy = !audit_n_rules;
     if (!context.dummy && state == AUDIT_STATE_BUILD) {
     context.prio = 0;
-    if (auditd_test_task(current))
+    if (auditd_test_task(current)) {
     return;
+    }
     }
     context.arch	    = syscall_get_arch(current);
     context.major      = major;
@@ -1932,45 +2016,46 @@ pub unsafe extern "C" fn __audit_uring_exit(success: c_int, code: c_long) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_syscall_exit(success: c_int, return_code: c_long) {
-    void __audit_syscall_exit(int success, long return_code)
-    {
     struct audit_context *context = audit_context();
     if (!context || context.dummy ||
     context.context != AUDIT_CTX_SYSCALL)
     goto out;
 // this may generate CONFIG_CHANGE records
-    if (!list_empty(&context.killed_trees))
+    if (!list_empty(&context.killed_trees)) {
     audit_kill_trees(context);
+    }
     audit_return_fixup(context, success, return_code);
 // run through both filters to ensure we set the filterkey properly
     audit_filter_syscall(current, context);
     audit_filter_inodes(current, context);
-    if (context.current_state != AUDIT_STATE_RECORD)
+    if (context.current_state != AUDIT_STATE_RECORD) {
     goto out;
+    }
     audit_log_exit();
     out:
     audit_reset_context(context);
     }
 #[no_mangle]
 pub unsafe extern "C" fn handle_one(inode: *const inode) {
-    static inline void handle_one(const struct inode *inode)
-    {
-    struct audit_context *context;
-    struct audit_tree_refs *p;
-    struct audit_chunk *chunk;
-    int count;
-    if (likely(!inode.i_fsnotify_marks))
+    let mut context = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut chunk = core::ptr::null_mut();
+    let mut count = 0;
+    if (likely(!inode.i_fsnotify_marks)) {
     return;
+    }
     context = audit_context();
     p = context.trees;
     count = context.tree_count;
     rcu_read_lock();
     chunk = audit_tree_lookup(inode);
     rcu_read_unlock();
-    if (!chunk)
+    if (!chunk) {
     return;
-    if (likely(put_tree_ref(context, chunk)))
+    }
+    if (likely(put_tree_ref(context, chunk))) {
     return;
+    }
     if (unlikely(!grow_tree_refs(context))) {
     pr_warn("out of memory, audit has lost a tree reference\n");
     audit_set_auditable(context);
@@ -1982,14 +2067,12 @@ pub unsafe extern "C" fn handle_one(inode: *const inode) {
     }
 #[no_mangle]
 unsafe extern "C" fn handle_path(dentry: *const dentry) {
-    static void handle_path(const struct dentry *dentry)
-    {
-    struct audit_context *context;
-    struct audit_tree_refs *p;
+    let mut context = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
     const struct dentry *d, *parent;
-    struct audit_chunk *drop;
-    unsigned long seq;
-    int count;
+    let mut drop = core::ptr::null_mut();
+    let mut seq = 0;
+    let mut count = 0;
     context = audit_context();
     p = context.trees;
     count = context.tree_count;
@@ -2001,7 +2084,7 @@ unsafe extern "C" fn handle_path(dentry: *const dentry) {
     for (;;) {
     struct inode *inode = d_backing_inode(d);
     if (inode && unlikely(inode.i_fsnotify_marks)) {
-    struct audit_chunk *chunk;
+    let mut chunk = core::ptr::null_mut();
     chunk = audit_tree_lookup(inode);
     if (chunk) {
     if (unlikely(!put_tree_ref(context, chunk))) {
@@ -2011,8 +2094,9 @@ unsafe extern "C" fn handle_path(dentry: *const dentry) {
     }
     }
     parent = d.d_parent;
-    if (parent == d)
+    if (parent == d) {
     break;
+    }
     d = parent;
     }
     if (unlikely(read_seqretry(&rename_lock, seq) || drop)) {  /* in this order */
@@ -2036,25 +2120,26 @@ unsafe extern "C" fn handle_path(dentry: *const dentry) {
     }
     rcu_read_unlock();
     }
-    static struct audit_names *audit_alloc_name(struct audit_context *context,
-    unsigned char type)
-    {
-    struct audit_names *aname;
+#[no_mangle]
+pub unsafe extern "C" fn audit_alloc_name() {
+    let mut aname = core::ptr::null_mut();
     if (context.name_count < AUDIT_NAMES) {
     aname = &context.preallocated_names[context.name_count];
     memset(aname, 0, sizeof(*aname));
     } else {
     aname = kzalloc_obj(*aname, GFP_NOFS);
-    if (!aname)
+    if (!aname) {
     return core::ptr::null_mut();
+    }
     aname.should_free = true;
     }
     aname.ino = AUDIT_INO_UNSET;
     aname.type = type;
     list_add_tail(&aname.list, &context.names_list);
     context.name_count++;
-    if (!context.pwd.dentry)
+    if (!context.pwd.dentry) {
     get_fs_pwd(current.fs, &context.pwd);
+    }
     return aname;
     }
 //
@@ -2066,30 +2151,31 @@ unsafe extern "C" fn handle_path(dentry: *const dentry) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
-    void __audit_getname(struct filename *name)
-    {
     struct audit_context *context = audit_context();
-    struct audit_names *n;
-    if (context.context == AUDIT_CTX_UNUSED)
+    let mut n = core::ptr::null_mut();
+    if (context.context == AUDIT_CTX_UNUSED) {
     return;
+    }
     n = audit_alloc_name(context, AUDIT_TYPE_UNKNOWN);
-    if (!n)
+    if (!n) {
     return;
+    }
     n.name = name;
     n.name_len = AUDIT_NAME_FULL;
     name.aname = n;
     name.refcnt++;
     }
-    static inline int audit_copy_fcaps(struct audit_names *name,
-    const struct dentry *dentry)
-    {
-    struct cpu_vfs_cap_data caps;
-    int rc;
-    if (!dentry)
+#[no_mangle]
+pub unsafe extern "C" fn audit_copy_fcaps() {
+    let mut caps;
+    let mut rc = 0;
+    if (!dentry) {
     return 0;
+    }
     rc = get_vfs_caps_from_disk(&nop_mnt_idmap, dentry, &caps);
-    if (rc)
+    if (rc) {
     return rc;
+    }
     name.fcap.permitted = caps.permitted;
     name.fcap.inheritable = caps.inheritable;
     name.fcap.fE = !!(caps.magic_etc & VFS_CAP_FLAGS_EFFECTIVE);
@@ -2099,10 +2185,8 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
     return 0;
     }
 // Copy inode data into an audit_names.
-    static void audit_copy_inode(struct audit_names *name,
-    const struct dentry *dentry,
-    struct inode *inode, unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_copy_inode() {
     name.ino   = inode.i_ino;
     name.dev   = inode.i_sb.s_dev;
     name.mode  = inode.i_mode;
@@ -2122,18 +2206,18 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
 // @dentry: dentry being audited
 // @flags: attributes for this particular entry
 //
-    void __audit_inode(struct filename *name, const struct dentry *dentry,
-    unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __audit_inode() {
     struct audit_context *context = audit_context();
     struct inode *inode = d_backing_inode(dentry);
-    struct audit_names *n;
-    let mut parent: bool = flags & AUDIT_INODE_PARENT;
-    struct audit_entry *e;
+    let mut n = core::ptr::null_mut();
+pub static mut parent: bool = flags & AUDIT_INODE_PARENT;
+    let mut e = core::ptr::null_mut();
     struct list_head *list = &audit_filter_list[AUDIT_FILTER_FS];
-    int i;
-    if (context.context == AUDIT_CTX_UNUSED)
+    let mut i = 0;
+    if (context.context == AUDIT_CTX_UNUSED) {
     return;
+    }
     rcu_read_lock();
     list_for_each_entry_rcu(e, list, list) {
     for (i = 0; i < e.rule.field_count; i++) {
@@ -2148,8 +2232,9 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
     }
     }
     rcu_read_unlock();
-    if (!name)
+    if (!name) {
     goto out_alloc;
+    }
 //
 // If we have a pointer to an audit_names entry already, then we can
 // just use it directly if the type is correct.
@@ -2161,8 +2246,9 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
     n.type == AUDIT_TYPE_UNKNOWN)
     goto out;
     } else {
-    if (n.type != AUDIT_TYPE_PARENT)
+    if (n.type != AUDIT_TYPE_PARENT) {
     goto out;
+    }
     }
     }
     list_for_each_entry_reverse(n, &context.names_list, list) {
@@ -2173,26 +2259,30 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
     continue;
     } else if (n.name) {
 // inode number has not been set, check the name
-    if (strcmp(n.name.name, name.name))
+    if (strcmp(n.name.name, name.name)) {
     continue;
-    } else
+    }
+    } else {
 // no inode and no name (?!) ... this is odd ...
     continue;
+    }
 // match the correct record type
     if (parent) {
     if (n.type == AUDIT_TYPE_PARENT ||
     n.type == AUDIT_TYPE_UNKNOWN)
     goto out;
     } else {
-    if (n.type != AUDIT_TYPE_PARENT)
+    if (n.type != AUDIT_TYPE_PARENT) {
     goto out;
+    }
     }
     }
     out_alloc:
 // unable to find an entry with both a matching name and type
     n = audit_alloc_name(context, AUDIT_TYPE_UNKNOWN);
-    if (!n)
+    if (!n) {
     return;
+    }
     if (name) {
     n.name = name;
     name.refcnt++;
@@ -2201,8 +2291,9 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
     if (parent) {
     n.name_len = n.name ? parent_len(n.name.name) : AUDIT_NAME_FULL;
     n.type = AUDIT_TYPE_PARENT;
-    if (flags & AUDIT_INODE_HIDDEN)
+    if (flags & AUDIT_INODE_HIDDEN) {
     n.hidden = true;
+    }
     } else {
     n.name_len = AUDIT_NAME_FULL;
     n.type = AUDIT_TYPE_NORMAL;
@@ -2212,8 +2303,6 @@ pub unsafe extern "C" fn __audit_getname(name: *mut filename) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_file(file: *const file) {
-    void __audit_file(const struct file *file)
-    {
     __audit_inode(core::ptr::null_mut(), file.f_path.dentry, 0);
     }
 //
@@ -2230,19 +2319,18 @@ pub unsafe extern "C" fn __audit_file(file: *const file) {
 // must be hooked prior, in order to capture the target inode during
 // unsuccessful attempts.
 //
-    void __audit_inode_child(struct inode *parent,
-    const struct dentry *dentry,
-    const unsigned char type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __audit_inode_child() {
     struct audit_context *context = audit_context();
     struct inode *inode = d_backing_inode(dentry);
     const struct qstr *dname = &dentry.d_name;
     struct audit_names *n, *found_parent = core::ptr::null_mut(), *found_child = core::ptr::null_mut();
-    struct audit_entry *e;
+    let mut e = core::ptr::null_mut();
     struct list_head *list = &audit_filter_list[AUDIT_FILTER_FS];
-    int i;
-    if (context.context == AUDIT_CTX_UNUSED)
+    let mut i = 0;
+    if (context.context == AUDIT_CTX_UNUSED) {
     return;
+    }
     rcu_read_lock();
     list_for_each_entry_rcu(e, list, list) {
     for (i = 0; i < e.rule.field_count; i++) {
@@ -2257,12 +2345,14 @@ pub unsafe extern "C" fn __audit_file(file: *const file) {
     }
     }
     rcu_read_unlock();
-    if (inode)
+    if (inode) {
     handle_one(inode);
+    }
     list_for_each_entry(n, &context.names_list, list) {
 // can only match entries that have a name
-    if (!n.name)
+    if (!n.name) {
     continue;
+    }
 // look for a parent entry first
     if (!found_parent &&
     (n.type == AUDIT_TYPE_PARENT || n.type == AUDIT_TYPE_UNKNOWN) &&
@@ -2270,8 +2360,9 @@ pub unsafe extern "C" fn __audit_file(file: *const file) {
     !audit_compare_dname_path(dname, n.name.name, n.name_len))) {
     n.type = AUDIT_TYPE_PARENT;
     found_parent = n;
-    if (found_child)
+    if (found_child) {
     break;
+    }
     continue;
     }
 // is there a matching child entry?
@@ -2282,24 +2373,28 @@ pub unsafe extern "C" fn __audit_file(file: *const file) {
     found_parent ?
     found_parent.name_len :
     AUDIT_NAME_FULL))) {
-    if (n.type == AUDIT_TYPE_UNKNOWN)
+    if (n.type == AUDIT_TYPE_UNKNOWN) {
     n.type = type;
+    }
     found_child = n;
-    if (found_parent)
+    if (found_parent) {
     break;
+    }
     }
     }
     if (!found_parent) {
 // create a new, "anonymous" parent record
     n = audit_alloc_name(context, AUDIT_TYPE_PARENT);
-    if (!n)
+    if (!n) {
     return;
+    }
     audit_copy_inode(n, core::ptr::null_mut(), parent, 0);
     }
     if (!found_child) {
     found_child = audit_alloc_name(context, type);
-    if (!found_child)
+    if (!found_child) {
     return;
+    }
 // Re-use the name belonging to the slot for a matching parent
 // directory. All names for this context are relinquished in
 // audit_free_names()
@@ -2309,12 +2404,14 @@ pub unsafe extern "C" fn __audit_file(file: *const file) {
     found_child.name.refcnt++;
     }
     }
-    if (inode)
+    if (inode) {
     audit_copy_inode(found_child, dentry, inode, 0);
-    else
+    }
+    else {
     found_child.ino = AUDIT_INO_UNSET;
     }
-    EXPORT_SYMBOL_GPL(__audit_inode_child);
+    }
+// EXPORT_SYMBOL_GPL;
 //
 // auditsc_get_stamp - get local copies of audit_context values
 // @ctx: audit_context for the task
@@ -2324,12 +2421,12 @@ pub unsafe extern "C" fn __audit_file(file: *const file) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn auditsc_get_stamp(ctx: *mut audit_context, stamp: *mut audit_stamp) -> c_int {
-    int auditsc_get_stamp(struct audit_context *ctx, struct audit_stamp *stamp)
-    {
-    if (ctx.context == AUDIT_CTX_UNUSED)
+    if (ctx.context == AUDIT_CTX_UNUSED) {
     return 0;
-    if (!ctx.stamp.serial)
+    }
+    if (!ctx.stamp.serial) {
     ctx.stamp.serial = audit_serial();
+    }
 // stamp = ctx->stamp;
     if (!ctx.prio) {
     ctx.prio = 1;
@@ -2345,13 +2442,13 @@ pub unsafe extern "C" fn auditsc_get_stamp(ctx: *mut audit_context, stamp: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_mq_open(oflag: c_int, mode: umode_t, attr: *mut mq_attr) {
-    void __audit_mq_open(int oflag, umode_t mode, struct mq_attr *attr)
-    {
     struct audit_context *context = audit_context();
-    if (attr)
+    if (attr) {
     memcpy(&context.mq_open.attr, attr, sizeof(struct mq_attr));
-    else
+    }
+    else {
     memset(&context.mq_open.attr, 0, sizeof(struct mq_attr));
+    }
     context.mq_open.oflag = oflag;
     context.mq_open.mode = mode;
     context.type = AUDIT_MQ_OPEN;
@@ -2363,15 +2460,16 @@ pub unsafe extern "C" fn __audit_mq_open(oflag: c_int, mode: umode_t, attr: *mut
 // @msg_prio: Message priority
 // @abs_timeout: Message timeout in absolute time
 //
-    void __audit_mq_sendrecv(mqd_t mqdes, size_t msg_len, unsigned int msg_prio,
-    const struct timespec64 *abs_timeout)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __audit_mq_sendrecv() {
     struct audit_context *context = audit_context();
     struct timespec64 *p = &context.mq_sendrecv.abs_timeout;
-    if (abs_timeout)
+    if (abs_timeout) {
     memcpy(p, abs_timeout, sizeof(*p));
-    else
+    }
+    else {
     memset(p, 0, sizeof(*p));
+    }
     context.mq_sendrecv.mqdes = mqdes;
     context.mq_sendrecv.msg_len = msg_len;
     context.mq_sendrecv.msg_prio = msg_prio;
@@ -2384,13 +2482,13 @@ pub unsafe extern "C" fn __audit_mq_open(oflag: c_int, mode: umode_t, attr: *mut
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_mq_notify(mqdes: mqd_t, notification: *const sigevent) {
-    void __audit_mq_notify(mqd_t mqdes, const struct sigevent *notification)
-    {
     struct audit_context *context = audit_context();
-    if (notification)
+    if (notification) {
     context.mq_notify.sigev_signo = notification.sigev_signo;
-    else
+    }
+    else {
     context.mq_notify.sigev_signo = 0;
+    }
     context.mq_notify.mqdes = mqdes;
     context.type = AUDIT_MQ_NOTIFY;
     }
@@ -2401,8 +2499,6 @@ pub unsafe extern "C" fn __audit_mq_notify(mqdes: mqd_t, notification: *const si
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_mq_getsetattr(mqdes: mqd_t, mqstat: *mut mq_attr) {
-    void __audit_mq_getsetattr(mqd_t mqdes, struct mq_attr *mqstat)
-    {
     struct audit_context *context = audit_context();
     context.mq_getsetattr.mqdes = mqdes;
     context.mq_getsetattr.mqstat = *mqstat;
@@ -2414,8 +2510,6 @@ pub unsafe extern "C" fn __audit_mq_getsetattr(mqdes: mqd_t, mqstat: *mut mq_att
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_ipc_obj(ipcp: *mut kern_ipc_perm) {
-    void __audit_ipc_obj(struct kern_ipc_perm *ipcp)
-    {
     struct audit_context *context = audit_context();
     context.ipc.uid = ipcp.uid;
     context.ipc.gid = ipcp.gid;
@@ -2435,8 +2529,6 @@ pub unsafe extern "C" fn __audit_ipc_obj(ipcp: *mut kern_ipc_perm) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_ipc_set_perm(qbytes: c_ulong, uid: uid_t, gid: gid_t, mode: umode_t) {
-    void __audit_ipc_set_perm(unsigned long qbytes, uid_t uid, gid_t gid, umode_t mode)
-    {
     struct audit_context *context = audit_context();
     context.ipc.qbytes = qbytes;
     context.ipc.perm_uid = uid;
@@ -2446,8 +2538,6 @@ pub unsafe extern "C" fn __audit_ipc_set_perm(qbytes: c_ulong, uid: uid_t, gid: 
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_bprm(bprm: *mut linux_binprm) {
-    void __audit_bprm(struct linux_binprm *bprm)
-    {
     struct audit_context *context = audit_context();
     context.type = AUDIT_EXECVE;
     context.execve.argc = bprm.argc;
@@ -2459,11 +2549,10 @@ pub unsafe extern "C" fn __audit_bprm(bprm: *mut linux_binprm) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_socketcall(nargs: c_int, args: *mut c_ulong) -> c_int {
-    int __audit_socketcall(int nargs, unsigned long *args)
-    {
     struct audit_context *context = audit_context();
-    if (nargs <= 0 || nargs > AUDITSC_ARGS || !args)
+    if (nargs <= 0 || nargs > AUDITSC_ARGS || !args) {
     return -EINVAL;
+    }
     context.type = AUDIT_SOCKETCALL;
     context.socketcall.nargs = nargs;
     memcpy(context.socketcall.args, args, nargs * sizeof(unsigned long));
@@ -2476,8 +2565,6 @@ pub unsafe extern "C" fn __audit_socketcall(nargs: c_int, args: *mut c_ulong) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_fd_pair(fd1: c_int, fd2: c_int) {
-    void __audit_fd_pair(int fd1, int fd2)
-    {
     struct audit_context *context = audit_context();
     context.fds[0] = fd1;
     context.fds[1] = fd2;
@@ -2491,13 +2578,12 @@ pub unsafe extern "C" fn __audit_fd_pair(fd1: c_int, fd2: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_sockaddr(len: c_int, a: *mut c_void) -> c_int {
-    int __audit_sockaddr(int len, void *a)
-    {
     struct audit_context *context = audit_context();
     if (!context.sockaddr) {
     void *p = kmalloc_obj(struct sockaddr_storage);
-    if (!p)
+    if (!p) {
     return -ENOMEM;
+    }
     context.sockaddr = p;
     }
     context.sockaddr_len = len;
@@ -2506,8 +2592,6 @@ pub unsafe extern "C" fn __audit_sockaddr(len: c_int, a: *mut c_void) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_ptrace(t: *mut task_struct) {
-    void __audit_ptrace(struct task_struct *t)
-    {
     struct audit_context *context = audit_context();
     context.target_pid = task_tgid_nr(t);
     context.target_auid = audit_get_loginuid(t);
@@ -2525,13 +2609,12 @@ pub unsafe extern "C" fn __audit_ptrace(t: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_signal_info_syscall(t: *mut task_struct) -> c_int {
-    int audit_signal_info_syscall(struct task_struct *t)
-    {
-    struct audit_aux_data_pids *axp;
+    let mut axp = core::ptr::null_mut();
     struct audit_context *ctx = audit_context();
-    let mut t_uid: kuid_t = task_uid(t);
-    if (!audit_signals || audit_dummy_context())
+pub static mut t_uid: kuid_t = task_uid(t);
+    if (!audit_signals || audit_dummy_context()) {
     return 0;
+    }
 // optimize the common case by putting first signal recipient directly
 // in audit_context
     if (!ctx.target_pid) {
@@ -2543,17 +2626,19 @@ pub unsafe extern "C" fn audit_signal_info_syscall(t: *mut task_struct) -> c_int
     security_task_getlsmprop_obj(t, &ctx.target_ref);
     return 0;
     }
-    axp = (void *)ctx.aux_pids;
+    axp = ctx.aux_pids;
     if (!axp || axp.pid_count == AUDIT_AUX_PIDS) {
     axp = kzalloc_obj(*axp, GFP_ATOMIC);
-    if (!axp)
+    if (!axp) {
     return -ENOMEM;
+    }
     axp.d.type = AUDIT_OBJ_PID;
     axp.d.next = ctx.aux_pids;
-    ctx.aux_pids = (void *)axp;
+    ctx.aux_pids = axp;
     }
-    if (WARN_ON_ONCE(axp.pid_count >= AUDIT_AUX_PIDS))
+    if (WARN_ON_ONCE(axp.pid_count >= AUDIT_AUX_PIDS)) {
     return -EINVAL;
+    }
     axp.target_pid[axp.pid_count] = task_tgid_nr(t);
     axp.target_auid[axp.pid_count] = audit_get_loginuid(t);
     axp.target_uid[axp.pid_count] = t_uid;
@@ -2574,18 +2659,18 @@ pub unsafe extern "C" fn audit_signal_info_syscall(t: *mut task_struct) -> c_int
 //
 // -Eric
 //
-    int __audit_log_bprm_fcaps(struct linux_binprm *bprm,
-    const struct cred *new, const struct cred *old)
-    {
-    struct audit_aux_data_bprm_fcaps *ax;
+#[no_mangle]
+pub unsafe extern "C" fn __audit_log_bprm_fcaps() {
+    let mut ax = core::ptr::null_mut();
     struct audit_context *context = audit_context();
-    struct cpu_vfs_cap_data vcaps;
+    let mut vcaps;
     ax = kmalloc_obj(*ax);
-    if (!ax)
+    if (!ax) {
     return -ENOMEM;
+    }
     ax.d.type = AUDIT_BPRM_FCAPS;
     ax.d.next = context.aux;
-    context.aux = (void *)ax;
+    context.aux = ax;
     get_vfs_caps_from_disk(&nop_mnt_idmap,
     bprm.file.f_path.dentry, &vcaps);
     ax.fcap.permitted = vcaps.permitted;
@@ -2613,8 +2698,6 @@ pub unsafe extern "C" fn audit_signal_info_syscall(t: *mut task_struct) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn __audit_log_capset(new: *const cred, old: *const cred) {
-    void __audit_log_capset(const struct cred *new, const struct cred *old)
-    {
     struct audit_context *context = audit_context();
     context.capset.pid = task_tgid_nr(current);
     context.capset.cap.effective   = new.cap_effective;
@@ -2625,8 +2708,6 @@ pub unsafe extern "C" fn __audit_log_capset(new: *const cred, old: *const cred) 
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_mmap_fd(fd: c_int, flags: c_int) {
-    void __audit_mmap_fd(int fd, int flags)
-    {
     struct audit_context *context = audit_context();
     context.mmap.fd = fd;
     context.mmap.flags = flags;
@@ -2634,8 +2715,6 @@ pub unsafe extern "C" fn __audit_mmap_fd(fd: c_int, flags: c_int) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_openat2_how(how: *mut open_how) {
-    void __audit_openat2_how(struct open_how *how)
-    {
     struct audit_context *context = audit_context();
     context.openat2.flags = how.flags;
     context.openat2.mode = how.mode;
@@ -2644,26 +2723,23 @@ pub unsafe extern "C" fn __audit_openat2_how(how: *mut open_how) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_log_kern_module(name: *const c_char) {
-    void __audit_log_kern_module(const char *name)
-    {
     struct audit_context *context = audit_context();
     context.module.name = kstrdup(name, GFP_KERNEL);
-    if (!context.module.name)
+    if (!context.module.name) {
     audit_log_lost("out of memory in __audit_log_kern_module");
+    }
     context.type = AUDIT_KERN_MODULE;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_fanotify(response: u32, friar: *mut fanotify_response_info_audit_rule) {
-    void __audit_fanotify(u32 response, struct fanotify_response_info_audit_rule *friar)
-    {
 // {subj,obj}_trust values are {0,1,2}: no,yes,unknown
-    switch (friar.hdr.type) {
-    case FAN_RESPONSE_INFO_NONE:
+    match (friar.hdr.type) {
+    FAN_RESPONSE_INFO_NONE => {
     audit_log(audit_context(), GFP_KERNEL, AUDIT_FANOTIFY,
     "resp=%u fan_type=%u fan_info=0 subj_trust=2 obj_trust=2",
     response, FAN_RESPONSE_INFO_NONE);
     break;
-    case FAN_RESPONSE_INFO_AUDIT_RULE:
+    FAN_RESPONSE_INFO_AUDIT_RULE => {
     audit_log(audit_context(), GFP_KERNEL, AUDIT_FANOTIFY,
     "resp=%u fan_type=%u fan_info=%X subj_trust=%u obj_trust=%u",
     response, friar.hdr.type, friar.rule_number,
@@ -2672,20 +2748,17 @@ pub unsafe extern "C" fn __audit_fanotify(response: u32, friar: *mut fanotify_re
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_tk_injoffset(offset: timespec64) {
-    void __audit_tk_injoffset(struct timespec64 offset)
-    {
     struct audit_context *context = audit_context();
 // only set type if not already set by NTP
-    if (!context.type)
+    if (!context.type) {
     context.type = AUDIT_TIME_INJOFFSET;
+    }
     memcpy(&context.time.tk_injoffset, &offset, sizeof(offset));
     }
 #[no_mangle]
 pub unsafe extern "C" fn __audit_ntp_log(ad: *const audit_ntp_data) {
-    void __audit_ntp_log(const struct audit_ntp_data *ad)
-    {
     struct audit_context *context = audit_context();
-    int type;
+    let mut type = 0;
     for (type = 0; type < AUDIT_NTP_NVALS; type++)
     if (ad.vals[type].newval != ad.vals[type].oldval) {
 // unconditionally set type, overwriting TK
@@ -2694,14 +2767,14 @@ pub unsafe extern "C" fn __audit_ntp_log(ad: *const audit_ntp_data) {
     break;
     }
     }
-    void __audit_log_nfcfg(const char *name, u8 af, unsigned int nentries,
-    enum audit_nfcfgop op, gfp_t gfp)
-    {
-    struct audit_buffer *ab;
+#[no_mangle]
+pub unsafe extern "C" fn __audit_log_nfcfg() {
+    let mut ab = core::ptr::null_mut();
     char comm[sizeof(current.comm)];
     ab = audit_log_start(audit_context(), gfp, AUDIT_NETFILTER_CFG);
-    if (!ab)
+    if (!ab) {
     return;
+    }
     audit_log_format(ab, "table=%s family=%u entries=%u op=%s",
     name, af, nentries, audit_nfcfgs[op].s);
     audit_log_format(ab, " pid=%u", task_tgid_nr(current));
@@ -2710,14 +2783,12 @@ pub unsafe extern "C" fn __audit_ntp_log(ad: *const audit_ntp_data) {
     audit_log_untrustedstring(ab, get_task_comm(comm, current));
     audit_log_end(ab);
     }
-    EXPORT_SYMBOL_GPL(__audit_log_nfcfg);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 unsafe extern "C" fn audit_log_task(ab: *mut audit_buffer) {
-    static void audit_log_task(struct audit_buffer *ab)
-    {
     kuid_t auid, uid;
-    kgid_t gid;
-    unsigned int sessionid;
+    let mut gid;
+    let mut sessionid = 0;
     char comm[sizeof(current.comm)];
     auid = audit_get_loginuid(current);
     sessionid = audit_get_sessionid(current);
@@ -2741,16 +2812,16 @@ unsafe extern "C" fn audit_log_task(ab: *mut audit_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_core_dumps(signr: c_long) {
-    void audit_core_dumps(long signr)
-    {
-    struct audit_buffer *ab;
-    if (!audit_enabled)
+    let mut ab = core::ptr::null_mut();
+    if (!audit_enabled) {
     return;
+    }
     if (signr == SIGQUIT)	/* don't care for those */
     return;
     ab = audit_log_start(audit_context(), GFP_KERNEL, AUDIT_ANOM_ABEND);
-    if (unlikely(!ab))
+    if (unlikely(!ab)) {
     return;
+    }
     audit_log_task(ab);
     audit_log_format(ab, " sig=%ld res=1", signr);
     audit_log_end(ab);
@@ -2769,37 +2840,145 @@ pub unsafe extern "C" fn audit_core_dumps(signr: c_long) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_seccomp(syscall: c_ulong, signr: c_long, code: c_int) {
-    void audit_seccomp(unsigned long syscall, long signr, int code)
-    {
-    struct audit_buffer *ab;
+    let mut ab = core::ptr::null_mut();
     ab = audit_log_start(audit_context(), GFP_KERNEL, AUDIT_SECCOMP);
-    if (unlikely(!ab))
+    if (unlikely(!ab)) {
     return;
+    }
     audit_log_task(ab);
     audit_log_format(ab, " sig=%ld arch=%x syscall=%ld compat=%d ip=0x%lx code=0x%x",
     signr, syscall_get_arch(current), syscall,
     in_compat_syscall(), KSTK_EIP(current), code);
     audit_log_end(ab);
     }
-    void audit_seccomp_actions_logged(const char *names, const char *old_names,
-    int res)
-    {
-    struct audit_buffer *ab;
-    if (!audit_enabled)
+#[no_mangle]
+pub unsafe extern "C" fn audit_seccomp_actions_logged() {
+    let mut ab = core::ptr::null_mut();
+    if (!audit_enabled) {
     return;
+    }
     ab = audit_log_start(audit_context(), GFP_KERNEL,
     AUDIT_CONFIG_CHANGE);
-    if (unlikely(!ab))
+    if (unlikely(!ab)) {
     return;
+    }
     audit_log_format(ab,
     "op=seccomp-logging actions=%s old-actions=%s res=%d",
     names, old_names, res);
     audit_log_end(ab);
     }
-    struct list_head *audit_killed_trees(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_killed_trees() {
     struct audit_context *ctx = audit_context();
-    if (likely(!ctx || ctx.context == AUDIT_CTX_UNUSED))
+    if (likely(!ctx || ctx.context == AUDIT_CTX_UNUSED)) {
     return core::ptr::null_mut();
+    }
     return &ctx.killed_trees;
     }
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

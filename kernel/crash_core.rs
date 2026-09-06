@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -51,19 +148,19 @@ pub const CMA_DMA_TIMEOUT_SEC: c_int = 10;
 
 #[no_mangle]
 pub unsafe extern "C" fn kimage_crash_copy_vmcoreinfo(image: *mut kimage) -> c_int {
-    int kimage_crash_copy_vmcoreinfo(struct kimage *image)
-    {
-    struct page *vmcoreinfo_base;
+    let mut vmcoreinfo_base = core::ptr::null_mut();
     struct page *vmcoreinfo_pages[DIV_ROUND_UP(VMCOREINFO_BYTES, PAGE_SIZE)];
     unsigned int order, nr_pages;
-    int i;
-    void *safecopy;
+    let mut i = 0;
+    let mut safecopy = core::ptr::null_mut();
     nr_pages = DIV_ROUND_UP(VMCOREINFO_BYTES, PAGE_SIZE);
     order = get_order(VMCOREINFO_BYTES);
-    if (!IS_ENABLED(CONFIG_CRASH_DUMP))
+    if (!IS_ENABLED(CONFIG_CRASH_DUMP)) {
     return 0;
-    if (image.type != KEXEC_TYPE_CRASH)
+    }
+    if (image.type != KEXEC_TYPE_CRASH) {
     return 0;
+    }
 //
 // For kdump, allocate one vmcoreinfo safe copy from the
 // crash memory. as we have arch_kexec_protect_crashkres()
@@ -91,36 +188,33 @@ pub unsafe extern "C" fn kimage_crash_copy_vmcoreinfo(image: *mut kimage) -> c_i
     }
 #[no_mangle]
 pub unsafe extern "C" fn kexec_should_crash(p: *mut task_struct) -> c_int {
-    int kexec_should_crash(struct task_struct *p)
-    {
 //
 // If crash_kexec_post_notifiers is enabled, don't run
 // crash_kexec() here yet, which must be run after panic
 // notifiers in panic().
 //
-    if (crash_kexec_post_notifiers)
+    if (crash_kexec_post_notifiers) {
     return 0;
+    }
 //
 // There are 4 panic() calls in make_task_dead() path, each of which
 // corresponds to each of these 4 conditions.
 //
-    if (in_interrupt() || !p.pid || is_global_init(p) || panic_on_oops)
+    if (in_interrupt() || !p.pid || is_global_init(p) || panic_on_oops) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kexec_crash_loaded() -> c_int {
-    int kexec_crash_loaded(void)
-    {
     return !!kexec_crash_image;
     }
-    EXPORT_SYMBOL_GPL(kexec_crash_loaded);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 unsafe extern "C" fn crash_cma_clear_pending_dma() {
-    static void crash_cma_clear_pending_dma(void)
-    {
-    if (!crashk_cma_cnt)
+    if (!crashk_cma_cnt) {
     return;
+    }
     mdelay(CMA_DMA_TIMEOUT_SEC * 1000);
     }
 //
@@ -130,8 +224,6 @@ unsafe extern "C" fn crash_cma_clear_pending_dma() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __crash_kexec(regs: *mut pt_regs) -> void __noclone {
-    void __noclone __crash_kexec(struct pt_regs *regs)
-    {
 // Take the kexec_lock here to prevent sys_kexec_load
 // running on one cpu from replacing the crash kernel
 // we are using after a panic on a different cpu.
@@ -142,7 +234,7 @@ pub unsafe extern "C" fn __crash_kexec(regs: *mut pt_regs) -> void __noclone {
 //
     if (kexec_trylock()) {
     if (kexec_crash_image) {
-    struct pt_regs fixed_regs;
+    let mut fixed_regs;
     crash_setup_regs(&fixed_regs, regs);
     crash_save_vmcoreinfo();
     machine_crash_shutdown(&fixed_regs);
@@ -152,11 +244,9 @@ pub unsafe extern "C" fn __crash_kexec(regs: *mut pt_regs) -> void __noclone {
     kexec_unlock();
     }
     }
-    STACK_FRAME_NON_STANDARD(__crash_kexec);
+// STACK_FRAME_NON_STANDARD;
 #[no_mangle]
 pub unsafe extern "C" fn crash_kexec(regs: *mut pt_regs) -> __bpf_kfunc void {
-    __bpf_kfunc void crash_kexec(struct pt_regs *regs)
-    {
     if (panic_try_start()) {
 // This is the 1st CPU which comes here, so go ahead.
     __crash_kexec(regs);
@@ -169,16 +259,13 @@ pub unsafe extern "C" fn crash_kexec(regs: *mut pt_regs) -> __bpf_kfunc void {
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_resource_size(res: *const resource) -> resource_size_t {
-    static inline resource_size_t crash_resource_size(const struct resource *res)
-    {
     return !res.end ? 0 : resource_size(res);
     }
-    int crash_prepare_elf64_headers(struct crash_mem *mem, int need_kernel_map,
-    void **addr, unsigned long *sz)
-    {
-    Elf64_Ehdr *ehdr;
-    Elf64_Phdr *phdr;
-    let mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
+#[no_mangle]
+pub unsafe extern "C" fn crash_prepare_elf64_headers() {
+    let mut ehdr = core::ptr::null_mut();
+    let mut phdr = core::ptr::null_mut();
+pub static mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
     unsigned char *buf;
     unsigned int cpu, i;
     unsigned long long notes_addr;
@@ -197,10 +284,11 @@ pub unsafe extern "C" fn crash_resource_size(res: *const resource) -> resource_s
     elf_sz = sizeof(Elf64_Ehdr) + nr_phdr * sizeof(Elf64_Phdr);
     elf_sz = ALIGN(elf_sz, ELF_CORE_HEADER_ALIGN);
     buf = vzalloc(elf_sz);
-    if (!buf)
+    if (!buf) {
     return -ENOMEM;
-    ehdr = (Elf64_Ehdr *)buf;
-    phdr = (Elf64_Phdr *)(ehdr + 1);
+    }
+    ehdr = buf;
+    phdr = (ehdr + 1);
     memcpy(ehdr.e_ident, ELFMAG, SELFMAG);
     ehdr.e_ident[EI_CLASS] = ELFCLASS64;
     ehdr.e_ident[EI_DATA] = ELFDATA2LSB;
@@ -261,12 +349,13 @@ pub unsafe extern "C" fn crash_resource_size(res: *const resource) -> resource_s
 // sz = elf_sz;
     return 0;
     }
-    static struct crash_mem *alloc_cmem(unsigned int nr_ranges)
-    {
-    struct crash_mem *cmem;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_cmem() {
+    let mut cmem = core::ptr::null_mut();
     cmem = kvzalloc_flex(*cmem, ranges, nr_ranges);
-    if (!cmem)
+    if (!cmem) {
     return core::ptr::null_mut();
+    }
     cmem.max_nr_ranges = nr_ranges;
     return cmem;
     }
@@ -281,50 +370,56 @@ pub unsafe extern "C" fn crash_resource_size(res: *const resource) -> resource_s
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_int {
-    int crash_exclude_core_ranges(struct crash_mem **cmem)
-    {
     int ret, i;
 // Exclude crashkernel region
     ret = arch_crash_exclude_mem_range(cmem, crashk_res.start, crashk_res.end);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (crashk_low_res.end) {
     ret = arch_crash_exclude_mem_range(cmem, crashk_low_res.start, crashk_low_res.end);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     for (i = 0; i < crashk_cma_cnt; ++i) {
     ret = arch_crash_exclude_mem_range(cmem, crashk_cma_ranges[i].start,
     crashk_cma_ranges[i].end);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return 0;
     }
-    int crash_prepare_headers(int need_kernel_map, void **addr, unsigned long *sz,
-    unsigned long *nr_mem_ranges)
-    {
-    unsigned int max_nr_ranges;
-    struct crash_mem *cmem;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn crash_prepare_headers() {
+    let mut max_nr_ranges = 0;
+    let mut cmem = core::ptr::null_mut();
+    let mut ret = 0;
     max_nr_ranges = arch_get_system_nr_ranges();
-    if (!max_nr_ranges)
+    if (!max_nr_ranges) {
     return -ENOMEM;
+    }
     cmem = alloc_cmem(max_nr_ranges);
-    if (!cmem)
+    if (!cmem) {
     return -ENOMEM;
+    }
     ret = arch_crash_populate_cmem(cmem);
-    if (ret)
+    if (ret) {
     goto out;
+    }
     ret = crash_exclude_core_ranges(&cmem);
-    if (ret)
+    if (ret) {
     goto out;
+    }
     ret = arch_crash_exclude_ranges(cmem);
-    if (ret)
+    if (ret) {
     goto out;
+    }
 // Return the computed number of memory ranges, for hotplug usage
-    if (nr_mem_ranges)
+    if (nr_mem_ranges) {
 // nr_mem_ranges = cmem->nr_ranges;
+    }
     ret = crash_prepare_elf64_headers(cmem, need_kernel_map, addr, sz);
     out:
     kvfree(cmem);
@@ -344,18 +439,18 @@ pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_in
 // returns 0 if a memory range is excluded successfully
 // return -ENOMEM if mem->ranges doesn't have space to hold split ranges
 //
-    int crash_exclude_mem_range(struct crash_mem *mem,
-    unsigned long long mstart, unsigned long long mend)
-    {
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn crash_exclude_mem_range() {
+    let mut i = 0;
     unsigned long long start, end, p_start, p_end;
     for (i = 0; i < mem.nr_ranges; i++) {
     start = mem.ranges[i].start;
     end = mem.ranges[i].end;
     p_start = mstart;
     p_end = mend;
-    if (p_start > end)
+    if (p_start > end) {
     continue;
+    }
 //
 // Because the memory ranges in mem->ranges are stored in
 // ascending order, when we detect `p_end < start`, we can
@@ -363,13 +458,16 @@ pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_in
 // ranges will definitely be outside the range we are looking
 // for.
 //
-    if (p_end < start)
+    if (p_end < start) {
     break;
+    }
 // Truncate any area outside of range
-    if (p_start < start)
+    if (p_start < start) {
     p_start = start;
-    if (p_end > end)
+    }
+    if (p_end > end) {
     p_end = end;
+    }
 // Found completely overlapping range
     if (p_start == start && p_end == end) {
     memmove(&mem.ranges[i], &mem.ranges[i + 1],
@@ -378,8 +476,9 @@ pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_in
     mem.nr_ranges--;
     } else if (p_start > start && p_end < end) {
 // Split original range
-    if (mem.nr_ranges >= mem.max_nr_ranges)
+    if (mem.nr_ranges >= mem.max_nr_ranges) {
     return -ENOMEM;
+    }
     memmove(&mem.ranges[i + 2], &mem.ranges[i + 1],
     (mem.nr_ranges - (i + 1)) * sizeof(mem.ranges[i]));
     mem.ranges[i].end = p_start - 1;
@@ -389,31 +488,31 @@ pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_in
     mem.nr_ranges++;
     } else if (p_start != start)
     mem.ranges[i].end = p_start - 1;
-    else
+    else {
     mem.ranges[i].start = p_end + 1;
+    }
     }
     return 0;
     }
-    EXPORT_SYMBOL_GPL(crash_exclude_mem_range);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn crash_get_memory_size() -> isize {
-    ssize_t crash_get_memory_size(void)
-    {
-    let mut size: isize = 0;
-    if (!kexec_trylock())
+pub static mut size: isize = 0;
+    if (!kexec_trylock()) {
     return -EBUSY;
+    }
     size += crash_resource_size(&crashk_res);
     size += crash_resource_size(&crashk_low_res);
     kexec_unlock();
     return size;
     }
-    static int __crash_shrink_memory(struct resource *old_res,
-    unsigned long new_size)
-    {
-    struct resource *ram_res;
+#[no_mangle]
+pub unsafe extern "C" fn __crash_shrink_memory() {
+    let mut ram_res = core::ptr::null_mut();
     ram_res = kzalloc_obj(*ram_res);
-    if (!ram_res)
+    if (!ram_res) {
     return -ENOMEM;
+    }
     ram_res.start = old_res.start + new_size;
     ram_res.end   = old_res.end;
     ram_res.flags = IORESOURCE_BUSY | IORESOURCE_SYSTEM_RAM;
@@ -431,12 +530,11 @@ pub unsafe extern "C" fn crash_get_memory_size() -> isize {
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_shrink_memory(new_size: c_ulong) -> c_int {
-    int crash_shrink_memory(unsigned long new_size)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     unsigned long old_size, low_size;
-    if (!kexec_trylock())
+    if (!kexec_trylock()) {
     return -EBUSY;
+    }
     if (kexec_crash_image) {
     ret = -ENOENT;
     goto unlock;
@@ -458,8 +556,9 @@ pub unsafe extern "C" fn crash_shrink_memory(new_size: c_ulong) -> c_int {
 //
     if (low_size > new_size) {
     ret = __crash_shrink_memory(&crashk_res, 0);
-    if (ret)
+    if (ret) {
     goto unlock;
+    }
     ret = __crash_shrink_memory(&crashk_low_res, new_size);
     } else {
     ret = __crash_shrink_memory(&crashk_res, new_size - low_size);
@@ -479,12 +578,11 @@ pub unsafe extern "C" fn crash_shrink_memory(new_size: c_ulong) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_save_cpu(regs: *mut pt_regs, cpu: c_int) {
-    void crash_save_cpu(struct pt_regs *regs, int cpu)
-    {
-    struct elf_prstatus prstatus;
-    u32 *buf;
-    if ((cpu < 0) || (cpu >= nr_cpu_ids))
+    let mut prstatus;
+    let mut buf = core::ptr::null_mut();
+    if ((cpu < 0) || (cpu >= nr_cpu_ids)) {
     return;
+    }
 // Using ELF notes here is opportunistic.
 // I need a well defined structure format
 // for the data I pass, and I need tags
@@ -492,9 +590,10 @@ pub unsafe extern "C" fn crash_save_cpu(regs: *mut pt_regs, cpu: c_int) {
 // squirrelled away.  ELF notes happen to provide
 // all of that, so there is no need to invent something new.
 //
-    buf = (u32 *)per_cpu_ptr(crash_notes, cpu);
-    if (!buf)
+    buf = per_cpu_ptr(crash_notes, cpu);
+    if (!buf) {
     return;
+    }
     memset(&prstatus, 0, sizeof(prstatus));
     prstatus.common.pr_pid = current.pid;
     elf_core_copy_regs(&prstatus.pr_reg, regs);
@@ -503,9 +602,7 @@ pub unsafe extern "C" fn crash_save_cpu(regs: *mut pt_regs, cpu: c_int) {
     final_note(buf);
     }
 #[no_mangle]
-unsafe extern "C" fn crash_notes_memory_init() -> int __init {
-    static int __init crash_notes_memory_init(void)
-    {
+unsafe extern "C" fn crash_notes_memory_init() -> c_int {
 // Allocate memory for saving cpu registers.
     size_t size, align;
 //
@@ -524,7 +621,7 @@ unsafe extern "C" fn crash_notes_memory_init() -> int __init {
 // Break compile if size is bigger than PAGE_SIZE since crash_notes
 // definitely will be in 2 pages with that.
 //
-    BUILD_BUG_ON(size > PAGE_SIZE);
+// BUILD_BUG_ON;
     crash_notes = __alloc_percpu(size, align);
     if (!crash_notes) {
     pr_warn("Memory allocation for saving cpu register states failed\n");
@@ -532,7 +629,7 @@ unsafe extern "C" fn crash_notes_memory_init() -> int __init {
     }
     return 0;
     }
-    subsys_initcall(crash_notes_memory_init);
+// subsys_initcall;
 
 //
 // Different than kexec/kdump loading/unloading/jumping/shrinking which
@@ -541,7 +638,7 @@ unsafe extern "C" fn crash_notes_memory_init() -> int __init {
 // regions are online. So mutex lock  __crash_hotplug_lock is used to
 // serialize the crash hotplug handling specifically.
 //
-    static DEFINE_MUTEX(__crash_hotplug_lock);
+// static DEFINE_MUTEX(__crash_hotplug_lock);
 
 //
 // This routine utilized when the crash_hotplug sysfs node is read.
@@ -550,14 +647,13 @@ unsafe extern "C" fn crash_notes_memory_init() -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn crash_check_hotplug_support() -> c_int {
-    int crash_check_hotplug_support(void)
-    {
-    let mut rc: c_int = 0;
+pub static mut rc: c_int = 0;
     crash_hotplug_lock();
 // Obtain lock while reading crash information
     if (!kexec_trylock()) {
-    if (!kexec_in_progress)
+    if (!kexec_in_progress) {
     pr_info("kexec_trylock() failed, kdump image may be inaccurate\n");
+    }
     crash_hotplug_unlock();
     return 0;
     }
@@ -592,45 +688,48 @@ pub unsafe extern "C" fn crash_check_hotplug_support() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn crash_handle_hotplug_event(hp_action: c_uint, cpu: c_uint, arg: *mut c_void) {
-    static void crash_handle_hotplug_event(unsigned int hp_action, unsigned int cpu, void *arg)
-    {
-    struct kimage *image;
+    let mut image = core::ptr::null_mut();
     crash_hotplug_lock();
 // Obtain lock while changing crash information
     if (!kexec_trylock()) {
-    if (!kexec_in_progress)
+    if (!kexec_in_progress) {
     pr_info("kexec_trylock() failed, kdump image may be inaccurate\n");
+    }
     crash_hotplug_unlock();
     return;
     }
 // Check kdump is not loaded
-    if (!kexec_crash_image)
+    if (!kexec_crash_image) {
     goto out;
+    }
     image = kexec_crash_image;
 // Check that kexec segments update is permitted
-    if (!image.hotplug_support)
+    if (!image.hotplug_support) {
     goto out;
+    }
     if (hp_action == KEXEC_CRASH_HP_ADD_CPU ||
     hp_action == KEXEC_CRASH_HP_REMOVE_CPU)
     pr_debug("hp_action %u, cpu %u\n", hp_action, cpu);
-    else
+    else {
     pr_debug("hp_action %u\n", hp_action);
+    }
 //
 // The elfcorehdr_index is set to -1 when the struct kimage
 // is allocated. Find the segment containing the elfcorehdr,
 // if not already found.
 //
     if (image.elfcorehdr_index < 0) {
-    unsigned long mem;
+    let mut mem = 0;
     unsigned char *ptr;
-    unsigned int n;
+    let mut n = 0;
     for (n = 0; n < image.nr_segments; n++) {
     mem = image.segment[n].mem;
     ptr = kmap_local_page(pfn_to_page(mem >> PAGE_SHIFT));
     if (ptr) {
 // The segment containing elfcorehdr
-    if (memcmp(ptr, ELFMAG, SELFMAG) == 0)
+    if (memcmp(ptr, ELFMAG, SELFMAG) == 0) {
     image.elfcorehdr_index = (int)n;
+    }
     kunmap_local(ptr);
     }
     }
@@ -658,49 +757,41 @@ unsafe extern "C" fn crash_handle_hotplug_event(hp_action: c_uint, cpu: c_uint, 
     }
 #[no_mangle]
 unsafe extern "C" fn crash_memhp_notifier(nb: *mut notifier_block, val: c_ulong, arg: *mut c_void) -> c_int {
-    static int crash_memhp_notifier(struct notifier_block *nb, unsigned long val, void *arg)
-    {
-    switch (val) {
-    case MEM_ONLINE:
+    match (val) {
+    MEM_ONLINE => {
     crash_handle_hotplug_event(KEXEC_CRASH_HP_ADD_MEMORY,
     KEXEC_CRASH_HP_INVALID_CPU, arg);
     break;
-    case MEM_OFFLINE:
+    MEM_OFFLINE => {
     crash_handle_hotplug_event(KEXEC_CRASH_HP_REMOVE_MEMORY,
     KEXEC_CRASH_HP_INVALID_CPU, arg);
     break;
     }
     return NOTIFY_OK;
     }
-    static struct notifier_block crash_memhp_nb = {
-    .notifier_call = crash_memhp_notifier,
-    .priority = 0
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn crash_cpuhp_online(cpu: c_uint) -> c_int {
-    static int crash_cpuhp_online(unsigned int cpu)
-    {
     crash_handle_hotplug_event(KEXEC_CRASH_HP_ADD_CPU, cpu, core::ptr::null_mut());
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn crash_cpuhp_offline(cpu: c_uint) -> c_int {
-    static int crash_cpuhp_offline(unsigned int cpu)
-    {
     crash_handle_hotplug_event(KEXEC_CRASH_HP_REMOVE_CPU, cpu, core::ptr::null_mut());
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn crash_hotplug_init() -> int __init {
-    static int __init crash_hotplug_init(void)
-    {
-    let mut result: c_int = 0;
-    if (IS_ENABLED(CONFIG_MEMORY_HOTPLUG))
+unsafe extern "C" fn crash_hotplug_init() -> c_int {
+pub static mut result: c_int = 0;
+    if (IS_ENABLED(CONFIG_MEMORY_HOTPLUG)) {
     register_memory_notifier(&crash_memhp_nb);
+    }
     if (IS_ENABLED(CONFIG_HOTPLUG_CPU)) {
     result = cpuhp_setup_state_nocalls(CPUHP_BP_PREPARE_DYN,
     "crash/cpuhp", crash_cpuhp_online, crash_cpuhp_offline);
     }
     return result;
     }
-    subsys_initcall(crash_hotplug_init);
+// subsys_initcall;
+}
+}

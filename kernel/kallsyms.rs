@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -56,12 +153,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // if uncompressed string is too long (>= maxlen), it will be truncated,
 // given the offset to where the symbol is in the compressed stream.
 //
-    static unsigned int kallsyms_expand_symbol(unsigned int off,
-    char *result, size_t maxlen)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kallsyms_expand_symbol() {
     int len, skipped_first = 0;
-    const char *tptr;
-    const u8 *data;
+    let mut tptr = core::ptr::null_mut();
+    let mut data = core::ptr::null_mut();
 // Get the compressed symbol length from the first symbol byte.
     data = &kallsyms_names[off];
     len = *data;
@@ -88,19 +184,22 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     len--;
     while (*tptr) {
     if (skipped_first) {
-    if (maxlen <= 1)
+    if (maxlen <= 1) {
     goto tail;
+    }
 // result = *tptr;
     result++;
     maxlen--;
-    } else
+    } else {
     skipped_first = 1;
+    }
     tptr++;
     }
     }
     tail:
-    if (maxlen)
+    if (maxlen) {
 // result = '\0';
+    }
 // Return to offset to the next symbol.
     return off;
     }
@@ -110,15 +209,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn kallsyms_get_symbol_type(off: c_uint) -> c_char {
-    static char kallsyms_get_symbol_type(unsigned int off)
-    {
 //
 // Get just the first code, look it up in the token table,
 // and return the first char from this token. If MSB of length
 // is 1, it is a "big" symbol, so needs an additional byte.
 //
-    if (kallsyms_names[off] & 0x80)
+    if (kallsyms_names[off] & 0x80) {
     off++;
+    }
     return kallsyms_token_table[kallsyms_token_index[kallsyms_names[off + 1]]];
     }
 //
@@ -127,9 +225,7 @@ unsafe extern "C" fn kallsyms_get_symbol_type(off: c_uint) -> c_char {
 //
 #[no_mangle]
 unsafe extern "C" fn get_symbol_offset(pos: c_ulong) -> c_uint {
-    static unsigned int get_symbol_offset(unsigned long pos)
-    {
-    const u8 *name;
+    let mut name = core::ptr::null_mut();
     int i, len;
 //
 // Use the closest marker we have. We have markers every 256 positions,
@@ -148,35 +244,31 @@ unsafe extern "C" fn get_symbol_offset(pos: c_ulong) -> c_uint {
 // If MSB is 1, it is a "big" symbol, so we need to look into
 // the next byte (and skip it, too).
 //
-    if ((len & 0x80) != 0)
+    if ((len & 0x80) != 0) {
     len = ((len & 0x7F) | (name[1] << 7)) + 1;
+    }
     name = name + len + 1;
     }
     return name - kallsyms_names;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_sym_address(idx: c_int) -> c_ulong {
-    unsigned long kallsyms_sym_address(int idx)
-    {
 // non-relocatable 32-bit kernels just embed the value directly
-    if (!IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_RELOCATABLE))
+    if (!IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_RELOCATABLE)) {
     return (u32)kallsyms_offsets[idx];
+    }
     return (unsigned long)offset_to_ptr(kallsyms_offsets + idx);
     }
 #[no_mangle]
 unsafe extern "C" fn get_symbol_seq(index: c_int) -> c_uint {
-    static unsigned int get_symbol_seq(int index)
-    {
     unsigned int i, seq = 0;
     for (i = 0; i < 3; i++)
     seq = (seq << 8) | kallsyms_seqs_of_names[3 * index + i];
     return seq;
     }
-    static int kallsyms_lookup_names(const char *name,
-    unsigned int *start,
-    unsigned int *end)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn kallsyms_lookup_names() {
+    let mut ret = 0;
     int low, mid, high;
     unsigned int seq, off;
     char namebuf[KSYM_NAME_LEN];
@@ -188,24 +280,28 @@ unsafe extern "C" fn get_symbol_seq(index: c_int) -> c_uint {
     off = get_symbol_offset(seq);
     kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
     ret = strcmp(name, namebuf);
-    if (ret > 0)
+    if (ret > 0) {
     low = mid + 1;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(0: ret <) -> else {
     else if (ret < 0)
     high = mid - 1;
-    else
+    else {
     break;
     }
-    if (low > high)
+    }
+    if (low > high) {
     return -ESRCH;
+    }
     low = mid;
     while (low) {
     seq = get_symbol_seq(low - 1);
     off = get_symbol_offset(seq);
     kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
-    if (strcmp(name, namebuf))
+    if (strcmp(name, namebuf)) {
     break;
+    }
     low--;
     }
 // start = low;
@@ -215,8 +311,9 @@ pub unsafe extern "C" fn if(0: ret <) -> else {
     seq = get_symbol_seq(high + 1);
     off = get_symbol_offset(seq);
     kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
-    if (strcmp(name, namebuf))
+    if (strcmp(name, namebuf)) {
     break;
+    }
     high++;
     }
 // end = high;
@@ -226,67 +323,67 @@ pub unsafe extern "C" fn if(0: ret <) -> else {
 // Lookup the address for this symbol. Returns 0 if not found.
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_lookup_name(name: *const c_char) -> c_ulong {
-    unsigned long kallsyms_lookup_name(const char *name)
-    {
-    int ret;
-    unsigned int i;
+    let mut ret = 0;
+    let mut i = 0;
 // Skip the search for empty string.
-    if (!*name)
+    if (!*name) {
     return 0;
+    }
     ret = kallsyms_lookup_names(name, &i, core::ptr::null_mut());
-    if (!ret)
+    if (!ret) {
     return kallsyms_sym_address(get_symbol_seq(i));
+    }
     return module_kallsyms_lookup_name(name);
     }
 //
 // Iterate over all symbols in vmlinux.  For symbols from modules use
 // module_kallsyms_on_each_symbol instead.
 //
-    int kallsyms_on_each_symbol(int (*fn)(void *, const char *, unsigned long),
-    void *data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kallsyms_on_each_symbol() {
     char namebuf[KSYM_NAME_LEN];
-    unsigned long i;
-    unsigned int off;
-    int ret;
+    let mut i = 0;
+    let mut off = 0;
+    let mut ret = 0;
     for (i = 0, off = 0; i < kallsyms_num_syms; i++) {
     off = kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
     ret = fn(data, namebuf, kallsyms_sym_address(i));
-    if (ret != 0)
+    if (ret != 0) {
     return ret;
+    }
     cond_resched();
     }
     return 0;
     }
-    int kallsyms_on_each_match_symbol(int (*fn)(void *, unsigned long),
-    const char *name, void *data)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn kallsyms_on_each_match_symbol() {
+    let mut ret = 0;
     unsigned int i, start, end;
     ret = kallsyms_lookup_names(name, &start, &end);
-    if (ret)
+    if (ret) {
     return 0;
+    }
     for (i = start; !ret && i <= end; i++) {
     ret = fn(data, kallsyms_sym_address(get_symbol_seq(i)));
     cond_resched();
     }
     return ret;
     }
-    static unsigned long get_symbol_pos(unsigned long addr,
-    unsigned long *symbolsize,
-    unsigned long *offset)
-    {
-    let mut symbol_start: c_ulong = 0, symbol_end = 0;
+#[no_mangle]
+pub unsafe extern "C" fn get_symbol_pos() {
+pub static mut symbol_start: c_ulong = 0, symbol_end = 0;
     unsigned long i, low, high, mid;
 // Do a binary search on the sorted kallsyms_offsets array.
     low = 0;
     high = kallsyms_num_syms;
     while (high - low > 1) {
     mid = low + (high - low) / 2;
-    if (kallsyms_sym_address(mid) <= addr)
+    if (kallsyms_sym_address(mid) <= addr) {
     low = mid;
-    else
+    }
+    else {
     high = mid;
+    }
     }
 //
 // Search for the first aliased symbol. Aliased
@@ -304,27 +401,30 @@ pub unsafe extern "C" fn kallsyms_lookup_name(name: *const c_char) -> c_ulong {
     }
 // If we found no next symbol, we use the end of the section.
     if (!symbol_end) {
-    if (is_kernel_inittext(addr))
+    if (is_kernel_inittext(addr)) {
     symbol_end = (unsigned long)_einittext;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_KALLSYMS_ALL)) -> else {
     else if (IS_ENABLED(CONFIG_KALLSYMS_ALL))
     symbol_end = (unsigned long)_end;
-    else
+    else {
     symbol_end = (unsigned long)_etext;
     }
-    if (symbolsize)
+    }
+    if (symbolsize) {
 // symbolsize = symbol_end - symbol_start;
-    if (offset)
+    }
+    if (offset) {
 // offset = addr - symbol_start;
+    }
     return low;
     }
 //
 // Lookup an address but don't bother to find any names.
 //
-    int kallsyms_lookup_size_offset(unsigned long addr, unsigned long *symbolsize,
-    unsigned long *offset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kallsyms_lookup_size_offset() {
     char namebuf[KSYM_NAME_LEN];
     if (is_ksym_addr(addr)) {
     get_symbol_pos(addr, symbolsize, offset);
@@ -333,12 +433,9 @@ pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_KALLSYMS_ALL)) -> else {
     return !!module_address_lookup(addr, symbolsize, offset, core::ptr::null_mut(), core::ptr::null_mut(), namebuf) ||
     !!bpf_address_lookup(addr, symbolsize, offset, namebuf);
     }
-    static int kallsyms_lookup_buildid(unsigned long addr,
-    unsigned long *symbolsize,
-    unsigned long *offset, char **modname,
-    const unsigned char **modbuildid, char *namebuf)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn kallsyms_lookup_buildid() {
+    let mut ret = 0;
 //
 // kallsyms_lookus() returns pointer to namebuf on success and
 // NULL on error. But some callers ignore the return value.
@@ -350,12 +447,14 @@ pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_KALLSYMS_ALL)) -> else {
 // Initialize the module-related return values. They are not set
 // when the symbol is in vmlinux or it is a bpf address.
 //
-    if (modname)
+    if (modname) {
 // modname = NULL;
-    if (modbuildid)
+    }
+    if (modbuildid) {
 // modbuildid = NULL;
+    }
     if (is_ksym_addr(addr)) {
-    unsigned long pos;
+    let mut pos = 0;
     pos = get_symbol_pos(addr, symbolsize, offset);
 // Grab name
     kallsyms_expand_symbol(get_symbol_offset(pos),
@@ -365,11 +464,13 @@ pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_KALLSYMS_ALL)) -> else {
 // See if it's in a module or a BPF JITed image.
     ret = module_address_lookup(addr, symbolsize, offset,
     modname, modbuildid, namebuf);
-    if (!ret)
+    if (!ret) {
     ret = bpf_address_lookup(addr, symbolsize, offset, namebuf);
-    if (!ret)
+    }
+    if (!ret) {
     ret = ftrace_mod_address_lookup(addr, symbolsize, offset,
     modname, modbuildid, namebuf);
+    }
     return ret;
     }
 //
@@ -386,18 +487,17 @@ pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_KALLSYMS_ALL)) -> else {
     {
     int ret = kallsyms_lookup_buildid(addr, symbolsize, offset, modname,
     core::ptr::null_mut(), namebuf);
-    if (!ret)
+    if (!ret) {
     return core::ptr::null_mut();
+    }
     return namebuf;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lookup_symbol_name(addr: c_ulong, symname: *mut c_char) -> c_int {
-    int lookup_symbol_name(unsigned long addr, char *symname)
-    {
     symname[0] = '\0';
     symname[KSYM_NAME_LEN - 1] = '\0';
     if (is_ksym_addr(addr)) {
-    unsigned long pos;
+    let mut pos = 0;
     pos = get_symbol_pos(addr, core::ptr::null_mut(), core::ptr::null_mut());
 // Grab name
     kallsyms_expand_symbol(get_symbol_offset(pos),
@@ -408,11 +508,11 @@ pub unsafe extern "C" fn lookup_symbol_name(addr: c_ulong, symname: *mut c_char)
     return lookup_module_symbol_name(addr, symname);
     }
 
-    static int append_buildid(char *buffer,  const char *modname,
-    const unsigned char *buildid)
-    {
-    if (!modname)
+#[no_mangle]
+pub unsafe extern "C" fn append_buildid() {
+    if (!modname) {
     return 0;
+    }
     if (!buildid) {
     pr_warn_once("Undefined buildid for the module %s\n", modname);
     return 0;
@@ -424,34 +524,35 @@ pub unsafe extern "C" fn lookup_symbol_name(addr: c_ulong, symname: *mut c_char)
     return sprintf(buffer, " %20phN", buildid);
     }
 
-    static int append_buildid(char *buffer,   const char *modname,
-    const unsigned char *buildid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn append_buildid() {
     return 0;
     }
 
 // Look up a kernel symbol and return it in a text buffer.
-    static int __sprint_symbol(char *buffer, unsigned long address,
-    int symbol_offset, int add_offset, int add_buildid)
-    {
-    char *modname;
+#[no_mangle]
+pub unsafe extern "C" fn __sprint_symbol() {
+    let mut modname = core::ptr::null_mut();
     const unsigned char *buildid;
     unsigned long offset, size;
-    int len;
+    let mut len = 0;
 // Prevent module removal until modname and modbuildid are printed
     guard(rcu)();
     address += symbol_offset;
     len = kallsyms_lookup_buildid(address, &size, &offset, &modname, &buildid,
     buffer);
-    if (!len)
+    if (!len) {
     return sprintf(buffer, "0x%lx", address - symbol_offset);
+    }
     offset -= symbol_offset;
-    if (add_offset)
+    if (add_offset) {
     len += sprintf(buffer + len, "+%#lx/%#lx", offset, size);
+    }
     if (modname) {
     len += sprintf(buffer + len, " [%s", modname);
-    if (add_buildid)
+    if (add_buildid) {
     len += append_buildid(buffer + len, modname, buildid);
+    }
     len += sprintf(buffer + len, "]");
     }
     return len;
@@ -469,11 +570,9 @@ pub unsafe extern "C" fn lookup_symbol_name(addr: c_ulong, symname: *mut c_char)
 //
 #[no_mangle]
 pub unsafe extern "C" fn sprint_symbol(buffer: *mut c_char, address: c_ulong) -> c_int {
-    int sprint_symbol(char *buffer, unsigned long address)
-    {
     return __sprint_symbol(buffer, address, 0, 1, 0);
     }
-    EXPORT_SYMBOL_GPL(sprint_symbol);
+// EXPORT_SYMBOL_GPL;
 //
 // sprint_symbol_build_id - Look up a kernel symbol and return it in a text buffer
 // @buffer: buffer to be stored
@@ -487,11 +586,9 @@ pub unsafe extern "C" fn sprint_symbol(buffer: *mut c_char, address: c_ulong) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn sprint_symbol_build_id(buffer: *mut c_char, address: c_ulong) -> c_int {
-    int sprint_symbol_build_id(char *buffer, unsigned long address)
-    {
     return __sprint_symbol(buffer, address, 0, 1, 1);
     }
-    EXPORT_SYMBOL_GPL(sprint_symbol_build_id);
+// EXPORT_SYMBOL_GPL;
 //
 // sprint_symbol_no_offset - Look up a kernel symbol and return it in a text buffer
 // @buffer: buffer to be stored
@@ -505,11 +602,9 @@ pub unsafe extern "C" fn sprint_symbol_build_id(buffer: *mut c_char, address: c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn sprint_symbol_no_offset(buffer: *mut c_char, address: c_ulong) -> c_int {
-    int sprint_symbol_no_offset(char *buffer, unsigned long address)
-    {
     return __sprint_symbol(buffer, address, 0, 0, 0);
     }
-    EXPORT_SYMBOL_GPL(sprint_symbol_no_offset);
+// EXPORT_SYMBOL_GPL;
 //
 // sprint_backtrace - Look up a backtrace symbol and return it in a text buffer
 // @buffer: buffer to be stored
@@ -526,8 +621,6 @@ pub unsafe extern "C" fn sprint_symbol_no_offset(buffer: *mut c_char, address: c
 //
 #[no_mangle]
 pub unsafe extern "C" fn sprint_backtrace(buffer: *mut c_char, address: c_ulong) -> c_int {
-    int sprint_backtrace(char *buffer, unsigned long address)
-    {
     return __sprint_symbol(buffer, address, -1, 1, 0);
     }
 //
@@ -547,8 +640,6 @@ pub unsafe extern "C" fn sprint_backtrace(buffer: *mut c_char, address: c_ulong)
 //
 #[no_mangle]
 pub unsafe extern "C" fn sprint_backtrace_build_id(buffer: *mut c_char, address: c_ulong) -> c_int {
-    int sprint_backtrace_build_id(char *buffer, unsigned long address)
-    {
     return __sprint_symbol(buffer, address, -1, 1, 1);
     }
 // To avoid using get_symbol_offset for every symbol, we carry prefix along.
@@ -560,7 +651,7 @@ pub struct kallsym_iter {
     pub pos_ftrace_mod_end: loff_t,
     pub pos_bpf_end: loff_t,
     pub value: c_ulong,
-    pub /: *mut *mut unsigned int nameoff; / If iterating in core kernel symbols.,
+//     pub /: *mut *mut unsigned int nameoff; / If iterating in core kernel symbols.,
     pub type: c_char,
     pub name: [c_char; KSYM_NAME_LEN],
     pub module_name: [c_char; MODULE_NAME_LEN],
@@ -570,8 +661,6 @@ pub struct kallsym_iter {
 
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_mod(iter: *mut kallsym_iter) -> c_int {
-    static int get_ksymbol_mod(struct kallsym_iter *iter)
-    {
     int ret = module_get_kallsym(iter.pos - kallsyms_num_syms,
     &iter.value, &iter.type,
     iter.name, iter.module_name,
@@ -589,8 +678,6 @@ unsafe extern "C" fn get_ksymbol_mod(iter: *mut kallsym_iter) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_ftrace_mod(iter: *mut kallsym_iter) -> c_int {
-    static int get_ksymbol_ftrace_mod(struct kallsym_iter *iter)
-    {
     int ret = ftrace_mod_get_kallsym(iter.pos - iter.pos_mod_end,
     &iter.value, &iter.type,
     iter.name, iter.module_name,
@@ -603,9 +690,7 @@ unsafe extern "C" fn get_ksymbol_ftrace_mod(iter: *mut kallsym_iter) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_bpf(iter: *mut kallsym_iter) -> c_int {
-    static int get_ksymbol_bpf(struct kallsym_iter *iter)
-    {
-    int ret;
+    let mut ret = 0;
     strscpy(iter.module_name, "bpf", MODULE_NAME_LEN);
     iter.exported = 0;
     ret = bpf_get_kallsym(iter.pos - iter.pos_ftrace_mod_end,
@@ -624,8 +709,6 @@ unsafe extern "C" fn get_ksymbol_bpf(iter: *mut kallsym_iter) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_kprobe(iter: *mut kallsym_iter) -> c_int {
-    static int get_ksymbol_kprobe(struct kallsym_iter *iter)
-    {
     strscpy(iter.module_name, "__builtin__kprobes", MODULE_NAME_LEN);
     iter.exported = 0;
     return kprobe_get_kallsym(iter.pos - iter.pos_bpf_end,
@@ -635,9 +718,7 @@ unsafe extern "C" fn get_ksymbol_kprobe(iter: *mut kallsym_iter) -> c_int {
 // Returns space to next name.
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_core(iter: *mut kallsym_iter) -> c_ulong {
-    static unsigned long get_ksymbol_core(struct kallsym_iter *iter)
-    {
-    let mut off: unsigned = iter.nameoff;
+pub static mut off: unsigned = iter.nameoff;
     iter.module_name[0] = '\0';
     iter.value = kallsyms_sym_address(iter.pos);
     iter.type = kallsyms_get_symbol_type(off);
@@ -646,8 +727,6 @@ unsafe extern "C" fn get_ksymbol_core(iter: *mut kallsym_iter) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn reset_iter(iter: *mut kallsym_iter, new_pos: loff_t) {
-    static void reset_iter(struct kallsym_iter *iter, loff_t new_pos)
-    {
     iter.name[0] = '\0';
     iter.nameoff = get_symbol_offset(new_pos);
     iter.pos = new_pos;
@@ -664,8 +743,6 @@ unsafe extern "C" fn reset_iter(iter: *mut kallsym_iter, new_pos: loff_t) {
 //
 #[no_mangle]
 unsafe extern "C" fn update_iter_mod(iter: *mut kallsym_iter, pos: loff_t) -> c_int {
-    static int update_iter_mod(struct kallsym_iter *iter, loff_t pos)
-    {
     iter.pos = pos;
     if ((!iter.pos_mod_end || iter.pos_mod_end > pos) &&
     get_ksymbol_mod(iter))
@@ -681,48 +758,47 @@ unsafe extern "C" fn update_iter_mod(iter: *mut kallsym_iter, pos: loff_t) -> c_
 // Returns false if pos at or past end of file.
 #[no_mangle]
 unsafe extern "C" fn update_iter(iter: *mut kallsym_iter, pos: loff_t) -> c_int {
-    static int update_iter(struct kallsym_iter *iter, loff_t pos)
-    {
 // Module symbols can be accessed randomly.
-    if (pos >= kallsyms_num_syms)
+    if (pos >= kallsyms_num_syms) {
     return update_iter_mod(iter, pos);
+    }
 // If we're not on the desired position, reset to new position.
-    if (pos != iter.pos)
+    if (pos != iter.pos) {
     reset_iter(iter, pos);
+    }
     iter.nameoff += get_ksymbol_core(iter);
     iter.pos++;
     return 1;
     }
-    static void *s_next(struct seq_file *m, void *p, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn s_next() {
     (*pos)++;
-    if (!update_iter(m.private, *pos))
+    if (!update_iter(m.private, *pos)) {
     return core::ptr::null_mut();
+    }
     return p;
     }
-    static void *s_start(struct seq_file *m, loff_t *pos)
-    {
-    if (!update_iter(m.private, *pos))
+#[no_mangle]
+pub unsafe extern "C" fn s_start() {
+    if (!update_iter(m.private, *pos)) {
     return core::ptr::null_mut();
+    }
     return m.private;
     }
 #[no_mangle]
 unsafe extern "C" fn s_stop(m: *mut seq_file, p: *mut c_void) {
-    static void s_stop(struct seq_file *m, void *p)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn s_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int s_show(struct seq_file *m, void *p)
-    {
-    void *value;
+    let mut value = core::ptr::null_mut();
     struct kallsym_iter *iter = m.private;
 // Some debugging symbols have no name.  Ignore them.
-    if (!iter.name[0])
+    if (!iter.name[0]) {
     return 0;
-    value = iter.show_value ? (void *)iter.value : core::ptr::null_mut();
+    }
+    value = iter.show_value ? iter.value : core::ptr::null_mut();
     if (iter.module_name[0]) {
-    char type;
+    let mut type = 0;
 //
 // Label it "global" if it is exported,
 // "local" if not exported.
@@ -731,17 +807,13 @@ unsafe extern "C" fn s_show(m: *mut seq_file, p: *mut c_void) -> c_int {
     tolower(iter.type);
     seq_printf(m, "%px %c %s\t[%s]\n", value,
     type, iter.name, iter.module_name);
-    } else
+    } else {
     seq_printf(m, "%px %c %s\n", value,
     iter.type, iter.name);
+    }
     return 0;
     }
-    static const struct seq_operations kallsyms_op = {
-    .start = s_start,
-    .next = s_next,
-    .stop = s_stop,
-    .show = s_show
-    };
+pub static mut seq_operations: usize = 0;
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -752,44 +824,34 @@ pub struct bpf_iter__ksym {
 
 #[no_mangle]
 unsafe extern "C" fn ksym_prog_seq_show(m: *mut seq_file, in_stop: bool) -> c_int {
-    static int ksym_prog_seq_show(struct seq_file *m, bool in_stop)
-    {
-    struct bpf_iter__ksym ctx;
-    struct bpf_iter_meta meta;
-    struct bpf_prog *prog;
+    let mut ctx;
+    let mut meta;
+    let mut prog = core::ptr::null_mut();
     meta.seq = m;
     prog = bpf_iter_get_info(&meta, in_stop);
-    if (!prog)
+    if (!prog) {
     return 0;
+    }
     ctx.meta = &meta;
     ctx.ksym = m ? m.private : core::ptr::null_mut();
     return bpf_iter_run_prog(prog, &ctx);
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_ksym_seq_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int bpf_iter_ksym_seq_show(struct seq_file *m, void *p)
-    {
     return ksym_prog_seq_show(m, false);
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_ksym_seq_stop(m: *mut seq_file, p: *mut c_void) {
-    static void bpf_iter_ksym_seq_stop(struct seq_file *m, void *p)
-    {
-    if (!p)
+    if (!p) {
     (void) ksym_prog_seq_show(m, true);
-    else
+    }
+    else {
     s_stop(m, p);
     }
-    static const struct seq_operations bpf_iter_ksym_ops = {
-    .start = s_start,
-    .next = s_next,
-    .stop = bpf_iter_ksym_seq_stop,
-    .show = bpf_iter_ksym_seq_show,
-    };
+    }
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_ksym_init(priv_data: *mut c_void, aux: *mut bpf_iter_aux_info) -> c_int {
-    static int bpf_iter_ksym_init(void *priv_data, struct bpf_iter_aux_info *aux)
-    {
     struct kallsym_iter *iter = priv_data;
     reset_iter(iter, 0);
 // cache here as in kallsyms_open() case; use current process
@@ -799,45 +861,28 @@ unsafe extern "C" fn bpf_iter_ksym_init(priv_data: *mut c_void, aux: *mut bpf_it
     return 0;
     }
     DEFINE_BPF_ITER_FUNC(ksym, struct bpf_iter_meta *meta, struct kallsym_iter *ksym)
-    static const struct bpf_iter_seq_info ksym_iter_seq_info = {
-    .seq_ops		= &bpf_iter_ksym_ops,
-    .init_seq_private	= bpf_iter_ksym_init,
-    .fini_seq_private	= core::ptr::null_mut(),
-    .seq_priv_size		= sizeof(struct kallsym_iter),
-    };
-    static struct bpf_iter_reg ksym_iter_reg_info = {
-    .target                 = "ksym",
-    .feature		= BPF_ITER_RESCHED,
-    .ctx_arg_info_size	= 1,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__ksym, ksym),
-    PTR_TO_BTF_ID_OR_NULL },
-    },
-    .seq_info		= &ksym_iter_seq_info,
-    };
+pub static mut bpf_iter_seq_info: usize = 0;
+pub static mut bpf_iter_reg: usize = 0;
     BTF_ID_LIST_SINGLE(btf_ksym_iter_id, struct, kallsym_iter)
 #[no_mangle]
-unsafe extern "C" fn bpf_ksym_iter_register() -> int __init {
-    static int __init bpf_ksym_iter_register(void)
-    {
+unsafe extern "C" fn bpf_ksym_iter_register() -> c_int {
     ksym_iter_reg_info.ctx_arg_info[0].btf_id = *btf_ksym_iter_id;
     return bpf_iter_reg_target(&ksym_iter_reg_info);
     }
-    late_initcall(bpf_ksym_iter_register);
+// late_initcall;
 
 #[no_mangle]
 unsafe extern "C" fn kallsyms_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int kallsyms_open(struct inode *inode, struct file *file)
-    {
 //
 // We keep iterator in m->private, since normal case is to
 // s_start from where we left off, so we avoid doing
 // using get_symbol_offset for every symbol.
 //
-    struct kallsym_iter *iter;
+    let mut iter = core::ptr::null_mut();
     iter = __seq_open_private(file, &kallsyms_op, sizeof(*iter));
-    if (!iter)
+    if (!iter) {
     return -ENOMEM;
+    }
     reset_iter(iter, 0);
 //
 // Instead of checking this on every s_show() call, cache
@@ -856,26 +901,24 @@ unsafe extern "C" fn kallsyms_open(inode: *mut inode, file: *mut file) -> c_int 
     reset_iter(&kdb_walk_kallsyms_iter, 0);
     }
     while (1) {
-    if (!update_iter(&kdb_walk_kallsyms_iter, *pos))
+    if (!update_iter(&kdb_walk_kallsyms_iter, *pos)) {
     return core::ptr::null_mut();
+    }
     ++*pos;
 // Some debugging symbols have no name.  Ignore them.
-    if (kdb_walk_kallsyms_iter.name[0])
+    if (kdb_walk_kallsyms_iter.name[0]) {
     return kdb_walk_kallsyms_iter.name;
     }
     }
+    }
 
-    static const struct proc_ops kallsyms_proc_ops = {
-    .proc_open	= kallsyms_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_release	= seq_release_private,
-    };
+pub static mut proc_ops: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn kallsyms_init() -> int __init {
-    static int __init kallsyms_init(void)
-    {
+unsafe extern "C" fn kallsyms_init() -> c_int {
     proc_create("kallsyms", 0444, core::ptr::null_mut(), &kallsyms_proc_ops);
     return 0;
     }
-    device_initcall(kallsyms_init);
+// device_initcall;
+
+}
+}

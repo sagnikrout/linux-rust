@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -45,7 +142,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // 1994/12/26: Changes by Alex Nash to fix a minor bug in /proc/dma.
 // In the previous version the reported device could end up being wrong,
 // if a device requested a DMA channel that was already in use.
-// [It also happened to remove the sizeof(char *) == sizeof(int)
+// [It also happened to remove the sizeof == sizeof(int)
 // assumption introduced because of those /proc/dma patches. -- Hennus]
 //
 
@@ -63,7 +160,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This doesn't really matter now, but it will once we get real semaphores
 // in the kernel.
 //
-    DEFINE_SPINLOCK(dma_spin_lock);
+// DEFINE_SPINLOCK;
 //
 // If our port doesn't define this it has no PC like DMA
 //
@@ -79,9 +176,7 @@ pub struct dma_chan {
     pub device_id: *const c_char,
 }
 
-    static struct dma_chan dma_chan_busy[MAX_DMA_CHANNELS] = {
-    [4] = { 1, "cascade" },
-    };
+pub static mut dma_chan: usize = 0;
 //
 // request_dma - request and reserve a system DMA channel
 // @dmanr: DMA channel number
@@ -89,12 +184,12 @@ pub struct dma_chan {
 //
 #[no_mangle]
 pub unsafe extern "C" fn request_dma(dmanr: c_uint, device_id: *const *const c_char) -> c_int {
-    int request_dma(unsigned int dmanr, const char * device_id)
-    {
-    if (dmanr >= MAX_DMA_CHANNELS)
+    if (dmanr >= MAX_DMA_CHANNELS) {
     return -EINVAL;
-    if (xchg(&dma_chan_busy[dmanr].lock, 1) != 0)
+    }
+    if (xchg(&dma_chan_busy[dmanr].lock, 1) != 0) {
     return -EBUSY;
+    }
     dma_chan_busy[dmanr].device_id = device_id;
 // old flag was 0, now contains 1 to indicate busy
     return 0;
@@ -105,35 +200,27 @@ pub unsafe extern "C" fn request_dma(dmanr: c_uint, device_id: *const *const c_c
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_dma(dmanr: c_uint) {
-    void free_dma(unsigned int dmanr)
-    {
     if (dmanr >= MAX_DMA_CHANNELS) {
-    printk(KERN_WARNING "Trying to free DMA%d\n", dmanr);
+    printk("Trying to free DMA%d\n", dmanr);
     return;
     }
     if (xchg(&dma_chan_busy[dmanr].lock, 0) == 0) {
-    printk(KERN_WARNING "Trying to free free DMA%d\n", dmanr);
+    printk("Trying to free free DMA%d\n", dmanr);
     return;
     }
     } /* free_dma */
 
 #[no_mangle]
 pub unsafe extern "C" fn request_dma(dmanr: c_uint, device_id: *const c_char) -> c_int {
-    int request_dma(unsigned int dmanr, const char *device_id)
-    {
     return -EINVAL;
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_dma(dmanr: c_uint) {
-    void free_dma(unsigned int dmanr)
-    {
     }
 
 #[no_mangle]
 unsafe extern "C" fn proc_dma_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int proc_dma_show(struct seq_file *m, void *v)
-    {
-    int i;
+    let mut i = 0;
     for (i = 0 ; i < MAX_DMA_CHANNELS ; i++) {
     if (dma_chan_busy[i].lock) {
     seq_printf(m, "%2d: %s\n", i,
@@ -145,21 +232,17 @@ unsafe extern "C" fn proc_dma_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn proc_dma_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int proc_dma_show(struct seq_file *m, void *v)
-    {
     seq_puts(m, "No DMA\n");
     return 0;
     }
 
 #[no_mangle]
-unsafe extern "C" fn proc_dma_init() -> int __init {
-    static int __init proc_dma_init(void)
-    {
+unsafe extern "C" fn proc_dma_init() -> c_int {
     proc_create_single("dma", 0, core::ptr::null_mut(), proc_dma_show);
     return 0;
     }
-    __initcall(proc_dma_init);
+// __initcall;
 
-    EXPORT_SYMBOL(request_dma);
-    EXPORT_SYMBOL(free_dma);
-    EXPORT_SYMBOL(dma_spin_lock);
+// EXPORT_SYMBOL;
+// EXPORT_SYMBOL;
+// EXPORT_SYMBOL;

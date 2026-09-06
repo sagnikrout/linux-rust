@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -101,8 +124,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static  __cacheline_aligned_in_smp DEFINE_SPINLOCK(pidmap_lock);
 #[no_mangle]
 pub unsafe extern "C" fn put_pid(pid: *mut pid) {
-    void put_pid(struct pid *pid)
-    {
     struct pid_namespace *ns;
     if (!pid)
     return;
@@ -116,15 +137,11 @@ pub unsafe extern "C" fn put_pid(pid: *mut pid) {
     EXPORT_SYMBOL_GPL(put_pid);
 #[no_mangle]
 unsafe extern "C" fn delayed_put_pid(rhp: *mut rcu_head) {
-    static void delayed_put_pid(struct rcu_head *rhp)
-    {
     struct pid *pid = container_of(rhp, struct pid, rcu);
     put_pid(pid);
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_pid(pid: *mut pid) {
-    void free_pid(struct pid *pid)
-    {
     int i;
     struct pid_namespace *active_ns;
     lockdep_assert_not_held(&tasklist_lock);
@@ -156,8 +173,6 @@ pub unsafe extern "C" fn free_pid(pid: *mut pid) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_pids(pids: *mut pid) {
-    void free_pids(struct pid **pids)
-    {
     int tmp;
 //
 // This can batch pidmap_lock.
@@ -348,8 +363,6 @@ pub unsafe extern "C" fn free_pids(pids: *mut pid) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disable_pid_allocation(ns: *mut pid_namespace) {
-    void disable_pid_allocation(struct pid_namespace *ns)
-    {
     spin_lock(&pidmap_lock);
     ns.pid_allocated &= ~PIDNS_ADDING;
     spin_unlock(&pidmap_lock);
@@ -375,8 +388,6 @@ pub unsafe extern "C" fn disable_pid_allocation(ns: *mut pid_namespace) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn attach_pid(task: *mut task_struct, type: enum pid_type) {
-    void attach_pid(struct task_struct *task, enum pid_type type)
-    {
     struct pid *pid;
     lockdep_assert_held_write(&tasklist_lock);
     pid = *task_pid_ptr(task, type);
@@ -400,8 +411,6 @@ pub unsafe extern "C" fn attach_pid(task: *mut task_struct, type: enum pid_type)
     }
 #[no_mangle]
 pub unsafe extern "C" fn detach_pid(pids: *mut pid, task: *mut task_struct, type: enum pid_type) {
-    void detach_pid(struct pid **pids, struct task_struct *task, enum pid_type type)
-    {
     __change_pid(pids, task, type, core::ptr::null_mut());
     }
     void change_pid(struct pid **pids, struct task_struct *task, enum pid_type type,
@@ -412,8 +421,6 @@ pub unsafe extern "C" fn detach_pid(pids: *mut pid, task: *mut task_struct, type
     }
 #[no_mangle]
 pub unsafe extern "C" fn exchange_tids(left: *mut task_struct, right: *mut task_struct) {
-    void exchange_tids(struct task_struct *left, struct task_struct *right)
-    {
     struct pid *pid1 = left.thread_pid;
     struct pid *pid2 = right.thread_pid;
     struct hlist_head *head1 = &pid1.tasks[PIDTYPE_PID];
@@ -503,8 +510,6 @@ pub unsafe extern "C" fn exchange_tids(left: *mut task_struct, right: *mut task_
     EXPORT_SYMBOL_GPL(find_get_pid);
 #[no_mangle]
 pub unsafe extern "C" fn pid_nr_ns(pid: *mut pid, ns: *mut pid_namespace) -> pid_t {
-    pid_t pid_nr_ns(struct pid *pid, struct pid_namespace *ns)
-    {
     struct upid *upid;
     let mut nr: pid_t = 0;
     if (pid && ns && ns.level <= pid.level) {
@@ -517,8 +522,6 @@ pub unsafe extern "C" fn pid_nr_ns(pid: *mut pid, ns: *mut pid_namespace) -> pid
     EXPORT_SYMBOL_GPL(pid_nr_ns);
 #[no_mangle]
 pub unsafe extern "C" fn pid_vnr(pid: *mut pid) -> pid_t {
-    pid_t pid_vnr(struct pid *pid)
-    {
     return pid_nr_ns(pid, task_active_pid_ns(current));
     }
     EXPORT_SYMBOL_GPL(pid_vnr);
@@ -621,8 +624,6 @@ pub unsafe extern "C" fn pid_vnr(pid: *mut pid) -> pid_t {
 //
 #[no_mangle]
 unsafe extern "C" fn pidfd_create(pid: *mut pid, flags: c_uint) -> c_int {
-    static int pidfd_create(struct pid *pid, unsigned int flags)
-    {
     int pidfd;
     struct file *pidfd_file;
     pidfd = pidfd_prepare(pid, flags, &pidfd_file);
@@ -666,8 +667,6 @@ unsafe extern "C" fn pidfd_create(pid: *mut pid, flags: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn set_is_seen(set: *mut ctl_table_set) -> c_int {
-    static int set_is_seen(struct ctl_table_set *set)
-    {
     return &task_active_pid_ns(current).set == set;
     }
     static int pid_table_root_permissions(struct ctl_table_header *head,
@@ -720,8 +719,6 @@ pub unsafe extern "C" fn if(_arg: in_egroup_p(make_kgid(pidns->user_ns, _arg: 0)
 
 #[no_mangle]
 pub unsafe extern "C" fn register_pidns_sysctls(pidns: *mut pid_namespace) -> c_int {
-    int register_pidns_sysctls(struct pid_namespace *pidns)
-    {
 
     struct ctl_table *tbl;
     setup_sysctl_set(&pidns.set, &pid_table_root, set_is_seen);
@@ -743,8 +740,6 @@ pub unsafe extern "C" fn register_pidns_sysctls(pidns: *mut pid_namespace) -> c_
     }
 #[no_mangle]
 pub unsafe extern "C" fn unregister_pidns_sysctls(pidns: *mut pid_namespace) {
-    void unregister_pidns_sysctls(struct pid_namespace *pidns)
-    {
 
     const struct ctl_table *tbl;
     tbl = pidns.sysctls.ctl_table_arg;
@@ -754,9 +749,7 @@ pub unsafe extern "C" fn unregister_pidns_sysctls(pidns: *mut pid_namespace) {
 
     }
 #[no_mangle]
-pub unsafe extern "C" fn pid_idr_init() -> void __init {
-    void __init pid_idr_init(void)
-    {
+pub unsafe extern "C" fn pid_idr_init() -> c_int {
 // Verify no one has done anything silly:
     BUILD_BUG_ON(PID_MAX_LIMIT >= PIDNS_ADDING);
 // bump default and minimum pid_max based on number of cpus
@@ -774,8 +767,6 @@ pub unsafe extern "C" fn pid_idr_init() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn pid_namespace_sysctl_init() -> __init int {
-    static __init int pid_namespace_sysctl_init(void)
-    {
 
 // "kernel" directory will have already been initialized.
     BUG_ON(register_pidns_sysctls(&init_pid_ns));
@@ -821,8 +812,6 @@ pub unsafe extern "C" fn if(PF_EXITING: task->flags &) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn pidfd_getfd(pid: *mut pid, fd: c_int) -> c_int {
-    static int pidfd_getfd(struct pid *pid, int fd)
-    {
     struct task_struct *task;
     struct file *file;
     int ret;
@@ -868,3 +857,6 @@ unsafe extern "C" fn pidfd_getfd(pid: *mut pid, fd: c_int) -> c_int {
     return PTR_ERR(pid);
     return pidfd_getfd(pid, fd);
     }
+
+}
+}

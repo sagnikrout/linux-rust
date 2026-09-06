@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -42,14 +139,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2002-2004 Eric Biederman  <ebiederm@xmission.com>
 //
 
-    static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
-    unsigned long nr_segments,
-    struct kexec_segment *segments,
-    unsigned long flags)
-    {
-    int ret;
-    struct kimage *image;
-    let mut kexec_on_panic: bool = flags & KEXEC_ON_CRASH;
+#[no_mangle]
+pub unsafe extern "C" fn kimage_alloc_init() {
+    let mut ret = 0;
+    let mut image = core::ptr::null_mut();
+pub static mut kexec_on_panic: bool = flags & KEXEC_ON_CRASH;
 
     if (kexec_on_panic) {
 // Verify we have a valid entry point
@@ -60,8 +154,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Allocate and initialize a controlling structure
     image = do_kimage_alloc_init();
-    if (!image)
+    if (!image) {
     return -ENOMEM;
+    }
     image.start = entry;
     image.nr_segments = nr_segments;
     memcpy(image.segment, segments, nr_segments * sizeof(*segments));
@@ -73,8 +168,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 
     ret = sanity_check_segment_list(image);
-    if (ret)
+    if (ret) {
     goto out_free_image;
+    }
 //
 // Find a location for the control code buffer, and add it
 // the vector of segments so that it's pages will also be
@@ -102,27 +198,29 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     kfree(image);
     return ret;
     }
-    static int do_kexec_load(unsigned long entry, unsigned long nr_segments,
-    struct kexec_segment *segments, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_kexec_load() {
     struct kimage **dest_image, *image;
-    unsigned long i;
-    int ret;
+    let mut i = 0;
+    let mut ret = 0;
 //
 // Because we write directly to the reserved memory region when loading
 // crash kernels we need a serialization here to prevent multiple crash
 // kernels from attempting to load simultaneously.
 //
-    if (!kexec_trylock())
+    if (!kexec_trylock()) {
     return -EBUSY;
+    }
 
     if (flags & KEXEC_ON_CRASH) {
     dest_image = &kexec_crash_image;
-    if (kexec_crash_image)
+    if (kexec_crash_image) {
     arch_kexec_unprotect_crashkres();
-    } else
+    }
+    } else {
 
     dest_image = &kexec_image;
+    }
     if (nr_segments == 0) {
 // Uninstall image
     kimage_free(xchg(dest_image, core::ptr::null_mut()));
@@ -138,39 +236,47 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     kimage_free(xchg(&kexec_crash_image, core::ptr::null_mut()));
     }
     ret = kimage_alloc_init(&image, entry, nr_segments, segments, flags);
-    if (ret)
+    if (ret) {
     goto out_unlock;
-    if (flags & KEXEC_PRESERVE_CONTEXT)
+    }
+    if (flags & KEXEC_PRESERVE_CONTEXT) {
     image.preserve_context = 1;
+    }
 
-    if ((flags & KEXEC_ON_CRASH) && arch_crash_hotplug_support(image, flags))
+    if ((flags & KEXEC_ON_CRASH) && arch_crash_hotplug_support(image, flags)) {
     image.hotplug_support = 1;
+    }
 
     ret = machine_kexec_prepare(image);
-    if (ret)
+    if (ret) {
     goto out;
+    }
 //
 // Some architecture(like S390) may touch the crash memory before
 // machine_kexec_prepare(), we must copy vmcoreinfo data after it.
 //
     ret = kimage_crash_copy_vmcoreinfo(image);
-    if (ret)
+    if (ret) {
     goto out;
+    }
     for (i = 0; i < nr_segments; i++) {
     ret = kimage_load_segment(image, i);
-    if (ret)
+    if (ret) {
     goto out;
+    }
     }
     kimage_terminate(image);
     ret = machine_kexec_post_load(image);
-    if (ret)
+    if (ret) {
     goto out;
+    }
 // Install the new kernel and uninstall the old
     image = xchg(dest_image, image);
     out:
 
-    if ((flags & KEXEC_ON_CRASH) && kexec_crash_image)
+    if ((flags & KEXEC_ON_CRASH) && kexec_crash_image) {
     arch_kexec_protect_crashkres();
+    }
 
     kimage_free(image);
     out_unlock:
@@ -197,82 +303,88 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // kexec does not sync, or unmount filesystems so if you need
 // that to happen you need to do that yourself.
 //
-    static inline int kexec_load_check(unsigned long nr_segments,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kexec_load_check() {
     int image_type = (flags & KEXEC_ON_CRASH) ?
     KEXEC_TYPE_CRASH : KEXEC_TYPE_DEFAULT;
-    int result;
+    let mut result = 0;
 // We only trust the superuser with rebooting the system.
-    if (!kexec_load_permitted(image_type))
+    if (!kexec_load_permitted(image_type)) {
     return -EPERM;
+    }
 // Permit LSMs and IMA to fail the kexec
     result = security_kernel_load_data(LOADING_KEXEC_IMAGE, false);
-    if (result < 0)
+    if (result < 0) {
     return result;
+    }
 //
 // kexec can be used to circumvent module loading restrictions, so
 // prevent loading in that case
 //
     result = security_locked_down(LOCKDOWN_KEXEC);
-    if (result)
+    if (result) {
     return result;
+    }
 //
 // Verify we have a legal set of flags
 // This leaves us room for future extensions.
 //
-    if ((flags & KEXEC_FLAGS) != (flags & ~KEXEC_ARCH_MASK))
+    if ((flags & KEXEC_FLAGS) != (flags & ~KEXEC_ARCH_MASK)) {
     return -EINVAL;
+    }
 // Put an artificial cap on the number
 // of segments passed to kexec_load.
 //
-    if (nr_segments > KEXEC_SEGMENT_MAX)
+    if (nr_segments > KEXEC_SEGMENT_MAX) {
     return -EINVAL;
+    }
     return 0;
     }
-    SYSCALL_DEFINE4(kexec_load, unsigned long, entry, unsigned long, nr_segments,
-    struct kexec_segment __user *, segments, unsigned long, flags)
-    {
-    struct kexec_segment *ksegments;
-    unsigned long result;
+#[no_mangle]
+pub unsafe extern "C" fn sys_kexec_load() {
+    let mut ksegments = core::ptr::null_mut();
+    let mut result = 0;
     result = kexec_load_check(nr_segments, flags);
-    if (result)
+    if (result) {
     return result;
+    }
 // Verify we are on the appropriate architecture
     if (((flags & KEXEC_ARCH_MASK) != KEXEC_ARCH) &&
     ((flags & KEXEC_ARCH_MASK) != KEXEC_ARCH_DEFAULT))
     return -EINVAL;
     ksegments = memdup_array_user(segments, nr_segments, sizeof(ksegments[0]));
-    if (IS_ERR(ksegments))
+    if (IS_ERR(ksegments)) {
     return PTR_ERR(ksegments);
+    }
     result = do_kexec_load(entry, nr_segments, ksegments, flags);
     kfree(ksegments);
     return result;
     }
 
-    COMPAT_SYSCALL_DEFINE4(kexec_load, compat_ulong_t, entry,
-    compat_ulong_t, nr_segments,
-    struct compat_kexec_segment __user *, segments,
-    compat_ulong_t, flags)
-    {
-    struct compat_kexec_segment in;
-    struct kexec_segment *ksegments;
+#[no_mangle]
+pub unsafe extern "C" fn sys_kexec_load() {
+    let mut in;
+    let mut ksegments = core::ptr::null_mut();
     unsigned long i, result;
     result = kexec_load_check(nr_segments, flags);
-    if (result)
+    if (result) {
     return result;
+    }
 // Don't allow clients that don't understand the native
 // architecture to do anything.
 //
-    if ((flags & KEXEC_ARCH_MASK) == KEXEC_ARCH_DEFAULT)
+    if ((flags & KEXEC_ARCH_MASK) == KEXEC_ARCH_DEFAULT) {
     return -EINVAL;
+    }
     ksegments = kmalloc_objs(ksegments[0], nr_segments);
-    if (!ksegments)
+    if (!ksegments) {
     return -ENOMEM;
+    }
     for (i = 0; i < nr_segments; i++) {
     result = copy_from_user(&in, &segments[i], sizeof(in));
-    if (result)
+    if (result) {
     goto fail;
+    }
     ksegments[i].buf   = compat_ptr(in.buf);
     ksegments[i].bufsz = in.bufsz;
     ksegments[i].mem   = in.mem;

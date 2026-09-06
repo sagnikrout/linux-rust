@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 // CPU control.
@@ -65,9 +162,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct cpuhp_cpu_state {
-    pub state: enum cpuhp_state,
-    pub target: enum cpuhp_state,
-    pub fail: enum cpuhp_state,
+    pub state: cpuhp_state,
+    pub target: cpuhp_state,
+    pub fail: cpuhp_state,
 
     pub thread: *mut task_struct,
     pub should_run: bool,
@@ -76,7 +173,7 @@ pub struct cpuhp_cpu_state {
     pub bringup: bool,
     pub node: *mut hlist_node,
     pub last: *mut hlist_node,
-    pub cb_state: enum cpuhp_state,
+    pub cb_state: cpuhp_state,
     pub result: c_int,
     pub ap_sync_state: core::sync::atomic::AtomicI32,
     pub done_up: completion,
@@ -88,27 +185,25 @@ pub struct cpuhp_cpu_state {
     .fail = CPUHP_INVALID,
     };
 
-    cpumask_t cpus_booted_once_mask;
+    let mut cpus_booted_once_mask;
 
     static struct lockdep_map cpuhp_state_up_map =
-    STATIC_LOCKDEP_MAP_INIT("cpuhp_state-up", &cpuhp_state_up_map);
+// STATIC_LOCKDEP_MAP_INIT;
     static struct lockdep_map cpuhp_state_down_map =
-    STATIC_LOCKDEP_MAP_INIT("cpuhp_state-down", &cpuhp_state_down_map);
+// STATIC_LOCKDEP_MAP_INIT;
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_lock_acquire(bringup: bool) {
-    static inline void cpuhp_lock_acquire(bool bringup)
-    {
     lock_map_acquire(bringup ? &cpuhp_state_up_map : &cpuhp_state_down_map);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_lock_release(bringup: bool) {
-    static inline void cpuhp_lock_release(bool bringup)
-    {
     lock_map_release(bringup ? &cpuhp_state_up_map : &cpuhp_state_down_map);
     }
 
-    static inline void cpuhp_lock_acquire(bool bringup) { }
-    static inline void cpuhp_lock_release(bool bringup) { }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_lock_acquire() { }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_lock_release() { }
 
 //
 // struct cpuhp_step - Hotplug state machine step
@@ -138,17 +233,14 @@ pub struct cpuhp_step {
     pub cant_stop: bool,
     pub multi_instance: bool,
 }
-
-    static DEFINE_MUTEX(cpuhp_state_mutex);
+// static DEFINE_MUTEX(cpuhp_state_mutex);
     static struct cpuhp_step cpuhp_hp_states[];
-    static struct cpuhp_step *cpuhp_get_step(enum cpuhp_state state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_get_step() {
     return cpuhp_hp_states + state;
     }
 #[no_mangle]
 unsafe extern "C" fn cpuhp_step_empty(bringup: bool, step: *mut cpuhp_step) -> bool {
-    static bool cpuhp_step_empty(bool bringup, struct cpuhp_step *step)
-    {
     return bringup ? !step.startup.single : !step.teardown.single;
     }
 //
@@ -163,10 +255,8 @@ unsafe extern "C" fn cpuhp_step_empty(bringup: bool, step: *mut cpuhp_step) -> b
 //
 // Return: %0 on success or a negative errno code
 //
-    static int cpuhp_invoke_callback(unsigned int cpu, enum cpuhp_state state,
-    bool bringup, struct hlist_node *node,
-    struct hlist_node **lastp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_invoke_callback() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
     struct cpuhp_step *step = cpuhp_get_step(state);
     int (*cbm)(unsigned int cpu, struct hlist_node *node);
@@ -177,11 +267,11 @@ unsafe extern "C" fn cpuhp_step_empty(bringup: bool, step: *mut cpuhp_step) -> b
     return -EAGAIN;
     }
     if (cpuhp_step_empty(bringup, step)) {
-    WARN_ON_ONCE(1);
+// WARN_ON_ONCE;
     return 0;
     }
     if (!step.multi_instance) {
-    WARN_ON_ONCE(lastp && *lastp);
+// WARN_ON_ONCE;
     cb = bringup ? step.startup.single : step.teardown.single;
     trace_cpuhp_enter(cpu, st.target, state, cb);
     ret = cb(cpu);
@@ -191,7 +281,7 @@ unsafe extern "C" fn cpuhp_step_empty(bringup: bool, step: *mut cpuhp_step) -> b
     cbm = bringup ? step.startup.multi : step.teardown.multi;
 // Single invocation for instance add/remove
     if (node) {
-    WARN_ON_ONCE(lastp && *lastp);
+// WARN_ON_ONCE;
     trace_cpuhp_multi_enter(cpu, st.target, state, cbm, node);
     ret = cbm(cpu, node);
     trace_cpuhp_exit(cpu, st.state, state, ret);
@@ -200,37 +290,42 @@ unsafe extern "C" fn cpuhp_step_empty(bringup: bool, step: *mut cpuhp_step) -> b
 // State transition. Invoke on all instances
     cnt = 0;
     hlist_for_each(node, &step.list) {
-    if (lastp && node == *lastp)
+    if (lastp && node == *lastp) {
     break;
+    }
     trace_cpuhp_multi_enter(cpu, st.target, state, cbm, node);
     ret = cbm(cpu, node);
     trace_cpuhp_exit(cpu, st.state, state, ret);
     if (ret) {
-    if (!lastp)
+    if (!lastp) {
     goto err;
+    }
 // lastp = node;
     return ret;
     }
     cnt++;
     }
-    if (lastp)
+    if (lastp) {
 // lastp = NULL;
+    }
     return 0;
     err:
 // Rollback the instances if one failed
     cbm = !bringup ? step.startup.multi : step.teardown.multi;
-    if (!cbm)
+    if (!cbm) {
     return ret;
+    }
     hlist_for_each(node, &step.list) {
-    if (!cnt--)
+    if (!cnt--) {
     break;
+    }
     trace_cpuhp_multi_enter(cpu, st.target, state, cbm, node);
     rollback_ret = cbm(cpu, node);
     trace_cpuhp_exit(cpu, st.state, state, rollback_ret);
 //
 // Rollback must not fail,
 //
-    WARN_ON_ONCE(rollback_ret);
+// WARN_ON_ONCE;
     }
     return ret;
     }
@@ -238,16 +333,12 @@ unsafe extern "C" fn cpuhp_step_empty(bringup: bool, step: *mut cpuhp_step) -> b
 // The former STARTING/DYING states, ran with IRQs disabled and must not fail.
 //
 #[no_mangle]
-unsafe extern "C" fn cpuhp_is_atomic_state(state: enum cpuhp_state) -> bool {
-    static bool cpuhp_is_atomic_state(enum cpuhp_state state)
-    {
+unsafe extern "C" fn cpuhp_is_atomic_state(state: cpuhp_state) -> bool {
     return CPUHP_AP_IDLE_DEAD <= state && state < CPUHP_AP_ONLINE;
     }
 
 #[no_mangle]
-unsafe extern "C" fn cpuhp_is_ap_state(state: enum cpuhp_state) -> bool {
-    static bool cpuhp_is_ap_state(enum cpuhp_state state)
-    {
+unsafe extern "C" fn cpuhp_is_ap_state(state: cpuhp_state) -> bool {
 //
 // The extra check for CPUHP_TEARDOWN_CPU is only for documentation
 // purposes as that state is handled explicitly in cpu_down.
@@ -256,15 +347,11 @@ unsafe extern "C" fn cpuhp_is_ap_state(state: enum cpuhp_state) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn wait_for_ap_thread(st: *mut cpuhp_cpu_state, bringup: bool) {
-    static inline void wait_for_ap_thread(struct cpuhp_cpu_state *st, bool bringup)
-    {
     struct completion *done = bringup ? &st.done_up : &st.done_down;
     wait_for_completion(done);
     }
 #[no_mangle]
 pub unsafe extern "C" fn complete_ap_thread(st: *mut cpuhp_cpu_state, bringup: bool) {
-    static inline void complete_ap_thread(struct cpuhp_cpu_state *st, bool bringup)
-    {
     struct completion *done = bringup ? &st.done_up : &st.done_down;
     complete(done);
     }
@@ -286,25 +373,23 @@ pub unsafe extern "C" fn complete_ap_thread(st: *mut cpuhp_cpu_state, bringup: b
 // a full barrier so that the AP changes are visible before the control CPU proceeds.
 //
 #[no_mangle]
-pub unsafe extern "C" fn cpuhp_ap_update_sync_state(state: enum cpuhp_sync_state) {
-    static inline void cpuhp_ap_update_sync_state(enum cpuhp_sync_state state)
-    {
+pub unsafe extern "C" fn cpuhp_ap_update_sync_state(state: cpuhp_sync_state) {
     atomic_t *st = this_cpu_ptr(&cpuhp_state.ap_sync_state);
     (void)atomic_xchg(st, state);
     }
     void __weak arch_cpuhp_sync_state_poll(void) { cpu_relax(); }
-    static bool cpuhp_wait_for_sync_state(unsigned int cpu, enum cpuhp_sync_state state,
-    enum cpuhp_sync_state next_state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_wait_for_sync_state() {
     atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
     ktime_t now, end, start = ktime_get();
-    int sync;
+    let mut sync = 0;
     end = start + 10ULL * NSEC_PER_SEC;
     sync = atomic_read(st);
     while (1) {
     if (sync == state) {
-    if (!atomic_try_cmpxchg(st, &sync, next_state))
+    if (!atomic_try_cmpxchg(st, &sync, next_state)) {
     continue;
+    }
     return true;
     }
     now = ktime_get();
@@ -322,7 +407,8 @@ pub unsafe extern "C" fn cpuhp_ap_update_sync_state(state: enum cpuhp_sync_state
     return true;
     }
 
-    static inline void cpuhp_ap_update_sync_state(enum cpuhp_sync_state state) { }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_ap_update_sync_state() { }
 
 //
 // cpuhp_ap_report_dead - Update synchronization state to DEAD
@@ -331,8 +417,6 @@ pub unsafe extern "C" fn cpuhp_ap_update_sync_state(state: enum cpuhp_sync_state
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_ap_report_dead() {
-    void cpuhp_ap_report_dead(void)
-    {
     cpuhp_ap_update_sync_state(SYNC_STATE_DEAD);
     }
     void __weak arch_cpuhp_cleanup_dead_cpu(unsigned int cpu) { }
@@ -342,14 +426,13 @@ pub unsafe extern "C" fn cpuhp_ap_report_dead() {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuhp_bp_sync_dead(cpu: c_uint) {
-    static void cpuhp_bp_sync_dead(unsigned int cpu)
-    {
     atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
-    let mut sync: c_int = atomic_read(st);
+pub static mut sync: c_int = atomic_read(st);
     do {
 // CPU can have reported dead already. Don't overwrite that!
-    if (sync == SYNC_STATE_DEAD)
+    if (sync == SYNC_STATE_DEAD) {
     break;
+    }
     } while (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_SHOULD_DIE));
     if (cpuhp_wait_for_sync_state(cpu, SYNC_STATE_DEAD, SYNC_STATE_DEAD)) {
 // CPU reached dead state. Invoke the cleanup function
@@ -360,7 +443,8 @@ unsafe extern "C" fn cpuhp_bp_sync_dead(cpu: c_uint) {
     pr_err("CPU%u failed to report dead state\n", cpu);
     }
 
-    static inline void cpuhp_bp_sync_dead(unsigned int cpu) { }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_bp_sync_dead() { }
 
 //
 // cpuhp_ap_sync_alive - Synchronize AP with the control CPU once it is alive
@@ -370,8 +454,6 @@ unsafe extern "C" fn cpuhp_bp_sync_dead(cpu: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_ap_sync_alive() {
-    void cpuhp_ap_sync_alive(void)
-    {
     atomic_t *st = this_cpu_ptr(&cpuhp_state.ap_sync_state);
     cpuhp_ap_update_sync_state(SYNC_STATE_ALIVE);
 // Wait for the control CPU to release it.
@@ -380,28 +462,27 @@ pub unsafe extern "C" fn cpuhp_ap_sync_alive() {
     }
 #[no_mangle]
 unsafe extern "C" fn cpuhp_can_boot_ap(cpu: c_uint) -> bool {
-    static bool cpuhp_can_boot_ap(unsigned int cpu)
-    {
     atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
-    let mut sync: c_int = atomic_read(st);
+pub static mut sync: c_int = atomic_read(st);
     again:
-    switch (sync) {
-    case SYNC_STATE_DEAD:
+    match (sync) {
+    SYNC_STATE_DEAD => {
 // CPU is properly dead
     break;
-    case SYNC_STATE_KICKED:
+    SYNC_STATE_KICKED => {
 // CPU did not come up in previous attempt
     break;
-    case SYNC_STATE_ALIVE:
+    SYNC_STATE_ALIVE => {
 // CPU is stuck cpuhp_ap_sync_alive().
     break;
-    default:
+    _ => {
 // CPU failed to report online or dead and is in limbo state.
     return false;
     }
 // Prepare for booting
-    if (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_KICKED))
+    if (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_KICKED)) {
     goto again;
+    }
     return true;
     }
     void __weak arch_cpuhp_cleanup_kick_cpu(unsigned int cpu) { }
@@ -411,11 +492,10 @@ unsafe extern "C" fn cpuhp_can_boot_ap(cpu: c_uint) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuhp_bp_sync_alive(cpu: c_uint) -> c_int {
-    static int cpuhp_bp_sync_alive(unsigned int cpu)
-    {
-    let mut ret: c_int = 0;
-    if (!IS_ENABLED(CONFIG_HOTPLUG_CORE_SYNC_FULL))
+pub static mut ret: c_int = 0;
+    if (!IS_ENABLED(CONFIG_HOTPLUG_CORE_SYNC_FULL)) {
     return 0;
+    }
     if (!cpuhp_wait_for_sync_state(cpu, SYNC_STATE_ALIVE, SYNC_STATE_SHOULD_ONLINE)) {
     pr_err("CPU%u failed to report alive state\n", cpu);
     ret = -EIO;
@@ -425,27 +505,25 @@ unsafe extern "C" fn cpuhp_bp_sync_alive(cpu: c_uint) -> c_int {
     return ret;
     }
 
-    static inline int cpuhp_bp_sync_alive(unsigned int cpu) { return 0; }
-    static inline bool cpuhp_can_boot_ap(unsigned int cpu) { return true; }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_bp_sync_alive() { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_can_boot_ap() { return true; }
 
 // Serializes the updates to cpu_online_mask, cpu_present_mask
-    static DEFINE_MUTEX(cpu_add_remove_lock);
-    bool cpuhp_tasks_frozen;
-    EXPORT_SYMBOL_GPL(cpuhp_tasks_frozen);
+// static DEFINE_MUTEX(cpu_add_remove_lock);
+    let mut cpuhp_tasks_frozen = 0;
+// EXPORT_SYMBOL_GPL;
 //
 // The following two APIs (cpu_maps_update_begin/done) must be used when
 // attempting to serialize the updates to cpu_online_mask & cpu_present_mask.
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_maps_update_begin() {
-    void cpu_maps_update_begin(void)
-    {
     mutex_lock(&cpu_add_remove_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpu_maps_update_done() {
-    void cpu_maps_update_done(void)
-    {
     mutex_unlock(&cpu_add_remove_lock);
     }
 //
@@ -454,87 +532,66 @@ pub unsafe extern "C" fn cpu_maps_update_done() {
 //
     static int cpu_hotplug_disabled;
 
-    DEFINE_STATIC_PERCPU_RWSEM(cpu_hotplug_lock);
+// DEFINE_STATIC_PERCPU_RWSEM;
     static bool cpu_hotplug_offline_disabled __ro_after_init;
 #[no_mangle]
 pub unsafe extern "C" fn cpus_read_lock() {
-    void cpus_read_lock(void)
-    {
     percpu_down_read(&cpu_hotplug_lock);
     }
-    EXPORT_SYMBOL_GPL(cpus_read_lock);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn cpus_read_trylock() -> c_int {
-    int cpus_read_trylock(void)
-    {
     return percpu_down_read_trylock(&cpu_hotplug_lock);
     }
-    EXPORT_SYMBOL_GPL(cpus_read_trylock);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn cpus_read_unlock() {
-    void cpus_read_unlock(void)
-    {
     percpu_up_read(&cpu_hotplug_lock);
     }
-    EXPORT_SYMBOL_GPL(cpus_read_unlock);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn cpus_write_lock() {
-    void cpus_write_lock(void)
-    {
     percpu_down_write(&cpu_hotplug_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpus_write_unlock() {
-    void cpus_write_unlock(void)
-    {
     percpu_up_write(&cpu_hotplug_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_assert_cpus_held() {
-    void lockdep_assert_cpus_held(void)
-    {
 //
 // We can't have hotplug operations before userspace starts running,
 // and some init codepaths will knowingly not take the hotplug lock.
 // This is all valid, so mute lockdep until it makes sense to report
 // unheld locks.
 //
-    if (system_state < SYSTEM_RUNNING)
+    if (system_state < SYSTEM_RUNNING) {
     return;
+    }
     percpu_rwsem_assert_held(&cpu_hotplug_lock);
     }
-    EXPORT_SYMBOL_GPL(lockdep_assert_cpus_held);
+// EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_is_cpus_held() -> c_int {
-    int lockdep_is_cpus_held(void)
-    {
     return percpu_rwsem_is_held(&cpu_hotplug_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_is_cpus_write_held() -> c_int {
-    int lockdep_is_cpus_write_held(void)
-    {
     return percpu_rwsem_is_write_held(&cpu_hotplug_lock);
     }
 
 #[no_mangle]
 unsafe extern "C" fn lockdep_acquire_cpus_lock() {
-    static void lockdep_acquire_cpus_lock(void)
-    {
     rwsem_acquire(&cpu_hotplug_lock.dep_map, 0, 0, _THIS_IP_);
     }
 #[no_mangle]
 unsafe extern "C" fn lockdep_release_cpus_lock() {
-    static void lockdep_release_cpus_lock(void)
-    {
     rwsem_release(&cpu_hotplug_lock.dep_map, _THIS_IP_);
     }
 // Declare CPU offlining not supported
 #[no_mangle]
 pub unsafe extern "C" fn cpu_hotplug_disable_offlining() {
-    void cpu_hotplug_disable_offlining(void)
-    {
     cpu_maps_update_begin();
     cpu_hotplug_offline_disabled = true;
     cpu_maps_update_done();
@@ -548,40 +605,31 @@ pub unsafe extern "C" fn cpu_hotplug_disable_offlining() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_hotplug_disable() {
-    void cpu_hotplug_disable(void)
-    {
     cpu_maps_update_begin();
     cpu_hotplug_disabled++;
     cpu_maps_update_done();
     }
-    EXPORT_SYMBOL_GPL(cpu_hotplug_disable);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 unsafe extern "C" fn __cpu_hotplug_enable() {
-    static void __cpu_hotplug_enable(void)
-    {
-    if (WARN_ONCE(!cpu_hotplug_disabled, "Unbalanced cpu hotplug enable\n"))
+    if (WARN_ONCE(!cpu_hotplug_disabled, "Unbalanced cpu hotplug enable\n")) {
     return;
+    }
     cpu_hotplug_disabled--;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpu_hotplug_enable() {
-    void cpu_hotplug_enable(void)
-    {
     cpu_maps_update_begin();
     __cpu_hotplug_enable();
     cpu_maps_update_done();
     }
-    EXPORT_SYMBOL_GPL(cpu_hotplug_enable);
+// EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
 unsafe extern "C" fn lockdep_acquire_cpus_lock() {
-    static void lockdep_acquire_cpus_lock(void)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn lockdep_release_cpus_lock() {
-    static void lockdep_release_cpus_lock(void)
-    {
     }
 
 //
@@ -590,15 +638,14 @@ unsafe extern "C" fn lockdep_release_cpus_lock() {
 //
     void __weak arch_smt_update(void) { }
 
-    let mut __read_mostly: enum cpuhp_smt_control cpu_smt_control = CPU_SMT_ENABLED;
+pub static mut __read_mostly: cpuhp_smt_control cpu_smt_control = CPU_SMT_ENABLED;
     static unsigned int cpu_smt_max_threads __ro_after_init;
-    let mut __read_mostly: unsigned int cpu_smt_num_threads = UINT_MAX;
+pub static mut __read_mostly: unsigned int cpu_smt_num_threads = UINT_MAX;
 #[no_mangle]
-pub unsafe extern "C" fn cpu_smt_disable(force: bool) -> void __init {
-    void __init cpu_smt_disable(bool force)
-    {
-    if (!cpu_smt_possible())
+pub unsafe extern "C" fn cpu_smt_disable(force: bool) -> c_int {
+    if (!cpu_smt_possible()) {
     return;
+    }
     if (force) {
     pr_info("SMT: Force disabled\n");
     cpu_smt_control = CPU_SMT_FORCE_DISABLED;
@@ -615,9 +662,10 @@ pub unsafe extern "C" fn cpu_smt_disable(force: bool) -> void __init {
     void __init cpu_smt_set_num_threads(unsigned int num_threads,
     unsigned int max_threads)
     {
-    WARN_ON(!num_threads || (num_threads > max_threads));
-    if (max_threads == 1)
+// WARN_ON;
+    if (max_threads == 1) {
     cpu_smt_control = CPU_SMT_NOT_SUPPORTED;
+    }
     cpu_smt_max_threads = max_threads;
 //
 // If SMT has been disabled via the kernel command line or SMT is
@@ -625,17 +673,16 @@ pub unsafe extern "C" fn cpu_smt_disable(force: bool) -> void __init {
 // If enabled, take the architecture requested number of threads
 // to bring up into account.
 //
-    if (cpu_smt_control != CPU_SMT_ENABLED)
+    if (cpu_smt_control != CPU_SMT_ENABLED) {
     cpu_smt_num_threads = 1;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(cpu_smt_num_threads: num_threads <) -> else {
     else if (num_threads < cpu_smt_num_threads)
     cpu_smt_num_threads = num_threads;
     }
 #[no_mangle]
-unsafe extern "C" fn smt_cmdline_disable(str: *mut c_char) -> int __init {
-    static int __init smt_cmdline_disable(char *str)
-    {
+unsafe extern "C" fn smt_cmdline_disable(str: *mut c_char) -> c_int {
     cpu_smt_disable(str && !strcmp(str, "force"));
     return 0;
     }
@@ -647,8 +694,6 @@ unsafe extern "C" fn smt_cmdline_disable(str: *mut c_char) -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_smt_thread_allowed(cpu: c_uint) -> bool {
-    static inline bool cpu_smt_thread_allowed(unsigned int cpu)
-    {
 
     return topology_smt_thread_allowed(cpu);
 
@@ -657,18 +702,20 @@ pub unsafe extern "C" fn cpu_smt_thread_allowed(cpu: c_uint) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpu_bootable(cpu: c_uint) -> bool {
-    static inline bool cpu_bootable(unsigned int cpu)
-    {
-    if (cpu_smt_control == CPU_SMT_ENABLED && cpu_smt_thread_allowed(cpu))
+    if (cpu_smt_control == CPU_SMT_ENABLED && cpu_smt_thread_allowed(cpu)) {
     return true;
+    }
 // All CPUs are bootable if controls are not configured
-    if (cpu_smt_control == CPU_SMT_NOT_IMPLEMENTED)
+    if (cpu_smt_control == CPU_SMT_NOT_IMPLEMENTED) {
     return true;
+    }
 // All CPUs are bootable if CPU is not SMT capable
-    if (cpu_smt_control == CPU_SMT_NOT_SUPPORTED)
+    if (cpu_smt_control == CPU_SMT_NOT_SUPPORTED) {
     return true;
-    if (topology_is_primary_thread(cpu))
+    }
+    if (topology_is_primary_thread(cpu)) {
     return true;
+    }
 //
 // On x86 it's required to boot all logical CPUs at least once so
 // that the init code can get a chance to set CR4.MCE on each
@@ -680,63 +727,64 @@ pub unsafe extern "C" fn cpu_bootable(cpu: c_uint) -> bool {
 // Returns true if SMT is supported and not forcefully (irreversibly) disabled
 #[no_mangle]
 pub unsafe extern "C" fn cpu_smt_possible() -> bool {
-    bool cpu_smt_possible(void)
-    {
     return cpu_smt_control != CPU_SMT_FORCE_DISABLED &&
     cpu_smt_control != CPU_SMT_NOT_SUPPORTED;
     }
-    EXPORT_SYMBOL_GPL(cpu_smt_possible);
+// EXPORT_SYMBOL_GPL;
 
-    static inline bool cpu_bootable(unsigned int cpu) { return true; }
+#[no_mangle]
+pub unsafe extern "C" fn cpu_bootable() { return true; }
 
     static inline enum cpuhp_state
     cpuhp_set_state(int cpu, struct cpuhp_cpu_state *st, enum cpuhp_state target)
     {
-    let mut prev_state: enum cpuhp_state = st.state;
-    let mut bringup: bool = st.state < target;
+pub static mut prev_state: cpuhp_state = st.state;
+pub static mut bringup: bool = st.state < target;
     st.rollback = false;
     st.last = core::ptr::null_mut();
     st.target = target;
     st.single = false;
     st.bringup = bringup;
-    if (cpu_dying(cpu) != !bringup)
+    if (cpu_dying(cpu) != !bringup) {
     set_cpu_dying(cpu, !bringup);
+    }
     return prev_state;
     }
-    static inline void
-    cpuhp_reset_state(int cpu, struct cpuhp_cpu_state *st,
-    enum cpuhp_state prev_state)
-    {
-    let mut bringup: bool = !st.bringup;
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_reset_state() {
+pub static mut bringup: bool = !st.bringup;
     st.target = prev_state;
 //
 // Already rolling back. No need invert the bringup value or to change
 // the current state.
 //
-    if (st.rollback)
+    if (st.rollback) {
     return;
+    }
     st.rollback = true;
 //
 // If we have st->last we need to undo partial multi_instance of this
 // state first. Otherwise start undo at the previous state.
 //
     if (!st.last) {
-    if (st.bringup)
+    if (st.bringup) {
     st.state--;
-    else
+    }
+    else {
     st.state++;
     }
+    }
     st.bringup = bringup;
-    if (cpu_dying(cpu) != !bringup)
+    if (cpu_dying(cpu) != !bringup) {
     set_cpu_dying(cpu, !bringup);
+    }
     }
 // Regular hotplug invocation of the AP hotplug thread
 #[no_mangle]
 unsafe extern "C" fn __cpuhp_kick_ap(st: *mut cpuhp_cpu_state) {
-    static void __cpuhp_kick_ap(struct cpuhp_cpu_state *st)
-    {
-    if (!st.single && st.state == st.target)
+    if (!st.single && st.state == st.target) {
     return;
+    }
     st.result = 0;
 //
 // Make sure the above stores are visible before should_run becomes
@@ -747,11 +795,10 @@ unsafe extern "C" fn __cpuhp_kick_ap(st: *mut cpuhp_cpu_state) {
     wake_up_process(st.thread);
     wait_for_ap_thread(st, st.bringup);
     }
-    static int cpuhp_kick_ap(int cpu, struct cpuhp_cpu_state *st,
-    enum cpuhp_state target)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_kick_ap() {
     enum cpuhp_state prev_state;
-    int ret;
+    let mut ret = 0;
     prev_state = cpuhp_set_state(cpu, st, target);
     __cpuhp_kick_ap(st);
     if ((ret = st.result)) {
@@ -762,13 +809,12 @@ unsafe extern "C" fn __cpuhp_kick_ap(st: *mut cpuhp_cpu_state) {
     }
 #[no_mangle]
 unsafe extern "C" fn bringup_wait_for_ap_online(cpu: c_uint) -> c_int {
-    static int bringup_wait_for_ap_online(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
 // Wait for the CPU to reach CPUHP_AP_ONLINE_IDLE
     wait_for_ap_thread(st, true);
-    if (WARN_ON_ONCE((!cpu_online(cpu))))
+    if (WARN_ON_ONCE((!cpu_online(cpu)))) {
     return -ECANCELED;
+    }
 // Unpark the hotplug thread of the target cpu
     kthread_unpark(st.thread);
 //
@@ -778,25 +824,23 @@ unsafe extern "C" fn bringup_wait_for_ap_online(cpu: c_uint) -> c_int {
 // cpu_bootable() check will now return false if this is not the
 // primary sibling.
 //
-    if (!cpu_bootable(cpu))
+    if (!cpu_bootable(cpu)) {
     return -ECANCELED;
+    }
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn cpuhp_kick_ap_alive(cpu: c_uint) -> c_int {
-    static int cpuhp_kick_ap_alive(unsigned int cpu)
-    {
-    if (!cpuhp_can_boot_ap(cpu))
+    if (!cpuhp_can_boot_ap(cpu)) {
     return -EAGAIN;
+    }
     return arch_cpuhp_kick_ap_alive(cpu, idle_thread_get(cpu));
     }
 #[no_mangle]
 unsafe extern "C" fn cpuhp_bringup_ap(cpu: c_uint) -> c_int {
-    static int cpuhp_bringup_ap(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    int ret;
+    let mut ret = 0;
 //
 // Some architectures have to walk the irq descriptors to
 // setup the vector space for the cpu which comes online.
@@ -804,14 +848,17 @@ unsafe extern "C" fn cpuhp_bringup_ap(cpu: c_uint) -> c_int {
 //
     irq_lock_sparse();
     ret = cpuhp_bp_sync_alive(cpu);
-    if (ret)
+    if (ret) {
     goto out_unlock;
+    }
     ret = bringup_wait_for_ap_online(cpu);
-    if (ret)
+    if (ret) {
     goto out_unlock;
+    }
     irq_unlock_sparse();
-    if (st.target <= CPUHP_AP_ONLINE_IDLE)
+    if (st.target <= CPUHP_AP_ONLINE_IDLE) {
     return 0;
+    }
     return cpuhp_kick_ap(cpu, st, st.target);
     out_unlock:
     irq_unlock_sparse();
@@ -820,13 +867,12 @@ unsafe extern "C" fn cpuhp_bringup_ap(cpu: c_uint) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn bringup_cpu(cpu: c_uint) -> c_int {
-    static int bringup_cpu(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
     struct task_struct *idle = idle_thread_get(cpu);
-    int ret;
-    if (!cpuhp_can_boot_ap(cpu))
+    let mut ret = 0;
+    if (!cpuhp_can_boot_ap(cpu)) {
     return -EAGAIN;
+    }
 //
 // Some architectures have to walk the irq descriptors to
 // setup the vector space for the cpu which comes online.
@@ -838,17 +884,21 @@ unsafe extern "C" fn bringup_cpu(cpu: c_uint) -> c_int {
 //
     irq_lock_sparse();
     ret = __cpu_up(cpu, idle);
-    if (ret)
+    if (ret) {
     goto out_unlock;
+    }
     ret = cpuhp_bp_sync_alive(cpu);
-    if (ret)
+    if (ret) {
     goto out_unlock;
+    }
     ret = bringup_wait_for_ap_online(cpu);
-    if (ret)
+    if (ret) {
     goto out_unlock;
+    }
     irq_unlock_sparse();
-    if (st.target <= CPUHP_AP_ONLINE_IDLE)
+    if (st.target <= CPUHP_AP_ONLINE_IDLE) {
     return 0;
+    }
     return cpuhp_kick_ap(cpu, st, st.target);
     out_unlock:
     irq_unlock_sparse();
@@ -857,15 +907,13 @@ unsafe extern "C" fn bringup_cpu(cpu: c_uint) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn finish_cpu(cpu: c_uint) -> c_int {
-    static int finish_cpu(unsigned int cpu)
-    {
     struct task_struct *idle = idle_thread_get(cpu);
     struct mm_struct *mm = idle.active_mm;
 //
 // sched_force_init_mm() ensured the use of &init_mm,
 // drop that refcount now that the CPU has stopped.
 //
-    WARN_ON(mm != &init_mm);
+// WARN_ON;
     idle.active_mm = core::ptr::null_mut();
     mmdrop_lazy_tlb(mm);
     return 0;
@@ -879,39 +927,36 @@ unsafe extern "C" fn finish_cpu(cpu: c_uint) -> c_int {
 // st->state will be modified ahead of time, to match state_to_run, as if it
 // has already ran.
 //
-    static bool cpuhp_next_state(bool bringup,
-    enum cpuhp_state *state_to_run,
-    struct cpuhp_cpu_state *st,
-    enum cpuhp_state target)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_next_state() {
     do {
     if (bringup) {
-    if (st.state >= target)
+    if (st.state >= target) {
     return false;
+    }
 // state_to_run = ++st->state;
     } else {
-    if (st.state <= target)
+    if (st.state <= target) {
     return false;
+    }
 // state_to_run = st->state--;
     }
-    if (!cpuhp_step_empty(bringup, cpuhp_get_step(*state_to_run)))
+    if (!cpuhp_step_empty(bringup, cpuhp_get_step(*state_to_run))) {
     break;
+    }
     } while (true);
     return true;
     }
-    static int __cpuhp_invoke_callback_range(bool bringup,
-    unsigned int cpu,
-    struct cpuhp_cpu_state *st,
-    enum cpuhp_state target,
-    bool nofail)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __cpuhp_invoke_callback_range() {
     enum cpuhp_state state;
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     while (cpuhp_next_state(bringup, &state, st, target)) {
-    int err;
+    let mut err = 0;
     err = cpuhp_invoke_callback(cpu, state, bringup, core::ptr::null_mut(), core::ptr::null_mut());
-    if (!err)
+    if (!err) {
     continue;
+    }
     if (nofail) {
     pr_warn("CPU %u %s state %s (%d) failed (%d)\n",
     cpu, bringup ? "UP" : "DOWN",
@@ -925,26 +970,19 @@ unsafe extern "C" fn finish_cpu(cpu: c_uint) -> c_int {
     }
     return ret;
     }
-    static inline int cpuhp_invoke_callback_range(bool bringup,
-    unsigned int cpu,
-    struct cpuhp_cpu_state *st,
-    enum cpuhp_state target)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_invoke_callback_range() {
     return __cpuhp_invoke_callback_range(bringup, cpu, st, target, false);
     }
-    static inline void cpuhp_invoke_callback_range_nofail(bool bringup,
-    unsigned int cpu,
-    struct cpuhp_cpu_state *st,
-    enum cpuhp_state target)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_invoke_callback_range_nofail() {
     __cpuhp_invoke_callback_range(bringup, cpu, st, target, true);
     }
 #[no_mangle]
 pub unsafe extern "C" fn can_rollback_cpu(st: *mut cpuhp_cpu_state) -> bool {
-    static inline bool can_rollback_cpu(struct cpuhp_cpu_state *st)
-    {
-    if (IS_ENABLED(CONFIG_HOTPLUG_CPU))
+    if (IS_ENABLED(CONFIG_HOTPLUG_CPU)) {
     return true;
+    }
 //
 // When CPU hotplug is disabled, then taking the CPU down is not
 // possible because takedown_cpu() and the architecture and
@@ -954,20 +992,20 @@ pub unsafe extern "C" fn can_rollback_cpu(st: *mut cpuhp_cpu_state) -> bool {
 //
     return st.state <= CPUHP_BRINGUP_CPU;
     }
-    static int cpuhp_up_callbacks(unsigned int cpu, struct cpuhp_cpu_state *st,
-    enum cpuhp_state target)
-    {
-    let mut prev_state: enum cpuhp_state = st.state;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_up_callbacks() {
+pub static mut prev_state: cpuhp_state = st.state;
+pub static mut ret: c_int = 0;
     ret = cpuhp_invoke_callback_range(true, cpu, st, target);
     if (ret) {
     pr_debug("CPU UP failed (%d) CPU %u state %s (%d)\n",
     ret, cpu, cpuhp_get_step(st.state).name,
     st.state);
     cpuhp_reset_state(cpu, st, prev_state);
-    if (can_rollback_cpu(st))
+    if (can_rollback_cpu(st)) {
     WARN_ON(cpuhp_invoke_callback_range(false, cpu, st,
     prev_state));
+    }
     }
     return ret;
     }
@@ -976,8 +1014,6 @@ pub unsafe extern "C" fn can_rollback_cpu(st: *mut cpuhp_cpu_state) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuhp_should_run(cpu: c_uint) -> c_int {
-    static int cpuhp_should_run(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
     return st.should_run;
     }
@@ -997,13 +1033,12 @@ unsafe extern "C" fn cpuhp_should_run(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuhp_thread_fun(cpu: c_uint) {
-    static void cpuhp_thread_fun(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
-    let mut bringup: bool = st.bringup;
+pub static mut bringup: bool = st.bringup;
     enum cpuhp_state state;
-    if (WARN_ON_ONCE(!st.should_run))
+    if (WARN_ON_ONCE(!st.should_run)) {
     return;
+    }
 //
 // ACQUIRE for the cpuhp_should_run() load of ->should_run. Ensures
 // that if we see ->should_run we also see the rest of the state.
@@ -1021,10 +1056,11 @@ unsafe extern "C" fn cpuhp_thread_fun(cpu: c_uint) {
     st.should_run = false;
     } else {
     st.should_run = cpuhp_next_state(bringup, &state, st, st.target);
-    if (!st.should_run)
+    if (!st.should_run) {
     goto end;
     }
-    WARN_ON_ONCE(!cpuhp_is_ap_state(state));
+    }
+// WARN_ON_ONCE;
     if (cpuhp_is_atomic_state(state)) {
     local_irq_disable();
     st.result = cpuhp_invoke_callback(cpu, state, bringup, st.node, &st.last);
@@ -1032,7 +1068,7 @@ unsafe extern "C" fn cpuhp_thread_fun(cpu: c_uint) {
 //
 // STARTING/DYING must not fail!
 //
-    WARN_ON_ONCE(st.result);
+// WARN_ON_ONCE;
     } else {
     st.result = cpuhp_invoke_callback(cpu, state, bringup, st.node, &st.last);
     }
@@ -1042,24 +1078,24 @@ unsafe extern "C" fn cpuhp_thread_fun(cpu: c_uint) {
 // paddle, no way forward, no way back. We loose, thanks for
 // playing.
 //
-    WARN_ON_ONCE(st.rollback);
+// WARN_ON_ONCE;
     st.should_run = false;
     }
     end:
     cpuhp_lock_release(bringup);
     lockdep_release_cpus_lock();
-    if (!st.should_run)
+    if (!st.should_run) {
     complete_ap_thread(st, bringup);
     }
+    }
 // Invoke a single callback on a remote cpu
-    static int
-    cpuhp_invoke_ap_callback(int cpu, enum cpuhp_state state, bool bringup,
-    struct hlist_node *node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_invoke_ap_callback() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    int ret;
-    if (!cpu_online(cpu))
+    let mut ret = 0;
+    if (!cpu_online(cpu)) {
     return 0;
+    }
     cpuhp_lock_acquire(false);
     cpuhp_lock_release(false);
     cpuhp_lock_acquire(true);
@@ -1068,8 +1104,9 @@ unsafe extern "C" fn cpuhp_thread_fun(cpu: c_uint) {
 // If we are up and running, use the hotplug thread. For early calls
 // we invoke the thread function directly.
 //
-    if (!st.thread)
+    if (!st.thread) {
     return cpuhp_invoke_callback(cpu, state, bringup, node, core::ptr::null_mut());
+    }
     st.rollback = false;
     st.last = core::ptr::null_mut();
     st.node = node;
@@ -1094,11 +1131,9 @@ unsafe extern "C" fn cpuhp_thread_fun(cpu: c_uint) {
     }
 #[no_mangle]
 unsafe extern "C" fn cpuhp_kick_ap_work(cpu: c_uint) -> c_int {
-    static int cpuhp_kick_ap_work(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut prev_state: enum cpuhp_state = st.state;
-    int ret;
+pub static mut prev_state: cpuhp_state = st.state;
+    let mut ret = 0;
     cpuhp_lock_acquire(false);
     cpuhp_lock_release(false);
     cpuhp_lock_acquire(true);
@@ -1108,19 +1143,11 @@ unsafe extern "C" fn cpuhp_kick_ap_work(cpu: c_uint) -> c_int {
     trace_cpuhp_exit(cpu, st.state, prev_state, ret);
     return ret;
     }
-    static struct smp_hotplug_thread cpuhp_threads = {
-    .store			= &cpuhp_state.thread,
-    .thread_should_run	= cpuhp_should_run,
-    .thread_fn		= cpuhp_thread_fun,
-    .thread_comm		= "cpuhp/%u",
-    .selfparking		= true,
-    };
+pub static mut smp_hotplug_thread: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn cpuhp_init_state() -> __init void {
-    static __init void cpuhp_init_state(void)
-    {
-    struct cpuhp_cpu_state *st;
-    int cpu;
+    let mut st = core::ptr::null_mut();
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     st = per_cpu_ptr(&cpuhp_state, cpu);
     init_completion(&st.done_up);
@@ -1128,11 +1155,9 @@ unsafe extern "C" fn cpuhp_init_state() -> __init void {
     }
     }
 #[no_mangle]
-pub unsafe extern "C" fn cpuhp_threads_init() -> void __init {
-    void __init cpuhp_threads_init(void)
-    {
+pub unsafe extern "C" fn cpuhp_threads_init() -> c_int {
     cpuhp_init_state();
-    BUG_ON(smpboot_register_percpu_thread(&cpuhp_threads));
+// BUG_ON;
     kthread_unpark(this_cpu_read(cpuhp_state.thread));
     }
 
@@ -1150,9 +1175,7 @@ pub unsafe extern "C" fn cpuhp_threads_init() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clear_tasks_mm_cpumask(cpu: c_int) {
-    void clear_tasks_mm_cpumask(int cpu)
-    {
-    struct task_struct *p;
+    let mut p = core::ptr::null_mut();
 //
 // This function is called after the cpu is taken down and marked
 // offline, so its not like new tasks will ever get this cpu set in
@@ -1160,17 +1183,18 @@ pub unsafe extern "C" fn clear_tasks_mm_cpumask(cpu: c_int) {
 // Thus, we may use rcu_read_lock() here, instead of grabbing
 // full-fledged tasklist_lock.
 //
-    WARN_ON(cpu_online(cpu));
+// WARN_ON;
     rcu_read_lock();
     for_each_process(p) {
-    struct task_struct *t;
+    let mut t = core::ptr::null_mut();
 //
 // Main thread might exit, but other threads may still have
 // a valid mm. Find one.
 //
     t = find_lock_task_mm(p);
-    if (!t)
+    if (!t) {
     continue;
+    }
     arch_clear_mm_cpumask_cpu(cpu, t.mm);
     task_unlock(t);
     }
@@ -1179,20 +1203,19 @@ pub unsafe extern "C" fn clear_tasks_mm_cpumask(cpu: c_int) {
 // Take this CPU down.
 #[no_mangle]
 unsafe extern "C" fn take_cpu_down(_param: *mut c_void) -> c_int {
-    static int take_cpu_down(void *_param)
-    {
     struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
-    let mut target: enum cpuhp_state = max((int)st.target, CPUHP_AP_OFFLINE);
+pub static mut target: cpuhp_state = max((int)st.target, CPUHP_AP_OFFLINE);
     int err, cpu = smp_processor_id();
 // Ensure this CPU doesn't handle any more interrupts.
     err = __cpu_disable();
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
 //
 // Must be called from CPUHP_TEARDOWN_CPU, which means, as we are going
 // down, that the current state is CPUHP_TEARDOWN_CPU - 1.
 //
-    WARN_ON(st.state != (CPUHP_TEARDOWN_CPU - 1));
+// WARN_ON;
 //
 // Invoke the former CPU_DYING callbacks. DYING must not fail!
 //
@@ -1203,10 +1226,8 @@ unsafe extern "C" fn take_cpu_down(_param: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn takedown_cpu(cpu: c_uint) -> c_int {
-    static int takedown_cpu(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    int err;
+    let mut err = 0;
 // Park the smpboot threads
     kthread_park(st.thread);
 //
@@ -1222,7 +1243,7 @@ unsafe extern "C" fn takedown_cpu(cpu: c_uint) -> c_int {
     kthread_unpark(st.thread);
     return err;
     }
-    BUG_ON(cpu_online(cpu));
+// BUG_ON;
 //
 // The teardown callback for CPUHP_AP_SCHED_STARTING will have removed
 // all runnable tasks from the CPU, there's only the idle task left now
@@ -1231,7 +1252,7 @@ unsafe extern "C" fn takedown_cpu(cpu: c_uint) -> c_int {
 // Wait for the stop thread to go away.
 //
     wait_for_ap_thread(st, false);
-    BUG_ON(st.state != CPUHP_AP_IDLE_DEAD);
+// BUG_ON;
 // Interrupts are moved away from the dying cpu, reenable alloc/free
     irq_unlock_sparse();
     hotplug_cpu__broadcast_tick_pull(cpu);
@@ -1249,17 +1270,13 @@ unsafe extern "C" fn takedown_cpu(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn cpuhp_complete_idle_dead(arg: *mut c_void) {
-    static void cpuhp_complete_idle_dead(void *arg)
-    {
     struct cpuhp_cpu_state *st = arg;
     complete_ap_thread(st, false);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_report_idle_dead() {
-    void cpuhp_report_idle_dead(void)
-    {
     struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
-    BUG_ON(st.state != CPUHP_AP_OFFLINE);
+// BUG_ON;
     tick_assert_timekeeping_handover();
     rcutree_report_cpu_dead();
     st.state = CPUHP_AP_IDLE_DEAD;
@@ -1270,20 +1287,20 @@ pub unsafe extern "C" fn cpuhp_report_idle_dead() {
     smp_call_function_single(cpumask_first(cpu_online_mask),
     cpuhp_complete_idle_dead, st, 0);
     }
-    static int cpuhp_down_callbacks(unsigned int cpu, struct cpuhp_cpu_state *st,
-    enum cpuhp_state target)
-    {
-    let mut prev_state: enum cpuhp_state = st.state;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_down_callbacks() {
+pub static mut prev_state: cpuhp_state = st.state;
+pub static mut ret: c_int = 0;
     ret = cpuhp_invoke_callback_range(false, cpu, st, target);
     if (ret) {
     pr_debug("CPU DOWN failed (%d) CPU %u state %s (%d)\n",
     ret, cpu, cpuhp_get_step(st.state).name,
     st.state);
     cpuhp_reset_state(cpu, st, prev_state);
-    if (st.state < prev_state)
+    if (st.state < prev_state) {
     WARN_ON(cpuhp_invoke_callback_range(true, cpu, st,
     prev_state));
+    }
     }
     return ret;
     }
@@ -1293,10 +1310,12 @@ pub unsafe extern "C" fn cpuhp_report_idle_dead() {
     {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
     int prev_state, ret = 0;
-    if (num_online_cpus() == 1)
+    if (num_online_cpus() == 1) {
     return -EBUSY;
-    if (!cpu_present(cpu))
+    }
+    if (!cpu_present(cpu)) {
     return -EINVAL;
+    }
     cpus_write_lock();
 //
 // Keep at least one housekeeping cpu onlined to avoid generating
@@ -1320,14 +1339,16 @@ pub unsafe extern "C" fn cpuhp_report_idle_dead() {
 // The AP side has done the error rollback already. Just
 // return the error code..
 //
-    if (ret)
+    if (ret) {
     goto out;
+    }
 //
 // We might have stopped still in the range of the AP hotplug
 // thread. Nothing to do anymore.
 //
-    if (st.state > CPUHP_TEARDOWN_CPU)
+    if (st.state > CPUHP_TEARDOWN_CPU) {
     goto out;
+    }
     st.target = target;
     }
 //
@@ -1340,7 +1361,7 @@ pub unsafe extern "C" fn cpuhp_report_idle_dead() {
     cpuhp_reset_state(cpu, st, prev_state);
     __cpuhp_kick_ap(st);
     } else {
-    WARN(1, "DEAD callback error for CPU%d", cpu);
+// WARN;
     }
     }
     out:
@@ -1349,24 +1370,22 @@ pub unsafe extern "C" fn cpuhp_report_idle_dead() {
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn cpu_down_maps_locked(cpu: c_uint, target: enum cpuhp_state) -> c_int {
-    static int cpu_down_maps_locked(unsigned int cpu, enum cpuhp_state target)
-    {
+unsafe extern "C" fn cpu_down_maps_locked(cpu: c_uint, target: cpuhp_state) -> c_int {
 //
 // If the platform does not support hotplug, report it explicitly to
 // differentiate it from a transient offlining failure.
 //
-    if (cpu_hotplug_offline_disabled)
+    if (cpu_hotplug_offline_disabled) {
     return -EOPNOTSUPP;
-    if (cpu_hotplug_disabled)
+    }
+    if (cpu_hotplug_disabled) {
     return -EBUSY;
+    }
     return _cpu_down(cpu, 0, target);
     }
 #[no_mangle]
-unsafe extern "C" fn cpu_down(cpu: c_uint, target: enum cpuhp_state) -> c_int {
-    static int cpu_down(unsigned int cpu, enum cpuhp_state target)
-    {
-    int err;
+unsafe extern "C" fn cpu_down(cpu: c_uint, target: cpuhp_state) -> c_int {
+    let mut err = 0;
     cpu_maps_update_begin();
     err = cpu_down_maps_locked(cpu, target);
     cpu_maps_update_done();
@@ -1384,38 +1403,34 @@ unsafe extern "C" fn cpu_down(cpu: c_uint, target: enum cpuhp_state) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_device_down(dev: *mut device) -> c_int {
-    int cpu_device_down(struct device *dev)
-    {
     return cpu_down(dev.id, CPUHP_OFFLINE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn remove_cpu(cpu: c_uint) -> c_int {
-    int remove_cpu(unsigned int cpu)
-    {
-    int ret;
+    let mut ret = 0;
     lock_device_hotplug();
     ret = device_offline(get_cpu_device(cpu));
     unlock_device_hotplug();
     return ret;
     }
-    EXPORT_SYMBOL_GPL(remove_cpu);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn smp_shutdown_nonboot_cpus(primary_cpu: c_uint) {
-    void smp_shutdown_nonboot_cpus(unsigned int primary_cpu)
-    {
-    unsigned int cpu;
-    int error;
+    let mut cpu = 0;
+    let mut error = 0;
     cpu_maps_update_begin();
 //
 // Make certain the cpu I'm about to reboot on is online.
 //
 // This is inline to what migrate_to_reboot_cpu() already do.
 //
-    if (!cpu_online(primary_cpu))
+    if (!cpu_online(primary_cpu)) {
     primary_cpu = cpumask_first(cpu_online_mask);
+    }
     for_each_online_cpu(cpu) {
-    if (cpu == primary_cpu)
+    if (cpu == primary_cpu) {
     continue;
+    }
     error = cpu_down_maps_locked(cpu, CPUHP_OFFLINE);
     if (error) {
     pr_err("Failed to offline CPU%d - error=%d",
@@ -1426,7 +1441,7 @@ pub unsafe extern "C" fn smp_shutdown_nonboot_cpus(primary_cpu: c_uint) {
 //
 // Ensure all but the reboot CPU are offline.
 //
-    BUG_ON(num_online_cpus() > 1);
+// BUG_ON;
 //
 // Make sure the CPUs won't be enabled by someone else after this
 // point. Kexec will reboot to a new kernel shortly resetting
@@ -1445,10 +1460,8 @@ pub unsafe extern "C" fn smp_shutdown_nonboot_cpus(primary_cpu: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn notify_cpu_starting(cpu: c_uint) {
-    void notify_cpu_starting(unsigned int cpu)
-    {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut target: enum cpuhp_state = min((int)st.target, CPUHP_AP_ONLINE);
+pub static mut target: cpuhp_state = min((int)st.target, CPUHP_AP_ONLINE);
     rcutree_report_cpu_starting(cpu);	/* Enables RCU usage on this CPU. */
     cpumask_set_cpu(cpu, &cpus_booted_once_mask);
 //
@@ -1462,13 +1475,12 @@ pub unsafe extern "C" fn notify_cpu_starting(cpu: c_uint) {
 // online bringup to the hotplug thread.
 //
 #[no_mangle]
-pub unsafe extern "C" fn cpuhp_online_idle(state: enum cpuhp_state) {
-    void cpuhp_online_idle(enum cpuhp_state state)
-    {
+pub unsafe extern "C" fn cpuhp_online_idle(state: cpuhp_state) {
     struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
 // Happens for the boot cpu
-    if (state != CPUHP_AP_ONLINE_IDLE)
+    if (state != CPUHP_AP_ONLINE_IDLE) {
     return;
+    }
     cpuhp_ap_update_sync_state(SYNC_STATE_ONLINE);
 //
 // Unpark the stopper thread before we start the idle loop (and start
@@ -1480,12 +1492,10 @@ pub unsafe extern "C" fn cpuhp_online_idle(state: enum cpuhp_state) {
     }
 // Requires cpu_add_remove_lock to be held
 #[no_mangle]
-unsafe extern "C" fn _cpu_up(cpu: c_uint, tasks_frozen: c_int, target: enum cpuhp_state) -> c_int {
-    static int _cpu_up(unsigned int cpu, int tasks_frozen, enum cpuhp_state target)
-    {
+unsafe extern "C" fn _cpu_up(cpu: c_uint, tasks_frozen: c_int, target: cpuhp_state) -> c_int {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    struct task_struct *idle;
-    let mut ret: c_int = 0;
+    let mut idle = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     cpus_write_lock();
     if (!cpu_present(cpu)) {
     ret = -EINVAL;
@@ -1495,8 +1505,9 @@ unsafe extern "C" fn _cpu_up(cpu: c_uint, tasks_frozen: c_int, target: enum cpuh
 // The caller of cpu_up() might have raced with another
 // caller. Nothing to do.
 //
-    if (st.state >= target)
+    if (st.state >= target) {
     goto out;
+    }
     if (st.state == CPUHP_OFFLINE) {
 // Let it fail before we try to bring the cpu up
     idle = idle_thread_get(cpu);
@@ -1522,8 +1533,9 @@ unsafe extern "C" fn _cpu_up(cpu: c_uint, tasks_frozen: c_int, target: enum cpuh
 // The AP side has done the error rollback already. Just
 // return the error code..
 //
-    if (ret)
+    if (ret) {
     goto out;
+    }
     }
 //
 // Try to reach the target state. We max out on the BP at
@@ -1538,18 +1550,17 @@ unsafe extern "C" fn _cpu_up(cpu: c_uint, tasks_frozen: c_int, target: enum cpuh
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn cpu_up(cpu: c_uint, target: enum cpuhp_state) -> c_int {
-    static int cpu_up(unsigned int cpu, enum cpuhp_state target)
-    {
-    let mut err: c_int = 0;
+unsafe extern "C" fn cpu_up(cpu: c_uint, target: cpuhp_state) -> c_int {
+pub static mut err: c_int = 0;
     if (!cpu_possible(cpu)) {
     pr_err("can't online cpu %d because it is not configured as may-hotadd at boot time\n",
     cpu);
     return -EINVAL;
     }
     err = try_online_node(cpu_to_node(cpu));
-    if (err)
+    if (err) {
     return err;
+    }
     cpu_maps_update_begin();
     if (cpu_hotplug_disabled) {
     err = -EBUSY;
@@ -1576,21 +1587,17 @@ unsafe extern "C" fn cpu_up(cpu: c_uint, target: enum cpuhp_state) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_device_up(dev: *mut device) -> c_int {
-    int cpu_device_up(struct device *dev)
-    {
     return cpu_up(dev.id, CPUHP_ONLINE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn add_cpu(cpu: c_uint) -> c_int {
-    int add_cpu(unsigned int cpu)
-    {
-    int ret;
+    let mut ret = 0;
     lock_device_hotplug();
     ret = device_online(get_cpu_device(cpu));
     unlock_device_hotplug();
     return ret;
     }
-    EXPORT_SYMBOL_GPL(add_cpu);
+// EXPORT_SYMBOL_GPL;
 //
 // bringup_hibernate_cpu - Bring up the CPU that we hibernated on
 // @sleep_cpu: The cpu we hibernated on and should be brought up.
@@ -1603,9 +1610,7 @@ pub unsafe extern "C" fn add_cpu(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bringup_hibernate_cpu(sleep_cpu: c_uint) -> c_int {
-    int bringup_hibernate_cpu(unsigned int sleep_cpu)
-    {
-    int ret;
+    let mut ret = 0;
     if (!cpu_online(sleep_cpu)) {
     pr_info("Hibernated on a CPU that is offline! Bringing CPU up.\n");
     ret = cpu_up(sleep_cpu, CPUHP_ONLINE);
@@ -1619,7 +1624,7 @@ pub unsafe extern "C" fn bringup_hibernate_cpu(sleep_cpu: c_uint) -> c_int {
     static void __init cpuhp_bringup_mask(const struct cpumask *mask, unsigned int ncpus,
     enum cpuhp_state target)
     {
-    unsigned int cpu;
+    let mut cpu = 0;
     for_each_cpu(cpu, mask) {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
     if (cpu_up(cpu, target) && can_rollback_cpu(st)) {
@@ -1628,26 +1633,23 @@ pub unsafe extern "C" fn bringup_hibernate_cpu(sleep_cpu: c_uint) -> c_int {
 // rolled back to CPUHP_BP_KICK_AP for the final
 // online. Clean it up. NOOP if already rolled back.
 //
-    WARN_ON(cpuhp_invoke_callback_range(false, cpu, st, CPUHP_OFFLINE));
+// WARN_ON;
     }
-    if (!--ncpus)
+    if (!--ncpus) {
     break;
     }
     }
+    }
 
-    let mut __ro_after_init: static bool __cpuhp_parallel_bringup = true;
+pub static mut __ro_after_init: bool __cpuhp_parallel_bringup = true;
 #[no_mangle]
-unsafe extern "C" fn parallel_bringup_parse_param(arg: *mut c_char) -> int __init {
-    static int __init parallel_bringup_parse_param(char *arg)
-    {
+unsafe extern "C" fn parallel_bringup_parse_param(arg: *mut c_char) -> c_int {
     return kstrtobool(arg, &__cpuhp_parallel_bringup);
     }
     early_param("cpuhp.parallel", parallel_bringup_parse_param);
 
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_smt_aware() -> bool {
-    static inline bool cpuhp_smt_aware(void)
-    {
     return cpu_smt_max_threads > 1;
     }
     static inline const struct cpumask *cpuhp_get_primary_thread_mask(void)
@@ -1657,8 +1659,6 @@ pub unsafe extern "C" fn cpuhp_smt_aware() -> bool {
 
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_smt_aware() -> bool {
-    static inline bool cpuhp_smt_aware(void)
-    {
     return false;
     }
     static inline const struct cpumask *cpuhp_get_primary_thread_mask(void)
@@ -1668,8 +1668,6 @@ pub unsafe extern "C" fn cpuhp_smt_aware() -> bool {
 
 #[no_mangle]
 pub unsafe extern "C" fn arch_cpuhp_init_parallel_bringup() -> bool __weak {
-    bool __weak arch_cpuhp_init_parallel_bringup(void)
-    {
     return true;
     }
 //
@@ -1684,13 +1682,13 @@ pub unsafe extern "C" fn arch_cpuhp_init_parallel_bringup() -> bool __weak {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuhp_bringup_cpus_parallel(ncpus: c_uint) -> bool __init {
-    static bool __init cpuhp_bringup_cpus_parallel(unsigned int ncpus)
-    {
     const struct cpumask *mask = cpu_present_mask;
-    if (__cpuhp_parallel_bringup)
+    if (__cpuhp_parallel_bringup) {
     __cpuhp_parallel_bringup = arch_cpuhp_init_parallel_bringup();
-    if (!__cpuhp_parallel_bringup)
+    }
+    if (!__cpuhp_parallel_bringup) {
     return false;
+    }
     if (cpuhp_smt_aware()) {
     const struct cpumask *pmask = cpuhp_get_primary_thread_mask();
     static struct cpumask tmp_mask __initdata;
@@ -1704,8 +1702,9 @@ unsafe extern "C" fn cpuhp_bringup_cpus_parallel(ncpus: c_uint) -> bool __init {
     cpuhp_bringup_mask(&tmp_mask, ncpus, CPUHP_ONLINE);
 // Account for the online CPUs
     ncpus -= num_online_cpus();
-    if (!ncpus)
+    if (!ncpus) {
     return true;
+    }
 // Create the mask for secondary CPUs
     cpumask_andnot(&tmp_mask, mask, pmask);
     mask = &tmp_mask;
@@ -1716,17 +1715,18 @@ unsafe extern "C" fn cpuhp_bringup_cpus_parallel(ncpus: c_uint) -> bool __init {
     return true;
     }
 
-    static inline bool cpuhp_bringup_cpus_parallel(unsigned int ncpus) { return false; }
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_bringup_cpus_parallel() { return false; }
 
 #[no_mangle]
-pub unsafe extern "C" fn bringup_nonboot_cpus(max_cpus: c_uint) -> void __init {
-    void __init bringup_nonboot_cpus(unsigned int max_cpus)
-    {
-    if (!max_cpus)
+pub unsafe extern "C" fn bringup_nonboot_cpus(max_cpus: c_uint) -> c_int {
+    if (!max_cpus) {
     return;
+    }
 // Try parallel bringup optimization if enabled
-    if (cpuhp_bringup_cpus_parallel(max_cpus))
+    if (cpuhp_bringup_cpus_parallel(max_cpus)) {
     return;
+    }
 // Full per CPU serialized bringup
     cpuhp_bringup_mask(cpu_present_mask, max_cpus, CPUHP_ONLINE);
     }
@@ -1734,17 +1734,17 @@ pub unsafe extern "C" fn bringup_nonboot_cpus(max_cpus: c_uint) -> void __init {
     static cpumask_var_t frozen_cpus;
 #[no_mangle]
 pub unsafe extern "C" fn freeze_secondary_cpus(primary: c_int) -> c_int {
-    int freeze_secondary_cpus(int primary)
-    {
     int cpu, error = 0;
     cpu_maps_update_begin();
     if (primary == -1) {
     primary = cpumask_first(cpu_online_mask);
-    if (!housekeeping_cpu(primary, HK_TYPE_TIMER))
+    if (!housekeeping_cpu(primary, HK_TYPE_TIMER)) {
     primary = housekeeping_any_cpu(HK_TYPE_TIMER);
+    }
     } else {
-    if (!cpu_online(primary))
+    if (!cpu_online(primary)) {
     primary = cpumask_first(cpu_online_mask);
+    }
     }
 //
 // We take down all of the non-boot CPUs in one shot to avoid races
@@ -1753,8 +1753,9 @@ pub unsafe extern "C" fn freeze_secondary_cpus(primary: c_int) -> c_int {
     cpumask_clear(frozen_cpus);
     pr_info("Disabling non-boot CPUs ...\n");
     for (cpu = nr_cpu_ids - 1; cpu >= 0; cpu--) {
-    if (!cpu_online(cpu) || cpu == primary)
+    if (!cpu_online(cpu) || cpu == primary) {
     continue;
+    }
     if (pm_wakeup_pending()) {
     pr_info("Wakeup pending. Abort CPU freeze\n");
     error = -EBUSY;
@@ -1763,17 +1764,20 @@ pub unsafe extern "C" fn freeze_secondary_cpus(primary: c_int) -> c_int {
     trace_suspend_resume(TPS("CPU_OFF"), cpu, true);
     error = _cpu_down(cpu, 1, CPUHP_OFFLINE);
     trace_suspend_resume(TPS("CPU_OFF"), cpu, false);
-    if (!error)
+    if (!error) {
     cpumask_set_cpu(cpu, frozen_cpus);
+    }
     else {
     pr_err("Error taking CPU%d down: %d\n", cpu, error);
     break;
     }
     }
-    if (!error)
-    BUG_ON(num_online_cpus() > 1);
-    else
+    if (!error) {
+// BUG_ON;
+    }
+    else {
     pr_err("Non-boot CPUs are not disabled\n");
+    }
 //
 // Make sure the CPUs won't be enabled by someone else. We need to do
 // this even in case of failure as all freeze_secondary_cpus() users are
@@ -1785,24 +1789,19 @@ pub unsafe extern "C" fn freeze_secondary_cpus(primary: c_int) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_thaw_secondary_cpus_begin() -> void __weak {
-    void __weak arch_thaw_secondary_cpus_begin(void)
-    {
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_thaw_secondary_cpus_end() -> void __weak {
-    void __weak arch_thaw_secondary_cpus_end(void)
-    {
     }
 #[no_mangle]
 pub unsafe extern "C" fn thaw_secondary_cpus() {
-    void thaw_secondary_cpus(void)
-    {
     int cpu, error;
 // Allow everyone to use the CPU hotplug again
     cpu_maps_update_begin();
     __cpu_hotplug_enable();
-    if (cpumask_empty(frozen_cpus))
+    if (cpumask_empty(frozen_cpus)) {
     goto out;
+    }
     pr_info("Enabling non-boot CPUs ...\n");
     arch_thaw_secondary_cpus_begin();
     for_each_cpu(cpu, frozen_cpus) {
@@ -1821,14 +1820,13 @@ pub unsafe extern "C" fn thaw_secondary_cpus() {
     cpu_maps_update_done();
     }
 #[no_mangle]
-unsafe extern "C" fn alloc_frozen_cpus() -> int __init {
-    static int __init alloc_frozen_cpus(void)
-    {
-    if (!alloc_cpumask_var(&frozen_cpus, GFP_KERNEL|__GFP_ZERO))
+unsafe extern "C" fn alloc_frozen_cpus() -> c_int {
+    if (!alloc_cpumask_var(&frozen_cpus, GFP_KERNEL|__GFP_ZERO)) {
     return -ENOMEM;
+    }
     return 0;
     }
-    core_initcall(alloc_frozen_cpus);
+// core_initcall;
 //
 // When callbacks for CPU hotplug notifications are being executed, we must
 // ensure that the state of the system with respect to the tasks being frozen
@@ -1840,28 +1838,24 @@ unsafe extern "C" fn alloc_frozen_cpus() -> int __init {
 // hotplug and Suspend/Hibernate call paths by hooking onto the Suspend
 // Hibernate notifications.
 //
-    static int
-    cpu_hotplug_pm_callback(struct notifier_block *nb,
-    unsigned long action, void *ptr)
-    {
-    switch (action) {
-    case PM_SUSPEND_PREPARE:
-    case PM_HIBERNATION_PREPARE:
+#[no_mangle]
+pub unsafe extern "C" fn cpu_hotplug_pm_callback() {
+    match (action) {
+    PM_SUSPEND_PREPARE => {
+    PM_HIBERNATION_PREPARE => {
     cpu_hotplug_disable();
     break;
-    case PM_POST_SUSPEND:
-    case PM_POST_HIBERNATION:
+    PM_POST_SUSPEND => {
+    PM_POST_HIBERNATION => {
     cpu_hotplug_enable();
     break;
-    default:
+    _ => {
     return NOTIFY_DONE;
     }
     return NOTIFY_OK;
     }
 #[no_mangle]
-unsafe extern "C" fn cpu_hotplug_pm_sync_init() -> int __init {
-    static int __init cpu_hotplug_pm_sync_init(void)
-    {
+unsafe extern "C" fn cpu_hotplug_pm_sync_init() -> c_int {
 //
 // cpu_hotplug_pm_callback has higher priority than x86
 // bsp_pm_callback which depends on cpu_hotplug_pm_callback
@@ -1870,214 +1864,18 @@ unsafe extern "C" fn cpu_hotplug_pm_sync_init() -> int __init {
     pm_notifier(cpu_hotplug_pm_callback, 0);
     return 0;
     }
-    core_initcall(cpu_hotplug_pm_sync_init);
+// core_initcall;
 
-    int __boot_cpu_id;
+    let mut __boot_cpu_id = 0;
 
 // Boot processor state steps
-    static struct cpuhp_step cpuhp_hp_states[] = {
-    [CPUHP_OFFLINE] = {
-    .name			= "offline",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= core::ptr::null_mut(),
-    },
-
-    [CPUHP_CREATE_THREADS]= {
-    .name			= "threads:prepare",
-    .startup.single		= smpboot_create_threads,
-    .teardown.single	= core::ptr::null_mut(),
-    .cant_stop		= true,
-    },
-    [CPUHP_RANDOM_PREPARE] = {
-    .name			= "random:prepare",
-    .startup.single		= random_prepare_cpu,
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    [CPUHP_WORKQUEUE_PREP] = {
-    .name			= "workqueue:prepare",
-    .startup.single		= workqueue_prepare_cpu,
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    [CPUHP_HRTIMERS_PREPARE] = {
-    .name			= "hrtimers:prepare",
-    .startup.single		= hrtimers_prepare_cpu,
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    [CPUHP_SMPCFD_PREPARE] = {
-    .name			= "smpcfd:prepare",
-    .startup.single		= smpcfd_prepare_cpu,
-    .teardown.single	= smpcfd_dead_cpu,
-    },
-    [CPUHP_RELAY_PREPARE] = {
-    .name			= "relay:prepare",
-    .startup.single		= relay_prepare_cpu,
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    [CPUHP_RCUTREE_PREP] = {
-    .name			= "RCU/tree:prepare",
-    .startup.single		= rcutree_prepare_cpu,
-    .teardown.single	= rcutree_dead_cpu,
-    },
-//
-// On the tear-down path, timers_dead_cpu() must be invoked
-// before blk_mq_queue_reinit_notify() from notify_dead(),
-// otherwise a RCU stall occurs.
-//
-    [CPUHP_TIMERS_PREPARE] = {
-    .name			= "timers:prepare",
-    .startup.single		= timers_prepare_cpu,
-    .teardown.single	= timers_dead_cpu,
-    },
-
-//
-// Kicks the AP alive. AP will wait in cpuhp_ap_sync_alive() until
-// the next step will release it.
-//
-    [CPUHP_BP_KICK_AP] = {
-    .name			= "cpu:kick_ap",
-    .startup.single		= cpuhp_kick_ap_alive,
-    },
-//
-// Waits for the AP to reach cpuhp_ap_sync_alive() and then
-// releases it for the complete bringup.
-//
-    [CPUHP_BRINGUP_CPU] = {
-    .name			= "cpu:bringup",
-    .startup.single		= cpuhp_bringup_ap,
-    .teardown.single	= finish_cpu,
-    .cant_stop		= true,
-    },
-
-//
-// All-in-one CPU bringup state which includes the kick alive.
-//
-    [CPUHP_BRINGUP_CPU] = {
-    .name			= "cpu:bringup",
-    .startup.single		= bringup_cpu,
-    .teardown.single	= finish_cpu,
-    .cant_stop		= true,
-    },
-
-// Final state before CPU kills itself
-    [CPUHP_AP_IDLE_DEAD] = {
-    .name			= "idle:dead",
-    },
-//
-// Last state before CPU enters the idle loop to die. Transient state
-// for synchronization.
-//
-    [CPUHP_AP_OFFLINE] = {
-    .name			= "ap:offline",
-    .cant_stop		= true,
-    },
-// First state is scheduler control. Interrupts are disabled
-    [CPUHP_AP_SCHED_STARTING] = {
-    .name			= "sched:starting",
-    .startup.single		= sched_cpu_starting,
-    .teardown.single	= sched_cpu_dying,
-    },
-    [CPUHP_AP_RCUTREE_DYING] = {
-    .name			= "RCU/tree:dying",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= rcutree_dying_cpu,
-    },
-    [CPUHP_AP_SMPCFD_DYING] = {
-    .name			= "smpcfd:dying",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= smpcfd_dying_cpu,
-    },
-    [CPUHP_AP_HRTIMERS_DYING] = {
-    .name			= "hrtimers:dying",
-    .startup.single		= hrtimers_cpu_starting,
-    .teardown.single	= hrtimers_cpu_dying,
-    },
-    [CPUHP_AP_TICK_DYING] = {
-    .name			= "tick:dying",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= tick_cpu_dying,
-    },
-// Entry state on starting. Interrupts enabled from here on. Transient
-// state for synchronsization
-    [CPUHP_AP_ONLINE] = {
-    .name			= "ap:online",
-    },
-//
-// Handled on control processor until the plugged processor manages
-// this itself.
-//
-    [CPUHP_TEARDOWN_CPU] = {
-    .name			= "cpu:teardown",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= takedown_cpu,
-    .cant_stop		= true,
-    },
-    [CPUHP_AP_SCHED_WAIT_EMPTY] = {
-    .name			= "sched:waitempty",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= sched_cpu_wait_empty,
-    },
-// Handle smpboot threads park/unpark
-    [CPUHP_AP_SMPBOOT_THREADS] = {
-    .name			= "smpboot/threads:online",
-    .startup.single		= smpboot_unpark_threads,
-    .teardown.single	= smpboot_park_threads,
-    },
-    [CPUHP_AP_IRQ_AFFINITY_ONLINE] = {
-    .name			= "irq/affinity:online",
-    .startup.single		= irq_affinity_online_cpu,
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    [CPUHP_AP_PERF_ONLINE] = {
-    .name			= "perf:online",
-    .startup.single		= perf_event_init_cpu,
-    .teardown.single	= perf_event_exit_cpu,
-    },
-    [CPUHP_AP_WATCHDOG_ONLINE] = {
-    .name			= "lockup_detector:online",
-    .startup.single		= lockup_detector_online_cpu,
-    .teardown.single	= lockup_detector_offline_cpu,
-    },
-    [CPUHP_AP_WORKQUEUE_ONLINE] = {
-    .name			= "workqueue:online",
-    .startup.single		= workqueue_online_cpu,
-    .teardown.single	= workqueue_offline_cpu,
-    },
-    [CPUHP_AP_RANDOM_ONLINE] = {
-    .name			= "random:online",
-    .startup.single		= random_online_cpu,
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    [CPUHP_AP_RCUTREE_ONLINE] = {
-    .name			= "RCU/tree:online",
-    .startup.single		= rcutree_online_cpu,
-    .teardown.single	= rcutree_offline_cpu,
-    },
-
-//
-// The dynamically registered state space is here
-//
-
-// Last state is scheduler control setting the cpu active
-    [CPUHP_AP_ACTIVE] = {
-    .name			= "sched:active",
-    .startup.single		= sched_cpu_activate,
-    .teardown.single	= sched_cpu_deactivate,
-    },
-
-// CPU is fully up and running.
-    [CPUHP_ONLINE] = {
-    .name			= "online",
-    .startup.single		= core::ptr::null_mut(),
-    .teardown.single	= core::ptr::null_mut(),
-    },
-    };
+pub static mut cpuhp_step: usize = 0;
 // Sanity check for callbacks
 #[no_mangle]
-unsafe extern "C" fn cpuhp_cb_check(state: enum cpuhp_state) -> c_int {
-    static int cpuhp_cb_check(enum cpuhp_state state)
-    {
-    if (state <= CPUHP_OFFLINE || state >= CPUHP_ONLINE)
+unsafe extern "C" fn cpuhp_cb_check(state: cpuhp_state) -> c_int {
+    if (state <= CPUHP_OFFLINE || state >= CPUHP_ONLINE) {
     return -EINVAL;
+    }
     return 0;
     }
 //
@@ -2086,38 +1884,34 @@ unsafe extern "C" fn cpuhp_cb_check(state: enum cpuhp_state) -> c_int {
 // by having no name assigned.
 //
 #[no_mangle]
-unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
-    static int cpuhp_reserve_state(enum cpuhp_state state)
-    {
+unsafe extern "C" fn cpuhp_reserve_state(state: cpuhp_state) -> c_int {
     enum cpuhp_state i, end;
-    struct cpuhp_step *step;
-    switch (state) {
-    case CPUHP_AP_ONLINE_DYN:
+    let mut step = core::ptr::null_mut();
+    match (state) {
+    CPUHP_AP_ONLINE_DYN => {
     step = cpuhp_hp_states + CPUHP_AP_ONLINE_DYN;
     end = CPUHP_AP_ONLINE_DYN_END;
     break;
-    case CPUHP_BP_PREPARE_DYN:
+    CPUHP_BP_PREPARE_DYN => {
     step = cpuhp_hp_states + CPUHP_BP_PREPARE_DYN;
     end = CPUHP_BP_PREPARE_DYN_END;
     break;
-    default:
+    _ => {
     return -EINVAL;
     }
     for (i = state; i <= end; i++, step++) {
-    if (!step.name)
+    if (!step.name) {
     return i;
     }
-    WARN(1, "No more dynamic states available for CPU hotplug\n");
+    }
+// WARN;
     return -ENOSPC;
     }
-    static int cpuhp_store_callbacks(enum cpuhp_state state, const char *name,
-    int (*startup)(unsigned int cpu),
-    int (*teardown)(unsigned int cpu),
-    bool multi_instance)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_store_callbacks() {
 // (Un)Install the callbacks for further cpu hotplug operations
-    struct cpuhp_step *sp;
-    let mut ret: c_int = 0;
+    let mut sp = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 //
 // If name is NULL, then the state gets removed.
 //
@@ -2130,59 +1924,63 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
     if (name && (state == CPUHP_AP_ONLINE_DYN ||
     state == CPUHP_BP_PREPARE_DYN)) {
     ret = cpuhp_reserve_state(state);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     state = ret;
     }
     sp = cpuhp_get_step(state);
-    if (name && sp.name)
+    if (name && sp.name) {
     return -EBUSY;
+    }
     sp.startup.single = startup;
     sp.teardown.single = teardown;
     sp.name = name;
     sp.multi_instance = multi_instance;
-    INIT_HLIST_HEAD(&sp.list);
+// INIT_HLIST_HEAD;
     return ret;
     }
-    static void *cpuhp_get_teardown_cb(enum cpuhp_state state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_get_teardown_cb() {
     return cpuhp_get_step(state).teardown.single;
     }
 //
 // Call the startup/teardown function for a step either on the AP or
 // on the current CPU.
 //
-    static int cpuhp_issue_call(int cpu, enum cpuhp_state state, bool bringup,
-    struct hlist_node *node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_issue_call() {
     struct cpuhp_step *sp = cpuhp_get_step(state);
-    int ret;
+    let mut ret = 0;
 //
 // If there's nothing to do, we done.
 // Relies on the union for multi_instance.
 //
-    if (cpuhp_step_empty(bringup, sp))
+    if (cpuhp_step_empty(bringup, sp)) {
     return 0;
+    }
 //
 // The non AP bound callbacks can fail on bringup. On teardown
 // e.g. module removal we crash for now.
 //
 
-    if (cpuhp_is_ap_state(state))
+    if (cpuhp_is_ap_state(state)) {
     ret = cpuhp_invoke_ap_callback(cpu, state, bringup, node);
-    else
+    }
+    else {
     ret = cpuhp_invoke_callback(cpu, state, bringup, node, core::ptr::null_mut());
+    }
 
     if (cpuhp_is_atomic_state(state)) {
     guard(irqsave)();
     ret = cpuhp_invoke_callback(cpu, state, bringup, node, core::ptr::null_mut());
 // STARTING/DYING must not fail!
-    WARN_ON_ONCE(ret);
+// WARN_ON_ONCE;
     } else {
     ret = cpuhp_invoke_callback(cpu, state, bringup, node, core::ptr::null_mut());
     }
 
-    BUG_ON(ret && !bringup);
+// BUG_ON;
     return ret;
     }
 //
@@ -2190,48 +1988,51 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
 //
 // Note: The teardown callbacks for rollback are not allowed to fail!
 //
-    static void cpuhp_rollback_install(int failedcpu, enum cpuhp_state state,
-    struct hlist_node *node)
-    {
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn cpuhp_rollback_install() {
+    let mut cpu = 0;
 // Roll back the already executed steps on the other cpus
     for_each_present_cpu(cpu) {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut cpustate: c_int = st.state;
-    if (cpu >= failedcpu)
+pub static mut cpustate: c_int = st.state;
+    if (cpu >= failedcpu) {
     break;
+    }
 // Did we invoke the startup call on that cpu ?
-    if (cpustate >= state)
+    if (cpustate >= state) {
     cpuhp_issue_call(cpu, state, false, node);
     }
     }
-    int __cpuhp_state_add_instance_cpuslocked(enum cpuhp_state state,
-    struct hlist_node *node,
-    bool invoke)
-    {
-    struct cpuhp_step *sp;
-    int cpu;
-    int ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __cpuhp_state_add_instance_cpuslocked() {
+    let mut sp = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut ret = 0;
     lockdep_assert_cpus_held();
     sp = cpuhp_get_step(state);
-    if (sp.multi_instance == false)
+    if (sp.multi_instance == false) {
     return -EINVAL;
+    }
     mutex_lock(&cpuhp_state_mutex);
-    if (!invoke || !sp.startup.multi)
+    if (!invoke || !sp.startup.multi) {
     goto add_node;
+    }
 //
 // Try to call the startup callback for each present cpu
 // depending on the hotplug state of the cpu.
 //
     for_each_present_cpu(cpu) {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut cpustate: c_int = st.state;
-    if (cpustate < state)
+pub static mut cpustate: c_int = st.state;
+    if (cpustate < state) {
     continue;
+    }
     ret = cpuhp_issue_call(cpu, state, true, node);
     if (ret) {
-    if (sp.teardown.multi)
+    if (sp.teardown.multi) {
     cpuhp_rollback_install(cpu, state, node);
+    }
     goto unlock;
     }
     }
@@ -2242,16 +2043,15 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
     mutex_unlock(&cpuhp_state_mutex);
     return ret;
     }
-    int __cpuhp_state_add_instance(enum cpuhp_state state, struct hlist_node *node,
-    bool invoke)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __cpuhp_state_add_instance() {
+    let mut ret = 0;
     cpus_read_lock();
     ret = __cpuhp_state_add_instance_cpuslocked(state, node, invoke);
     cpus_read_unlock();
     return ret;
     }
-    EXPORT_SYMBOL_GPL(__cpuhp_state_add_instance);
+// EXPORT_SYMBOL_GPL;
 //
 // __cpuhp_setup_state_cpuslocked - Setup the callbacks for an hotplug machine state
 // @state:		The state to setup
@@ -2270,17 +2070,14 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
 // 0 for all other states
 // On failure: proper (negative) error code
 //
-    int __cpuhp_setup_state_cpuslocked(enum cpuhp_state state,
-    const char *name, bool invoke,
-    int (*startup)(unsigned int cpu),
-    int (*teardown)(unsigned int cpu),
-    bool multi_instance)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __cpuhp_setup_state_cpuslocked() {
     int cpu, ret = 0;
-    bool dynstate;
+    let mut dynstate = 0;
     lockdep_assert_cpus_held();
-    if (cpuhp_cb_check(state) || !name)
+    if (cpuhp_cb_check(state) || !name) {
     return -EINVAL;
+    }
     mutex_lock(&cpuhp_state_mutex);
     ret = cpuhp_store_callbacks(state, name, startup, teardown,
     multi_instance);
@@ -2289,21 +2086,24 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
     state = ret;
     ret = 0;
     }
-    if (ret || !invoke || !startup)
+    if (ret || !invoke || !startup) {
     goto out;
+    }
 //
 // Try to call the startup callback for each present cpu
 // depending on the hotplug state of the cpu.
 //
     for_each_present_cpu(cpu) {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut cpustate: c_int = st.state;
-    if (cpustate < state)
+pub static mut cpustate: c_int = st.state;
+    if (cpustate < state) {
     continue;
+    }
     ret = cpuhp_issue_call(cpu, state, true, core::ptr::null_mut());
     if (ret) {
-    if (teardown)
+    if (teardown) {
     cpuhp_rollback_install(cpu, state, core::ptr::null_mut());
+    }
     cpuhp_store_callbacks(state, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), false);
     goto out;
     }
@@ -2314,37 +2114,35 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
 // If the requested state is CPUHP_AP_ONLINE_DYN or CPUHP_BP_PREPARE_DYN,
 // return the dynamically allocated state in case of success.
 //
-    if (!ret && dynstate)
+    if (!ret && dynstate) {
     return state;
+    }
     return ret;
     }
-    EXPORT_SYMBOL(__cpuhp_setup_state_cpuslocked);
-    int __cpuhp_setup_state(enum cpuhp_state state,
-    const char *name, bool invoke,
-    int (*startup)(unsigned int cpu),
-    int (*teardown)(unsigned int cpu),
-    bool multi_instance)
-    {
-    int ret;
+// EXPORT_SYMBOL;
+#[no_mangle]
+pub unsafe extern "C" fn __cpuhp_setup_state() {
+    let mut ret = 0;
     cpus_read_lock();
     ret = __cpuhp_setup_state_cpuslocked(state, name, invoke, startup,
     teardown, multi_instance);
     cpus_read_unlock();
     return ret;
     }
-    EXPORT_SYMBOL(__cpuhp_setup_state);
-    int __cpuhp_state_remove_instance(enum cpuhp_state state,
-    struct hlist_node *node, bool invoke)
-    {
+// EXPORT_SYMBOL;
+#[no_mangle]
+pub unsafe extern "C" fn __cpuhp_state_remove_instance() {
     struct cpuhp_step *sp = cpuhp_get_step(state);
-    int cpu;
-    BUG_ON(cpuhp_cb_check(state));
-    if (!sp.multi_instance)
+    let mut cpu = 0;
+// BUG_ON;
+    if (!sp.multi_instance) {
     return -EINVAL;
+    }
     cpus_read_lock();
     mutex_lock(&cpuhp_state_mutex);
-    if (!invoke || !cpuhp_get_teardown_cb(state))
+    if (!invoke || !cpuhp_get_teardown_cb(state)) {
     goto remove;
+    }
 //
 // Call the teardown callback for each present cpu depending
 // on the hotplug state of the cpu. This function is not
@@ -2352,9 +2150,10 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
 //
     for_each_present_cpu(cpu) {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut cpustate: c_int = st.state;
-    if (cpustate >= state)
+pub static mut cpustate: c_int = st.state;
+    if (cpustate >= state) {
     cpuhp_issue_call(cpu, state, false, node);
+    }
     }
     remove:
     hlist_del(node);
@@ -2362,7 +2161,7 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
     cpus_read_unlock();
     return 0;
     }
-    EXPORT_SYMBOL_GPL(__cpuhp_state_remove_instance);
+// EXPORT_SYMBOL_GPL;
 //
 // __cpuhp_remove_state_cpuslocked - Remove the callbacks for an hotplug machine state
 // @state:	The state to remove
@@ -2374,12 +2173,10 @@ unsafe extern "C" fn cpuhp_reserve_state(state: enum cpuhp_state) -> c_int {
 // about module removal!
 //
 #[no_mangle]
-pub unsafe extern "C" fn __cpuhp_remove_state_cpuslocked(state: enum cpuhp_state, invoke: bool) {
-    void __cpuhp_remove_state_cpuslocked(enum cpuhp_state state, bool invoke)
-    {
+pub unsafe extern "C" fn __cpuhp_remove_state_cpuslocked(state: cpuhp_state, invoke: bool) {
     struct cpuhp_step *sp = cpuhp_get_step(state);
-    int cpu;
-    BUG_ON(cpuhp_cb_check(state));
+    let mut cpu = 0;
+// BUG_ON;
     lockdep_assert_cpus_held();
     mutex_lock(&cpuhp_state_mutex);
     if (sp.multi_instance) {
@@ -2388,8 +2185,9 @@ pub unsafe extern "C" fn __cpuhp_remove_state_cpuslocked(state: enum cpuhp_state
     state);
     goto remove;
     }
-    if (!invoke || !cpuhp_get_teardown_cb(state))
+    if (!invoke || !cpuhp_get_teardown_cb(state)) {
     goto remove;
+    }
 //
 // Call the teardown callback for each present cpu depending
 // on the hotplug state of the cpu. This function is not
@@ -2397,29 +2195,26 @@ pub unsafe extern "C" fn __cpuhp_remove_state_cpuslocked(state: enum cpuhp_state
 //
     for_each_present_cpu(cpu) {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-    let mut cpustate: c_int = st.state;
-    if (cpustate >= state)
+pub static mut cpustate: c_int = st.state;
+    if (cpustate >= state) {
     cpuhp_issue_call(cpu, state, false, core::ptr::null_mut());
+    }
     }
     remove:
     cpuhp_store_callbacks(state, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), false);
     mutex_unlock(&cpuhp_state_mutex);
     }
-    EXPORT_SYMBOL(__cpuhp_remove_state_cpuslocked);
+// EXPORT_SYMBOL;
 #[no_mangle]
-pub unsafe extern "C" fn __cpuhp_remove_state(state: enum cpuhp_state, invoke: bool) {
-    void __cpuhp_remove_state(enum cpuhp_state state, bool invoke)
-    {
+pub unsafe extern "C" fn __cpuhp_remove_state(state: cpuhp_state, invoke: bool) {
     cpus_read_lock();
     __cpuhp_remove_state_cpuslocked(state, invoke);
     cpus_read_unlock();
     }
-    EXPORT_SYMBOL(__cpuhp_remove_state);
+// EXPORT_SYMBOL;
 
 #[no_mangle]
 unsafe extern "C" fn cpuhp_offline_cpu_device(cpu: c_uint) {
-    static void cpuhp_offline_cpu_device(unsigned int cpu)
-    {
     struct device *dev = get_cpu_device(cpu);
     dev_set_offline(dev);
 // Tell user space about the state change
@@ -2427,31 +2222,30 @@ unsafe extern "C" fn cpuhp_offline_cpu_device(cpu: c_uint) {
     }
 #[no_mangle]
 unsafe extern "C" fn cpuhp_online_cpu_device(cpu: c_uint) {
-    static void cpuhp_online_cpu_device(unsigned int cpu)
-    {
     struct device *dev = get_cpu_device(cpu);
     dev_clear_offline(dev);
 // Tell user space about the state change
     kobject_uevent(&dev.kobj, KOBJ_ONLINE);
     }
 #[no_mangle]
-pub unsafe extern "C" fn cpuhp_smt_disable(ctrlval: enum cpuhp_smt_control) -> c_int {
-    int cpuhp_smt_disable(enum cpuhp_smt_control ctrlval)
-    {
+pub unsafe extern "C" fn cpuhp_smt_disable(ctrlval: cpuhp_smt_control) -> c_int {
     int cpu, ret = 0;
     cpu_maps_update_begin();
     for_each_online_cpu(cpu) {
-    if (topology_is_primary_thread(cpu))
+    if (topology_is_primary_thread(cpu)) {
     continue;
+    }
 //
 // Disable can be called with CPU_SMT_ENABLED when changing
 // from a higher to lower number of SMT threads per core.
 //
-    if (ctrlval == CPU_SMT_ENABLED && cpu_smt_thread_allowed(cpu))
+    if (ctrlval == CPU_SMT_ENABLED && cpu_smt_thread_allowed(cpu)) {
     continue;
+    }
     ret = cpu_down_maps_locked(cpu, CPUHP_OFFLINE);
-    if (ret)
+    if (ret) {
     break;
+    }
 //
 // As this needs to hold the cpu maps lock it's impossible
 // to call device_offline() because that ends up calling
@@ -2467,8 +2261,9 @@ pub unsafe extern "C" fn cpuhp_smt_disable(ctrlval: enum cpuhp_smt_control) -> c
 //
     cpuhp_offline_cpu_device(cpu);
     }
-    if (!ret)
+    if (!ret) {
     cpu_smt_control = ctrlval;
+    }
     cpu_maps_update_done();
     return ret;
     }
@@ -2476,27 +2271,26 @@ pub unsafe extern "C" fn cpuhp_smt_disable(ctrlval: enum cpuhp_smt_control) -> c
 
 #[no_mangle]
 pub unsafe extern "C" fn topology_is_core_online(cpu: c_uint) -> bool {
-    static inline bool topology_is_core_online(unsigned int cpu)
-    {
     return true;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn cpuhp_smt_enable() -> c_int {
-    int cpuhp_smt_enable(void)
-    {
     int cpu, ret = 0;
     cpu_maps_update_begin();
     cpu_smt_control = CPU_SMT_ENABLED;
     for_each_present_cpu(cpu) {
 // Skip online CPUs and CPUs on offline nodes
-    if (cpu_online(cpu) || !node_online(cpu_to_node(cpu)))
+    if (cpu_online(cpu) || !node_online(cpu_to_node(cpu))) {
     continue;
-    if (!cpu_smt_thread_allowed(cpu) || !topology_is_core_online(cpu))
+    }
+    if (!cpu_smt_thread_allowed(cpu) || !topology_is_core_online(cpu)) {
     continue;
+    }
     ret = _cpu_up(cpu, 0, CPUHP_ONLINE);
-    if (ret)
+    if (ret) {
     break;
+    }
 // See comment in cpuhp_smt_disable()
     cpuhp_online_cpu_device(cpu);
     }
@@ -2504,40 +2298,44 @@ pub unsafe extern "C" fn cpuhp_smt_enable() -> c_int {
     return ret;
     }
 
-    static ssize_t state_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn state_show() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, dev.id);
     return sprintf(buf, "%d\n", st.state);
     }
-    static DEVICE_ATTR_RO(state);
-    static ssize_t target_store(struct device *dev, struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
+// static DEVICE_ATTR_RO(state);
+#[no_mangle]
+pub unsafe extern "C" fn target_store() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, dev.id);
-    struct cpuhp_step *sp;
+    let mut sp = core::ptr::null_mut();
     int target, ret;
     ret = kstrtoint(buf, 10, &target);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 
-    if (target < CPUHP_OFFLINE || target > CPUHP_ONLINE)
+    if (target < CPUHP_OFFLINE || target > CPUHP_ONLINE) {
     return -EINVAL;
+    }
 
-    if (target != CPUHP_OFFLINE && target != CPUHP_ONLINE)
+    if (target != CPUHP_OFFLINE && target != CPUHP_ONLINE) {
     return -EINVAL;
+    }
 
     ret = lock_device_hotplug_sysfs();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&cpuhp_state_mutex);
     sp = cpuhp_get_step(target);
     ret = !sp.name || sp.cant_stop ? -EINVAL : 0;
     mutex_unlock(&cpuhp_state_mutex);
-    if (ret)
+    if (ret) {
     goto out;
-    if (st.state < target)
+    }
+    if (st.state < target) {
     ret = cpu_up(dev.id, target);
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(target: st->state >) -> else {
     else if (st.state > target)
@@ -2550,114 +2348,109 @@ pub unsafe extern "C" fn if(target): WARN_ON(st->target !=) -> else {
     unlock_device_hotplug();
     return ret ? ret : count;
     }
-    static ssize_t target_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn target_show() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, dev.id);
     return sprintf(buf, "%d\n", st.target);
     }
-    static DEVICE_ATTR_RW(target);
-    static ssize_t fail_store(struct device *dev, struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
+// static DEVICE_ATTR_RW(target);
+#[no_mangle]
+pub unsafe extern "C" fn fail_store() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, dev.id);
-    struct cpuhp_step *sp;
+    let mut sp = core::ptr::null_mut();
     int fail, ret;
     ret = kstrtoint(buf, 10, &fail);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (fail == CPUHP_INVALID) {
     st.fail = fail;
     return count;
     }
-    if (fail < CPUHP_OFFLINE || fail > CPUHP_ONLINE)
+    if (fail < CPUHP_OFFLINE || fail > CPUHP_ONLINE) {
     return -EINVAL;
+    }
 //
 // Cannot fail STARTING/DYING callbacks.
 //
-    if (cpuhp_is_atomic_state(fail))
+    if (cpuhp_is_atomic_state(fail)) {
     return -EINVAL;
+    }
 //
 // DEAD callbacks cannot fail...
 // ... neither can CPUHP_BRINGUP_CPU during hotunplug. The latter
 // triggering STARTING callbacks, a failure in this state would
 // hinder rollback.
 //
-    if (fail <= CPUHP_BRINGUP_CPU && st.state > CPUHP_BRINGUP_CPU)
+    if (fail <= CPUHP_BRINGUP_CPU && st.state > CPUHP_BRINGUP_CPU) {
     return -EINVAL;
+    }
 //
 // Cannot fail anything that doesn't have callbacks.
 //
     mutex_lock(&cpuhp_state_mutex);
     sp = cpuhp_get_step(fail);
-    if (!sp.startup.single && !sp.teardown.single)
+    if (!sp.startup.single && !sp.teardown.single) {
     ret = -EINVAL;
+    }
     mutex_unlock(&cpuhp_state_mutex);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     st.fail = fail;
     return count;
     }
-    static ssize_t fail_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fail_show() {
     struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, dev.id);
     return sprintf(buf, "%d\n", st.fail);
     }
-    static DEVICE_ATTR_RW(fail);
+// static DEVICE_ATTR_RW(fail);
     static struct attribute *cpuhp_cpu_attrs[] = {
     &dev_attr_state.attr,
     &dev_attr_target.attr,
     &dev_attr_fail.attr,
     core::ptr::null_mut()
     };
-    static const struct attribute_group cpuhp_cpu_attr_group = {
-    .attrs = cpuhp_cpu_attrs,
-    .name = "hotplug",
-    };
+pub static mut attribute_group: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn states_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> isize {
-    static ssize_t states_show(struct device *dev, struct device_attribute *attr, char *buf)
-    {
-    let mut res: isize = 0;
-    int i;
+pub static mut res: isize = 0;
+    let mut i = 0;
     mutex_lock(&cpuhp_state_mutex);
     for (i = CPUHP_OFFLINE; i <= CPUHP_ONLINE; i++) {
     struct cpuhp_step *sp = cpuhp_get_step(i);
-    if (sp.name)
+    if (sp.name) {
     res += sysfs_emit_at(buf, res, "%3d: %s\n", i, sp.name);
+    }
     }
     mutex_unlock(&cpuhp_state_mutex);
     return res;
     }
-    static DEVICE_ATTR_RO(states);
+// static DEVICE_ATTR_RO(states);
     static struct attribute *cpuhp_cpu_root_attrs[] = {
     &dev_attr_states.attr,
     core::ptr::null_mut()
     };
-    static const struct attribute_group cpuhp_cpu_root_attr_group = {
-    .attrs = cpuhp_cpu_root_attrs,
-    .name = "hotplug",
-    };
+pub static mut attribute_group: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn cpu_smt_num_threads_valid(threads: c_uint) -> bool {
-    static bool cpu_smt_num_threads_valid(unsigned int threads)
-    {
-    if (IS_ENABLED(CONFIG_SMT_NUM_THREADS_DYNAMIC))
+    if (IS_ENABLED(CONFIG_SMT_NUM_THREADS_DYNAMIC)) {
     return threads >= 1 && threads <= cpu_smt_max_threads;
-    let mut threads: return = = 1 || threads == cpu_smt_max_threads;
     }
-    static ssize_t
-    __store_smt_control(struct device *dev, struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
+pub static mut threads: return = = 1 || threads == cpu_smt_max_threads;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __store_smt_control() {
     int ctrlval, ret, num_threads, orig_threads;
-    bool force_off;
-    if (cpu_smt_control == CPU_SMT_FORCE_DISABLED)
+    let mut force_off = 0;
+    if (cpu_smt_control == CPU_SMT_FORCE_DISABLED) {
     return -EPERM;
-    if (cpu_smt_control == CPU_SMT_NOT_SUPPORTED)
+    }
+    if (cpu_smt_control == CPU_SMT_NOT_SUPPORTED) {
     return -ENODEV;
+    }
     if (sysfs_streq(buf, "on")) {
     ctrlval = CPU_SMT_ENABLED;
     num_threads = cpu_smt_max_threads;
@@ -2668,25 +2461,29 @@ unsafe extern "C" fn cpu_smt_num_threads_valid(threads: c_uint) -> bool {
     ctrlval = CPU_SMT_FORCE_DISABLED;
     num_threads = 1;
     } else if (kstrtoint(buf, 10, &num_threads) == 0) {
-    if (num_threads == 1)
+    if (num_threads == 1) {
     ctrlval = CPU_SMT_DISABLED;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(_arg: cpu_smt_num_threads_valid(num_threads)) -> else {
     else if (cpu_smt_num_threads_valid(num_threads))
     ctrlval = CPU_SMT_ENABLED;
-    else
+    else {
     return -EINVAL;
+    }
     } else {
     return -EINVAL;
     }
     ret = lock_device_hotplug_sysfs();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     orig_threads = cpu_smt_num_threads;
     cpu_smt_num_threads = num_threads;
     force_off = ctrlval != cpu_smt_control && ctrlval == CPU_SMT_FORCE_DISABLED;
-    if (num_threads > orig_threads)
+    if (num_threads > orig_threads) {
     ret = cpuhp_smt_enable();
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(force_off: num_threads < orig_threads ||) -> else {
     else if (num_threads < orig_threads || force_off)
@@ -2695,10 +2492,8 @@ pub unsafe extern "C" fn if(force_off: num_threads < orig_threads ||) -> else {
     return ret ? ret : count;
     }
 
-    static ssize_t
-    __store_smt_control(struct device *dev, struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __store_smt_control() {
     return -ENODEV;
     }
 
@@ -2709,9 +2504,8 @@ pub unsafe extern "C" fn if(force_off: num_threads < orig_threads ||) -> else {
     [CPU_SMT_NOT_SUPPORTED]		= "notsupported",
     [CPU_SMT_NOT_IMPLEMENTED]	= "notimplemented",
     };
-    static ssize_t control_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn control_show() {
     const char *state = smt_states[cpu_smt_control];
 
 //
@@ -2725,33 +2519,26 @@ pub unsafe extern "C" fn if(force_off: num_threads < orig_threads ||) -> else {
 
     return sysfs_emit(buf, "%s\n", state);
     }
-    static ssize_t control_store(struct device *dev, struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn control_store() {
     return __store_smt_control(dev, attr, buf, count);
     }
-    static DEVICE_ATTR_RW(control);
-    static ssize_t active_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+// static DEVICE_ATTR_RW(control);
+#[no_mangle]
+pub unsafe extern "C" fn active_show() {
     return sysfs_emit(buf, "%d\n", sched_smt_active());
     }
-    static DEVICE_ATTR_RO(active);
+// static DEVICE_ATTR_RO(active);
     static struct attribute *cpuhp_smt_attrs[] = {
     &dev_attr_control.attr,
     &dev_attr_active.attr,
     core::ptr::null_mut()
     };
-    static const struct attribute_group cpuhp_smt_attr_group = {
-    .attrs = cpuhp_smt_attrs,
-    .name = "smt",
-    };
+pub static mut attribute_group: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn cpu_smt_sysfs_init() -> int __init {
-    static int __init cpu_smt_sysfs_init(void)
-    {
-    struct device *dev_root;
-    let mut ret: c_int = -ENODEV;
+unsafe extern "C" fn cpu_smt_sysfs_init() -> c_int {
+    let mut dev_root = core::ptr::null_mut();
+pub static mut ret: c_int = -ENODEV;
     dev_root = bus_get_dev_root(&cpu_subsys);
     if (dev_root) {
     ret = sysfs_create_group(&dev_root.kobj, &cpuhp_smt_attr_group);
@@ -2760,32 +2547,34 @@ unsafe extern "C" fn cpu_smt_sysfs_init() -> int __init {
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn cpuhp_sysfs_init() -> int __init {
-    static int __init cpuhp_sysfs_init(void)
-    {
-    struct device *dev_root;
+unsafe extern "C" fn cpuhp_sysfs_init() -> c_int {
+    let mut dev_root = core::ptr::null_mut();
     int cpu, ret;
     ret = cpu_smt_sysfs_init();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     dev_root = bus_get_dev_root(&cpu_subsys);
     if (dev_root) {
     ret = sysfs_create_group(&dev_root.kobj, &cpuhp_cpu_root_attr_group);
     put_device(dev_root);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     for_each_possible_cpu(cpu) {
     struct device *dev = get_cpu_device(cpu);
-    if (!dev)
+    if (!dev) {
     continue;
+    }
     ret = sysfs_create_group(&dev.kobj, &cpuhp_cpu_attr_group);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return 0;
     }
-    device_initcall(cpuhp_sysfs_init);
+// device_initcall;
 
 //
 // cpu_bit_bitmap[] is a special, "compressed" data structure that
@@ -2804,48 +2593,42 @@ unsafe extern "C" fn cpuhp_sysfs_init() -> int __init {
     MASK_DECLARE_8(48),	MASK_DECLARE_8(56),
 
     };
-    EXPORT_SYMBOL_GPL(cpu_bit_bitmap);
+// EXPORT_SYMBOL_GPL;
     const DECLARE_BITMAP(cpu_all_bits, NR_CPUS) = CPU_BITS_ALL;
-    EXPORT_SYMBOL(cpu_all_bits);
+// EXPORT_SYMBOL;
 
     struct cpumask __cpu_possible_mask __ro_after_init
     = {CPU_BITS_ALL};
-    let mut __ro_after_init: unsigned int __num_possible_cpus = NR_CPUS;
+pub static mut __ro_after_init: unsigned int __num_possible_cpus = NR_CPUS;
 
     struct cpumask __cpu_possible_mask __ro_after_init;
     unsigned int __num_possible_cpus __ro_after_init;
 
-    EXPORT_SYMBOL(__cpu_possible_mask);
-    EXPORT_SYMBOL(__num_possible_cpus);
+// EXPORT_SYMBOL;
+// EXPORT_SYMBOL;
     struct cpumask __cpu_online_mask __read_mostly;
-    EXPORT_SYMBOL(__cpu_online_mask);
+// EXPORT_SYMBOL;
     struct cpumask __cpu_enabled_mask __read_mostly;
-    EXPORT_SYMBOL(__cpu_enabled_mask);
+// EXPORT_SYMBOL;
     struct cpumask __cpu_present_mask __read_mostly;
-    EXPORT_SYMBOL(__cpu_present_mask);
+// EXPORT_SYMBOL;
     struct cpumask __cpu_active_mask __read_mostly;
-    EXPORT_SYMBOL(__cpu_active_mask);
+// EXPORT_SYMBOL;
     struct cpumask __cpu_dying_mask __read_mostly;
-    EXPORT_SYMBOL(__cpu_dying_mask);
+// EXPORT_SYMBOL;
     atomic_t __num_online_cpus __read_mostly;
-    EXPORT_SYMBOL(__num_online_cpus);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn init_cpu_present(src: *const cpumask) {
-    void init_cpu_present(const struct cpumask *src)
-    {
     cpumask_copy(&__cpu_present_mask, src);
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_cpu_possible(src: *const cpumask) {
-    void init_cpu_possible(const struct cpumask *src)
-    {
     cpumask_copy(&__cpu_possible_mask, src);
     __num_possible_cpus = cpumask_weight(&__cpu_possible_mask);
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_cpu_online(cpu: c_uint, online: bool) {
-    void set_cpu_online(unsigned int cpu, bool online)
-    {
 //
 // atomic_inc/dec() is required to handle the horrid abuse of this
 // function by the reboot and kexec code which invoke it from
@@ -2857,11 +2640,13 @@ pub unsafe extern "C" fn set_cpu_online(cpu: c_uint, online: bool) {
 // concurrent hotplug operations.
 //
     if (online) {
-    if (!cpumask_test_and_set_cpu(cpu, &__cpu_online_mask))
+    if (!cpumask_test_and_set_cpu(cpu, &__cpu_online_mask)) {
     atomic_inc(&__num_online_cpus);
+    }
     } else {
-    if (cpumask_test_and_clear_cpu(cpu, &__cpu_online_mask))
+    if (cpumask_test_and_clear_cpu(cpu, &__cpu_online_mask)) {
     atomic_dec(&__num_online_cpus);
+    }
     }
     }
 //
@@ -2870,24 +2655,22 @@ pub unsafe extern "C" fn set_cpu_online(cpu: c_uint, online: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_cpu_possible(cpu: c_uint, possible: bool) {
-    void set_cpu_possible(unsigned int cpu, bool possible)
-    {
     if (possible) {
-    if (!cpumask_test_and_set_cpu(cpu, &__cpu_possible_mask))
+    if (!cpumask_test_and_set_cpu(cpu, &__cpu_possible_mask)) {
     __num_possible_cpus++;
+    }
     } else {
-    if (cpumask_test_and_clear_cpu(cpu, &__cpu_possible_mask))
+    if (cpumask_test_and_clear_cpu(cpu, &__cpu_possible_mask)) {
     __num_possible_cpus--;
+    }
     }
     }
 //
 // Activate the first processor.
 //
 #[no_mangle]
-pub unsafe extern "C" fn boot_cpu_init() -> void __init {
-    void __init boot_cpu_init(void)
-    {
-    let mut cpu: c_int = smp_processor_id();
+pub unsafe extern "C" fn boot_cpu_init() -> c_int {
+pub static mut cpu: c_int = smp_processor_id();
 // Mark the boot cpu "present", "online" etc for SMP and UP case
     set_cpu_online(cpu, true);
     set_cpu_active(cpu, true);
@@ -2901,9 +2684,7 @@ pub unsafe extern "C" fn boot_cpu_init() -> void __init {
 // Must be called _AFTER_ setting up the per_cpu areas
 //
 #[no_mangle]
-pub unsafe extern "C" fn boot_cpu_hotplug_init() -> void __init {
-    void __init boot_cpu_hotplug_init(void)
-    {
+pub unsafe extern "C" fn boot_cpu_hotplug_init() -> c_int {
 
     cpumask_set_cpu(smp_processor_id(), &cpus_booted_once_mask);
     atomic_set(this_cpu_ptr(&cpuhp_state.ap_sync_state), SYNC_STATE_ONLINE);
@@ -2927,12 +2708,11 @@ pub unsafe extern "C" fn boot_cpu_hotplug_init() -> void __init {
     [CPU_MITIGATE_GUEST_GUEST] = IS_ENABLED(CONFIG_KVM),
     };
 #[no_mangle]
-pub unsafe extern "C" fn cpu_attack_vector_mitigated(v: enum cpu_attack_vectors) -> bool {
-    bool cpu_attack_vector_mitigated(enum cpu_attack_vectors v)
-    {
-    if (v < NR_CPU_ATTACK_VECTORS)
+pub unsafe extern "C" fn cpu_attack_vector_mitigated(v: cpu_attack_vectors) -> bool {
+    if (v < NR_CPU_ATTACK_VECTORS) {
     return attack_vectors[v];
-    WARN_ONCE(1, "Invalid attack vector %d\n", v);
+    }
+// WARN_ONCE;
     return false;
     }
 //
@@ -2958,8 +2738,8 @@ pub unsafe extern "C" fn cpu_attack_vector_mitigated(v: enum cpu_attack_vectors)
     NO_CROSS_THREAD,
     NR_VECTOR_PARAMS,
     };
-    let mut __ro_after_init: enum smt_mitigations smt_mitigations = SMT_MITIGATIONS_AUTO;
-    let mut __ro_after_init: static enum cpu_mitigations cpu_mitigations = CPU_MITIGATIONS_AUTO;
+pub static mut __ro_after_init: smt_mitigations smt_mitigations = SMT_MITIGATIONS_AUTO;
+pub static mut __ro_after_init: cpu_mitigations cpu_mitigations = CPU_MITIGATIONS_AUTO;
     static const match_table_t global_mitigations = {
     { CPU_MITIGATIONS_AUTO_NOSMT,	"auto,nosmt"},
     { CPU_MITIGATIONS_AUTO,		"auto"},
@@ -2974,10 +2754,8 @@ pub unsafe extern "C" fn cpu_attack_vector_mitigated(v: enum cpu_attack_vectors)
     { NR_VECTOR_PARAMS,	core::ptr::null_mut()},
     };
 #[no_mangle]
-unsafe extern "C" fn mitigations_parse_global_opt(arg: *mut c_char) -> int __init {
-    static int __init mitigations_parse_global_opt(char *arg)
-    {
-    int i;
+unsafe extern "C" fn mitigations_parse_global_opt(arg: *mut c_char) -> c_int {
+    let mut i = 0;
     for (i = 0; i < ARRAY_SIZE(global_mitigations); i++) {
     const char *pattern = global_mitigations[i].pattern;
     if (!strncmp(arg, pattern, strlen(pattern))) {
@@ -2988,11 +2766,9 @@ unsafe extern "C" fn mitigations_parse_global_opt(arg: *mut c_char) -> int __ini
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> int __init {
-    static int __init mitigations_parse_cmdline(char *arg)
-    {
+unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> c_int {
     char *s, *p;
-    int len;
+    let mut len = 0;
     len = mitigations_parse_global_opt(arg);
     if (cpu_mitigations_off()) {
     memset(attack_vectors, 0, sizeof(attack_vectors));
@@ -3001,8 +2777,9 @@ unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> int __init {
     smt_mitigations = SMT_MITIGATIONS_ON;
     }
     p = arg + len;
-    if (!*p)
+    if (!*p) {
     return 0;
+    }
 // Attack vector controls may come after the ','
     if (*p++ != ',' || !IS_ENABLED(CONFIG_ARCH_HAS_CPU_ATTACK_VECTORS)) {
     pr_crit("Unsupported mitigations=%s, system may still be vulnerable\n",	arg);
@@ -3010,22 +2787,22 @@ unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> int __init {
     }
     while ((s = strsep(&p, ",")) != core::ptr::null_mut()) {
     switch (match_token(s, vector_mitigations, core::ptr::null_mut())) {
-    case NO_USER_KERNEL:
+    NO_USER_KERNEL => {
     attack_vectors[CPU_MITIGATE_USER_KERNEL] = false;
     break;
-    case NO_USER_USER:
+    NO_USER_USER => {
     attack_vectors[CPU_MITIGATE_USER_USER] = false;
     break;
-    case NO_GUEST_HOST:
+    NO_GUEST_HOST => {
     attack_vectors[CPU_MITIGATE_GUEST_HOST] = false;
     break;
-    case NO_GUEST_GUEST:
+    NO_GUEST_GUEST => {
     attack_vectors[CPU_MITIGATE_GUEST_GUEST] = false;
     break;
-    case NO_CROSS_THREAD:
+    NO_CROSS_THREAD => {
     smt_mitigations = SMT_MITIGATIONS_OFF;
     break;
-    default:
+    _ => {
     pr_crit("Unsupported mitigations options %s\n",	s);
     return 0;
     }
@@ -3035,26 +2812,44 @@ unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> int __init {
 // mitigations=off
 #[no_mangle]
 pub unsafe extern "C" fn cpu_mitigations_off() -> bool {
-    bool cpu_mitigations_off(void)
-    {
-    let mut cpu_mitigations: return = = CPU_MITIGATIONS_OFF;
+pub static mut cpu_mitigations: return = = CPU_MITIGATIONS_OFF;
     }
-    EXPORT_SYMBOL_GPL(cpu_mitigations_off);
+// EXPORT_SYMBOL_GPL;
 // mitigations=auto,nosmt
 #[no_mangle]
 pub unsafe extern "C" fn cpu_mitigations_auto_nosmt() -> bool {
-    bool cpu_mitigations_auto_nosmt(void)
-    {
-    let mut cpu_mitigations: return = = CPU_MITIGATIONS_AUTO_NOSMT;
+pub static mut cpu_mitigations: return = = CPU_MITIGATIONS_AUTO_NOSMT;
     }
-    EXPORT_SYMBOL_GPL(cpu_mitigations_auto_nosmt);
+// EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
-unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> int __init {
-    static int __init mitigations_parse_cmdline(char *arg)
-    {
+unsafe extern "C" fn mitigations_parse_cmdline(arg: *mut c_char) -> c_int {
     pr_crit("Kernel compiled without mitigations, ignoring 'mitigations'; system may still be vulnerable\n");
     return 0;
     }
 
     early_param("mitigations", mitigations_parse_cmdline);
+
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

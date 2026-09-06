@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -52,49 +149,45 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn compat_sig_setmask(blocked: *mut sigset_t, set: compat_sigset_word) {
-    static inline void compat_sig_setmask(sigset_t *blocked, compat_sigset_word set)
-    {
     memcpy(blocked.sig, &set, sizeof(set));
     }
-    COMPAT_SYSCALL_DEFINE3(sigprocmask, int, how,
-    compat_old_sigset_t __user *, nset,
-    compat_old_sigset_t __user *, oset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sigprocmask() {
     old_sigset_t old_set, new_set;
-    sigset_t new_blocked;
+    let mut new_blocked;
     old_set = current.blocked.sig[0];
     if (nset) {
-    if (get_user(new_set, nset))
+    if (get_user(new_set, nset)) {
     return -EFAULT;
+    }
     new_set &= ~(sigmask(SIGKILL) | sigmask(SIGSTOP));
     new_blocked = current.blocked;
-    switch (how) {
-    case SIG_BLOCK:
+    match (how) {
+    SIG_BLOCK => {
     sigaddsetmask(&new_blocked, new_set);
     break;
-    case SIG_UNBLOCK:
+    SIG_UNBLOCK => {
     sigdelsetmask(&new_blocked, new_set);
     break;
-    case SIG_SETMASK:
+    SIG_SETMASK => {
     compat_sig_setmask(&new_blocked, new_set);
     break;
-    default:
+    _ => {
     return -EINVAL;
     }
     set_current_blocked(&new_blocked);
     }
     if (oset) {
-    if (put_user(old_set, oset))
+    if (put_user(old_set, oset)) {
     return -EFAULT;
+    }
     }
     return 0;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn put_compat_rusage(r: *const rusage, ru: *mut compat_rusage __user) -> c_int {
-    int put_compat_rusage(const struct rusage *r, struct compat_rusage __user *ru)
-    {
-    struct compat_rusage r32;
+    let mut r32;
     memset(&r32, 0, sizeof(r32));
     r32.ru_utime.tv_sec = r.ru_utime.tv_sec;
     r32.ru_utime.tv_usec = r.ru_utime.tv_usec;
@@ -114,16 +207,17 @@ pub unsafe extern "C" fn put_compat_rusage(r: *const rusage, ru: *mut compat_rus
     r32.ru_nsignals = r.ru_nsignals;
     r32.ru_nvcsw = r.ru_nvcsw;
     r32.ru_nivcsw = r.ru_nivcsw;
-    if (copy_to_user(ru, &r32, sizeof(r32)))
+    if (copy_to_user(ru, &r32, sizeof(r32))) {
     return -EFAULT;
+    }
     return 0;
     }
-    static int compat_get_user_cpu_mask(compat_ulong_t __user *user_mask_ptr,
-    unsigned len, struct cpumask *new_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn compat_get_user_cpu_mask() {
     unsigned long *k;
-    if (len < cpumask_size())
+    if (len < cpumask_size()) {
     memset(new_mask, 0, cpumask_size());
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
     else if (len > cpumask_size())
@@ -131,40 +225,44 @@ pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
     k = cpumask_bits(new_mask);
     return compat_get_bitmap(k, user_mask_ptr, len * 8);
     }
-    COMPAT_SYSCALL_DEFINE3(sched_setaffinity, compat_pid_t, pid,
-    unsigned int, len,
-    compat_ulong_t __user *, user_mask_ptr)
-    {
-    cpumask_var_t new_mask;
-    int retval;
-    if (!alloc_cpumask_var(&new_mask, GFP_KERNEL))
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_setaffinity() {
+    let mut new_mask;
+    let mut retval = 0;
+    if (!alloc_cpumask_var(&new_mask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     retval = compat_get_user_cpu_mask(user_mask_ptr, len, new_mask);
-    if (retval)
+    if (retval) {
     goto out;
+    }
     retval = sched_setaffinity(pid, new_mask);
     out:
     free_cpumask_var(new_mask);
     return retval;
     }
-    COMPAT_SYSCALL_DEFINE3(sched_getaffinity, compat_pid_t,  pid, unsigned int, len,
-    compat_ulong_t __user *, user_mask_ptr)
-    {
-    int ret;
-    cpumask_var_t mask;
-    if ((len * BITS_PER_BYTE) < nr_cpu_ids)
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_getaffinity() {
+    let mut ret = 0;
+    let mut mask;
+    if ((len * BITS_PER_BYTE) < nr_cpu_ids) {
     return -EINVAL;
-    if (len & (sizeof(compat_ulong_t)-1))
+    }
+    if (len & (sizeof(compat_ulong_t)-1)) {
     return -EINVAL;
-    if (!zalloc_cpumask_var(&mask, GFP_KERNEL))
+    }
+    if (!zalloc_cpumask_var(&mask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     ret = sched_getaffinity(pid, mask);
     if (ret == 0) {
-    let mut retlen: c_uint = min(len, cpumask_size());
-    if (compat_put_bitmap(user_mask_ptr, cpumask_bits(mask), retlen * 8))
+pub static mut retlen: c_uint = min(len, cpumask_size());
+    if (compat_put_bitmap(user_mask_ptr, cpumask_bits(mask), retlen * 8)) {
     ret = -EFAULT;
-    else
+    }
+    else {
     ret = retlen;
+    }
     }
     free_cpumask_var(mask);
     return ret;
@@ -176,9 +274,8 @@ pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
 // We also assume that copying sigev_value.sival_int is sufficient
 // to keep all the bits of sigev_value.sival_ptr intact.
 //
-    int get_compat_sigevent(struct sigevent *event,
-    const struct compat_sigevent __user *u_event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_compat_sigevent() {
     memset(event, 0, sizeof(*event));
     return (!access_ok(u_event, sizeof(*u_event)) ||
     __get_user(event.sigev_value.sival_int,
@@ -189,15 +286,15 @@ pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
     &u_event.sigev_notify_thread_id))
     ? -EFAULT : 0;
     }
-    long compat_get_bitmap(unsigned long *mask, const compat_ulong_t __user *umask,
-    unsigned long bitmap_size)
-    {
-    unsigned long nr_compat_longs;
+#[no_mangle]
+pub unsafe extern "C" fn compat_get_bitmap() {
+    let mut nr_compat_longs = 0;
 // align bitmap up to nearest compat_long_t boundary
     bitmap_size = ALIGN(bitmap_size, BITS_PER_COMPAT_LONG);
     nr_compat_longs = BITS_TO_COMPAT_LONGS(bitmap_size);
-    if (!user_read_access_begin(umask, bitmap_size / 8))
+    if (!user_read_access_begin(umask, bitmap_size / 8)) {
     return -EFAULT;
+    }
     while (nr_compat_longs > 1) {
     compat_ulong_t l1, l2;
     unsafe_get_user(l1, umask++, Efault);
@@ -205,57 +302,70 @@ pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
 // mask++ = ((unsigned long)l2 << BITS_PER_COMPAT_LONG) | l1;
     nr_compat_longs -= 2;
     }
-    if (nr_compat_longs)
+    if (nr_compat_longs) {
     unsafe_get_user(*mask, umask++, Efault);
+    }
     user_read_access_end();
     return 0;
     Efault:
     user_read_access_end();
     return -EFAULT;
     }
-    long compat_put_bitmap(compat_ulong_t __user *umask, unsigned long *mask,
-    unsigned long bitmap_size)
-    {
-    unsigned long nr_compat_longs;
+#[no_mangle]
+pub unsafe extern "C" fn compat_put_bitmap() {
+    let mut nr_compat_longs = 0;
 // align bitmap up to nearest compat_long_t boundary
     bitmap_size = ALIGN(bitmap_size, BITS_PER_COMPAT_LONG);
     nr_compat_longs = BITS_TO_COMPAT_LONGS(bitmap_size);
-    if (!user_write_access_begin(umask, bitmap_size / 8))
+    if (!user_write_access_begin(umask, bitmap_size / 8)) {
     return -EFAULT;
+    }
     while (nr_compat_longs > 1) {
-    let mut m: c_ulong = *mask++;
+pub static mut m: c_ulong = *mask++;
     unsafe_put_user((compat_ulong_t)m, umask++, Efault);
     unsafe_put_user(m >> BITS_PER_COMPAT_LONG, umask++, Efault);
     nr_compat_longs -= 2;
     }
-    if (nr_compat_longs)
+    if (nr_compat_longs) {
     unsafe_put_user((compat_ulong_t)*mask, umask++, Efault);
+    }
     user_write_access_end();
     return 0;
     Efault:
     user_write_access_end();
     return -EFAULT;
     }
-    int
-    get_compat_sigset(sigset_t *set, const compat_sigset_t __user *compat)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_compat_sigset() {
 
-    compat_sigset_t v;
-    if (copy_from_user(&v, compat, sizeof(compat_sigset_t)))
+    let mut v;
+    if (copy_from_user(&v, compat, sizeof(compat_sigset_t))) {
     return -EFAULT;
-    switch (_NSIG_WORDS) {
-    case 4: set.sig[3] = v.sig[6] | (((long)v.sig[7]) << 32 );
+    }
+    match (_NSIG_WORDS) {
+    4 => { set.sig[3] = v.sig[6] | (((long)v.sig[7]) << 32 );
     fallthrough;
-    case 3: set.sig[2] = v.sig[4] | (((long)v.sig[5]) << 32 );
+    3 => { set.sig[2] = v.sig[4] | (((long)v.sig[5]) << 32 );
     fallthrough;
-    case 2: set.sig[1] = v.sig[2] | (((long)v.sig[3]) << 32 );
+    2 => { set.sig[1] = v.sig[2] | (((long)v.sig[3]) << 32 );
     fallthrough;
-    case 1: set.sig[0] = v.sig[0] | (((long)v.sig[1]) << 32 );
+    1 => { set.sig[0] = v.sig[0] | (((long)v.sig[1]) << 32 );
     }
 
-    if (copy_from_user(set, compat, sizeof(compat_sigset_t)))
+    if (copy_from_user(set, compat, sizeof(compat_sigset_t))) {
     return -EFAULT;
+    }
 
     return 0;
     }
-    EXPORT_SYMBOL_GPL(get_compat_sigset);
+// EXPORT_SYMBOL_GPL;
+
+}
+}
+}
+}
+}
+}
+}
+}
+}

@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -42,9 +139,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
     static int fei_kprobe_handler(struct kprobe *kp, struct pt_regs *regs);
-    static void fei_post_handler(struct kprobe *kp, struct pt_regs *regs,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fei_post_handler() {
 //
 // A dummy post handler is required to prohibit optimizing, because
 // jump optimization does not support execution path overriding.
@@ -57,34 +153,33 @@ pub struct fei_attr {
     pub kp: kprobe,
     pub retval: c_ulong,
 }
-
-    static DEFINE_MUTEX(fei_lock);
-    static LIST_HEAD(fei_attr_list);
-    static DECLARE_FAULT_ATTR(fei_fault_attr);
+// static DEFINE_MUTEX(fei_lock);
+// static LIST_HEAD(fei_attr_list);
+// static DECLARE_FAULT_ATTR(fei_fault_attr);
     static struct dentry *fei_debugfs_dir;
 #[no_mangle]
 unsafe extern "C" fn adjust_error_retval(addr: c_ulong, retv: c_ulong) -> c_ulong {
-    static unsigned long adjust_error_retval(unsigned long addr, unsigned long retv)
-    {
     switch (get_injectable_error_type(addr)) {
-    case EI_ETYPE_NULL:
+    EI_ETYPE_NULL => {
     return 0;
-    case EI_ETYPE_ERRNO:
-    if (retv < (unsigned long)-MAX_ERRNO)
+    EI_ETYPE_ERRNO => {
+    if (retv < (unsigned long)-MAX_ERRNO) {
     return (unsigned long)-EINVAL;
+    }
     break;
-    case EI_ETYPE_ERRNO_NULL:
-    if (retv != 0 && retv < (unsigned long)-MAX_ERRNO)
+    EI_ETYPE_ERRNO_NULL => {
+    if (retv != 0 && retv < (unsigned long)-MAX_ERRNO) {
     return (unsigned long)-EINVAL;
+    }
     break;
-    case EI_ETYPE_TRUE:
+    EI_ETYPE_TRUE => {
     return 1;
     }
     return retv;
     }
-    static struct fei_attr *fei_attr_new(const char *sym, unsigned long addr)
-    {
-    struct fei_attr *attr;
+#[no_mangle]
+pub unsafe extern "C" fn fei_attr_new() {
+    let mut attr = core::ptr::null_mut();
     attr = kzalloc_obj(*attr);
     if (attr) {
     attr.kp.symbol_name = kstrdup(sym, GFP_KERNEL);
@@ -95,46 +190,42 @@ unsafe extern "C" fn adjust_error_retval(addr: c_ulong, retv: c_ulong) -> c_ulon
     attr.kp.pre_handler = fei_kprobe_handler;
     attr.kp.post_handler = fei_post_handler;
     attr.retval = adjust_error_retval(addr, 0);
-    INIT_LIST_HEAD(&attr.list);
+// INIT_LIST_HEAD;
     }
     return attr;
     }
 #[no_mangle]
 unsafe extern "C" fn fei_attr_free(attr: *mut fei_attr) {
-    static void fei_attr_free(struct fei_attr *attr)
-    {
     if (attr) {
     kfree(attr.kp.symbol_name);
     kfree(attr);
     }
     }
-    static struct fei_attr *fei_attr_lookup(const char *sym)
-    {
-    struct fei_attr *attr;
+#[no_mangle]
+pub unsafe extern "C" fn fei_attr_lookup() {
+    let mut attr = core::ptr::null_mut();
     list_for_each_entry(attr, &fei_attr_list, list) {
-    if (!strcmp(attr.kp.symbol_name, sym))
+    if (!strcmp(attr.kp.symbol_name, sym)) {
     return attr;
+    }
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn fei_attr_is_valid(_attr: *mut fei_attr) -> bool {
-    static bool fei_attr_is_valid(struct fei_attr *_attr)
-    {
-    struct fei_attr *attr;
+    let mut attr = core::ptr::null_mut();
     list_for_each_entry(attr, &fei_attr_list, list) {
-    if (attr == _attr)
+    if (attr == _attr) {
     return true;
+    }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn fei_retval_set(data: *mut c_void, val: u64) -> c_int {
-    static int fei_retval_set(void *data, u64 val)
-    {
     struct fei_attr *attr = data;
-    let mut retv: c_ulong = (unsigned long)val;
-    let mut err: c_int = 0;
+pub static mut retv: c_ulong = (unsigned long)val;
+pub static mut err: c_int = 0;
     mutex_lock(&fei_lock);
 //
 // Since this operation can be done after retval file is removed,
@@ -150,24 +241,25 @@ unsafe extern "C" fn fei_retval_set(data: *mut c_void, val: u64) -> c_int {
     val) != retv)
     err = -EINVAL;
     }
-    if (!err)
+    if (!err) {
     attr.retval = val;
+    }
     out:
     mutex_unlock(&fei_lock);
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn fei_retval_get(data: *mut c_void, val: *mut u64) -> c_int {
-    static int fei_retval_get(void *data, u64 *val)
-    {
     struct fei_attr *attr = data;
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
     mutex_lock(&fei_lock);
 // Here we also validate @attr to ensure it still exists.
-    if (!fei_attr_is_valid(attr))
+    if (!fei_attr_is_valid(attr)) {
     err = -ENOENT;
-    else
+    }
+    else {
 // val = attr->retval;
+    }
     mutex_unlock(&fei_lock);
     return err;
     }
@@ -175,22 +267,16 @@ unsafe extern "C" fn fei_retval_get(data: *mut c_void, val: *mut u64) -> c_int {
     "%llx\n");
 #[no_mangle]
 unsafe extern "C" fn fei_debugfs_add_attr(attr: *mut fei_attr) {
-    static void fei_debugfs_add_attr(struct fei_attr *attr)
-    {
-    struct dentry *dir;
+    let mut dir = core::ptr::null_mut();
     dir = debugfs_create_dir(attr.kp.symbol_name, fei_debugfs_dir);
     debugfs_create_file("retval", 0600, dir, attr, &fei_retval_ops);
     }
 #[no_mangle]
 unsafe extern "C" fn fei_debugfs_remove_attr(attr: *mut fei_attr) {
-    static void fei_debugfs_remove_attr(struct fei_attr *attr)
-    {
     debugfs_lookup_and_remove(attr.kp.symbol_name, fei_debugfs_dir);
     }
 #[no_mangle]
 unsafe extern "C" fn fei_kprobe_handler(kp: *mut kprobe, regs: *mut pt_regs) -> c_int {
-    static int fei_kprobe_handler(struct kprobe *kp, struct pt_regs *regs)
-    {
     struct fei_attr *attr = container_of(kp, struct fei_attr, kp);
     if (should_fail(&fei_fault_attr, 1)) {
     regs_set_return_value(regs, attr.retval);
@@ -200,45 +286,32 @@ unsafe extern "C" fn fei_kprobe_handler(kp: *mut kprobe, regs: *mut pt_regs) -> 
     return 0;
     }
     NOKPROBE_SYMBOL(fei_kprobe_handler)
-    static void *fei_seq_start(struct seq_file *m, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fei_seq_start() {
     mutex_lock(&fei_lock);
     return seq_list_start(&fei_attr_list, *pos);
     }
 #[no_mangle]
 unsafe extern "C" fn fei_seq_stop(m: *mut seq_file, v: *mut c_void) {
-    static void fei_seq_stop(struct seq_file *m, void *v)
-    {
     mutex_unlock(&fei_lock);
     }
-    static void *fei_seq_next(struct seq_file *m, void *v, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fei_seq_next() {
     return seq_list_next(v, &fei_attr_list, pos);
     }
 #[no_mangle]
 unsafe extern "C" fn fei_seq_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int fei_seq_show(struct seq_file *m, void *v)
-    {
     struct fei_attr *attr = list_entry(v, struct fei_attr, list);
     seq_printf(m, "%ps\n", attr.kp.addr);
     return 0;
     }
-    static const struct seq_operations fei_seq_ops = {
-    .start	= fei_seq_start,
-    .next	= fei_seq_next,
-    .stop	= fei_seq_stop,
-    .show	= fei_seq_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn fei_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int fei_open(struct inode *inode, struct file *file)
-    {
     return seq_open(file, &fei_seq_ops);
     }
 #[no_mangle]
 unsafe extern "C" fn fei_attr_remove(attr: *mut fei_attr) {
-    static void fei_attr_remove(struct fei_attr *attr)
-    {
     fei_debugfs_remove_attr(attr);
     unregister_kprobe(&attr.kp);
     list_del(&attr.list);
@@ -246,26 +319,25 @@ unsafe extern "C" fn fei_attr_remove(attr: *mut fei_attr) {
     }
 #[no_mangle]
 unsafe extern "C" fn fei_attr_remove_all() {
-    static void fei_attr_remove_all(void)
-    {
     struct fei_attr *attr, *n;
     list_for_each_entry_safe(attr, n, &fei_attr_list, list) {
     fei_attr_remove(attr);
     }
     }
-    static ssize_t fei_write(struct file *file, const char __user *buffer,
-    size_t count, loff_t *ppos)
-    {
-    struct fei_attr *attr;
-    unsigned long addr;
+#[no_mangle]
+pub unsafe extern "C" fn fei_write() {
+    let mut attr = core::ptr::null_mut();
+    let mut addr = 0;
     char *buf, *sym;
-    int ret;
+    let mut ret = 0;
 // cut off if it is too long
-    if (count > KSYM_NAME_LEN)
+    if (count > KSYM_NAME_LEN) {
     count = KSYM_NAME_LEN;
+    }
     buf = memdup_user_nul(buffer, count);
-    if (IS_ERR(buf))
+    if (IS_ERR(buf)) {
     return PTR_ERR(buf);
+    }
     sym = strstrip(buf);
     mutex_lock(&fei_lock);
 // Writing just spaces will remove all injection points
@@ -316,26 +388,23 @@ unsafe extern "C" fn fei_attr_remove_all() {
     kfree(buf);
     return ret;
     }
-    static const struct file_operations fei_ops = {
-    .open =		fei_open,
-    .read =		seq_read,
-    .write =	fei_write,
-    .llseek =	seq_lseek,
-    .release =	seq_release,
-    };
+pub static mut file_operations: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn fei_debugfs_init() -> int __init {
-    static int __init fei_debugfs_init(void)
-    {
-    struct dentry *dir;
+unsafe extern "C" fn fei_debugfs_init() -> c_int {
+    let mut dir = core::ptr::null_mut();
     dir = fault_create_debugfs_attr("fail_function", core::ptr::null_mut(),
     &fei_fault_attr);
-    if (IS_ERR(dir))
+    if (IS_ERR(dir)) {
     return PTR_ERR(dir);
+    }
 // injectable attribute is just a symlink of error_inject/list
     debugfs_create_symlink("injectable", dir, "../error_injection/list");
     debugfs_create_file("inject", 0600, dir, core::ptr::null_mut(), &fei_ops);
     fei_debugfs_dir = dir;
     return 0;
     }
-    late_initcall(fei_debugfs_init);
+// late_initcall;
+}
+}
+}
+}

@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 // audit_watch.c -- watching inodes
@@ -58,20 +155,20 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_watch {
-    pub /: *mut *mut refcount_t count; / reference count,
-    pub /: *mut *mut dev_t dev; / associated superblock device,
-    pub /: *mut *mut *mut char path; / insertion path,
-    pub /: *mut *mut u64 ino; / associated inode number,
-    pub /: *mut *mut *mut audit_parent parent; / associated parent,
-    pub /: *mut *mut list_head wlist; / entry in parent->watches list,
-    pub /: *mut *mut list_head rules; / anchor for krule->rlist,
+//     pub /: *mut *mut refcount_t count; / reference count,
+//     pub /: *mut *mut dev_t dev; / associated superblock device,
+//     pub /: *mut *mut *mut char path; / insertion path,
+//     pub /: *mut *mut u64 ino; / associated inode number,
+//     pub /: *mut *mut *mut audit_parent parent; / associated parent,
+//     pub /: *mut *mut list_head wlist; / entry in parent->watches list,
+//     pub /: *mut *mut list_head rules; / anchor for krule->rlist,
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct audit_parent {
-    pub /: *mut *mut list_head watches; / anchor for audit_watch->wlist,
-    pub /: *mut *mut fsnotify_mark mark; / fsnotify mark on the inode,
+//     pub /: *mut *mut list_head watches; / anchor for audit_watch->wlist,
+//     pub /: *mut *mut fsnotify_mark mark; / fsnotify mark on the inode,
 }
 
 // fsnotify handle.
@@ -81,94 +178,82 @@ pub struct audit_parent {
     FS_MOVE_SELF | FS_UNMOUNT)
 #[no_mangle]
 unsafe extern "C" fn audit_free_parent(parent: *mut audit_parent) {
-    static void audit_free_parent(struct audit_parent *parent)
-    {
-    WARN_ON(!list_empty(&parent.watches));
+// WARN_ON;
     kfree(parent);
     }
 #[no_mangle]
 unsafe extern "C" fn audit_watch_free_mark(entry: *mut fsnotify_mark) {
-    static void audit_watch_free_mark(struct fsnotify_mark *entry)
-    {
-    struct audit_parent *parent;
+    let mut parent = core::ptr::null_mut();
     parent = container_of(entry, struct audit_parent, mark);
     audit_free_parent(parent);
     }
 #[no_mangle]
 unsafe extern "C" fn audit_get_parent(parent: *mut audit_parent) {
-    static void audit_get_parent(struct audit_parent *parent)
-    {
-    if (likely(parent))
+    if (likely(parent)) {
     fsnotify_get_mark(&parent.mark);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn audit_put_parent(parent: *mut audit_parent) {
-    static void audit_put_parent(struct audit_parent *parent)
-    {
-    if (likely(parent))
+    if (likely(parent)) {
     fsnotify_put_mark(&parent.mark);
+    }
     }
 //
 // Find and return the audit_parent on the given inode.  If found a reference
 // is taken on this parent.
 //
-    static inline struct audit_parent *audit_find_parent(struct inode *inode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_find_parent() {
     struct audit_parent *parent = core::ptr::null_mut();
-    struct fsnotify_mark *entry;
+    let mut entry = core::ptr::null_mut();
     entry = fsnotify_find_inode_mark(inode, audit_watch_group);
-    if (entry)
+    if (entry) {
     parent = container_of(entry, struct audit_parent, mark);
+    }
     return parent;
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_get_watch(watch: *mut audit_watch) {
-    void audit_get_watch(struct audit_watch *watch)
-    {
     refcount_inc(&watch.count);
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_put_watch(watch: *mut audit_watch) {
-    void audit_put_watch(struct audit_watch *watch)
-    {
     if (refcount_dec_and_test(&watch.count)) {
-    WARN_ON(watch.parent);
-    WARN_ON(!list_empty(&watch.rules));
+// WARN_ON;
+// WARN_ON;
     kfree(watch.path);
     kfree(watch);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn audit_remove_watch(watch: *mut audit_watch) {
-    static void audit_remove_watch(struct audit_watch *watch)
-    {
     list_del(&watch.wlist);
     audit_put_parent(watch.parent);
     watch.parent = core::ptr::null_mut();
     audit_put_watch(watch); /* match initial get */
     }
-    char *audit_watch_path(struct audit_watch *watch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_watch_path() {
     return watch.path;
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_watch_compare(watch: *mut audit_watch, ino: u64, dev: dev_t) -> c_int {
-    int audit_watch_compare(struct audit_watch *watch, u64 ino, dev_t dev)
-    {
     return (watch.ino != AUDIT_INO_UNSET) &&
     (watch.ino == ino) &&
     (watch.dev == dev);
     }
 // Initialize a parent watch entry.
-    static struct audit_parent *audit_init_parent(const struct path *path)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_init_parent() {
     struct inode *inode = d_backing_inode(path.dentry);
-    struct audit_parent *parent;
-    int ret;
+    let mut parent = core::ptr::null_mut();
+    let mut ret = 0;
     parent = kzalloc_obj(*parent);
-    if (unlikely(!parent))
+    if (unlikely(!parent)) {
     return ERR_PTR(-ENOMEM);
-    INIT_LIST_HEAD(&parent.watches);
+    }
+// INIT_LIST_HEAD;
     fsnotify_init_mark(&parent.mark, audit_watch_group);
     parent.mark.mask = AUDIT_FS_WATCH;
     ret = fsnotify_add_inode_mark(&parent.mark, inode, 0);
@@ -179,13 +264,14 @@ pub unsafe extern "C" fn audit_watch_compare(watch: *mut audit_watch, ino: u64, 
     return parent;
     }
 // Initialize a watch entry.
-    static struct audit_watch *audit_init_watch(char *path)
-    {
-    struct audit_watch *watch;
+#[no_mangle]
+pub unsafe extern "C" fn audit_init_watch() {
+    let mut watch = core::ptr::null_mut();
     watch = kzalloc_obj(*watch);
-    if (unlikely(!watch))
+    if (unlikely(!watch)) {
     return ERR_PTR(-ENOMEM);
-    INIT_LIST_HEAD(&watch.rules);
+    }
+// INIT_LIST_HEAD;
     refcount_set(&watch.count, 1);
     watch.path = path;
     watch.dev = AUDIT_DEV_UNSET;
@@ -195,11 +281,10 @@ pub unsafe extern "C" fn audit_watch_compare(watch: *mut audit_watch, ino: u64, 
 // Translate a watch string to kernel representation.
 #[no_mangle]
 pub unsafe extern "C" fn audit_to_watch(krule: *mut audit_krule, path: *mut c_char, len: c_int, op: u32) -> c_int {
-    int audit_to_watch(struct audit_krule *krule, char *path, int len, u32 op)
-    {
-    struct audit_watch *watch;
-    if (!audit_watch_group)
+    let mut watch = core::ptr::null_mut();
+    if (!audit_watch_group) {
     return -EOPNOTSUPP;
+    }
     if (path[0] != '/' || path[len-1] == '/' ||
     (krule.listnr != AUDIT_FILTER_EXIT &&
     krule.listnr != AUDIT_FILTER_URING_EXIT) ||
@@ -207,20 +292,22 @@ pub unsafe extern "C" fn audit_to_watch(krule: *mut audit_krule, path: *mut c_ch
     krule.inode_f || krule.watch || krule.tree)
     return -EINVAL;
     watch = audit_init_watch(path);
-    if (IS_ERR(watch))
+    if (IS_ERR(watch)) {
     return PTR_ERR(watch);
+    }
     krule.watch = watch;
     return 0;
     }
 // Duplicate the given audit watch.  The new watch's rules list is initialized
 // to an empty list and wlist is undefined.
-    static struct audit_watch *audit_dupe_watch(struct audit_watch *old)
-    {
-    char *path;
-    struct audit_watch *new;
+#[no_mangle]
+pub unsafe extern "C" fn audit_dupe_watch() {
+    let mut path = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
     path = kstrdup(old.path, GFP_KERNEL);
-    if (unlikely(!path))
+    if (unlikely(!path)) {
     return ERR_PTR(-ENOMEM);
+    }
     new = audit_init_watch(path);
     if (IS_ERR(new)) {
     kfree(path);
@@ -235,14 +322,14 @@ pub unsafe extern "C" fn audit_to_watch(krule: *mut audit_krule, path: *mut c_ch
     }
 #[no_mangle]
 unsafe extern "C" fn audit_watch_log_rule_change(r: *mut audit_krule, w: *mut audit_watch, op: *mut c_char) {
-    static void audit_watch_log_rule_change(struct audit_krule *r, struct audit_watch *w, char *op)
-    {
-    struct audit_buffer *ab;
-    if (!audit_enabled)
+    let mut ab = core::ptr::null_mut();
+    if (!audit_enabled) {
     return;
+    }
     ab = audit_log_start(audit_context(), GFP_NOFS, AUDIT_CONFIG_CHANGE);
-    if (!ab)
+    if (!ab) {
     return;
+    }
     audit_log_session_info(ab);
     audit_log_format(ab, "op=%s path=", op);
     audit_log_untrustedstring(ab, w.path);
@@ -251,11 +338,8 @@ unsafe extern "C" fn audit_watch_log_rule_change(r: *mut audit_krule, w: *mut au
     audit_log_end(ab);
     }
 // Update inode info in audit rules based on filesystem event.
-    static void audit_update_watch(struct audit_parent *parent,
-    const struct qstr *dname, dev_t dev,
-    u64 ino, unsigned int invalidating,
-    struct audit_watch_ctx *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_update_watch() {
     struct audit_watch *owatch, *nwatch, *nextw;
     struct audit_krule *r, *nextr;
     struct audit_entry *oentry, *nentry;
@@ -268,8 +352,9 @@ unsafe extern "C" fn audit_watch_log_rule_change(r: *mut audit_krule, w: *mut au
     continue;
 // If the update involves invalidating rules, do the inode-based
 // filtering now, so we don't omit records.
-    if (invalidating && !audit_dummy_context())
+    if (invalidating && !audit_dummy_context()) {
     audit_filter_inodes(current, audit_context());
+    }
 // updating ino will likely change which audit_hash_list we
 // are on so we need a new watch for the new list
     nwatch = audit_dupe_watch(owatch);
@@ -289,7 +374,7 @@ unsafe extern "C" fn audit_watch_log_rule_change(r: *mut audit_krule, w: *mut au
     list_del(&oentry.rule.list);
     audit_panic("error updating watch, removing");
     } else {
-    let mut h: c_int = audit_hash_ino(ino);
+pub static mut h: c_int = audit_hash_ino(ino);
 //
 // nentry->rule.watch == oentry->rule.watch so
 // we must drop that reference and set it to our
@@ -303,8 +388,9 @@ unsafe extern "C" fn audit_watch_log_rule_change(r: *mut audit_krule, w: *mut au
     list_replace(&oentry.rule.list,
     &nentry.rule.list);
     }
-    if (oentry.rule.exe)
+    if (oentry.rule.exe) {
     audit_remove_mark(oentry.rule.exe);
+    }
     call_rcu(&oentry.rcu, audit_free_rule_rcu);
     }
     audit_remove_watch(owatch);
@@ -320,18 +406,17 @@ unsafe extern "C" fn audit_watch_log_rule_change(r: *mut audit_krule, w: *mut au
 // Remove all watches & rules associated with a parent that is going away.
 #[no_mangle]
 unsafe extern "C" fn audit_remove_parent_watches(parent: *mut audit_parent) {
-    static void audit_remove_parent_watches(struct audit_parent *parent)
-    {
     struct audit_watch *w, *nextw;
     struct audit_krule *r, *nextr;
-    struct audit_entry *e;
+    let mut e = core::ptr::null_mut();
     mutex_lock(&audit_filter_mutex);
     list_for_each_entry_safe(w, nextw, &parent.watches, wlist) {
     list_for_each_entry_safe(r, nextr, &w.rules, rlist) {
     e = container_of(r, struct audit_entry, rule);
     audit_watch_log_rule_change(r, w, "remove_rule");
-    if (e.rule.exe)
+    if (e.rule.exe) {
     audit_remove_mark(e.rule.exe);
+    }
     list_del(&r.rlist);
     list_del(&r.list);
     list_del_rcu(&e.list);
@@ -345,12 +430,11 @@ unsafe extern "C" fn audit_remove_parent_watches(parent: *mut audit_parent) {
 // Get path information necessary for adding watches.
 #[no_mangle]
 unsafe extern "C" fn audit_get_nd(watch: *mut audit_watch, parent: *mut path) -> c_int {
-    static int audit_get_nd(struct audit_watch *watch, struct path *parent)
-    {
-    struct dentry *d;
+    let mut d = core::ptr::null_mut();
     d = kern_path_parent(watch.path, parent);
-    if (IS_ERR(d))
+    if (IS_ERR(d)) {
     return PTR_ERR(d);
+    }
     if (d_is_positive(d)) {
 // update watch filter fields
     watch.dev = d.d_sb.s_dev;
@@ -361,15 +445,15 @@ unsafe extern "C" fn audit_get_nd(watch: *mut audit_watch, parent: *mut path) ->
     }
 // Associate the given rule with an existing parent.
 // Caller must hold audit_filter_mutex.
-    static void audit_add_to_parent(struct audit_krule *krule,
-    struct audit_parent *parent)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn audit_add_to_parent() {
     struct audit_watch *w, *watch = krule.watch;
-    let mut watch_found: c_int = 0;
+pub static mut watch_found: c_int = 0;
     lockdep_assert_held(&audit_filter_mutex);
     list_for_each_entry(w, &parent.watches, wlist) {
-    if (strcmp(watch.path, w.path))
+    if (strcmp(watch.path, w.path)) {
     continue;
+    }
     watch_found = 1;
 // put krule's ref to temporary watch
     audit_put_watch(watch);
@@ -389,11 +473,9 @@ unsafe extern "C" fn audit_get_nd(watch: *mut audit_watch, parent: *mut path) ->
 // Caller must hold audit_filter_mutex.
 #[no_mangle]
 pub unsafe extern "C" fn audit_add_watch(krule: *mut audit_krule, list: *mut list_head) -> c_int {
-    int audit_add_watch(struct audit_krule *krule, struct list_head **list)
-    {
     struct audit_watch *watch = krule.watch;
-    struct audit_parent *parent;
-    struct path parent_path;
+    let mut parent = core::ptr::null_mut();
+    let mut parent_path;
     int h, ret = 0;
 //
 // When we will be calling audit_add_to_parent, krule->watch might have
@@ -429,8 +511,6 @@ pub unsafe extern "C" fn audit_add_watch(krule: *mut audit_krule, list: *mut lis
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_remove_watch_rule(krule: *mut audit_krule) {
-    void audit_remove_watch_rule(struct audit_krule *krule)
-    {
     struct audit_watch *watch = krule.watch;
     struct audit_parent *parent = watch.parent;
     list_del(&krule.rlist);
@@ -441,26 +521,26 @@ pub unsafe extern "C" fn audit_remove_watch_rule(krule: *mut audit_krule) {
 //
     audit_get_parent(parent);
     audit_remove_watch(watch);
-    if (list_empty(&parent.watches))
+    if (list_empty(&parent.watches)) {
     fsnotify_destroy_mark(&parent.mark, audit_watch_group);
+    }
     audit_put_parent(parent);
     }
     }
 // Update watch data in audit rules based on fsnotify events.
-    static int audit_watch_handle_event(struct fsnotify_mark *inode_mark, u32 mask,
-    struct inode *inode, struct inode *dir,
-    const struct qstr *dname, u32 cookie)
-    {
-    struct audit_parent *parent;
+#[no_mangle]
+pub unsafe extern "C" fn audit_watch_handle_event() {
+    let mut parent = core::ptr::null_mut();
     parent = container_of(inode_mark, struct audit_parent, mark);
-    if (WARN_ON_ONCE(inode_mark.group != audit_watch_group))
+    if (WARN_ON_ONCE(inode_mark.group != audit_watch_group)) {
     return 0;
+    }
     if (mask & (FS_CREATE|FS_MOVED_TO) && inode) {
-    let mut ctx: audit_watch_ctx = { .dir = dir, .child = inode };
+pub static mut ctx: audit_watch_ctx = { .dir = dir, .child = inode };
     audit_update_watch(parent, dname, inode.i_sb.s_dev, inode.i_ino, 0,
     &ctx);
     } else if (mask & (FS_DELETE|FS_MOVED_FROM)) {
-    let mut ctx: audit_watch_ctx = { .dir = dir, .child = core::ptr::null_mut() };
+pub static mut ctx: audit_watch_ctx = { .dir = dir, .child = core::ptr::null_mut() };
     audit_update_watch(parent, dname, AUDIT_DEV_UNSET, AUDIT_INO_UNSET, 1,
     &ctx);
     }
@@ -470,14 +550,9 @@ pub unsafe extern "C" fn if((FS_DELETE_SELF|FS_UNMOUNT|FS_MOVE_SELF): mask &) ->
     audit_remove_parent_watches(parent);
     return 0;
     }
-    static const struct fsnotify_ops audit_watch_fsnotify_ops = {
-    .handle_inode_event =	audit_watch_handle_event,
-    .free_mark =		audit_watch_free_mark,
-    };
+pub static mut fsnotify_ops: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn audit_watch_init() -> int __init {
-    static int __init audit_watch_init(void)
-    {
+unsafe extern "C" fn audit_watch_init() -> c_int {
     audit_watch_group = fsnotify_alloc_group(&audit_watch_fsnotify_ops, 0);
     if (IS_ERR(audit_watch_group)) {
     audit_watch_group = core::ptr::null_mut();
@@ -485,15 +560,15 @@ unsafe extern "C" fn audit_watch_init() -> int __init {
     }
     return 0;
     }
-    device_initcall(audit_watch_init);
-    int audit_dupe_exe(struct audit_krule *new, struct audit_krule *old,
-    struct audit_watch_ctx *ctx)
-    {
-    struct audit_fsnotify_mark *audit_mark;
-    char *pathname;
+// device_initcall;
+#[no_mangle]
+pub unsafe extern "C" fn audit_dupe_exe() {
+    let mut audit_mark = core::ptr::null_mut();
+    let mut pathname = core::ptr::null_mut();
     pathname = kstrdup(audit_mark_path(old.exe), GFP_KERNEL);
-    if (!pathname)
+    if (!pathname) {
     return -ENOMEM;
+    }
     audit_mark = audit_alloc_mark(new, pathname, strlen(pathname), ctx);
     if (IS_ERR(audit_mark)) {
     kfree(pathname);
@@ -504,21 +579,24 @@ unsafe extern "C" fn audit_watch_init() -> int __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_exe_compare(tsk: *mut task_struct, mark: *mut audit_fsnotify_mark) -> c_int {
-    int audit_exe_compare(struct task_struct *tsk, struct audit_fsnotify_mark *mark)
-    {
-    struct file *exe_file;
-    u64 ino;
-    dev_t dev;
+    let mut exe_file = core::ptr::null_mut();
+    let mut ino = 0;
+    let mut dev;
 // only do exe filtering if we are recording @current events/records
-    if (tsk != current)
+    if (tsk != current) {
     return 0;
-    if (!current.mm)
+    }
+    if (!current.mm) {
     return 0;
+    }
     exe_file = get_mm_exe_file(current.mm);
-    if (!exe_file)
+    if (!exe_file) {
     return 0;
+    }
     ino = file_inode(exe_file).i_ino;
     dev = file_inode(exe_file).i_sb.s_dev;
     fput(exe_file);
     return audit_mark_compare(mark, ino, dev);
     }
+
+}

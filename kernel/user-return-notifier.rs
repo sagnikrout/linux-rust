@@ -35,10 +35,32 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
-
-    static DEFINE_PER_CPU(struct hlist_head, return_notifier_list);
+// static DEFINE_PER_CPU(struct hlist_head, return_notifier_list);
 //
 // Request a notification when the current cpu returns to userspace.  Must be
 // called in atomic context.  The notifier will also be called in atomic
@@ -46,8 +68,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn user_return_notifier_register(urn: *mut user_return_notifier) {
-    void user_return_notifier_register(struct user_return_notifier *urn)
-    {
     set_tsk_thread_flag(current, TIF_USER_RETURN_NOTIFY);
     hlist_add_head(&urn.link, this_cpu_ptr(&return_notifier_list));
     }
@@ -58,8 +78,6 @@ pub unsafe extern "C" fn user_return_notifier_register(urn: *mut user_return_not
 //
 #[no_mangle]
 pub unsafe extern "C" fn user_return_notifier_unregister(urn: *mut user_return_notifier) {
-    void user_return_notifier_unregister(struct user_return_notifier *urn)
-    {
     hlist_del(&urn.link);
     if (hlist_empty(this_cpu_ptr(&return_notifier_list)))
     clear_tsk_thread_flag(current, TIF_USER_RETURN_NOTIFY);
@@ -68,8 +86,6 @@ pub unsafe extern "C" fn user_return_notifier_unregister(urn: *mut user_return_n
 // Calls registered user return notifiers
 #[no_mangle]
 pub unsafe extern "C" fn fire_user_return_notifiers() {
-    void fire_user_return_notifiers(void)
-    {
     struct user_return_notifier *urn;
     struct hlist_node *tmp2;
     struct hlist_head *head;

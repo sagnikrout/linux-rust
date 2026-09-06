@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 // Task credentials management - see Documentation/security/credentials.rst
@@ -43,13 +140,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Written by David Howells (dhowells@redhat.com)
 //
 
-    printk("[%-5.5s%5u] " FMT "\n",					\
+    printk("[%-5.5s%5u] " FMT "\n",					
     current.comm, current.pid, ##__VA_ARGS__)
 
-    do {									\
-    if (0)								\
-    no_printk("[%-5.5s%5u] " FMT "\n",			\
-    current.comm, current.pid, ##__VA_ARGS__);	\
+    do {									
+    if (0) {
+    no_printk("[%-5.5s%5u] " FMT "\n",			
+    current.comm, current.pid, ##__VA_ARGS__);	
+    }
     } while (0)
 
     static struct kmem_cache *cred_jar;
@@ -58,23 +156,24 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn put_cred_rcu(rcu: *mut rcu_head) {
-    static void put_cred_rcu(struct rcu_head *rcu)
-    {
     struct cred *cred = container_of(rcu, struct cred, rcu);
     kdebug("put_cred_rcu(%p)", cred);
-    if (atomic_long_read(&cred.usage) != 0)
+    if (atomic_long_read(&cred.usage) != 0) {
     panic("CRED: put_cred_rcu() sees %p with usage %ld\n",
     cred, atomic_long_read(&cred.usage));
+    }
     security_cred_free(cred);
     key_put(cred.session_keyring);
     key_put(cred.process_keyring);
     key_put(cred.thread_keyring);
     key_put(cred.request_key_auth);
-    if (cred.group_info)
+    if (cred.group_info) {
     put_group_info(cred.group_info);
+    }
     free_uid(cred.user);
-    if (cred.ucounts)
+    if (cred.ucounts) {
     put_ucounts(cred.ucounts);
+    }
     put_user_ns(cred.user_ns);
     kmem_cache_free(cred_jar, cred);
     }
@@ -86,32 +185,30 @@ unsafe extern "C" fn put_cred_rcu(rcu: *mut rcu_head) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __put_cred(cred: *mut cred) {
-    void __put_cred(struct cred *cred)
-    {
     kdebug("__put_cred(%p{%ld})", cred,
     atomic_long_read(&cred.usage));
-    BUG_ON(atomic_long_read(&cred.usage) != 0);
-    BUG_ON(cred == current.cred);
-    BUG_ON(cred == current.real_cred);
-    if (cred.non_rcu)
+// BUG_ON;
+// BUG_ON;
+// BUG_ON;
+    if (cred.non_rcu) {
     put_cred_rcu(&cred.rcu);
-    else
+    }
+    else {
     call_rcu(&cred.rcu, put_cred_rcu);
     }
-    EXPORT_SYMBOL(__put_cred);
+    }
+// EXPORT_SYMBOL;
 //
 // Clean up a task's credentials when it exits
 //
 #[no_mangle]
 pub unsafe extern "C" fn exit_creds(tsk: *mut task_struct) {
-    void exit_creds(struct task_struct *tsk)
-    {
     struct cred *real_cred, *cred;
     kdebug("exit_creds(%u,%p,%p,{%ld})", tsk.pid, tsk.real_cred, tsk.cred,
     atomic_long_read(&tsk.cred.usage));
-    real_cred = (struct cred *) tsk.real_cred;
+    real_cred =  tsk.real_cred;
     tsk.real_cred = core::ptr::null_mut();
-    cred = (struct cred *) tsk.cred;
+    cred =  tsk.cred;
     tsk.cred = core::ptr::null_mut();
     if (real_cred == cred) {
     put_cred_many(cred, 2);
@@ -136,29 +233,31 @@ pub unsafe extern "C" fn exit_creds(tsk: *mut task_struct) {
 //
     const struct cred *get_task_cred(struct task_struct *task)
     {
-    const struct cred *cred;
+    let mut cred = core::ptr::null_mut();
     rcu_read_lock();
     do {
     cred = __task_cred((task));
-    BUG_ON(!cred);
+// BUG_ON;
     } while (!get_cred_rcu(cred));
     rcu_read_unlock();
     return cred;
     }
-    EXPORT_SYMBOL(get_task_cred);
+// EXPORT_SYMBOL;
 //
 // Allocate blank credentials, such that the credentials can be filled in at a
 // later date without risk of ENOMEM.
 //
-    struct cred *cred_alloc_blank(void)
-    {
-    struct cred *new;
+#[no_mangle]
+pub unsafe extern "C" fn cred_alloc_blank() {
+    let mut new = core::ptr::null_mut();
     new = kmem_cache_zalloc(cred_jar, GFP_KERNEL);
-    if (!new)
+    if (!new) {
     return core::ptr::null_mut();
+    }
     atomic_long_set(&new.usage, 1);
-    if (security_cred_alloc_blank(new, GFP_KERNEL_ACCOUNT) < 0)
+    if (security_cred_alloc_blank(new, GFP_KERNEL_ACCOUNT) < 0) {
     goto error;
+    }
     return new;
     error:
     abort_creds(new);
@@ -178,14 +277,15 @@ pub unsafe extern "C" fn exit_creds(tsk: *mut task_struct) {
 //
 // Call commit_creds() or abort_creds() to clean up.
 //
-    struct cred *prepare_creds(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn prepare_creds() {
     struct task_struct *task = current;
-    const struct cred *old;
-    struct cred *new;
+    let mut old = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
     new = kmem_cache_alloc(cred_jar, GFP_KERNEL);
-    if (!new)
+    if (!new) {
     return core::ptr::null_mut();
+    }
     kdebug("prepare_creds() alloc %p", new);
     old = task.cred;
     memcpy(new, old, sizeof(struct cred));
@@ -203,26 +303,29 @@ pub unsafe extern "C" fn exit_creds(tsk: *mut task_struct) {
     new.security = core::ptr::null_mut();
 
     new.ucounts = get_ucounts(new.ucounts);
-    if (!new.ucounts)
+    if (!new.ucounts) {
     goto error;
-    if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0)
+    }
+    if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0) {
     goto error;
+    }
     return new;
     error:
     abort_creds(new);
     return core::ptr::null_mut();
     }
-    EXPORT_SYMBOL(prepare_creds);
+// EXPORT_SYMBOL;
 //
 // Prepare credentials for current to perform an execve()
 // - The caller must hold ->cred_guard_mutex
 //
-    struct cred *prepare_exec_creds(void)
-    {
-    struct cred *new;
+#[no_mangle]
+pub unsafe extern "C" fn prepare_exec_creds() {
+    let mut new = core::ptr::null_mut();
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return new;
+    }
 
 // newly exec'd tasks don't get a thread keyring
     key_put(new.thread_keyring);
@@ -246,10 +349,8 @@ pub unsafe extern "C" fn exit_creds(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn copy_creds(p: *mut task_struct, clone_flags: u64) -> c_int {
-    int copy_creds(struct task_struct *p, u64 clone_flags)
-    {
-    struct cred *new;
-    int ret;
+    let mut new = core::ptr::null_mut();
+    let mut ret = 0;
 
     p.cached_requested_key = core::ptr::null_mut();
 
@@ -267,15 +368,18 @@ pub unsafe extern "C" fn copy_creds(p: *mut task_struct, clone_flags: u64) -> c_
     return 0;
     }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     if (clone_flags & CLONE_NEWUSER) {
     ret = create_user_ns(new);
-    if (ret < 0)
+    if (ret < 0) {
     goto error_put;
+    }
     ret = set_cred_ucounts(new);
-    if (ret < 0)
+    if (ret < 0) {
     goto error_put;
+    }
     }
 
 // new threads get their own thread keyrings if their parent already
@@ -283,8 +387,9 @@ pub unsafe extern "C" fn copy_creds(p: *mut task_struct, clone_flags: u64) -> c_
     if (new.thread_keyring) {
     key_put(new.thread_keyring);
     new.thread_keyring = core::ptr::null_mut();
-    if (clone_flags & CLONE_THREAD)
+    if (clone_flags & CLONE_THREAD) {
     install_thread_keyring_to_cred(new);
+    }
     }
 // The process keyring is only shared between the threads in a process;
 // anything outside of those threads doesn't inherit.
@@ -304,15 +409,14 @@ pub unsafe extern "C" fn copy_creds(p: *mut task_struct, clone_flags: u64) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn cred_cap_issubset(set: *const cred, subset: *const cred) -> bool {
-    static bool cred_cap_issubset(const struct cred *set, const struct cred *subset)
-    {
     const struct user_namespace *set_ns = set.user_ns;
     const struct user_namespace *subset_ns = subset.user_ns;
 // If the two credentials are in the same user namespace see if
 // the capabilities of subset are a subset of set.
 //
-    if (set_ns == subset_ns)
+    if (set_ns == subset_ns) {
     return cap_issubset(subset.cap_permitted, set.cap_permitted);
+    }
 // The credentials are in a different user namespaces
 // therefore one is a subset of the other only if a set is an
 // ancestor of subset and set->euid is owner of subset or one
@@ -341,14 +445,12 @@ unsafe extern "C" fn cred_cap_issubset(set: *const cred, subset: *const cred) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn commit_creds(new: *mut cred) -> c_int {
-    int commit_creds(struct cred *new)
-    {
     struct task_struct *task = current;
     const struct cred *old = task.real_cred;
     kdebug("commit_creds(%p{%ld})", new,
     atomic_long_read(&new.usage));
-    BUG_ON(task.cred != old);
-    BUG_ON(atomic_long_read(&new.usage) < 1);
+// BUG_ON;
+// BUG_ON;
     get_cred(new); /* we will require a ref for the subj creds too */
 // dumpability changes
     if (!uid_eq(old.euid, new.euid) ||
@@ -357,8 +459,9 @@ pub unsafe extern "C" fn commit_creds(new: *mut cred) -> c_int {
     !gid_eq(old.fsgid, new.fsgid) ||
     !cred_cap_issubset(old, new)) {
 // mm-less tasks share init_task's exec_state
-    if (task.mm)
+    if (task.mm) {
     task_exec_state_set_dumpable(suid_dumpable);
+    }
     task.pdeath_signal = 0;
 //
 // If a task drops privileges and becomes nondumpable,
@@ -372,22 +475,27 @@ pub unsafe extern "C" fn commit_creds(new: *mut cred) -> c_int {
     smp_wmb();
     }
 // alter the thread keyring
-    if (!uid_eq(new.fsuid, old.fsuid))
+    if (!uid_eq(new.fsuid, old.fsuid)) {
     key_fsuid_changed(new);
-    if (!gid_eq(new.fsgid, old.fsgid))
+    }
+    if (!gid_eq(new.fsgid, old.fsgid)) {
     key_fsgid_changed(new);
+    }
 // do it
 // RLIMIT_NPROC limits on user->processes have already been checked
 // in set_user().
 //
-    if (new.user != old.user || new.user_ns != old.user_ns)
+    if (new.user != old.user || new.user_ns != old.user_ns) {
     inc_rlimit_ucounts(new.ucounts, UCOUNT_RLIMIT_NPROC, 1);
+    }
     rcu_assign_pointer(task.real_cred, new);
     rcu_assign_pointer(task.cred, new);
-    if (new.user != old.user || new.user_ns != old.user_ns)
+    if (new.user != old.user || new.user_ns != old.user_ns) {
     dec_rlimit_ucounts(old.ucounts, UCOUNT_RLIMIT_NPROC, 1);
-    if (new.user_ns != old.user_ns)
+    }
+    if (new.user_ns != old.user_ns) {
     switch_cred_namespaces(old, new);
+    }
 // send notifications
     if (!uid_eq(new.uid,   old.uid)  ||
     !uid_eq(new.euid,  old.euid) ||
@@ -403,7 +511,7 @@ pub unsafe extern "C" fn commit_creds(new: *mut cred) -> c_int {
     put_cred_many(old, 2);
     return 0;
     }
-    EXPORT_SYMBOL(commit_creds);
+// EXPORT_SYMBOL;
 //
 // abort_creds - Discard a set of credentials and unlock the current task
 // @new: The credentials that were going to be applied
@@ -413,14 +521,12 @@ pub unsafe extern "C" fn commit_creds(new: *mut cred) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn abort_creds(new: *mut cred) {
-    void abort_creds(struct cred *new)
-    {
     kdebug("abort_creds(%p{%ld})", new,
     atomic_long_read(&new.usage));
-    BUG_ON(atomic_long_read(&new.usage) < 1);
+// BUG_ON;
     put_cred(new);
     }
-    EXPORT_SYMBOL(abort_creds);
+// EXPORT_SYMBOL;
 //
 // cred_fscmp - Compare two credentials with respect to filesystem access.
 // @a: The first credential
@@ -437,54 +543,64 @@ pub unsafe extern "C" fn abort_creds(new: *mut cred) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cred_fscmp(a: *const cred, b: *const cred) -> c_int {
-    int cred_fscmp(const struct cred *a, const struct cred *b)
-    {
     struct group_info *ga, *gb;
-    int g;
-    if (a == b)
+    let mut g = 0;
+    if (a == b) {
     return 0;
-    if (uid_lt(a.fsuid, b.fsuid))
+    }
+    if (uid_lt(a.fsuid, b.fsuid)) {
     return -1;
-    if (uid_gt(a.fsuid, b.fsuid))
+    }
+    if (uid_gt(a.fsuid, b.fsuid)) {
     return 1;
-    if (gid_lt(a.fsgid, b.fsgid))
+    }
+    if (gid_lt(a.fsgid, b.fsgid)) {
     return -1;
-    if (gid_gt(a.fsgid, b.fsgid))
+    }
+    if (gid_gt(a.fsgid, b.fsgid)) {
     return 1;
+    }
     ga = a.group_info;
     gb = b.group_info;
-    if (ga == gb)
+    if (ga == gb) {
     return 0;
-    if (ga == core::ptr::null_mut())
+    }
+    if (ga == core::ptr::null_mut()) {
     return -1;
-    if (gb == core::ptr::null_mut())
+    }
+    if (gb == core::ptr::null_mut()) {
     return 1;
-    if (ga.ngroups < gb.ngroups)
+    }
+    if (ga.ngroups < gb.ngroups) {
     return -1;
-    if (ga.ngroups > gb.ngroups)
+    }
+    if (ga.ngroups > gb.ngroups) {
     return 1;
+    }
     for (g = 0; g < ga.ngroups; g++) {
-    if (gid_lt(ga.gid[g], gb.gid[g]))
+    if (gid_lt(ga.gid[g], gb.gid[g])) {
     return -1;
-    if (gid_gt(ga.gid[g], gb.gid[g]))
+    }
+    if (gid_gt(ga.gid[g], gb.gid[g])) {
     return 1;
+    }
     }
     return 0;
     }
-    EXPORT_SYMBOL(cred_fscmp);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn set_cred_ucounts(new: *mut cred) -> c_int {
-    int set_cred_ucounts(struct cred *new)
-    {
     struct ucounts *new_ucounts, *old_ucounts = new.ucounts;
 //
 // This optimization is needed because alloc_ucounts() uses locks
 // for table lookups.
 //
-    if (old_ucounts.ns == new.user_ns && uid_eq(old_ucounts.uid, new.uid))
+    if (old_ucounts.ns == new.user_ns && uid_eq(old_ucounts.uid, new.uid)) {
     return 0;
-    if (!(new_ucounts = alloc_ucounts(new.user_ns, new.uid)))
+    }
+    if (!(new_ucounts = alloc_ucounts(new.user_ns, new.uid))) {
     return -EAGAIN;
+    }
     new.ucounts = new_ucounts;
     put_ucounts(old_ucounts);
     return 0;
@@ -493,9 +609,7 @@ pub unsafe extern "C" fn set_cred_ucounts(new: *mut cred) -> c_int {
 // initialise the credentials stuff
 //
 #[no_mangle]
-pub unsafe extern "C" fn cred_init() -> void __init {
-    void __init cred_init(void)
-    {
+pub unsafe extern "C" fn cred_init() -> c_int {
 // allocate a slab in which we can store credentials
     cred_jar = KMEM_CACHE(cred,
     SLAB_HWCACHE_ALIGN | SLAB_PANIC | SLAB_ACCOUNT);
@@ -516,15 +630,17 @@ pub unsafe extern "C" fn cred_init() -> void __init {
 //
 // Returns the new credentials or NULL if out of memory.
 //
-    struct cred *prepare_kernel_cred(struct task_struct *daemon)
-    {
-    const struct cred *old;
-    struct cred *new;
-    if (WARN_ON_ONCE(!daemon))
+#[no_mangle]
+pub unsafe extern "C" fn prepare_kernel_cred() {
+    let mut old = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
+    if (WARN_ON_ONCE(!daemon)) {
     return core::ptr::null_mut();
+    }
     new = kmem_cache_alloc(cred_jar, GFP_KERNEL);
-    if (!new)
+    if (!new) {
     return core::ptr::null_mut();
+    }
     kdebug("prepare_kernel_cred() alloc %p", new);
     old = get_task_cred(daemon);
 // new = *old;
@@ -543,10 +659,12 @@ pub unsafe extern "C" fn cred_init() -> void __init {
     new.security = core::ptr::null_mut();
 
     new.ucounts = get_ucounts(new.ucounts);
-    if (!new.ucounts)
+    if (!new.ucounts) {
     goto error;
-    if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0)
+    }
+    if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0) {
     goto error;
+    }
     put_cred(old);
     return new;
     error:
@@ -554,7 +672,7 @@ pub unsafe extern "C" fn cred_init() -> void __init {
     put_cred(old);
     return core::ptr::null_mut();
     }
-    EXPORT_SYMBOL(prepare_kernel_cred);
+// EXPORT_SYMBOL;
 //
 // set_security_override - Set the security ID in a set of credentials
 // @new: The credentials to alter
@@ -565,11 +683,9 @@ pub unsafe extern "C" fn cred_init() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_security_override(new: *mut cred, secid: u32) -> c_int {
-    int set_security_override(struct cred *new, u32 secid)
-    {
     return security_kernel_act_as(new, secid);
     }
-    EXPORT_SYMBOL(set_security_override);
+// EXPORT_SYMBOL;
 //
 // set_create_files_as - Set the LSM file create context in a set of credentials
 // @new: The credentials to alter
@@ -581,12 +697,11 @@ pub unsafe extern "C" fn set_security_override(new: *mut cred, secid: u32) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_create_files_as(new: *mut cred, inode: *mut inode) -> c_int {
-    int set_create_files_as(struct cred *new, struct inode *inode)
-    {
-    if (!uid_valid(inode.i_uid) || !gid_valid(inode.i_gid))
+    if (!uid_valid(inode.i_uid) || !gid_valid(inode.i_gid)) {
     return -EINVAL;
+    }
     new.fsuid = inode.i_uid;
     new.fsgid = inode.i_gid;
     return security_kernel_create_files_as(new, inode);
     }
-    EXPORT_SYMBOL(set_create_files_as);
+// EXPORT_SYMBOL;

@@ -35,100 +35,194 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
 // Supplementary group IDs
 //
 
-    struct group_info *groups_alloc(int gidsetsize)
-    {
-    struct group_info *gi;
+#[no_mangle]
+pub unsafe extern "C" fn groups_alloc() {
+    let mut gi = core::ptr::null_mut();
     gi = kvmalloc_flex(*gi, gid, gidsetsize, GFP_KERNEL_ACCOUNT);
-    if (!gi)
+    if (!gi) {
     return core::ptr::null_mut();
+    }
     refcount_set(&gi.usage, 1);
     gi.ngroups = gidsetsize;
     return gi;
     }
-    EXPORT_SYMBOL(groups_alloc);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn groups_free(group_info: *mut group_info) {
-    void groups_free(struct group_info *group_info)
-    {
     kvfree(group_info);
     }
-    EXPORT_SYMBOL(groups_free);
+// EXPORT_SYMBOL;
 // export the group_info to a user-space array
-    static int groups_to_user(gid_t __user *grouplist,
-    const struct group_info *group_info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn groups_to_user() {
     struct user_namespace *user_ns = current_user_ns();
-    int i;
-    let mut count: c_uint = group_info.ngroups;
+    let mut i = 0;
+pub static mut count: c_uint = group_info.ngroups;
     for (i = 0; i < count; i++) {
-    gid_t gid;
+    let mut gid = 0;
     gid = from_kgid_munged(user_ns, group_info.gid[i]);
-    if (put_user(gid, grouplist+i))
+    if (put_user(gid, grouplist+i)) {
     return -EFAULT;
+    }
     }
     return 0;
     }
 // fill a group_info from a user-space array - it must be allocated already
-    static int groups_from_user(struct group_info *group_info,
-    gid_t __user *grouplist)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn groups_from_user() {
     struct user_namespace *user_ns = current_user_ns();
-    int i;
-    let mut count: c_uint = group_info.ngroups;
+    let mut i = 0;
+pub static mut count: c_uint = group_info.ngroups;
     for (i = 0; i < count; i++) {
-    gid_t gid;
-    kgid_t kgid;
-    if (get_user(gid, grouplist+i))
+    let mut gid = 0;
+    let mut kgid;
+    if (get_user(gid, grouplist+i)) {
     return -EFAULT;
+    }
     kgid = make_kgid(user_ns, gid);
-    if (!gid_valid(kgid))
+    if (!gid_valid(kgid)) {
     return -EINVAL;
+    }
     group_info.gid[i] = kgid;
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn gid_cmp(_a: *const c_void, _b: *const c_void) -> c_int {
-    static int gid_cmp(const void *_a, const void *_b)
-    {
-    let mut a: kgid_t = *(kgid_t *)_a;
-    let mut b: kgid_t = *(kgid_t *)_b;
+pub static mut a: kgid_t = *_a;
+pub static mut b: kgid_t = *_b;
     return gid_gt(a, b) - gid_lt(a, b);
     }
 #[no_mangle]
 pub unsafe extern "C" fn groups_sort(group_info: *mut group_info) {
-    void groups_sort(struct group_info *group_info)
-    {
     sort(group_info.gid, group_info.ngroups, sizeof(*group_info.gid),
     gid_cmp, core::ptr::null_mut());
     }
-    EXPORT_SYMBOL(groups_sort);
+// EXPORT_SYMBOL;
 // a simple bsearch
 #[no_mangle]
 pub unsafe extern "C" fn groups_search(group_info: *const group_info, grp: kgid_t) -> c_int {
-    int groups_search(const struct group_info *group_info, kgid_t grp)
-    {
     unsigned int left, right;
-    if (!group_info)
+    if (!group_info) {
     return 0;
+    }
     left = 0;
     right = group_info.ngroups;
     while (left < right) {
-    let mut mid: c_uint = (left+right)/2;
-    if (gid_gt(grp, group_info.gid[mid]))
+pub static mut mid: c_uint = (left+right)/2;
+    if (gid_gt(grp, group_info.gid[mid])) {
     left = mid + 1;
+    }
 #[no_mangle]
 pub unsafe extern "C" fn if(_arg: gid_lt(grp, _arg: group_info->gid[mid])) -> else {
     else if (gid_lt(grp, group_info.gid[mid]))
     right = mid;
-    else
+    else {
     return 1;
+    }
     }
     return 0;
     }
@@ -139,13 +233,11 @@ pub unsafe extern "C" fn if(_arg: gid_lt(grp, _arg: group_info->gid[mid])) -> el
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_groups(new: *mut cred, group_info: *mut group_info) {
-    void set_groups(struct cred *new, struct group_info *group_info)
-    {
     put_group_info(new.group_info);
     get_group_info(group_info);
     new.group_info = group_info;
     }
-    EXPORT_SYMBOL(set_groups);
+// EXPORT_SYMBOL;
 //
 // set_current_groups - Change current's group subscription
 // @group_info: The group list to impose
@@ -155,31 +247,32 @@ pub unsafe extern "C" fn set_groups(new: *mut cred, group_info: *mut group_info)
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_current_groups(group_info: *mut group_info) -> c_int {
-    int set_current_groups(struct group_info *group_info)
-    {
-    struct cred *new;
-    const struct cred *old;
-    int retval;
+    let mut new = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
+    let mut retval = 0;
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     old = current_cred();
     set_groups(new, group_info);
     retval = security_task_fix_setgroups(new, old);
-    if (retval < 0)
+    if (retval < 0) {
     goto error;
+    }
     return commit_creds(new);
     error:
     abort_creds(new);
     return retval;
     }
-    EXPORT_SYMBOL(set_current_groups);
-    SYSCALL_DEFINE2(getgroups, int, gidsetsize, gid_t __user *, grouplist)
-    {
+// EXPORT_SYMBOL;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getgroups() {
     const struct cred *cred = current_cred();
-    int i;
-    if (gidsetsize < 0)
+    let mut i = 0;
+    if (gidsetsize < 0) {
     return -EINVAL;
+    }
 // no need to grab task_lock here; it cannot change
     i = cred.group_info.ngroups;
     if (gidsetsize) {
@@ -197,8 +290,6 @@ pub unsafe extern "C" fn set_current_groups(group_info: *mut group_info) -> c_in
     }
 #[no_mangle]
 pub unsafe extern "C" fn may_setgroups() -> bool {
-    bool may_setgroups(void)
-    {
     struct user_namespace *user_ns = current_user_ns();
     return ns_capable_setid(user_ns, CAP_SETGID) &&
     userns_may_setgroups(user_ns);
@@ -207,17 +298,20 @@ pub unsafe extern "C" fn may_setgroups() -> bool {
 // SMP: Our groups are copy-on-write. We can set them safely
 // without another task interfering.
 //
-    SYSCALL_DEFINE2(setgroups, int, gidsetsize, gid_t __user *, grouplist)
-    {
-    struct group_info *group_info;
-    int retval;
-    if (!may_setgroups())
+#[no_mangle]
+pub unsafe extern "C" fn sys_setgroups() {
+    let mut group_info = core::ptr::null_mut();
+    let mut retval = 0;
+    if (!may_setgroups()) {
     return -EPERM;
-    if ((unsigned)gidsetsize > NGROUPS_MAX)
+    }
+    if ((unsigned)gidsetsize > NGROUPS_MAX) {
     return -EINVAL;
+    }
     group_info = groups_alloc(gidsetsize);
-    if (!group_info)
+    if (!group_info) {
     return -ENOMEM;
+    }
     retval = groups_from_user(group_info, grouplist);
     if (retval) {
     put_group_info(group_info);
@@ -233,23 +327,23 @@ pub unsafe extern "C" fn may_setgroups() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn in_group_p(grp: kgid_t) -> c_int {
-    int in_group_p(kgid_t grp)
-    {
     const struct cred *cred = current_cred();
-    let mut retval: c_int = 1;
-    if (!gid_eq(grp, cred.fsgid))
+pub static mut retval: c_int = 1;
+    if (!gid_eq(grp, cred.fsgid)) {
     retval = groups_search(cred.group_info, grp);
+    }
     return retval;
     }
-    EXPORT_SYMBOL(in_group_p);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn in_egroup_p(grp: kgid_t) -> c_int {
-    int in_egroup_p(kgid_t grp)
-    {
     const struct cred *cred = current_cred();
-    let mut retval: c_int = 1;
-    if (!gid_eq(grp, cred.egid))
+pub static mut retval: c_int = 1;
+    if (!gid_eq(grp, cred.egid)) {
     retval = groups_search(cred.group_info, grp);
+    }
     return retval;
     }
-    EXPORT_SYMBOL(in_egroup_p);
+// EXPORT_SYMBOL;
+
+}

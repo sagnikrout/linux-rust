@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -67,7 +90,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     .desc	= IORES_DESC_SOFT_RESERVED,
     .flags	= IORESOURCE_MEM,
     };
-    static DEFINE_RWLOCK(resource_lock);
+// static DEFINE_RWLOCK(resource_lock);
 //
 // Return the next node of @p in pre-order tree traversal.  If
 // @skip_children is true, skip the descendant nodes of @p in
@@ -119,15 +142,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn r_stop(m: *mut seq_file, v: *mut c_void) {
-    static void r_stop(struct seq_file *m, void *v)
-    __releases(resource_lock)
-    {
     read_unlock(&resource_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn r_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int r_show(struct seq_file *m, void *v)
-    {
     struct resource *root = pde_data(file_inode(m.file));
     struct resource *r = v, *p;
     unsigned long long start, end;
@@ -156,9 +174,7 @@ unsafe extern "C" fn r_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     .show	= r_show,
     };
 #[no_mangle]
-unsafe extern "C" fn ioresources_init() -> int __init {
-    static int __init ioresources_init(void)
-    {
+unsafe extern "C" fn ioresources_init() -> c_int {
     proc_create_seq_data("ioports", 0, core::ptr::null_mut(), &resource_op,
     &ioport_resource);
     proc_create_seq_data("iomem", 0, core::ptr::null_mut(), &resource_op, &iomem_resource);
@@ -168,8 +184,6 @@ unsafe extern "C" fn ioresources_init() -> int __init {
 
 #[no_mangle]
 unsafe extern "C" fn free_resource(res: *mut resource) {
-    static void free_resource(struct resource *res)
-    {
 //
 // If the resource was allocated using memblock early during boot
 // we'll leak it here: we can only return full pages back to the
@@ -186,8 +200,6 @@ unsafe extern "C" fn free_resource(res: *mut resource) {
 // Return the conflict entry if you can't request it
 #[no_mangle]
 unsafe extern "C" fn __request_resource(root: *mut resource, new: *mut resource) -> *mut resource {
-    static struct resource * __request_resource(struct resource *root, struct resource *new)
-    {
     let mut start: resource_size_t = new.start;
     let mut end: resource_size_t = new.end;
     struct resource *tmp, **p;
@@ -214,8 +226,6 @@ unsafe extern "C" fn __request_resource(root: *mut resource, new: *mut resource)
     }
 #[no_mangle]
 unsafe extern "C" fn __release_resource(old: *mut resource, release_child: bool) -> c_int {
-    static int __release_resource(struct resource *old, bool release_child)
-    {
     struct resource *tmp, **p, *chd;
     p = &old.parent.child;
     for (;;) {
@@ -243,8 +253,6 @@ unsafe extern "C" fn __release_resource(old: *mut resource, release_child: bool)
     }
 #[no_mangle]
 unsafe extern "C" fn __release_child_resources(r: *mut resource) {
-    static void __release_child_resources(struct resource *r)
-    {
     struct resource *tmp, *p;
     resource_size_t size;
     p = r.child;
@@ -264,8 +272,6 @@ unsafe extern "C" fn __release_child_resources(r: *mut resource) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn release_child_resources(r: *mut resource) {
-    void release_child_resources(struct resource *r)
-    {
     write_lock(&resource_lock);
     __release_child_resources(r);
     write_unlock(&resource_lock);
@@ -294,8 +300,6 @@ pub unsafe extern "C" fn release_child_resources(r: *mut resource) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn request_resource(root: *mut resource, new: *mut resource) -> c_int {
-    int request_resource(struct resource *root, struct resource *new)
-    {
     struct resource *conflict;
     conflict = request_resource_conflict(root, new);
     return conflict ? -EBUSY : 0;
@@ -307,8 +311,6 @@ pub unsafe extern "C" fn request_resource(root: *mut resource, new: *mut resourc
 //
 #[no_mangle]
 pub unsafe extern "C" fn release_resource(old: *mut resource) -> c_int {
-    int release_resource(struct resource *old)
-    {
     int retval;
     write_lock(&resource_lock);
     retval = __release_resource(old, true);
@@ -318,8 +320,6 @@ pub unsafe extern "C" fn release_resource(old: *mut resource) -> c_int {
     EXPORT_SYMBOL(release_resource);
 #[no_mangle]
 unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulong) -> bool {
-    static bool is_type_match(struct resource *p, unsigned long flags, unsigned long desc)
-    {
     return (p.flags & flags) == flags && (desc == IORES_DESC_NONE || desc == p.desc);
     }
 //
@@ -545,8 +545,6 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
     }
 #[no_mangle]
 unsafe extern "C" fn __is_ram(pfn: c_ulong, nr_pages: c_ulong, arg: *mut c_void) -> c_int {
-    static int __is_ram(unsigned long pfn, unsigned long nr_pages, void *arg)
-    {
     return 1;
     }
 //
@@ -555,8 +553,6 @@ unsafe extern "C" fn __is_ram(pfn: c_ulong, nr_pages: c_ulong, arg: *mut c_void)
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_is_ram(pfn: c_ulong) -> int __weak {
-    int __weak page_is_ram(unsigned long pfn)
-    {
     return walk_system_ram_range(pfn, 1, core::ptr::null_mut(), __is_ram) == 1;
     }
     EXPORT_SYMBOL_GPL(page_is_ram);
@@ -653,8 +649,6 @@ pub unsafe extern "C" fn page_is_ram(pfn: c_ulong) -> int __weak {
 //
 #[no_mangle]
 pub unsafe extern "C" fn region_intersects_soft_reserve(start: resource_size_t, size: usize) -> c_int {
-    int region_intersects_soft_reserve(resource_size_t start, size_t size)
-    {
     guard(read_lock)(&resource_lock);
     return __region_intersects(&soft_reserve_resource, start, size,
     IORESOURCE_MEM, IORES_DESC_SOFT_RESERVED);
@@ -662,8 +656,6 @@ pub unsafe extern "C" fn region_intersects_soft_reserve(start: resource_size_t, 
     EXPORT_SYMBOL_GPL(region_intersects_soft_reserve);
 #[no_mangle]
 pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void __weak {
-    void __weak arch_remove_reservations(struct resource *avail)
-    {
     }
     static void resource_clip(struct resource *res, resource_size_t min,
     resource_size_t max)
@@ -856,8 +848,6 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
 //
 #[no_mangle]
 unsafe extern "C" fn __insert_resource(parent: *mut resource, new: *mut resource) -> *mut resource {
-    static struct resource * __insert_resource(struct resource *parent, struct resource *new)
-    {
     struct resource *first, *next;
     for (;; parent = first) {
     first = __request_resource(parent, new);
@@ -933,8 +923,6 @@ unsafe extern "C" fn __insert_resource(parent: *mut resource, new: *mut resource
 //
 #[no_mangle]
 pub unsafe extern "C" fn insert_resource(parent: *mut resource, new: *mut resource) -> c_int {
-    int insert_resource(struct resource *parent, struct resource *new)
-    {
     struct resource *conflict;
     conflict = insert_resource_conflict(parent, new);
     return conflict ? -EBUSY : 0;
@@ -950,8 +938,6 @@ pub unsafe extern "C" fn insert_resource(parent: *mut resource, new: *mut resour
 //
 #[no_mangle]
 pub unsafe extern "C" fn insert_resource_expand_to_fit(root: *mut resource, new: *mut resource) {
-    void insert_resource_expand_to_fit(struct resource *root, struct resource *new)
-    {
     if (new.parent)
     return;
     write_lock(&resource_lock);
@@ -995,8 +981,6 @@ pub unsafe extern "C" fn insert_resource_expand_to_fit(root: *mut resource, new:
 //
 #[no_mangle]
 pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
-    int remove_resource(struct resource *old)
-    {
     int retval;
     write_lock(&resource_lock);
     retval = __release_resource(old, false);
@@ -1141,8 +1125,6 @@ pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn resource_alignment(res: *const resource) -> resource_size_t {
-    resource_size_t resource_alignment(const struct resource *res)
-    {
     switch (res.flags & (IORESOURCE_SIZEALIGN | IORESOURCE_STARTALIGN)) {
     case IORESOURCE_SIZEALIGN:
     return resource_size(res);
@@ -1162,13 +1144,11 @@ pub unsafe extern "C" fn resource_alignment(res: *const resource) -> resource_si
 //
 // release_region releases a matching busy region.
 //
-    static DECLARE_WAIT_QUEUE_HEAD(muxed_resource_wait);
+// static DECLARE_WAIT_QUEUE_HEAD(muxed_resource_wait);
     static struct inode *iomem_inode;
 
 #[no_mangle]
 unsafe extern "C" fn revoke_iomem(res: *mut resource) {
-    static void revoke_iomem(struct resource *res)
-    {
 // pairs with smp_store_release() in iomem_init_inode()
     struct inode *inode = smp_load_acquire(&iomem_inode);
 //
@@ -1325,8 +1305,6 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
 
 #[no_mangle]
 unsafe extern "C" fn append_child_to_parent(new_parent: *mut resource, new_child: *mut resource) {
-    static void append_child_to_parent(struct resource *new_parent, struct resource *new_child)
-    {
     struct resource *child;
     child = new_parent.child;
     if (child) {
@@ -1381,8 +1359,6 @@ unsafe extern "C" fn append_child_to_parent(new_parent: *mut resource, new_child
 //
 #[no_mangle]
 pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, size: resource_size_t) {
-    void release_mem_region_adjustable(resource_size_t start, resource_size_t size)
-    {
     struct resource *parent = &iomem_resource;
     struct resource *new_res = core::ptr::null_mut();
     let mut alloc_nofail: bool = false;
@@ -1489,8 +1465,6 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
 //
 #[no_mangle]
 pub unsafe extern "C" fn merge_system_ram_resource(res: *mut resource) {
-    void merge_system_ram_resource(struct resource *res)
-    {
     let mut flags: c_ulong = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
     struct resource *cur;
     if (WARN_ON_ONCE((res.flags & flags) != flags))
@@ -1521,8 +1495,6 @@ pub unsafe extern "C" fn merge_system_ram_resource(res: *mut resource) {
 //
 #[no_mangle]
 unsafe extern "C" fn devm_resource_release(dev: *mut device, ptr: *mut c_void) {
-    static void devm_resource_release(struct device *dev, void *ptr)
-    {
     struct resource **r = ptr;
     release_resource(*r);
     }
@@ -1565,8 +1537,6 @@ unsafe extern "C" fn devm_resource_release(dev: *mut device, ptr: *mut c_void) {
     EXPORT_SYMBOL(devm_request_resource);
 #[no_mangle]
 unsafe extern "C" fn devm_resource_match(dev: *mut device, res: *mut c_void, data: *mut c_void) -> c_int {
-    static int devm_resource_match(struct device *dev, void *res, void *data)
-    {
     struct resource **ptr = res;
     return *ptr == data;
     }
@@ -1579,8 +1549,6 @@ unsafe extern "C" fn devm_resource_match(dev: *mut device, res: *mut c_void, dat
 //
 #[no_mangle]
 pub unsafe extern "C" fn devm_release_resource(dev: *mut device, new: *mut resource) {
-    void devm_release_resource(struct device *dev, struct resource *new)
-    {
     WARN_ON(devres_release(dev, devm_resource_release, devm_resource_match,
     new));
     }
@@ -1595,15 +1563,11 @@ pub struct region_devres {
 
 #[no_mangle]
 unsafe extern "C" fn devm_region_release(dev: *mut device, res: *mut c_void) {
-    static void devm_region_release(struct device *dev, void *res)
-    {
     struct region_devres *this = res;
     __release_region(this.parent, this.start, this.n);
     }
 #[no_mangle]
 unsafe extern "C" fn devm_region_match(dev: *mut device, res: *mut c_void, match_data: *mut c_void) -> c_int {
-    static int devm_region_match(struct device *dev, void *res, void *match_data)
-    {
     struct region_devres *this = res, *match = match_data;
     return this.parent == match.parent &&
     this.start == match.start && this.n == match.n;
@@ -1642,9 +1606,7 @@ unsafe extern "C" fn devm_region_match(dev: *mut device, res: *mut c_void, match
 //
 pub const MAXRESERVE: c_int = 4;
 #[no_mangle]
-unsafe extern "C" fn reserve_setup(str: *mut c_char) -> int __init {
-    static int __init reserve_setup(char *str)
-    {
+unsafe extern "C" fn reserve_setup(str: *mut c_char) -> c_int {
     static int reserved;
     static struct resource reserve[MAXRESERVE];
     for (;;) {
@@ -1682,8 +1644,6 @@ unsafe extern "C" fn reserve_setup(str: *mut c_char) -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn iomem_map_sanity_check(addr: resource_size_t, size: c_ulong) -> c_int {
-    int iomem_map_sanity_check(resource_size_t addr, unsigned long size)
-    {
     let mut end: resource_size_t = addr + size - 1;
     struct resource *p;
     let mut err: c_int = 0;
@@ -1729,8 +1689,6 @@ pub unsafe extern "C" fn iomem_map_sanity_check(addr: resource_size_t, size: c_u
 //
 #[no_mangle]
 pub unsafe extern "C" fn resource_is_exclusive(root: *mut resource, addr: u64, size: resource_size_t) -> bool {
-    bool resource_is_exclusive(struct resource *root, u64 addr, resource_size_t size)
-    {
     const unsigned int exclusive_system_ram = IORESOURCE_SYSTEM_RAM |
     IORESOURCE_EXCLUSIVE;
     let mut skip_children: bool = false, err = false;
@@ -1773,8 +1731,6 @@ pub unsafe extern "C" fn resource_is_exclusive(root: *mut resource, addr: u64, s
     }
 #[no_mangle]
 pub unsafe extern "C" fn iomem_is_exclusive(addr: u64) -> bool {
-    bool iomem_is_exclusive(u64 addr)
-    {
     return resource_is_exclusive(&iomem_resource, addr & PAGE_MASK,
     PAGE_SIZE);
     }
@@ -1792,8 +1748,6 @@ pub unsafe extern "C" fn iomem_is_exclusive(addr: u64) -> bool {
     EXPORT_SYMBOL(resource_list_create_entry);
 #[no_mangle]
 pub unsafe extern "C" fn resource_list_free(head: *mut list_head) {
-    void resource_list_free(struct list_head *head)
-    {
     struct resource_entry *entry, *tmp;
     list_for_each_entry_safe(entry, tmp, head, node)
     resource_list_destroy_entry(entry);
@@ -1831,8 +1785,6 @@ pub unsafe extern "C" fn resource_list_free(head: *mut list_head) {
     }
 #[no_mangle]
 unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
-    static void remove_free_mem_region(void *_res)
-    {
     struct resource *res = _res;
     if (res.parent)
     remove_resource(res);
@@ -1958,9 +1910,7 @@ unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
     EXPORT_SYMBOL_GPL(alloc_free_mem_region);
 
 #[no_mangle]
-unsafe extern "C" fn strict_iomem(str: *mut c_char) -> int __init {
-    static int __init strict_iomem(char *str)
-    {
+unsafe extern "C" fn strict_iomem(str: *mut c_char) -> c_int {
     if (strstr(str, "relaxed"))
     strict_iomem_checks = 0;
     if (strstr(str, "strict"))
@@ -1969,8 +1919,6 @@ unsafe extern "C" fn strict_iomem(str: *mut c_char) -> int __init {
     }
 #[no_mangle]
 unsafe extern "C" fn iomem_fs_init_fs_context(fc: *mut fs_context) -> c_int {
-    static int iomem_fs_init_fs_context(struct fs_context *fc)
-    {
     return init_pseudo(fc, DEVMEM_MAGIC) ? 0 : -ENOMEM;
     }
     static struct file_system_type iomem_fs_type = {
@@ -1980,9 +1928,7 @@ unsafe extern "C" fn iomem_fs_init_fs_context(fc: *mut fs_context) -> c_int {
     .kill_sb	= kill_anon_super,
     };
 #[no_mangle]
-unsafe extern "C" fn iomem_init_inode() -> int __init {
-    static int __init iomem_init_inode(void)
-    {
+unsafe extern "C" fn iomem_init_inode() -> c_int {
     static struct vfsmount *iomem_vfs_mount;
     static int iomem_fs_cnt;
     struct inode *inode;

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 
@@ -42,8 +65,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 unsafe extern "C" fn task_work_set_notify_irq(entry: *mut irq_work) {
-    static void task_work_set_notify_irq(struct irq_work *entry)
-    {
 //
 // no-op IPI
 //
@@ -171,8 +192,6 @@ unsafe extern "C" fn task_work_set_notify_irq(entry: *mut irq_work) {
     }
 #[no_mangle]
 unsafe extern "C" fn task_work_func_match(cb: *mut callback_head, data: *mut c_void) -> bool {
-    static bool task_work_func_match(struct callback_head *cb, void *data)
-    {
     return cb.func == data;
     }
 //
@@ -193,8 +212,6 @@ unsafe extern "C" fn task_work_func_match(cb: *mut callback_head, data: *mut c_v
     }
 #[no_mangle]
 unsafe extern "C" fn task_work_match(cb: *mut callback_head, data: *mut c_void) -> bool {
-    static bool task_work_match(struct callback_head *cb, void *data)
-    {
     let mut cb: return = = data;
     }
 //
@@ -209,8 +226,6 @@ unsafe extern "C" fn task_work_match(cb: *mut callback_head, data: *mut c_void) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_work_cancel(task: *mut task_struct, cb: *mut callback_head) -> bool {
-    bool task_work_cancel(struct task_struct *task, struct callback_head *cb)
-    {
     struct callback_head *ret;
     ret = task_work_cancel_match(task, task_work_match, cb);
     let mut ret: return = = cb;
@@ -225,8 +240,6 @@ pub unsafe extern "C" fn task_work_cancel(task: *mut task_struct, cb: *mut callb
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_work_run() {
-    void task_work_run(void)
-    {
     struct task_struct *task = current;
     struct callback_head *work, *head, *next;
     for (;;) {

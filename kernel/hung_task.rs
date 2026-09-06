@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -46,11 +143,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // The number of tasks checked:
 //
-    let mut sysctl_hung_task_check_count: static int __read_mostly = PID_MAX_LIMIT;
+pub static mut sysctl_hung_task_check_count: int __read_mostly = PID_MAX_LIMIT;
 //
 // Total number of tasks detected as hung since boot:
 //
-    let mut sysctl_hung_task_detect_count: static atomic_long_t = ATOMIC_LONG_INIT(0);
+pub static mut sysctl_hung_task_detect_count: atomic_long_t = ATOMIC_LONG_INIT(0);
 //
 // Limit number of tasks checked in a batch.
 //
@@ -62,12 +159,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Zero means infinite timeout - no checking done:
 //
-    let mut sysctl_hung_task_timeout_secs: unsigned long __read_mostly = CONFIG_DEFAULT_HUNG_TASK_TIMEOUT;
+pub static mut sysctl_hung_task_timeout_secs: unsigned long __read_mostly = CONFIG_DEFAULT_HUNG_TASK_TIMEOUT;
 //
 // Zero (default value) means use sysctl_hung_task_timeout_secs:
 //
     static unsigned long __read_mostly sysctl_hung_task_check_interval_secs;
-    let mut sysctl_hung_task_warnings: static int __read_mostly = 10;
+pub static mut sysctl_hung_task_warnings: int __read_mostly = 10;
     static int __read_mostly did_panic;
     static bool hung_task_call_panic;
     static struct task_struct *watchdog_task;
@@ -92,21 +189,16 @@ pub const sysctl_hung_task_all_cpu_backtrace: c_int = 0;
 //
     static unsigned int __read_mostly sysctl_hung_task_panic =
     CONFIG_BOOTPARAM_HUNG_TASK_PANIC;
-    static int
-    hung_task_panic(struct notifier_block *this, unsigned long event, void *ptr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hung_task_panic() {
     did_panic = 1;
     return NOTIFY_DONE;
     }
-    static struct notifier_block panic_block = {
-    .notifier_call = hung_task_panic,
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn task_is_hung(t: *mut task_struct, timeout: c_ulong) -> bool {
-    static bool task_is_hung(struct task_struct *t, unsigned long timeout)
-    {
-    let mut switch_count: c_ulong = t.nvcsw + t.nivcsw;
-    let mut state: c_uint = READ_ONCE(t.__state);
+pub static mut switch_count: c_ulong = t.nvcsw + t.nivcsw;
+pub static mut state: c_uint = READ_ONCE(t.__state);
 //
 // skip the TASK_KILLABLE tasks -- these can be killed
 // skip the TASK_IDLE tasks -- those are genuinely idle
@@ -120,39 +212,40 @@ unsafe extern "C" fn task_is_hung(t: *mut task_struct, timeout: c_ulong) -> bool
 // TASK_UNINTERRUPTIBLE without having ever been switched out once, it
 // musn't be checked.
 //
-    if (unlikely(!switch_count))
+    if (unlikely(!switch_count)) {
     return false;
+    }
     if (switch_count != t.last_switch_count) {
     t.last_switch_count = switch_count;
     t.last_switch_time = jiffies;
     return false;
     }
-    if (time_is_after_jiffies(t.last_switch_time + timeout * HZ))
+    if (time_is_after_jiffies(t.last_switch_time + timeout * HZ)) {
     return false;
+    }
     return true;
     }
 
 #[no_mangle]
 unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong) {
-    static void debug_show_blocker(struct task_struct *task, unsigned long timeout)
-    {
     struct task_struct *g, *t;
     unsigned long owner, blocker, blocker_type;
     const char *rwsem_blocked_by, *rwsem_blocked_as;
-    RCU_LOCKDEP_WARN(!rcu_read_lock_held(), "No rcu lock held");
+// RCU_LOCKDEP_WARN;
     blocker = READ_ONCE(task.blocker);
-    if (!blocker)
+    if (!blocker) {
     return;
+    }
     blocker_type = hung_task_get_blocker_type(blocker);
-    switch (blocker_type) {
-    case BLOCKER_TYPE_MUTEX:
+    match (blocker_type) {
+    BLOCKER_TYPE_MUTEX => {
     owner = mutex_get_owner(hung_task_blocker_to_lock(blocker));
     break;
-    case BLOCKER_TYPE_SEM:
+    BLOCKER_TYPE_SEM => {
     owner = sem_last_holder(hung_task_blocker_to_lock(blocker));
     break;
-    case BLOCKER_TYPE_RWSEM_READER:
-    case BLOCKER_TYPE_RWSEM_WRITER:
+    BLOCKER_TYPE_RWSEM_READER => {
+    BLOCKER_TYPE_RWSEM_WRITER => {
     owner = (unsigned long)rwsem_owner(
     hung_task_blocker_to_lock(blocker));
     rwsem_blocked_as = (blocker_type == BLOCKER_TYPE_RWSEM_READER) ?
@@ -161,22 +254,22 @@ unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong
     hung_task_blocker_to_lock(blocker)) ?
     "reader" : "writer";
     break;
-    default:
-    WARN_ON_ONCE(1);
+    _ => {
+// WARN_ON_ONCE;
     return;
     }
     if (unlikely(!owner)) {
-    switch (blocker_type) {
-    case BLOCKER_TYPE_MUTEX:
+    match (blocker_type) {
+    BLOCKER_TYPE_MUTEX => {
     pr_err("INFO: task %s:%d is blocked on a mutex, but the owner is not found.\n",
     task.comm, task.pid);
     break;
-    case BLOCKER_TYPE_SEM:
+    BLOCKER_TYPE_SEM => {
     pr_err("INFO: task %s:%d is blocked on a semaphore, but the last holder is not found.\n",
     task.comm, task.pid);
     break;
-    case BLOCKER_TYPE_RWSEM_READER:
-    case BLOCKER_TYPE_RWSEM_WRITER:
+    BLOCKER_TYPE_RWSEM_READER => {
+    BLOCKER_TYPE_RWSEM_WRITER => {
     pr_err("INFO: task %s:%d is blocked on an rw-semaphore, but the owner is not found.\n",
     task.comm, task.pid);
     break;
@@ -185,35 +278,35 @@ unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong
     }
 // Ensure the owner information is correct.
     for_each_process_thread(g, t) {
-    if ((unsigned long)t != owner)
+    if ((unsigned long)t != owner) {
     continue;
-    switch (blocker_type) {
-    case BLOCKER_TYPE_MUTEX:
+    }
+    match (blocker_type) {
+    BLOCKER_TYPE_MUTEX => {
     pr_err("INFO: task %s:%d is blocked on a mutex likely owned by task %s:%d.\n",
     task.comm, task.pid, t.comm, t.pid);
     break;
-    case BLOCKER_TYPE_SEM:
+    BLOCKER_TYPE_SEM => {
     pr_err("INFO: task %s:%d blocked on a semaphore likely last held by task %s:%d\n",
     task.comm, task.pid, t.comm, t.pid);
     break;
-    case BLOCKER_TYPE_RWSEM_READER:
-    case BLOCKER_TYPE_RWSEM_WRITER:
+    BLOCKER_TYPE_RWSEM_READER => {
+    BLOCKER_TYPE_RWSEM_WRITER => {
     pr_err("INFO: task %s:%d <%s> blocked on an rw-semaphore likely owned by task %s:%d <%s>\n",
     task.comm, task.pid, rwsem_blocked_as, t.comm,
     t.pid, rwsem_blocked_by);
     break;
     }
 // Avoid duplicated task dump, skip if the task is also hung.
-    if (!task_is_hung(t, timeout))
+    if (!task_is_hung(t, timeout)) {
     sched_show_task(t);
+    }
     return;
     }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong) {
-    static inline void debug_show_blocker(struct task_struct *task, unsigned long timeout)
-    {
     }
 
 //
@@ -225,9 +318,8 @@ pub unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_u
 // Print structured information about the specified hung task, if warnings
 // are enabled or if the panic batch threshold is exceeded.
 //
-    static void hung_task_info(struct task_struct *t, unsigned long timeout,
-    unsigned long this_round_count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hung_task_info() {
     trace_sched_process_hang(t);
     if (sysctl_hung_task_panic && this_round_count >= sysctl_hung_task_panic) {
     console_verbose();
@@ -239,8 +331,9 @@ pub unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_u
 // accordingly
 //
     if (sysctl_hung_task_warnings || hung_task_call_panic) {
-    if (sysctl_hung_task_warnings > 0)
+    if (sysctl_hung_task_warnings > 0) {
     sysctl_hung_task_warnings--;
+    }
     pr_err("INFO: task %s:%d blocked%s for more than %ld seconds.\n",
     t.comm, t.pid, t.in_iowait ? " in I/O wait" : "",
     (jiffies - t.last_switch_time) / HZ);
@@ -248,14 +341,16 @@ pub unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_u
     print_tainted(), init_utsname().release,
     (int)strcspn(init_utsname().version, " "),
     init_utsname().version);
-    if (t.flags & PF_POSTCOREDUMP)
+    if (t.flags & PF_POSTCOREDUMP) {
     pr_err("      Blocked by coredump.\n");
+    }
     pr_err("\"echo 0 > /proc/sys/kernel/hung_task_timeout_secs\""
     " disables this message.\n");
     sched_show_task(t);
     debug_show_blocker(t, timeout);
-    if (!sysctl_hung_task_warnings)
+    if (!sysctl_hung_task_warnings) {
     pr_info("Future hung task reports are suppressed, see sysctl kernel.hung_task_warnings\n");
+    }
     }
     touch_nmi_watchdog();
     }
@@ -268,9 +363,7 @@ pub unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_u
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_lock_break(g: *mut task_struct, t: *mut task_struct) -> bool {
-    static bool rcu_lock_break(struct task_struct *g, struct task_struct *t)
-    {
-    bool can_cont;
+    let mut can_cont = 0;
     get_task_struct(g);
     get_task_struct(t);
     rcu_read_unlock();
@@ -287,28 +380,29 @@ unsafe extern "C" fn rcu_lock_break(g: *mut task_struct, t: *mut task_struct) ->
 //
 #[no_mangle]
 unsafe extern "C" fn check_hung_uninterruptible_tasks(timeout: c_ulong) {
-    static void check_hung_uninterruptible_tasks(unsigned long timeout)
-    {
-    let mut max_count: c_int = sysctl_hung_task_check_count;
-    let mut last_break: c_ulong = jiffies;
+pub static mut max_count: c_int = sysctl_hung_task_check_count;
+pub static mut last_break: c_ulong = jiffies;
     struct task_struct *g, *t;
-    unsigned long this_round_count;
-    let mut need_warning: c_int = sysctl_hung_task_warnings;
-    let mut si_mask: c_ulong = hung_task_si_mask;
+    let mut this_round_count = 0;
+pub static mut need_warning: c_int = sysctl_hung_task_warnings;
+pub static mut si_mask: c_ulong = hung_task_si_mask;
 //
 // If the system crashed already then all bets are off,
 // do not report extra hung tasks:
 //
-    if (test_taint(TAINT_DIE) || did_panic)
+    if (test_taint(TAINT_DIE) || did_panic) {
     return;
+    }
     this_round_count = 0;
     rcu_read_lock();
     for_each_process_thread(g, t) {
-    if (!max_count--)
+    if (!max_count--) {
     goto unlock;
+    }
     if (time_after(jiffies, last_break + HUNG_TASK_LOCK_BREAK)) {
-    if (!rcu_lock_break(g, t))
+    if (!rcu_lock_break(g, t)) {
     goto unlock;
+    }
     last_break = jiffies;
     }
     if (task_is_hung(t, timeout)) {
@@ -325,20 +419,22 @@ unsafe extern "C" fn check_hung_uninterruptible_tasks(timeout: c_ulong) {
     }
     unlock:
     rcu_read_unlock();
-    if (!this_round_count)
+    if (!this_round_count) {
     return;
+    }
     if (need_warning || hung_task_call_panic) {
     si_mask |= SYS_INFO_LOCKS;
-    if (sysctl_hung_task_all_cpu_backtrace)
+    if (sysctl_hung_task_all_cpu_backtrace) {
     si_mask |= SYS_INFO_ALL_BT;
     }
+    }
     sys_info(si_mask);
-    if (hung_task_call_panic)
+    if (hung_task_call_panic) {
     panic("hung_task: blocked tasks");
     }
-    static long hung_timeout_jiffies(unsigned long last_checked,
-    unsigned long timeout)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn hung_timeout_jiffies() {
 // timeout of 0 will disable the watchdog
     return timeout ? last_checked - jiffies + timeout * HZ :
     MAX_SCHEDULE_TIMEOUT;
@@ -357,22 +453,24 @@ unsafe extern "C" fn check_hung_uninterruptible_tasks(timeout: c_ulong) {
 // zero value only.
 // Return: 0 on success, or a negative error code on failure.
 //
-    static int proc_dohung_task_detect_count(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    unsigned long detect_count;
-    struct ctl_table proxy_table;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn proc_dohung_task_detect_count() {
+    let mut detect_count = 0;
+    let mut proxy_table;
+    let mut err = 0;
     proxy_table = *table;
     proxy_table.data = &detect_count;
-    if (SYSCTL_KERN_TO_USER(dir))
+    if (SYSCTL_KERN_TO_USER(dir)) {
     detect_count = atomic_long_read(&sysctl_hung_task_detect_count);
+    }
     err = proc_doulongvec_minmax(&proxy_table, dir, buffer, lenp, ppos);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
     if (SYSCTL_USER_TO_KERN(dir)) {
-    if (detect_count)
+    if (detect_count) {
     return -EINVAL;
+    }
     atomic_long_set(&sysctl_hung_task_detect_count, 0);
     }
     return 0;
@@ -380,14 +478,13 @@ unsafe extern "C" fn check_hung_uninterruptible_tasks(timeout: c_ulong) {
 //
 // Process updating of timeout sysctl
 //
-    static int proc_dohung_task_timeout_secs(const struct ctl_table *table, int write,
-    void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn proc_dohung_task_timeout_secs() {
+    let mut ret = 0;
     ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
-    if (ret || !write)
+    if (ret || !write) {
     goto out;
+    }
     wake_up_process(watchdog_task);
     out:
     return ret;
@@ -396,105 +493,34 @@ unsafe extern "C" fn check_hung_uninterruptible_tasks(timeout: c_ulong) {
 // This is needed for proc_doulongvec_minmax of sysctl_hung_task_timeout_secs
 // and hung_task_check_interval_secs
 //
-    let mut hung_task_timeout_max: static unsigned long = (LONG_MAX / HZ);
-    static const struct ctl_table hung_task_sysctls[] = {
-
-    {
-    .procname	= "hung_task_all_cpu_backtrace",
-    .data		= &sysctl_hung_task_all_cpu_backtrace,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-
-    {
-    .procname	= "hung_task_panic",
-    .data		= &sysctl_hung_task_panic,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_INT_MAX,
-    },
-    {
-    .procname	= "hung_task_check_count",
-    .data		= &sysctl_hung_task_check_count,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    },
-    {
-    .procname	= "hung_task_timeout_secs",
-    .data		= &sysctl_hung_task_timeout_secs,
-    .maxlen		= sizeof(unsigned long),
-    .mode		= 0644,
-    .proc_handler	= proc_dohung_task_timeout_secs,
-    .extra2		= (void *)&hung_task_timeout_max,
-    },
-    {
-    .procname	= "hung_task_check_interval_secs",
-    .data		= &sysctl_hung_task_check_interval_secs,
-    .maxlen		= sizeof(unsigned long),
-    .mode		= 0644,
-    .proc_handler	= proc_dohung_task_timeout_secs,
-    .extra2		= (void *)&hung_task_timeout_max,
-    },
-    {
-    .procname	= "hung_task_warnings",
-    .data		= &sysctl_hung_task_warnings,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_NEG_ONE,
-    },
-    {
-    .procname	= "hung_task_detect_count",
-    .maxlen		= sizeof(unsigned long),
-    .mode		= 0644,
-    .proc_handler	= proc_dohung_task_detect_count,
-    },
-    {
-    .procname	= "hung_task_sys_info",
-    .data		= &hung_task_si_mask,
-    .maxlen         = sizeof(hung_task_si_mask),
-    .mode		= 0644,
-    .proc_handler	= sysctl_sys_info_handler,
-    },
-    };
+pub static mut hung_task_timeout_max: unsigned long = (LONG_MAX / HZ);
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn hung_task_sysctl_init() -> void __init {
-    static void __init hung_task_sysctl_init(void)
-    {
+unsafe extern "C" fn hung_task_sysctl_init() -> c_int {
     register_sysctl_init("kernel", hung_task_sysctls);
     }
 
-    let mut reset_hung_task: static atomic_t = ATOMIC_INIT(0);
+pub static mut reset_hung_task: atomic_t = ATOMIC_INIT(0);
 #[no_mangle]
 pub unsafe extern "C" fn reset_hung_task_detector() {
-    void reset_hung_task_detector(void)
-    {
     atomic_set(&reset_hung_task, 1);
     }
-    EXPORT_SYMBOL_GPL(reset_hung_task_detector);
+// EXPORT_SYMBOL_GPL;
     static bool hung_detector_suspended;
-    static int hungtask_pm_notify(struct notifier_block *self,
-    unsigned long action, void *hcpu)
-    {
-    switch (action) {
-    case PM_SUSPEND_PREPARE:
-    case PM_HIBERNATION_PREPARE:
-    case PM_RESTORE_PREPARE:
+#[no_mangle]
+pub unsafe extern "C" fn hungtask_pm_notify() {
+    match (action) {
+    PM_SUSPEND_PREPARE => {
+    PM_HIBERNATION_PREPARE => {
+    PM_RESTORE_PREPARE => {
     hung_detector_suspended = true;
     break;
-    case PM_POST_SUSPEND:
-    case PM_POST_HIBERNATION:
-    case PM_POST_RESTORE:
+    PM_POST_SUSPEND => {
+    PM_POST_HIBERNATION => {
+    PM_POST_RESTORE => {
     hung_detector_suspended = false;
     break;
-    default:
+    _ => {
     break;
     }
     return NOTIFY_OK;
@@ -504,16 +530,15 @@ pub unsafe extern "C" fn reset_hung_task_detector() {
 //
 #[no_mangle]
 unsafe extern "C" fn watchdog(dummy: *mut c_void) -> c_int {
-    static int watchdog(void *dummy)
-    {
-    let mut hung_last_checked: c_ulong = jiffies;
+pub static mut hung_last_checked: c_ulong = jiffies;
     set_user_nice(current, 0);
     for ( ; ; ) {
-    let mut timeout: c_ulong = sysctl_hung_task_timeout_secs;
-    let mut interval: c_ulong = sysctl_hung_task_check_interval_secs;
-    long t;
-    if (interval == 0)
+pub static mut timeout: c_ulong = sysctl_hung_task_timeout_secs;
+pub static mut interval: c_ulong = sysctl_hung_task_check_interval_secs;
+    let mut t = 0;
+    if (interval == 0) {
     interval = timeout;
+    }
     interval = min_t(unsigned long, interval, timeout);
     t = hung_timeout_jiffies(hung_last_checked, interval);
     if (t <= 0) {
@@ -528,9 +553,7 @@ unsafe extern "C" fn watchdog(dummy: *mut c_void) -> c_int {
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn hung_task_init() -> int __init {
-    static int __init hung_task_init(void)
-    {
+unsafe extern "C" fn hung_task_init() -> c_int {
     atomic_notifier_chain_register(&panic_notifier_list, &panic_block);
 // Disable hung task detector on suspend
     pm_notifier(hungtask_pm_notify, 0);
@@ -538,4 +561,24 @@ unsafe extern "C" fn hung_task_init() -> int __init {
     hung_task_sysctl_init();
     return 0;
     }
-    subsys_initcall(hung_task_init);
+// subsys_initcall;
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0+
 //
@@ -92,8 +115,8 @@ pub struct scf_statistics {
 
     static struct scf_statistics *scf_stats_p;
     static struct task_struct *scf_torture_stats_task;
-    static DEFINE_PER_CPU(long long, scf_invoked_count);
-    static DEFINE_PER_CPU(struct llist_head, scf_free_pool);
+// static DEFINE_PER_CPU(long long, scf_invoked_count);
+// static DEFINE_PER_CPU(struct llist_head, scf_free_pool);
 // Data for random primitive selection
 pub const SCF_PRIM_RESCHED: c_int = 0;
 pub const SCF_PRIM_SINGLE: c_int = 1;
@@ -142,12 +165,10 @@ pub struct scf_check {
     static atomic_t n_alloc_errs;
     static bool scfdone;
     static char *bangstr = "";
-    static DEFINE_TORTURE_RANDOM_PERCPU(scf_torture_rand);
+// static DEFINE_TORTURE_RANDOM_PERCPU(scf_torture_rand);
     extern void resched_cpu(int cpu); // An alternative IPI vector.
 #[no_mangle]
 unsafe extern "C" fn scf_add_to_free_list(scfcp: *mut scf_check) {
-    static void scf_add_to_free_list(struct scf_check *scfcp)
-    {
     struct llist_head *pool;
     unsigned int cpu;
     if (!scfcp)
@@ -158,8 +179,6 @@ unsafe extern "C" fn scf_add_to_free_list(scfcp: *mut scf_check) {
     }
 #[no_mangle]
 unsafe extern "C" fn scf_cleanup_free_list(cpu: c_uint) {
-    static void scf_cleanup_free_list(unsigned int cpu)
-    {
     struct llist_head *pool;
     struct llist_node *node;
     struct scf_check *scfcp;
@@ -174,8 +193,6 @@ unsafe extern "C" fn scf_cleanup_free_list(cpu: c_uint) {
 // Print torture statistics.  Caller must ensure serialization.
 #[no_mangle]
 unsafe extern "C" fn scf_torture_stats_print() {
-    static void scf_torture_stats_print(void)
-    {
     int cpu;
     int i;
     let mut invoked_count: c_longlong = 0;
@@ -227,8 +244,6 @@ unsafe extern "C" fn scf_torture_stats_print() {
 // Add a primitive to the scf_sel_array[].
 #[no_mangle]
 unsafe extern "C" fn scf_sel_add(weight: c_ulong, prim: c_int, wait: bool) {
-    static void scf_sel_add(unsigned long weight, int prim, bool wait)
-    {
     struct scf_selector *scfsp = &scf_sel_array[scf_sel_array_len];
 // If no weight, if array would overflow, if computing three-place
 // percentages would overflow, or if the scf_prim_name[] array would
@@ -247,8 +262,6 @@ unsafe extern "C" fn scf_sel_add(weight: c_ulong, prim: c_int, wait: bool) {
 // Dump out weighting percentages for scf_prim_name[] array.
 #[no_mangle]
 unsafe extern "C" fn scf_sel_dump() {
-    static void scf_sel_dump(void)
-    {
     int i;
     let mut oldw: c_ulong = 0;
     struct scf_selector *scfsp;
@@ -278,8 +291,6 @@ unsafe extern "C" fn scf_sel_dump() {
 // a little bit.
 #[no_mangle]
 unsafe extern "C" fn scf_handler(scfc_in: *mut c_void) {
-    static void scf_handler(void *scfc_in)
-    {
     int i;
     int j;
     let mut r: c_ulong = torture_random(this_cpu_ptr(&scf_torture_rand));
@@ -324,8 +335,6 @@ unsafe extern "C" fn scf_handler(scfc_in: *mut c_void) {
 // As above, but check for correct CPU.
 #[no_mangle]
 unsafe extern "C" fn scf_handler_1(scfc_in: *mut c_void) {
-    static void scf_handler_1(void *scfc_in)
-    {
     struct scf_check *scfcp = scfc_in;
     if (likely(scfcp) && WARN_ONCE(smp_processor_id() != scfcp.scfc_cpu, "%s: Wanted CPU %d got CPU %d\n", __func__, scfcp.scfc_cpu, smp_processor_id())) {
     atomic_inc(&n_errs);
@@ -335,8 +344,6 @@ unsafe extern "C" fn scf_handler_1(scfc_in: *mut c_void) {
 // Randomly do an smp_call_function*() invocation.
 #[no_mangle]
 unsafe extern "C" fn scftorture_invoke_one(scfp: *mut scf_statistics, trsp: *mut torture_random_state) {
-    static void scftorture_invoke_one(struct scf_statistics *scfp, struct torture_random_state *trsp)
-    {
     let mut allocfail: bool = false;
     uintptr_t cpu;
     let mut ret: c_int = 0;
@@ -463,8 +470,6 @@ pub unsafe extern "C" fn if(0xfff): !(torture_random(trsp) &) -> else {
 // smp_call_function() family of functions.
 #[no_mangle]
 unsafe extern "C" fn scftorture_invoker(arg: *mut c_void) -> c_int {
-    static int scftorture_invoker(void *arg)
-    {
     int cpu;
     int curcpu;
     DEFINE_TORTURE_RANDOM(rand);
@@ -519,13 +524,9 @@ unsafe extern "C" fn scftorture_invoker(arg: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn scf_cleanup_handler(unused: *mut c_void) {
-    static void scf_cleanup_handler(void *unused)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn scf_torture_cleanup() {
-    static void scf_torture_cleanup(void)
-    {
     int i;
     if (torture_cleanup_begin())
     return;
@@ -554,9 +555,7 @@ pub unsafe extern "C" fn if(_arg: torture_onoff_failures()) -> else {
     torture_cleanup_end();
     }
 #[no_mangle]
-unsafe extern "C" fn scf_torture_init() -> int __init {
-    static int __init scf_torture_init(void)
-    {
+unsafe extern "C" fn scf_torture_init() -> c_int {
     long i;
     let mut firsterr: c_int = 0;
     let mut weight_resched1: c_ulong = weight_resched;
@@ -672,3 +671,7 @@ pub unsafe extern "C" fn if(_arg: weight_resched1) -> else {
     }
     module_init(scf_torture_init);
     module_exit(scf_torture_cleanup);
+
+}
+}
+}

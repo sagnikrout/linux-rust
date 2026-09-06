@@ -35,29 +35,123 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 
-    static void *arch_memremap_wb(resource_size_t offset, unsigned long size,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn arch_memremap_wb() {
 
-    return ( void *)ioremap_cache(offset, size);
+    return ioremap_cache(offset, size);
 
-    return ( void *)ioremap(offset, size);
+    return ioremap(offset, size);
 
     }
 
-    static bool arch_memremap_can_ram_remap(resource_size_t offset, size_t size,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn arch_memremap_can_ram_remap() {
     return true;
     }
 
-    static void *try_ram_remap(resource_size_t offset, size_t size,
-    unsigned long flags)
-    {
-    let mut pfn: c_ulong = PHYS_PFN(offset);
+#[no_mangle]
+pub unsafe extern "C" fn try_ram_remap() {
+pub static mut pfn: c_ulong = PHYS_PFN(offset);
 // In the simple case just return the existing linear address
     if (pfn_valid(pfn) && !PageHighMem(pfn_to_page(pfn)) &&
     arch_memremap_can_ram_remap(offset, size, flags))
@@ -92,13 +186,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // be coalesced together (e.g. in the CPU's write buffers), but is otherwise
 // uncached. Attempts to map System RAM with this mapping type will fail.
 //
-    void *memremap(resource_size_t offset, size_t size, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn memremap() {
     int is_ram = region_intersects(offset, size,
     IORESOURCE_SYSTEM_RAM, IORES_DESC_NONE);
     void *addr = core::ptr::null_mut();
-    if (!flags)
+    if (!flags) {
     return core::ptr::null_mut();
+    }
     if (is_ram == REGION_MIXED) {
     WARN_ONCE(1, "memremap attempted on mixed range %pa size: %#lx\n",
     &offset, (unsigned long) size);
@@ -112,10 +207,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // capability of memremap() to autodetect cases where
 // the requested range is potentially in System RAM.
 //
-    if (is_ram == REGION_INTERSECTS)
+    if (is_ram == REGION_INTERSECTS) {
     addr = try_ram_remap(offset, size, flags);
-    if (!addr)
+    }
+    if (!addr) {
     addr = arch_memremap_wb(offset, size, flags);
+    }
     }
 //
 // If we don't have a mapping yet and other request flags are
@@ -128,41 +225,38 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     &offset, (unsigned long) size);
     return core::ptr::null_mut();
     }
-    if (!addr && (flags & MEMREMAP_WT))
+    if (!addr && (flags & MEMREMAP_WT)) {
     addr = ioremap_wt(offset, size);
-    if (!addr && (flags & MEMREMAP_WC))
+    }
+    if (!addr && (flags & MEMREMAP_WC)) {
     addr = ioremap_wc(offset, size);
+    }
     return addr;
     }
-    EXPORT_SYMBOL(memremap);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn memunmap(addr: *mut c_void) {
-    void memunmap(void *addr)
-    {
-    if (is_ioremap_addr(addr))
+    if (is_ioremap_addr(addr)) {
     iounmap((void __iomem *) addr);
     }
-    EXPORT_SYMBOL(memunmap);
+    }
+// EXPORT_SYMBOL;
 #[no_mangle]
 unsafe extern "C" fn devm_memremap_release(dev: *mut device, res: *mut c_void) {
-    static void devm_memremap_release(struct device *dev, void *res)
-    {
-    memunmap(*(void **)res);
+    memunmap(*res);
     }
 #[no_mangle]
 unsafe extern "C" fn devm_memremap_match(dev: *mut device, res: *mut c_void, match_data: *mut c_void) -> c_int {
-    static int devm_memremap_match(struct device *dev, void *res, void *match_data)
-    {
-    return *(void **)res == match_data;
+    return *res == match_data;
     }
-    void *devm_memremap(struct device *dev, resource_size_t offset,
-    size_t size, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn devm_memremap() {
     void **ptr, *addr;
     ptr = devres_alloc_node(devm_memremap_release, sizeof(*ptr), GFP_KERNEL,
     dev_to_node(dev));
-    if (!ptr)
+    if (!ptr) {
     return ERR_PTR(-ENOMEM);
+    }
     addr = memremap(offset, size, flags);
     if (addr) {
 // ptr = addr;
@@ -173,12 +267,10 @@ unsafe extern "C" fn devm_memremap_match(dev: *mut device, res: *mut c_void, mat
     }
     return addr;
     }
-    EXPORT_SYMBOL(devm_memremap);
+// EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn devm_memunmap(dev: *mut device, addr: *mut c_void) {
-    void devm_memunmap(struct device *dev, void *addr)
-    {
     WARN_ON(devres_release(dev, devm_memremap_release,
     devm_memremap_match, addr));
     }
-    EXPORT_SYMBOL(devm_memunmap);
+// EXPORT_SYMBOL;

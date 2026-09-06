@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -107,8 +130,6 @@ pub const KB: c_int = 1024;
 //
 #[no_mangle]
 pub unsafe extern "C" fn xacct_add_tsk(stats: *mut taskstats, p: *mut task_struct) {
-    void xacct_add_tsk(struct taskstats *stats, struct task_struct *p)
-    {
     struct mm_struct *mm;
 // convert pages-nsec/1024 to Mbyte-usec, see __acct_update_integrals
     stats.coremem = p.acct_rss_mem1 * PAGE_SIZE;
@@ -162,8 +183,6 @@ pub unsafe extern "C" fn xacct_add_tsk(stats: *mut taskstats, p: *mut task_struc
 //
 #[no_mangle]
 pub unsafe extern "C" fn acct_update_integrals(tsk: *mut task_struct) {
-    void acct_update_integrals(struct task_struct *tsk)
-    {
     u64 utime, stime;
     unsigned long flags;
     local_irq_save(flags);
@@ -177,8 +196,6 @@ pub unsafe extern "C" fn acct_update_integrals(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn acct_account_cputime(tsk: *mut task_struct) {
-    void acct_account_cputime(struct task_struct *tsk)
-    {
     __acct_update_integrals(tsk, tsk.utime, tsk.stime);
     }
 //
@@ -187,8 +204,6 @@ pub unsafe extern "C" fn acct_account_cputime(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn acct_clear_integrals(tsk: *mut task_struct) {
-    void acct_clear_integrals(struct task_struct *tsk)
-    {
     tsk.acct_timexpd = 0;
     tsk.acct_rss_mem1 = 0;
     tsk.acct_vm_mem1 = 0;

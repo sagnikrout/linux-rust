@@ -35,6 +35,103 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -71,12 +168,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     asynchronous and synchronous parts of the kernel.
 //
 
-    let mut next_cookie: static async_cookie_t = 1;
+pub static mut next_cookie: async_cookie_t = 1;
 pub const MAX_WORK: c_int = 32768;
-
-    static LIST_HEAD(async_global_pending);	/* pending from all registered doms */
-    static ASYNC_DOMAIN(async_dfl_domain);
-    static DEFINE_SPINLOCK(async_lock);
+// static LIST_HEAD(async_global_pending);	/* pending from all registered doms */
+// static ASYNC_DOMAIN(async_dfl_domain);
+// static DEFINE_SPINLOCK(async_lock);
     static struct workqueue_struct *async_wq;
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -89,35 +185,33 @@ pub struct async_entry {
     pub data: *mut c_void,
     pub domain: *mut async_domain,
 }
-
-    static DECLARE_WAIT_QUEUE_HEAD(async_done);
+// static DECLARE_WAIT_QUEUE_HEAD(async_done);
     static atomic_t entry_count;
 #[no_mangle]
 unsafe extern "C" fn microseconds_since(start: ktime_t) -> c_longlong {
-    static long long microseconds_since(ktime_t start)
-    {
-    let mut now: ktime_t = ktime_get();
+pub static mut now: ktime_t = ktime_get();
     return ktime_to_ns(ktime_sub(now, start)) >> 10;
     }
 #[no_mangle]
 unsafe extern "C" fn lowest_in_progress(domain: *mut async_domain) -> async_cookie_t {
-    static async_cookie_t lowest_in_progress(struct async_domain *domain)
-    {
     struct async_entry *first = core::ptr::null_mut();
-    let mut ret: async_cookie_t = ASYNC_COOKIE_MAX;
-    unsigned long flags;
+pub static mut ret: async_cookie_t = ASYNC_COOKIE_MAX;
+    let mut flags = 0;
     spin_lock_irqsave(&async_lock, flags);
     if (domain) {
-    if (!list_empty(&domain.pending))
+    if (!list_empty(&domain.pending)) {
     first = list_first_entry(&domain.pending,
     struct async_entry, domain_list);
+    }
     } else {
-    if (!list_empty(&async_global_pending))
+    if (!list_empty(&async_global_pending)) {
     first = list_first_entry(&async_global_pending,
     struct async_entry, global_list);
     }
-    if (first)
+    }
+    if (first) {
     ret = first.cookie;
+    }
     spin_unlock_irqrestore(&async_lock, flags);
     return ret;
     }
@@ -126,12 +220,10 @@ unsafe extern "C" fn lowest_in_progress(domain: *mut async_domain) -> async_cook
 //
 #[no_mangle]
 unsafe extern "C" fn async_run_entry_fn(work: *mut work_struct) {
-    static void async_run_entry_fn(struct work_struct *work)
-    {
     struct async_entry *entry =
     container_of(work, struct async_entry, work);
-    unsigned long flags;
-    ktime_t calltime;
+    let mut flags = 0;
+    let mut calltime;
 // 1) run (and print duration)
     pr_debug("calling  %lli_%pS @ %i\n", (long long)entry.cookie,
     entry.func, task_pid_nr(current));
@@ -151,16 +243,13 @@ unsafe extern "C" fn async_run_entry_fn(work: *mut work_struct) {
 // 4) wake up any waiters
     wake_up(&async_done);
     }
-    static async_cookie_t __async_schedule_node_domain(async_func_t func,
-    void *data, int node,
-    struct async_domain *domain,
-    struct async_entry *entry)
-    {
-    async_cookie_t newcookie;
-    unsigned long flags;
-    INIT_LIST_HEAD(&entry.domain_list);
-    INIT_LIST_HEAD(&entry.global_list);
-    INIT_WORK(&entry.work, async_run_entry_fn);
+#[no_mangle]
+pub unsafe extern "C" fn __async_schedule_node_domain() {
+    let mut newcookie;
+    let mut flags = 0;
+// INIT_LIST_HEAD;
+// INIT_LIST_HEAD;
+// INIT_WORK;
     entry.func = func;
     entry.data = data;
     entry.domain = domain;
@@ -168,8 +257,9 @@ unsafe extern "C" fn async_run_entry_fn(work: *mut work_struct) {
 // allocate cookie and queue
     newcookie = entry.cookie = next_cookie++;
     list_add_tail(&entry.domain_list, &domain.pending);
-    if (domain.registered)
+    if (domain.registered) {
     list_add_tail(&entry.global_list, &async_global_pending);
+    }
     atomic_inc(&entry_count);
     spin_unlock_irqrestore(&async_lock, flags);
 // schedule for execution
@@ -196,9 +286,9 @@ unsafe extern "C" fn async_run_entry_fn(work: *mut work_struct) {
     async_cookie_t async_schedule_node_domain(async_func_t func, void *data,
     int node, struct async_domain *domain)
     {
-    struct async_entry *entry;
-    unsigned long flags;
-    async_cookie_t newcookie;
+    let mut entry = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut newcookie;
 // allow irq-off callers
     entry = kzalloc_obj(struct async_entry, GFP_ATOMIC);
 //
@@ -216,7 +306,7 @@ unsafe extern "C" fn async_run_entry_fn(work: *mut work_struct) {
     }
     return __async_schedule_node_domain(func, data, node, domain, entry);
     }
-    EXPORT_SYMBOL_GPL(async_schedule_node_domain);
+// EXPORT_SYMBOL_GPL;
 //
 // async_schedule_node - NUMA specific version of async_schedule
 // @func: function to execute asynchronously
@@ -232,11 +322,9 @@ unsafe extern "C" fn async_run_entry_fn(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn async_schedule_node(func: async_func_t, data: *mut c_void, node: c_int) -> async_cookie_t {
-    async_cookie_t async_schedule_node(async_func_t func, void *data, int node)
-    {
     return async_schedule_node_domain(func, data, node, &async_dfl_domain);
     }
-    EXPORT_SYMBOL_GPL(async_schedule_node);
+// EXPORT_SYMBOL_GPL;
 //
 // async_schedule_dev_nocall - A simplified variant of async_schedule_dev()
 // @func: function to execute asynchronously
@@ -251,9 +339,7 @@ pub unsafe extern "C" fn async_schedule_node(func: async_func_t, data: *mut c_vo
 //
 #[no_mangle]
 pub unsafe extern "C" fn async_schedule_dev_nocall(func: async_func_t, dev: *mut device) -> bool {
-    bool async_schedule_dev_nocall(async_func_t func, struct device *dev)
-    {
-    struct async_entry *entry;
+    let mut entry = core::ptr::null_mut();
     entry = kzalloc_obj(struct async_entry);
 // Give up if there is no memory or too much work.
     if (!entry || atomic_read(&entry_count) > MAX_WORK) {
@@ -271,11 +357,9 @@ pub unsafe extern "C" fn async_schedule_dev_nocall(func: async_func_t, dev: *mut
 //
 #[no_mangle]
 pub unsafe extern "C" fn async_synchronize_full() {
-    void async_synchronize_full(void)
-    {
     async_synchronize_full_domain(core::ptr::null_mut());
     }
-    EXPORT_SYMBOL_GPL(async_synchronize_full);
+// EXPORT_SYMBOL_GPL;
 //
 // async_synchronize_full_domain - synchronize all asynchronous function within a certain domain
 // @domain: the domain to synchronize
@@ -285,11 +369,9 @@ pub unsafe extern "C" fn async_synchronize_full() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn async_synchronize_full_domain(domain: *mut async_domain) {
-    void async_synchronize_full_domain(struct async_domain *domain)
-    {
     async_synchronize_cookie_domain(ASYNC_COOKIE_MAX, domain);
     }
-    EXPORT_SYMBOL_GPL(async_synchronize_full_domain);
+// EXPORT_SYMBOL_GPL;
 //
 // async_synchronize_cookie_domain - synchronize asynchronous function calls within a certain domain with cookie checkpointing
 // @cookie: async_cookie_t to use as checkpoint
@@ -301,16 +383,14 @@ pub unsafe extern "C" fn async_synchronize_full_domain(domain: *mut async_domain
 //
 #[no_mangle]
 pub unsafe extern "C" fn async_synchronize_cookie_domain(cookie: async_cookie_t, domain: *mut async_domain) {
-    void async_synchronize_cookie_domain(async_cookie_t cookie, struct async_domain *domain)
-    {
-    ktime_t starttime;
+    let mut starttime;
     pr_debug("async_waiting @ %i\n", task_pid_nr(current));
     starttime = ktime_get();
     wait_event(async_done, lowest_in_progress(domain) >= cookie);
     pr_debug("async_continuing @ %i after %lli usec\n", task_pid_nr(current),
     microseconds_since(starttime));
     }
-    EXPORT_SYMBOL_GPL(async_synchronize_cookie_domain);
+// EXPORT_SYMBOL_GPL;
 //
 // async_synchronize_cookie - synchronize asynchronous function calls with cookie checkpointing
 // @cookie: async_cookie_t to use as checkpoint
@@ -320,11 +400,9 @@ pub unsafe extern "C" fn async_synchronize_cookie_domain(cookie: async_cookie_t,
 //
 #[no_mangle]
 pub unsafe extern "C" fn async_synchronize_cookie(cookie: async_cookie_t) {
-    void async_synchronize_cookie(async_cookie_t cookie)
-    {
     async_synchronize_cookie_domain(cookie, &async_dfl_domain);
     }
-    EXPORT_SYMBOL_GPL(async_synchronize_cookie);
+// EXPORT_SYMBOL_GPL;
 //
 // current_is_async - is %current an async worker task?
 //
@@ -332,16 +410,12 @@ pub unsafe extern "C" fn async_synchronize_cookie(cookie: async_cookie_t) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn current_is_async() -> bool {
-    bool current_is_async(void)
-    {
     struct worker *worker = current_wq_worker();
     return worker && worker.current_func == async_run_entry_fn;
     }
-    EXPORT_SYMBOL_GPL(current_is_async);
+// EXPORT_SYMBOL_GPL;
 #[no_mangle]
-pub unsafe extern "C" fn async_init() -> void __init {
-    void __init async_init(void)
-    {
+pub unsafe extern "C" fn async_init() -> c_int {
 //
 // Async can schedule a number of interdependent work items. However,
 // unbound workqueues can handle only upto min_active interdependent
@@ -350,6 +424,6 @@ pub unsafe extern "C" fn async_init() -> void __init {
 // min_active.
 //
     async_wq = alloc_workqueue("async", WQ_UNBOUND, 0);
-    BUG_ON(!async_wq);
+// BUG_ON;
     workqueue_set_min_active(async_wq, WQ_DFL_ACTIVE);
     }

@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -104,8 +127,6 @@ pub struct stacktrace_cookie {
 
 #[no_mangle]
 unsafe extern "C" fn stack_trace_consume_entry(cookie: *mut c_void, addr: c_ulong) -> bool {
-    static bool stack_trace_consume_entry(void *cookie, unsigned long addr)
-    {
     struct stacktrace_cookie *c = cookie;
     if (c.len >= c.size)
     return false;
@@ -118,8 +139,6 @@ unsafe extern "C" fn stack_trace_consume_entry(cookie: *mut c_void, addr: c_ulon
     }
 #[no_mangle]
 unsafe extern "C" fn stack_trace_consume_entry_nosched(cookie: *mut c_void, addr: c_ulong) -> bool {
-    static bool stack_trace_consume_entry_nosched(void *cookie, unsigned long addr)
-    {
     if (in_sched_functions(addr))
     return true;
     return stack_trace_consume_entry(cookie, addr);
@@ -234,8 +253,6 @@ unsafe extern "C" fn stack_trace_consume_entry_nosched(cookie: *mut c_void, addr
 //
 #[no_mangle]
 pub unsafe extern "C" fn stack_trace_save_user(store: *mut c_ulong, size: c_uint) -> c_uint {
-    unsigned int stack_trace_save_user(unsigned long *store, unsigned int size)
-    {
     let mut consume_entry: stack_trace_consume_fn = stack_trace_consume_entry;
     struct stacktrace_cookie c = {
     .store	= store,
@@ -359,8 +376,6 @@ pub unsafe extern "C" fn stack_trace_save_user(store: *mut c_ulong, size: c_uint
 //
 #[no_mangle]
 pub unsafe extern "C" fn stack_trace_save_user(store: *mut c_ulong, size: c_uint) -> c_uint {
-    unsigned int stack_trace_save_user(unsigned long *store, unsigned int size)
-    {
     struct stack_trace trace = {
     .entries	= store,
     .max_entries	= size,
@@ -371,8 +386,6 @@ pub unsafe extern "C" fn stack_trace_save_user(store: *mut c_ulong, size: c_uint
 
 #[no_mangle]
 pub unsafe extern "C" fn in_irqentry_text(ptr: c_ulong) -> bool {
-    static inline bool in_irqentry_text(unsigned long ptr)
-    {
     return (ptr >= (unsigned long)&__irqentry_text_start &&
     ptr < (unsigned long)&__irqentry_text_end) ||
     (ptr >= (unsigned long)&__softirqentry_text_start &&
@@ -387,8 +400,6 @@ pub unsafe extern "C" fn in_irqentry_text(ptr: c_ulong) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn filter_irq_stacks(entries: *mut c_ulong, nr_entries: c_uint) -> c_uint {
-    unsigned int filter_irq_stacks(unsigned long *entries, unsigned int nr_entries)
-    {
     unsigned int i;
     for (i = 0; i < nr_entries; i++) {
     if (in_irqentry_text(entries[i])) {

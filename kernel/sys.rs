@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0
 //
@@ -82,9 +105,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     },
     };
 #[no_mangle]
-unsafe extern "C" fn init_overflow_sysctl() -> int __init {
-    static int __init init_overflow_sysctl(void)
-    {
+unsafe extern "C" fn init_overflow_sysctl() -> c_int {
     register_sysctl_init("kernel", overflow_sysctl_table);
     return 0;
     }
@@ -97,8 +118,6 @@ unsafe extern "C" fn init_overflow_sysctl() -> int __init {
 //
 #[no_mangle]
 unsafe extern "C" fn set_one_prio_perm(p: *mut task_struct) -> bool {
-    static bool set_one_prio_perm(struct task_struct *p)
-    {
     const struct cred *cred = current_cred(), *pcred = __task_cred(p);
     if (uid_eq(pcred.uid,  cred.euid) ||
     uid_eq(pcred.euid, cred.euid))
@@ -113,8 +132,6 @@ unsafe extern "C" fn set_one_prio_perm(p: *mut task_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn set_one_prio(p: *mut task_struct, niceval: c_int, error: c_int) -> c_int {
-    static int set_one_prio(struct task_struct *p, int niceval, int error)
-    {
     int no_nice;
     if (!set_one_prio_perm(p)) {
     error = -EPERM;
@@ -285,8 +302,6 @@ pub unsafe extern "C" fn if(_arg: !uid_eq(uid, _arg: cred->uid)) -> else {
 
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setregid(rgid: gid_t, egid: gid_t) -> c_long {
-    long __sys_setregid(gid_t rgid, gid_t egid)
-    {
     struct user_namespace *ns = current_user_ns();
     const struct cred *old;
     struct cred *new;
@@ -343,8 +358,6 @@ pub unsafe extern "C" fn __sys_setregid(rgid: gid_t, egid: gid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setgid(gid: gid_t) -> c_long {
-    long __sys_setgid(gid_t gid)
-    {
     struct user_namespace *ns = current_user_ns();
     const struct cred *old;
     struct cred *new;
@@ -383,8 +396,6 @@ pub unsafe extern "C" fn if(_arg: gid_eq(kgid, gid_eq(kgid: old->gid) ||, _arg: 
 //
 #[no_mangle]
 unsafe extern "C" fn set_user(new: *mut cred) -> c_int {
-    static int set_user(struct cred *new)
-    {
     struct user_struct *new_user;
     new_user = alloc_uid(new.uid);
     if (!new_user)
@@ -395,8 +406,6 @@ unsafe extern "C" fn set_user(new: *mut cred) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn flag_nproc_exceeded(new: *mut cred) {
-    static void flag_nproc_exceeded(struct cred *new)
-    {
     if (new.ucounts == current_ucounts())
     return;
 //
@@ -429,8 +438,6 @@ unsafe extern "C" fn flag_nproc_exceeded(new: *mut cred) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setreuid(ruid: uid_t, euid: uid_t) -> c_long {
-    long __sys_setreuid(uid_t ruid, uid_t euid)
-    {
     struct user_namespace *ns = current_user_ns();
     const struct cred *old;
     struct cred *new;
@@ -500,8 +507,6 @@ pub unsafe extern "C" fn __sys_setreuid(ruid: uid_t, euid: uid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setuid(uid: uid_t) -> c_long {
-    long __sys_setuid(uid_t uid)
-    {
     struct user_namespace *ns = current_user_ns();
     const struct cred *old;
     struct cred *new;
@@ -548,8 +553,6 @@ pub unsafe extern "C" fn __sys_setuid(uid: uid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setresuid(ruid: uid_t, euid: uid_t, suid: uid_t) -> c_long {
-    long __sys_setresuid(uid_t ruid, uid_t euid, uid_t suid)
-    {
     struct user_namespace *ns = current_user_ns();
     const struct cred *old;
     struct cred *new;
@@ -634,8 +637,6 @@ pub unsafe extern "C" fn __sys_setresuid(ruid: uid_t, euid: uid_t, suid: uid_t) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setresgid(rgid: gid_t, egid: gid_t, sgid: gid_t) -> c_long {
-    long __sys_setresgid(gid_t rgid, gid_t egid, gid_t sgid)
-    {
     struct user_namespace *ns = current_user_ns();
     const struct cred *old;
     struct cred *new;
@@ -713,8 +714,6 @@ pub unsafe extern "C" fn __sys_setresgid(rgid: gid_t, egid: gid_t, sgid: gid_t) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setfsuid(uid: uid_t) -> c_long {
-    long __sys_setfsuid(uid_t uid)
-    {
     const struct cred *old;
     struct cred *new;
     uid_t old_fsuid;
@@ -751,8 +750,6 @@ pub unsafe extern "C" fn __sys_setfsuid(uid: uid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setfsgid(gid: gid_t) -> c_long {
-    long __sys_setfsgid(gid_t gid)
-    {
     const struct cred *old;
     struct cred *new;
     gid_t old_fsgid;
@@ -839,8 +836,6 @@ pub unsafe extern "C" fn __sys_setfsgid(gid: gid_t) -> c_long {
     }
 #[no_mangle]
 unsafe extern "C" fn do_sys_times(tms: *mut tms) {
-    static void do_sys_times(struct tms *tms)
-    {
     u64 tgutime, tgstime, cutime, cstime;
     thread_group_cputime_adjusted(current, &tgutime, &tgstime);
     cutime = current.signal.cutime;
@@ -864,8 +859,6 @@ unsafe extern "C" fn do_sys_times(tms: *mut tms) {
 
 #[no_mangle]
 unsafe extern "C" fn clock_t_to_compat_clock_t(x: clock_t) -> compat_clock_t {
-    static compat_clock_t clock_t_to_compat_clock_t(clock_t x)
-    {
     return compat_jiffies_to_clock_t(clock_t_to_jiffies(x));
     }
     COMPAT_SYSCALL_DEFINE1(times, struct compat_tms __user *, tbuf)
@@ -960,8 +953,6 @@ unsafe extern "C" fn clock_t_to_compat_clock_t(x: clock_t) -> compat_clock_t {
     }
 #[no_mangle]
 unsafe extern "C" fn do_getpgid(pid: pid_t) -> c_int {
-    static int do_getpgid(pid_t pid)
-    {
     struct task_struct *p;
     struct pid *grp;
     int retval;
@@ -1022,8 +1013,6 @@ unsafe extern "C" fn do_getpgid(pid: pid_t) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn set_special_pids(pids: *mut pid, pid: *mut pid) {
-    static void set_special_pids(struct pid **pids, struct pid *pid)
-    {
     struct task_struct *curr = current.group_leader;
     if (task_session(curr) != pid)
     change_pid(pids, curr, PIDTYPE_SID, pid);
@@ -1032,8 +1021,6 @@ unsafe extern "C" fn set_special_pids(pids: *mut pid, pid: *mut pid) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn ksys_setsid() -> c_int {
-    int ksys_setsid(void)
-    {
     struct task_struct *group_leader = current.group_leader;
     struct pid *sid = task_pid(group_leader);
     struct pid *pids[PIDTYPE_MAX] = { 0 };
@@ -1081,8 +1068,6 @@ pub const override_architecture(name): c_int = 0;
 //
 #[no_mangle]
 unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> c_int {
-    static int override_release(char __user *release, size_t len)
-    {
     let mut ret: c_int = 0;
     if (current.personality & UNAME26) {
     const char *rest = UTS_RELEASE;
@@ -1377,8 +1362,6 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
 
 #[no_mangle]
 pub unsafe extern "C" fn rlim64_is_infinity(rlim64: __u64) -> bool {
-    static inline bool rlim64_is_infinity(__u64 rlim64)
-    {
 
     return rlim64 >= ULONG_MAX;
 
@@ -1387,8 +1370,6 @@ pub unsafe extern "C" fn rlim64_is_infinity(rlim64: __u64) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn rlim_to_rlim64(rlim: *const rlimit, rlim64: *mut rlimit64) {
-    static void rlim_to_rlim64(const struct rlimit *rlim, struct rlimit64 *rlim64)
-    {
     if (rlim.rlim_cur == RLIM_INFINITY)
     rlim64.rlim_cur = RLIM64_INFINITY;
     else
@@ -1400,8 +1381,6 @@ unsafe extern "C" fn rlim_to_rlim64(rlim: *const rlimit, rlim64: *mut rlimit64) 
     }
 #[no_mangle]
 unsafe extern "C" fn rlim64_to_rlim(rlim64: *const rlimit64, rlim: *mut rlimit) {
-    static void rlim64_to_rlim(const struct rlimit64 *rlim64, struct rlimit *rlim)
-    {
     if (rlim64_is_infinity(rlim64.rlim_cur))
     rlim.rlim_cur = RLIM_INFINITY;
     else
@@ -1526,8 +1505,6 @@ unsafe extern "C" fn rlim64_to_rlim(rlim64: *const rlimit64, rlim: *mut rlimit) 
 //
 #[no_mangle]
 unsafe extern "C" fn accumulate_thread_rusage(t: *mut task_struct, r: *mut rusage) {
-    static void accumulate_thread_rusage(struct task_struct *t, struct rusage *r)
-    {
     r.ru_nvcsw += t.nvcsw;
     r.ru_nivcsw += t.nivcsw;
     r.ru_minflt += t.min_flt;
@@ -1537,8 +1514,6 @@ unsafe extern "C" fn accumulate_thread_rusage(t: *mut task_struct, r: *mut rusag
     }
 #[no_mangle]
 pub unsafe extern "C" fn getrusage(p: *mut task_struct, who: c_int, r: *mut rusage) {
-    void getrusage(struct task_struct *p, int who, struct rusage *r)
-    {
     struct task_struct *t;
     unsigned long flags;
     u64 tgutime, tgstime, utime, stime;
@@ -1637,8 +1612,6 @@ pub unsafe extern "C" fn getrusage(p: *mut task_struct, who: c_int, r: *mut rusa
     }
 #[no_mangle]
 unsafe extern "C" fn prctl_set_mm_exe_file(mm: *mut mm_struct, fd: c_uint) -> c_int {
-    static int prctl_set_mm_exe_file(struct mm_struct *mm, unsigned int fd)
-    {
     CLASS(fd, exe)(fd);
     struct inode *inode;
     int err;
@@ -1665,8 +1638,6 @@ unsafe extern "C" fn prctl_set_mm_exe_file(mm: *mut mm_struct, fd: c_uint) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn validate_prctl_map_addr(prctl_map: *mut prctl_mm_map) -> c_int {
-    static int validate_prctl_map_addr(struct prctl_mm_map *prctl_map)
-    {
     let mut mmap_max_addr: c_ulong = TASK_SIZE;
     let mut error: c_int = -EINVAL, i;
     static const unsigned char offsets[] = {
@@ -1721,8 +1692,6 @@ unsafe extern "C" fn validate_prctl_map_addr(prctl_map: *mut prctl_mm_map) -> c_
 
 #[no_mangle]
 unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data_size: c_ulong) -> c_int {
-    static int prctl_set_mm_map(int opt, const void __user *addr, unsigned long data_size)
-    {
     let mut prctl_map: prctl_mm_map = { .exe_fd = (u32)-1, };
     unsigned long user_auxv[AT_VECTOR_SIZE];
     struct mm_struct *mm = current.mm;
@@ -1961,22 +1930,16 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
 
 #[no_mangle]
 unsafe extern "C" fn prctl_get_tid_address(me: *mut task_struct, tid_addr: *mut *mut int __user  __user) -> c_int {
-    static int prctl_get_tid_address(struct task_struct *me, int __user * __user *tid_addr)
-    {
     return put_user(me.clear_child_tid, tid_addr);
     }
 
 #[no_mangle]
 unsafe extern "C" fn prctl_get_tid_address(me: *mut task_struct, tid_addr: *mut *mut int __user  __user) -> c_int {
-    static int prctl_get_tid_address(struct task_struct *me, int __user * __user *tid_addr)
-    {
     return -EINVAL;
     }
 
 #[no_mangle]
 unsafe extern "C" fn propagate_has_child_subreaper(p: *mut task_struct, data: *mut c_void) -> c_int {
-    static int propagate_has_child_subreaper(struct task_struct *p, void *data)
-    {
 //
 // If task has has_child_subreaper - all its descendants
 // already have these flag too and new descendants will
@@ -1993,8 +1956,6 @@ unsafe extern "C" fn propagate_has_child_subreaper(p: *mut task_struct, data: *m
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_prctl_spec_ctrl_get(t: *mut task_struct, which: c_ulong) -> int __weak {
-    int __weak arch_prctl_spec_ctrl_get(struct task_struct *t, unsigned long which)
-    {
     return -EINVAL;
     }
     int __weak arch_prctl_spec_ctrl_set(struct task_struct *t, unsigned long which,
@@ -2004,20 +1965,14 @@ pub unsafe extern "C" fn arch_prctl_spec_ctrl_get(t: *mut task_struct, which: c_
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_get_shadow_stack_status(t: *mut task_struct, status: *mut unsigned long __user) -> int __weak {
-    int __weak arch_get_shadow_stack_status(struct task_struct *t, unsigned long __user *status)
-    {
     return -EINVAL;
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_set_shadow_stack_status(t: *mut task_struct, status: c_ulong) -> int __weak {
-    int __weak arch_set_shadow_stack_status(struct task_struct *t, unsigned long status)
-    {
     return -EINVAL;
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_lock_shadow_stack_status(t: *mut task_struct, status: c_ulong) -> int __weak {
-    int __weak arch_lock_shadow_stack_status(struct task_struct *t, unsigned long status)
-    {
     return -EINVAL;
     }
     int __weak arch_prctl_get_branch_landing_pad_state(struct task_struct *t,
@@ -2027,14 +1982,10 @@ pub unsafe extern "C" fn arch_lock_shadow_stack_status(t: *mut task_struct, stat
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_prctl_set_branch_landing_pad_state(t: *mut task_struct, state: c_ulong) -> int __weak {
-    int __weak arch_prctl_set_branch_landing_pad_state(struct task_struct *t, unsigned long state)
-    {
     return -EINVAL;
     }
 #[no_mangle]
 pub unsafe extern "C" fn arch_prctl_lock_branch_landing_pad_state(t: *mut task_struct) -> int __weak {
-    int __weak arch_prctl_lock_branch_landing_pad_state(struct task_struct *t)
-    {
     return -EINVAL;
     }
 
@@ -2053,8 +2004,6 @@ pub unsafe extern "C" fn arch_prctl_lock_branch_landing_pad_state(t: *mut task_s
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_current_mdwe() -> c_ulong {
-    static inline unsigned long get_current_mdwe(void)
-    {
     let mut ret: c_ulong = 0;
     if (mm_flags_test(MMF_HAS_MDWE, current.mm))
     ret |= PR_MDWE_REFUSE_EXEC_GAIN;
@@ -2097,8 +2046,6 @@ pub unsafe extern "C" fn get_current_mdwe() -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn prctl_get_auxv(addr: *mut void __user, len: c_ulong) -> c_int {
-    static int prctl_get_auxv(void __user *addr, unsigned long len)
-    {
     struct mm_struct *mm = current.mm;
     let mut size: c_ulong = min_t(unsigned long, sizeof(mm.saved_auxv), len);
     if (size && copy_to_user(addr, mm.saved_auxv, size))
@@ -2540,8 +2487,6 @@ pub unsafe extern "C" fn if(_arg: !arg2) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn do_sysinfo(info: *mut sysinfo) -> c_int {
-    static int do_sysinfo(struct sysinfo *info)
-    {
     unsigned long mem_total, sav_total;
     unsigned int mem_unit, bitcount;
     struct timespec64 tp;
@@ -2662,3 +2607,9 @@ pub struct compat_sysinfo {
     return -EFAULT;
     return 0;
     }
+
+}
+}
+}
+}
+}

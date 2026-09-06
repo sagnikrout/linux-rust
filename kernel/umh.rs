@@ -35,6 +35,29 @@ pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
 
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+
+
 
 // SPDX-License-Identifier: GPL-2.0-only
 //
@@ -43,20 +66,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     let mut usermodehelper_bset: static kernel_cap_t = CAP_FULL_SET;
     let mut usermodehelper_inheritable: static kernel_cap_t = CAP_FULL_SET;
-    static DEFINE_SPINLOCK(umh_sysctl_lock);
-    static DECLARE_RWSEM(umhelper_sem);
+// static DEFINE_SPINLOCK(umh_sysctl_lock);
+// static DECLARE_RWSEM(umhelper_sem);
 #[no_mangle]
 unsafe extern "C" fn call_usermodehelper_freeinfo(info: *mut subprocess_info) {
-    static void call_usermodehelper_freeinfo(struct subprocess_info *info)
-    {
     if (info.cleanup)
     (*info.cleanup)(info);
     kfree(info);
     }
 #[no_mangle]
 unsafe extern "C" fn umh_complete(sub_info: *mut subprocess_info) {
-    static void umh_complete(struct subprocess_info *sub_info)
-    {
     struct completion *comp = xchg(&sub_info.complete, core::ptr::null_mut());
 //
 // See call_usermodehelper_exec(). If xchg() returns NULL
@@ -73,8 +92,6 @@ unsafe extern "C" fn umh_complete(sub_info: *mut subprocess_info) {
 //
 #[no_mangle]
 unsafe extern "C" fn call_usermodehelper_exec_async(data: *mut c_void) -> c_int {
-    static int call_usermodehelper_exec_async(void *data)
-    {
     struct subprocess_info *sub_info = data;
     struct cred *new;
     int retval;
@@ -127,8 +144,6 @@ unsafe extern "C" fn call_usermodehelper_exec_async(data: *mut c_void) -> c_int 
 // Handles UMH_WAIT_PROC.
 #[no_mangle]
 unsafe extern "C" fn call_usermodehelper_exec_sync(sub_info: *mut subprocess_info) {
-    static void call_usermodehelper_exec_sync(struct subprocess_info *sub_info)
-    {
     pid_t pid;
 // If SIGCLD is ignored do_wait won't populate the status.
     kernel_sigaction(SIGCHLD, SIG_DFL);
@@ -156,8 +171,6 @@ unsafe extern "C" fn call_usermodehelper_exec_sync(sub_info: *mut subprocess_inf
 //
 #[no_mangle]
 unsafe extern "C" fn call_usermodehelper_exec_work(work: *mut work_struct) {
-    static void call_usermodehelper_exec_work(struct work_struct *work)
-    {
     struct subprocess_info *sub_info =
     container_of(work, struct subprocess_info, work);
     if (sub_info.wait & UMH_WAIT_PROC) {
@@ -190,12 +203,12 @@ unsafe extern "C" fn call_usermodehelper_exec_work(work: *mut work_struct) {
 // Wait queue head used by usermodehelper_disable() to wait for all running
 // helpers to finish.
 //
-    static DECLARE_WAIT_QUEUE_HEAD(running_helpers_waitq);
+// static DECLARE_WAIT_QUEUE_HEAD(running_helpers_waitq);
 //
 // Used by usermodehelper_read_lock_wait() to wait for usermodehelper_disabled
 // to become 'false'.
 //
-    static DECLARE_WAIT_QUEUE_HEAD(usermodehelper_disabled_waitq);
+// static DECLARE_WAIT_QUEUE_HEAD(usermodehelper_disabled_waitq);
 //
 // Time to wait for running_helpers to become zero before the setting of
 // usermodehelper_disabled in usermodehelper_disable() fails
@@ -203,8 +216,6 @@ unsafe extern "C" fn call_usermodehelper_exec_work(work: *mut work_struct) {
 
 #[no_mangle]
 pub unsafe extern "C" fn usermodehelper_read_trylock() -> c_int {
-    int usermodehelper_read_trylock(void)
-    {
     DEFINE_WAIT(wait);
     let mut ret: c_int = 0;
     down_read(&umhelper_sem);
@@ -228,8 +239,6 @@ pub unsafe extern "C" fn usermodehelper_read_trylock() -> c_int {
     EXPORT_SYMBOL_GPL(usermodehelper_read_trylock);
 #[no_mangle]
 pub unsafe extern "C" fn usermodehelper_read_lock_wait(timeout: c_long) -> c_long {
-    long usermodehelper_read_lock_wait(long timeout)
-    {
     DEFINE_WAIT(wait);
     if (timeout < 0)
     return -EINVAL;
@@ -251,8 +260,6 @@ pub unsafe extern "C" fn usermodehelper_read_lock_wait(timeout: c_long) -> c_lon
     EXPORT_SYMBOL_GPL(usermodehelper_read_lock_wait);
 #[no_mangle]
 pub unsafe extern "C" fn usermodehelper_read_unlock() {
-    void usermodehelper_read_unlock(void)
-    {
     up_read(&umhelper_sem);
     }
     EXPORT_SYMBOL_GPL(usermodehelper_read_unlock);
@@ -265,8 +272,6 @@ pub unsafe extern "C" fn usermodehelper_read_unlock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __usermodehelper_set_disable_depth(depth: enum umh_disable_depth) {
-    void __usermodehelper_set_disable_depth(enum umh_disable_depth depth)
-    {
     down_write(&umhelper_sem);
     usermodehelper_disabled = depth;
     wake_up(&usermodehelper_disabled_waitq);
@@ -280,8 +285,6 @@ pub unsafe extern "C" fn __usermodehelper_set_disable_depth(depth: enum umh_disa
 //
 #[no_mangle]
 pub unsafe extern "C" fn __usermodehelper_disable(depth: enum umh_disable_depth) -> c_int {
-    int __usermodehelper_disable(enum umh_disable_depth depth)
-    {
     long retval;
     if (!depth)
     return -EINVAL;
@@ -304,15 +307,11 @@ pub unsafe extern "C" fn __usermodehelper_disable(depth: enum umh_disable_depth)
     }
 #[no_mangle]
 unsafe extern "C" fn helper_lock() {
-    static void helper_lock(void)
-    {
     atomic_inc(&running_helpers);
     smp_mb__after_atomic();
     }
 #[no_mangle]
 unsafe extern "C" fn helper_unlock() {
-    static void helper_unlock(void)
-    {
     if (atomic_dec_and_test(&running_helpers))
     wake_up(&running_helpers_waitq);
     }
@@ -383,8 +382,6 @@ unsafe extern "C" fn helper_unlock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn call_usermodehelper_exec(sub_info: *mut subprocess_info, wait: c_int) -> c_int {
-    int call_usermodehelper_exec(struct subprocess_info *sub_info, int wait)
-    {
     let mut state: c_uint = TASK_UNINTERRUPTIBLE;
     DECLARE_COMPLETION_ONSTACK(done);
     let mut retval: c_int = 0;
@@ -456,8 +453,6 @@ pub unsafe extern "C" fn call_usermodehelper_exec(sub_info: *mut subprocess_info
 //
 #[no_mangle]
 pub unsafe extern "C" fn call_usermodehelper(path: *const c_char, argv: *mut c_char, envp: *mut c_char, wait: c_int) -> c_int {
-    int call_usermodehelper(const char *path, char **argv, char **envp, int wait)
-    {
     struct subprocess_info *info;
     let mut gfp_mask: gfp_t = (wait == UMH_NO_WAIT) ? GFP_ATOMIC : GFP_KERNEL;
     info = call_usermodehelper_setup(path, argv, envp, gfp_mask,
@@ -527,9 +522,7 @@ pub unsafe extern "C" fn call_usermodehelper(path: *const c_char, argv: *mut c_c
     },
     };
 #[no_mangle]
-unsafe extern "C" fn init_umh_sysctls() -> int __init {
-    static int __init init_umh_sysctls(void)
-    {
+unsafe extern "C" fn init_umh_sysctls() -> c_int {
     register_sysctl_init("kernel/usermodehelper", usermodehelper_table);
     return 0;
     }
