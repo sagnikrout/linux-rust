@@ -1,4 +1,4 @@
-# Release Process
+## Release process guidelines
 
 This document describes the recommended release process for this experimental, AI-assisted project. The goal is to ensure releases are transparent about model usage and validation.
 

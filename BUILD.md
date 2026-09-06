@@ -1,4 +1,4 @@
-# Build & Run (Experimental)
+## Build and execution procedures (experimental)
 
 This project is a research/proof-of-concept OS/kernel implementation generated with significant AI assistance. The build instructions here are intentionally high-level and meant as a starting point; many components may be missing or require additional platform-specific tooling.
 

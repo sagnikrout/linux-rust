@@ -1,141 +1,121 @@
-# Comprehensive Security Audit & Vulnerability Assessment: Pure-Rust Linux Kernel & Microkernel
+## Security audit and vulnerability assessment for pure-Rust Linux kernel and microkernel
 
-**Audit Date**: September 2026  
-**Auditor**: Anti-Gravity Security Engineering (Defensive Systems Group)  
-**Target Codebase**: `sagnikrout/linux-rust` (49,702 Rust modules + x86_64 Freestanding Microkernel)  
-**Security Posture Evaluation**: **HARDENED & VERIFIED (CORE REMEDIATIONS IMPLEMENTED)**
+Audit date: September 2026
+Auditor: Anti-Gravity Security Engineering (Defensive Systems Group)
+Target codebase: sagnikrout/linux-rust (49,702 Rust modules and x86_64 freestanding microkernel)
+Security evaluation: Hardened (core remediations verified)
 
----
+## Executive summary and threat model
 
-## 1. Executive Summary & Threat Model
+This document records the vulnerability evaluation of the pure-Rust Linux kernel tree and freestanding microkernel.
 
-This security audit performs an unsparing, exhaustive evaluation of the modernized pure-Rust Linux kernel tree and freestanding microkernel. 
+The transition from C to Rust in this project involves two architectural considerations:
+1. Pointer-heavy logic transpiled from C into no_std Rust operates within unsafe blocks. Raw pointer arithmetic retains spatial and temporal memory hazards until wrapped in verified safe abstractions.
+2. The freestanding microkernel executes in Ring 0 with identity-mapped page tables. Memory safety protections such as W^X enforcement, user-mode privilege boundaries, and dynamic exception stacks require structured enforcement.
 
-While the project has achieved complete elimination of C files and verified freestanding bootability on x86_64 hardware emulation, the transition from C to Rust introduces unique architectural security considerations:
-1. **The "Unsafe Scaffold" Paradigm**: Transpiling C to `#![no_std]` Rust wraps pointer-heavy logic in `unsafe` blocks. While Rust eliminates compiler-introduced undefined behavior from ambiguous C aliasing rules, raw pointer operations still possess C-like spatial and temporal memory hazards until wrapped in safe abstractions.
-2. **Hardware & Privilege Isolation**: The freestanding microkernel runs entirely in Ring 0 with identity-mapped pages. Modern OS security primitives (W^X / DEP, User-Mode Ring 3 separation, SMAP, SMEP, KASLR, and Guard Pages) require systematic, phased deployment.
+## Vulnerability severity matrix and remediation status
 
----
-
-## 2. Vulnerability Severity Matrix & Remediation Status
-
-| Finding ID | Severity | Category | Vulnerability Description | Location | Status |
+| Identifier | Severity | Category | Description | Location | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **SEC-01** | **CRITICAL** | Memory Protection | **Violation of W^X (DEP/NX)**: Memory identity-mapped as RWX | `boot.S:49-67` | *Roadmap Planned* |
-| **SEC-02** | **HIGH** | Memory Safety | **Double-Free & Sub-Page Corruption**: Unvalidated `free_page` alignment & state | `mm.rs:44-52` | **REMEDIATED & VERIFIED** |
-| **SEC-03** | **HIGH** | System Integrity | **Absence of Kernel Stack Guard Pages**: Stack overflow corrupts adjacent BSS | `boot.S:15-17` | **REMEDIATED & VERIFIED** |
-| **SEC-04** | **HIGH** | Exception Safety | **Missing IST on Double Fault**: Kernel stack overflow causes instant Triple Fault | `idt.rs:29-37` | *Roadmap Planned* |
-| **SEC-05** | **MEDIUM** | Availability (DoS) | **Unbounded Busy-Wait in UART Driver**: Transmit loop hangs if hardware stalls | `serial.rs:22-25` | **REMEDIATED & VERIFIED** |
-| **SEC-06** | **MEDIUM** | Concurrency | **Unsynchronized Mutable Statics**: `ALLOC_BITMAP` vulnerable to race conditions | `mm.rs:5, 25` | **REMEDIATED & VERIFIED** |
-| **SEC-07** | **MEDIUM** | Memory Isolation | **Page 0 Is Identity Mapped**: Null pointer dereference overwrites IVT/BDA | `boot.S:60-67` | *Roadmap Planned* |
-| **SEC-08** | **LOW** | Privilege Boundary | **No User-Mode (Ring 3) Separation**: Entire OS runs in Ring 0 without TSS | `boot.S:21-29` | *Roadmap Planned* |
+| SEC-01 | Critical | Memory protection | Violation of W^X (DEP/NX) | boot.S:49-67 | Documented for roadmap |
+| SEC-02 | High | Memory safety | Double-free and sub-page corruption | mm.rs:44-52 | Remediated and verified |
+| SEC-03 | High | System integrity | Absence of kernel stack guard page | boot.S:15-17 | Remediated and verified |
+| SEC-04 | High | Exception safety | Missing IST on double fault | idt.rs:29-37 | Documented for roadmap |
+| SEC-05 | Medium | Availability | Unbounded busy-wait in UART driver | serial.rs:22-25 | Remediated and verified |
+| SEC-06 | Medium | Concurrency | Unsynchronized mutable statics | mm.rs:5, 25 | Remediated and verified |
+| SEC-07 | Medium | Memory isolation | Identity-mapped page zero | boot.S:60-67 | Documented for roadmap |
+| SEC-08 | Low | Privilege boundary | Absence of Ring 3 user mode | boot.S:21-29 | Documented for roadmap |
 
----
+## Vulnerability analysis
 
-## 3. In-Depth Vulnerability Analysis
+### Finding SEC-01: violation of write XOR execute (DEP/NX)
 
----
+Severity: Critical
+Affected location: rust_mini_kernel/boot.S (lines 49 to 67)
+Status: Documented for architectural split-paging implementation
 
-### Finding SEC-01: Violation of W^X (Write XOR Execute / DEP / NX)
-- **Severity**: **CRITICAL**
-- **Affected File**: `rust_mini_kernel/boot.S` (Lines 49–67)
-- **Mechanics**:
-  In `boot.S`, the Page-Directory entries for the identity-mapped 1GB address space are configured with:
-  ```assembly
-  mov $0x200000, %eax
-  mul %ecx
-  or $0b10000011, %eax    /* Present (bit 0), Writable (bit 1), Huge Page 2MB (bit 7) */
-  mov %eax, p2_table(,%ecx,8)
-  ```
-  The **No-Execute (`NX`)** bit (Bit 63 of the 64-bit page entry) is never set for data sections, nor is the **Writable** bit cleared for code sections.
-- **Security Impact**:
-  Every byte of physical RAM—including `.text` (executable instructions), `.rodata` (constants), the stack, and heap pages—is simultaneously **Writable and Executable**. Any memory safety bug resulting in an arbitrary write primitive allows an attacker to directly overwrite kernel code in place without needing Return-Oriented Programming (ROP) or code reuse techniques.
-- **Remediation**:
-  1. Set the `NXE` (No-Execute Enable) bit (Bit 11) in the `EFER` MSR (`0xC0000080`).
-  2. Implement split page tables:
-     - Mark `.text` as Present + Executable + **Read-Only** (`Writable = 0`, `NX = 0`).
-     - Mark `.rodata` as Present + **Read-Only** + **No-Execute** (`Writable = 0`, `NX = 1`).
-     - Mark `.data`, `.bss`, stack, and heap pages as Present + Writable + **No-Execute** (`Writable = 1`, `NX = 1`).
+Page directory entries for the identity-mapped 1GB address space configure entries as present, writable, and 2MB huge page. The no-execute (NX) bit 63 is unset. RAM containing code, constants, stack, and heap is writable and executable.
 
----
+Planned remediation: Set the NXE bit 11 in the EFER MSR (0xC0000080) and configure split page entries to isolate executable instructions from writable data.
 
-### Finding SEC-02: Double-Free and Sub-Page Deallocation Vulnerability
-- **Severity**: **HIGH**
-- **Affected File**: `rust_mini_kernel/src/mm.rs`
-- **Mechanics**:
-  The previous physical memory manager implemented `free_page` with idempotent bitwise clear without alignment checks or double-free validation.
-- **Remediation Implemented**:
-  1. **Enforce 4096-Byte Page Alignment**: Rejects misaligned addresses with `Err(MmError::MisalignedPointer)`.
-  2. **Atomic Double-Free Detection**: Uses `AtomicU64::fetch_and(!mask, Ordering::SeqCst)` to inspect previous bit state. If already 0, immediately returns `Err(MmError::DoubleFreeDetected)`.
-  3. **Kernel Memory Boundary Enforcement**: Verifies `page_idx >= RESERVED_PAGES` (protecting first 4MB reserved kernel memory) and `page_idx < TOTAL_PAGES`.
+### Finding SEC-02: double-free and sub-page corruption
 
----
+Severity: High
+Affected location: rust_mini_kernel/src/mm.rs
+Status: Remediated and verified
 
-### Finding SEC-03: Lack of Kernel Stack Guard Page
-- **Severity**: **HIGH**
-- **Affected File**: `rust_mini_kernel/boot.S`
-- **Mechanics**:
-  The kernel stack was placed directly adjacent to `p2_table` in `.bss`, meaning stack overflow would corrupt page directory tables.
-- **Remediation Implemented**:
-  Introduced a dedicated 4096-byte `stack_guard_page` isolation buffer directly beneath `stack_bottom`. Verified via automated assembly inspection and runtime address range validation in automated test suite.
+The original physical memory manager implemented free_page with an idempotent bitwise clear without pointer alignment checks or state verification. Passing an unaligned address or duplicate address resulted in silent bitmap corruption.
 
----
+Remediation:
+1. Validates 4096-byte alignment and returns Err(MmError::MisalignedPointer) on unaligned input.
+2. Protects the initial 4MB kernel and page table region (page_idx < RESERVED_PAGES) with Err(MmError::ReservedRegionViolation).
+3. Uses AtomicU64::fetch_and to inspect previous bit state. If the bit was already zero, the call returns Err(MmError::DoubleFreeDetected).
 
-### Finding SEC-04: Missing Interrupt Stack Table (IST) on Faults
-- **Severity**: **HIGH**
-- **Affected File**: `rust_mini_kernel/src/idt.rs`
-- **Mechanics**:
-  Every IDT gate descriptor is initialized with `ist = 0`. When an exception occurs on stack exhaustion, the CPU pushes onto the exhausted stack, causing a Double Fault (`#DF`, vector 8) which triggers a hardware Triple Fault reset.
-- **Remediation Plan**:
-  Configure a Task State Segment (TSS) with an emergency 4KB stack assigned to `IST1`. Configure IDT vector 8 (`#DF`) with `ist = 1`.
+### Finding SEC-03: absence of kernel stack guard page
 
----
+Severity: High
+Affected location: rust_mini_kernel/boot.S
+Status: Remediated and verified
 
-### Finding SEC-05: Unbounded Polling in Hardware UART Driver (DoS)
-- **Severity**: **MEDIUM**
-- **Affected File**: `rust_mini_kernel/src/serial.rs`
-- **Mechanics**:
-  Indefinite busy-wait loops in `write_byte` freeze the system if hardware stalls.
-- **Remediation Implemented**:
-  Introduced bounded timeout counters (100,000 iterations) with `core::hint::spin_loop()`. If the serial controller stalls or drops offline, the byte is safely dropped rather than hanging the CPU.
+The kernel stack was positioned immediately following page tables in the BSS section. A downward stack overflow would directly overwrite page directory tables.
 
----
+Remediation: A 4096-byte stack_guard_page buffer was inserted between the page tables and stack_bottom. Runtime address distance validation was integrated into the in-kernel test suite.
 
-### Finding SEC-06: Unsynchronized Mutable Static Variables
-- **Severity**: **MEDIUM**
-- **Affected File**: `rust_mini_kernel/src/mm.rs`
-- **Mechanics**:
-  `ALLOC_BITMAP` was declared as a `static mut [u64]`, introducing race hazards.
-- **Remediation Implemented**:
-  Migrated `ALLOC_BITMAP` to `[AtomicU64; SLOTS]` using atomic CAS (`compare_exchange_weak`) loops for page allocation and `fetch_and` for page release. Cleanly resolves concurrency hazards across SMP cores.
+### Finding SEC-04: missing interrupt stack table on faults
 
----
+Severity: High
+Affected location: rust_mini_kernel/src/idt.rs
+Status: Documented for roadmap
 
-### Finding SEC-07: Physical Page 0 Identity Mapped
-- **Severity**: **MEDIUM**
-- **Affected File**: `rust_mini_kernel/boot.S`
-- **Mechanics**:
-  The lowest 2MB region is mapped as Present, meaning NULL pointer dereferences do not trap and corrupt address 0.
-- **Remediation Plan**:
-  Map the lowest 2MB with 4KB granular pages, leaving Page 0 (`0x0000..0x0FFF`) with `Present = 0`.
+Every IDT gate descriptor initializes with ist = 0. When an exception occurs under kernel stack exhaustion, pushing the exception frame onto the exhausted stack triggers a double fault (vector 8). Because vector 8 also uses the current stack, the CPU enters a hardware triple fault.
 
----
+Planned remediation: Configure a task state segment (TSS) with a dedicated 4KB stack assigned to IST1, and route vector 8 to use IST1.
 
-### Finding SEC-08: Privilege Separation (Ring 3 User Mode)
-- **Severity**: **LOW**
-- **Affected File**: `rust_mini_kernel/boot.S`
-- **Mechanics**:
-  The entire microkernel executes in Ring 0 supervisor mode.
-- **Remediation Plan**:
-  Implement user-mode GDT descriptors (`DPL=3`), `sysenter`/`syscall` instruction handlers, and TSS task switching.
+### Finding SEC-05: unbounded polling in hardware UART driver
 
----
+Severity: Medium
+Affected location: rust_mini_kernel/src/serial.rs
+Status: Remediated and verified
 
-## 4. Remediation Verification & Test Results
+The serial driver used an unbounded while loop waiting for the transmitter empty status bit. A detached or stalled serial port causes an infinite kernel hang.
 
-All implemented remediations were verified using the kernel's automated 10-part test suite across multiple x86_64 CPU hardware emulation models:
+Remediation: Added a bounded loop counter (100,000 iterations) with spin_loop hints. The driver drops the byte upon counter expiration rather than hanging the CPU.
 
-```
+### Finding SEC-06: unsynchronized mutable static variables
+
+Severity: Medium
+Affected location: rust_mini_kernel/src/mm.rs
+Status: Remediated and verified
+
+ALLOC_BITMAP was declared as a mutable static array without synchronization primitives, introducing data races under multi-core execution.
+
+Remediation: Converted ALLOC_BITMAP to an array of AtomicU64 primitives. Implemented atomic compare-and-swap loops for page allocation and atomic fetch_and operations for page deallocation.
+
+### Finding SEC-07: identity-mapped page zero
+
+Severity: Medium
+Affected location: rust_mini_kernel/boot.S
+Status: Documented for roadmap
+
+The first 2MB huge page identity-maps physical address zero as present and writable. Null pointer dereferences read or write real-mode data structures without triggering a page fault.
+
+Planned remediation: Map the first 2MB range with 4KB page tables, setting present = 0 for page zero (0x0000 to 0x0FFF).
+
+### Finding SEC-08: absence of Ring 3 user-mode privilege separation
+
+Severity: Low
+Affected location: rust_mini_kernel/boot.S
+Status: Documented for roadmap
+
+The microkernel executes entirely in Ring 0 supervisor mode without user-mode segment descriptors or task state switching.
+
+Planned remediation: Add user-mode code and data segment descriptors with DPL 3, configure SYSCALL/SYSRET MSR registers, and manage user page table mappings.
+
+## Remediation verification and test results
+
+Remediated components were verified through the automated in-kernel test suite executing in QEMU:
+
+```text
 =======================================================
    RIGOROUS KERNEL & SECURITY TEST SUITE (10 TESTS)    
 =======================================================
@@ -154,10 +134,10 @@ All implemented remediations were verified using the kernel's automated 10-part 
 =======================================================
 ```
 
-### Multi-Architecture Hardware Matrix Validation
+### Hardware matrix validation across processor models
 
-| Architecture Model | Vendor String | Test Suite Result | Microkernel Status |
+| Architecture model | Vendor string | In-kernel test results | Status |
 | :--- | :--- | :--- | :--- |
-| **QEMU Generic 64-bit (`qemu64`)** | `AuthenticAMD` | **10/10 PASS (100%)** | Verified Clean & Hardened |
-| **Intel Skylake (`Skylake-Client`)** | `GenuineIntel` | **10/10 PASS (100%)** | Verified Clean & Hardened |
-| **AMD EPYC (`EPYC`)** | `AuthenticAMD` | **10/10 PASS (100%)** | Verified Clean & Hardened |
+| QEMU generic 64-bit (qemu64) | AuthenticAMD | 10/10 pass (100%) | Verified |
+| Intel Skylake (Skylake-Client) | GenuineIntel | 10/10 pass (100%) | Verified |
+| AMD EPYC (EPYC) | AuthenticAMD | 10/10 pass (100%) | Verified |

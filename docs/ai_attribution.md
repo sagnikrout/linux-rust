@@ -1,4 +1,4 @@
-# AI Attribution Policy
+## Artificial intelligence attribution policy
 
 This repository contains content generated with the assistance of Google Gemini 3.8. This document explains how we record, disclose, and manage AI-generated contributions.
 

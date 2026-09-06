@@ -1,4 +1,4 @@
-# Release Notes
+## Release notes template and guidelines
 
 This repository contains experimental, AI‑assisted system code. Release notes in this repository are intentionally transparent about the role of generative models and the extent of human validation. Each release SHOULD include the following sections.
 
@@ -13,7 +13,7 @@ Release template
 - Recommended actions for users: do not run on production hosts; test in VMs/containers; review critical subsystems before reuse
 
 Example
-- Release: Experimental snapshot — 2026-09-06
+- Release: Experimental snapshot : 2026-09-06
 - Summary: Reworked documentation and transparency statements across the repository; no functional code changes.
 - Model / tooling: Generated primarily with Google Gemini 3.8 and curated with manual editing.
 - AI-generated components: broad code scaffolding and many source files; see docs/ai_attribution.md for further details.

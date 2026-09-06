@@ -1,9 +1,9 @@
-# Changelog
+## Changelog record
 
 All notable changes to this repository will be documented in this file. This project is experimental and AI-assisted; changelog entries should be explicit about what was generated and what was manually authored.
 
 Format
-- YYYY-MM-DD — Release title
+- YYYY-MM-DD : Release title
   - Summary of changes
   - AI-generated files/components: list (if any)
   - Manually authored/edited files/components: list (if any)

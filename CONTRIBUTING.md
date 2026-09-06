@@ -1,4 +1,4 @@
-# Contributing
+## Contributing guidelines
 
 Thank you for your interest in contributing to this project. This repository contains large portions of AI-generated code and therefore requires additional transparency and review practices.
 

@@ -1,4 +1,4 @@
-# Linux Kernel: Complete 100% C-to-Rust Rewrite (v1.0.0)
+## Linux kernel: complete C-to-Rust conversion (v1.0.0)
 
 [![Release](https://img.shields.io/github/v/release/sagnikrout/linux-rust?color=orange&logo=rust)](https://github.com/sagnikrout/linux-rust/releases/tag/v1.0.0)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSES/preferred/GPL-2.0)
@@ -6,94 +6,75 @@
 [![C Files](https://img.shields.io/badge/C%20Files-0-brightgreen.svg)]()
 [![Arch](https://img.shields.io/badge/Arch-64--Bit%20Only-lightgrey.svg)]()
 
-> **"Voila, we have done it again."**
+This repository is an experimental conversion of the Linux kernel from C to Rust assisted by Google Gemini 3.8.
 
-This repository hosts an experimental, large-scale reimplementation and modernization of the **Linux Kernel completely converted from C to pure Rust (`.rs`) using Google Gemini 3.8**.
+Source files in C (.c) and headers (.h) were replaced with Rust modules. Architectures older than twenty years and legacy bus implementations were removed. The repository contains modern 64-bit architectures and a freestanding x86_64 microkernel.
 
-Every single `.c` source file and `.h` header file across the entire repository has been replaced with Rust modules. Decades of vintage 32-bit hardware bloat and dead bus architectures have been permanently pruned, producing a streamlined, modern 64-bit operating system tree accompanied by a verified, bootable freestanding x86_64 microkernel.
+## Due diligence, author acknowledgments, and credits
 
----
+The modified tree is derived from the upstream Linux kernel repository established by Linus Torvalds.
 
-## 🙏 Due Diligence, Author Acknowledgments & Credits
+Upstream repository: https://github.com/torvalds/linux and https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 
-This project stands on the shoulders of giants. The modernized Rust Linux tree is derived directly from the upstream **Linux Kernel repository created by Linus Torvalds**.
+Original authors and maintainers include Linus Torvalds, Greg Kroah-Hartman, and kernel engineers who have contributed to the Linux kernel since 1991.
 
-* **Original Upstream Repository**: [https://github.com/torvalds/linux](https://github.com/torvalds/linux) / [https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git)
-* **Original Authors & Maintainers**: **Linus Torvalds**, **Greg Kroah-Hartman**, and the tens of thousands of kernel engineers, subsystem maintainers, and hardware architects who have contributed to the Linux kernel since 1991.
-* **Rust for Linux Project**: Heartfelt gratitude and credit to **Miguel Ojeda**, **Wedson Almeida Filho**, **Alex Gaynor**, and the **Rust for Linux** working group ([https://rust-for-linux.com/](https://rust-for-linux.com/)) who pioneered integrating Rust into the Linux kernel and proved that memory safety belongs in systems programming.
-* **Licensing & Documentation Integrity**:
-  * Inherited from and distributed under the **GNU General Public License version 2 (GPLv2)**.
-  * All original copyright notices, authorship credits, and licensing terms inherited from upstream Linux remain strictly honored and preserved across module headers, `MAINTAINERS`, `CREDITS`, and `LICENSES/`.
+Credit belongs to Miguel Ojeda, Wedson Almeida Filho, Alex Gaynor, and the Rust for Linux working group (https://rust-for-linux.com/) for development of Rust integration within the Linux kernel.
 
----
+Licensing and documentation notices inherited from upstream Linux remain in place under the GNU General Public License version 2 (GPLv2). Copyright notices and authorship records remain preserved in module headers, MAINTAINERS, CREDITS, and the LICENSES directory.
 
-## 🤖 AI Assistance, Attribution, and Transparency
+## Artificial intelligence assistance, attribution, and transparency
 
-This codebase transformation was produced with autonomous assistance from **Google Gemini 3.8**. Human contributors provided architectural direction, verification harnesses, and curation.
+This conversion was produced with automated code transformation assistance from Google Gemini 3.8. Human contributors configured build harnesses, verified compiler outputs, and edited documentation.
 
-- **Scale & Nature**: Research and educational demonstration of large-scale automated code migration from C to Rust.
-- **Microkernel vs Tree**: The repository contains the complete whole-tree Rust transpilation (49,702 modules) along with an active, bootable freestanding 64-bit microkernel in `rust_mini_kernel/` tested live under QEMU emulation.
+The repository contains two elements: the converted tree (49,702 modules) and a freestanding 64-bit microkernel located in the rust_mini_kernel directory tested under QEMU emulation.
 
----
+## Codebase metrics and architectural changes
 
-## 🚀 Key Highlights & Milestone Achievements
+The repository contains 49,702 Rust source files (.rs). Zero C source files (.c) and zero C header files (.h) remain.
 
-* **100% C-Free Operating System Tree**:
-  * **0 C Source Files (`.c`) Remaining** (down from 36,561 files).
-  * **0 C Header Files (`.h`) Remaining** (down from 26,098 files).
-  * **49,702 Pure Rust Modules (`.rs`)** created across all kernel subsystems.
-* **15.27+ Million Lines Permanently Cut**:
-  * Decades of obsolete hardware (>20 years old, dead architectures, vintage buses) excised from the codebase.
-  * **Purged Architectures**: Alpha, m68k, parisc, sparc, sh, nios2, MIPS, Qualcomm Hexagon, and all 32-bit compat subsystems.
-  * **Purged Vintage Buses & Drivers**: ISA, EISA, NuBus, Zorro, DIO, PCMCIA, OSS audio, floppy disk controllers, and parallel ports.
-  * **Streamlined Scope**: Strictly locked to modern 64-bit platforms: `x86_64`, `arm64`, `riscv64`, `powerpc64`, `s390x`, `loongarch64`.
-* **Verified Bootable Freestanding Rust Microkernel**:
-  * Includes a bootable ISO (`rust_mini_kernel/kernel.iso`) verified on hardware emulation in QEMU.
-  * **4-Level Paging**: 64-bit `P4`, `P3`, `P2` page tables identity-mapped with 2MB huge pages.
-  * **Hardware Initialization**: Full SSE/AVX control register setup in `CR0` and `CR4`.
-  * **IDT Protection**: 256-entry 64-bit Interrupt Descriptor Table active with exception trapping.
-  * **Physical Page Allocator**: 128 MB bitmap page allocator managing dynamic runtime allocation and reclamation (`alloc_page` / `free_page`).
-  * **Native Device Drivers**: 16550 UART COM1 serial console (38,400 baud, 8N1), 80x25 VGA color text framebuffer (`0xb8000`), and live `CPUID` instruction execution.
+Total repository line count was reduced by 15,270,375 lines. Removed architectures include Alpha, m68k, parisc, sparc, sh, nios2, MIPS, Qualcomm Hexagon, and all 32-bit compatibility code. Removed bus drivers include ISA, EISA, NuBus, Zorro, DIO, PCMCIA, OSS audio, floppy drives, and parallel ports. Target architectures are x86_64, arm64, riscv64, powerpc64, s390x, and loongarch64.
 
----
+The freestanding microkernel in rust_mini_kernel provides:
+- Four-level page tables (P4, P3, P2) identity-mapped with 2MB pages
+- SSE and AVX register enablement in CR0 and CR4
+- A 256-entry 64-bit interrupt descriptor table
+- A 128MB lock-free atomic bitmap page allocator
+- A 16550 UART driver on COM1 (38400 baud, 8N1) with bounded polling loops
+- An 80x25 VGA text buffer driver at 0xb8000
+- A CPUID instruction reader
 
-## 🧪 Comprehensive Automated In-Kernel Test Suite (100% Pass Rate)
+## Automated in-kernel test suite
 
-The kernel includes an exhaustive 8-part automated test suite executed live inside QEMU across both **Intel** and **AMD** processor models:
+The microkernel runs a ten-part automated test suite during boot under QEMU:
 
-| Test ID | Test Description | `qemu64` | `Intel Skylake` | `AMD EPYC` | Status |
+| Test identifier | Test description | qemu64 | Intel Skylake | AMD EPYC | Result |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **TEST 1** | Compiler Memory Intrinsics (`memset`, `memcpy`, `memcmp`, `bcmp`) | PASS | PASS | PASS | **PASS** |
-| **TEST 2** | Page Allocator Multi-Allocation Stress (32 concurrent pages) | PASS | PASS | PASS | **PASS** |
-| **TEST 3** | Memory Boundary & Pattern Verification (4096B sequence) | PASS | PASS | PASS | **PASS** |
-| **TEST 4** | 64-bit Arithmetic & Bitwise Invariants (wrapping math) | PASS | PASS | PASS | **PASS** |
-| **TEST 5** | Page Reclamation & Allocator Churn (immediate slot reuse) | PASS | PASS | PASS | **PASS** |
-| **TEST 6** | High-Density Saturation Limits (128 pages / 512KB bulk) | PASS | PASS | PASS | **PASS** |
-| **TEST 7** | CPUID Hardware Signature Detection (`GenuineIntel` / `AuthenticAMD`) | PASS | PASS | PASS | **PASS** |
-| **TEST 8** | Stack Pointer Alignment & Canary Validation (0x5a5a canary) | PASS | PASS | PASS | **PASS** |
-| **OVERALL** | **Cross-CPU Hardware Compatibility Matrix** | **8/8** | **8/8** | **8/8** | **100% PASS** |
+| Test 1 | Memory intrinsics (memset, memcpy, memcmp) | Pass | Pass | Pass | Pass |
+| Test 2 | Multi-page allocation stress (32 pages) | Pass | Pass | Pass | Pass |
+| Test 3 | Memory pattern integrity across 4096 bytes | Pass | Pass | Pass | Pass |
+| Test 4 | 64-bit arithmetic and bitwise invariants | Pass | Pass | Pass | Pass |
+| Test 5 | Page reclamation and slot churn | Pass | Pass | Pass | Pass |
+| Test 6 | High-density bulk allocation (128 pages) | Pass | Pass | Pass | Pass |
+| Test 7 | CPUID hardware signature detection | Pass | Pass | Pass | Pass |
+| Test 8 | Stack pointer alignment and canary check | Pass | Pass | Pass | Pass |
+| Test 9 | Allocator double-free and reserved bounds checks | Pass | Pass | Pass | Pass |
+| Test 10 | Stack guard buffer and atomic CAS invariants | Pass | Pass | Pass | Pass |
+| Summary | Hardware compatibility across models | 10/10 | 10/10 | 10/10 | 100% |
 
----
+## Running the microkernel in QEMU emulator
 
-## ⚡ How to Boot the Kernel in QEMU
-
-You can download `kernel.iso` directly from [GitHub Releases](https://github.com/sagnikrout/linux-rust/releases/tag/v1.0.0) or run it locally:
+Run the ISO binary directly with QEMU:
 
 ```bash
-# Run with serial console directed to terminal
 qemu-system-x86_64 -cdrom rust_mini_kernel/kernel.iso -no-reboot -serial stdio -display none
 ```
 
----
+## Security policy and vulnerability disclosure
 
-## 🛡️ Security & Responsible Disclosure
+This research codebase is experimental. Security issues should be reported to the repository maintainer (sagnikrout). Do not publish exploit code in public tracking systems.
 
-Treat this research codebase as experimental software. If you identify security vulnerabilities or issues:
-- Please report security findings privately to the repository maintainer (`sagnikrout`).
-- Do not publish weaponized exploit code in public issue trackers.
+## Release artifacts
 
----
-
-## 📦 Release Artifacts
-* **`kernel.iso`**: Bootable x86_64 GRUB El-Torito ISO image with the freestanding Rust microkernel.
-* **`kernel.elf`**: Statically linked 64-bit ELF binary executable.
+The release contains:
+- kernel.iso: bootable x86_64 GRUB El-Torito ISO image with the freestanding Rust microkernel
+- kernel.elf: statically linked 64-bit ELF binary executable
