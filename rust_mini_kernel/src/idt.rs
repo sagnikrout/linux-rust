@@ -1,5 +1,5 @@
 use core::arch::asm;
-use super::serial::SerialPort;
+use super::serial;
 
 #[repr(C, packed)]
 #[derive(Copy, Clone)]
@@ -63,5 +63,5 @@ pub unsafe fn init_idt() {
     };
 
     asm!("lidt [{}]", in(reg) &ptr, options(readonly, nostack, preserves_flags));
-    SerialPort::write_str("[IDT] 256-entry Interrupt Descriptor Table active\n");
+    serial::write_str("[IDT] 256-entry Interrupt Descriptor Table active\n");
 }
